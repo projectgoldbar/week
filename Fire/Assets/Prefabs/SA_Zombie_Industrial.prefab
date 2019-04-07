@@ -12,8 +12,12 @@ GameObject:
   - component: {fileID: 4984650952796854042}
   - component: {fileID: 729142772}
   - component: {fileID: 729142773}
-  - component: {fileID: 729142776}
-  m_Layer: 0
+  - component: {fileID: 768105562}
+  - component: {fileID: 768105563}
+  - component: {fileID: 764756898276923651}
+  - component: {fileID: 9056230258734320559}
+  - component: {fileID: 6180017041527739451}
+  m_Layer: 10
   m_Name: SA_Zombie_Industrial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +70,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
@@ -92,7 +96,21 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &729142776
+--- !u!114 &768105562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4984650952789523300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc373f047ce342a41806bb87c51a6289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Agent: {fileID: 729142773}
+  mono: {fileID: 768105562}
+--- !u!114 &768105563
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,9 +122,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9478f86845beaf40a707de65a66566f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkPoint: 0
-  state: 0
-  agent: {fileID: 0}
+  hp: 10
+  atkPoint: 1
+  Distance: 0
+  Check: 0
+  AttackCheck: 0
+  Target: {fileID: 0}
+--- !u!114 &764756898276923651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4984650952789523300}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb076fecbed1ef48be0e1d93ac5e6e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9056230258734320559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4984650952789523300}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35a9a0a02e15cb43a696fe9580a0898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6180017041527739451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4984650952789523300}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 875518f6a50340644995c431e5140bf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4984650952789708792
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +175,7 @@ GameObject:
   - component: {fileID: 4984650952789346814}
   - component: {fileID: 4984650952792808748}
   - component: {fileID: 957520590}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SA_Zombie_Industrial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
