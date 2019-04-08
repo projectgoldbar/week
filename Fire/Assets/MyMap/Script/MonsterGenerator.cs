@@ -8,38 +8,36 @@ public class MonsterGenerator : MonoBehaviour
 
     public int MonsterCount;
 
-    public Transform testright;
-    public Transform testleft;
+    public Transform enemy;
     public float minDistance;
     public float maxDistance;
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(Invoking());
     }
 
-
-    IEnumerator Invoking()
+    private IEnumerator Invoking()
     {
-        for (; ;)
+        for (; ; )
         {
             MonsterGen(MonsterCount, minDistance, maxDistance);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(5f);
         }
     }
 
-    public void MonsterGen(int NumOfMonster,float minDistance, float maxDistance)
+    public void MonsterGen(int NumOfMonster, float minDistance, float maxDistance)
     {
         for (int i = 0; i < NumOfMonster; i++)
         {
-            GameObject.Instantiate(testright, FindFarPoint(player.position,minDistance,maxDistance), Quaternion.identity);
+            GameObject.Instantiate(enemy, FindFarPoint(player.position, minDistance, maxDistance), Quaternion.identity);
         }
     }
 
     public Vector3 FindFarPoint(Vector3 pivot, float minDistance = 6f, float maxDistance = 10f)
     {
         float distance = Random.Range(minDistance, maxDistance);
-        float angle = Random.Range(player.rotation.eulerAngles.y*-1, -player.rotation.eulerAngles.y+180);
+        float angle = Random.Range(player.rotation.eulerAngles.y * -1, -player.rotation.eulerAngles.y + 180);
         float radian = angle * Mathf.Deg2Rad;
         return pivot + (new Vector3(Mathf.Cos(radian), 0f, Mathf.Sin(radian)) * distance);
     }
