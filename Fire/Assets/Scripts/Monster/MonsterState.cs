@@ -13,7 +13,7 @@ public class MonsterState : MonoBehaviour
     {
         Agent = GetComponent<NavMeshAgent>();
         mono = GetComponent<MonoBehaviour>();
-        ChangeState(StateIndex.PATROL);
+        ChangeState(StateIndex.CHASE);
     }
 
     private void Update()
@@ -22,6 +22,11 @@ public class MonsterState : MonoBehaviour
         {
             StateBase.Ing();
         }
+    }
+
+    public void AttackEndState()
+    {
+        ChangeState(StateIndex.CHASE);
     }
 
     public void ChangeState(StateIndex nextState)

@@ -18,7 +18,7 @@ public class State_Chase : State
     {
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            state.ChangeState(StateIndex.ATTACK);
+            //state.ChangeState(StateIndex.ATTACK);
         }
     }
 

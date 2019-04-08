@@ -6,6 +6,9 @@ public class GeneratorBase : MonoBehaviour
     protected Animator anim;
     protected NavMeshAgent agent;
 
+    public virtual void Start()
+    { }
+
     public virtual void Process()
     {
         anim = GetComponent<Animator>();

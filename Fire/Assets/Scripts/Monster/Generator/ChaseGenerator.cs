@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ChaseGenerator : GeneratorBase
 {
+    private ChaseGenerator Chase;
+
     public void OnEnable()
     {
         Process();
@@ -13,7 +15,7 @@ public class ChaseGenerator : GeneratorBase
         base.Process();
         anim.SetBool("Attack", false);
         anim.SetBool("Walk", true);
-        agent.stoppingDistance = 2;
+        agent.stoppingDistance = 0;
         StartCoroutine(AgentSetPosition());
     }
 
@@ -22,7 +24,7 @@ public class ChaseGenerator : GeneratorBase
         for (; ; )
         {
             agent.destination = Ref.Instance.playerTr.position;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.02f);
         }
     }
 }
