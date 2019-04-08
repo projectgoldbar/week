@@ -8,10 +8,10 @@
         Process();
     }
 
-    public override void Start()
+    public void Start()
     {
-        Patrol = this;
-        Patrol.enabled = false;
+        //  Patrol = this;
+        //  Patrol.enabled = false;
     }
 
     public override void Process()
