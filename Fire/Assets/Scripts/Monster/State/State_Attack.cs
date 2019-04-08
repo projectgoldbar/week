@@ -13,14 +13,6 @@ public class State_Attack : State
             AttackProcessGenarator = Mono.gameObject.AddComponent<AttackGenerator>();
     }
 
-    public override void Ing()
-    {
-        if (!monster.AttackCheck)
-        {
-            state.ChangeState(StateIndex.CHASE);
-        }
-    }
-
     public override void Exit()
     {
         var AttackProcessGenarator = Mono.GetComponent<AttackGenerator>();

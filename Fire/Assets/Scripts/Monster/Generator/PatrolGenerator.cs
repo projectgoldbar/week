@@ -1,8 +1,17 @@
 ﻿public class PatrolGenerator : GeneratorBase
 {
+    private PatrolGenerator Patrol;
+
     private void OnEnable()
+
     {
         Process();
+    }
+
+    public void Start()
+    {
+        //  Patrol = this;
+        //  Patrol.enabled = false;
     }
 
     public override void Process()

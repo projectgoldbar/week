@@ -35,14 +35,16 @@ public class MonsterUnit : MonoBehaviour
             Vector3 dir = (Ref.Instance.playerTr.position - transform.position);
             Distance = dir.magnitude;
 
-            if (Distance < 10)
+            if (Distance < 10000)
             {
                 Check = true;
                 Target = Ref.Instance.playerTr;
             }
-
-            if (Distance <= 2) AttackCheck = true;
-            else AttackCheck = false;
+            if (Check)
+            {
+                if (Distance <= 2) AttackCheck = true;
+                else AttackCheck = false;
+            }
 
             yield return null;
         }
