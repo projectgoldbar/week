@@ -18,12 +18,15 @@ public class ChaseGenerator : GeneratorBase
     public override void Process()
     {
         base.Process();
-        //agent.destination = Ref.Instance.playerTr.position;
-        SetAgentPosition = StartCoroutine(AgentSetPosition());
+        StartCoroutine(AgentSetPosition());
     }
 
     public void ShaseProcess()
     {
+        var FindTarget = Physics.OverlapSphere(unit.Righthand.transform.position, 2.0f, 1 << LayerMask.GetMask("Player"));
+        if (FindTarget.Length > 0)
+            Debug.Log(FindTarget[0]);
+
         state = ChaseState.Chase;
         stateCheck(state);
     }
@@ -43,16 +46,11 @@ public class ChaseGenerator : GeneratorBase
         {
             case ChaseState.Chase:
                 anim.SetBool("Walk", true);
-                agent.stoppingDistance = 0;
-                //StartCoroutine()
-                //agent.destination = Ref.Instance.playerTr.position;
+
                 break;
 
             case ChaseState.Attack:
                 anim.SetTrigger("Attack");
-                agent.stoppingDistance = 0;
-                StopCoroutine(SetAgentPosition);
-                agent.destination = transform.position;
                 break;
         }
     }

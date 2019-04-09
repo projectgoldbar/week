@@ -24,11 +24,6 @@ public class MonsterState : MonoBehaviour
         }
     }
 
-    public void AttackEndState()
-    {
-        ChangeState(StateIndex.CHASE);
-    }
-
     public void ChangeState(StateIndex nextState)
     {
         if (StateBase != null)

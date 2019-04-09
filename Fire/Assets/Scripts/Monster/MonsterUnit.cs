@@ -9,8 +9,10 @@ public class MonsterUnit : MonoBehaviour
 
     public float atkPoint = 1;
 
-    // [System.NonSerialized]
-    public float Distance = 0;
+    [SerializeField]
+    private float Distance = 0;
+
+    public Transform Righthand;
 
     // [System.NonSerialized]
     public bool Check = false;
@@ -18,10 +20,12 @@ public class MonsterUnit : MonoBehaviour
     // [System.NonSerialized]
     public bool AttackCheck = false;
 
-    // [System.NonSerialized]
-    public Transform Target = null;
-
     #endregion 변수들
+
+    private void Awake()
+    {
+        Righthand = GameObject.FindGameObjectWithTag("HandPos").GetComponent<Transform>();
+    }
 
     private void Start()
     {
@@ -38,11 +42,10 @@ public class MonsterUnit : MonoBehaviour
             if (Distance < 10000)
             {
                 Check = true;
-                Target = Ref.Instance.playerTr;
             }
             if (Check)
             {
-                if (Distance <= 2) AttackCheck = true;
+                if (Distance <= 2.5f) AttackCheck = true;
                 else AttackCheck = false;
             }
 

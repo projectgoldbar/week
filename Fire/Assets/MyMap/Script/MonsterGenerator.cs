@@ -31,7 +31,7 @@ public class MonsterGenerator : MonoBehaviour
     {
         for (int i = 0; i < NumOfMonster; i++)
         {
-            GameObject.Instantiate(enemy, FindFarPoint(player.position, minDistance, maxDistance), Quaternion.identity);
+            var monster = GameObject.Instantiate(enemy, FindFarPoint(player.position, minDistance, maxDistance), Quaternion.identity, transform);
         }
     }
 
