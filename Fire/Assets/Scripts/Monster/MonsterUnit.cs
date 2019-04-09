@@ -22,11 +22,6 @@ public class MonsterUnit : MonoBehaviour
 
     #endregion 변수들
 
-    private void Awake()
-    {
-        Righthand = GameObject.FindGameObjectWithTag("HandPos").GetComponent<Transform>();
-    }
-
     private void Start()
     {
         StartCoroutine(DistanceCheck());
