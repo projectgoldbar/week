@@ -6,9 +6,9 @@ using System;
 
 public class Move : MonoBehaviour
 {
-    public float runSpeed = 1000.0f;
-    public float rotSpeed = 3.0f;
-    public float damp = 20.0f;
+    public float runSpeed = 100.0f;
+    public float rotSpeed = 100.0f;
+
     public static Action StopMove = () => { };
 
     private enum RotState { ADVANCE, LEFT, RIGHT, DEAD };
@@ -16,24 +16,13 @@ public class Move : MonoBehaviour
     [SerializeField]
     private RotState rotState = RotState.ADVANCE;
 
-    private Rigidbody rid;
-
     private Vector2 touchPos = Vector2.zero;
-
-    private Transform tr;
 
     private NavMeshAgent agent;
 
     private void Awake()
     {
-        tr = GetComponent<Transform>();
-        rid = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-    }
-
-    private void Start()
-    {
-        StartCoroutine(MoveRotState());
     }
 
     private void OnEnable()
@@ -94,12 +83,29 @@ public class Move : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rid.velocity = tr.forward * runSpeed;
+        runSpeed = agent.speed;
+        agent.velocity = agent.transform.forward * runSpeed;
+
+        switch (rotState)
+        {
+            case RotState.LEFT:
+
+                agent.transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * -rotSpeed);
+                break;
+
+            case RotState.RIGHT:
+                agent.transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * rotSpeed);
+                break;
+
+            case RotState.DEAD:
+                StopMove?.Invoke();
+                break;
+        }
     }
 
     private void stopRun()
     {
-        rid.velocity = Vector3.zero;
+        agent.velocity = Vector3.zero;
         StopMove -= stopRun;
     }
 
@@ -110,11 +116,12 @@ public class Move : MonoBehaviour
             switch (rotState)
             {
                 case RotState.LEFT:
-                    transform.rotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * -rotSpeed * damp);
+
+                    transform.rotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * -rotSpeed);
                     break;
 
                 case RotState.RIGHT:
-                    transform.rotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * rotSpeed * damp);
+                    transform.rotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * rotSpeed);
                     break;
 
                 case RotState.DEAD:

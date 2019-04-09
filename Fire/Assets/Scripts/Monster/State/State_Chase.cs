@@ -14,14 +14,6 @@ public class State_Chase : State
             ChaseProcessGenarator = Mono.gameObject.AddComponent<ChaseGenerator>();
     }
 
-    public override void Ing()
-    {
-        if (agent.remainingDistance <= agent.stoppingDistance)
-        {
-            //state.ChangeState(StateIndex.ATTACK);
-        }
-    }
-
     public override void Exit()
     {
         Debug.Log("Chase-Exit");

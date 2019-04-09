@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1124890662260160776}
   - component: {fileID: 1124890662269790744}
-  - component: {fileID: 1040839406}
   - component: {fileID: 1040839407}
+  - component: {fileID: 1562899097}
+  - component: {fileID: 1562899096}
   m_Layer: 10
   m_Name: SA_Zombie_Firefighter
   m_TagString: Untagged
@@ -53,22 +54,6 @@ Animator:
   m_HasTransformHierarchy: 0
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!54 &1040839406
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1124890662260276442}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 84
-  m_CollisionDetection: 0
 --- !u!195 &1040839407
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -85,12 +70,43 @@ NavMeshAgent:
   m_AngularSpeed: 1000
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1562899097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124890662260276442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc373f047ce342a41806bb87c51a6289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Agent: {fileID: 1040839407}
+  mono: {fileID: 1562899097}
+--- !u!114 &1562899096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124890662260276442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9478f86845beaf40a707de65a66566f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10
+  atkPoint: 1
+  Distance: 0
+  Check: 0
+  AttackCheck: 0
 --- !u!1 &1124890662260340328
 GameObject:
   m_ObjectHideFlags: 0
