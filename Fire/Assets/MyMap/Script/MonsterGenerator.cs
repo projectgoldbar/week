@@ -22,6 +22,7 @@ public class MonsterGenerator : MonoBehaviour
         for (; ; )
         {
             MonsterGen(MonsterCount, minDistance, maxDistance);
+            //yield break;
             yield return new WaitForSeconds(5f);
         }
     }
