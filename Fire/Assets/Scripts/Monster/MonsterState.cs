@@ -5,23 +5,23 @@ public class MonsterState : MonoBehaviour
 {
     public NavMeshAgent Agent;
     public MonoBehaviour mono;
-    public State StateBase = null;
+    // public State StateBase = null;
+
+    [Header("안넣어도됨 상태머신에서 집어넣음.")]
+    public GeneratorBase StateBase = null;
 
     private StateIndex stateindex = StateIndex.IDLE;
 
+    private PatrolGenerator Patrol;
+    private ChaseGenerator Chase;
+
     public void Awake()
     {
-        Agent = GetComponent<NavMeshAgent>();
-        mono = GetComponent<MonoBehaviour>();
-        ChangeState(StateIndex.CHASE);
-    }
-
-    private void Update()
-    {
-        if (StateBase != null)
-        {
-            StateBase.Ing();
-        }
+        Patrol = GetComponent<PatrolGenerator>();
+        Patrol.enabled = false;
+        Chase = GetComponent<ChaseGenerator>();
+        Chase.enabled = false;
+        ChangeState(StateIndex.PATROL);
     }
 
     public void ChangeState(StateIndex nextState)
@@ -34,17 +34,25 @@ public class MonsterState : MonoBehaviour
         StateBase.Initiate();
     }
 
-    public State CreateStateInstance(StateIndex NextState)
+    public GeneratorBase CreateStateInstance(StateIndex NextState)
     {
+        GeneratorBase Base = null;
+
         switch (NextState)
         {
             //case StateIndex.IDLE: return new State_Idle(mono);
-            case StateIndex.PATROL: StateBase = new State_Patrol(mono); break;
-            case StateIndex.CHASE: StateBase = new State_Chase(mono); break;
-            case StateIndex.ATTACK: StateBase = new State_Attack(mono); break;
-            case StateIndex.JUMP: StateBase = new State_Jump(mono); break;
-            case StateIndex.STURN: StateBase = new State_Sturn(mono); break;
+            case StateIndex.PATROL:
+                Base = Patrol;
+                Base.enabled = true;
+                Chase.enabled = false;
+                break;
+
+            case StateIndex.CHASE:
+                Base = Chase;
+                Base.enabled = true;
+                Patrol.enabled = false;
+                break;
         }
-        return StateBase;
+        return Base;
     }
 }

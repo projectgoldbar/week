@@ -8,12 +8,10 @@ public class AttackGenerator : GeneratorBase
         Process();
     }
 
-    public override void Process()
+    public void Process()
     {
-        base.Process();
-
-        anim.SetBool("Attack", true);
-        agent.stoppingDistance = 0;
-        agent.destination = transform.position;
+        // anim.SetBool("Attack", true);
+        monsterState.Agent.stoppingDistance = 0;
+        // monsterState.Agent.destination = transform.position;
     }
 }

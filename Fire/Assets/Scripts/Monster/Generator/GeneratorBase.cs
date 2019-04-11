@@ -3,16 +3,19 @@ using UnityEngine.AI;
 
 public class GeneratorBase : MonoBehaviour
 {
-    protected Animator anim;
-    protected NavMeshAgent agent;
+    protected MonsterState monsterState;
     protected MonsterUnit unit;
 
-    public virtual void Process()
+    protected GeneratorBase generator;
+
+    public virtual void Initiate()
     {
-        anim = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
+        generator = this;
+        monsterState = GetComponent<MonsterState>();
         unit = GetComponent<MonsterUnit>();
     }
 
-    // Update is called once per frame
+    public virtual void Exit()
+    {
+    }
 }

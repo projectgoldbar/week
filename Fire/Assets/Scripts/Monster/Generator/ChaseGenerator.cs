@@ -1,24 +1,31 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-
-public enum ChaseState { Chase, Attack };
+using UnityEngine.AI;
 
 public class ChaseGenerator : GeneratorBase
 {
-    public ChaseState state = ChaseState.Chase;
+    private NavMeshPath Path;
 
-    private Coroutine SetAgentPosition;
-
-    public void OnEnable()
+    private void Awake()
     {
+        Path = new NavMeshPath();
+    }
+
+    public override void Initiate()
+    {
+        base.Initiate();
         Process();
     }
 
-    public override void Process()
+    public override void Exit()
     {
-        base.Process();
-        StartCoroutine(AgentSetPosition());
+        generator.enabled = false;
+    }
+
+    private void Process()
+    {
+        generator.enabled = true;
     }
 
     public void ShaseProcess()
@@ -27,40 +34,52 @@ public class ChaseGenerator : GeneratorBase
         if (FindTarget.Length > 0)
             Debug.Log(FindTarget[0]);
 
-        state = ChaseState.Chase;
-        stateCheck(state);
+        unit.state = StateIndex.CHASE;
+        stateCheck(unit.state);
     }
 
     public void AttackProcess()
     {
         if (unit.AttackCheck)
         {
-            state = ChaseState.Attack;
-            stateCheck(state);
+            unit.state = StateIndex.ATTACK;
+            stateCheck(unit.state);
         }
     }
 
-    private void stateCheck(ChaseState State)
+    private void stateCheck(StateIndex State)
     {
         switch (State)
         {
-            case ChaseState.Chase:
-                anim.SetBool("Walk", true);
-
+            case StateIndex.CHASE:
+                unit.Anim.SetBool("Walk", true);
+                monsterState.Agent.avoidancePriority = 50;
                 break;
 
-            case ChaseState.Attack:
-                anim.SetTrigger("Attack");
+            case StateIndex.ATTACK:
+                unit.Anim.SetTrigger("Attack");
+                monsterState.Agent.avoidancePriority = 51;
                 break;
         }
     }
 
-    public IEnumerator AgentSetPosition()
+    public void Update()
     {
-        for (; ; )
-        {
-            agent.destination = Ref.Instance.playerTr.position;
-            yield return new WaitForSeconds(0.02f);
-        }
+        NavMesh.CalculatePath(transform.position, Ref.Instance.playerTr.position, NavMesh.AllAreas, Path);
+
+        monsterState.Agent.SetPath(Path);
     }
+
+    //public IEnumerator AgentSetPosition()
+    //{
+    //    NavMeshPath Path = new NavMeshPath();
+
+    //    for (; ; )
+    //    {
+    //        NavMesh.CalculatePath(transform.position, Ref.Instance.playerTr.position, NavMesh.AllAreas, Path);
+
+    //        monsterState.Agent.SetPath(Path);
+    //        yield return Second;
+    //    }
+    //}
 }

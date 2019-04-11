@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MonsterUnit : MonoBehaviour
 {
@@ -20,6 +21,11 @@ public class MonsterUnit : MonoBehaviour
     // [System.NonSerialized]
     public bool AttackCheck = false;
 
+    public Animator Anim;
+    public MonsterState monsterstate;
+
+    public StateIndex state = StateIndex.PATROL;
+
     #endregion 변수들
 
     private void Start()
@@ -34,13 +40,15 @@ public class MonsterUnit : MonoBehaviour
             Vector3 dir = (Ref.Instance.playerTr.position - transform.position);
             Distance = dir.magnitude;
 
-            if (Distance < 10000)
+            if (Distance < 10)
             {
                 Check = true;
+                monsterstate.ChangeState(StateIndex.CHASE);
             }
             if (Check)
             {
-                if (Distance <= 2.5f) AttackCheck = true;
+                if (Distance <= 2.5f)
+                    AttackCheck = true;
                 else AttackCheck = false;
             }
 

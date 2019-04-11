@@ -23,6 +23,7 @@ public class Move : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.avoidancePriority = 1;
     }
 
     private void OnEnable()

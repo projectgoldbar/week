@@ -210,6 +210,7 @@ ModelImporter:
     7400004: Zombie_Idle
     7400006: Zombie_Eating
     9500000: //RootNode
+    11100000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -226,15 +227,12 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'Body_jnt' has translation animation that will
-      be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -247,11 +245,11 @@ ModelImporter:
       takeName: Take 001
       firstFrame: 51
       lastFrame: 79
-      wrapMode: 0
+      wrapMode: 2
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 1
@@ -303,7 +301,7 @@ ModelImporter:
       takeName: Take 001
       firstFrame: 155
       lastFrame: 205
-      wrapMode: 0
+      wrapMode: 2
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
@@ -321,14 +319,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.03446185
-        functionName: AttackProcess
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 0
       maskSource: {instanceID: 0}
@@ -399,143 +390,7 @@ ModelImporter:
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
-    human:
-    - boneName: Hips_jnt
-      humanName: Hips
-      limit:
-        min: {x: -40, y: -40, z: -40}
-        max: {x: 40, y: 40, z: 40}
-        value: {x: 0.015238949, y: 0, z: 0.0076194745}
-        length: 0.01904869
-        modified: 1
-    - boneName: UpperLeg_Left_jnt
-      humanName: LeftUpperLeg
-      limit:
-        min: {x: -60.000004, y: -60.000004, z: -90}
-        max: {x: 60.000004, y: 60.000004, z: 50}
-        value: {x: 0.29961714, y: 0, z: 0.14980857}
-        length: 0.37452155
-        modified: 1
-    - boneName: UpperLeg_Right_jnt
-      humanName: RightUpperLeg
-      limit:
-        min: {x: -60.000004, y: -60.000004, z: -90}
-        max: {x: 60.000004, y: 60.000004, z: 50}
-        value: {x: 0.29961747, y: 0, z: 0.14980873}
-        length: 0.37452197
-        modified: 1
-    - boneName: LowerLeg_Left_jnt
-      humanName: LeftLowerLeg
-      limit:
-        min: {x: -90, y: 0, z: -80}
-        max: {x: 90, y: 0, z: 80}
-        value: {x: 0.31099483, y: 0, z: 0.15549742}
-        length: 0.3887437
-        modified: 1
-    - boneName: LowerLeg_Right_jnt
-      humanName: RightLowerLeg
-      limit:
-        min: {x: -90, y: 0, z: -80}
-        max: {x: 90, y: 0, z: 80}
-        value: {x: 0.31099507, y: 0, z: 0.15549754}
-        length: 0.388744
-        modified: 1
-    - boneName: Foot_Left_jnt
-      humanName: LeftFoot
-      limit:
-        min: {x: 0, y: -30.000002, z: -50}
-        max: {x: 0, y: 30.000002, z: 50}
-        value: {x: 0.12224419, y: 0, z: 0.061122093}
-        length: 0.15280527
-        modified: 1
-    - boneName: Foot_Right_jnt
-      humanName: RightFoot
-      limit:
-        min: {x: 0, y: -30.000002, z: -50}
-        max: {x: 0, y: 30.000002, z: 50}
-        value: {x: 0.12224399, y: 0, z: 0.061121996}
-        length: 0.15280503
-        modified: 1
-    - boneName: Body_jnt
-      humanName: Spine
-      limit:
-        min: {x: -40, y: -40, z: -40}
-        max: {x: 40, y: 40, z: 40}
-        value: {x: 0.5362599, y: 0, z: 0.26812994}
-        length: 0.67032516
-        modified: 1
-    - boneName: Spine_jnt
-      humanName: Chest
-      limit:
-        min: {x: -40, y: -40, z: -40}
-        max: {x: 40, y: 40, z: 40}
-        value: {x: 0.24850076, y: 0, z: 0.12425038}
-        length: 0.31062603
-        modified: 1
-    - boneName: Head_jnt
-      humanName: Head
-      limit:
-        min: {x: -40, y: -40, z: -40}
-        max: {x: 40, y: 40, z: 40}
-        value: {x: 0.12425038, y: 0, z: 0.06212519}
-        length: 0.15531301
-        modified: 1
-    - boneName: UpperArm_Left_jnt
-      humanName: LeftUpperArm
-      limit:
-        min: {x: -90, y: -100, z: -60.000004}
-        max: {x: 90, y: 100, z: 100}
-        value: {x: 0.37695023, y: 0, z: 0.18847512}
-        length: 0.47118795
-        modified: 1
-    - boneName: UpperArm_Right_jnt
-      humanName: RightUpperArm
-      limit:
-        min: {x: -90, y: -100, z: -60.000004}
-        max: {x: 90, y: 100, z: 100}
-        value: {x: 0.3769519, y: 0, z: 0.18847595}
-        length: 0.47119004
-        modified: 1
-    - boneName: LowerArm_Left_jnt
-      humanName: LeftLowerArm
-      limit:
-        min: {x: -90, y: 0, z: -80}
-        max: {x: 90, y: 0, z: 80}
-        value: {x: 0.35223988, y: 0, z: 0.17611994}
-        length: 0.4403
-        modified: 1
-    - boneName: LowerArm_Right_jnt
-      humanName: RightLowerArm
-      limit:
-        min: {x: -90, y: 0, z: -80}
-        max: {x: 90, y: 0, z: 80}
-        value: {x: 0.35223988, y: 0, z: 0.17611994}
-        length: 0.4403
-        modified: 1
-    - boneName: Hand_Left_jnt
-      humanName: LeftHand
-      limit:
-        min: {x: 0, y: -40, z: -80}
-        max: {x: 0, y: 40, z: 80}
-        value: {x: 0.17611994, y: 0, z: 0.08805997}
-        length: 0.22015
-        modified: 1
-    - boneName: Hand_Right_jnt
-      humanName: RightHand
-      limit:
-        min: {x: 0, y: -40, z: -80}
-        max: {x: 0, y: 40, z: 80}
-        value: {x: 0.17611994, y: 0, z: 0.08805997}
-        length: 0.22015
-        modified: 1
-    - boneName: Hat_jnt
-      humanName: RightEye
-      limit:
-        min: {x: 0, y: -20, z: -10}
-        max: {x: 0, y: 20, z: 15.000001}
-        value: {x: 0.079999976, y: 0, z: 0.039999988}
-        length: 0.1
-        modified: 1
+    human: []
     skeleton:
     - name: SimpleZombie
       parentName: 

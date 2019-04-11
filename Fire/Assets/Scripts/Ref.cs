@@ -7,6 +7,8 @@ public class Ref : Singleton<Ref>
     public Slider hpbar = null;
 
     public Transform playerTr = null;
+
+    public static int CameraViewMonster;
 }
 
 public class RandomAngle
