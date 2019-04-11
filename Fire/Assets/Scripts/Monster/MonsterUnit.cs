@@ -9,17 +9,16 @@ public class MonsterUnit : MonoBehaviour
 
     public float atkPoint = 1;
 
-    // [System.NonSerialized]
-    public float Distance = 0;
+    [SerializeField]
+    private float Distance = 0;
+
+    public Transform Righthand;
 
     // [System.NonSerialized]
     public bool Check = false;
 
     // [System.NonSerialized]
     public bool AttackCheck = false;
-
-    // [System.NonSerialized]
-    public Transform Target = null;
 
     #endregion 변수들
 
@@ -35,14 +34,15 @@ public class MonsterUnit : MonoBehaviour
             Vector3 dir = (Ref.Instance.playerTr.position - transform.position);
             Distance = dir.magnitude;
 
-            if (Distance < 10)
+            if (Distance < 10000)
             {
                 Check = true;
-                Target = Ref.Instance.playerTr;
             }
-
-            if (Distance <= 2) AttackCheck = true;
-            else AttackCheck = false;
+            if (Check)
+            {
+                if (Distance <= 2.5f) AttackCheck = true;
+                else AttackCheck = false;
+            }
 
             yield return null;
         }
