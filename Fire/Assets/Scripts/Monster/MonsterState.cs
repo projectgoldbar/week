@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class MonsterState : MonoBehaviour
@@ -10,18 +12,35 @@ public class MonsterState : MonoBehaviour
     [Header("안넣어도됨 상태머신에서 집어넣음.")]
     public GeneratorBase StateBase = null;
 
-    private StateIndex stateindex = StateIndex.IDLE;
-
     private PatrolGenerator Patrol;
     private ChaseGenerator Chase;
+    private AttackGenerator Attack;
 
-    public void Awake()
+    private List<GeneratorBase> generators = new List<GeneratorBase>();
+
+    private void OnEnable()
+    {
+        ChangeState(StateIndex.PATROL);
+    }
+
+    private void Awake()
+    {
+        StateSetting();
+        ListAddSetting();
+    }
+
+    private void StateSetting()
     {
         Patrol = GetComponent<PatrolGenerator>();
-        Patrol.enabled = false;
         Chase = GetComponent<ChaseGenerator>();
-        Chase.enabled = false;
-        ChangeState(StateIndex.PATROL);
+        Attack = GetComponent<AttackGenerator>();
+    }
+
+    private void ListAddSetting()
+    {
+        generators.Add(Patrol);
+        generators.Add(Chase);
+        generators.Add(Attack);
     }
 
     public void ChangeState(StateIndex nextState)
@@ -36,23 +55,45 @@ public class MonsterState : MonoBehaviour
 
     public GeneratorBase CreateStateInstance(StateIndex NextState)
     {
-        GeneratorBase Base = null;
+        GeneratorBase generator = null;
 
         switch (NextState)
         {
-            //case StateIndex.IDLE: return new State_Idle(mono);
             case StateIndex.PATROL:
-                Base = Patrol;
-                Base.enabled = true;
-                Chase.enabled = false;
+                generator = Generator_activation(generator, Patrol);
+                Generator_Inactive(Patrol);
                 break;
 
             case StateIndex.CHASE:
-                Base = Chase;
-                Base.enabled = true;
-                Patrol.enabled = false;
+                generator = Generator_activation(generator, Chase);
+                Generator_Inactive(Chase);
+                Agent.avoidancePriority = 50;
+                break;
+
+            case StateIndex.ATTACK:
+                generator = Generator_activation(generator, Attack);
+                Generator_Inactive(Attack);
+                Agent.avoidancePriority = 51;
                 break;
         }
-        return Base;
+        return generator;
+    }
+
+    private GeneratorBase Generator_activation(GeneratorBase generator, GeneratorBase Base)
+    {
+        generator = Base;
+        generator.enabled = true;
+
+        return generator;
+    }
+
+    private void Generator_Inactive(GeneratorBase Base)
+    {
+        var list = generators.FindAll(x => x != Base);
+
+        foreach (var item in list)
+        {
+            item.enabled = false;
+        }
     }
 }

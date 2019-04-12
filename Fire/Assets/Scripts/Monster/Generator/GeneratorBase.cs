@@ -1,21 +1,31 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public class GeneratorBase : MonoBehaviour
 {
-    protected MonsterState monsterState;
-    protected MonsterUnit unit;
+    public MonsterState state;
 
-    protected GeneratorBase generator;
+    public MonsterUnit unit;
+
+    public void Awake()
+    {
+        state = transform.GetComponent<MonsterState>();
+        unit = transform.GetComponent<MonsterUnit>();
+    }
 
     public virtual void Initiate()
     {
-        generator = this;
-        monsterState = GetComponent<MonsterState>();
-        unit = GetComponent<MonsterUnit>();
+        Get(state, unit);
     }
 
     public virtual void Exit()
     {
+    }
+
+    public void Get(MonsterState state, MonsterUnit unit)
+    {
+        state = transform.GetComponent<MonsterState>();
+        unit = transform.GetComponent<MonsterUnit>();
     }
 }

@@ -637,7 +637,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d1e26b3a3707be744b01eb7df7046c87, type: 2}
+  - {fileID: 2100000, guid: d494968b4d1d6234cab1b5fd40c8f378, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -661,7 +661,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300016, guid: dbbc53a6bc8f5c64bb234194ce1380aa, type: 3}
+  m_Mesh: {fileID: 4300040, guid: dbbc53a6bc8f5c64bb234194ce1380aa, type: 3}
   m_Bones:
   - {fileID: 385339369921965170}
   - {fileID: 1779895338306523769}
@@ -707,6 +707,7 @@ GameObject:
   - component: {fileID: 7001827027952702491}
   - component: {fileID: 1956270102}
   - component: {fileID: 1956270103}
+  - component: {fileID: 7975861459677828526}
   m_Layer: 10
   m_Name: EnemyZombie
   m_TagString: Untagged
@@ -778,7 +779,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7977870060189588057}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
@@ -814,15 +815,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9478f86845beaf40a707de65a66566f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
   atkPoint: 1
   Distance: 0
   Righthand: {fileID: 9117440280926939017}
   Check: 0
-  AttackCheck: 0
+  Attack: 0
   Anim: {fileID: 8664546413801839227}
   monsterstate: {fileID: 7001827027952702490}
   state: 0
+  ChaseTarget: {fileID: 0}
 --- !u!114 &1956270102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,6 +836,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 875518f6a50340644995c431e5140bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
+  unit: {fileID: 0}
 --- !u!114 &1956270103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,8 +850,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a35a9a0a02e15cb43a696fe9580a0898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 0}
+  unit: {fileID: 0}
   patrolPointParent: {fileID: 0}
   Points: []
+--- !u!114 &7975861459677828526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7977870060189588057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0bb09f9ecc4374f9bfdf6ac4a3600b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: {fileID: 0}
+  unit: {fileID: 0}
+  attackKind: 0
 --- !u!1 &8222695413349559739
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,8 +11,11 @@ public class PatrolGenerator : GeneratorBase
 
     private Action StopRutine;
 
+    private WaitForSeconds second = new WaitForSeconds(0.02f);
+
     private void OnEnable()
     {
+        unit.state = StateIndex.PATROL;
     }
 
     public override void Initiate()
@@ -50,18 +53,18 @@ public class PatrolGenerator : GeneratorBase
 
     private void Randomdestination()
     {
-        monsterState.Agent.SetDestination(Points[UnityEngine.Random.Range(0, Points.Length)].transform.position);
+        state.Agent.destination = Points[UnityEngine.Random.Range(0, Points.Length)].transform.position;
     }
 
     private IEnumerator PathPending()
     {
         while (true)
         {
-            if (!monsterState.Agent.pathPending && monsterState.Agent.remainingDistance <= 2.0f)
+            if (!state.Agent.pathPending && state.Agent.remainingDistance <= 2.0f)
             {
                 Randomdestination();
             }
-            yield return new WaitForSeconds(0.02f);
+            yield return second;
             yield return null;
         }
     }
@@ -73,9 +76,9 @@ public class PatrolGenerator : GeneratorBase
         RandomAngle random = new RandomAngle();
 
         unit.Anim.SetBool("Walk", true);
-        monsterState.Agent.stoppingDistance = 0;
+        state.Agent.stoppingDistance = 0;
         var randomPos = transform.position + random.RandomPosition();
-        monsterState.Agent.destination = randomPos;
+        state.Agent.destination = randomPos;
 
         Invoke("Process2", UnityEngine.Random.Range(2, 5));
     }
@@ -83,8 +86,8 @@ public class PatrolGenerator : GeneratorBase
     private void Process2()
     {
         unit.Anim.SetBool("Walk", false);
-        monsterState.Agent.stoppingDistance = 0;
-        monsterState.Agent.destination = transform.position;
+        state.Agent.stoppingDistance = 0;
+        state.Agent.destination = transform.position;
         Invoke("Process1", UnityEngine.Random.Range(2, 5));
     }
 
