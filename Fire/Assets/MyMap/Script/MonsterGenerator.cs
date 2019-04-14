@@ -10,6 +10,9 @@ public class MonsterGenerator : MonoBehaviour
     public int MonsterCount;
 
     public Transform enemy;
+
+    public float duration = 1;
+    public int time = 4;
     public float minDistance;
     public float maxDistance;
 
@@ -22,28 +25,16 @@ public class MonsterGenerator : MonoBehaviour
 
     private void Start()
     {
-        //Initiate();
-        StartCoroutine(Invoking());
+        StartCoroutine(InvokeCreating(duration, time));
     }
 
-    private void Initiate()
+    private IEnumerator InvokeCreating(float duration, int time)
     {
-        monsterQueue = new Queue<Transform>();
-        for (int i = 0; i < 20; i++)
-        {
-            var monster = GameObject.Instantiate(enemy, transform.position, Quaternion.identity, transform);
-            //monster.gameObject.SetActive(false);
-            monsterQueue.Enqueue(monster);
-        }
-    }
-
-    private IEnumerator Invoking()
-    {
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < time; i++)
         {
             MonsterGen(MonsterCount, minDistance, maxDistance);
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(duration);
         }
         yield break;
     }
@@ -58,18 +49,6 @@ public class MonsterGenerator : MonoBehaviour
             monsterDataBase.monsterDataList.Add(new MonsterData(monster.transform));
         }
     }
-
-    //public void MonsterGen(int NumOfMonster, float minDistance, float maxDistance)
-    //{
-    //    var a = monsterDataBase.monsterList;
-    //    for (int i = 0; i < NumOfMonster; i++)
-    //    {
-    //        var monster = monsterQueue.Dequeue();
-    //        monster.position = FindFarPoint(player.position, minDistance, maxDistance);
-    //        //monster.gameObject.SetActive(true);
-    //        a.Add(monster);
-    //    }
-    //}
 
     public Vector3 FindFarPoint(Vector3 pivot, float minDistance = 6f, float maxDistance = 10f)
     {

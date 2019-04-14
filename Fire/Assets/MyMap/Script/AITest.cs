@@ -18,6 +18,12 @@ public class AITest : MonoBehaviour
         StartCoroutine(Invoking2());
     }
 
+    private void SetpathObject(NavMeshAgent agent, NavMeshPath path)
+    {
+        agent.CalculatePath(target.position, path);
+        agent.SetPath(path);
+    }
+
     private IEnumerator Sequence()
     {
         NavMeshHit hit;
@@ -53,17 +59,32 @@ public class AITest : MonoBehaviour
         {
             CheckDistance();
             SetPath();
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
-    private void CheckDistance()
+    private bool CheckDistance()
     {
+        bool answer = true;
         var monsterlist = monsterDataBase.monsterDataList;
         for (int i = 0; i < monsterlist.Count; i++)
         {
             monsterlist[i].distanceToPlayer = Vector3.Distance(monsterlist[i].transform.position, target.position);
             //Debug.Log(monsterlist[i].distanceToPlayer);
+        }
+        return answer;
+    }
+
+    private void CheckWall()
+    {
+        NavMeshHit hit;
+        var list = monsterDataBase.monsterList;
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i].GetComponent<NavMeshAgent>().Raycast(target.position, out hit))
+            {
+                //hit.
+            }
         }
     }
 
@@ -83,7 +104,7 @@ public class AITest : MonoBehaviour
         for (int i = 0; i < monsterList.Count; i++)
         {
             var navMeshA = monsterList[i].GetComponent<NavMeshAgent>();
-            NavMesh.CalculatePath(monsterList[i].position, target.position, NavMesh.AllAreas, navpath);
+            navMeshA.CalculatePath(target.position, navpath);
             navMeshA.SetPath(navpath);
             navMeshA.avoidancePriority--;
         }
@@ -126,7 +147,7 @@ public class AITest : MonoBehaviour
         NavMeshPath navpath = new NavMeshPath();
         var monsterList = monsterDataBase.monsterList;
 
-        NavMesh.CalculatePath(monster.transform.position, target.position, NavMesh.AllAreas, navpath);
+        monster.CalculatePath(target.position, navpath);
         return navpath;
         //monster.SetPath(navpath);
         //for (int i = 0; i < navpath.corners.Length; i++)
