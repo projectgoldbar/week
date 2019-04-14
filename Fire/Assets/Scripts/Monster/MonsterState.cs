@@ -7,25 +7,26 @@ public class MonsterState : MonoBehaviour
 {
     public NavMeshAgent Agent;
     public MonoBehaviour mono;
-    // public State StateBase = null;
 
     [Header("안넣어도됨 상태머신에서 집어넣음.")]
     public GeneratorBase StateBase = null;
 
-    private PatrolGenerator Patrol;
-    private ChaseGenerator Chase;
-    private AttackGenerator Attack;
+    [Header("자기본인 넣어주면됨")]
+    public PatrolGenerator Patrol;
+
+    public ChaseGenerator Chase;
+    public AttackGenerator Attack;
 
     private List<GeneratorBase> generators = new List<GeneratorBase>();
 
     private void OnEnable()
     {
-        ChangeState(StateIndex.PATROL);
+        ChangeState(StateIndex.CHASE);
     }
 
     private void Awake()
     {
-        StateSetting();
+        //StateSetting();
         ListAddSetting();
     }
 
@@ -41,6 +42,14 @@ public class MonsterState : MonoBehaviour
         generators.Add(Patrol);
         generators.Add(Chase);
         generators.Add(Attack);
+    }
+
+    private void Update()
+    {
+        if (StateBase != null)
+        {
+            StateBase.Execution();
+        }
     }
 
     public void ChangeState(StateIndex nextState)

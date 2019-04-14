@@ -4,28 +4,21 @@ using System.Collections;
 
 public class GeneratorBase : MonoBehaviour
 {
-    public MonsterState state;
+    protected MonsterState state;
+    protected MonsterUnit unit;
 
-    public MonsterUnit unit;
-
-    public void Awake()
+    public virtual void Initiate()
     {
         state = transform.GetComponent<MonsterState>();
         unit = transform.GetComponent<MonsterUnit>();
     }
 
-    public virtual void Initiate()
+    public virtual void Execution()
     {
-        Get(state, unit);
     }
 
     public virtual void Exit()
     {
-    }
-
-    public void Get(MonsterState state, MonsterUnit unit)
-    {
-        state = transform.GetComponent<MonsterState>();
-        unit = transform.GetComponent<MonsterUnit>();
+        StopAllCoroutines();
     }
 }
