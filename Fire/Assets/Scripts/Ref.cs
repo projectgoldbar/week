@@ -9,6 +9,16 @@ public class Ref : Singleton<Ref>
     public Transform playerTr = null;
 
     public static int CameraViewMonster;
+
+    public Color NonColor()
+    {
+        return Color.white;
+    }
+
+    public Color RedColor()
+    {
+        return Color.red;
+    }
 }
 
 public class RandomAngle

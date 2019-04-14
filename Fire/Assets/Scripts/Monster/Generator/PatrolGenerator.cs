@@ -1,21 +1,20 @@
 ﻿using UnityEngine;
-using System;
+using UnityEngine.AI;
+using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 
 public class PatrolGenerator : GeneratorBase
 {
-    public Transform patrolPointParent;
+    public Transform patrolPointParent = null;
     public Transform[] Points;
-    private Coroutine PatrolRutine;
 
-    private Action StopRutine;
-
-    private WaitForSeconds second = new WaitForSeconds(0.02f);
+    private WaitForSeconds second = new WaitForSeconds(0.05f);
+    private NavMeshPath Path;
 
     private void OnEnable()
     {
-        unit.state = StateIndex.PATROL;
+        Path = new NavMeshPath();
     }
 
     public override void Initiate()
@@ -26,22 +25,15 @@ public class PatrolGenerator : GeneratorBase
 
     private void Process()
     {
+        unit.state = StateIndex.PATROL;
         Points = PatrolPoint();
         Randomdestination();
 
-        PatrolRutine = StartCoroutine(PathPending());
-        StopRutine += Stop;
         //Process1();
-    }
-
-    private void Stop()
-    {
-        StopCoroutine(PatrolRutine);
     }
 
     public override void Exit()
     {
-        StopRutine?.Invoke();
     }
 
     private Transform[] PatrolPoint()
@@ -53,23 +45,16 @@ public class PatrolGenerator : GeneratorBase
 
     private void Randomdestination()
     {
-        state.Agent.destination = Points[UnityEngine.Random.Range(0, Points.Length)].transform.position;
+        state.Agent.destination = Points[Random.Range(0, Points.Length)].transform.position;
     }
 
-    private IEnumerator PathPending()
+    public override void Execution()
     {
-        while (true)
+        if (!state.Agent.pathPending && state.Agent.remainingDistance <= 2.0f)
         {
-            if (!state.Agent.pathPending && state.Agent.remainingDistance <= 2.0f)
-            {
-                Randomdestination();
-            }
-            yield return second;
-            yield return null;
+            Randomdestination();
         }
     }
-
-    #region 왔다갓다
 
     private void Process1()
     {
@@ -80,7 +65,7 @@ public class PatrolGenerator : GeneratorBase
         var randomPos = transform.position + random.RandomPosition();
         state.Agent.destination = randomPos;
 
-        Invoke("Process2", UnityEngine.Random.Range(2, 5));
+        Invoke("Process2", Random.Range(2, 5));
     }
 
     private void Process2()
@@ -88,8 +73,6 @@ public class PatrolGenerator : GeneratorBase
         unit.Anim.SetBool("Walk", false);
         state.Agent.stoppingDistance = 0;
         state.Agent.destination = transform.position;
-        Invoke("Process1", UnityEngine.Random.Range(2, 5));
+        Invoke("Process1", Random.Range(2, 5));
     }
-
-    #endregion 왔다갓다
 }

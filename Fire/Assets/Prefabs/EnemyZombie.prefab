@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 7977870060189754567}
   - component: {fileID: 7977870060175799677}
   m_Layer: 10
-  m_Name: SA_Zombie_Firefighter
+  m_Name: SA_Zombie_Robber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -702,12 +702,12 @@ GameObject:
   - component: {fileID: 7977870060189769611}
   - component: {fileID: 8664546413801839227}
   - component: {fileID: 7001827028441207916}
-  - component: {fileID: 686835451}
   - component: {fileID: 7001827027952702490}
   - component: {fileID: 7001827027952702491}
   - component: {fileID: 1956270102}
   - component: {fileID: 1956270103}
   - component: {fileID: 7975861459677828526}
+  - component: {fileID: 764919434}
   m_Layer: 10
   m_Name: EnemyZombie
   m_TagString: Untagged
@@ -759,8 +759,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 7977870060189588057}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
-  m_Speed: 5
+  m_Radius: 0.75
+  m_Speed: 10
   m_Acceleration: 50
   avoidancePriority: 99
   m_AngularSpeed: 1000
@@ -772,22 +772,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
---- !u!208 &686835451
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977870060189588057}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 1.12, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!114 &7001827027952702490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,6 +787,9 @@ MonoBehaviour:
   Agent: {fileID: 7001827028441207916}
   mono: {fileID: 7001827027952702490}
   StateBase: {fileID: 0}
+  Patrol: {fileID: 1956270103}
+  Chase: {fileID: 1956270102}
+  Attack: {fileID: 7975861459677828526}
 --- !u!114 &7001827027952702491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -817,7 +804,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atkPoint: 1
   Distance: 0
-  Righthand: {fileID: 9117440280926939017}
   Check: 0
   Attack: 0
   Anim: {fileID: 8664546413801839227}
@@ -836,8 +822,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 875518f6a50340644995c431e5140bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: {fileID: 0}
-  unit: {fileID: 0}
 --- !u!114 &1956270103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,8 +834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a35a9a0a02e15cb43a696fe9580a0898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: {fileID: 0}
-  unit: {fileID: 0}
   patrolPointParent: {fileID: 0}
   Points: []
 --- !u!114 &7975861459677828526
@@ -866,9 +848,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0bb09f9ecc4374f9bfdf6ac4a3600b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: {fileID: 0}
-  unit: {fileID: 0}
-  attackKind: 0
+  attackKind: 1
+--- !u!136 &764919434
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7977870060189588057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &8222695413349559739
 GameObject:
   m_ObjectHideFlags: 0
