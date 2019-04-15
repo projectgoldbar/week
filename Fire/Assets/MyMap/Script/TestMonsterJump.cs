@@ -8,8 +8,11 @@ public class TestMonsterJump : MonoBehaviour
     private Animator anim;
     public float flySpd;
     public Transform target;
-    public Transform blastRadius;
+    public GameDataBase database;
     public string jump = "Jumping";
+    public static int fxDataindex = 0;
+
+    public float range = 5f;
 
     #region 포물선운동
 
@@ -43,16 +46,16 @@ public class TestMonsterJump : MonoBehaviour
     {
         anim = GetComponent<Animator>();
 
-        StartCoroutine(CheckDistance());
+        StartCoroutine(CheckDistanceAndLunch());
         // FlyToTarget(transform.position, FallDownPosition(), 9.8f, max_height);
     }
 
-    private IEnumerator CheckDistance()
+    private IEnumerator CheckDistanceAndLunch()
     {
         for (; ; )
         {
             //Debug.Log(Vector3.Distance(new Vector3(transform.position.x, 1.5f, transform.position.y), target.position));
-            if (Vector3.Distance(new Vector3(transform.position.x, 1.5f, transform.position.y), target.position) < 15f)
+            if (Vector3.Distance(new Vector3(transform.position.x, 1.5f, transform.position.z), target.position) < range)
             {
                 Launch();
                 yield break;
@@ -64,14 +67,23 @@ public class TestMonsterJump : MonoBehaviour
     private void Launch()
     {
         var setamingPoint = FallDownPosition();
-        anim.SetBool(jump, true);
+        //anim.SetBool(jump, true);
         OnDrawRadius(setamingPoint);
         FlyToTarget(transform.position, setamingPoint, g, max_height);
     }
 
     private void OnDrawRadius(Vector3 amingPoint)
     {
-        blastRadius.transform.position = amingPoint;
+        var a = database.jumpZombieRadius[fxDataindex];
+        a.GetComponent<MeshRenderer>().enabled = true;
+        database.jumpZombieRadius[fxDataindex].transform.position = amingPoint;
+
+        if (fxDataindex >= database.jumpZombieRadius.Length)
+        {
+            fxDataindex = 0;
+        }
+        fxDataindex++;
+        Debug.Log(fxDataindex);
     }
 
     private Vector3 FallDownPosition()
@@ -140,8 +152,8 @@ public class TestMonsterJump : MonoBehaviour
             //총 체공시간 계산치보다 비행시간이 길다면 탈출.
             if (elapsed_time >= dat)
             {
-                anim.SetBool(jump, false);
-                //Destroy(gameObject);
+                //anim.SetBool(jump, false);
+                gameObject.SetActive(false);
                 yield break;
             }
             yield return null;
