@@ -1,18 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class UserItemData : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    //public Queue<Item.BoxingItem> itembox;
+
+    private void Awake()
     {
-        
+        //itembox = new Queue<Item.BoxingItem>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            출력();
+        }
+    }
+
+    public void 출력()
+    {
     }
 }
