@@ -14,6 +14,7 @@ public class TargetPointer : MonoBehaviour
     private Vector3 targetPosition;
     public RectTransform pointerRectTransform;
     public Image pointerImage;
+    public float borderSize = 100f;
 
     private void Awake()
     {
@@ -22,7 +23,6 @@ public class TargetPointer : MonoBehaviour
 
     private void Update()
     {
-        float borderSize = 100f;
         Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(targetPosition);
         bool isOffScreen = targetPositionScreenPoint.x <= borderSize || targetPositionScreenPoint.x >= Screen.width - borderSize || targetPositionScreenPoint.y <= borderSize || targetPositionScreenPoint.y >= Screen.height - borderSize;
 
