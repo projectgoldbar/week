@@ -14,7 +14,10 @@ public class NewMonsterGenerator : MonoBehaviour
 
     public float maxZombieCount = 300;
 
+    public float cooldown = 0.3f;
+
     private void Awake()
+
     {
         groundGenPoint = gp.GetComponentsInChildren<Transform>();
         loopTopGenPoint = lp.GetComponentsInChildren<Transform>();
@@ -22,8 +25,17 @@ public class NewMonsterGenerator : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("GenerateZombie", 1f, 0.3f);
+        StartCoroutine(Invokee(cooldown));
         GenerateLoopTopZombie();
+    }
+
+    private IEnumerator Invokee(float cooldown)
+    {
+        for (int i = 0; i < maxZombieCount; i++)
+        {
+            GenerateZombie();
+            yield return new WaitForSeconds(cooldown);
+        }
     }
 
     private void GenerateZombie()
