@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
         }
         else if (instance != this)
         {
-            Destroy(gameObject);
+            Destroy(instance);
+            instance = this;
         }
         DontDestroyOnLoad(gameObject);
         //if (SceneManager.sceneCountInBuildSettings == 3)

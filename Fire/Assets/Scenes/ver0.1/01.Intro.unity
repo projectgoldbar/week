@@ -44,15 +44,15 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 1
-    m_EnableRealtimeLightmaps: 1
+    m_EnableBakedLightmaps: 0
+    m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 10
     m_Resolution: 2
@@ -88,7 +88,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 5adf06019761e244d87bacfb5a546e81,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -579,6 +580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1661670134}
   - component: {fileID: 1661670133}
+  - component: {fileID: 1661670135}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -598,6 +600,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4545513a80c0cf344bd9581a2a46651a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inGameItemContainer: {fileID: 0}
+  Inventory: []
 --- !u!4 &1661670134
 Transform:
   m_ObjectHideFlags: 0
@@ -612,6 +616,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1661670135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661670132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d88cc78e888e0a4097f2ce9195e4c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1860463294
 GameObject:
   m_ObjectHideFlags: 0

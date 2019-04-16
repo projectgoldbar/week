@@ -67,16 +67,16 @@ public class Move : MonoBehaviour
                 {
                      if (touchPos.x <= Screen.width * 0.5)
                     {
-                       rotState = RotState.LEFT;
+                       rotState = State.LEFT;
                     }
                     else
                     {
-                        rotState = RotState.RIGHT;
+                        rotState = State.RIGHT;
                     }
                 }
                 else if (Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
-                   rotState = RotState.ADVANCE;
+                   rotState = State.ADVANCE;
                 }
             }
         }

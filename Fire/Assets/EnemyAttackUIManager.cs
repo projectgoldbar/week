@@ -62,7 +62,6 @@ public class EnemyAttackUIManager : MonoBehaviour
             rect.localPosition = new Vector3(rect.localPosition.x, rect.localPosition.y, 0f);
             yield return new WaitForEndOfFrame();
         }
-        rect.gameObject.SetActive(false);
     }
 
     private IEnumerator Timer(Coroutine drawUI, float time, RectTransform rect)

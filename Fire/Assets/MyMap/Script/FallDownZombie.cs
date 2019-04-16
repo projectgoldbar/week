@@ -60,19 +60,17 @@ public class FallDownZombie : MonoBehaviour
         }
     }
 
-    private Vector3 SetamingPoint;
-    private bool drawCircle = false;
+    private Vector3 setAmingPoint;
 
     private void Launch()
     {
-        SetamingPoint = FallDownPosition();
+        setAmingPoint = FallDownPosition();
 
-        //anim.SetBool(jump, true);
+        anim.SetBool(jump, true);
         //OnDrawRadius(setamingPoint);
-        drawCircle = true;
-        EnemyAttackUIManager.instance.Draw(type, 3f, SetamingPoint);
+        EnemyAttackUIManager.instance.Draw(type, 2f, setAmingPoint);
 
-        FlyToTarget(transform.position, SetamingPoint, g, max_height);
+        FlyToTarget(transform.position, setAmingPoint, g, max_height);
     }
 
     private Vector3 FallDownPosition()
@@ -142,7 +140,9 @@ public class FallDownZombie : MonoBehaviour
             if (elapsed_time >= dat)
             {
                 //anim.SetBool(jump, false);
+                ParticleManager.instance.OutputEffect(type, new Vector3(setAmingPoint.x, setAmingPoint.y + 1f, setAmingPoint.z));
                 gameObject.SetActive(false);
+
                 yield break;
             }
             yield return null;
