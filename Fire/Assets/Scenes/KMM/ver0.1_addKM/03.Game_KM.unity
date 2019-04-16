@@ -598,6 +598,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5198647958841914378, guid: 0b49f35452581c246ad7394aab45430d,
+        type: 3}
+      propertyPath: m_Name
+      value: GenPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198647958841914378, guid: 0b49f35452581c246ad7394aab45430d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5198647958841914372, guid: 0b49f35452581c246ad7394aab45430d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -653,10 +663,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5198647958841914378, guid: 0b49f35452581c246ad7394aab45430d,
+    - target: {fileID: 5198647958841914373, guid: 0b49f35452581c246ad7394aab45430d,
         type: 3}
-      propertyPath: m_Name
-      value: GenPoint
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b49f35452581c246ad7394aab45430d, type: 3}
@@ -971,6 +981,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3394433893365643164, guid: 704b6f47f13c3e1468934b201635a9c3,
+        type: 3}
+      propertyPath: m_Name
+      value: RoopTopGenpoint
+      objectReference: {fileID: 0}
     - target: {fileID: 3394433893365643106, guid: 704b6f47f13c3e1468934b201635a9c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1025,11 +1040,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3394433893365643164, guid: 704b6f47f13c3e1468934b201635a9c3,
-        type: 3}
-      propertyPath: m_Name
-      value: RoopTopGenpoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 704b6f47f13c3e1468934b201635a9c3, type: 3}
@@ -1154,7 +1164,7 @@ MonoBehaviour:
   target: {fileID: 1625372286}
   pointerRectTransform: {fileID: 1913338667}
   pointerImage: {fileID: 1913338665}
-  borderSize: 100
+  borderSize: 50
 --- !u!4 &965653040
 Transform:
   m_ObjectHideFlags: 0
@@ -18786,7 +18796,7 @@ GameObject:
   - component: {fileID: 4285316330644644892}
   - component: {fileID: 4285316330644644893}
   m_Layer: 5
-  m_Name: Button_NExtGimmickItem
+  m_Name: down_L_Button_NExtGimmickItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19155,7 +19165,7 @@ GameObject:
   - component: {fileID: 4285316330849803232}
   - component: {fileID: 4285316330849803233}
   m_Layer: 5
-  m_Name: Button_default
+  m_Name: down_M_Button_default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22088,7 +22098,7 @@ GameObject:
   - component: {fileID: 4285316331997744766}
   - component: {fileID: 4285316331997744767}
   m_Layer: 5
-  m_Name: Button_Pause
+  m_Name: down_R_Button_Pause
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22316,7 +22326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4285316332139737978}
   m_Layer: 5
-  m_Name: HP
+  m_Name: top_L_HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
