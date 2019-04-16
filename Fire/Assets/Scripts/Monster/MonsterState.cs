@@ -57,40 +57,38 @@ public class MonsterState : MonoBehaviour
         if (StateBase != null)
             StateBase.Exit();
 
-        StateBase = CreateStateInstance(nextState);
+        StateBase = StateOnOff(nextState);
 
         StateBase.Initiate();
     }
 
-    public GeneratorBase CreateStateInstance(StateIndex NextState)
+    public GeneratorBase StateOnOff(StateIndex NextState)
     {
         GeneratorBase generator = null;
 
         switch (NextState)
         {
             case StateIndex.PATROL:
-                generator = Generator_activation(generator, Patrol);
-                Generator_Inactive(Patrol);
+                generator = State_activation(generator, Patrol);
+                State_Inactive(Patrol);
                 break;
 
             case StateIndex.CHASE:
-                Agent.speed = 10f;
-                generator = Generator_activation(generator, Chase);
-                Generator_Inactive(Chase);
+                generator = State_activation(generator, Chase);
+                State_Inactive(Chase);
                 Agent.avoidancePriority = 50;
                 break;
 
             case StateIndex.ATTACK:
-                Agent.speed = 0;
-                generator = Generator_activation(generator, Attack);
-                Generator_Inactive(Attack);
+                generator = State_activation(generator, Attack);
+                State_Inactive(Attack);
                 Agent.avoidancePriority = 51;
                 break;
         }
         return generator;
     }
 
-    private GeneratorBase Generator_activation(GeneratorBase generator, GeneratorBase Base)
+    private GeneratorBase State_activation(GeneratorBase generator, GeneratorBase Base)
     {
         generator = Base;
         generator.enabled = true;
@@ -98,7 +96,7 @@ public class MonsterState : MonoBehaviour
         return generator;
     }
 
-    private void Generator_Inactive(GeneratorBase Base)
+    private void State_Inactive(GeneratorBase Base)
     {
         var list = generators.FindAll(x => x != Base);
 

@@ -82,7 +82,8 @@ public class Car_Generator : MonoBehaviour
 
         explosion.Play();
 
-        //yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(5.0f);
+        gameObject.SetActive(false);
 
         //사운드
         //카메라흔들림

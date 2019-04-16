@@ -10,16 +10,10 @@ public class MonsterUnit : MonoBehaviour
 
     public float Distance = 0;
 
-    // [System.NonSerialized]
-    public bool Check = false;
-
-    // [System.NonSerialized]
-    public bool Attack = false;
-
     public Animator Anim;
     public MonsterState monsterstate;
 
-    public StateIndex state = StateIndex.PATROL;
+    public StateIndex state = StateIndex.CHASE;
 
     public Transform ChaseTarget = null;
 

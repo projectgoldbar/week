@@ -2,29 +2,31 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+[DefaultExecutionOrder(-500)]
 public class ChaseGenerator : GeneratorBase
 {
     private NavMeshPath Path;
-    private WaitForSeconds second = new WaitForSeconds(0.02f);
+    private WaitForSeconds second = new WaitForSeconds(0.3f);
 
     private float timer = 3;
 
     private float CurrentTime = 0;
 
-    private void OnEnable()
+    public override void Awake()
     {
+        base.Awake();
         Path = new NavMeshPath();
     }
 
     public override void Initiate()
     {
-        base.Initiate();
         Process();
         CurrentTime = 0;
         timer = Random.Range(3.0f, 5.0f);
+        StartCoroutine(CalculatePath());
     }
 
-    public override void Exit()
+    private void OnEnable()
     {
     }
 
@@ -44,9 +46,15 @@ public class ChaseGenerator : GeneratorBase
                 state.ChangeState(StateIndex.ATTACK);
             }
         }
+    }
 
-        NavMesh.CalculatePath(transform.position, Utility.Instance.playerTr.position, NavMesh.AllAreas, Path);
-
-        state.Agent.SetPath(Path);
+    private IEnumerator CalculatePath()
+    {
+        while (true)
+        {
+            state.Agent.CalculatePath(Utility.Instance.playerTr.position, Path);
+            state.Agent.SetPath(Path);
+            yield return second;
+        }
     }
 }

@@ -10,21 +10,24 @@ public class AttackGenerator : GeneratorBase
     private float distance = 40.0f;
 
     private Material mat;
-
+    private bool attackStanby = false;
     private Vector3 pos = new Vector3();
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         mat = GetComponentInChildren<SkinnedMeshRenderer>().materials[0];
     }
 
     private void OnEnable()
     {
+        agent.speed = 0;
+        agent.ResetPath();
+        attackStanby = false;
     }
 
     public override void Initiate()
     {
-        base.Initiate();
         Process();
         StartCoroutine(RushStanby());
 
@@ -58,19 +61,22 @@ public class AttackGenerator : GeneratorBase
     public void ATKKindProcess()
     {
         if (attackKind == AttackKind.RUSH_ATTACK)
-        { Invoke("RushAttackProcess", 0.2f); }
+        {
+            attackStanby = true;
+            Invoke("RushAttackProcess", 0.3f);
+        }
     }
 
     public void RushAttackProcess()
     {
         //러쉬공격
         unit.Anim.SetBool("RushAttack", true);
-        unit.Attack = true;
+        //unit.Attack = true;
         state.Agent.updateRotation = false;
 
         Forward_Direction_Control();
 
-        Invoke("StateEnd", 0.8f);
+        Invoke("StateEnd", 0.5f);
     }
 
     public void Forward_Direction_Control()
@@ -81,7 +87,7 @@ public class AttackGenerator : GeneratorBase
 
     private void StateEnd()
     {
-        unit.Attack = false;
+        // unit.Attack = false;
         unit.Anim.SetBool("RushAttack", false);
         state.Agent.updateRotation = true;
         state.ChangeState(StateIndex.CHASE);
@@ -89,10 +95,9 @@ public class AttackGenerator : GeneratorBase
 
     public override void Execution()
     {
-        if (unit)
-        { if (!unit.Attack) return; }
-
-        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 5.0f);
+        //if (unit)
+        if (!attackStanby) return;
+        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 3.0f);
 
         //if (Vector3.Distance(transform.position, pos) < 5f)
         //{
@@ -102,6 +107,11 @@ public class AttackGenerator : GeneratorBase
 
     public override void Exit()
     {
+    }
+
+    private void OnDisable()
+    {
+        agent.speed = 10f;
     }
 
     public Vector3 FindFarPoint(Vector3 pivot, float minDistance = 6f, float maxDistance = 10f)
