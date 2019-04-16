@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    private InGameItemContainer inGameItemContainer;
+    public InGameItemContainer inGameItemContainer;
 
     private void Awake()
     {
@@ -19,11 +19,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (SceneManager.sceneCountInBuildSettings == 3)
-        {
-            inGameItemContainer = gameObject.AddComponent<InGameItemContainer>();
-        }
         DontDestroyOnLoad(gameObject);
+        //if (SceneManager.sceneCountInBuildSettings == 3)
+        //{
+        //    inGameItemContainer = GameObject.Find("GameDataBase").GetComponent<InGameItemContainer>();
+        //}
     }
 
     public List<Item> Inventory;
@@ -37,5 +37,13 @@ public class GameManager : MonoBehaviour
     {
         inGameItemContainer.OpenVeilAll(Inventory);
         SceneManager.LoadScene("01.Intro");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameEnd();
+        }
     }
 }

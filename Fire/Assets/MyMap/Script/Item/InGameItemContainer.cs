@@ -7,9 +7,15 @@ public class InGameItemContainer : MonoBehaviour
     public Queue<Item> veiledItemlist = new Queue<Item>();
     private Queue<Item> unVeiledItemlist = new Queue<Item>();
 
+    private void Awake()
+    {
+        GameManager.instance.inGameItemContainer = this;
+    }
+
     /// <summary>
     /// 펼치기 안한 모든 아이템을 펼치고 unVeiledItemlist에 집어 넣는다.
     /// </summary>
+    ///
     public void OpenVeilAll()
     {
         for (int i = 0; i < veiledItemlist.Count; i++)
