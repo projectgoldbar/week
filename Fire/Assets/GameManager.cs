@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
+    private InGameItemContainer inGameItemContainer;
 
     private void Awake()
     {
@@ -18,8 +19,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (SceneManager.sceneCountInBuildSettings == 3)
+        {
+            inGameItemContainer = gameObject.AddComponent<InGameItemContainer>();
+        }
         DontDestroyOnLoad(gameObject);
     }
+
+    public List<Item> Inventory;
 
     public void GameStart()
     {
@@ -28,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     public void GameEnd()
     {
+        inGameItemContainer.OpenVeilAll(Inventory);
         SceneManager.LoadScene("01.Intro");
     }
 }

@@ -5,11 +5,21 @@ using System;
 
 public class UserItemData : MonoBehaviour
 {
-    //public Queue<Item.BoxingItem> itembox;
+    public static UserItemData instance = null;
+
+    public List<Item> inventory;
 
     private void Awake()
     {
-        //itembox = new Queue<Item.BoxingItem>();
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
