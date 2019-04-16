@@ -7,7 +7,7 @@ public class AttackGenerator : GeneratorBase
 {
     public AttackKind attackKind = AttackKind.RUSH_ATTACK;
 
-    private float distance = 30.0f;
+    private float distance = 40.0f;
 
     private Material mat;
 
@@ -92,7 +92,12 @@ public class AttackGenerator : GeneratorBase
         if (unit)
         { if (!unit.Attack) return; }
 
-        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 2.0f);
+        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 5.0f);
+
+        //if (Vector3.Distance(transform.position, pos) < 5f)
+        //{
+        //    StateEnd();
+        //}
     }
 
     public override void Exit()

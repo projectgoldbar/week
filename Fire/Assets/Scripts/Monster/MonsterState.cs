@@ -74,12 +74,14 @@ public class MonsterState : MonoBehaviour
                 break;
 
             case StateIndex.CHASE:
+                Agent.speed = 10f;
                 generator = Generator_activation(generator, Chase);
                 Generator_Inactive(Chase);
                 Agent.avoidancePriority = 50;
                 break;
 
             case StateIndex.ATTACK:
+                Agent.speed = 0;
                 generator = Generator_activation(generator, Attack);
                 Generator_Inactive(Attack);
                 Agent.avoidancePriority = 51;

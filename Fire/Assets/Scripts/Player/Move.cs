@@ -43,12 +43,12 @@ public class Move : MonoBehaviour
                 if (touchPos.x <= Screen.width * 0.5)
                 {
                     rotState = State.LEFT;
-                    Car_LeftTurn();
+                    // Car_LeftTurn();
                 }
                 else
                 {
                     rotState = State.RIGHT;
-                    Car_RightTurn();
+                    // Car_RightTurn();
                 }
             }
             else if (Input.GetMouseButtonUp(0))
@@ -91,7 +91,7 @@ public class Move : MonoBehaviour
         MoveState();
     }
 
-    public virtual void MoveState()
+    public void MoveState()
     {
         switch (rotState)
         {
@@ -107,14 +107,6 @@ public class Move : MonoBehaviour
                 StopMove?.Invoke();
                 break;
         }
-    }
-
-    public virtual void Car_LeftTurn()
-    {
-    }
-
-    public virtual void Car_RightTurn()
-    {
     }
 
     public void Left_Turn()

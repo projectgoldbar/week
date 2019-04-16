@@ -54,7 +54,7 @@ public class Car_Generator : MonoBehaviour
 
     private IEnumerator EndCar()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(10);
 
         Passenger.transform.SetParent(null);
         Passenger.SetActive(true);
