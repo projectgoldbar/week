@@ -1,17 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class TestMonsterJump : MonoBehaviour
+public class FallDownZombie : MonoBehaviour
 {
+    private ZombieType type = ZombieType.Falldown;
     private Animator anim;
     public float flySpd;
     public Transform target;
-    public GameDataBase database;
     public string jump = "Jumping";
-    public static int fxDataindex = 0;
-
     public float range = 5f;
 
     #region 포물선운동
@@ -64,26 +60,19 @@ public class TestMonsterJump : MonoBehaviour
         }
     }
 
+    private Vector3 SetamingPoint;
+    private bool drawCircle = false;
+
     private void Launch()
     {
-        var setamingPoint = FallDownPosition();
+        SetamingPoint = FallDownPosition();
+
         //anim.SetBool(jump, true);
-        OnDrawRadius(setamingPoint);
-        FlyToTarget(transform.position, setamingPoint, g, max_height);
-    }
+        //OnDrawRadius(setamingPoint);
+        drawCircle = true;
+        EnemyAttackUIManager.instance.Draw(type, 3f, SetamingPoint);
 
-    private void OnDrawRadius(Vector3 amingPoint)
-    {
-        var a = database.jumpZombieRadius[fxDataindex];
-        a.GetComponent<MeshRenderer>().enabled = true;
-        database.jumpZombieRadius[fxDataindex].transform.position = amingPoint;
-
-        if (fxDataindex >= database.jumpZombieRadius.Length)
-        {
-            fxDataindex = 0;
-        }
-        fxDataindex++;
-        Debug.Log(fxDataindex);
+        FlyToTarget(transform.position, SetamingPoint, g, max_height);
     }
 
     private Vector3 FallDownPosition()

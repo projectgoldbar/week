@@ -21,8 +21,8 @@ public class AttackGenerator : GeneratorBase
 
     private void OnEnable()
     {
-        agent.speed = 0;
-        agent.ResetPath();
+        state.Agent.speed = 0;
+        state.Agent.ResetPath();
         attackStanby = false;
     }
 
@@ -111,7 +111,7 @@ public class AttackGenerator : GeneratorBase
 
     private void OnDisable()
     {
-        agent.speed = 10f;
+        state.Agent.speed = 10f;
     }
 
     public Vector3 FindFarPoint(Vector3 pivot, float minDistance = 6f, float maxDistance = 10f)
