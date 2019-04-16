@@ -705,8 +705,6 @@ GameObject:
   - component: {fileID: 7001827027952702490}
   - component: {fileID: 7001827027952702491}
   - component: {fileID: 1956270102}
-  - component: {fileID: 1956270103}
-  - component: {fileID: 7975861459677828526}
   - component: {fileID: 764919434}
   m_Layer: 10
   m_Name: EnemyZombie
@@ -787,9 +785,9 @@ MonoBehaviour:
   Agent: {fileID: 7001827028441207916}
   mono: {fileID: 7001827027952702490}
   StateBase: {fileID: 0}
-  Patrol: {fileID: 1956270103}
+  Patrol: {fileID: 0}
   Chase: {fileID: 1956270102}
-  Attack: {fileID: 7975861459677828526}
+  Attack: {fileID: 0}
 --- !u!114 &7001827027952702491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,8 +802,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atkPoint: 1
   Distance: 0
-  Check: 0
-  Attack: 0
   Anim: {fileID: 8664546413801839227}
   monsterstate: {fileID: 7001827027952702490}
   state: 0
@@ -822,33 +818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 875518f6a50340644995c431e5140bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1956270103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977870060189588057}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a35a9a0a02e15cb43a696fe9580a0898, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolPointParent: {fileID: 0}
-  Points: []
---- !u!114 &7975861459677828526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977870060189588057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa0bb09f9ecc4374f9bfdf6ac4a3600b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackKind: 1
 --- !u!136 &764919434
 CapsuleCollider:
   m_ObjectHideFlags: 0

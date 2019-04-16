@@ -11,37 +11,41 @@ public class MonsterState : MonoBehaviour
     [Header("안넣어도됨 상태머신에서 집어넣음.")]
     public GeneratorBase StateBase = null;
 
-    [Header("자기본인 넣어주면됨")]
-    public PatrolGenerator Patrol;
+    [Tooltip("자기자신오브젝트넣음")]
+    public PatrolGenerator Patrol = null;
 
-    public ChaseGenerator Chase;
-    public AttackGenerator Attack;
+    [Tooltip("자기자신오브젝트넣음")]
+    public ChaseGenerator Chase = null;
 
-    private List<GeneratorBase> generators = new List<GeneratorBase>();
+    [Tooltip("자기자신오브젝트넣음")]
+    public AttackGenerator Attack = null;
+
+    [Tooltip("자기자신오브젝트넣음")]
+    public TrapGenerator Trap = null;
+
+    [Tooltip("자기자신오브젝트넣음")]
+    public Gallery gallery = null;
+
+    [System.NonSerialized]
+    public List<GeneratorBase> generators = new List<GeneratorBase>();
 
     private void OnEnable()
     {
+    }
+
+    public virtual void Awake()
+    {
+        ListAddSetting();
         ChangeState(StateIndex.CHASE);
     }
 
-    private void Awake()
+    public void ListAddSetting()
     {
-        //StateSetting();
-        ListAddSetting();
-    }
-
-    private void StateSetting()
-    {
-        Patrol = GetComponent<PatrolGenerator>();
-        Chase = GetComponent<ChaseGenerator>();
-        Attack = GetComponent<AttackGenerator>();
-    }
-
-    private void ListAddSetting()
-    {
-        generators.Add(Patrol);
+        // generators.Add(Patrol);
         generators.Add(Chase);
         generators.Add(Attack);
+        generators.Add(Trap);
+        generators.Add(gallery);
     }
 
     private void Update()
@@ -84,11 +88,21 @@ public class MonsterState : MonoBehaviour
                 State_Inactive(Attack);
                 Agent.avoidancePriority = 51;
                 break;
+
+            case StateIndex.TRAP:
+                generator = State_activation(generator, Trap);
+                State_Inactive(Trap);
+                break;
+
+            case StateIndex.Gallery:
+                generator = State_activation(generator, gallery);
+                State_Inactive(gallery);
+                break;
         }
         return generator;
     }
 
-    private GeneratorBase State_activation(GeneratorBase generator, GeneratorBase Base)
+    protected GeneratorBase State_activation(GeneratorBase generator, GeneratorBase Base)
     {
         generator = Base;
         generator.enabled = true;
@@ -96,7 +110,7 @@ public class MonsterState : MonoBehaviour
         return generator;
     }
 
-    private void State_Inactive(GeneratorBase Base)
+    protected void State_Inactive(GeneratorBase Base)
     {
         var list = generators.FindAll(x => x != Base);
 

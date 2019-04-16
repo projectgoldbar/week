@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class ChaseGenerator : GeneratorBase
 {
     private NavMeshPath Path;
-    private WaitForSeconds second = new WaitForSeconds(0.3f);
+    protected WaitForSeconds second = new WaitForSeconds(0.3f);
 
     private float timer = 3;
 
@@ -33,18 +33,24 @@ public class ChaseGenerator : GeneratorBase
     private void Process()
     {
         unit.state = StateIndex.CHASE;
+        state.Agent.velocity = Vector3.forward;
     }
 
     public override void Execution() //Update
     {
         //if (unit.Distance <= 20.0f)
         {
-            CurrentTime += Time.deltaTime;
-            if (CurrentTime >= timer)
-            {
-                CurrentTime = 0;
-                state.ChangeState(StateIndex.ATTACK);
-            }
+            CoolDown();
+        }
+    }
+
+    public virtual void CoolDown()
+    {
+        CurrentTime += Time.deltaTime;
+        if (CurrentTime >= timer)
+        {
+            CurrentTime = 0;
+            state.ChangeState(StateIndex.ATTACK);
         }
     }
 
