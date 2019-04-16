@@ -35,7 +35,7 @@ public class MonsterUnit : MonoBehaviour
 
     private IEnumerator DistanceNStateCheck()
     {
-        ChaseTarget = Ref.Instance.playerTr;
+        ChaseTarget = Utility.Instance.playerTr;
         while (true)
         {
             if (ChaseTarget != null)

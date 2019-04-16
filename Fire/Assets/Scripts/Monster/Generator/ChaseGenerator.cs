@@ -20,6 +20,7 @@ public class ChaseGenerator : GeneratorBase
     {
         base.Initiate();
         Process();
+        CurrentTime = 0;
         timer = Random.Range(3.0f, 5.0f);
     }
 
@@ -34,7 +35,7 @@ public class ChaseGenerator : GeneratorBase
 
     public override void Execution() //Update
     {
-        if (unit.Distance <= 20.0f)
+        //if (unit.Distance <= 20.0f)
         {
             CurrentTime += Time.deltaTime;
             if (CurrentTime >= timer)
@@ -44,7 +45,7 @@ public class ChaseGenerator : GeneratorBase
             }
         }
 
-        NavMesh.CalculatePath(transform.position, Ref.Instance.playerTr.position, NavMesh.AllAreas, Path);
+        NavMesh.CalculatePath(transform.position, Utility.Instance.playerTr.position, NavMesh.AllAreas, Path);
 
         state.Agent.SetPath(Path);
     }

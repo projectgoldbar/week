@@ -11,19 +11,18 @@ public class Move : MonoBehaviour
 
     public static Action StopMove = () => { };
 
-    private enum RotState { ADVANCE, LEFT, RIGHT, DEAD };
+    public enum State { IDLE, ADVANCE, LEFT, RIGHT, DEAD };
 
     [SerializeField]
-    private RotState rotState = RotState.ADVANCE;
+    public State rotState = State.ADVANCE;
 
-    private Vector2 touchPos = Vector2.zero;
+    protected Vector2 touchPos = Vector2.zero;
 
     private NavMeshAgent agent;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.avoidancePriority = 1;
     }
 
     private void OnEnable()
@@ -43,16 +42,18 @@ public class Move : MonoBehaviour
             {
                 if (touchPos.x <= Screen.width * 0.5)
                 {
-                    rotState = RotState.LEFT;
+                    rotState = State.LEFT;
+                    Car_LeftTurn();
                 }
                 else
                 {
-                    rotState = RotState.RIGHT;
+                    rotState = State.RIGHT;
+                    Car_RightTurn();
                 }
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                rotState = RotState.ADVANCE;
+                rotState = State.ADVANCE;
             }
         }
 
@@ -87,50 +88,48 @@ public class Move : MonoBehaviour
         runSpeed = agent.speed;
         agent.velocity = agent.transform.forward * runSpeed;
 
+        MoveState();
+    }
+
+    public virtual void MoveState()
+    {
         switch (rotState)
         {
-            case RotState.LEFT:
-
-                agent.transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * -rotSpeed);
+            case State.LEFT:
+                Left_Turn();
                 break;
 
-            case RotState.RIGHT:
-                agent.transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * rotSpeed);
+            case State.RIGHT:
+                Right_Turn();
                 break;
 
-            case RotState.DEAD:
+            case State.DEAD:
                 StopMove?.Invoke();
                 break;
         }
+    }
+
+    public virtual void Car_LeftTurn()
+    {
+    }
+
+    public virtual void Car_RightTurn()
+    {
+    }
+
+    public void Left_Turn()
+    {
+        agent.transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * -rotSpeed);
+    }
+
+    public void Right_Turn()
+    {
+        agent.transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * rotSpeed);
     }
 
     private void stopRun()
     {
         agent.velocity = Vector3.zero;
         StopMove -= stopRun;
-    }
-
-    private IEnumerator MoveRotState()
-    {
-        while (true)
-        {
-            switch (rotState)
-            {
-                case RotState.LEFT:
-
-                    transform.rotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * -rotSpeed);
-                    break;
-
-                case RotState.RIGHT:
-                    transform.rotation *= Quaternion.Euler(Vector3.up * Time.deltaTime * rotSpeed);
-                    break;
-
-                case RotState.DEAD:
-                    StopMove?.Invoke();
-                    break;
-            }
-
-            yield return null;
-        }
     }
 }

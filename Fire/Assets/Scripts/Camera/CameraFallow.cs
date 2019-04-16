@@ -21,6 +21,8 @@ public class CameraFallow : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        offset = transform.position - target.position;
+
         var Move_vec = new Vector3(
             target.localPosition.x,
             target.localPosition.y + offset.y,

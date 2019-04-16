@@ -7,9 +7,11 @@ public class AttackGenerator : GeneratorBase
 {
     public AttackKind attackKind = AttackKind.RUSH_ATTACK;
 
-    private float distance = 10.0f;
+    private float distance = 30.0f;
 
     private Material mat;
+
+    private Vector3 pos = new Vector3();
 
     private void Awake()
     {
@@ -24,8 +26,9 @@ public class AttackGenerator : GeneratorBase
     {
         base.Initiate();
         Process();
+        StartCoroutine(RushStanby());
 
-        ATKKind();
+        pos = transform.position + transform.forward * distance;
     }
 
     private void Process()
@@ -34,14 +37,28 @@ public class AttackGenerator : GeneratorBase
 
         attackKind = AttackKind.RUSH_ATTACK;
         unit.state = StateIndex.ATTACK;
-
-        // mat.color = Ref.Instance.RedColor();
     }
 
-    public void ATKKind()
+    public IEnumerator RushStanby()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            mat.color = Utility.Instance.ChangeColor(Color.green);
+
+            yield return new WaitForSeconds(0.05f);
+
+            mat.color = Utility.Instance.ChangeColor(Color.white);
+
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        ATKKindProcess();
+    }
+
+    public void ATKKindProcess()
     {
         if (attackKind == AttackKind.RUSH_ATTACK)
-        { Invoke("RushAttackProcess", 1.0f); }
+        { Invoke("RushAttackProcess", 0.2f); }
     }
 
     public void RushAttackProcess()
@@ -53,12 +70,12 @@ public class AttackGenerator : GeneratorBase
 
         Forward_Direction_Control();
 
-        Invoke("StateEnd", 0.5f);
+        Invoke("StateEnd", 0.8f);
     }
 
     public void Forward_Direction_Control()
     {
-        Quaternion rot = Quaternion.LookRotation(Ref.Instance.playerTr.position - transform.position);
+        Quaternion rot = Quaternion.LookRotation(Utility.Instance.playerTr.position - transform.position);
         transform.rotation = rot;
     }
 
@@ -66,22 +83,20 @@ public class AttackGenerator : GeneratorBase
     {
         unit.Attack = false;
         unit.Anim.SetBool("RushAttack", false);
+        state.Agent.updateRotation = true;
         state.ChangeState(StateIndex.CHASE);
     }
 
     public override void Execution()
     {
-        if (!unit.Attack) return;
+        if (unit)
+        { if (!unit.Attack) return; }
 
-        transform.position = Vector3.Lerp(transform.position,
-                                          transform.position + transform.forward * distance,
-                                          Time.deltaTime * 5.0f);
+        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 2.0f);
     }
 
     public override void Exit()
     {
-        // mat.color = Ref.Instance.NonColor();
-        state.Agent.updateRotation = true;
     }
 
     public Vector3 FindFarPoint(Vector3 pivot, float minDistance = 6f, float maxDistance = 10f)

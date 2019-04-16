@@ -25,12 +25,17 @@ public class Player : MonoBehaviour
             if (hp <= 0)
             {
                 Debug.Log("플레이어 사망");
-                Move.StopMove?.Invoke();
+                GetComponent<Move>().rotState = Move.State.DEAD;
                 Anim.SetTrigger("Dead");
-                //Invoke("Gameover", 3.0f);
+                Invoke("Gameover", 1.0f);
+                Utility.Instance.PlayerHpText.text = "0";
+                Utility.Instance.PlayerHpBar.fillAmount = 0;
             }
-            // else
-            //    Ref.Instance.hpbar.value = (Hp / MaxHp);
+            else
+            {
+                Utility.Instance.PlayerHpText.text = Mathf.RoundToInt(Hp).ToString();
+                Utility.Instance.PlayerHpBar.fillAmount = (Hp / MaxHp);
+            }
         }
     }
 
@@ -43,23 +48,19 @@ public class Player : MonoBehaviour
         Anim = GetComponent<Animator>();
         Hp = MaxHp;
 
-        mat.color = Ref.Instance.NonColor();
+        // mat.color = Ref.Instance.NonColor();
     }
 
     public void Gameover()
     {
-        SceneManager.LoadScene(0);
+        GameManager.instance.GameEnd();
     }
 
-    public IEnumerator hitDamage()
+    public IEnumerator HitDamageEffectColorBlink()
     {
-        for (int i = 0; i <= 2; i++)
+        for (int i = 0; i < 2; i++)
         {
-            if (i / 2 == 1)
-                mat.color = Ref.Instance.NonColor();
-            else
-                mat.color = Ref.Instance.RedColor();
-
+            mat.color = Utility.Instance.ColorChageForColorBlink(Color.white, Color.red);
             yield return wait;
         }
     }
@@ -83,12 +84,12 @@ public class Player : MonoBehaviour
             //particle.time = 0;
             //particle.Play();
 
-            // Hp -= 1;
+            Hp -= 1;
 
             //unit = collision.GetComponent<MonsterUnit>();
 
             //if (unit.state == StateIndex.ATTACK)
-            { StartCoroutine(hitDamage()); }
+            { StartCoroutine(HitDamageEffectColorBlink()); }
         }
     }
 }
