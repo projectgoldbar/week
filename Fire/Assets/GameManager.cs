@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     public InGameItemContainer inGameItemContainer;
+    public Vector3 goal;
 
     private void Awake()
     {
@@ -43,6 +44,10 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameEnd();
+        }
+        if (Vector3.Distance(Utility.Instance.playerTr.position, goal) < 1f)
         {
             GameEnd();
         }

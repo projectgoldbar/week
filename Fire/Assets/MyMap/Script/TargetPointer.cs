@@ -1,24 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class TargetPointer : MonoBehaviour
 {
-    [SerializeField] private Camera uiCamera;
-    [SerializeField] private Sprite arrowSprite;
-    [SerializeField] private Sprite crossSprite;
+    public Camera uiCamera;
+    public Sprite indicationSprite;
+    public Sprite goalMarkSprite;
 
     public Transform player;
-    public Transform target;
-    private Vector3 targetPosition;
+    public Vector3 targetPosition;
     public RectTransform pointerRectTransform;
     public Image pointerImage;
+
     public float borderSize = 100f;
 
-    private void Awake()
+    private void OnDisable()
     {
-        targetPosition = target.position;
+        targetPosition = new Vector3(167f, 1.5f, -2f);
     }
 
     private void Update()
@@ -30,7 +28,7 @@ public class TargetPointer : MonoBehaviour
         {
             RotatePointerTowardsTargetPosition();
 
-            pointerImage.sprite = arrowSprite;
+            pointerImage.sprite = indicationSprite;
             Vector3 cappedTargetScreenPosition = targetPositionScreenPoint;
             cappedTargetScreenPosition.x = Mathf.Clamp(cappedTargetScreenPosition.x, borderSize, Screen.width - borderSize);
             cappedTargetScreenPosition.y = Mathf.Clamp(cappedTargetScreenPosition.y, borderSize, Screen.height - borderSize);
@@ -40,7 +38,7 @@ public class TargetPointer : MonoBehaviour
         }
         else
         {
-            pointerImage.sprite = crossSprite;
+            pointerImage.sprite = goalMarkSprite;
             Vector3 pointerWorldPosition = uiCamera.ScreenToWorldPoint(targetPositionScreenPoint);
             pointerRectTransform.position = pointerWorldPosition;
             pointerRectTransform.localPosition = new Vector3(pointerRectTransform.localPosition.x, pointerRectTransform.localPosition.y, 0f);

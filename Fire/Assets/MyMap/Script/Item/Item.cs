@@ -16,8 +16,8 @@ public class Item : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             container.veiledItemlist.Enqueue(this);
-            TargetPointer a = GameObject.Find("UI").GetComponent<TargetPointer>();
-            a.pointerRectTransform.gameObject.SetActive(false);
+            MarkerSystem.instance.targetChange(new Vector3(167f, 1.5f, -2f));
+            GameManager.instance.goal = new Vector3(167f, 1.5f, -2f);
             Destroy(this.gameObject);
         }
     }
