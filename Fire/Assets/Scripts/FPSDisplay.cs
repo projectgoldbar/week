@@ -9,7 +9,7 @@ public class FPSDisplay : MonoBehaviour
 #if UNITY_EDITOR
         Application.targetFrameRate = 60;
 #else
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 45;
 #endif
     }
 
