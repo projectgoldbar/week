@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class MonsterState : MonoBehaviour
 {
@@ -10,9 +11,6 @@ public class MonsterState : MonoBehaviour
 
     [Header("안넣어도됨 상태머신에서 집어넣음.")]
     public GeneratorBase StateBase = null;
-
-    [Tooltip("자기자신오브젝트넣음")]
-    public PatrolGenerator Patrol = null;
 
     [Tooltip("자기자신오브젝트넣음")]
     public ChaseGenerator Chase = null;
@@ -24,7 +22,7 @@ public class MonsterState : MonoBehaviour
     public TrapGenerator Trap = null;
 
     [Tooltip("자기자신오브젝트넣음")]
-    public Gallery gallery = null;
+    public FlyingGenerator Flying = null;
 
     [System.NonSerialized]
     public List<GeneratorBase> generators = new List<GeneratorBase>();
@@ -41,11 +39,10 @@ public class MonsterState : MonoBehaviour
 
     public void ListAddSetting()
     {
-        // generators.Add(Patrol);
         generators.Add(Chase);
         generators.Add(Attack);
         generators.Add(Trap);
-        generators.Add(gallery);
+        generators.Add(Flying);
     }
 
     private void Update()
@@ -72,11 +69,6 @@ public class MonsterState : MonoBehaviour
 
         switch (NextState)
         {
-            case StateIndex.PATROL:
-                generator = State_activation(generator, Patrol);
-                State_Inactive(Patrol);
-                break;
-
             case StateIndex.CHASE:
                 generator = State_activation(generator, Chase);
                 State_Inactive(Chase);
@@ -95,8 +87,13 @@ public class MonsterState : MonoBehaviour
                 break;
 
             case StateIndex.Gallery:
-                generator = State_activation(generator, gallery);
-                State_Inactive(gallery);
+                generator = State_activation(generator, Chase);
+                State_Inactive(Chase);
+                break;
+
+            case StateIndex.Flaying:
+                generator = State_activation(generator, Flying);
+                State_Inactive(Flying);
                 break;
         }
         return generator;

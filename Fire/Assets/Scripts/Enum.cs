@@ -1,4 +1,4 @@
-﻿public enum StateIndex { Gallery, TRAP, PATROL, CHASE, ATTACK, JUMP, STURN };
+﻿public enum StateIndex { Gallery, TRAP, PATROL, CHASE, ATTACK, JUMP, STURN, Flaying };
 
 public enum AttackKind { HAND_ATTACK, RUSH_ATTACK };
 
