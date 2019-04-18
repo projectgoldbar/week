@@ -357,6 +357,9 @@ GameObject:
   - component: {fileID: 4681347488794115837}
   - component: {fileID: 4681347488628628815}
   - component: {fileID: 4681347488628628812}
+  - component: {fileID: 7977870061818345085}
+  - component: {fileID: 4442070626063617855}
+  - component: {fileID: 1041694303}
   m_Layer: 10
   m_Name: EnemyZombie(Gallery)
   m_TagString: Untagged
@@ -436,9 +439,10 @@ MonoBehaviour:
   Agent: {fileID: 2439825274739446811}
   mono: {fileID: 2439825276334724205}
   StateBase: {fileID: 0}
-  Patrol: {fileID: 1956270103, guid: 3e829520a66adfc4cb6ac17cdc8bd513, type: 3}
   Chase: {fileID: 4681347488628628815}
   Attack: {fileID: 4681347488628628812}
+  Trap: {fileID: 7977870061818345085}
+  Flying: {fileID: 4442070626063617855}
 --- !u!114 &2439825276334724204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,6 +500,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackKind: 0
+  trail: {fileID: 0}
+--- !u!114 &7977870061818345085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3332780486429366830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d33f2cbdef3fe184da61f4974f649b25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dis: 0
+  check: 0
+--- !u!114 &4442070626063617855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3332780486429366830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe4b868cdec710449a0abc2d1d767d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1041694303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3332780486429366830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b23eaa3b5699543a31f469349b458d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flySpd: 3
 --- !u!1 &3332780486429429916
 GameObject:
   m_ObjectHideFlags: 0

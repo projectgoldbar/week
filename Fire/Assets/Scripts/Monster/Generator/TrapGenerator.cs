@@ -5,11 +5,16 @@ using UnityEngine;
 [DefaultExecutionOrder(-500)]
 public class TrapGenerator : GeneratorBase
 {
-    private Vector3 pos = new Vector3();
-
     public float dis = 0;
 
     public bool check = false;
+
+    private float CheckTrapDistance = 15;
+    private float TrapSpeed = 5;
+
+    private Vector3 TrapVelocityDir = Vector3.zero;
+
+    private Vector3 ArrivalPosition = Vector3.zero;
 
     private void OnEnable()
     {
@@ -23,10 +28,10 @@ public class TrapGenerator : GeneratorBase
     public override void Initiate()
     {
         Process();
+        unit.Anim.Play("IDLE");
+        state.Agent.velocity = TrapVelocityDir;
 
-        state.Agent.velocity = Vector3.zero;
-
-        pos = transform.position + transform.forward * 15;
+        ArrivalPosition = transform.position + transform.forward * 15;
     }
 
     public void Process()
@@ -36,9 +41,10 @@ public class TrapGenerator : GeneratorBase
 
     private void Advance()
     {
-        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 2.0f);
-        dis = Vector3.Distance(transform.position, pos);
-        if (dis <= 1.5f)
+        unit.Anim.SetBool("TrapWalk", true);
+        transform.position = Vector3.Lerp(transform.position, ArrivalPosition, Time.deltaTime * TrapSpeed);
+        dis = Vector3.Distance(transform.position, ArrivalPosition);
+        if (dis <= 1.2f)
         {
             state.ChangeState(StateIndex.Gallery);
         }

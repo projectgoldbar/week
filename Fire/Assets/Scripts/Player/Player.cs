@@ -29,12 +29,12 @@ public class Player : MonoBehaviour
                 Anim.SetTrigger("Dead");
                 Invoke("Gameover", 1.0f);
                 Utility.Instance.PlayerHpText.text = "0";
-                Utility.Instance.PlayerHpBar.fillAmount = 0;
+                Utility.Instance.PlayerHpBar.value = 0;
             }
             else
             {
                 Utility.Instance.PlayerHpText.text = Mathf.RoundToInt(Hp).ToString();
-                Utility.Instance.PlayerHpBar.fillAmount = (Hp / MaxHp);
+                Utility.Instance.PlayerHpBar.value = (Hp / MaxHp);
             }
         }
     }
@@ -51,8 +51,14 @@ public class Player : MonoBehaviour
         // mat.color = Ref.Instance.NonColor();
     }
 
+    private void OnApplicationQuit()
+    {
+        mat.color = Color.white;
+    }
+
     public void Gameover()
     {
+        mat.color = Color.white;
         GameManager.instance.GameEnd();
     }
 

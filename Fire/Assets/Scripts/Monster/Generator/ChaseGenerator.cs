@@ -21,9 +21,11 @@ public class ChaseGenerator : GeneratorBase
     public override void Initiate()
     {
         Process();
-        CurrentTime = 0;
-        timer = Random.Range(3.0f, 5.0f);
+
+        unit.Anim.SetBool("RushAttack", false);
+        unit.Anim.Play("Zombie_Walk");
         StartCoroutine(CalculatePath());
+        state.Agent.updateRotation = true;
     }
 
     private void OnEnable()
@@ -33,7 +35,9 @@ public class ChaseGenerator : GeneratorBase
     private void Process()
     {
         unit.state = StateIndex.CHASE;
-        state.Agent.velocity = Vector3.forward;
+        state.Agent.enabled = true;
+        CurrentTime = 0;
+        timer = Random.Range(3.0f, 5.0f);
     }
 
     public override void Execution() //Update

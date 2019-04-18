@@ -5,6 +5,15 @@ using UnityEngine;
 [DefaultExecutionOrder(-500)]
 public class Gallery : ChaseGenerator
 {
+    private void OnEnable()
+    {
+    }
+
+    public override void Awake()
+    {
+        base.Awake();
+    }
+
     public override void Initiate()
     {
         base.Initiate();

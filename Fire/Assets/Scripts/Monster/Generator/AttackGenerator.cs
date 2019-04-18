@@ -7,11 +7,16 @@ public class AttackGenerator : GeneratorBase
 {
     public AttackKind attackKind = AttackKind.RUSH_ATTACK;
 
-    private float distance = 40.0f;
+    public TrailRenderer trail = null;
+
+    private float distance = 30.0f;
 
     private Material mat;
     private bool attackStanby = false;
     private Vector3 pos = new Vector3();
+
+    private Vector3 hitpos = Vector3.zero;
+    private RaycastHit hit;
 
     public override void Awake()
     {
@@ -21,9 +26,9 @@ public class AttackGenerator : GeneratorBase
 
     private void OnEnable()
     {
-        state.Agent.speed = 0;
         state.Agent.ResetPath();
         attackStanby = false;
+        state.Agent.velocity = Vector3.zero;
     }
 
     public override void Initiate()
@@ -31,7 +36,26 @@ public class AttackGenerator : GeneratorBase
         Process();
         StartCoroutine(RushStanby());
 
-        pos = transform.position + transform.forward * distance;
+        trail.time = 0.2f;
+    }
+
+    private bool isHit = false;
+
+    private void RayCastFindPosition()
+    {
+        //isHit = (Physics.Raycast(transform.position, transform.forward, out hit, distance));
+
+        //if (isHit)
+        //{
+        //    //hitpos = Vector3.Lerp(transform.position, hit.point, 0.7f);
+        //    pos = hit.point - Vector3.forward * 1.0f;
+        //}
+        //else
+        {
+            pos = transform.position + transform.forward * distance;
+        }
+
+        // pos = transform.position + transform.forward * distance;
     }
 
     private void Process()
@@ -40,6 +64,8 @@ public class AttackGenerator : GeneratorBase
 
         attackKind = AttackKind.RUSH_ATTACK;
         unit.state = StateIndex.ATTACK;
+
+        RayCastFindPosition();
     }
 
     public IEnumerator RushStanby()
@@ -70,9 +96,8 @@ public class AttackGenerator : GeneratorBase
     public void RushAttackProcess()
     {
         //러쉬공격
-        unit.Anim.SetBool("RushAttack", true);
-        //unit.Attack = true;
         state.Agent.updateRotation = false;
+        unit.Anim.SetBool("RushAttack", true);
 
         Forward_Direction_Control();
 
@@ -87,31 +112,22 @@ public class AttackGenerator : GeneratorBase
 
     private void StateEnd()
     {
-        // unit.Attack = false;
-        unit.Anim.SetBool("RushAttack", false);
-        state.Agent.updateRotation = true;
         state.ChangeState(StateIndex.CHASE);
     }
 
     public override void Execution()
     {
-        //if (unit)
         if (!attackStanby) return;
         transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 3.0f);
-
-        //if (Vector3.Distance(transform.position, pos) < 5f)
-        //{
-        //    StateEnd();
-        //}
     }
 
     public override void Exit()
     {
+        trail.time = 0.01f;
     }
 
     private void OnDisable()
     {
-        state.Agent.speed = 10f;
     }
 
     public Vector3 FindFarPoint(Vector3 pivot, float minDistance = 6f, float maxDistance = 10f)

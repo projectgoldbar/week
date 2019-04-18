@@ -20,9 +20,13 @@ public class Car_Generator : MonoBehaviour
 
     public int explosion_Timer = 1;
 
+    private BoxCollider Box;
+
+    public bool PlayerIn = false;
+
     private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
+        Box = GetComponent<BoxCollider>();
         controller = GetComponent<CarController>();
         controller.enabled = false;
     }
@@ -34,7 +38,7 @@ public class Car_Generator : MonoBehaviour
             if (other.gameObject.CompareTag("Player"))
             {
                 Utility.Instance.CarKey--;
-
+                PlayerIn = true;
                 Passenger = other.gameObject;
                 Passenger.transform.SetParent(transform);
                 Passenger.SetActive(false);
@@ -44,17 +48,23 @@ public class Car_Generator : MonoBehaviour
 
                 cameraFallow.target = transform;
 
-                agent.speed = carMaxSpeed;
-                agent.radius = 6;
-
+                Box.center = new Vector3(Box.center.x, Box.center.y, 3.0f);
+                Box.size = new Vector3(Box.size.x, Box.size.y, 4.0f);
                 StartCoroutine(EndCar());
             }
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Monster") && PlayerIn)
+        {
+            var enemyAgent = other.gameObject.GetComponent<MonsterState>();
+
+            enemyAgent.ChangeState(StateIndex.Flaying);
         }
     }
 
     private IEnumerator EndCar()
     {
         yield return new WaitForSeconds(10);
+        PlayerIn = false;
 
         Passenger.transform.SetParent(null);
         Passenger.SetActive(true);
@@ -66,10 +76,8 @@ public class Car_Generator : MonoBehaviour
 
         cameraFallow.target = Passenger.transform;
 
-        agent.speed = carMinSpeed;
-
-        //agent.speed = 0;
-        agent.velocity = Vector3.zero;
+        Box.center = new Vector3(Box.center.x, Box.center.y, -0.6f);
+        Box.size = new Vector3(Box.size.x, Box.size.y, 11.0f);
 
         //차 폭발
         StartCoroutine(Car_Explosion());

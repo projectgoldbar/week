@@ -18,9 +18,9 @@ public class Move : MonoBehaviour
 
     protected Vector2 touchPos = Vector2.zero;
 
-    private NavMeshAgent agent;
+    protected NavMeshAgent agent;
 
-    private void Awake()
+    public void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
     }
@@ -43,12 +43,12 @@ public class Move : MonoBehaviour
                 if (touchPos.x <= Screen.width * 0.5)
                 {
                     rotState = State.LEFT;
-                    // Car_LeftTurn();
+                    Car_LeftTurn();
                 }
                 else
                 {
                     rotState = State.RIGHT;
-                    // Car_RightTurn();
+                    Car_RightTurn();
                 }
             }
             else if (Input.GetMouseButtonUp(0))
@@ -83,16 +83,28 @@ public class Move : MonoBehaviour
 #endif
     }
 
+    public virtual void Car_LeftTurn()
+    {
+    }
+
+    public virtual void Car_RightTurn()
+    {
+    }
+
     private void FixedUpdate()
     {
-        runSpeed = agent.speed;
-        agent.velocity = agent.transform.forward * runSpeed;
-
         MoveState();
     }
 
     public void MoveState()
     {
+        SelectState();
+    }
+
+    public virtual void SelectState()
+    {
+        runSpeed = agent.speed;
+        agent.velocity = agent.transform.forward * runSpeed;
         switch (rotState)
         {
             case State.LEFT:
@@ -119,7 +131,7 @@ public class Move : MonoBehaviour
         agent.transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * rotSpeed);
     }
 
-    private void stopRun()
+    public virtual void stopRun()
     {
         agent.velocity = Vector3.zero;
         StopMove -= stopRun;

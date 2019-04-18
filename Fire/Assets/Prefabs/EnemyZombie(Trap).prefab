@@ -419,10 +419,11 @@ GameObject:
   - component: {fileID: 6992218518859087453}
   - component: {fileID: 7968331924740141084}
   - component: {fileID: 1134431289836067469}
-  - component: {fileID: 6992218518859087443}
   - component: {fileID: 6992218518859087452}
   - component: {fileID: 6992218518859087442}
   - component: {fileID: 6992218518859087441}
+  - component: {fileID: 2649249524080271834}
+  - component: {fileID: 281022297}
   m_Layer: 10
   m_Name: EnemyZombie(Trap)
   m_TagString: Untagged
@@ -502,11 +503,10 @@ MonoBehaviour:
   Agent: {fileID: 7968331923114455147}
   mono: {fileID: 7968331924740141084}
   StateBase: {fileID: 0}
-  Patrol: {fileID: 0}
-  Chase: {fileID: 6992218518859087443}
+  Chase: {fileID: 6992218518859087441}
   Attack: {fileID: 6992218518859087442}
   Trap: {fileID: 6992218518859087452}
-  gallery: {fileID: 6992218518859087441}
+  Flying: {fileID: 2649249524080271834}
 --- !u!114 &7968331924740141084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,18 +539,6 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.5, z: 0}
---- !u!114 &6992218518859087443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6992218518859087454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 875518f6a50340644995c431e5140bf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6992218518859087452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,6 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackKind: 1
+  trail: {fileID: 0}
 --- !u!114 &6992218518859087441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,6 +579,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771a9befea77dc24eaa5f8fd3912e6e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2649249524080271834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6992218518859087454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe4b868cdec710449a0abc2d1d767d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &281022297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6992218518859087454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b23eaa3b5699543a31f469349b458d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flySpd: 3
 --- !u!1 &6992218518859281644
 GameObject:
   m_ObjectHideFlags: 0
