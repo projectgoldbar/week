@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public ItemType type;
     public InGameItemContainer container;
 
     public int hp;

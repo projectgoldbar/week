@@ -9,6 +9,10 @@ public class InGameItemContainer : MonoBehaviour
 
     private void Awake()
     {
+        if (!GameManager.instance)
+        {
+            return;
+        }
         GameManager.instance.inGameItemContainer = this;
     }
 
