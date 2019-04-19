@@ -18,7 +18,17 @@ public class MarkerSystem : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        SetupNewPointer(target.transform.position);
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(instance.gameObject);
+            instance = this;
+        }
+
+        //SetupNewPointer(target.transform.position);
     }
 
     public void targetChange(Vector3 newTarget)
@@ -29,7 +39,8 @@ public class MarkerSystem : MonoBehaviour
             {
                 pointerList[i].targetPosition = newTarget;
                 pointerList[i].indicationSprite = indicationSprite;
-                pointerList[i].goalMarkSprite = homeSprite;
+                pointerList[i].goalMarkSprite = indicationSprite2;
+                pointerList[i].text.text = "2";
             }
         }
     }

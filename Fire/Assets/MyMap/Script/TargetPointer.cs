@@ -47,6 +47,9 @@ public class TargetPointer : MonoBehaviour
         }
     }
 
+    public RectTransform rectTransform;
+    public Text text;
+
     private void RotatePointerTowardsTargetPosition()
     {
         Vector3 toPosition = targetPosition;
@@ -54,7 +57,7 @@ public class TargetPointer : MonoBehaviour
         fromPosition.y = 0f;
         Vector3 dir = (toPosition - fromPosition).normalized;
         float angle = GetAngleFromVectorFloat(dir);
-        pointerRectTransform.localEulerAngles = new Vector3(0, 0, angle);
+        this.rectTransform.localEulerAngles = new Vector3(0, 0, angle);
     }
 
     private float GetAngleFromVectorFloat(Vector3 dir)

@@ -3,6 +3,7 @@ using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class Player : MonoBehaviour
     public Material mat;
 
     private WaitForSeconds wait = new WaitForSeconds(0.05f);
+
+    private float hp;
+
+    private Action specialMove = null;
+    private Action setItemOption = null;
 
     public float Hp
     {
@@ -39,9 +45,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    private float hp;
-
     private Animator Anim;
+
+    public void StatusRefresh()
+    {
+    }
 
     private void Awake()
     {

@@ -25,8 +25,12 @@ public class NewMonsterGenerator : MonoBehaviour
 
     private void Start()
     {
+        //GenerateLoopTopZombie();
+    }
+
+    public void GenGallery()
+    {
         StartCoroutine(Invokee(cooldown));
-        GenerateLoopTopZombie();
     }
 
     private IEnumerator Invokee(float cooldown)
@@ -46,7 +50,6 @@ public class NewMonsterGenerator : MonoBehaviour
             float z = Random.Range(0, 6f);
             var monster = GameObject.Instantiate(zombie, groundGenPoint[Random.Range(0, groundGenPoint.Length)].position + new Vector3(x, 0, z), Quaternion.identity);
             monsterDataBase.monsterList.Add(monster);
-            monsterDataBase.monsterDataList.Add(new MonsterData(monster.transform));
         }
     }
 

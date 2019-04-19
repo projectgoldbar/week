@@ -6,6 +6,7 @@ public class MonsterUnit : MonoBehaviour
 {
     #region 변수들
 
+    public int level = 0;
     public float atkPoint = 1;
 
     public float Distance = 0;

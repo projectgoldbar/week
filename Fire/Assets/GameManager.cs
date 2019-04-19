@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         //}
     }
 
-    public List<Item> Inventory;
+    public List<Item_Equip> Inventory;
 
     public void GameStart()
     {
@@ -47,9 +47,7 @@ public class GameManager : MonoBehaviour
         {
             GameEnd();
         }
-        if (Vector3.Distance(Utility.Instance.playerTr.position, goal) < 1f)
-        {
-            GameEnd();
-        }
+        Debug.Log(Inventory[0]);
+        //if (Vector3.Distance(Utility.Instance.playerTr.position, goal) < 1f)
     }
 }
