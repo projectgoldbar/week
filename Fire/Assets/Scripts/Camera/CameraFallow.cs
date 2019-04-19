@@ -18,6 +18,6 @@ public class CameraFallow : MonoBehaviour
     // Update is called once per frame
     private void LateUpdate()
     {
-        transform.position = target.position + (Vector3.up * offset);
+        transform.position = new Vector3(target.position.x,offset,target.position.z);
     }
 }
