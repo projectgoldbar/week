@@ -30,13 +30,13 @@ public class InGameItemContainer : MonoBehaviour
         }
     }
 
-    public void OpenVeilAll(List<Item_Equip> something)
+    public void OpenVeilAll(Queue<Item_Equip> something)
     {
         for (int i = 0; i < veiledItemlist.Count; i++)
         {
             var unVeiledItem = veiledItemlist.Dequeue();
             //unVeiledItem.Open();
-            something.Add(unVeiledItem);
+            something.Enqueue(unVeiledItem);
         }
     }
 

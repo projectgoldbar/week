@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public InGameItemContainer inGameItemContainer;
     public Vector3 goal;
+    private Inventory userInventory;
+    public Queue<Item_Equip> inventory;
+    public int a = 0;
 
     private void Awake()
     {
@@ -18,17 +21,23 @@ public class GameManager : MonoBehaviour
         }
         else if (instance != this)
         {
-            Destroy(instance.gameObject);
-            instance = this;
+            Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+
+        inventory = new Queue<Item_Equip>();
+
+        userInventory = FindObjectOfType<Inventory>();
+        if (a == 0)
+        {
+            userInventory.LoadInventory();
+        }
+
         //if (SceneManager.sceneCountInBuildSettings == 3)
         //{
         //    inGameItemContainer = GameObject.Find("GameDataBase").GetComponent<InGameItemContainer>();
         //}
     }
-
-    public List<Item_Equip> Inventory;
 
     public void GameStart()
     {
@@ -37,8 +46,22 @@ public class GameManager : MonoBehaviour
 
     public void GameEnd()
     {
-        inGameItemContainer.OpenVeilAll(Inventory);
+        inGameItemContainer.OpenVeilAll(inventory);
         SceneManager.LoadScene("01.Intro");
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene("01.Intro");
+    }
+
+    public void PutItemOnInventory(List<Item_Equip> list)
+    {
+        Debug.Log("넣기");
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            list.Add(inventory.Dequeue());
+        }
     }
 
     private void Update()
@@ -47,7 +70,7 @@ public class GameManager : MonoBehaviour
         {
             GameEnd();
         }
-        Debug.Log(Inventory[0]);
+        //Debug.Log(Inventory[1]);
         //if (Vector3.Distance(Utility.Instance.playerTr.position, goal) < 1f)
     }
 }
