@@ -12,24 +12,25 @@ public class ChaseGenerator : GeneratorBase
 
     private float CurrentTime = 0;
 
+    private void OnEnable()
+    {
+    }
+
     public override void Awake()
     {
         base.Awake();
+        unit.ChaseTarget = Utility.Instance.playerTr;
         Path = new NavMeshPath();
     }
 
     public override void Initiate()
     {
         Process();
-
         unit.Anim.SetBool("RushAttack", false);
-        unit.Anim.Play("Zombie_Walk");
-        StartCoroutine(CalculatePath());
-        state.Agent.updateRotation = true;
-    }
 
-    private void OnEnable()
-    {
+        unit.Anim.Play("Zombie_Walk");
+        state.Agent.updateRotation = true;
+        StartCoroutine(CalculatePath());
     }
 
     private void Process()
@@ -62,7 +63,7 @@ public class ChaseGenerator : GeneratorBase
     {
         while (true)
         {
-            state.Agent.CalculatePath(Utility.Instance.playerTr.position, Path);
+            state.Agent.CalculatePath(unit.ChaseTarget.position, Path);
             state.Agent.SetPath(Path);
             yield return second;
         }

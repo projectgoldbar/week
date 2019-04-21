@@ -12,17 +12,20 @@ public class MonsterState : MonoBehaviour
     [Header("안넣어도됨 상태머신에서 집어넣음.")]
     public GeneratorBase StateBase = null;
 
-    [Tooltip("자기자신오브젝트넣음")]
+    [Header("자기자신오브젝트넣음")]
     public ChaseGenerator Chase = null;
 
-    [Tooltip("자기자신오브젝트넣음")]
+    [Header("자기자신오브젝트넣음")]
     public AttackGenerator Attack = null;
 
-    [Tooltip("자기자신오브젝트넣음")]
+    [Header("자기자신오브젝트넣음")]
     public TrapGenerator Trap = null;
 
-    [Tooltip("자기자신오브젝트넣음")]
+    [Header("자기자신오브젝트넣음")]
     public FlyingGenerator Flying = null;
+
+    [Header("자기자신오브젝트넣음")]
+    public FlyOutCatch Catch = null;
 
     [System.NonSerialized]
     public List<GeneratorBase> generators = new List<GeneratorBase>();
@@ -75,6 +78,11 @@ public class MonsterState : MonoBehaviour
                 Agent.avoidancePriority = 50;
                 break;
 
+            case StateIndex.Gallery:
+                generator = State_activation(generator, Chase);
+                State_Inactive(Chase);
+                break;
+
             case StateIndex.ATTACK:
                 generator = State_activation(generator, Attack);
                 State_Inactive(Attack);
@@ -86,14 +94,14 @@ public class MonsterState : MonoBehaviour
                 State_Inactive(Trap);
                 break;
 
-            case StateIndex.Gallery:
-                generator = State_activation(generator, Chase);
-                State_Inactive(Chase);
-                break;
-
             case StateIndex.Flaying:
                 generator = State_activation(generator, Flying);
                 State_Inactive(Flying);
+                break;
+
+            case StateIndex.FlyOutCatch:
+                generator = State_activation(generator, Catch);
+                State_Inactive(Catch);
                 break;
         }
         return generator;

@@ -6,8 +6,6 @@ public class ShootEffectPool : MonoBehaviour
 {
     public ParticleSystem blood_effect;
 
-    public Transform parents;
-
     public int effectCount = 10;
 
     public List<ParticleSystem> effects = new List<ParticleSystem>();
@@ -21,7 +19,7 @@ public class ShootEffectPool : MonoBehaviour
     {
         for (int i = 0; i < effectCount; i++)
         {
-            var go = Instantiate(blood_effect, parents);
+            var go = Instantiate(blood_effect, transform);
             go.Stop();
             go.time = 0;
             effects.Add(go);

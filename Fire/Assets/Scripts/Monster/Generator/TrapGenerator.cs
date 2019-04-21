@@ -28,7 +28,6 @@ public class TrapGenerator : GeneratorBase
     public override void Initiate()
     {
         Process();
-        unit.Anim.Play("IDLE");
         state.Agent.velocity = TrapVelocityDir;
 
         ArrivalPosition = transform.position + transform.forward * 15;
@@ -41,12 +40,14 @@ public class TrapGenerator : GeneratorBase
 
     private void Advance()
     {
-        unit.Anim.SetBool("TrapWalk", true);
+        unit.Anim.SetBool("RushAttack", true);
         transform.position = Vector3.Lerp(transform.position, ArrivalPosition, Time.deltaTime * TrapSpeed);
         dis = Vector3.Distance(transform.position, ArrivalPosition);
         if (dis <= 1.2f)
         {
-            state.ChangeState(StateIndex.Gallery);
+            StartCoroutine(GetComponent<pomulseon>().MonsterStanUpStateChange(transform, StateIndex.Gallery, 0.9f));
+
+            //state.ChangeState(StateIndex.Gallery);
         }
     }
 

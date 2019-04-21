@@ -6,21 +6,14 @@ using UnityEngine.AI;
 public class Car_Generator : MonoBehaviour
 {
     private CarController controller;
-
     private GameObject Passenger;
+    private BoxCollider Box;
 
     public CameraFallow cameraFallow;
-
     public NavMeshAgent agent;
-
-    public float carMaxSpeed = 50.0f;
-    public float carMinSpeed = 3.5f;
-
     public ParticleSystem explosion = null;
 
     public int explosion_Timer = 1;
-
-    private BoxCollider Box;
 
     public bool PlayerIn = false;
 
@@ -29,6 +22,7 @@ public class Car_Generator : MonoBehaviour
         Box = GetComponent<BoxCollider>();
         controller = GetComponent<CarController>();
         controller.enabled = false;
+        agent.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,6 +32,8 @@ public class Car_Generator : MonoBehaviour
             if (other.gameObject.CompareTag("Player"))
             {
                 Utility.Instance.CarKey--;
+                agent.enabled = true;
+
                 PlayerIn = true;
                 Passenger = other.gameObject;
                 Passenger.transform.SetParent(transform);
@@ -53,11 +49,22 @@ public class Car_Generator : MonoBehaviour
                 StartCoroutine(EndCar());
             }
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Monster") && PlayerIn)
-        {
-            var enemyAgent = other.gameObject.GetComponent<MonsterState>();
 
-            enemyAgent.ChangeState(StateIndex.Flaying);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Building"))
+        {
+        }
+
+        if (PlayerIn)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+            {
+                var enemyAgent = other.gameObject.GetComponent<MonsterState>();
+
+                enemyAgent.ChangeState(StateIndex.Flaying);
+            }
+        }
+        else
+        {
         }
     }
 
@@ -65,7 +72,7 @@ public class Car_Generator : MonoBehaviour
     {
         yield return new WaitForSeconds(10);
         PlayerIn = false;
-
+        agent.enabled = false;
         Passenger.transform.SetParent(null);
         Passenger.SetActive(true);
 
