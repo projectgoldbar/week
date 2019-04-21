@@ -11,6 +11,8 @@ public class TargetPointer : MonoBehaviour
     public Vector3 targetPosition;
     public RectTransform pointerRectTransform;
     public Image pointerImage;
+    public RectTransform rectTransform;
+    public Text text;
 
     public float borderSize = 100f;
 
@@ -51,9 +53,6 @@ public class TargetPointer : MonoBehaviour
             pointerRectTransform.localEulerAngles = Vector3.zero;
         }
     }
-
-    public RectTransform rectTransform;
-    public Text text;
 
     private void RotatePointerTowardsTargetPosition()
     {

@@ -244,6 +244,7 @@ public class GameLevelManager : MonoBehaviour
         //StartCoroutine(MonsterGen(0.3f, 100));
         var a = FindEmptySpace(new Vector3(0, 1.5f, 0), 50f, 200f);
         ItemSpwan(keyItemList, a, stage);
+        MarkerSystem.instance.stage = this.stage;
         MarkerSystem.instance.targetChange(a);
         for (int i = 0; i < zombielist.Length; i++)
         {

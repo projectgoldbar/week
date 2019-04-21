@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    [NonSerialized]
     private Animator Anim;
 
     public void StatusRefresh()
@@ -54,6 +55,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Anim = GetComponent<Animator>();
+        Anim.SetFloat("RunSpeed", 1.0f);
         Hp = MaxHp;
         Hp += GameManager.instance.playerHp;
         // mat.color = Ref.Instance.NonColor();
@@ -85,18 +87,18 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
-            //var PlayerPos = transform.position;
-            //var EnemyPos = collision.transform.position;
+            var PlayerPos = transform.position;
+            var EnemyPos = collision.transform.position;
 
-            //var particle = effect.Geteffect();
+            var particle = effect.Geteffect();
 
-            //var dir = (EnemyPos - PlayerPos);
+            var dir = (EnemyPos - PlayerPos);
 
-            //particle.transform.position = EnemyPos;
-            //particle.transform.rotation = Quaternion.LookRotation(dir.normalized);
+            particle.transform.position = EnemyPos;
+            particle.transform.rotation = Quaternion.LookRotation(dir.normalized);
 
-            //particle.time = 0;
-            //particle.Play();
+            particle.time = 0;
+            particle.Play();
 
             Hp -= 1;
 
