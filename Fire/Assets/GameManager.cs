@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private Inventory userInventory;
     public Queue<Item_Equip> inventory;
     public int a = 0;
+    public int playerHp = 0;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
         }
         else if (instance != this)
         {
-            Destroy(gameObject);
+            Destroy(instance.gameObject);
         }
         DontDestroyOnLoad(gameObject);
 

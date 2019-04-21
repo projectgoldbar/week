@@ -40,9 +40,9 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        RefreshStatus();
         GameManager.instance.PutItemOnInventory(itemList);
         SaveInventory();
+        RefreshStatus();
     }
 
     private void Update()
@@ -65,7 +65,7 @@ public class Inventory : MonoBehaviour
         {
             uiImageList[i].sprite = itemList[i].itemImage;
         }
-        player.MaxHp += everyHp;
+        GameManager.instance.playerHp = everyHp;
     }
 
     //해제

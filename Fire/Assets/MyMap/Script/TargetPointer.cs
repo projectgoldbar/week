@@ -14,6 +14,11 @@ public class TargetPointer : MonoBehaviour
 
     public float borderSize = 100f;
 
+    private void Start()
+    {
+        player = GameObject.FindObjectOfType<Player>().transform;
+    }
+
     private void OnDisable()
     {
         targetPosition = new Vector3(167f, 1.5f, -2f);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-200)]
 public class NewMonsterGenerator : MonoBehaviour
 {
     public Transform gp;

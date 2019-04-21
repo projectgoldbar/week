@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         Hp = MaxHp;
-
+        Hp += GameManager.instance.playerHp;
         // mat.color = Ref.Instance.NonColor();
     }
 
@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
     public void Gameover()
     {
         mat.color = Color.white;
-        GameManager.instance.GameEnd();
+        GameManager.instance.GameOver();
     }
 
     public IEnumerator HitDamageEffectColorBlink()

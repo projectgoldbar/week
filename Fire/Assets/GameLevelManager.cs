@@ -241,8 +241,8 @@ public class GameLevelManager : MonoBehaviour
 
     public void StageUp()
     {
-        StartCoroutine(MonsterGen(0.3f, 100));
-        var a = FindEmptySpace(player.transform.position, 50f, 200f);
+        //StartCoroutine(MonsterGen(0.3f, 100));
+        var a = FindEmptySpace(new Vector3(0, 1.5f, 0), 50f, 200f);
         ItemSpwan(keyItemList, a, stage);
         MarkerSystem.instance.targetChange(a);
         for (int i = 0; i < zombielist.Length; i++)
