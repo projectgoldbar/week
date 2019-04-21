@@ -3,6 +3,7 @@ using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class Player : MonoBehaviour
     public Material mat;
 
     private WaitForSeconds wait = new WaitForSeconds(0.05f);
+
+    private float hp;
+
+    private Action specialMove = null;
+    private Action setItemOption = null;
 
     public float Hp
     {
@@ -39,15 +45,19 @@ public class Player : MonoBehaviour
         }
     }
 
-    private float hp;
-
+    [NonSerialized]
     private Animator Anim;
+
+    public void StatusRefresh()
+    {
+    }
 
     private void Awake()
     {
         Anim = GetComponent<Animator>();
+        Anim.SetFloat("RunSpeed", 1.0f);
         Hp = MaxHp;
-
+        Hp += GameManager.instance.playerHp;
         // mat.color = Ref.Instance.NonColor();
     }
 
@@ -59,7 +69,7 @@ public class Player : MonoBehaviour
     public void Gameover()
     {
         mat.color = Color.white;
-        GameManager.instance.GameEnd();
+        GameManager.instance.GameOver();
     }
 
     public IEnumerator HitDamageEffectColorBlink()
@@ -77,18 +87,18 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
-            //var PlayerPos = transform.position;
-            //var EnemyPos = collision.transform.position;
+            var PlayerPos = transform.position;
+            var EnemyPos = collision.transform.position;
 
-            //var particle = effect.Geteffect();
+            var particle = effect.Geteffect();
 
-            //var dir = (EnemyPos - PlayerPos);
+            var dir = (EnemyPos - PlayerPos);
 
-            //particle.transform.position = EnemyPos;
-            //particle.transform.rotation = Quaternion.LookRotation(dir.normalized);
+            particle.transform.position = EnemyPos;
+            particle.transform.rotation = Quaternion.LookRotation(dir.normalized);
 
-            //particle.time = 0;
-            //particle.Play();
+            particle.time = 0;
+            particle.Play();
 
             Hp -= 1;
 

@@ -66,10 +66,10 @@ public class AITest : MonoBehaviour
     private bool CheckDistance()
     {
         bool answer = true;
-        var monsterlist = monsterDataBase.monsterDataList;
-        for (int i = 0; i < monsterlist.Count; i++)
+        // var monsterlist = monsterDataBase.monsterDataList;
+        //for (int i = 0; i < monsterlist.Count; i++)
         {
-            monsterlist[i].distanceToPlayer = Vector3.Distance(monsterlist[i].transform.position, target.position);
+            //monsterlist[i].distanceToPlayer = Vector3.Distance(monsterlist[i].transform.position, target.position);
             //Debug.Log(monsterlist[i].distanceToPlayer);
         }
         return answer;
@@ -130,16 +130,16 @@ public class AITest : MonoBehaviour
 
     private void SetPath()
     {
-        var monsterlist = monsterDataBase.monsterDataList;
+        //var monsterlist = monsterDataBase.monsterDataList;
 
         //var b = SetPath2(monsterlist[0].transform.gameObject.GetComponent<NavMeshAgent>());
-        for (int i = 0; i < monsterlist.Count; i++)
-        {
-            if (monsterlist[i].distanceToPlayer < 50f)
-            {
-                monsterlist[i].transform.GetComponent<NavMeshAgent>().SetPath(SetPath2(monsterlist[i].transform.GetComponent<NavMeshAgent>()));
-            }
-        }
+        //for (int i = 0; i < monsterlist.Count; i++)
+        //{
+        //    if (monsterlist[i].distanceToPlayer < 50f)
+        //    {
+        //        monsterlist[i].transform.GetComponent<NavMeshAgent>().SetPath(SetPath2(monsterlist[i].transform.GetComponent<NavMeshAgent>()));
+        //    }
+        //}
     }
 
     private NavMeshPath SetPath2(NavMeshAgent monster)

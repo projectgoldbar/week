@@ -11,8 +11,15 @@ public class TargetPointer : MonoBehaviour
     public Vector3 targetPosition;
     public RectTransform pointerRectTransform;
     public Image pointerImage;
+    public RectTransform rectTransform;
+    public Text text;
 
     public float borderSize = 100f;
+
+    private void Start()
+    {
+        player = GameObject.FindObjectOfType<Player>().transform;
+    }
 
     private void OnDisable()
     {
@@ -54,7 +61,7 @@ public class TargetPointer : MonoBehaviour
         fromPosition.y = 0f;
         Vector3 dir = (toPosition - fromPosition).normalized;
         float angle = GetAngleFromVectorFloat(dir);
-        pointerRectTransform.localEulerAngles = new Vector3(0, 0, angle);
+        this.rectTransform.localEulerAngles = new Vector3(0, 0, angle);
     }
 
     private float GetAngleFromVectorFloat(Vector3 dir)

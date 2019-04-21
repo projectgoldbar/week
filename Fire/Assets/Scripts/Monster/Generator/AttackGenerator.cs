@@ -7,7 +7,7 @@ public class AttackGenerator : GeneratorBase
 {
     public AttackKind attackKind = AttackKind.RUSH_ATTACK;
 
-    public TrailRenderer trail = null;
+    public TrailRenderer trail;
 
     private float distance = 30.0f;
 
@@ -18,9 +18,12 @@ public class AttackGenerator : GeneratorBase
     private Vector3 hitpos = Vector3.zero;
     private RaycastHit hit;
 
+    private pomulseon pomulseon;
+
     public override void Awake()
     {
         base.Awake();
+        pomulseon = GetComponent<pomulseon>();
         mat = GetComponentInChildren<SkinnedMeshRenderer>().materials[0];
     }
 
@@ -89,11 +92,11 @@ public class AttackGenerator : GeneratorBase
         if (attackKind == AttackKind.RUSH_ATTACK)
         {
             attackStanby = true;
-            Invoke("RushAttackProcess", 0.3f);
+            Invoke("AttackProcess", 0.3f);
         }
     }
 
-    public void RushAttackProcess()
+    public virtual void AttackProcess()
     {
         //러쉬공격
         state.Agent.updateRotation = false;
@@ -101,7 +104,7 @@ public class AttackGenerator : GeneratorBase
 
         Forward_Direction_Control();
 
-        Invoke("StateEnd", 0.5f);
+        Invoke("StateEnd", 1.0f);
     }
 
     public void Forward_Direction_Control()
@@ -112,7 +115,9 @@ public class AttackGenerator : GeneratorBase
 
     private void StateEnd()
     {
-        state.ChangeState(StateIndex.CHASE);
+        StartCoroutine(pomulseon.MonsterStanUpStateChange(transform, StateIndex.CHASE));
+
+        //state.ChangeState(StateIndex.CHASE);
     }
 
     public override void Execution()

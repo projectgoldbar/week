@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ public class pomulseon : MonoBehaviour
 
     #endregion 포물선운동
 
-    public void FlyToTarget(Transform target, Vector3 targetstartPos, Vector3 targetendPos, float g = 19.8f, float max_height = 50.0f)
+    public void FlyToTarget(Transform target, Vector3 targetstartPos, Vector3 targetendPos, Action<Transform> action = null, float g = 19.8f, float max_height = 50.0f)
     {
         start_pos = targetstartPos;
 
@@ -63,10 +64,10 @@ public class pomulseon : MonoBehaviour
         tz = -(targetstartPos.z - targetendPos.z) / dat;
 
         this.elapsed_time = 0;
-        StartCoroutine(PositionChange(target));
+        StartCoroutine(PositionChange(target, action));
     }
 
-    private IEnumerator PositionChange(Transform target)
+    private IEnumerator PositionChange(Transform target, Action<Transform> action = null)
     {
         while (true)
         {
@@ -83,25 +84,53 @@ public class pomulseon : MonoBehaviour
 
             //비행동안 날아가는 총알의 위치와 로테이션 변환.
             //transform.LookAt(tpos);
-            target.position = tpos;
+            target.transform.position = tpos;
 
             //총 체공시간 계산치보다 비행시간이 길다면 탈출.
-            if (elapsed_time >= dat)
+            if (elapsed_time + 0.03f >= dat)
             {
-                MonsterState monsterState = target.GetComponent<MonsterState>();
-
-                StartCoroutine(Delay(monsterState));
-
+                action?.Invoke(target);
                 yield break;
             }
             yield return null;
         }
     }
 
-    private IEnumerator Delay(MonsterState monsterState)
+    //public IEnumerator PlayerStandup(Player player, float time = 1.1f)
+    //{
+    //    player.Anim.Play("StanUp");
+
+    //    while (true)
+    //    {
+    //        if (player.Anim.GetCurrentAnimatorStateInfo(0).IsName("StanUp") &&
+    //            player.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= time)
+    //        {
+    //            yield break;
+    //        }
+
+    //        yield return null;
+    //    }
+    //}
+
+    public IEnumerator MonsterStanUpStateChange(Transform monster, StateIndex state, float time = 1.1f)
     {
-        yield return new WaitForSeconds(1);
-        monsterState.ChangeState(StateIndex.CHASE);
-        yield return null;
+        // yield return new WaitForSeconds(0.4f);
+
+        var anim = monster.GetComponent<MonsterUnit>().Anim;
+        var MonsterState = monster.GetComponent<MonsterState>();
+
+        anim.Play("StanUp");
+
+        while (true)
+        {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("StanUp") &&
+                anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= time)
+            {
+                MonsterState.ChangeState(state);
+                yield break;
+            }
+
+            yield return null;
+        }
     }
 }

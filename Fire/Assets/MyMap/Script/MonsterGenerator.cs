@@ -46,7 +46,7 @@ public class MonsterGenerator : MonoBehaviour
         {
             var monster = GameObject.Instantiate(enemy, FindFarPoint(player.position, minDistance, maxDistance), Quaternion.identity);
             a.Add(monster);
-            monsterDataBase.monsterDataList.Add(new MonsterData(monster.transform));
+            //monsterDataBase.monsterDataList.Add(new MonsterData(monster.transform));
         }
     }
 

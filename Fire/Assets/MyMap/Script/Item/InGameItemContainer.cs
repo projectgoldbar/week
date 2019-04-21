@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InGameItemContainer : MonoBehaviour
 {
-    public Queue<Item> veiledItemlist = new Queue<Item>();
-    private Queue<Item> unVeiledItemlist = new Queue<Item>();
+    public Queue<Item_Equip> veiledItemlist = new Queue<Item_Equip>();
+    private Queue<Item_Equip> unVeiledItemlist = new Queue<Item_Equip>();
 
     private void Awake()
     {
@@ -25,18 +25,18 @@ public class InGameItemContainer : MonoBehaviour
         for (int i = 0; i < veiledItemlist.Count; i++)
         {
             var unVeiledItem = veiledItemlist.Dequeue();
-            unVeiledItem.Open();
+            //unVeiledItem.Open();
             unVeiledItemlist.Enqueue(unVeiledItem);
         }
     }
 
-    public void OpenVeilAll(List<Item> something)
+    public void OpenVeilAll(Queue<Item_Equip> something)
     {
         for (int i = 0; i < veiledItemlist.Count; i++)
         {
             var unVeiledItem = veiledItemlist.Dequeue();
-            unVeiledItem.Open();
-            something.Add(unVeiledItem);
+            //unVeiledItem.Open();
+            something.Enqueue(unVeiledItem);
         }
     }
 
@@ -44,10 +44,10 @@ public class InGameItemContainer : MonoBehaviour
     /// 펼치기 안한 아이템중 첫번째 아이템을 펼치기 한다.
     /// </summary>
     /// <returns></returns>
-    public Item OpenVeilOnce()
+    public Item_Equip OpenVeilOnce()
     {
         var unVeiledItem = veiledItemlist.Dequeue();
-        unVeiledItem.Open();
+        //unVeiledItem.Open();
         return unVeiledItem;
     }
 }

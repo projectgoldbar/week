@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class FlyingGenerator : GeneratorBase
 {
@@ -20,7 +21,12 @@ public class FlyingGenerator : GeneratorBase
 
         Fly.FlyToTarget(transform,
                transform.position,
-               transform.position);
+               transform.position, (tr) => MonsterFly(transform));
+    }
+
+    public void MonsterFly(Transform target)
+    {
+        StartCoroutine(Fly.MonsterStanUpStateChange(target, StateIndex.CHASE));
     }
 
     public override void Exit()

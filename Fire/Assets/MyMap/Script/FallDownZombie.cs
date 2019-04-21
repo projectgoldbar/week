@@ -41,7 +41,7 @@ public class FallDownZombie : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-
+        target = GameObject.FindObjectOfType<Player>().transform;
         StartCoroutine(CheckDistanceAndLunch());
         // FlyToTarget(transform.position, FallDownPosition(), 9.8f, max_height);
     }
