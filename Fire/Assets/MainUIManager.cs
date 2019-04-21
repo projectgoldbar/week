@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class MainUIManager : MonoBehaviour
 {
-    public GameObject shopPanel;
+    public GameObject InvenPanel;
 
-    public void ShopOpen()
+    public void InvenOpen()
     {
-        shopPanel.
+        InvenPanel.
             SetActive(true);
     }
 
-    public void ShopClose()
+    public void InvenClose(GameObject gObject)
     {
-        shopPanel.SetActive(false);
+        gObject.SetActive(false);
     }
 }

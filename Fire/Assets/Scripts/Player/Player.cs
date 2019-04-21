@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 {
     public float MaxHp;
 
-    public ShootEffectPool effect;
+    public ShootEffectPool effect = null;
 
     public bool Hit = false;
 
@@ -89,10 +89,9 @@ public class Player : MonoBehaviour
         {
             var PlayerPos = transform.position;
             var EnemyPos = collision.transform.position;
+            var dir = (EnemyPos - PlayerPos);
 
             var particle = effect.Geteffect();
-
-            var dir = (EnemyPos - PlayerPos);
 
             particle.transform.position = EnemyPos;
             particle.transform.rotation = Quaternion.LookRotation(dir.normalized);
