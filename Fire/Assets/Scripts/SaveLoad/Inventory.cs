@@ -9,34 +9,13 @@ public class Inventory : MonoBehaviour
     public List<Item_Equip> equipItem;
     public List<Item_Equip> itemList;
     public List<Image> uiImageList;
+    public List<Image> equipedImageList;
+    public GameObject Info;
+    public Text hpText;
+    public Text descriptionText;
+    public Text Name;
 
-    //장착
-    public void Equipment(int index)
-    {
-        switch (itemList[index].type)
-        {
-            case EquipType.Head:
-                equipItem[0] = itemList[index];
-                RefreshStatus();
-                SaveInventory();
-                break;
-
-            case EquipType.Body:
-                equipItem[1] = itemList[index];
-                RefreshStatus();
-
-                break;
-
-            case EquipType.Shose:
-                equipItem[2] = itemList[index];
-                RefreshStatus();
-
-                break;
-
-            default:
-                break;
-        }
-    }
+    public int itemListIdx = 0;
 
     private void Start()
     {
@@ -65,6 +44,10 @@ public class Inventory : MonoBehaviour
         {
             uiImageList[i].sprite = itemList[i].itemImage;
         }
+        for (int i = 0; i < equipItem.Count; i++)
+        {
+            equipedImageList[i].sprite = equipItem[i].itemImage;
+        }
         GameManager.instance.playerHp = everyHp;
     }
 
@@ -72,6 +55,45 @@ public class Inventory : MonoBehaviour
     public void UnEquipment(int index)
     {
         equipItem[index] = null;
+    }
+
+    //아이템정보출력
+    public void ShowInfo(int index)
+    {
+        itemListIdx = index;
+        hpText.text = itemList[index].hp.ToString();
+        descriptionText.text = itemList[index].description;
+        Name.text = itemList[index].name;
+
+        Info.SetActive(true);
+    }
+
+    //장착
+    public void Equipment()
+    {
+        switch (itemList[itemListIdx].type)
+        {
+            case EquipType.Head:
+                equipItem[0] = itemList[itemListIdx];
+                RefreshStatus();
+                SaveInventory();
+                break;
+
+            case EquipType.Body:
+                equipItem[1] = itemList[itemListIdx];
+                RefreshStatus();
+
+                break;
+
+            case EquipType.Shose:
+                equipItem[2] = itemList[itemListIdx];
+                RefreshStatus();
+
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void SaveInventory()
