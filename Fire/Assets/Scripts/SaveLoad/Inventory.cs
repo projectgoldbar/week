@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    public List<int> equipedItemIndexToItemList;
+
     public Player player;
     public List<Item_Equip> equipItem;
+
     public List<Item_Equip> itemList;
     public List<Image> uiImageList;
     public List<Image> equipedImageList;
@@ -75,20 +78,26 @@ public class Inventory : MonoBehaviour
         {
             case EquipType.Head:
                 equipItem[0] = itemList[itemListIdx];
+                equipedItemIndexToItemList[0] = itemListIdx;
                 RefreshStatus();
+
                 SaveInventory();
                 break;
 
             case EquipType.Body:
                 equipItem[1] = itemList[itemListIdx];
-                RefreshStatus();
+                equipedItemIndexToItemList[1] = itemListIdx;
 
+                RefreshStatus();
+                SaveInventory();
                 break;
 
             case EquipType.Shose:
                 equipItem[2] = itemList[itemListIdx];
-                RefreshStatus();
+                equipedItemIndexToItemList[2] = itemListIdx;
 
+                RefreshStatus();
+                SaveInventory();
                 break;
 
             default:
@@ -109,6 +118,16 @@ public class Inventory : MonoBehaviour
             itemList.Add(new Item_Equip(a.type[i], a.name[i], a.description[i], a.hp[i]));
         }
 
+        for (int i = 0; i < a.equipIndexList.Count; i++)
+        {
+            equipedItemIndexToItemList.Add(a.equipIndexList[i]);
+            //Equipment();
+        }
+        for (int i = 0; i < equipedItemIndexToItemList.Count; i++)
+        {
+            itemListIdx = equipedItemIndexToItemList[i];
+            Equipment();
+        }
         //for (int i = 0; i < a.itemlist.Count; i++)
         //{
         //    itemList.Add(a.itemlist[i]);
