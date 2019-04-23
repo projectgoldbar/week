@@ -31,27 +31,27 @@ public class TargetPointer : MonoBehaviour
         Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(targetPosition);
         bool isOffScreen = targetPositionScreenPoint.x <= borderSize || targetPositionScreenPoint.x >= Screen.width - borderSize || targetPositionScreenPoint.y <= borderSize || targetPositionScreenPoint.y >= Screen.height - borderSize;
 
-        if (isOffScreen)
-        {
-            RotatePointerTowardsTargetPosition();
+        //if (isOffScreen)
+        //{
+        RotatePointerTowardsTargetPosition();
 
-            pointerImage.sprite = indicationSprite;
-            Vector3 cappedTargetScreenPosition = targetPositionScreenPoint;
-            cappedTargetScreenPosition.x = Mathf.Clamp(cappedTargetScreenPosition.x, borderSize, Screen.width - borderSize);
-            cappedTargetScreenPosition.y = Mathf.Clamp(cappedTargetScreenPosition.y, borderSize, Screen.height - borderSize);
-            Vector3 pointerWorldPosition = uiCamera.ScreenToWorldPoint(cappedTargetScreenPosition);
-            pointerRectTransform.position = pointerWorldPosition;
-            pointerRectTransform.localPosition = new Vector3(pointerRectTransform.localPosition.x, pointerRectTransform.localPosition.y, 0f);
-        }
-        else
-        {
-            pointerImage.sprite = goalMarkSprite;
-            Vector3 pointerWorldPosition = uiCamera.ScreenToWorldPoint(targetPositionScreenPoint);
-            pointerRectTransform.position = pointerWorldPosition;
-            pointerRectTransform.localPosition = new Vector3(pointerRectTransform.localPosition.x, pointerRectTransform.localPosition.y, 0f);
+        //pointerImage.sprite = indicationSprite;
+        ////Vector3 cappedTargetScreenPosition = targetPositionScreenPoint;
+        //cappedTargetScreenPosition.x = Mathf.Clamp(cappedTargetScreenPosition.x, borderSize, Screen.width - borderSize);
+        //cappedTargetScreenPosition.y = Mathf.Clamp(cappedTargetScreenPosition.y, borderSize, Screen.height - borderSize);
+        //Vector3 pointerWorldPosition = uiCamera.ScreenToWorldPoint(cappedTargetScreenPosition);
+        //pointerRectTransform.position = pointerWorldPosition;
+        //pointerRectTransform.localPosition = new Vector3(pointerRectTransform.localPosition.x, pointerRectTransform.localPosition.y, 0f);
+        //}
+        //else
+        //{
+        //pointerImage.sprite = goalMarkSprite;
+        //Vector3 pointerWorldPosition = uiCamera.ScreenToWorldPoint(targetPositionScreenPoint);
+        //pointerRectTransform.position = pointerWorldPosition;
+        //pointerRectTransform.localPosition = new Vector3(pointerRectTransform.localPosition.x, pointerRectTransform.localPosition.y, 0f);
 
-            pointerRectTransform.localEulerAngles = Vector3.zero;
-        }
+        //pointerRectTransform.localEulerAngles = Vector3.zero;
+        //}
     }
 
     private void RotatePointerTowardsTargetPosition()
