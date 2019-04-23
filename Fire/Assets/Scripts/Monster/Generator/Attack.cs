@@ -9,7 +9,7 @@ public class Attack : GeneratorBase
 
     public TrailRenderer trail;
 
-    private float distance = 30.0f;
+    private float distance = 30f;
 
     private Material mat;
     private bool attackStanby = false;

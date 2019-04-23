@@ -27,8 +27,6 @@ public class Move : MonoBehaviour
     private bool Left_flag = false;
     private bool Right_flag = false;
 
-    public Text tt;
-
     private bool b_Touch = false;
 
     public void Awake()
