@@ -9,7 +9,7 @@ public class MonsterUnit : MonoBehaviour
     public int level = 0;
     public float atkPoint = 1;
 
-    public float Distance = 0;
+    public float distance = 0;
 
     public Animator Anim;
     public MonsterState monsterstate;
@@ -24,6 +24,11 @@ public class MonsterUnit : MonoBehaviour
 
     private bool SearchIn = false;
 
+    //[System.NonSerialized]
+    public Transform Hulk = null;
+
+    public Transform Catch = null;
+
     #endregion 변수들
 
     private void Start()
@@ -31,13 +36,14 @@ public class MonsterUnit : MonoBehaviour
         StartCoroutine(DistanceNStateCheck());
     }
 
-    public void SetSearchIn(bool Search)
+    public void SetCatch(Transform hulk)
     {
-        SearchIn = Search;
+        Hulk = hulk;
     }
 
-    public void SetCatchTr()
+    public void GetCatch(Transform C)
     {
+        Catch = C;
     }
 
     private void Awake()
@@ -70,8 +76,9 @@ public class MonsterUnit : MonoBehaviour
         {
             if (ChaseTarget != null)
             {
-                Vector3 dir = (ChaseTarget.position - transform.position);
-                Distance = dir.magnitude;
+                //Vector3 dir = (ChaseTarget.position - transform.position);
+                //Distance = dir.magnitude;
+                distance = Vector3.Distance(Utility.Instance.playerTr.position, transform.position);
             }
 
             yield return null;

@@ -60,6 +60,8 @@ public class Car_Generator : MonoBehaviour
             {
                 var enemyAgent = other.gameObject.GetComponent<MonsterState>();
 
+                enemyAgent.Type = FlyType.Car;
+
                 enemyAgent.ChangeState(StateIndex.Flaying);
             }
         }

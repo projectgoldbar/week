@@ -5,7 +5,6 @@ using UnityEngine.AI;
 [DefaultExecutionOrder(-500)]
 public class ChaseGenerator : GeneratorBase
 {
-    private NavMeshPath Path;
     protected WaitForSeconds second = new WaitForSeconds(0.3f);
 
     private float timer = 3;
@@ -19,7 +18,6 @@ public class ChaseGenerator : GeneratorBase
     public override void Awake()
     {
         base.Awake();
-        unit.ChaseTarget = Utility.Instance.playerTr;
         Path = new NavMeshPath();
     }
 
@@ -29,14 +27,14 @@ public class ChaseGenerator : GeneratorBase
         unit.Anim.SetBool("RushAttack", false);
 
         unit.Anim.Play("Zombie_Walk");
-        state.Agent.updateRotation = true;
         StartCoroutine(CalculatePath());
     }
 
-    private void Process()
+    public virtual void Process()
     {
         unit.state = StateIndex.CHASE;
         state.Agent.enabled = true;
+        state.Agent.updateRotation = true;
         CurrentTime = 0;
         timer = Random.Range(3.0f, 5.0f);
     }

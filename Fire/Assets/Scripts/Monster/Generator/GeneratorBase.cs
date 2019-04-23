@@ -6,12 +6,14 @@ public class GeneratorBase : MonoBehaviour
 {
     protected MonsterState state;
     protected MonsterUnit unit;
+    protected NavMeshPath Path;
     //protected NavMeshAgent agent;
 
     public virtual void Awake()
     {
         state = transform.GetComponent<MonsterState>();
         unit = transform.GetComponent<MonsterUnit>();
+        Path = new NavMeshPath();
         // agent = transform.GetComponent<NavMeshAgent>();
     }
 

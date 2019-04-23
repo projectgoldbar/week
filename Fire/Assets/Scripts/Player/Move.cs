@@ -21,6 +21,8 @@ public class Move : MonoBehaviour
 
     protected NavMeshAgent agent;
 
+    private Touch touch;
+
     public void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -63,21 +65,25 @@ public class Move : MonoBehaviour
         {
             if (Input.touchCount > 0)
             {
-                touchPos = Input.GetTouch(0).position;
-                if (Input.GetTouch(0).phase == TouchPhase.Began)
+                for (int i = 0; i < Input.touchCount; i++)
                 {
-                     if (touchPos.x <= Screen.width * 0.5)
+                    touch = Input.GetTouch(i);
+
+                    if (touch.phase == TouchPhase.Began)
                     {
-                       rotState = State.LEFT;
+                        if (touch.position.x <= Screen.width * 0.5)
+                        {
+                            rotState = State.LEFT;
+                        }
+                        else
+                        {
+                            rotState = State.RIGHT;
+                        }
                     }
-                    else
+                    else if (touch.phase == TouchPhase.Ended)
                     {
-                        rotState = State.RIGHT;
+                        rotState = State.ADVANCE;
                     }
-                }
-                else if (Input.GetTouch(0).phase == TouchPhase.Ended)
-                {
-                   rotState = State.ADVANCE;
                 }
             }
         }
@@ -134,7 +140,7 @@ public class Move : MonoBehaviour
 
     public virtual void stopRun()
     {
-        agent.velocity = Vector3.zero;
+        agent.speed = 0;
         StopMove -= stopRun;
     }
 }

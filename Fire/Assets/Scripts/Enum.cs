@@ -9,3 +9,5 @@ public enum ItemType { KeyItem, BonusItem, Gold, Count = 3 }
 public enum Direction { Left, Right, Foward, Back }
 
 public enum EquipType { Head, Body, Shose }
+
+public enum FlyType { Car, Hulk }

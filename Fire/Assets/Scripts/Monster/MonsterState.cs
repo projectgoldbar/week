@@ -16,7 +16,7 @@ public class MonsterState : MonoBehaviour
     public ChaseGenerator Chase = null;
 
     [Header("자기자신오브젝트넣음")]
-    public AttackGenerator Attack = null;
+    public Attack Attack = null;
 
     [Header("자기자신오브젝트넣음")]
     public TrapGenerator Trap = null;
@@ -29,6 +29,8 @@ public class MonsterState : MonoBehaviour
 
     [System.NonSerialized]
     public List<GeneratorBase> generators = new List<GeneratorBase>();
+
+    public FlyType Type = FlyType.Car;
 
     private void OnEnable()
     {
@@ -46,6 +48,7 @@ public class MonsterState : MonoBehaviour
         generators.Add(Attack);
         generators.Add(Trap);
         generators.Add(Flying);
+        generators.Add(Catch);
     }
 
     private void Update()
@@ -115,7 +118,7 @@ public class MonsterState : MonoBehaviour
         return generator;
     }
 
-    protected void State_Inactive(GeneratorBase Base)
+    public void State_Inactive(GeneratorBase Base)
     {
         var list = generators.FindAll(x => x != Base);
 
