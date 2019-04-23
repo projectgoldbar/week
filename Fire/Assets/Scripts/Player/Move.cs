@@ -2,19 +2,18 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using System;
 
 public class Move : MonoBehaviour
 {
-    [NonSerialized]
     public float runSpeed = 100.0f;
 
-    [NonSerialized]
     public float rotSpeed = 300.0f;
 
     public static Action StopMove = () => { };
 
-    public enum State { IDLE, ADVANCE, LEFT, RIGHT, DEAD };
+    public enum State { IDLE, ADVANCE, LEFT, RIGHT, DEAD, Special };
 
     [SerializeField]
     public State rotState = State.ADVANCE;
@@ -23,9 +22,21 @@ public class Move : MonoBehaviour
 
     protected NavMeshAgent agent;
 
+    private Touch touch;
+
+    private bool Left_flag = false;
+    private bool Right_flag = false;
+
+    private bool b_Touch = false;
+
     public void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Start()
+    {
+        //StartCoroutine(Mover());
     }
 
     private void OnEnable()
@@ -38,51 +49,77 @@ public class Move : MonoBehaviour
 #if UNITY_EDITOR
 
         touchPos = Input.mousePosition;
-
         //if (EventSystem.current.IsPointerOverGameObject() == false)
+
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (touchPos.x <= Screen.width * 0.5)
             {
-                if (touchPos.x <= Screen.width * 0.5)
-                {
-                    rotState = State.LEFT;
-                    Car_LeftTurn();
-                }
-                else
-                {
-                    rotState = State.RIGHT;
-                    Car_RightTurn();
-                }
+                Left_flag = true;
+                rotState = State.LEFT;
+                //Car_LeftTurn();
             }
-            else if (Input.GetMouseButtonUp(0))
+            if (touchPos.x > Screen.width * 0.5)
             {
-                rotState = State.ADVANCE;
+                Right_flag = false;
+                rotState = State.RIGHT;
+                //Car_RightTurn();
             }
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            if (rotState == State.LEFT)
+                Left_flag = false;
+            else if (rotState == State.RIGHT)
+                Right_flag = false;
+
+            if (rotState == State.Special)
+            {
+                Left_flag = false;
+                Right_flag = false;
+            }
+            rotState = State.ADVANCE;
         }
 
 #else
-        //if (EventSystem.current.IsPointerOverGameObject() == false)
+
+        if (Input.touchCount > 0)
         {
-            if (Input.touchCount > 0)
+            for (int i = 0; i < Input.touchCount; i++)
             {
-                touchPos = Input.GetTouch(0).position;
-                if (Input.GetTouch(0).phase == TouchPhase.Began)
+                touch = Input.GetTouch(i);
+
+                if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Stationary)
                 {
-                     if (touchPos.x <= Screen.width * 0.5)
+                    if (touch.position.x <= Screen.width * 0.5)
                     {
-                       rotState = State.LEFT;
+                        rotState = State.LEFT;
+                        Left_flag = true;
                     }
-                    else
+                    if (touch.position.x > Screen.width * 0.5)
                     {
                         rotState = State.RIGHT;
+                        Right_flag = true;
                     }
                 }
-                else if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                if (touch.phase == TouchPhase.Ended)
                 {
-                   rotState = State.ADVANCE;
+                    if (rotState == State.LEFT)
+                        Left_flag = false;
+                    else if (rotState == State.RIGHT)
+                        Right_flag = false;
+
+                    if (rotState == State.Special)
+                    {
+                        Left_flag = false;
+                        Right_flag = false;
+                    }
+
+                    rotState = State.ADVANCE;
                 }
             }
         }
+
 #endif
     }
 
@@ -108,8 +145,21 @@ public class Move : MonoBehaviour
     {
         runSpeed = agent.speed;
         agent.velocity = agent.transform.forward * runSpeed;
+        if (Left_flag && Right_flag)
+        {
+            rotState = State.Special;
+        }
+
         switch (rotState)
         {
+            case State.ADVANCE:
+                agent.speed = 30;
+                break;
+
+            case State.Special:
+                agent.speed += Time.deltaTime * 10;
+                break;
+
             case State.LEFT:
                 Left_Turn();
                 break;
@@ -126,17 +176,17 @@ public class Move : MonoBehaviour
 
     public void Left_Turn()
     {
-        agent.transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * -rotSpeed);
+        transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * -rotSpeed);
     }
 
     public void Right_Turn()
     {
-        agent.transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * rotSpeed);
+        transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * rotSpeed);
     }
 
     public virtual void stopRun()
     {
-        agent.velocity = Vector3.zero;
+        agent.speed = 0;
         StopMove -= stopRun;
     }
 }

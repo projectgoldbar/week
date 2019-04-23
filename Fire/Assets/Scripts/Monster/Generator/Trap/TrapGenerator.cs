@@ -53,7 +53,7 @@ public class TrapGenerator : GeneratorBase
 
     public override void Execution() //Update
     {
-        if (unit.Distance <= 15)
+        if (unit.distance <= 15)
         {
             check = true;
         }

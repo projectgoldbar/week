@@ -3,13 +3,13 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
-public class AttackGenerator : GeneratorBase
+public class Attack : GeneratorBase
 {
     public AttackKind attackKind = AttackKind.RUSH_ATTACK;
 
     public TrailRenderer trail;
 
-    private float distance = 30.0f;
+    private float distance = 30f;
 
     private Material mat;
     private bool attackStanby = false;
@@ -20,6 +20,8 @@ public class AttackGenerator : GeneratorBase
 
     private pomulseon pomulseon;
 
+    private bool isHit = false;
+
     public override void Awake()
     {
         base.Awake();
@@ -29,20 +31,27 @@ public class AttackGenerator : GeneratorBase
 
     private void OnEnable()
     {
-        state.Agent.ResetPath();
+        //state.Agent.ResetPath();
         attackStanby = false;
-        //state.Agent.velocity = Vector3.zero;
     }
 
     public override void Initiate()
     {
         Process();
+        state.Agent.velocity = Vector3.zero;
+        state.Agent.ResetPath();
         StartCoroutine(RushStanby());
 
         trail.time = 0.2f;
     }
 
-    private bool isHit = false;
+    private void Process()
+    {
+        attackKind = AttackKind.RUSH_ATTACK;
+        unit.state = StateIndex.ATTACK;
+
+        RayCastFindPosition();
+    }
 
     private void RayCastFindPosition()
     {
@@ -59,16 +68,6 @@ public class AttackGenerator : GeneratorBase
         }
 
         // pos = transform.position + transform.forward * distance;
-    }
-
-    private void Process()
-    {
-        state.Agent.ResetPath();
-
-        attackKind = AttackKind.RUSH_ATTACK;
-        unit.state = StateIndex.ATTACK;
-
-        RayCastFindPosition();
     }
 
     public IEnumerator RushStanby()
@@ -92,7 +91,7 @@ public class AttackGenerator : GeneratorBase
         if (attackKind == AttackKind.RUSH_ATTACK)
         {
             attackStanby = true;
-            Invoke("AttackProcess", 0.3f);
+            AttackProcess();
         }
     }
 
@@ -103,8 +102,6 @@ public class AttackGenerator : GeneratorBase
         unit.Anim.SetBool("RushAttack", true);
 
         Forward_Direction_Control();
-
-        Invoke("StateEnd", 1.0f);
     }
 
     public void Forward_Direction_Control()
@@ -116,14 +113,35 @@ public class AttackGenerator : GeneratorBase
     private void StateEnd()
     {
         StartCoroutine(pomulseon.MonsterStanUpStateChange(transform, StateIndex.CHASE));
-
-        //state.ChangeState(StateIndex.CHASE);
     }
+
+    private float CoolTimer = 1;
+    private float CurrentTIme = 0;
 
     public override void Execution()
     {
+        CoolTime();
+    }
+
+    public void DashMv()
+    {
         if (!attackStanby) return;
-        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 5.0f);
+        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 3.0f);
+    }
+
+    public void CoolTime()
+    {
+        DashMv();
+
+        if (attackKind == AttackKind.RUSH_ATTACK)
+        {
+            CurrentTIme += Time.deltaTime;
+            if (CurrentTIme >= 1)
+            {
+                CurrentTIme = 0;
+                StateEnd();
+            }
+        }
     }
 
     public override void Exit()

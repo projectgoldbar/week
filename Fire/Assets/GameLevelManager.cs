@@ -7,6 +7,7 @@ public class GameLevelManager : MonoBehaviour
     public static GameLevelManager instance;
     public InGameItemContainer itemContainer;
     public NewMonsterGenerator monsterGenerator;
+    public GameManager gm;
 
     public int stage = 0;
     private bool oneMoreChance = false;
@@ -42,6 +43,8 @@ public class GameLevelManager : MonoBehaviour
 
     #endregion 아이템리스트들
 
+    public bool genOK = false;
+
     //초기화
     private void Awake()
     {
@@ -60,9 +63,9 @@ public class GameLevelManager : MonoBehaviour
             ItemInit((ItemType)i);
         }
         //PointSet(300);
-
+        gm = GameObject.FindObjectOfType<GameManager>();
         //StartCoroutine(MonsterGen(delay, count));
-        monsterGenerator.GenGallery();
+        if (genOK == true) { monsterGenerator.GenGallery(); }
         StageUp();
     }
 
@@ -206,6 +209,7 @@ public class GameLevelManager : MonoBehaviour
     public MonsterDataBase monsterdataBase;
 
     public GameObject[] zombielist;
+    public GameObject[] specialZombies;
     public int spwanMinDistance = 70;
     public int spwanMaxDistance = 140;
     public float delay;
@@ -251,6 +255,7 @@ public class GameLevelManager : MonoBehaviour
             if (zombielist[i].GetComponent<MonsterUnit>().level <= stage)
             {
                 Instantiate(zombielist[i].gameObject, FindEmptySpace(player.position, 50f, 60f), Quaternion.identity);
+                Instantiate(specialZombies[Random.Range(0, specialZombies.Length)].gameObject, FindEmptySpace(player.position, 50f, 60f), Quaternion.identity);
                 //for (; 0 < i;)
                 //{
                 //    Instantiate(zombielist[i].gameObject, FindEmptySpace(player.position, 50f, 60f), Quaternion.identity);
@@ -274,4 +279,17 @@ public class GameLevelManager : MonoBehaviour
     }
 
     // 함정을 리젠하고 관리하는 장치
+
+    //게임 종료 부분
+    public GameObject gameOverUI;
+
+    public void OnGameOverPanel()
+    {
+        gameOverUI.SetActive(true);
+    }
+
+    public void GameOver()
+    {
+        gm.GameOver();
+    }
 }

@@ -32,6 +32,10 @@ public class pomulseon : MonoBehaviour
 
     #endregion 포물선운동
 
+    private void OnEnable()
+    {
+    }
+
     public void FlyToTarget(Transform target, Vector3 targetstartPos, Vector3 targetendPos, Action<Transform> action = null, float g = 19.8f, float max_height = 50.0f)
     {
         start_pos = targetstartPos;
@@ -116,16 +120,21 @@ public class pomulseon : MonoBehaviour
     {
         // yield return new WaitForSeconds(0.4f);
 
-        var anim = monster.GetComponent<MonsterUnit>().Anim;
+        var Unit = monster.GetComponent<MonsterUnit>();
         var MonsterState = monster.GetComponent<MonsterState>();
 
-        anim.Play("StanUp");
+        Unit.Anim.Play("StanUp");
 
         while (true)
         {
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("StanUp") &&
-                anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= time)
+            if (Unit.Anim.GetCurrentAnimatorStateInfo(0).IsName("StanUp") &&
+                Unit.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= time)
             {
+                if (Unit.Hulk)
+                {
+                    MonsterState.Agent.enabled = true;
+                }
+
                 MonsterState.ChangeState(state);
                 yield break;
             }

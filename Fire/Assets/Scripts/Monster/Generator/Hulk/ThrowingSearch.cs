@@ -33,8 +33,24 @@ public class ThrowingSearch : MonoBehaviour
                 var target = FindTarget(transform.position, m_Mask);
                 if (target != null)
                     unit.ChaseTarget = target;
+                else
+                    unit.ChaseTarget = Utility.Instance.playerTr;
 
                 CurrentTime = 0;
+            }
+
+            if (Vector3.Distance(transform.position, unit.ChaseTarget.position) <= 2.5f)
+            {
+                SearchIn = true;
+                var State = unit.ChaseTarget.GetComponent<MonsterState>();
+                var Unit = unit.ChaseTarget.GetComponent<MonsterUnit>();
+
+                if (Unit != null)
+                {
+                    //내 트랜스폼을 박은녀석한테로 전달
+                    Unit.SetCatch(transform);
+                    State.ChangeState(StateIndex.FlyOutCatch);
+                }
             }
         }
         else
@@ -46,7 +62,7 @@ public class ThrowingSearch : MonoBehaviour
     private Transform FindTarget(Vector3 center, LayerMask m_Mask)
     {
         Collider[] hitColliders = Physics.OverlapSphere(center, Radius, m_Mask);
-
+        SpecialZombieCount = 0;
         GameObject enemyGameObject = null;
 
         float temp = 0;
@@ -106,35 +122,26 @@ public class ThrowingSearch : MonoBehaviour
                 }
             }
         }
-        SpecialZombieCount = 0;
+
         return enemyGameObject.transform;
     }
 
-    public void CatchTransform(Transform tr)
-    {
-        tr = transform;
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    SearchIn = true;
+    //    // if (other.gameObject.layer == 1 << LayerMask.NameToLayer("Monster"))
+    //    {
+    //        var State = other.GetComponent<MonsterState>();
+    //        var Flycatch = other.GetComponent<FlyOutCatch>();
 
-    private void OnTriggerEnter(Collider other)
-    {
-        SearchIn = true;
-        if (other.gameObject.layer == 1 << LayerMask.GetMask("Monster"))
-        {
-            var State = other.GetComponent<MonsterState>();
-            var Unit = other.GetComponent<MonsterUnit>();
+    //        Debug.Log("뭐지");
 
-            if (Unit != null)
-            {
-            }
-
-            if (State != null)
-            {
-                State.ChangeState(StateIndex.FlyOutCatch);
-            }
-        }
-        else
-        {
-            var player = other.GetComponent<Player>();
-        }
-    }
+    //        //if (Flycatch != null)
+    //        {
+    //            //내 트랜스폼을 박은녀석한테로 전달
+    //            Flycatch.FlyCatch(transform);
+    //            State.ChangeState(StateIndex.FlyOutCatch);
+    //        }
+    //    }
+    //}
 }

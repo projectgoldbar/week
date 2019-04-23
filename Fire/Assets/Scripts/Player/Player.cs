@@ -30,7 +30,9 @@ public class Player : MonoBehaviour
             hp = value;
             if (hp <= 0)
             {
-                Debug.Log("플레이어 사망");
+                //Debug.Log("플레이어 사망");
+                GameLevelManager.instance.OnGameOverPanel();
+
                 GetComponent<Move>().rotState = Move.State.DEAD;
                 Anim.SetTrigger("Dead");
                 Invoke("Gameover", 1.0f);
@@ -69,7 +71,6 @@ public class Player : MonoBehaviour
     public void Gameover()
     {
         mat.color = Color.white;
-        GameManager.instance.GameOver();
     }
 
     public IEnumerator HitDamageEffectColorBlink()

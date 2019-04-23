@@ -2,12 +2,13 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
+[DefaultExecutionOrder(-400)]
 public static class SaveSystem
 {
     public static void SavePlayer(Inventory inventory)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.fun";
+        string path = Application.persistentDataPath + "/inventor.dd";
         FileStream stream = new FileStream(path, FileMode.Create);
         InventoryData data = new InventoryData(inventory);
 
@@ -17,7 +18,7 @@ public static class SaveSystem
 
     public static InventoryData LoadPlayer()
     {
-        string path = Application.persistentDataPath + "/player.fun";
+        string path = Application.persistentDataPath + "/inventor.dd";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();

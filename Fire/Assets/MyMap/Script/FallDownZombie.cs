@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class FallDownZombie : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class FallDownZombie : MonoBehaviour
     public Transform target;
     public string jump = "Jumping";
     public float range = 5f;
+    private NavMeshAgent agent;
+    private NavMeshPath path;
+    private WaitForSeconds seconds = new WaitForSeconds(3);
 
     #region 포물선운동
 
@@ -40,10 +44,25 @@ public class FallDownZombie : MonoBehaviour
 
     private void Start()
     {
+        path = new NavMeshPath();
+        agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         target = GameObject.FindObjectOfType<Player>().transform;
+        StartCoroutine(CalculatePath());
         StartCoroutine(CheckDistanceAndLunch());
         // FlyToTarget(transform.position, FallDownPosition(), 9.8f, max_height);
+    }
+
+    private IEnumerator CalculatePath()
+    {
+        var a = Utility.Instance.playerTr.GetComponent<TestTarget>();
+        while (true)
+        {
+            agent.ResetPath();
+            agent.CalculatePath(Utility.Instance.playerTr.position, path);
+            agent.SetPath(path);
+            yield return seconds;
+        }
     }
 
     private IEnumerator CheckDistanceAndLunch()
@@ -140,7 +159,7 @@ public class FallDownZombie : MonoBehaviour
             if (elapsed_time >= dat)
             {
                 //anim.SetBool(jump, false);
-                ParticleManager.instance.OutputEffect(type, new Vector3(setAmingPoint.x, setAmingPoint.y + 1f, setAmingPoint.z));
+                ParticleManager.Instance.OutputEffect(type, new Vector3(setAmingPoint.x, setAmingPoint.y + 1f, setAmingPoint.z));
                 gameObject.SetActive(false);
 
                 yield break;

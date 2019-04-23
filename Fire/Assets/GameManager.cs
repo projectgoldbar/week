@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[DefaultExecutionOrder(-300)]
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     public InGameItemContainer inGameItemContainer;
     public Vector3 goal;
     private Inventory userInventory;
-    public Queue<Item_Equip> inventory;
+
+    public static Queue<Item_Equip> inventory = new Queue<Item_Equip>();
     public int a = 0;
     public int playerHp = 0;
 
@@ -26,14 +28,19 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-        inventory = new Queue<Item_Equip>();
+        //inventory = new Queue<Item_Equip>();
 
         userInventory = FindObjectOfType<Inventory>();
         if (a == 0)
         {
             userInventory.LoadInventory();
+            if (inventory != null)
+            {
+                PutItemOnInventory(userInventory.itemList);
+            }
+            userInventory.RefreshStatus();
+            userInventory.SaveInventory();
         }
-
         //if (SceneManager.sceneCountInBuildSettings == 3)
         //{
         //    inGameItemContainer = GameObject.Find("GameDataBase").GetComponent<InGameItemContainer>();
@@ -48,6 +55,7 @@ public class GameManager : MonoBehaviour
     public void GameEnd()
     {
         inGameItemContainer.OpenVeilAll(inventory);
+        Debug.Log("내인벤토리에 잇는 아이템의 수" + inventory.Count);
         SceneManager.LoadScene("01.Intro");
     }
 

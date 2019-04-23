@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Item
+public class Hiper : MonoBehaviour
 {
+    public TrailRenderer Trail;
 }

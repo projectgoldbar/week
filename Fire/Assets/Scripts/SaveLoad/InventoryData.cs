@@ -26,9 +26,13 @@ public class InventoryData
             type.Add(inventory.itemList[i].type);
             description.Add(inventory.itemList[i].description);
         }
-        for (int i = 0; i < inventory.equipedItemIndexToItemList.Count; i++)
+
+        if (inventory.equipedItemIndexToItemList != null)
         {
-            equipIndexList.Add(inventory.equipedItemIndexToItemList[i]);
+            for (int i = 0; i < inventory.equipedItemIndexToItemList.Count; i++)
+            {
+                equipIndexList.Add(inventory.equipedItemIndexToItemList.Dequeue());
+            }
         }
     }
 }

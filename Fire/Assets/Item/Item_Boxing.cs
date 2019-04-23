@@ -18,8 +18,8 @@ public class Item_Boxing : MonoBehaviour
                 GameLevelManager.instance.StageUp();
             }
 
-            var b = ItemList.Instance.equipItemList[Random.Range(0, ItemList.Instance.equipItemList.Count)];
-            var a = new Item_Equip(b.type, b.name, b.description, Random.Range(0, 4));
+            var b = ItemList.equipItemList[Random.Range(0, ItemList.Instance.equipItemList.Count)];
+            var a = new Item_Equip(b.type, b.name, b.description, Random.Range(b.minStat, b.maxStat));
             GameLevelManager.instance.itemContainer.veiledItemlist.Enqueue(a);
             Destroy(this.gameObject);
         }
