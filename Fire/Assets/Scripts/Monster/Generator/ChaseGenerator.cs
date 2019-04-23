@@ -65,7 +65,7 @@ public class ChaseGenerator : GeneratorBase
         while (true)
         {
             state.Agent.ResetPath();
-            state.Agent.CalculatePath(a.target, Path);
+            state.Agent.CalculatePath(Utility.Instance.playerTr.position, Path);
             state.Agent.SetPath(Path);
             yield return second;
         }

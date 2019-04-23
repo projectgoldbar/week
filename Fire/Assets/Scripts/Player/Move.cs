@@ -38,7 +38,7 @@ public class Move : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Mover());
+        //StartCoroutine(Mover());
     }
 
     private void OnEnable()
@@ -48,47 +48,42 @@ public class Move : MonoBehaviour
 
     private void Update()
     {
-        #region UNITY_EDITOR Code
+#if UNITY_EDITOR
 
-        //#if UNITY_EDITOR
+        touchPos = Input.mousePosition;
+        //if (EventSystem.current.IsPointerOverGameObject() == false)
 
-        //        touchPos = Input.mousePosition;
-        //        //if (EventSystem.current.IsPointerOverGameObject() == false)
-        //        {
-        //            if (Input.GetMouseButtonDown(0))
-        //            {
-        //                tt.text = "PC";
-        //                if (touchPos.x <= Screen.width * 0.5)
-        //                {
-        //                    Left_flag = true;
-        //                    rotState = State.LEFT;
-        //                    //Car_LeftTurn();
-        //                }
-        //                if (touchPos.x > Screen.width * 0.5)
-        //                {
-        //                    Right_flag = false;
-        //                    rotState = State.RIGHT;
-        //                    //Car_RightTurn();
-        //                }
-        //            }
-        //            else if (Input.GetMouseButtonUp(0))
-        //            {
-        //                if (rotState == State.LEFT)
-        //                    Left_flag = false;
-        //                else if (rotState == State.RIGHT)
-        //                    Right_flag = false;
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (touchPos.x <= Screen.width * 0.5)
+            {
+                Left_flag = true;
+                rotState = State.LEFT;
+                //Car_LeftTurn();
+            }
+            if (touchPos.x > Screen.width * 0.5)
+            {
+                Right_flag = false;
+                rotState = State.RIGHT;
+                //Car_RightTurn();
+            }
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            if (rotState == State.LEFT)
+                Left_flag = false;
+            else if (rotState == State.RIGHT)
+                Right_flag = false;
 
-        //                if (rotState == State.Special)
-        //                {
-        //                    Left_flag = false;
-        //                    Right_flag = false;
-        //                }
-        //                rotState = State.ADVANCE;
-        //            }
-        //        }
-        //#else
+            if (rotState == State.Special)
+            {
+                Left_flag = false;
+                Right_flag = false;
+            }
+            rotState = State.ADVANCE;
+        }
 
-        #endregion UNITY_EDITOR Code
+#else
 
         if (Input.touchCount > 0)
         {
@@ -127,16 +122,7 @@ public class Move : MonoBehaviour
             }
         }
 
-        //#endif
-    }
-
-    private IEnumerator Mover()
-    {
-        while (true)
-        {
-            MoveState();
-            yield return null;
-        }
+#endif
     }
 
     public virtual void Car_LeftTurn()
@@ -147,6 +133,11 @@ public class Move : MonoBehaviour
     {
     }
 
+    private void FixedUpdate()
+    {
+        MoveState();
+    }
+
     public void MoveState()
     {
         SelectState();
@@ -154,6 +145,8 @@ public class Move : MonoBehaviour
 
     public virtual void SelectState()
     {
+        runSpeed = agent.speed;
+        agent.velocity = agent.transform.forward * runSpeed;
         if (Left_flag && Right_flag)
         {
             rotState = State.Special;
@@ -162,22 +155,18 @@ public class Move : MonoBehaviour
         switch (rotState)
         {
             case State.ADVANCE:
-                tt.text = agent.speed.ToString();
                 agent.speed = 30;
                 break;
 
             case State.Special:
-                tt.text = agent.speed.ToString() + "   ~~~~~스페셜무브";
                 agent.speed += Time.deltaTime * 10;
                 break;
 
             case State.LEFT:
-                tt.text = agent.speed.ToString() + "좌회전";
                 Left_Turn();
                 break;
 
             case State.RIGHT:
-                tt.text = agent.speed.ToString() + "우회전";
                 Right_Turn();
                 break;
 
@@ -185,19 +174,16 @@ public class Move : MonoBehaviour
                 StopMove?.Invoke();
                 break;
         }
-
-        runSpeed = agent.speed;
-        agent.velocity = agent.transform.forward * runSpeed;
     }
 
     public void Left_Turn()
     {
-        agent.transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * -rotSpeed);
+        transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * -rotSpeed);
     }
 
     public void Right_Turn()
     {
-        agent.transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * rotSpeed);
+        transform.rotation *= Quaternion.Euler(Vector3.up * Time.fixedDeltaTime * rotSpeed);
     }
 
     public virtual void stopRun()

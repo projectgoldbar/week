@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[DefaultExecutionOrder(-400)]
 public class Inventory : MonoBehaviour
 {
-    public List<int> equipedItemIndexToItemList;
+    public Queue<int> equipedItemIndexToItemList;
 
     public Player player;
     public List<Item_Equip> equipItem;
@@ -20,11 +21,9 @@ public class Inventory : MonoBehaviour
 
     public int itemListIdx = 0;
 
-    private void Start()
+    private void Awake()
     {
-        GameManager.instance.PutItemOnInventory(itemList);
-        SaveInventory();
-        RefreshStatus();
+        equipedItemIndexToItemList = new Queue<int>();
     }
 
     private void Update()
@@ -51,7 +50,15 @@ public class Inventory : MonoBehaviour
         {
             equipedImageList[i].sprite = equipItem[i].itemImage;
         }
-        SaveInventory();
+
+        if (equipedItemIndexToItemList != null)
+        {
+            for (int i = 0; i < equipedItemIndexToItemList.Count - 3; i++)
+            {
+                equipedItemIndexToItemList.Dequeue();
+            }
+        }
+
         GameManager.instance.playerHp = everyHp;
     }
 
@@ -79,21 +86,20 @@ public class Inventory : MonoBehaviour
         {
             case EquipType.Head:
                 equipItem[0] = itemList[itemListIdx];
-                equipedItemIndexToItemList[0] = itemListIdx;
-                RefreshStatus();
+                equipedItemIndexToItemList.Enqueue(itemListIdx);
 
+                RefreshStatus();
                 break;
 
             case EquipType.Body:
                 equipItem[1] = itemList[itemListIdx];
-                equipedItemIndexToItemList[1] = itemListIdx;
-
+                equipedItemIndexToItemList.Enqueue(itemListIdx);
                 RefreshStatus();
                 break;
 
             case EquipType.Shose:
                 equipItem[2] = itemList[itemListIdx];
-                equipedItemIndexToItemList[2] = itemListIdx;
+                equipedItemIndexToItemList.Enqueue(itemListIdx);
 
                 RefreshStatus();
                 break;
@@ -103,7 +109,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void SaveInventory()
+    public void SaveInventory()
     {
         SaveSystem.SavePlayer(this);
     }
@@ -116,16 +122,19 @@ public class Inventory : MonoBehaviour
             itemList.Add(new Item_Equip(a.type[i], a.name[i], a.description[i], a.hp[i]));
         }
 
-        //for (int i = 0; i < a.equipIndexList.Count; i++)
-        //{
-        //    equipedItemIndexToItemList.Add(a.equipIndexList[i]);
-        //    //Equipment();
-        //}
-        //for (int i = 0; i < equipedItemIndexToItemList.Count; i++)
-        //{
-        //    itemListIdx = equipedItemIndexToItemList[i];
-        //    Equipment();
-        //}
+        for (int i = 0; i < a.equipIndexList.Count; i++)
+        {
+            equipedItemIndexToItemList.Enqueue(a.equipIndexList[i]);
+            //Equipment();
+        }
+        if (equipedItemIndexToItemList != null)
+        {
+            for (int i = 0; i < equipedItemIndexToItemList.Count; i++)
+            {
+                itemListIdx = equipedItemIndexToItemList.Dequeue();
+                Equipment();
+            }
+        }
         //for (int i = 0; i < a.itemlist.Count; i++)
         //{
         //    itemList.Add(a.itemlist[i]);

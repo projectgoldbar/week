@@ -209,6 +209,7 @@ public class GameLevelManager : MonoBehaviour
     public MonsterDataBase monsterdataBase;
 
     public GameObject[] zombielist;
+    public GameObject[] specialZombies;
     public int spwanMinDistance = 70;
     public int spwanMaxDistance = 140;
     public float delay;
@@ -254,6 +255,7 @@ public class GameLevelManager : MonoBehaviour
             if (zombielist[i].GetComponent<MonsterUnit>().level <= stage)
             {
                 Instantiate(zombielist[i].gameObject, FindEmptySpace(player.position, 50f, 60f), Quaternion.identity);
+                Instantiate(specialZombies[Random.Range(0, specialZombies.Length)].gameObject, FindEmptySpace(player.position, 50f, 60f), Quaternion.identity);
                 //for (; 0 < i;)
                 //{
                 //    Instantiate(zombielist[i].gameObject, FindEmptySpace(player.position, 50f, 60f), Quaternion.identity);

@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleManager : MonoBehaviour
+public class ParticleManager : Singleton<ParticleManager>
 {
-    public static ParticleManager instance;
     public List<ParticleSystem> fallDownParticleList;
 
     private void Awake()
     {
-        instance = this;
         for (int i = 0; i < fallDownParticleList.Count; i++)
         {
             fallDownParticleList[i] = Instantiate(fallDownParticleList[i], this.transform.position, Quaternion.identity);

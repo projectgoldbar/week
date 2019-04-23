@@ -15,4 +15,6 @@ public class EquipItemInfo
     public string name;
     public string description;
     public EquipType type;
+    public int minStat = 0;
+    public int maxStat = 3;
 }
