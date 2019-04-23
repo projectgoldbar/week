@@ -24,32 +24,34 @@ public class ChaseGenerator : GeneratorBase
     public override void Initiate()
     {
         Process();
-        unit.Anim.SetBool("RushAttack", false);
-
-        unit.Anim.Play("Zombie_Walk");
+        ComponentOnOff();
         StartCoroutine(CalculatePath());
     }
 
     public virtual void Process()
     {
         unit.state = StateIndex.CHASE;
-        state.Agent.enabled = true;
-        state.Agent.updateRotation = true;
         CurrentTime = 0;
         timer = Random.Range(3.0f, 5.0f);
+        unit.Anim.SetBool("RushAttack", false);
+        unit.Anim.Play("Zombie_Walk");
+    }
+
+    private void ComponentOnOff()
+    {
+        state.Agent.enabled = true;
+        state.Agent.updateRotation = true;
     }
 
     public override void Execution() //Update
     {
-        //if (unit.Distance <= 20.0f)
-        {
-            CoolDown();
-        }
+        CoolDown();
     }
 
     public virtual void CoolDown()
     {
-        //CurrentTime += Time.deltaTime;
+        CurrentTime += Time.deltaTime;
+
         if (CurrentTime >= timer)
         {
             CurrentTime = 0;

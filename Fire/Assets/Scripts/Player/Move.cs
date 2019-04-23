@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using System;
 
 public class Move : MonoBehaviour
@@ -12,7 +13,7 @@ public class Move : MonoBehaviour
 
     public static Action StopMove = () => { };
 
-    public enum State { IDLE, ADVANCE, LEFT, RIGHT, DEAD };
+    public enum State { IDLE, ADVANCE, LEFT, RIGHT, DEAD, Special };
 
     [SerializeField]
     public State rotState = State.ADVANCE;
@@ -23,9 +24,21 @@ public class Move : MonoBehaviour
 
     private Touch touch;
 
+    private bool Left_flag = false;
+    private bool Right_flag = false;
+
+    public Text tt;
+
+    private bool b_Touch = false;
+
     public void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(Mover());
     }
 
     private void OnEnable()
@@ -35,59 +48,95 @@ public class Move : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_EDITOR
+        #region UNITY_EDITOR Code
 
-        touchPos = Input.mousePosition;
+        //#if UNITY_EDITOR
 
-        //if (EventSystem.current.IsPointerOverGameObject() == false)
+        //        touchPos = Input.mousePosition;
+        //        //if (EventSystem.current.IsPointerOverGameObject() == false)
+        //        {
+        //            if (Input.GetMouseButtonDown(0))
+        //            {
+        //                tt.text = "PC";
+        //                if (touchPos.x <= Screen.width * 0.5)
+        //                {
+        //                    Left_flag = true;
+        //                    rotState = State.LEFT;
+        //                    //Car_LeftTurn();
+        //                }
+        //                if (touchPos.x > Screen.width * 0.5)
+        //                {
+        //                    Right_flag = false;
+        //                    rotState = State.RIGHT;
+        //                    //Car_RightTurn();
+        //                }
+        //            }
+        //            else if (Input.GetMouseButtonUp(0))
+        //            {
+        //                if (rotState == State.LEFT)
+        //                    Left_flag = false;
+        //                else if (rotState == State.RIGHT)
+        //                    Right_flag = false;
+
+        //                if (rotState == State.Special)
+        //                {
+        //                    Left_flag = false;
+        //                    Right_flag = false;
+        //                }
+        //                rotState = State.ADVANCE;
+        //            }
+        //        }
+        //#else
+
+        #endregion UNITY_EDITOR Code
+
+        if (Input.touchCount > 0)
         {
-            if (Input.GetMouseButtonDown(0))
+            for (int i = 0; i < Input.touchCount; i++)
             {
-                if (touchPos.x <= Screen.width * 0.5)
+                touch = Input.GetTouch(i);
+
+                if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Stationary)
                 {
-                    rotState = State.LEFT;
-                    Car_LeftTurn();
+                    if (touch.position.x <= Screen.width * 0.5)
+                    {
+                        rotState = State.LEFT;
+                        Left_flag = true;
+                    }
+                    if (touch.position.x > Screen.width * 0.5)
+                    {
+                        rotState = State.RIGHT;
+                        Right_flag = true;
+                    }
                 }
-                else
+                if (touch.phase == TouchPhase.Ended)
                 {
-                    rotState = State.RIGHT;
-                    Car_RightTurn();
+                    if (rotState == State.LEFT)
+                        Left_flag = false;
+                    else if (rotState == State.RIGHT)
+                        Right_flag = false;
+
+                    if (rotState == State.Special)
+                    {
+                        Left_flag = false;
+                        Right_flag = false;
+                    }
+
+                    rotState = State.ADVANCE;
                 }
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                rotState = State.ADVANCE;
             }
         }
 
-#else
-        //if (EventSystem.current.IsPointerOverGameObject() == false)
-        {
-            if (Input.touchCount > 0)
-            {
-                for (int i = 0; i < Input.touchCount; i++)
-                {
-                    touch = Input.GetTouch(i);
+        //#endif
+    }
 
-                    if (touch.phase == TouchPhase.Began)
-                    {
-                        if (touch.position.x <= Screen.width * 0.5)
-                        {
-                            rotState = State.LEFT;
-                        }
-                        else
-                        {
-                            rotState = State.RIGHT;
-                        }
-                    }
-                    else if (touch.phase == TouchPhase.Ended)
-                    {
-                        rotState = State.ADVANCE;
-                    }
-                }
-            }
+    private IEnumerator Mover()
+    {
+        while (true)
+        {
+            MoveState();
+            yield return null;
         }
-#endif
     }
 
     public virtual void Car_LeftTurn()
@@ -98,11 +147,6 @@ public class Move : MonoBehaviour
     {
     }
 
-    private void FixedUpdate()
-    {
-        MoveState();
-    }
-
     public void MoveState()
     {
         SelectState();
@@ -110,15 +154,30 @@ public class Move : MonoBehaviour
 
     public virtual void SelectState()
     {
-        runSpeed = agent.speed;
-        agent.velocity = agent.transform.forward * runSpeed;
+        if (Left_flag && Right_flag)
+        {
+            rotState = State.Special;
+        }
+
         switch (rotState)
         {
+            case State.ADVANCE:
+                tt.text = agent.speed.ToString();
+                agent.speed = 30;
+                break;
+
+            case State.Special:
+                tt.text = agent.speed.ToString() + "   ~~~~~스페셜무브";
+                agent.speed += Time.deltaTime * 10;
+                break;
+
             case State.LEFT:
+                tt.text = agent.speed.ToString() + "좌회전";
                 Left_Turn();
                 break;
 
             case State.RIGHT:
+                tt.text = agent.speed.ToString() + "우회전";
                 Right_Turn();
                 break;
 
@@ -126,6 +185,9 @@ public class Move : MonoBehaviour
                 StopMove?.Invoke();
                 break;
         }
+
+        runSpeed = agent.speed;
+        agent.velocity = agent.transform.forward * runSpeed;
     }
 
     public void Left_Turn()
