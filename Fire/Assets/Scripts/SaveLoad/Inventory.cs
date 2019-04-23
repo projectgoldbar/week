@@ -51,6 +51,7 @@ public class Inventory : MonoBehaviour
         {
             equipedImageList[i].sprite = equipItem[i].itemImage;
         }
+        SaveInventory();
         GameManager.instance.playerHp = everyHp;
     }
 
@@ -81,7 +82,6 @@ public class Inventory : MonoBehaviour
                 equipedItemIndexToItemList[0] = itemListIdx;
                 RefreshStatus();
 
-                SaveInventory();
                 break;
 
             case EquipType.Body:
@@ -89,7 +89,6 @@ public class Inventory : MonoBehaviour
                 equipedItemIndexToItemList[1] = itemListIdx;
 
                 RefreshStatus();
-                SaveInventory();
                 break;
 
             case EquipType.Shose:
@@ -97,7 +96,6 @@ public class Inventory : MonoBehaviour
                 equipedItemIndexToItemList[2] = itemListIdx;
 
                 RefreshStatus();
-                SaveInventory();
                 break;
 
             default:
@@ -118,16 +116,16 @@ public class Inventory : MonoBehaviour
             itemList.Add(new Item_Equip(a.type[i], a.name[i], a.description[i], a.hp[i]));
         }
 
-        for (int i = 0; i < a.equipIndexList.Count; i++)
-        {
-            equipedItemIndexToItemList.Add(a.equipIndexList[i]);
-            //Equipment();
-        }
-        for (int i = 0; i < equipedItemIndexToItemList.Count; i++)
-        {
-            itemListIdx = equipedItemIndexToItemList[i];
-            Equipment();
-        }
+        //for (int i = 0; i < a.equipIndexList.Count; i++)
+        //{
+        //    equipedItemIndexToItemList.Add(a.equipIndexList[i]);
+        //    //Equipment();
+        //}
+        //for (int i = 0; i < equipedItemIndexToItemList.Count; i++)
+        //{
+        //    itemListIdx = equipedItemIndexToItemList[i];
+        //    Equipment();
+        //}
         //for (int i = 0; i < a.itemlist.Count; i++)
         //{
         //    itemList.Add(a.itemlist[i]);

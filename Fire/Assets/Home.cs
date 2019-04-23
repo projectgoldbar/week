@@ -6,7 +6,7 @@ public class Home : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("a");
+        Debug.Log("집에들어옴");
         if (other.CompareTag("Player"))
         {
             GameManager.instance.GameEnd();

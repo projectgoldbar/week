@@ -31,7 +31,7 @@ public class AttackGenerator : GeneratorBase
     {
         state.Agent.ResetPath();
         attackStanby = false;
-        state.Agent.velocity = Vector3.zero;
+        //state.Agent.velocity = Vector3.zero;
     }
 
     public override void Initiate()
@@ -123,7 +123,7 @@ public class AttackGenerator : GeneratorBase
     public override void Execution()
     {
         if (!attackStanby) return;
-        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 3.0f);
+        transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 5.0f);
     }
 
     public override void Exit()

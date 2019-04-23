@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         if (a == 0)
         {
             userInventory.LoadInventory();
+            a++;
         }
 
         //if (SceneManager.sceneCountInBuildSettings == 3)
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
     public void GameEnd()
     {
         inGameItemContainer.OpenVeilAll(inventory);
+        Debug.Log("내인벤토리에 잇는 아이템의 수" + inventory.Count);
         SceneManager.LoadScene("01.Intro");
     }
 

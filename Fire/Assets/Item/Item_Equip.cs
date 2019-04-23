@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine;
 
 [System.Serializable]
-public class Item_Equip : Item
+public class Item_Equip
 {
     public EquipType type;
     public string name;
@@ -17,6 +17,6 @@ public class Item_Equip : Item
         name = _name;
         description = _description;
         hp = _hp;
-        itemImage = Resources.Load("ItemSprite/" + name.ToString(), typeof(Sprite)) as Sprite;
+        itemImage = Resources.Load(name.ToString(), typeof(Sprite)) as Sprite;
     }
 }

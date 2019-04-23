@@ -51,7 +51,7 @@ public class ChaseGenerator : GeneratorBase
 
     public virtual void CoolDown()
     {
-        CurrentTime += Time.deltaTime;
+        //CurrentTime += Time.deltaTime;
         if (CurrentTime >= timer)
         {
             CurrentTime = 0;
@@ -61,9 +61,11 @@ public class ChaseGenerator : GeneratorBase
 
     private IEnumerator CalculatePath()
     {
+        var a = Utility.Instance.playerTr.GetComponent<TestTarget>();
         while (true)
         {
-            state.Agent.CalculatePath(unit.ChaseTarget.position, Path);
+            state.Agent.ResetPath();
+            state.Agent.CalculatePath(a.target, Path);
             state.Agent.SetPath(Path);
             yield return second;
         }

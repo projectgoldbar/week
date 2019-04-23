@@ -6,10 +6,8 @@ using System;
 
 public class Move : MonoBehaviour
 {
-    [NonSerialized]
     public float runSpeed = 100.0f;
 
-    [NonSerialized]
     public float rotSpeed = 300.0f;
 
     public static Action StopMove = () => { };

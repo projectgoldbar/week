@@ -7,7 +7,7 @@ public static class SaveSystem
     public static void SavePlayer(Inventory inventory)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.fun";
+        string path = Application.persistentDataPath + "/inventory.dd";
         FileStream stream = new FileStream(path, FileMode.Create);
         InventoryData data = new InventoryData(inventory);
 
@@ -17,7 +17,7 @@ public static class SaveSystem
 
     public static InventoryData LoadPlayer()
     {
-        string path = Application.persistentDataPath + "/player.fun";
+        string path = Application.persistentDataPath + "/inventory.dd";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
