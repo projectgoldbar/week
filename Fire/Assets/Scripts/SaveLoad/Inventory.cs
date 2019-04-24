@@ -129,7 +129,7 @@ public class Inventory : MonoBehaviour
         }
         if (equipedItemIndexToItemList != null)
         {
-            for (int i = 0; i < equipedItemIndexToItemList.Count; i++)
+            for (int i = 0; 0 < equipedItemIndexToItemList.Count; i++)
             {
                 itemListIdx = equipedItemIndexToItemList.Dequeue();
                 Equipment();
