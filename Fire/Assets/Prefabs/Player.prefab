@@ -148,7 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b21038b80a0e4864b824b066c2d79c60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Trail: {fileID: 0}
+  Trail: {fileID: 4666882728506771649}
+  m: {fileID: 0}
 --- !u!1 &7535004060812477370
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +160,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7535004060812602380}
   - component: {fileID: 7535004060803021418}
-  - component: {fileID: 7535004060812477374}
+  - component: {fileID: 7187144785242327990}
+  - component: {fileID: 7834840901471462969}
   - component: {fileID: 7535004060812477373}
   - component: {fileID: 704896192}
   - component: {fileID: 573293770}
@@ -211,7 +213,7 @@ Animator:
   m_HasTransformHierarchy: 0
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7535004060812477374
+--- !u!114 &7187144785242327990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -223,9 +225,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 071b29d8560f3b2468dc9c4122964428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 3.5
-  rotSpeed: 600
-  rotState: 0
+  rotSpeed: 300
+  rotState: 1
+--- !u!114 &7834840901471462969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535004060812477370}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e5da8e2be9e0e47ab1e7f85bb67cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotSpeed: 200
+  rotState: 1
+  pos: {x: 0, y: 0}
+  start: {x: 0, y: 0}
+  Current: {x: 0, y: 0}
 --- !u!114 &7535004060812477373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +270,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 30
+  m_Speed: 11
   m_Acceleration: 8
   avoidancePriority: 1
   m_AngularSpeed: 1000

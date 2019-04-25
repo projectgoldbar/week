@@ -7,6 +7,7 @@ using System;
 
 public class Move : MonoBehaviour
 {
+    [NonSerialized]
     public float runSpeed = 100.0f;
 
     public float rotSpeed = 300.0f;
@@ -20,7 +21,8 @@ public class Move : MonoBehaviour
 
     protected Vector2 touchPos = Vector2.zero;
 
-    protected NavMeshAgent agent;
+    [NonSerialized]
+    public NavMeshAgent agent;
 
     private Touch touch;
 
@@ -50,7 +52,14 @@ public class Move : MonoBehaviour
 
         touchPos = Input.mousePosition;
         //if (EventSystem.current.IsPointerOverGameObject() == false)
+        PcMove();
+#else
+        MobileMove();
+#endif
+    }
 
+    public virtual void PcMove()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             if (touchPos.x <= Screen.width * 0.5)
@@ -80,9 +89,10 @@ public class Move : MonoBehaviour
             }
             rotState = State.ADVANCE;
         }
+    }
 
-#else
-
+    public virtual void MobileMove()
+    {
         if (Input.touchCount > 0)
         {
             for (int i = 0; i < Input.touchCount; i++)
@@ -119,8 +129,6 @@ public class Move : MonoBehaviour
                 }
             }
         }
-
-#endif
     }
 
     public virtual void Car_LeftTurn()

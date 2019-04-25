@@ -75,9 +75,14 @@ public class Player : MonoBehaviour
 
     public IEnumerator HitDamageEffectColorBlink()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i <= 2; i++)
         {
-            mat.color = Utility.Instance.ColorChageForColorBlink(Color.white, Color.red);
+            if (i % 2 == 0)
+                mat.color = Utility.Instance.ChangeColor(Color.white);
+            else
+                mat.color = Utility.Instance.ChangeColor(Color.red);
+
+            // mat.color = Utility.Instance.ColorChageForColorBlink(Color.white, Color.red);
             yield return wait;
         }
     }
@@ -88,24 +93,31 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
-            var PlayerPos = transform.position;
-            var EnemyPos = collision.transform.position;
-            var dir = (EnemyPos - PlayerPos);
-
-            var particle = effect.Geteffect();
-
-            particle.transform.position = EnemyPos;
-            particle.transform.rotation = Quaternion.LookRotation(dir.normalized);
-
-            particle.time = 0;
-            particle.Play();
-
-            Hp -= 1;
-
-            //unit = collision.GetComponent<MonsterUnit>();
-
-            //if (unit.state == StateIndex.ATTACK)
-            { StartCoroutine(HitDamageEffectColorBlink()); }
+            DamageHit(collision.transform);
         }
+    }
+
+    //회피
+    private void Evasion()
+    { }
+
+    //데미지히트
+    private void DamageHit(Transform CollisionTr)
+    {
+        var PlayerPos = transform.position;
+        var EnemyPos = CollisionTr.position;
+        var dir = (EnemyPos - PlayerPos);
+
+        var particle = effect.Geteffect();
+
+        particle.transform.position = EnemyPos;
+        particle.transform.rotation = Quaternion.LookRotation(dir.normalized);
+
+        particle.time = 0;
+        particle.Play();
+
+        Hp -= 1;
+
+        { StartCoroutine(HitDamageEffectColorBlink()); }
     }
 }

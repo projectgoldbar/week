@@ -414,10 +414,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.75
-  m_Speed: 9
-  m_Acceleration: 50
+  m_Speed: 14
+  m_Acceleration: 10
   avoidancePriority: 99
-  m_AngularSpeed: 1000
+  m_AngularSpeed: 200
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
@@ -446,6 +446,7 @@ MonoBehaviour:
   Trap: {fileID: 2145245221}
   Flying: {fileID: 4442070626063617855}
   Catch: {fileID: 687806919}
+  Type: 0
 --- !u!114 &2439825276334724204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,12 +461,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   atkPoint: 1
-  Distance: 0
+  distance: 0
   Anim: {fileID: 4092043296822647308}
   monsterstate: {fileID: 2439825276334724205}
   state: 0
   ChaseTarget: {fileID: 0}
   type: 0
+  Hulk: {fileID: 0}
+  Catch: {fileID: 0}
 --- !u!136 &4681347488794115837
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -544,7 +547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b23eaa3b5699543a31f469349b458d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flySpd: 3
+  flySpd: 1
 --- !u!114 &2145245221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,7 +574,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6898e7daf8e89e8478b987c2fa1da999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hulk: {fileID: 0}
 --- !u!1 &3332780486429429916
 GameObject:
   m_ObjectHideFlags: 0
