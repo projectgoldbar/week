@@ -96,6 +96,8 @@ public class Player : MonoBehaviour
 
     private float evationTimer = 0;
 
+    public ParticleSystem Ex;
+
     private void Update()
     {
         if (evasion)
@@ -111,7 +113,6 @@ public class Player : MonoBehaviour
             }
             else
             {
-                //사용자가 동작을 하면 Return
                 //1.버튼
                 evasionTrigger.gameObject.SetActive(true);
                 //2.스와이프
@@ -136,7 +137,9 @@ public class Player : MonoBehaviour
     public void Evasion()
     {
         //예 1)
-
+        Ex.time = 0;
+        Ex.Play();
+        Hp += 10;
         evasion = false;
         evasionTrigger.gameObject.SetActive(false);
     }

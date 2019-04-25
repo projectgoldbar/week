@@ -54,7 +54,8 @@ public class Move : MonoBehaviour
         //if (EventSystem.current.IsPointerOverGameObject() == false)
         PcMove();
 #else
-        MobileMove();
+        //if (EventSystem.current.IsPointerOverGameObject() == false)
+            MobileMove();
 #endif
     }
 
