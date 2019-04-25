@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     private Action specialMove = null;
     private Action setItemOption = null;
 
+    public Button evasionTrigger;
+
     public float Hp
     {
         get => hp;
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour
         Anim.SetFloat("RunSpeed", 1.0f);
         Hp = MaxHp;
         Hp += GameManager.instance.playerHp;
+        evasionTrigger.gameObject.SetActive(false);
         // mat.color = Ref.Instance.NonColor();
     }
 
@@ -89,17 +92,54 @@ public class Player : MonoBehaviour
 
     private MonsterUnit unit;
 
+    private bool evasion = false;
+
+    private float evationTimer = 0;
+
+    private void Update()
+    {
+        if (evasion)
+        {
+            evationTimer += Time.deltaTime;
+            if (evationTimer >= 0.3f)
+            {
+                if (EnemyTr != null)
+                    DamageHit(EnemyTr);
+                evationTimer = 0;
+                evasionTrigger.gameObject.SetActive(false);
+                evasion = false;
+            }
+            else
+            {
+                //사용자가 동작을 하면 Return
+                //1.버튼
+                evasionTrigger.gameObject.SetActive(true);
+                //2.스와이프
+                //3.화면클릭
+            }
+        }
+    }
+
+    private Transform EnemyTr;
+
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
-            DamageHit(collision.transform);
+            evationTimer = 0;
+            EnemyTr = collision.transform;
+            evasion = true;
         }
     }
 
     //회피
-    private void Evasion()
-    { }
+    public void Evasion()
+    {
+        //예 1)
+
+        evasion = false;
+        evasionTrigger.gameObject.SetActive(false);
+    }
 
     //데미지히트
     private void DamageHit(Transform CollisionTr)
@@ -110,7 +150,7 @@ public class Player : MonoBehaviour
 
         var particle = effect.Geteffect();
 
-        particle.transform.position = EnemyPos;
+        particle.transform.position = PlayerPos;
         particle.transform.rotation = Quaternion.LookRotation(dir.normalized);
 
         particle.time = 0;

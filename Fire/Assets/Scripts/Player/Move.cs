@@ -161,7 +161,7 @@ public class Move : MonoBehaviour
         switch (rotState)
         {
             case State.ADVANCE:
-                agent.speed = 30;
+                agent.speed = 11;
                 break;
 
             case State.Special:
