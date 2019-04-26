@@ -12,6 +12,7 @@ public class Inventory : MonoBehaviour
     public List<Item_Equip> equipItem;
 
     public List<Item_Equip> itemList;
+    public List<Item_Equip> inventoryList;
     public List<Image> uiImageList;
     public List<Image> equipedImageList;
     public GameObject Info;
@@ -144,5 +145,13 @@ public class Inventory : MonoBehaviour
         //    equipItem.Add(a.equipList[i]);
         //}
         RefreshStatus();
+    }
+
+    public void NextPage()
+    {
+    }
+
+    public void PrevPage()
+    {
     }
 }

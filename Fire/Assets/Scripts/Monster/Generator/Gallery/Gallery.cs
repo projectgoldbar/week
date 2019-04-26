@@ -7,6 +7,7 @@ public class Gallery : ChaseGenerator
 {
     private void OnEnable()
     {
+        StartCoroutine(CalculatePath());
     }
 
     public override void Awake()

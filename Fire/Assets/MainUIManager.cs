@@ -16,4 +16,8 @@ public class MainUIManager : MonoBehaviour
     {
         gObject.SetActive(false);
     }
+
+    public void Next_Page()
+    {
+    }
 }

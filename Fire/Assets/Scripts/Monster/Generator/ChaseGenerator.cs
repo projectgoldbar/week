@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[DefaultExecutionOrder(-500)]
+[DefaultExecutionOrder(-250)]
 public class ChaseGenerator : GeneratorBase
 {
     protected WaitForSeconds second = new WaitForSeconds(0.3f);
@@ -13,6 +13,7 @@ public class ChaseGenerator : GeneratorBase
 
     private void OnEnable()
     {
+        StartCoroutine(CalculatePath());
     }
 
     public override void Awake()
@@ -59,9 +60,9 @@ public class ChaseGenerator : GeneratorBase
         }
     }
 
-    private IEnumerator CalculatePath()
+    public IEnumerator CalculatePath()
     {
-        var a = Utility.Instance.playerTr.GetComponent<TestTarget>();
+        var a = Utility.Instance.playerTr;
         while (true)
         {
             state.Agent.ResetPath();
