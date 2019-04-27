@@ -22,7 +22,7 @@ public class ChaseGenerator : GeneratorBase
     public override void Awake()
     {
         base.Awake();
-        Path = new NavMeshPath();
+        //Path = new NavMeshPath();
     }
 
     public override void Initiate()
@@ -91,8 +91,8 @@ public class ChaseGenerator : GeneratorBase
     {
         while (true)
         {
-            state.Agent.CalculatePath(target.position, Path);
-            //state.Agent.ResetPath();
+            state.Agent.ResetPath();
+            state.Agent.CalculatePath(Utility.Instance.playerTr.position, Path);
             state.Agent.SetPath(Path);
             yield return second;
         }

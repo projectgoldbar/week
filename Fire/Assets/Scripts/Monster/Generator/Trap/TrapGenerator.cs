@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[DefaultExecutionOrder(-500)]
+[DefaultExecutionOrder(-250)]
 public class TrapGenerator : GeneratorBase
 {
     public float dis = 0;

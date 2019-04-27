@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-[DefaultExecutionOrder(-300)]
+[DefaultExecutionOrder(-900)]
 public class Player : MonoBehaviour
 {
     public float MaxHp;

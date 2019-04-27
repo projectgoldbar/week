@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Events;
 
-[DefaultExecutionOrder(-300)]
+[DefaultExecutionOrder(-2000)]
 public class Utility : Singleton<Utility>
 {
     [Header("Player")]
