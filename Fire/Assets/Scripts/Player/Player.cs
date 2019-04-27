@@ -1,28 +1,24 @@
-﻿using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+﻿using System;
 using System.Collections;
-using System;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public float MaxHp;
-
     public ShootEffectPool effect = null;
-
     public bool Hit = false;
-
     public Material mat;
 
     private WaitForSeconds wait = new WaitForSeconds(0.05f);
-
-    private float hp;
-
     private Action specialMove = null;
     private Action setItemOption = null;
 
-    public Button evasionTrigger;
+    private Animator Anim;
+    private MonsterUnit unit;
+
+    private float hp;
+
+    public Evasion evasion;
 
     public float Hp
     {
@@ -37,7 +33,9 @@ public class Player : MonoBehaviour
 
                 GetComponent<Move>().rotState = Move.State.DEAD;
                 Anim.SetTrigger("Dead");
+
                 Invoke("Gameover", 1.0f);
+
                 Utility.Instance.PlayerHpText.text = "0";
                 Utility.Instance.PlayerHpBar.value = 0;
             }
@@ -49,9 +47,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    [NonSerialized]
-    private Animator Anim;
-
     public void StatusRefresh()
     {
     }
@@ -62,7 +57,7 @@ public class Player : MonoBehaviour
         Anim.SetFloat("RunSpeed", 1.0f);
         Hp = MaxHp;
         Hp += GameManager.instance.playerHp;
-        evasionTrigger.gameObject.SetActive(false);
+
         // mat.color = Ref.Instance.NonColor();
     }
 
@@ -90,71 +85,27 @@ public class Player : MonoBehaviour
         }
     }
 
-    private MonsterUnit unit;
-
-    private bool evasion = false;
-
-    private float evationTimer = 0;
-
-    public ParticleSystem Ex;
-
-    private void Update()
-    {
-        if (evasion)
-        {
-            evationTimer += Time.deltaTime;
-            if (evationTimer >= 0.3f)
-            {
-                if (EnemyTr != null)
-                    DamageHit(EnemyTr);
-                evationTimer = 0;
-                evasionTrigger.gameObject.SetActive(false);
-                evasion = false;
-            }
-            else
-            {
-                //1.버튼
-                evasionTrigger.gameObject.SetActive(true);
-                //2.스와이프
-                //3.화면클릭
-            }
-        }
-    }
-
-    private Transform EnemyTr;
-
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
-            evationTimer = 0;
-            EnemyTr = collision.transform;
-            evasion = true;
+            if (evasion != null)
+            {
+                evasion.b_Evasion = true;
+            }
+
+            //DamageHit();
         }
     }
 
-    //회피
-    public void Evasion()
-    {
-        //예 1)
-        Ex.time = 0;
-        Ex.Play();
-        Hp += 10;
-        evasion = false;
-        evasionTrigger.gameObject.SetActive(false);
-    }
-
     //데미지히트
-    private void DamageHit(Transform CollisionTr)
+    public void DamageHit()
     {
         var PlayerPos = transform.position;
-        var EnemyPos = CollisionTr.position;
-        var dir = (EnemyPos - PlayerPos);
 
         var particle = effect.Geteffect();
 
         particle.transform.position = PlayerPos;
-        particle.transform.rotation = Quaternion.LookRotation(dir.normalized);
 
         particle.time = 0;
         particle.Play();

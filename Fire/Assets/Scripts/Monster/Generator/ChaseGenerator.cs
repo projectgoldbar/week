@@ -7,7 +7,10 @@ public class ChaseGenerator : GeneratorBase
 {
     protected WaitForSeconds second = new WaitForSeconds(0.3f);
 
-    private float timer = 3;
+    private float timer = 0;
+    public float timerMin = 3;
+    public float timerMax = 5;
+    public float range = 10f;
 
     private float CurrentTime = 0;
 
@@ -25,7 +28,7 @@ public class ChaseGenerator : GeneratorBase
     public override void Initiate()
     {
         Process();
-        ComponentOnOff();
+        ComponentOn();
         StartCoroutine(CalculatePath());
     }
 
@@ -33,15 +36,29 @@ public class ChaseGenerator : GeneratorBase
     {
         unit.state = StateIndex.CHASE;
         CurrentTime = 0;
-        timer = Random.Range(3.0f, 5.0f);
+        timer = Random.Range(timerMin, timerMax);
         unit.Anim.SetBool("RushAttack", false);
         unit.Anim.Play("Zombie_Walk");
     }
 
-    private void ComponentOnOff()
+    private void ComponentOn()
     {
         state.Agent.enabled = true;
         state.Agent.updateRotation = true;
+    }
+
+    private void ComponentOnOff()
+    {
+        if (state.Agent.enabled == false)
+        {
+            state.Agent.enabled = true;
+            state.Agent.updateRotation = true;
+        }
+        else
+        {
+            state.Agent.enabled = false;
+            state.Agent.updateRotation = false;
+        }
     }
 
     public override void Execution() //Update
@@ -56,13 +73,23 @@ public class ChaseGenerator : GeneratorBase
         if (CurrentTime >= timer)
         {
             CurrentTime = 0;
+            DistanceCheck();
+        }
+    }
+
+    public void DistanceCheck()
+    {
+        if (unit.distance < range)
+        {
+            StopCoroutine(this.CalculatePath());
             state.ChangeState(StateIndex.ATTACK);
         }
+        else return;
     }
 
     public IEnumerator CalculatePath()
     {
-        var a = Utility.Instance.playerTr;
+        Debug.Log("a");
         while (true)
         {
             state.Agent.ResetPath();

@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.EventSystems;
 
 public class Attack : GeneratorBase
 {
@@ -16,7 +14,6 @@ public class Attack : GeneratorBase
     private Vector3 pos = new Vector3();
 
     private Vector3 hitpos = Vector3.zero;
-    private RaycastHit hit;
 
     private pomulseon pomulseon;
 
@@ -84,12 +81,14 @@ public class Attack : GeneratorBase
         }
 
         ATKKindProcess();
+        yield break;
     }
 
     public void ATKKindProcess()
     {
         if (attackKind == AttackKind.RUSH_ATTACK)
         {
+            //state.Agent.updateRotation = false;
             attackStanby = true;
             AttackProcess();
         }
@@ -98,10 +97,9 @@ public class Attack : GeneratorBase
     public virtual void AttackProcess()
     {
         //러쉬공격
-        state.Agent.updateRotation = false;
         unit.Anim.SetBool("RushAttack", true);
 
-        Forward_Direction_Control();
+        //Forward_Direction_Control();
     }
 
     public void Forward_Direction_Control()
@@ -120,7 +118,7 @@ public class Attack : GeneratorBase
 
     public override void Execution()
     {
-        CoolTime();
+        AttackEndCoolTime();
     }
 
     public void DashMv()
@@ -129,7 +127,7 @@ public class Attack : GeneratorBase
         transform.position = Vector3.Lerp(transform.position, pos, Time.deltaTime * 3.0f);
     }
 
-    public void CoolTime()
+    public void AttackEndCoolTime()
     {
         DashMv();
 
