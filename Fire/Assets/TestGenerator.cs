@@ -13,6 +13,7 @@ public class TestGenerator : MonoBehaviour
     public Text resultText;
     public Transform[] genPont;
     public Button button;
+    public Button fpsButton;
 
     public InputField genCountInputField;
     public InputField playerHpInputField;
@@ -45,6 +46,17 @@ public class TestGenerator : MonoBehaviour
         }
     }
 
+    public void ShowFps()
+    {
+        var a = player.GetComponent<FPSDisplay>();
+        if (a.enabled == false)
+        {
+            a.enabled = true;
+        }
+        else
+            a.enabled = false;
+    }
+
     public void GenCountSet()
     {
         var a = int.Parse(genCountInputField.text);
@@ -72,6 +84,8 @@ public class TestGenerator : MonoBehaviour
         GenMonster(genCount);
         genCountInputField.gameObject.SetActive(false);
         button.gameObject.SetActive(false);
+        playerHpInputField.gameObject.SetActive(false);
+        fpsButton.gameObject.SetActive(false);
         //StartCoroutine(Timer());
         Time.timeScale = 1;
         //for (int i = 0; i < monsterList.Count; i++)
@@ -103,6 +117,9 @@ public class TestGenerator : MonoBehaviour
         Time.timeScale = 0;
         genCountInputField.gameObject.SetActive(true);
         button.gameObject.SetActive(true);
+        playerHpInputField.gameObject.SetActive(true);
+        fpsButton.gameObject.SetActive(true);
+
         sw.Reset();
     }
 
@@ -157,4 +174,17 @@ public class TestGenerator : MonoBehaviour
             }
         }
     }
+
+    //private IEnumerator ZombieIdiotMove()
+    //{
+    //    for (int i = 0; i < monsterList.Count; i++)
+    //    {
+    //        if (monsterList[i].gameObject.activeSelf)
+    //        {
+    //            StopCoroutine(monsterList[i].GetComponent<ChaseGenerator>().CalculatePath(Utility.Instance.playerTr.position));
+    //            monsterList[i].GetComponent<ChaseGenerator>().StartCoroutine(monsterList[i].GetComponent<ChaseGenerator>().CalculatePath(new Vector3(0, 0, 0)));
+    //            yield return new WaitForSeconds(1f);
+    //        }
+    //    }
+    //}
 }

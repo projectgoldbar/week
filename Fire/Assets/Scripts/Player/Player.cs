@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
+[DefaultExecutionOrder(-300)]
 public class Player : MonoBehaviour
 {
     public float MaxHp;
@@ -95,6 +96,14 @@ public class Player : MonoBehaviour
             //}
 
             DamageHit();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Interaction"))
+        {
+            other.GetComponent<Interaction>().Somthing();
         }
     }
 

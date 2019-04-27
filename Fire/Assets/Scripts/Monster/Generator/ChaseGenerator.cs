@@ -16,7 +16,7 @@ public class ChaseGenerator : GeneratorBase
 
     private void OnEnable()
     {
-        StartCoroutine(CalculatePath());
+        //StartCoroutine(CalculatePath(Utility.Instance.playerTr));
     }
 
     public override void Awake()
@@ -29,7 +29,7 @@ public class ChaseGenerator : GeneratorBase
     {
         Process();
         ComponentOn();
-        StartCoroutine(CalculatePath());
+        StartCoroutine(CalculatePath(Utility.Instance.playerTr));
     }
 
     public virtual void Process()
@@ -81,19 +81,18 @@ public class ChaseGenerator : GeneratorBase
     {
         if (unit.distance < range)
         {
-            StopCoroutine(this.CalculatePath());
+            StopCoroutine(this.CalculatePath(Utility.Instance.playerTr));
             state.ChangeState(StateIndex.ATTACK);
         }
         else return;
     }
 
-    public IEnumerator CalculatePath()
+    public virtual IEnumerator CalculatePath(Transform target)
     {
-        Debug.Log("a");
         while (true)
         {
-            state.Agent.ResetPath();
-            state.Agent.CalculatePath(Utility.Instance.playerTr.position, Path);
+            state.Agent.CalculatePath(target.position, Path);
+            //state.Agent.ResetPath();
             state.Agent.SetPath(Path);
             yield return second;
         }

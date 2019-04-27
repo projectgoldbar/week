@@ -8,10 +8,10 @@ public class NewMonsterGenerator : MonoBehaviour
     public Transform gp;
     public Transform lp;
     public Transform[] groundGenPoint;
-    public Transform[] loopTopGenPoint;
+    public Transform[] InteractionGenPoint;
     public MonsterDataBase monsterDataBase;
     public Transform zombie;
-    public Transform looptopZombie;
+    public Transform Interaction;
 
     public float maxZombieCount = 300;
 
@@ -21,12 +21,12 @@ public class NewMonsterGenerator : MonoBehaviour
 
     {
         groundGenPoint = gp.GetComponentsInChildren<Transform>();
-        loopTopGenPoint = lp.GetComponentsInChildren<Transform>();
+        InteractionGenPoint = lp.GetComponentsInChildren<Transform>();
     }
 
     private void Start()
     {
-        //GenerateLoopTopZombie();
+        GenerateInteraction();
     }
 
     public void GenGallery()
@@ -54,14 +54,14 @@ public class NewMonsterGenerator : MonoBehaviour
         }
     }
 
-    private void GenerateLoopTopZombie()
+    private void GenerateInteraction()
     {
-        for (int i = 0; i < loopTopGenPoint.Length; i++)
+        for (int i = 0; i < InteractionGenPoint.Length; i++)
         {
             var gen = Random.Range(0, 2);
             if (gen == 0)
             {
-                Instantiate(looptopZombie, loopTopGenPoint[i].position, Quaternion.identity);
+                Instantiate(Interaction, InteractionGenPoint[i].position, Quaternion.identity);
             }
             else
             {

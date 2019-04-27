@@ -8,13 +8,14 @@ public class TestRushZombie : MonoBehaviour
 {
     public NavMeshAgent agent;
     public NavMeshPath Path;
-    private Vector3 target;
-    private bool coolDown = false;
+
+    //private Vector3 target;
+    public bool coolDown = false;
 
     private void Awake()
     {
         Path = new NavMeshPath();
-        target = Utility.Instance.playerTr.GetComponent<TestTarget>().target;
+        //target = Utility.Instance.playerTr.position;
     }
 
     private void Start()
@@ -30,6 +31,7 @@ public class TestRushZombie : MonoBehaviour
             if (DIstanceChk() < 10f)
             {
                 Attack();
+                coolDown = false;
             }
         }
     }
@@ -37,7 +39,8 @@ public class TestRushZombie : MonoBehaviour
     private void Attack()
     {
         Debug.Log("a");
-        Vector3.Lerp(transform.position, transform.forward + transform.forward * 3f, 0.3f);
+
+        Vector3.Lerp(transform.position, Utility.Instance.playerTr.forward * 3f, 0.3f);
     }
 
     //경로 탐색
@@ -45,7 +48,7 @@ public class TestRushZombie : MonoBehaviour
     {
         while (true)
         {
-            agent.CalculatePath(target, Path);
+            agent.CalculatePath(Utility.Instance.playerTr.position, Path);
             agent.SetPath(Path);
             yield return new WaitForSeconds(0.3f);
         }
@@ -58,11 +61,11 @@ public class TestRushZombie : MonoBehaviour
         {
             if (coolDown)
             {
-                coolDown = true;
+                coolDown = false;
             }
             else
             {
-                coolDown = false;
+                coolDown = true;
             }
             yield return new WaitForSeconds(3f);
         }
@@ -71,7 +74,7 @@ public class TestRushZombie : MonoBehaviour
     //거리계산
     private float DIstanceChk()
     {
-        Vector3 dir = (target - transform.position);
+        Vector3 dir = (Utility.Instance.playerTr.position - transform.position);
         float distance = dir.magnitude;
         return distance;
     }
