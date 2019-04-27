@@ -89,12 +89,12 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
-            if (evasion != null)
-            {
-                evasion.b_Evasion = true;
-            }
+            //if (evasion != null)
+            //{
+            //    evasion.b_Evasion = true;
+            //}
 
-            //DamageHit();
+            DamageHit();
         }
     }
 

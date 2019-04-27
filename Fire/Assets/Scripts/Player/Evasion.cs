@@ -5,7 +5,10 @@ public class Evasion : MonoBehaviour
 {
     public Player player;
 
+    [Header("Test용 버튼")]
     public Button evasionTrigger;
+
+    [Header("Test용 Particle")]
     public ParticleSystem EvasionEx;
 
     [System.NonSerialized]
