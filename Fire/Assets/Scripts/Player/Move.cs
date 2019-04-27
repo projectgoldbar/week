@@ -1,9 +1,6 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.AI;
-using UnityEngine.UI;
-using System;
 
 public class Move : MonoBehaviour
 {
@@ -31,8 +28,11 @@ public class Move : MonoBehaviour
 
     private bool b_Touch = false;
 
+    private Swipe swipe;
+
     public void Awake()
     {
+        swipe = FindObjectOfType<Swipe>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -150,6 +150,8 @@ public class Move : MonoBehaviour
         SelectState();
     }
 
+    public bool rotationStop = false;
+
     public virtual void SelectState()
     {
         runSpeed = agent.speed;
@@ -170,10 +172,12 @@ public class Move : MonoBehaviour
                 break;
 
             case State.LEFT:
+                //if (!swipe.GoSwipe)
                 Left_Turn();
                 break;
 
             case State.RIGHT:
+                //if (!swipe.GoSwipe)
                 Right_Turn();
                 break;
 

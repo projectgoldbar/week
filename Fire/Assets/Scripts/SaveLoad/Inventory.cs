@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -118,6 +117,10 @@ public class Inventory : MonoBehaviour
     public void LoadInventory()
     {
         InventoryData a = SaveSystem.LoadPlayer();
+        if (a == null)
+        {
+            return;
+        }
         for (int i = 0; i < a.hp.Count; i++)
         {
             itemList.Add(new Item_Equip(a.type[i], a.name[i], a.description[i], a.hp[i]));

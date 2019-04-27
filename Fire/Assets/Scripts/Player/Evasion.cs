@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Evasion : MonoBehaviour
@@ -18,6 +19,10 @@ public class Evasion : MonoBehaviour
 
     private bool b_evasion = false;
 
+    private Action method;
+
+    private Swipe swipe;
+
     public bool b_Evasion
     {
         get
@@ -35,6 +40,8 @@ public class Evasion : MonoBehaviour
 
     private void Awake()
     {
+        swipe = FindObjectOfType<Swipe>();
+        method += EvasionProcess;
         evasionTrigger.gameObject.SetActive(false);
     }
 
@@ -45,16 +52,22 @@ public class Evasion : MonoBehaviour
             evationTimer += Time.deltaTime;
             if (evationTimer >= 0.3f)
             {
+                Time.timeScale = 1;
                 player.DamageHit();
                 evationTimer = 0;
                 evasionTrigger.gameObject.SetActive(false);
                 b_Evasion = false;
+                swipe.GoSwipe = false;
             }
             else
             {
                 //1.버튼
+                Time.timeScale = 0.5f;
                 evasionTrigger.gameObject.SetActive(true);
                 //2.스와이프
+                swipe.GoSwipe = true;
+                if (swipe.GoSwipe)
+                    swipe.SwipeProcess(() => EvasionProcess());
                 //3.화면클릭
             }
         }
@@ -63,10 +76,13 @@ public class Evasion : MonoBehaviour
     public void EvasionProcess()
     {
         //예 1)
-        b_Evasion = false;
-        EvasionEx.time = 0;
         EvasionEx.transform.position = transform.position;
+        b_Evasion = false;
+
+        evationTimer = 0;
+        EvasionEx.time = 0;
         EvasionEx.Play();
         player.Hp += 10;
+        Time.timeScale = 1;
     }
 }

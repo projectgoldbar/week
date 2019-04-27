@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 [DefaultExecutionOrder(-300)]
@@ -49,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     public void GameStart()
     {
+        userInventory.SaveInventory();
         SceneManager.LoadScene("02.Loading");
     }
 
