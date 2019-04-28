@@ -2,45 +2,63 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[DefaultExecutionOrder(-500)]
+[DefaultExecutionOrder(-250)]
 public class ChaseGenerator : GeneratorBase
 {
     protected WaitForSeconds second = new WaitForSeconds(0.3f);
 
-    private float timer = 3;
+    private float timer = 0;
+    public float timerMin = 3;
+    public float timerMax = 5;
+    public float range = 10f;
 
     private float CurrentTime = 0;
 
     private void OnEnable()
     {
+        //StartCoroutine(CalculatePath(Utility.Instance.playerTr));
     }
 
     public override void Awake()
     {
         base.Awake();
-        Path = new NavMeshPath();
+        //Path = new NavMeshPath();
     }
 
     public override void Initiate()
     {
         Process();
-        ComponentOnOff();
-        StartCoroutine(CalculatePath());
+        ComponentOn();
+        StartCoroutine(CalculatePath(Utility.Instance.playerTr));
     }
 
     public virtual void Process()
     {
         unit.state = StateIndex.CHASE;
         CurrentTime = 0;
-        timer = Random.Range(3.0f, 5.0f);
+        timer = Random.Range(timerMin, timerMax);
         unit.Anim.SetBool("RushAttack", false);
         unit.Anim.Play("Zombie_Walk");
     }
 
-    private void ComponentOnOff()
+    private void ComponentOn()
     {
         state.Agent.enabled = true;
         state.Agent.updateRotation = true;
+    }
+
+    private void ComponentOnOff()
+    {
+        if (state.Agent.enabled == false)
+        {
+            state.Agent.enabled = true;
+            state.Agent.updateRotation = true;
+        }
+        else
+        {
+            state.Agent.enabled = false;
+            state.Agent.updateRotation = false;
+        }
     }
 
     public override void Execution() //Update
@@ -55,13 +73,22 @@ public class ChaseGenerator : GeneratorBase
         if (CurrentTime >= timer)
         {
             CurrentTime = 0;
-            state.ChangeState(StateIndex.ATTACK);
+            DistanceCheck();
         }
     }
 
-    private IEnumerator CalculatePath()
+    public void DistanceCheck()
     {
-        var a = Utility.Instance.playerTr.GetComponent<TestTarget>();
+        if (unit.distance < range)
+        {
+            StopCoroutine(this.CalculatePath(Utility.Instance.playerTr));
+            state.ChangeState(StateIndex.ATTACK);
+        }
+        else return;
+    }
+
+    public virtual IEnumerator CalculatePath(Transform target)
+    {
         while (true)
         {
             state.Agent.ResetPath();

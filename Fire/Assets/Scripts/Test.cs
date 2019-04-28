@@ -2,57 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
+[DefaultExecutionOrder(-600)]
 public class Test : MonoBehaviour
 {
-    private LineRenderer line;
+    private NavMeshPath path;
+    private NavMeshAgent agent;
+    private WaitForSeconds second;
 
-    public Transform[] pranets;         //달의 트랜스폼을 담음
-
-    private QuestDateBase questDate;
-
-    public Canvas planetcanvas;
-    public Text text;
-
-    //퀘스트창에 전달할 클래스변수
-    public static dataInfo info;
-
-    public CanvasGroup PlanetUICanvas;
-    // Start is called before the first frame update
+    private Transform tr;
 
     private void Awake()
     {
-        line = GetComponent<LineRenderer>();
-        questDate = GetComponent<QuestDateBase>();
+        path = new NavMeshPath();
+        second = new WaitForSeconds(0.3f);
+        tr = GameObject.FindObjectOfType<Player>().GetComponent<Transform>();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (Input.GetMouseButtonDown(0))
+        path = new NavMeshPath();
+        second = new WaitForSeconds(0.3f);
+        tr = GameObject.FindObjectOfType<Player>().GetComponent<Transform>();
+        StartCoroutine(CalculatePath());
+    }
+
+    public IEnumerator CalculatePath()
+    {
+        while (true)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, LayerMask.GetMask("Planet")))
-            {
-                string planetName = hit.transform.name;
-                Vector3 pos = PlanetPos(hit);
-
-                info = GetSetDataInfo(questDate, planetName);
-
-                planetcanvas.transform.position = pos;
-                text.text = info.QuestContent;
-            }
+            agent.ResetPath();
+            agent.CalculatePath(tr.position, path);
+            agent.SetPath(path);
+            yield return second;
         }
-    }
-
-    private dataInfo GetSetDataInfo(QuestDateBase data, string planetName)
-    {
-        return data.database[planetName];
-    }
-
-    private Vector3 PlanetPos(RaycastHit hit)
-    {
-        return hit.transform.position;
     }
 }

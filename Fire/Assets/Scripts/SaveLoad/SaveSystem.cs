@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 [DefaultExecutionOrder(-400)]
 public static class SaveSystem

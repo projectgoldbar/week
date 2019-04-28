@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[DefaultExecutionOrder(-500)]
+[DefaultExecutionOrder(-250)]
 public class Gallery : ChaseGenerator
 {
     private void OnEnable()
     {
+        StartCoroutine(CalculatePath(Utility.Instance.playerTr));
     }
 
     public override void Awake()

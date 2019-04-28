@@ -12,6 +12,7 @@ public class Item_Boxing : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
+            Debug.Log("a");
             if (type == ItemType.KeyItem)
             {
                 GameLevelManager.instance.stage++;

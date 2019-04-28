@@ -1,12 +1,10 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.AI;
-using UnityEngine.UI;
-using System;
 
 public class Move : MonoBehaviour
 {
+    [NonSerialized]
     public float runSpeed = 100.0f;
 
     public float rotSpeed = 300.0f;
@@ -20,7 +18,8 @@ public class Move : MonoBehaviour
 
     protected Vector2 touchPos = Vector2.zero;
 
-    protected NavMeshAgent agent;
+    [NonSerialized]
+    public NavMeshAgent agent;
 
     private Touch touch;
 
@@ -29,8 +28,11 @@ public class Move : MonoBehaviour
 
     private bool b_Touch = false;
 
+    private Swipe swipe;
+
     public void Awake()
     {
+        swipe = FindObjectOfType<Swipe>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -50,7 +52,15 @@ public class Move : MonoBehaviour
 
         touchPos = Input.mousePosition;
         //if (EventSystem.current.IsPointerOverGameObject() == false)
+        PcMove();
+#else
+        //if (EventSystem.current.IsPointerOverGameObject() == false)
+            MobileMove();
+#endif
+    }
 
+    public virtual void PcMove()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             if (touchPos.x <= Screen.width * 0.5)
@@ -80,9 +90,10 @@ public class Move : MonoBehaviour
             }
             rotState = State.ADVANCE;
         }
+    }
 
-#else
-
+    public virtual void MobileMove()
+    {
         if (Input.touchCount > 0)
         {
             for (int i = 0; i < Input.touchCount; i++)
@@ -119,8 +130,6 @@ public class Move : MonoBehaviour
                 }
             }
         }
-
-#endif
     }
 
     public virtual void Car_LeftTurn()
@@ -141,6 +150,8 @@ public class Move : MonoBehaviour
         SelectState();
     }
 
+    public bool rotationStop = false;
+
     public virtual void SelectState()
     {
         runSpeed = agent.speed;
@@ -153,7 +164,7 @@ public class Move : MonoBehaviour
         switch (rotState)
         {
             case State.ADVANCE:
-                agent.speed = 30;
+                agent.speed = 11;
                 break;
 
             case State.Special:
@@ -161,10 +172,12 @@ public class Move : MonoBehaviour
                 break;
 
             case State.LEFT:
+                //if (!swipe.GoSwipe)
                 Left_Turn();
                 break;
 
             case State.RIGHT:
+                //if (!swipe.GoSwipe)
                 Right_Turn();
                 break;
 

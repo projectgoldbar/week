@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +11,7 @@ public class Inventory : MonoBehaviour
     public List<Item_Equip> equipItem;
 
     public List<Item_Equip> itemList;
+    public List<Item_Equip> inventoryList;
     public List<Image> uiImageList;
     public List<Image> equipedImageList;
     public GameObject Info;
@@ -117,6 +117,10 @@ public class Inventory : MonoBehaviour
     public void LoadInventory()
     {
         InventoryData a = SaveSystem.LoadPlayer();
+        if (a == null)
+        {
+            return;
+        }
         for (int i = 0; i < a.hp.Count; i++)
         {
             itemList.Add(new Item_Equip(a.type[i], a.name[i], a.description[i], a.hp[i]));
@@ -144,5 +148,13 @@ public class Inventory : MonoBehaviour
         //    equipItem.Add(a.equipList[i]);
         //}
         RefreshStatus();
+    }
+
+    public void NextPage()
+    {
+    }
+
+    public void PrevPage()
+    {
     }
 }
