@@ -28,7 +28,6 @@ public class Attack : GeneratorBase
 
     private void OnEnable()
     {
-        //state.Agent.ResetPath();
         attackStanby = false;
     }
 
@@ -46,25 +45,18 @@ public class Attack : GeneratorBase
     {
         attackKind = AttackKind.RUSH_ATTACK;
         unit.state = StateIndex.ATTACK;
-
         RayCastFindPosition();
     }
 
+    private RaycastHit hit;
+
     private void RayCastFindPosition()
     {
-        //isHit = (Physics.Raycast(transform.position, transform.forward, out hit, distance));
+        //isHit = (Physics.Raycast(transform.position, transform.forward, out hit, distance, 1 << LayerMask.NameToLayer("Building")));
 
-        //if (isHit)
-        //{
-        //    //hitpos = Vector3.Lerp(transform.position, hit.point, 0.7f);
-        //    pos = hit.point - Vector3.forward * 1.0f;
-        //}
-        //else
         {
             pos = transform.position + transform.forward * distance;
         }
-
-        // pos = transform.position + transform.forward * distance;
     }
 
     public IEnumerator RushStanby()
@@ -88,7 +80,7 @@ public class Attack : GeneratorBase
     {
         if (attackKind == AttackKind.RUSH_ATTACK)
         {
-            //state.Agent.updateRotation = false;
+            state.Agent.updateRotation = false;
             attackStanby = true;
             AttackProcess();
         }

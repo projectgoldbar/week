@@ -78,7 +78,6 @@ public class MonsterState : MonoBehaviour
             case StateIndex.CHASE:
                 generator = State_activation(generator, Chase);
                 State_Inactive(Chase);
-                Agent.avoidancePriority = 50;
                 break;
 
             case StateIndex.Gallery:
@@ -89,7 +88,6 @@ public class MonsterState : MonoBehaviour
             case StateIndex.ATTACK:
                 generator = State_activation(generator, Attack);
                 State_Inactive(Attack);
-                Agent.avoidancePriority = 51;
                 break;
 
             case StateIndex.TRAP:

@@ -42,7 +42,7 @@ public class Evasion : MonoBehaviour
     {
         swipe = FindObjectOfType<Swipe>();
         method += EvasionProcess;
-        evasionTrigger.gameObject.SetActive(false);
+        // evasionTrigger.gameObject.SetActive(false);
     }
 
     public void Update()

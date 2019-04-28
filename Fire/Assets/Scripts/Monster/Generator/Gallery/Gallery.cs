@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [DefaultExecutionOrder(-250)]
 public class Gallery : ChaseGenerator
@@ -21,7 +19,22 @@ public class Gallery : ChaseGenerator
         second = new WaitForSeconds(0.2f);
     }
 
+    public override void Execution()
+    {
+        CoolDown();
+    }
+
     public override void CoolDown()
     {
+        DistanceCheck();
+    }
+
+    public override void DistanceCheck()
+    {
+        if (unit.distance <= range)
+        {
+            state.ChangeState(StateIndex.ATTACK);
+        }
+        else return;
     }
 }

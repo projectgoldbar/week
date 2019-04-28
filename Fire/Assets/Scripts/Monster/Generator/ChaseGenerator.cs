@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 [DefaultExecutionOrder(-250)]
 public class ChaseGenerator : GeneratorBase
@@ -22,7 +21,6 @@ public class ChaseGenerator : GeneratorBase
     public override void Awake()
     {
         base.Awake();
-        //Path = new NavMeshPath();
     }
 
     public override void Initiate()
@@ -36,6 +34,7 @@ public class ChaseGenerator : GeneratorBase
     {
         unit.state = StateIndex.CHASE;
         CurrentTime = 0;
+        state.Agent.radius = 0.4f;
         timer = Random.Range(timerMin, timerMax);
         unit.Anim.SetBool("RushAttack", false);
         unit.Anim.Play("Zombie_Walk");
@@ -77,7 +76,7 @@ public class ChaseGenerator : GeneratorBase
         }
     }
 
-    public void DistanceCheck()
+    public virtual void DistanceCheck()
     {
         if (unit.distance < range)
         {
