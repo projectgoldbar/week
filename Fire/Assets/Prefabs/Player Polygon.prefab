@@ -1766,7 +1766,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5435032019357852279}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: d76d275f892225040931f0b8f015d1ff, type: 3}
+  m_Avatar: {fileID: 9000000, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
   m_Controller: {fileID: 9100000, guid: f583cb06d1d0c114a98adc727dcebe1a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -1790,6 +1790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotSpeed: 300
   rotState: 1
+  rotationStop: 0
 --- !u!114 &5712350880129353716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1804,6 +1805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotSpeed: 200
   rotState: 1
+  rotationStop: 0
   pos: {x: 0, y: 0}
   start: {x: 0, y: 0}
   Current: {x: 0, y: 0}
@@ -1838,8 +1840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5435032019357852272}
   evasionTrigger: {fileID: 0}
-  EvasionEx: {fileID: 198274180701648066, guid: a9ec2e096ed1d1a4f88e2946690fd145,
-    type: 3}
+  EvasionEx: {fileID: 0}
 --- !u!195 &2593135047140424973
 NavMeshAgent:
   m_ObjectHideFlags: 0
