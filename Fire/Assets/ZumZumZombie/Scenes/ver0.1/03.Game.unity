@@ -2477,11 +2477,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Polygon
       objectReference: {fileID: 0}
-    - target: {fileID: 4630110037912840827, guid: d61bb8412762ee74d9a04158aa6e8de6,
-        type: 3}
-      propertyPath: rotSpeed
-      value: 250
-      objectReference: {fileID: 0}
     - target: {fileID: 5435032019357928897, guid: d61bb8412762ee74d9a04158aa6e8de6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2536,6 +2531,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630110037912840827, guid: d61bb8412762ee74d9a04158aa6e8de6,
+        type: 3}
+      propertyPath: rotSpeed
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 5435032019357852272, guid: d61bb8412762ee74d9a04158aa6e8de6,
         type: 3}
@@ -2941,6 +2941,12 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4480083265963994827, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 988951fa3fe91a043a85ee7af9fd553f,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5a89b022b1eb97408ecb35d32fee9b8, type: 3}
 --- !u!114 &1065206589 stripped
@@ -4263,6 +4269,7 @@ MonoBehaviour:
   delay: 0.3
   count: 1
   gameOverUI: {fileID: 1437280485}
+  lifeTimeText: {fileID: 0}
 --- !u!1001 &1563817141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4496,6 +4503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ccb3d24eb8c184d8891a7b10ee56c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clearPanel: {fileID: 0}
 --- !u!65 &1685445737
 BoxCollider:
   m_ObjectHideFlags: 0
