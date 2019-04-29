@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
+using UnityEngine.UI;
 
+[DefaultExecutionOrder(-50)]
 public class GameLevelManager : MonoBehaviour
 {
     public static GameLevelManager instance;
@@ -11,7 +14,7 @@ public class GameLevelManager : MonoBehaviour
 
     public int stage = 0;
     private bool oneMoreChance = false;
-
+    private Stopwatch sw = new Stopwatch();
     public Transform player;
 
     // 아이템을 리젠하고 관리하는 장치
@@ -66,7 +69,8 @@ public class GameLevelManager : MonoBehaviour
         gm = GameObject.FindObjectOfType<GameManager>();
         //StartCoroutine(MonsterGen(delay, count));
         if (genOK == true) { monsterGenerator.GenGallery(); }
-        StageUp();
+        sw.Start();
+        //StageUp();
     }
 
     private void ItemInit(ItemType type)
@@ -126,24 +130,24 @@ public class GameLevelManager : MonoBehaviour
     private bool SomethingOnPlace(Vector3 point)
     {
         Vector3 rayStartPoint = new Vector3(point.x, point.y + 80f, point.z);
-        Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+        //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
         if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 200f, 1 << 11))
         {
             rayStartPoint.y = point.y;
             rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Left, 1f);
-            Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+            //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
             if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
             {
                 rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Right, 1f);
-                Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+                //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
                 if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
                 {
                     rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Back, 1f);
-                    Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+                    //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
                     if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
                     {
                         rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Foward, 1f);
-                        Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+                        //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
                         if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
                         {
                             return false;
@@ -283,12 +287,16 @@ public class GameLevelManager : MonoBehaviour
     //게임 종료 부분
     public GameObject gameOverUI;
 
+    public Text lifeTimeText;
+
     public void OnGameOverPanel()
     {
+        var a = 0 + sw.ElapsedMilliseconds;
         gameOverUI.SetActive(true);
+        lifeTimeText.text = "생존시간 :" + a / 1000;
     }
 
-    public void GameOver()
+    public void GameOver(bool tutorial)
     {
         gm.GameOver();
     }

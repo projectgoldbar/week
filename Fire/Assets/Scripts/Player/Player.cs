@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
         Anim = GetComponent<Animator>();
         Anim.SetFloat("RunSpeed", 1.0f);
         Hp = MaxHp;
-        Hp += GameManager.instance.playerHp;
+        //Hp += GameManager.instance.playerHp;
 
         // mat.color = Ref.Instance.NonColor();
     }

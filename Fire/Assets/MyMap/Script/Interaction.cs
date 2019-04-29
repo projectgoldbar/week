@@ -6,14 +6,14 @@ public class Interaction : MonoBehaviour
 {
     public Transform pivot;
 
-    public void Somthing()
+    public virtual void Somthing()
     {
-        StartCoroutine(Fall());
+        StartCoroutine(Interactioncoroutine());
 
-        gameObject.layer = LayerMask.NameToLayer("Building");
+        gameObject.layer = LayerMask.NameToLayer("UsedInteraction");
     }
 
-    private IEnumerator Fall()
+    private IEnumerator Interactioncoroutine()
     {
         for (int i = 0; i < 10; i++)
         {
