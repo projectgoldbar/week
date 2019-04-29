@@ -14,7 +14,9 @@ public class Player : MonoBehaviour
     private Action specialMove = null;
     private Action setItemOption = null;
 
-    private Animator Anim;
+    [NonSerialized]
+    public Animator Anim;
+
     private MonsterUnit unit;
 
     private float hp;

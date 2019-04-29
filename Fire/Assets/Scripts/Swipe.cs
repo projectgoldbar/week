@@ -13,7 +13,7 @@ public class Swipe : MonoBehaviour
 
     private void Awake()
     {
-        GoSwipe = true;
+        //GoSwipe = true;
     }
 
     private void Update()

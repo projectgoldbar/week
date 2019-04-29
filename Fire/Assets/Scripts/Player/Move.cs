@@ -30,8 +30,11 @@ public class Move : MonoBehaviour
 
     private Swipe swipe;
 
+    public Rigidbody rid;
+
     public void Awake()
     {
+        rid = GetComponent<Rigidbody>();
         swipe = FindObjectOfType<Swipe>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -61,7 +64,7 @@ public class Move : MonoBehaviour
 
     public virtual void PcMove()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && (!swipe.GoSwipe))
         {
             if (touchPos.x <= Screen.width * 0.5)
             {
@@ -76,7 +79,7 @@ public class Move : MonoBehaviour
                 //Car_RightTurn();
             }
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0) && (!swipe.GoSwipe))
         {
             if (rotState == State.LEFT)
                 Left_flag = false;
@@ -94,7 +97,7 @@ public class Move : MonoBehaviour
 
     public virtual void MobileMove()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && (!swipe.GoSwipe))
         {
             for (int i = 0; i < Input.touchCount; i++)
             {
@@ -156,6 +159,7 @@ public class Move : MonoBehaviour
     {
         runSpeed = agent.speed;
         agent.velocity = agent.transform.forward * runSpeed;
+
         if (Left_flag && Right_flag)
         {
             rotState = State.Special;
@@ -199,6 +203,7 @@ public class Move : MonoBehaviour
 
     public virtual void stopRun()
     {
+        swipe.GoSwipe = true;
         agent.speed = 0;
         StopMove -= stopRun;
     }

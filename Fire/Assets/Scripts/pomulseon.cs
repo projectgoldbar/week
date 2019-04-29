@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class pomulseon : MonoBehaviour
@@ -75,7 +74,7 @@ public class pomulseon : MonoBehaviour
     {
         while (true)
         {
-            elapsed_time += Time.deltaTime * flySpd;
+            elapsed_time += Time.deltaTime;// * flySpd;
 
             //매프레임당 이동벡터의 x
             var tx = start_pos.x + this.tx * elapsed_time;
@@ -88,7 +87,7 @@ public class pomulseon : MonoBehaviour
 
             //비행동안 날아가는 총알의 위치와 로테이션 변환.
             //transform.LookAt(tpos);
-            target.transform.position = tpos;
+            target.position = tpos;
 
             //총 체공시간 계산치보다 비행시간이 길다면 탈출.
             if (elapsed_time + 0.03f >= dat)
