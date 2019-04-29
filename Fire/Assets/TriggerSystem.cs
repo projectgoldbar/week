@@ -10,6 +10,7 @@ public class TriggerSystem : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
+            GameObject.FindObjectOfType<AudioManager>().LV1AudioPlay();
             triggerObject.gameObject.SetActive(false);
         }
     }

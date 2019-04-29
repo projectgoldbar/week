@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Diagnostics;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -9,13 +10,22 @@ public class TutorialManager : MonoBehaviour
     private GameLevelManager glm;
 
     private NewMonsterGenerator monsterGenerator;
-    public Transform zombie;
+    public GameObject zombie;
+    public GameObject zombie2;
+    public GameObject zombie3;
+    public Transform LV2ZombieSpwanPoint;
+    public Transform Lv3ZombieSpwanPoint;
+    public Transform Lv4ZombieSpwanPoint;
+    private Stopwatch sw = new Stopwatch();
 
     private void Awake()
     {
         glm = GameLevelManager.instance;
         monsterGenerator = glm.monsterGenerator;
-        Lv2GenPoints = Lv2GenPoint.GetComponentsInChildren<Transform>();
+        Lv2GenPoints = LV2ZombieSpwanPoint.GetComponentsInChildren<Transform>();
+        Lv3GenPoints = Lv3ZombieSpwanPoint.GetComponentsInChildren<Transform>();
+        Lv4GenPoints = Lv4ZombieSpwanPoint.GetComponentsInChildren<Transform>();
+        //sw.Start();
     }
 
     public void TutorialGameOver()
@@ -34,31 +44,67 @@ public class TutorialManager : MonoBehaviour
     public Transform Lv2GenPoint;
 
     public Transform[] Lv2GenPoints;
+    public Transform[] Lv3GenPoints;
+    public Transform[] Lv4GenPoints;
 
     public void RootiedItem()
     {
         glm.stage++;
         glm.StageUp();
-
-        StartCoroutine(Invokee(new WaitForSeconds(3f)));
+        ZombieSpwan(1);
+        //StartCoroutine(Invokee(new WaitForSeconds(1f)));
     }
 
-    private IEnumerator Invokee(WaitForSeconds cooldown)
+    public void ZombieSpwan(int lv)
     {
-        for (int i = 0; i < 45; i++)
+        switch (lv)
         {
-            GenerateZombie();
-            yield return cooldown;
+            case 1:
+                StartCoroutine(Invokee(new WaitForSeconds(0.5f), 20, Lv2GenPoints, zombie));
+                break;
+
+            case 2:
+                StartCoroutine(Invokee(new WaitForSeconds(0.5f), 6, Lv3GenPoints, zombie2));
+                break;
+
+            case 3:
+                StartCoroutine(Invokee(new WaitForSeconds(0.5f), 15, Lv3GenPoints, zombie3));
+                break;
+
+            default:
+                break;
         }
     }
 
-    private void GenerateZombie()
+    private bool ok = true;
+
+    private IEnumerator Invokee(WaitForSeconds cooldown, int count, Transform[] trs, GameObject zombie)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            GenerateZombie(trs, zombie);
+            yield return cooldown;
+        }
+        if (ok == true)
+        {
+            ZombieSpwan(2);
+        }
+        else
+        {
+            ZombieSpwan(3);
+        }
+        ok = false;
+
+        yield break;
+    }
+
+    private void GenerateZombie(Transform[] trs, GameObject zombie)
     {
         for (int i = 0; i < 1; i++)
         {
             float x = Random.Range(0, 6f);
             float z = Random.Range(0, 6f);
-            var monster = GameObject.Instantiate(zombie, Lv2GenPoints[Random.Range(0, Lv2GenPoints.Length)].position + new Vector3(x, 0, z), Quaternion.identity);
+            var monster = Instantiate(zombie, trs[Random.Range(1, trs.Length)].position + new Vector3(x, 0, z), Quaternion.identity);
         }
     }
 }

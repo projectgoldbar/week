@@ -9,6 +9,8 @@ public class TutorialItem : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             GameObject.FindObjectOfType<TutorialManager>().RootiedItem();
+            GameObject.FindObjectOfType<AudioManager>().LV2AudioPlay();
+
             Destroy(this.gameObject);
         }
     }
