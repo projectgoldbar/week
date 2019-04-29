@@ -66,8 +66,8 @@ public class Evasion : MonoBehaviour
                 evasionTrigger.gameObject.SetActive(true);
                 //2.스와이프
                 swipe.GoSwipe = true;
-                if (swipe.GoSwipe)
-                    swipe.SwipeProcess(() => EvasionProcess());
+                //if (swipe.GoSwipe)
+                //    swipe.SwipeProcess(() => EvasionProcess());
                 //3.화면클릭
             }
         }
