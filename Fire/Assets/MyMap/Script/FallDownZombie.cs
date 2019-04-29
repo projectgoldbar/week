@@ -85,6 +85,7 @@ public class FallDownZombie : MonoBehaviour
     {
         setAmingPoint = FallDownPosition();
 
+        anim.speed = 0.6f;
         anim.SetBool(jump, true);
         //OnDrawRadius(setamingPoint);
         EnemyAttackUIManager.instance.Draw(type, 2f, setAmingPoint);

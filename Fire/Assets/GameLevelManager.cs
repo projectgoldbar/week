@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-50)]
 public class GameLevelManager : MonoBehaviour
 {
     public static GameLevelManager instance;
@@ -66,7 +67,7 @@ public class GameLevelManager : MonoBehaviour
         gm = GameObject.FindObjectOfType<GameManager>();
         //StartCoroutine(MonsterGen(delay, count));
         if (genOK == true) { monsterGenerator.GenGallery(); }
-        StageUp();
+        //StageUp();
     }
 
     private void ItemInit(ItemType type)
@@ -288,7 +289,7 @@ public class GameLevelManager : MonoBehaviour
         gameOverUI.SetActive(true);
     }
 
-    public void GameOver()
+    public void GameOver(bool tutorial)
     {
         gm.GameOver();
     }

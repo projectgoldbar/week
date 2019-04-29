@@ -21,12 +21,18 @@ public class Gallery : ChaseGenerator
 
     public override void Execution()
     {
-        CoolDown();
+        //CoolDown();
+        if (unit.distance > range)
+        {
+            unit.Anim.SetBool("GalleryAttack", false);
+        }
+        else
+            unit.Anim.SetBool("GalleryAttack", true);
     }
 
     public override void CoolDown()
     {
-        DistanceCheck();
+        //DistanceCheck();
     }
 
     public override void DistanceCheck()

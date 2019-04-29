@@ -17,29 +17,33 @@ public class NewMonsterGenerator : MonoBehaviour
 
     public float cooldown = 0.3f;
 
+    private WaitForSeconds second;
+
     private void Awake()
 
     {
         groundGenPoint = gp.GetComponentsInChildren<Transform>();
         InteractionGenPoint = lp.GetComponentsInChildren<Transform>();
+        second = new WaitForSeconds(cooldown);
     }
 
     private void Start()
     {
-        GenerateInteraction();
+        //GenerateInteraction();
     }
 
     public void GenGallery()
     {
-        StartCoroutine(Invokee(cooldown));
+        second = new WaitForSeconds(cooldown);
+        StartCoroutine(Invokee(second));
     }
 
-    private IEnumerator Invokee(float cooldown)
+    private IEnumerator Invokee(WaitForSeconds cooldown)
     {
         for (int i = 0; i < maxZombieCount; i++)
         {
             GenerateZombie();
-            yield return new WaitForSeconds(cooldown);
+            yield return cooldown;
         }
     }
 
