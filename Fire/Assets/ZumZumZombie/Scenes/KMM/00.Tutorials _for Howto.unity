@@ -1819,6 +1819,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fcbdb17e1e369341a2af164a81eb584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  homePointer: {fileID: 0}
+  arrowPointer: {fileID: 0}
 --- !u!65 &338884131
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2691,18 +2693,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1583425586}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &524092870 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 524092870, guid: c5a89b022b1eb97408ecb35d32fee9b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1065206588}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &539256960
 GameObject:
   m_ObjectHideFlags: 0
@@ -8024,7 +8014,7 @@ MonoBehaviour:
   delay: 0.3
   count: 1
   gameOverUI: {fileID: 1437280485}
-  lifeTimeText: {fileID: 524092870}
+  lifeTimeText: {fileID: 0}
 --- !u!1 &1570641254 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 193748, guid: 3c50a70630d75104d891efa22080163c,
