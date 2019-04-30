@@ -11,8 +11,14 @@ public class HowtoMoveUI : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 0;
         howtoMoveUIColor = howtoMoveUI.color;
-        StartCoroutine("DisappearHowtoMoveUI");
+        StartCoroutine(DisappearHowtoMoveUI());
+    }
+
+    public void GameStart()
+    {
+        Time.timeScale = 1;
     }
 
     private IEnumerator DisappearHowtoMoveUI()
@@ -25,6 +31,7 @@ public class HowtoMoveUI : MonoBehaviour
                                             a);
             yield return fixedUpdate;
         }
+        howtoMoveUI.gameObject.SetActive(false);
         yield break;
     }
 }

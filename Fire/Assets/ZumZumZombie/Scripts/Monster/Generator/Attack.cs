@@ -63,7 +63,7 @@ public class Attack : GeneratorBase
     {
         for (int i = 0; i < 2; i++)
         {
-            mat.color = Utility.Instance.ChangeColor(Color.green);
+            mat.color = Utility.Instance.ChangeColor(Color.red);
 
             yield return new WaitForSeconds(0.05f);
 
