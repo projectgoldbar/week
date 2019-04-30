@@ -13,22 +13,22 @@ public class SwipeTest : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            swipe.GoSwipe = true;
-            Debug.Log("스와이프 준비됨");
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    swipe.GoSwipe = true;
+        //    Debug.Log("스와이프 준비됨");
+        //}
 
         if (swipe.GoSwipe)
         {
-            //swipe.SwipeProcess(() => aa());
-            swipe.LeftNRightSwipe(() => aa());
+            ////swipe.SwipeProcess(() => aa());
+            //swipe.LeftNRightSwipe(() => aa());
 
-            swipe.RightNLeftSwipe(() => aa());
+            //swipe.RightNLeftSwipe(() => aa());
 
-            swipe.UpNDownSwipe(() => aa());
+            //swipe.UpNDownSwipe(() => aa());
 
-            swipe.DownNUpSwipe(() => aa());
+            //swipe.DownNUpSwipe(() => aa());
         }
     }
 
