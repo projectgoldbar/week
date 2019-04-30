@@ -1,30 +1,29 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 public class HowtoMoveUI : MonoBehaviour
 {
     public RawImage howtoMoveUI;
-    Color howtoMoveUIColor;
+    private Color howtoMoveUIColor;
+    private WaitForFixedUpdate fixedUpdate = new WaitForFixedUpdate();
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         howtoMoveUIColor = howtoMoveUI.color;
         StartCoroutine("DisappearHowtoMoveUI");
     }
 
-    IEnumerator DisappearHowtoMoveUI(){
-
+    private IEnumerator DisappearHowtoMoveUI()
+    {
         for (float a = 1.5f; a >= 0; a -= 0.01f)
         {
-            howtoMoveUI.color = new Vector4(howtoMoveUIColor.r, 
+            howtoMoveUI.color = new Vector4(howtoMoveUIColor.r,
                                             howtoMoveUIColor.g,
                                             howtoMoveUIColor.b,
                                             a);
-            yield return new WaitForFixedUpdate();
+            yield return fixedUpdate;
         }
+        yield break;
     }
 }

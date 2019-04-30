@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Diagnostics;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -16,7 +15,6 @@ public class TutorialManager : MonoBehaviour
     public Transform LV2ZombieSpwanPoint;
     public Transform Lv3ZombieSpwanPoint;
     public Transform Lv4ZombieSpwanPoint;
-    private Stopwatch sw = new Stopwatch();
 
     private void Awake()
     {
@@ -60,7 +58,7 @@ public class TutorialManager : MonoBehaviour
         switch (lv)
         {
             case 1:
-                StartCoroutine(Invokee(new WaitForSeconds(0.5f), 20, Lv2GenPoints, zombie));
+                StartCoroutine(Invokee(new WaitForSeconds(0.5f), 25, Lv2GenPoints, zombie));
                 break;
 
             case 2:
@@ -68,7 +66,7 @@ public class TutorialManager : MonoBehaviour
                 break;
 
             case 3:
-                StartCoroutine(Invokee(new WaitForSeconds(0.5f), 15, Lv3GenPoints, zombie3));
+                StartCoroutine(Invokee(new WaitForSeconds(0.5f), 3, Lv3GenPoints, zombie3));
                 break;
 
             default:
@@ -92,6 +90,7 @@ public class TutorialManager : MonoBehaviour
         else
         {
             ZombieSpwan(3);
+            ok = true;
         }
         ok = false;
 

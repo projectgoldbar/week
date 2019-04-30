@@ -287,17 +287,24 @@ public class GameLevelManager : MonoBehaviour
     //게임 종료 부분
     public GameObject gameOverUI;
 
-    public Text lifeTimeText;
+    public GameObject lifeTimeText;
 
     public void OnGameOverPanel()
     {
-        var a = 0 + sw.ElapsedMilliseconds;
         gameOverUI.SetActive(true);
-        lifeTimeText.text = "생존시간 :" + a / 1000;
+        OnLifeTimeText();
     }
 
     public void GameOver(bool tutorial)
     {
         gm.GameOver();
+    }
+
+    private void OnLifeTimeText()
+    {
+        sw.Stop();
+        var a = sw.ElapsedMilliseconds;
+        lifeTimeText.SetActive(true);
+        lifeTimeText.GetComponent<Text>().text = "생존시간 :" + a / 1000;
     }
 }

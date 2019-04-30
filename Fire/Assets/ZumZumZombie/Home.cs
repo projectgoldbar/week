@@ -8,9 +8,9 @@ public class Home : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("집에들어옴");
         if (other.CompareTag("Player"))
         {
+            Time.timeScale = 0;
             clearPanel.SetActive(true);
         }
     }
