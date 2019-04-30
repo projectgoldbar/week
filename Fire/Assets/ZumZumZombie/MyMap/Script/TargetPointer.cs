@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class TargetPointer : MonoBehaviour
 {
@@ -16,9 +17,29 @@ public class TargetPointer : MonoBehaviour
 
     public float borderSize = 100f;
 
+    private WaitForSeconds second = new WaitForSeconds(0.3f);
+
     private void Start()
     {
         player = GameObject.FindObjectOfType<Player>().transform;
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(Blink());
+    }
+
+    private IEnumerator Blink()
+    {
+        var a = GetComponent<Image>().color;
+        for (int i = 30; i > 0; i--)
+        {
+            GetComponent<Image>().color = a;
+            yield return second;
+            GetComponent<Image>().color = Color.yellow;
+            yield return second;
+        }
+        GetComponent<Image>().color = a;
     }
 
     private void OnDisable()
