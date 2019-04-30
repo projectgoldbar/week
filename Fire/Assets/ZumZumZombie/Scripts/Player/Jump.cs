@@ -10,7 +10,7 @@ public class Jump : MonoBehaviour
     private void Awake()
     {
         swipe = FindObjectOfType<Swipe>();
-        swipe.GoSwipe = true;
+        // swipe.GoSwipe = true;
     }
 
     // Update is called once per frame
@@ -29,13 +29,12 @@ public class Jump : MonoBehaviour
                 PlayerJump();
             }
 
-            //swipe.DownNUpSwipe(() => PlayerJump());
+            swipe.DownNUpSwipe(() => PlayerJump());
         }
 
         if (player.Anim.GetCurrentAnimatorStateInfo(0).IsName("BigJump") &&
             player.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.35f)
         {
-            //player.Anim.speed = 1.5f;
             move.agent.enabled = true;
         }
         if (player.Anim.GetCurrentAnimatorStateInfo(0).IsName("BigJump") &&
