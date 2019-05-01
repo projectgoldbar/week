@@ -18,8 +18,8 @@ public class Jump : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            swipe.GoSwipe = true;
-            //PlayerJump();
+            //swipe.GoSwipe = true;
+            PlayerJump();
             Debug.Log("스와이프 준비됨");
         }
         if (swipe.GoSwipe)
@@ -31,9 +31,8 @@ public class Jump : MonoBehaviour
         }
         if (player.Anim.GetCurrentAnimatorStateInfo(0).IsName("BigJump"))
         {
-            if (player.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.3f)
+            if (player.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.35f)
             {
-                move.agent.enabled = true;
             }
             if (player.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.4f)
             {
@@ -41,7 +40,7 @@ public class Jump : MonoBehaviour
             }
             if (player.Anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
             {
-                player.Anim.speed = 1.0f;
+                player.Anim.speed = 1.0f; move.agent.enabled = true;
             }
         }
 
@@ -55,15 +54,16 @@ public class Jump : MonoBehaviour
         //swipe.GoSwipe = true;
         move.agent.enabled = false;
         pomulseon Fly = move.GetComponent<pomulseon>();
-        Fly.flySpd = 2f;
+        //Fly.flySpd = 15f;
         Fly.FlyToTarget(move.transform,
                         move.transform.position,
-                        move.transform.position + move.transform.forward * 6.0f,
-                        EndAnimNPomul, 19.8f, 1.5f);
+                        move.transform.position + move.transform.forward * 10.0f,
+                        EndAnimNPomul, 19.8f, 4.0f);
     }
 
     public void EndAnimNPomul(Transform a)
     {
+        move.agent.enabled = true;
         swipe.GoSwipe = false;
         move.rotState = Move.State.ADVANCE;
     }
