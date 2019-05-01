@@ -73,7 +73,14 @@ public class GameLevelManager : MonoBehaviour
             PlayerInit();
         }
         //PointSet(300);
-        gm = GameObject.FindObjectOfType<GameManager>();
+        if (GameObject.FindObjectOfType<GameManager>() != null)
+        {
+            gm = GameObject.FindObjectOfType<GameManager>();
+        }
+        if (tutorialClear == true)
+        {
+            StageUp();
+        }
         //StartCoroutine(MonsterGen(delay, count));
         if (genOK == true) { monsterGenerator.GenGallery(); }
         sw.Start();
@@ -205,7 +212,6 @@ public class GameLevelManager : MonoBehaviour
             default:
                 break;
         }
-
         return pivot;
     }
 

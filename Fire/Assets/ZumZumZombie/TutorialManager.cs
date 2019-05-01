@@ -33,6 +33,7 @@ public class TutorialManager : MonoBehaviour
 
     public void TutorialClear()
     {
+        GameLevelManager.instance.tutorialClear = true;
         SceneManager.LoadScene("01.intro");
     }
 

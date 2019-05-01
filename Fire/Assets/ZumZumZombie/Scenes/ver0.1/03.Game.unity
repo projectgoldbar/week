@@ -305,75 +305,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c80bafd6785ca140a94b3d667c26ca5, type: 3}
---- !u!1001 &317325536
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1949398332665831733, guid: df48162861b25474a87e3ea6d55f83f5,
-        type: 3}
-      propertyPath: m_Name
-      value: Zombie_fall
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947301647795743717, guid: df48162861b25474a87e3ea6d55f83f5,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947301647795743717, guid: df48162861b25474a87e3ea6d55f83f5,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.526
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947301647795743717, guid: df48162861b25474a87e3ea6d55f83f5,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947301647795743717, guid: df48162861b25474a87e3ea6d55f83f5,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947301647795743717, guid: df48162861b25474a87e3ea6d55f83f5,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947301647795743717, guid: df48162861b25474a87e3ea6d55f83f5,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947301647795743717, guid: df48162861b25474a87e3ea6d55f83f5,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947301647795743717, guid: df48162861b25474a87e3ea6d55f83f5,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947301647795743717, guid: df48162861b25474a87e3ea6d55f83f5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947301647795743717, guid: df48162861b25474a87e3ea6d55f83f5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1947301647795743717, guid: df48162861b25474a87e3ea6d55f83f5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: df48162861b25474a87e3ea6d55f83f5, type: 3}
 --- !u!1 &420300987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1709,7 +1640,7 @@ PrefabInstance:
     - target: {fileID: 8470214480111057326, guid: 0cc27bf87020e30489245b85e01ef816,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.47
+      value: -143.1
       objectReference: {fileID: 0}
     - target: {fileID: 8470214480111057326, guid: 0cc27bf87020e30489245b85e01ef816,
         type: 3}
@@ -1821,7 +1752,7 @@ MonoBehaviour:
   gm: {fileID: 0}
   stage: 0
   player: {fileID: 447756863}
-  tutorialClear: 0
+  tutorialClear: 1
   item: {fileID: 496527370}
   keyItemCount: 20
   bonuseItemCount: 10
@@ -1834,7 +1765,7 @@ MonoBehaviour:
   - {fileID: 1369419213}
   - {fileID: 972133289}
   specialZombies:
-  - {fileID: 0}
+  - {fileID: 1949398332665831733, guid: df48162861b25474a87e3ea6d55f83f5, type: 3}
   spwanMinDistance: 70
   spwanMaxDistance: 140
   delay: 0.3

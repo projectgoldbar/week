@@ -76,14 +76,11 @@ public class ChaseGenerator : GeneratorBase
         }
     }
 
-    public ParticleSystem ps;
-
     public virtual void DistanceCheck()
     {
         if (unit.distance < range)
         {
             StopCoroutine(this.CalculatePath(Utility.Instance.playerTr));
-            ps.Play();
             state.ChangeState(StateIndex.ATTACK);
         }
         else return;
