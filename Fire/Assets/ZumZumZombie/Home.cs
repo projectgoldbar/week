@@ -11,6 +11,7 @@ public class Home : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Time.timeScale = 0;
+            GameLevelManager.instance.OnLifeTimeText();
             clearPanel.SetActive(true);
         }
     }

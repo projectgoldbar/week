@@ -147,6 +147,102 @@ public class Utility : Singleton<Utility>
     //}
 
     #endregion 포물선운동
+
+    private Vector3 FindEmptySpace(Vector3 pivot, float minDistance, float maxDistance)
+    {
+        Vector3 returnVector = new Vector3();
+        while (true)
+        {
+            returnVector = FindFarPoint(pivot, minDistance, maxDistance);
+            if (!SomethingOnPlace(returnVector))
+            {
+                break;
+            }
+        }
+        return returnVector;
+    }
+
+    public Vector3 FindFarPoint(Vector3 pivot, float minDistance = 90f, float maxDistance = 110f)
+    {
+        float distance = Random.Range(minDistance, maxDistance);
+        float angle = Random.Range(0f, 360f);
+        float radian = angle * Mathf.Deg2Rad;
+        return pivot + (new Vector3(Mathf.Cos(radian), 0f, Mathf.Sin(radian)) * distance);
+    }
+
+    /// <summary>
+    /// 피벗기준으로 rotation방향으로 distance만큼 떨어진 위치를 반환
+    /// </summary>
+    /// <param name="pivot"></param>
+    /// <param name="rotation"></param>
+    private Vector3 PivotPointSet(Vector3 pivot, Vector3 origin, Direction direction, float distance)
+    {
+        switch (direction)
+        {
+            case Direction.Left:
+                pivot = origin;
+                pivot.x -= distance;
+                break;
+
+            case Direction.Right:
+                pivot = origin;
+                pivot.x += distance;
+                break;
+
+            case Direction.Foward:
+                pivot = origin;
+                pivot.z += distance;
+
+                break;
+
+            case Direction.Back:
+                pivot = origin;
+                pivot.z -= distance;
+
+                break;
+
+            default:
+                break;
+        }
+        return pivot;
+    }
+
+    /// <summary>
+    /// 포인트 위치에 뭐가 있는지 확인하는 함수
+    /// </summary>
+    /// <param name="point">확인하고싶은 위치</param>
+    /// <returns></returns>
+    private bool SomethingOnPlace(Vector3 point)
+    {
+        Vector3 rayStartPoint = new Vector3(point.x, point.y + 80f, point.z);
+        //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 200f, 1 << 11))
+        {
+            rayStartPoint.y = point.y;
+            rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Left, 1f);
+            //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+            if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+            {
+                rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Right, 1f);
+                //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+                if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+                {
+                    rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Back, 1f);
+                    //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+                    if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+                    {
+                        rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Foward, 1f);
+                        //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+                        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
 }
 
 public class RandomAngle

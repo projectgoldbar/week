@@ -45,15 +45,20 @@ public class GameManager : MonoBehaviour
         //}
     }
 
+    private void OnEnable()
+    {
+        inGameItemContainer = GameObject.FindObjectOfType<InGameItemContainer>();
+    }
+
     public void GameStart()
     {
         userInventory.SaveInventory();
-        SceneManager.LoadScene("02.Loading");
+        SceneManager.LoadScene("03.Game");
     }
 
     public void GameEnd()
     {
-        inGameItemContainer.OpenVeilAll(inventory);
+        //inGameItemContainer.OpenVeilAll(inventory);
         Debug.Log("내인벤토리에 잇는 아이템의 수" + inventory.Count);
         SceneManager.LoadScene("01.Intro");
     }

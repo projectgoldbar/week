@@ -12,7 +12,8 @@ public class TutorialItem : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             homePointer.SetActive(true);
-            arrowPointer.SetActive(false);
+            //arrowPointer.SetActive(false);
+            GameLevelManager.instance.StageUp();
             GameObject.FindObjectOfType<TutorialManager>().RootiedItem();
             GameObject.FindObjectOfType<AudioManager>().LV2AudioPlay();
 

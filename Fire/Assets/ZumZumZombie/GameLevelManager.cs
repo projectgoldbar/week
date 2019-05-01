@@ -182,7 +182,7 @@ public class GameLevelManager : MonoBehaviour
     /// 피벗기준으로 rotation방향으로 distance만큼 떨어진 위치를 반환
     /// </summary>
     /// <param name="pivot"></param>
-    /// <param name="rotation">1 = 3시, 2= 6시, 3 = 9시, 4 = 12시</param>
+    /// <param name="rotation"></param>
     private Vector3 PivotPointSet(Vector3 pivot, Vector3 origin, Direction direction, float distance)
     {
         switch (direction)
@@ -318,7 +318,13 @@ public class GameLevelManager : MonoBehaviour
         gm.GameOver();
     }
 
-    private void OnLifeTimeText()
+    public void GameClear()
+    {
+        OnLifeTimeText();
+        gm.GameEnd();
+    }
+
+    public void OnLifeTimeText()
     {
         sw.Stop();
         var a = sw.ElapsedMilliseconds;
