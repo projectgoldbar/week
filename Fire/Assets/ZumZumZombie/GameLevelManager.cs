@@ -16,6 +16,7 @@ public class GameLevelManager : MonoBehaviour
     private bool oneMoreChance = false;
     private Stopwatch sw = new Stopwatch();
     public Transform player;
+    public bool tutorialClear = false;
 
     // 아이템을 리젠하고 관리하는 장치
     [SerializeField]
@@ -61,9 +62,15 @@ public class GameLevelManager : MonoBehaviour
             instance = this;
         }
         DontDestroyOnLoad(this);
+
         for (int i = 0; i < 3; i++)
         {
             ItemInit((ItemType)i);
+        }
+
+        if (tutorialClear)
+        {
+            PlayerInit();
         }
         //PointSet(300);
         gm = GameObject.FindObjectOfType<GameManager>();
@@ -71,6 +78,11 @@ public class GameLevelManager : MonoBehaviour
         if (genOK == true) { monsterGenerator.GenGallery(); }
         sw.Start();
         //StageUp();
+    }
+
+    private void PlayerInit()
+    {
+        player.transform.position = FindEmptySpace(new Vector3(0, 0, 0), 1f, 300f);
     }
 
     private void ItemInit(ItemType type)

@@ -147,7 +147,7 @@ public class Inventory : MonoBehaviour
         //{
         //    equipItem.Add(a.equipList[i]);
         //}
-        RefreshStatus();
+        //RefreshStatus();
     }
 
     public void NextPage()

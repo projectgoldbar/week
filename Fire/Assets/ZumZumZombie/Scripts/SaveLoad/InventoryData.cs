@@ -27,12 +27,12 @@ public class InventoryData
             description.Add(inventory.itemList[i].description);
         }
 
-        if (inventory.equipedItemIndexToItemList != null)
-        {
-            for (int i = 0; i < inventory.equipedItemIndexToItemList.Count; i++)
-            {
-                equipIndexList.Add(inventory.equipedItemIndexToItemList.Dequeue());
-            }
-        }
+        //if (inventory.equipedItemIndexToItemList != null)
+        //{
+        //    for (int i = 0; i < inventory.equipedItemIndexToItemList.Count; i++)
+        //    {
+        //        equipIndexList.Add(inventory.equipedItemIndexToItemList.Dequeue());
+        //    }
+        //}
     }
 }
