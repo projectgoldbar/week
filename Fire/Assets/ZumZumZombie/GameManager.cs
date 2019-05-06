@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     public void GameStart()
     {
         userInventory.SaveInventory();
+        Time.timeScale = 1;
         SceneManager.LoadScene("03.Game");
     }
 

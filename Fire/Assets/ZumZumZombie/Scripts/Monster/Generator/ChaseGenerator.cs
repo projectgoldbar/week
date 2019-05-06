@@ -15,7 +15,7 @@ public class ChaseGenerator : GeneratorBase
 
     private void OnEnable()
     {
-        //StartCoroutine(CalculatePath(Utility.Instance.playerTr));
+        StartCoroutine(CalculatePath(Utility.Instance.playerTr));
     }
 
     public override void Awake()

@@ -309,6 +309,7 @@ public class GameLevelManager : MonoBehaviour
 
     public void OnGameOverPanel()
     {
+        Time.timeScale = 0;
         gameOverUI.SetActive(true);
         OnLifeTimeText();
     }

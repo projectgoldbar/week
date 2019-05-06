@@ -28,11 +28,13 @@ public class TutorialManager : MonoBehaviour
 
     public void TutorialGameOver()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("00.Tutorials");
     }
 
     public void TutorialClear()
     {
+        Time.timeScale = 1;
         GameLevelManager.instance.tutorialClear = true;
         SceneManager.LoadScene("01.intro");
     }
