@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ZombieState
 {
+    [DefaultExecutionOrder(-300)]
     public class ZombieState : MonoBehaviour
     {
         protected ZombiesComponent zombieData;
@@ -11,6 +12,10 @@ namespace ZombieState
         private void Awake()
         {
             zombieData = GetComponent<ZombiesComponent>();
+        }
+
+        public virtual void Setting()
+        {
         }
 
         public virtual void Initiate()
@@ -21,8 +26,9 @@ namespace ZombieState
         {
         }
 
-        public virtual void StateChange()
+        public virtual void StateChange(ZombieState state)
         {
+            zombieData.stateMachine.StateChange(state);
         }
 
         public virtual void Execute()

@@ -274,7 +274,7 @@ public class GameLevelManager : MonoBehaviour
         MarkerSystem.instance.targetChange(a);
         for (int i = 0; i < zombielist.Length; i++)
         {
-            if (zombielist[i].GetComponent<MonsterUnit>().level <= stage)
+            if (zombielist[i].GetComponent<ZombieState.ZombiesComponent>().level <= stage)
             {
                 Instantiate(zombielist[i].gameObject, FindEmptySpace(player.position, 50f, 60f), Quaternion.identity);
                 Instantiate(specialZombies[Random.Range(0, specialZombies.Length)].gameObject, FindEmptySpace(player.position, 50f, 60f), Quaternion.identity);

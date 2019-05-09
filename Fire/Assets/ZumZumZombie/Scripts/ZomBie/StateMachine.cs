@@ -8,14 +8,32 @@ namespace ZombieState
 
         private void Awake()
         {
-            StateChange(GetComponent<Zombie_Chase>());
+            if (currentState == null)
+            {
+                currentState = GetComponent<Zombie_Moving>();
+            }
+            AllStateSetup();
+            StateStart();
         }
 
-        private void StateChange(ZombieState state)
+        public void AllStateSetup()
         {
-            //currentState.Exit();
+            var a = FindObjectsOfType<ZombieState>();
+            for (int i = 0; i < a.Length; i++)
+            {
+                a[i].Setting();
+            }
+        }
+
+        public void StateChange(ZombieState state)
+        {
+            currentState.Exit();
             currentState = state;
-            currentState.Initiate();
+            StateStart();
+        }
+
+        public void StateStart()
+        {
             currentState.Execute();
         }
 

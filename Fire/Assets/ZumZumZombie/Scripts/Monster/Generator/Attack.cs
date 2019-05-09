@@ -53,7 +53,6 @@ public class Attack : GeneratorBase
     private void RayCastFindPosition()
     {
         //isHit = (Physics.Raycast(transform.position, transform.forward, out hit, distance, 1 << LayerMask.NameToLayer("Building")));
-
         {
             pos = transform.position + transform.forward * distance;
         }
