@@ -10,6 +10,8 @@ namespace ZombieState
         public float range = 30f;
         private WaitForSeconds delay;
         private Vector3 pivot;
+        public BuildData buildData;
+        public Transform pp;
 
         public override void Setting()
         {
@@ -28,17 +30,34 @@ namespace ZombieState
             var v = new Vector3(transform.position.x, transform.position.y + 5f, transform.position.z);
             zombieData.eyeTrailRenderer.time = 0.5f;
             //zombieData.agent.speed = 0;
-            RaycastHit hit;
+            //RaycastHit hit;
 
-            if (Physics.Raycast(v, transform.forward, out hit, range, 1 << 11))
+            //if (Physics.Raycast(v, transform.forward, out hit, range, 1 << 11))
+            //{
+            //    pivot = Vector3.Lerp(transform.position, hit.point, 0.8f);
+            //    pivot.y -= 5f;
+            //}
+            //else
+            //{
+            //    pivot = transform.position + transform.forward * range;
+            //}
+            var a = zombieData.transform.position;
+            for (int i = 0; i < buildData.buildingColliders.Count; i++)
             {
-                pivot = Vector3.Lerp(transform.position, hit.point, 0.8f);
-                pivot.y -= 5f;
+                if (buildData.buildingColliders[i].Contains(pp.position))
+                {
+                    Debug.Log(0);
+                    pivot = Vector3.Lerp(transform.position, a, 0.8f);
+                    pivot.y -= 5f;
+                    break;
+                }
+                else
+                {
+                    pivot = transform.position + transform.forward * range;
+                    Debug.Log(1);
+                }
             }
-            else
-            {
-                pivot = transform.position + transform.forward * range;
-            }
+
             //이동
 
             StartCoroutine(zombieData.zombieAttackCoroutine);

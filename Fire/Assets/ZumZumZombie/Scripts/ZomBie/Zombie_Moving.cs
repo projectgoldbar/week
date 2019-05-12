@@ -22,6 +22,7 @@ namespace ZombieState
 
         public override void Execute()
         {
+            //zombieData.agent.enabled = true;
             zombieData.animator.Play("Zombie_Walk");
             StartCoroutine(zombieData.moveCoroutine);
         }
@@ -30,10 +31,31 @@ namespace ZombieState
         {
             while (true)
             {
-                //Debug.Log("calculate");
+                Debug.Log("calculate");
+                //if (Vector3.Distance(zombieData.player.position, transform.position) < 10f)
+                //{
+                //    //CoolTime(3f);
+                //    //zombieData.agent.enabled = false;
+                //    StateChange(zombieData.attack);
+                //    yield return null;
+                //}
+
                 zombieData.agent.CalculatePath(zombieData.player.position, zombieData.path);
+                //zombieData.agent.SetDestination(zombieData.player.position);
                 zombieData.agent.SetPath(zombieData.path);
+
                 yield return waitSecond;
+            }
+        }
+
+        public void CoolTime(float timer)
+        {
+            float currentTime = 0;
+
+            for (; currentTime <= timer;)
+            {
+                currentTime += 1 * Time.deltaTime;
+                Debug.Log(currentTime);
             }
         }
 
@@ -41,14 +63,14 @@ namespace ZombieState
         {
             if (Input.GetKeyDown(KeyCode.J))
             {
-                StopCoroutine(zombieData.moveCoroutine);
+                StartCoroutine(zombieData.moveCoroutine);
             }
         }
 
         public override void Exit()
         {
             StopCoroutine(zombieData.moveCoroutine);
-            this.enabled = false;
+            //this.enabled = false;
         }
     }
 }
