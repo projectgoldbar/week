@@ -5,8 +5,9 @@ using UnityEngine;
 public class Interaction : MonoBehaviour
 {
     public Transform pivot;
+    public int zombieCount = 3;
 
-    public virtual void Somthing()
+    public virtual void Use()
     {
         StartCoroutine(Interactioncoroutine());
 

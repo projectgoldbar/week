@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Interaction"))
         {
-            other.GetComponent<Interaction>().Somthing();
+            other.GetComponent<Interaction>().Use();
         }
     }
 

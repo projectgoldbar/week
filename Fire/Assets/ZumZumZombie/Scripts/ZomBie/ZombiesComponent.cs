@@ -8,6 +8,7 @@ namespace ZombieState
     public class ZombiesComponent : MonoBehaviour
     {
         public int level = 0;
+        public int damage = 1;
         public NavMeshAgent agent;
         public NavMeshPath path;
         public Transform player;

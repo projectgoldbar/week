@@ -31,7 +31,7 @@ namespace ZombieState
         {
             while (true)
             {
-                Debug.Log("calculate");
+                //Debug.Log("calculate");
                 //if (Vector3.Distance(zombieData.player.position, transform.position) < 10f)
                 //{
                 //    //CoolTime(3f);
@@ -40,9 +40,9 @@ namespace ZombieState
                 //    yield return null;
                 //}
 
-                zombieData.agent.CalculatePath(zombieData.player.position, zombieData.path);
-                //zombieData.agent.SetDestination(zombieData.player.position);
-                zombieData.agent.SetPath(zombieData.path);
+                //zombieData.agent.CalculatePath(zombieData.player.position, zombieData.path);
+                zombieData.agent.destination = zombieData.player.position;
+                //zombieData.agent.SetPath(zombieData.path);
 
                 yield return waitSecond;
             }
