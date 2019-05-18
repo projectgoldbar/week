@@ -1,6 +1,5 @@
-﻿using UnityEngine;
+﻿using EnhancedUI.EnhancedScroller;
 using UnityEngine.UI;
-using EnhancedUI.EnhancedScroller;
 
 namespace EnhancedScrollerDemos.Pagination
 {

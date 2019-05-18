@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using EnhancedUI;
+﻿using EnhancedUI;
 using EnhancedUI.EnhancedScroller;
-using System;
+using System.Collections;
+using UnityEngine;
 
 namespace EnhancedScrollerDemos.Pagination
 {
@@ -50,15 +49,15 @@ namespace EnhancedScrollerDemos.Pagination
         private bool _loadingNew;
 
         /// <summary>
-        /// Be sure to set up your references to the scroller after the Awake function. The 
+        /// Be sure to set up your references to the scroller after the Awake function. The
         /// scroller does some internal configuration in its own Awake function. If you need to
         /// do this in the Awake function, you can set up the script order through the Unity editor.
         /// In this case, be sure to set the EnhancedScroller's script before your delegate.
-        /// 
+        ///
         /// In this example, we are calling our initializations in the delegate's Start function,
         /// but it could have been done later, perhaps in the Update function.
         /// </summary>
-        void Start()
+        private void Start()
         {
             // tell the scroller that this script will be its delegate
             scroller.Delegate = this;
@@ -101,7 +100,7 @@ namespace EnhancedScrollerDemos.Pagination
         #region EnhancedScroller Handlers
 
         /// <summary>
-        /// This tells the scroller the number of cells that should have room allocated. 
+        /// This tells the scroller the number of cells that should have room allocated.
         /// This should be the length of your data array plus one for the loading cell.
         /// </summary>
         /// <param name="scroller">The scroller that is requesting the data size</param>
@@ -152,7 +151,7 @@ namespace EnhancedScrollerDemos.Pagination
                 CellView cellView = scroller.GetCellView(cellViewPrefab) as CellView;
 
                 // set the name of the game object to the cell's data index.
-                // this is optional, but it helps up debug the objects in 
+                // this is optional, but it helps up debug the objects in
                 // the scene hierarchy.
                 cellView.name = "Cell " + dataIndex.ToString();
 
@@ -190,7 +189,7 @@ namespace EnhancedScrollerDemos.Pagination
         /// This should not be used in your application
         /// </summary>
         /// <returns>The delay</returns>
-        IEnumerator FakeDelay()
+        private IEnumerator FakeDelay()
         {
             // wait for one second
             yield return new WaitForSeconds(1f);
@@ -199,6 +198,6 @@ namespace EnhancedScrollerDemos.Pagination
             LoadData(_data.Count);
         }
 
-        #endregion
+        #endregion EnhancedScroller Handlers
     }
 }
