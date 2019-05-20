@@ -3,6 +3,8 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.UI;
+using TMPro;
 
 public class UserDataMansger : Singleton<UserDataMansger>
 {
@@ -13,11 +15,28 @@ public class UserDataMansger : Singleton<UserDataMansger>
     string userdataname = "USERDATA.dat";
     string LvupgradeDataname = "LVUpData.dat";
 
+    public TextMeshProUGUI UserMoney = null;
+    public int Money
+    {
+        get
+        {
+            return money;
+        }
+        set
+        {
+            money = value;
+            UserMoney.text = money.ToString(); 
+        }
+    }
+    private int money;
     // Start is called before the first frame update
     private void Awake()
     {
         DataBinaryLoad(userdataname);
         LVUPGRADEDATALoad(LvupgradeDataname);
+
+        Money = userData.Money;
+        userData.getSkill = new List<SkillData>();
     }
 
 
@@ -141,7 +160,8 @@ public class UserDataMansger : Singleton<UserDataMansger>
         user.DNAStorageLV = 1;
         user.ZDNAStorageLV = 1;
         user.bootyLV = 1;
-        user.Money = 1000;
+        user.Money = userData.Money;
+        user.getSkill = userData.getSkill;
 
         return user;
     }

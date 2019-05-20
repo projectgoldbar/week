@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class UserData
@@ -10,7 +11,7 @@ public class UserData
     public float maxRiskLevel = 0;
 
     #region
-    public int Money; //
+    public int Money;
     #endregion
 
     #region 강화LV
@@ -54,6 +55,34 @@ public class UserData
     [Header("스킬습득관련")]
     public int[] skillPointList;
     public int[] skillLVList;
+    public List<SkillData> getSkill;
 
     #endregion 스킬습득관련
+}
+
+
+[System.Serializable]
+public class SkillData
+{
+    //만약 검색을 해야한다면? 
+    //Index 나 Name으로 검색?
+    public int Index;               
+    public string Name;
+    public string Ability;
+    public string Ability2;
+    public bool Get;
+    //열린것과 닫힌것으로 검색을 해야한다면 Get으로 검색?
+
+    public SkillData()
+    {
+    }
+    public SkillData(int index,string name ,string ability , string ability2,bool get)
+    {
+        Index = index;
+        Name = name;
+        Ability = ability;
+        Ability2 = ability2;
+        Get = get;
+    }
+
 }
