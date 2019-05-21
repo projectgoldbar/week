@@ -4,25 +4,41 @@ using UnityEngine;
 [System.Serializable]
 public class UserData
 {
-    public float playTime = 0;
-    public int playCount = 0;
-    public int dieCount = 0;
-    public int clearCount = 0;
-    public float maxRiskLevel = 0;
+    [Header("최대체력")]
+    public int MaxHp;
+    [Header("체력감소속도")]
+    public int Hpdeceleration;
+    [Header("방어력")]
+    public int DEF;
+    [Header("획득체력")]
+    public int Hpgain;
+    [Header("획득 진화포인트")]
+    public int Gainevolution;
+    [Header("골드 획득량")]
+    public int MoneyGain;
+    [Header("시작거리")]
+    public int StartRange;
 
-    #region
+    [Header("")]
+    public float playTime;
+    public int playCount;
+    public int dieCount;
+    public int clearCount;
+    public float maxRiskLevel;
+
+    #region MONEY
     public int Money;
     #endregion
 
     #region 강화LV
 
     [Header("강화")]
-    public int hpLV = 0;
+    public int hpLV;
 
-    public int clearBonusDNALV = 0;
-    public int DNAStorageLV = 0;
-    public int ZDNAStorageLV = 0;
-    public int bootyLV = 0;
+    public int clearBonusDNALV;
+    public int DNAStorageLV;
+    public int ZDNAStorageLV;
+    public int bootyLV;
 
     #endregion 강화LV
 

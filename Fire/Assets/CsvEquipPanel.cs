@@ -3,16 +3,23 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CsvEquipPanel : CSVdata
+public class CsvEquipPanel : MonoBehaviour
 {
+    public ChildReference1 list;
     public GameObject Equiplist = null;
 
     public Transform TextPanel;
 
     private WaitForSeconds forSecond;
 
+    public SkinnedMeshRenderer ChangeModel = null;
+    public SkinnedMeshRenderer[] meshRenderer;
+
 
     public GameObject rootGameOBJ = null;
+
+    private int objnum;
+
     private void Start()
     {
        forSecond = new WaitForSeconds(0.0002f);
@@ -36,9 +43,9 @@ public class CsvEquipPanel : CSVdata
             Equip.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 400.0f);
             for (int j = 0; j < 3; j++)
             {
-                ChildReference obj = GameObject.Instantiate<ChildReference>(list, Equip.transform);
-                
-
+                ChildReference1 obj = GameObject.Instantiate<ChildReference1>(list, Equip.transform);
+                objnum = (i * 3 + j);
+                obj.name = objnum.ToString();
                 obj.Name.text = Read[i * 3 + j]["이름"].ToString();
                 obj.ability.text = StringBillder(Read[i * 3 + j]["적용능력1"].ToString(),
                                                 "\n" + Read[i * 3 + j]["적용능력2"] +
@@ -57,6 +64,9 @@ public class CsvEquipPanel : CSVdata
                     Ability2 = obj.ability2.text,
                     Get = false
                 };
+
+
+
 
                 // 스킬? 장비창에 ITEM들은 언제 습득?
                 // 
@@ -81,6 +91,8 @@ public class CsvEquipPanel : CSVdata
         //rootGameOBJ.SetActive(false);
        // transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 400.0f * (Read.Count / 3));
     }
+
+    
 
 
     public void SettingSkill(SkillData data , ChildReference obj)

@@ -3,6 +3,5 @@
     private void Awake()
     {
         UpdataPanel_Read();
-       
     }
 }

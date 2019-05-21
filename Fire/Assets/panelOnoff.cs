@@ -39,7 +39,6 @@ public class panelOnoff : MonoBehaviour
             if (item.activeSelf) item.SetActive(false);
             else continue;
         }
-
         return panels[num];
     }
 }

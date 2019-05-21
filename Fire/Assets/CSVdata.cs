@@ -21,7 +21,8 @@ public class CSVdata : MonoBehaviour
         Read = CSVReader.Read(CSVFileName);
         goldData = CSVReader.Read(CSVFileGoldData);
         ChildCount = Read.Count;
-        for (int i = 0; i < Read.Count; i++)
+
+        for (int i = 0; i < ChildCount; i++)
         {
             #region 레벨업데이타셋팅
             LvUpData data = new LvUpData();
@@ -32,34 +33,14 @@ public class CSVdata : MonoBehaviour
             obj.name = i.ToString();
             obj.Name.text = Read[i]["이름Text"].ToString();
             obj.ability.text = Read[i]["적용능력Text"].ToString() + "";
+
+
+            
         }
 
         transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 60.0f * Read.Count);
     }
 
-    int cnt;
-    public void UpdateDateRead()
-    {
-        var ArrNumber = int.Parse(transform.name);
 
-        if (goldData.Count - 1 == cnt)
-        {
-            obj.GoldButtonText.text = "Max";
-            obj.ability2.text = "+" + goldData[cnt][ArrNumber + "번능력치"].ToString();
-            return;
-        }
-
-        if (goldData.Count > cnt)
-        {
-            obj.GoldButtonText.text = goldData[cnt][ArrNumber + "번금액"].ToString();
-            obj.ability2.text = "+" + goldData[cnt][ArrNumber + "번능력치"].ToString();
-            cnt++;
-        }
-        obj.LvCount = cnt;
-    }
-
-
-    public void UpdateDateRead2() { }
-
-}
+ }
     

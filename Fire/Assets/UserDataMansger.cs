@@ -12,6 +12,8 @@ public class UserDataMansger : Singleton<UserDataMansger>
 
     public UserData userData;
 
+    public List<UpdateData> updateData = new List<UpdateData>();
+
     string userdataname = "USERDATA.dat";
     string LvupgradeDataname = "LVUpData.dat";
 
@@ -37,6 +39,7 @@ public class UserDataMansger : Singleton<UserDataMansger>
 
         Money = userData.Money;
         userData.getSkill = new List<SkillData>();
+        
     }
 
 
@@ -133,15 +136,7 @@ public class UserDataMansger : Singleton<UserDataMansger>
         if (file != null && file.Length > 0)
         {
             List<LvUpData> tempList = (List<LvUpData>)binaryf.Deserialize(file);
-
             LvDataList = tempList;
-
-
-            Debug.Log("lv");
-            foreach (var item in LvDataList)
-            {
-                Debug.Log(item.LvCount);
-            }
         }
         file.Close();
     }
@@ -155,13 +150,23 @@ public class UserDataMansger : Singleton<UserDataMansger>
         UserData user = new UserData();
 
         //실제 사용될 데이터의 변수들 셋팅
-        user.hpLV = 1;
-        user.clearBonusDNALV = 1;
-        user.DNAStorageLV = 1;
-        user.ZDNAStorageLV = 1;
-        user.bootyLV = 1;
-        user.Money = userData.Money;
-        user.getSkill = userData.getSkill;
+
+        user.MaxHp                          = userData.MaxHp;
+        user.Hpdeceleration                 = userData.Hpdeceleration;
+        user.DEF                            = userData.DEF;
+        user.Hpgain                         = userData.Hpgain;
+        user.MoneyGain                      = userData.MoneyGain;
+        user.Gainevolution                  = userData.Gainevolution;
+        user.StartRange                     = userData.StartRange;
+
+
+        user.hpLV                           = 1;
+        user.clearBonusDNALV                = 1;
+        user.DNAStorageLV                   = 1;
+        user.ZDNAStorageLV                  = 1;
+        user.bootyLV                        = 1;
+        user.Money                          = userData.Money;
+        user.getSkill                       = userData.getSkill;
 
         return user;
     }
@@ -191,4 +196,11 @@ public class UserDataMansger : Singleton<UserDataMansger>
 public class LvUpData
 {
     public int LvCount;
+}
+
+[System.Serializable]
+public class UpdateData
+{
+    public string Name;
+    public int Data;
 }
