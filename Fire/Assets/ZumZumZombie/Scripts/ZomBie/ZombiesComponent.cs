@@ -26,7 +26,7 @@ namespace ZombieState
         private void Awake()
         {
             path = new NavMeshPath();
-            player = GameObject.FindObjectOfType<Player>().transform;
+            player = GameObject.FindObjectOfType<PlayerMove>().transform;
             agent = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
             stateMachine = GetComponent<StateMachine>();
