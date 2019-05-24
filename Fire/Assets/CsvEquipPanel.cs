@@ -51,7 +51,7 @@ public class CsvEquipPanel : MonoBehaviour
                                                 "\n" + Read[i * 3 + j]["적용능력2"] +
                                                 "\n" + Read[i * 3 + j]["적용능력3"]);
 
-                obj.ability2.text = StringBillder("+ " + Read[i * 3 + j]["적용수치1"].ToString(),
+                obj.ability2.text = StringBillder(Read[i * 3 + j]["적용수치1"].ToString(),
                                                 "\n+ " + Read[i * 3 + j]["적용수치2"] +
                                                 "\n+ " + Read[i * 3 + j]["적용수치3"] );
 
@@ -62,18 +62,16 @@ public class CsvEquipPanel : MonoBehaviour
                     Name = obj.Name.text,
                     Ability = obj.ability.text,
                     Ability2 = obj.ability2.text,
-                    Get = false
+                    Get = true
                 };
 
 
 
 
-                // 스킬? 장비창에 ITEM들은 언제 습득?
-                // 
-                UserDataMansger.Instance.userData.getSkill.Add(skillData);
+              
 
 
-                //SettingSkill(skillData, obj);
+                SettingSkill(skillData, obj);
 
             }
             var p = Instantiate(TextPanel, Equip.transform);
@@ -95,7 +93,7 @@ public class CsvEquipPanel : MonoBehaviour
     
 
 
-    public void SettingSkill(SkillData data , ChildReference obj)
+    public void SettingSkill(SkillData data , ChildReference1 obj)
     {
         var b_GetSkill = data.Get;
         if (!b_GetSkill)

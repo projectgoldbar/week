@@ -14,6 +14,10 @@ public class UserDataMansger : Singleton<UserDataMansger>
 
     public List<UpdateData> updateData = new List<UpdateData>();
 
+    [SerializeField]
+    public Dictionary<string, UpdateData> udateDataDic = new Dictionary<string, UpdateData>();
+
+
     string userdataname = "USERDATA.dat";
     string LvupgradeDataname = "LVUpData.dat";
 
@@ -38,7 +42,7 @@ public class UserDataMansger : Singleton<UserDataMansger>
         LVUPGRADEDATALoad(LvupgradeDataname);
 
         Money = userData.Money;
-        userData.getSkill = new List<SkillData>();
+        
         
     }
 
@@ -49,11 +53,11 @@ public class UserDataMansger : Singleton<UserDataMansger>
         var data = CSVReader.Read("UserDataCSV");
         UserData user = new UserData();
 
-        user.hpLV                       = CSVIntParseData(data, "hpLV");
-        user.clearBonusDNALV            = CSVIntParseData(data, "clearBonusDNALV");
-        user.DNAStorageLV               = CSVIntParseData(data, "DNAStorageLV");
-        user.ZDNAStorageLV              = CSVIntParseData(data, "ZDNAStorageLV");
-        user.bootyLV                    = CSVIntParseData(data, "bootyLV");
+        //user.hpLV                       = CSVIntParseData(data, "hpLV");
+        //user.clearBonusDNALV            = CSVIntParseData(data, "clearBonusDNALV");
+        //user.DNAStorageLV               = CSVIntParseData(data, "DNAStorageLV");
+        //user.ZDNAStorageLV              = CSVIntParseData(data, "ZDNAStorageLV");
+        //user.bootyLV                    = CSVIntParseData(data, "bootyLV");
 
         userData = user;
 
@@ -151,22 +155,17 @@ public class UserDataMansger : Singleton<UserDataMansger>
 
         //실제 사용될 데이터의 변수들 셋팅
 
-        user.MaxHp                          = userData.MaxHp;
-        user.Hpdeceleration                 = userData.Hpdeceleration;
-        user.DEF                            = userData.DEF;
-        user.Hpgain                         = userData.Hpgain;
-        user.MoneyGain                      = userData.MoneyGain;
-        user.Gainevolution                  = userData.Gainevolution;
-        user.StartRange                     = userData.StartRange;
+        user.userAbillity                   = userData.userAbillity;
 
 
-        user.hpLV                           = 1;
-        user.clearBonusDNALV                = 1;
-        user.DNAStorageLV                   = 1;
-        user.ZDNAStorageLV                  = 1;
-        user.bootyLV                        = 1;
+
+
+        //user.hpLV                           = 1;
+        //user.clearBonusDNALV                = 1;
+        //user.DNAStorageLV                   = 1;
+        //user.ZDNAStorageLV                  = 1;
+        //user.bootyLV                        = 1;
         user.Money                          = userData.Money;
-        user.getSkill                       = userData.getSkill;
 
         return user;
     }
@@ -201,6 +200,7 @@ public class LvUpData
 [System.Serializable]
 public class UpdateData
 {
+    public int Index;
     public string Name;
     public int Data;
 }

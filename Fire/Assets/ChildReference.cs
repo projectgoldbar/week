@@ -20,14 +20,17 @@ public class ChildReference : MonoBehaviour
     private panelOnoff panel;
     private csvUpdatePanel csvUpdate;
     public List<Dictionary<string, object>> goldRead = new List<Dictionary<string, object>>();
-    
+
+   
+
+
     private void Awake()
     {
         panel = FindObjectOfType<panelOnoff>();
         csvUpdate = FindObjectOfType<csvUpdatePanel>();
         goldRead = CSVReader.Read("ShopGoldData");
         //GoldButton.onClick.AddListener(Process);
-        LoadProcess();
+        
     }
 
     private void Start()
@@ -37,14 +40,6 @@ public class ChildReference : MonoBehaviour
             ArrNumber = int.Parse(transform.name);
             Update_Load();
         }
-    }
-
-    
-
-
-    private void LoadProcess()
-    {
-        LoadData?.Invoke();
     }
 
     public void DataUpdate()
@@ -64,43 +59,39 @@ public class ChildReference : MonoBehaviour
         UserDataMansger.Instance.updateData[ArrNumber] = DATA();
 
         PlayerDataSetup();
+
+
     }
 
     public void PlayerDataSetup()
     {
-        //최대체력
-        var MaxHp = UserDataMansger.Instance.updateData[0].Data;
-        UserDataMansger.Instance.userData.MaxHp = MaxHp;
+        UserAbillity Abillity = new UserAbillity(){
+            //최대체력
+            _MaxHp               = UserDataMansger.Instance.updateData[0].Data,
+            //체력감소속도
+            Hpdeceleration      = UserDataMansger.Instance.updateData[1].Data,
+            //방어력
+            DEF                 = UserDataMansger.Instance.updateData[2].Data,
+            //획득 체력
+            HpGain              = UserDataMansger.Instance.updateData[3].Data,
+            //획득 진화포인트
+            Gainevolution       = UserDataMansger.Instance.updateData[4].Data,
+            //골드 획득량
+            MoneyGain           = UserDataMansger.Instance.updateData[5].Data,
+            //시작거리
+            StartRange          = UserDataMansger.Instance.updateData[6].Data
+        };
 
-        //체력감소속도
-        var Hpdeceleration = UserDataMansger.Instance.updateData[1].Data;
-        UserDataMansger.Instance.userData.Hpdeceleration = Hpdeceleration;
+        UserDataMansger.Instance.userData.userAbillity = Abillity;
 
-        //방어력
-        var DEF = UserDataMansger.Instance.updateData[2].Data;
-        UserDataMansger.Instance.userData.DEF = DEF;
 
-        //획득 체력
-        var Hpgain = UserDataMansger.Instance.updateData[3].Data;
-        UserDataMansger.Instance.userData.Hpgain = Hpgain;
-
-        //획득 진화포인트
-        var Gainevolution = UserDataMansger.Instance.updateData[4].Data;
-        UserDataMansger.Instance.userData.Gainevolution = Gainevolution;
-
-        //골드 획득량
-        var MoneyGain = UserDataMansger.Instance.updateData[5].Data;
-        UserDataMansger.Instance.userData.MoneyGain = MoneyGain;
-
-        //시작거리
-        var StartRange = UserDataMansger.Instance.updateData[6].Data;
-        UserDataMansger.Instance.userData.StartRange = StartRange;
     }
 
 
     public UpdateData DATA()
     {
         UpdateData data = new UpdateData();
+        data.Index = ArrNumber;
         data.Name = Name.text;
         data.Data = int.Parse(ability2.text);
 
@@ -134,9 +125,18 @@ public class ChildReference : MonoBehaviour
 
         UserDataMansger.Instance.updateData.Add(DATA());
 
+        UserDataMansger.Instance.udateDataDic.Add(Name.text, DATA());
 
-        
+
+       
+
+
+
     }
+
+
+   
+
 
 
     public void DataEquip()

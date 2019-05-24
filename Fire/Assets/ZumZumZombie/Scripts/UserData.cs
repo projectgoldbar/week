@@ -4,20 +4,9 @@ using UnityEngine;
 [System.Serializable]
 public class UserData
 {
-    [Header("최대체력")]
-    public int MaxHp;
-    [Header("체력감소속도")]
-    public int Hpdeceleration;
-    [Header("방어력")]
-    public int DEF;
-    [Header("획득체력")]
-    public int Hpgain;
-    [Header("획득 진화포인트")]
-    public int Gainevolution;
-    [Header("골드 획득량")]
-    public int MoneyGain;
-    [Header("시작거리")]
-    public int StartRange;
+
+    public UserAbillity userAbillity;
+
 
     [Header("")]
     public float playTime;
@@ -33,21 +22,19 @@ public class UserData
     #region 강화LV
 
     [Header("강화")]
-    public int hpLV;
-
-    public int clearBonusDNALV;
-    public int DNAStorageLV;
-    public int ZDNAStorageLV;
-    public int bootyLV;
+    int maxHp = 0;
 
     #endregion 강화LV
 
     #region 소비아이템구매여부
 
     [Header("소비아이템구매여부")]
-    public int itemSkillCount = 0;
-    public int itemSkillCooltime = 0;
-    public int itemInteractionCount = 0;
+    int bloodOil = 0;
+    int rubberDuck = 0;
+    int boodooDoll = 0;
+    int twinPye = 0;
+    int bottleHeart = 0;
+
 
     #endregion 소비아이템구매여부
 
@@ -58,20 +45,14 @@ public class UserData
 
     #endregion 업적클리어현황
 
-    #region 인벤토리관련
+    #region 모자관련
 
-    [Header("인벤토리관련")]
-    public long dna;
-    public bool[] bootyList;
-
-    #endregion 인벤토리관련
-
-    #region 스킬습득관련
+    
 
     [Header("스킬습득관련")]
-    public int[] skillPointList;
     public int[] skillLVList;
-    public List<SkillData> getSkill;
+
+   
 
     #endregion 스킬습득관련
 }
@@ -99,6 +80,71 @@ public class SkillData
         Ability = ability;
         Ability2 = ability2;
         Get = get;
+    }
+
+}
+
+public class GameSkill
+{
+    public int SkillIndex;
+    
+    public int SkillCount;
+
+    public int Ability;
+
+    public GameSkill() { }
+
+    public GameSkill(int skillIndex, int skillCount, int ability)
+    {
+        this.SkillIndex = skillIndex;
+        this.SkillCount = skillCount;
+        this.Ability = ability;
+    }
+}
+
+[System.Serializable]
+public class UserAbillity
+{
+    [Header("최대체력")]
+    public int MaxHp;
+    [Header("체력감소속도")]
+    public int Hpdeceleration;
+    [Header("방어력")]
+    public int DEF;
+    [Header("획득체력")]
+    public int HpGain;
+    [Header("획득 추가진화포인트")]
+    public int Gainevolution;
+    [Header("골드 획득량")]
+    public int MoneyGain;
+    [Header("2배 시간")]
+    public int StartRange;
+
+    public int _MaxHp{ get { return MaxHp; }
+        set
+        {
+            MaxHp = value;
+            UnityEngine.MonoBehaviour.FindObjectOfType<PlayerData>().maxhp = MaxHp;
+        }
+    }
+
+    public UserAbillity() { }
+
+    public UserAbillity(int Maxhp,
+                     int Hpdeceleration,
+                     int DEF,
+                     int HpGain, 
+                     int Gainevolution,
+                     int MoneyGain,
+                     int StartRange )
+    {
+        this._MaxHp = Maxhp;
+        this.Hpdeceleration = Hpdeceleration;
+        this.DEF = DEF;
+        this.HpGain = HpGain;
+        this.Gainevolution = Gainevolution;
+        this.MoneyGain = MoneyGain;
+        this.StartRange = StartRange;
     }
 
 }

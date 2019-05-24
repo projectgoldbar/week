@@ -32,8 +32,7 @@ public class CSVdata : MonoBehaviour
             obj = GameObject.Instantiate<ChildReference>(list, transform);
             obj.name = i.ToString();
             obj.Name.text = Read[i]["이름Text"].ToString();
-            obj.ability.text = Read[i]["적용능력Text"].ToString() + "";
-
+            obj.ability.text = Read[i]["적용능력Text"].ToString();
 
             
         }
