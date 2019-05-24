@@ -11,10 +11,10 @@ public class GameLevelManager : MonoBehaviour
     public InGameItemContainer itemContainer;
     public NewMonsterGenerator monsterGenerator;
     public GameManager gm;
+    private Stopwatch sw = new Stopwatch();
+    private bool oneMoreChance = false;
 
     public int stage = 0;
-    private bool oneMoreChance = false;
-    private Stopwatch sw = new Stopwatch();
     public Transform player;
     public bool tutorialClear = false;
 
