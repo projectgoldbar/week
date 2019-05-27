@@ -33,7 +33,7 @@ public class UserDataMansger : Singleton<UserDataMansger>
     public List<Dictionary<string, object>> CsvReadEquipDataSet = new List<Dictionary<string, object>>();
 
 
-   
+    private CsvEquipPanel csvEquip;
 
     public TextMeshProUGUI UserMoney = null;
     public int Money
@@ -52,8 +52,10 @@ public class UserDataMansger : Singleton<UserDataMansger>
     // Start is called before the first frame update
     private void Awake()
     {
+        csvEquip = FindObjectOfType<CsvEquipPanel>();
 
-        System.Array.Clear(userData.skillLVList, 0, 23);
+
+        //System.Array.Clear(userData.skillLVList, 0, 23);
 
 
         DataBinaryLoad(userdataname);
@@ -211,6 +213,15 @@ public class UserDataMansger : Singleton<UserDataMansger>
 #else
         return Application.dataPath +"/"+FileName;
 #endif
+    }
+
+
+    //아이템(스킬?) 수집
+    public void CollectionSkill(int v)   //v는 아이템의 인덱스번호
+    {
+        LobyDataManager.Instance.reference1[v].b_Collection = true;
+        csvEquip.CollectionPanelOnoff();
+        csvEquip.Seteffect();
     }
 
 }

@@ -21,7 +21,12 @@ public class ChildReference1 : MonoBehaviour
     public Text ability = null;
     public Text ability2 = null;
     public Button GoldButton = null;
+
+
     public Text GoldButtonText = null;
+      
+    public Image Buttonimage = null;
+         
 
     private panelOnoff panel;
     public CsvEquipPanel csvEquip;
@@ -48,10 +53,7 @@ public class ChildReference1 : MonoBehaviour
         EquipButtonText();
     }
 
-    public void CollectionSkin(int v)   //v는 Change되는 스킨모델의 인덱스번호
-    {
-        LobyDataManager.Instance.reference1[v].b_Collection = true;
-    }
+    
 
     public void DataEquip()
     {
@@ -113,17 +115,25 @@ public class ChildReference1 : MonoBehaviour
 
     private void EquipButtonText()
     {
-
-        //수집못한애들은 텍스트 변화를 막아야함.
+        
         for (int i = 0; i < UserDataMansger.Instance.userData.skillEquip.Length; i++)
         {
-            if (!UserDataMansger.Instance.userData.skillEquip[i])
+            if (UserDataMansger.Instance.userData.skillCollection[i]) //수집
             {
-                LobyDataManager.Instance.reference1[i].GoldButtonText.text = "장착";
+                if (!UserDataMansger.Instance.userData.skillEquip[i]) //장착
+                {
+                    LobyDataManager.Instance.reference1[i].GoldButtonText.text = "장착";
+                    LobyDataManager.Instance.reference1[i].Buttonimage.color = Color.green;
+                }
+                else
+                {
+                    LobyDataManager.Instance.reference1[i].GoldButtonText.text = "장착중";
+                    LobyDataManager.Instance.reference1[i].Buttonimage.color = Color.red;
+                }
             }
             else
             {
-                LobyDataManager.Instance.reference1[i].GoldButtonText.text = "장착중";
+                LobyDataManager.Instance.reference1[i].GoldButtonText.text = "";
             }
         }
     }

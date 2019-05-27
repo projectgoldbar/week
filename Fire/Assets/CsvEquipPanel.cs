@@ -107,20 +107,7 @@ public class CsvEquipPanel : MonoBehaviour
 
         }
 
-        for (int i = 0; i < LobyDataManager.Instance.SetText.Length; i++)
-        {
-
-            var texts = LobyDataManager.Instance.SetText[i].GetComponent<Text>();
-            int SetItem = 0;
-
-            EquipDataSet SetValue = new EquipDataSet();
-            SetValue.name = Read2[i]["세트효율"].ToString();
-            SetValue.Data = int.Parse(Read2[i]["세트효율수치"].ToString());
-
-            texts.text = StringBillder(SetValue.name,
-                                                "+" + SetValue.Data +
-                                                "% 효율 \t" + SetItem + "/3");
-        }
+        Seteffect();
         UI_TextSetting();
         CollectionPanelOnoff();
         yield return forSecond;
@@ -177,16 +164,12 @@ public class CsvEquipPanel : MonoBehaviour
         #endregion
 
         #region 수집했을때 텍스트변화
-        
 
         for (int i = 0; i < UserDataMansger.Instance.userData.skillCollection.Length; i++)
         {
             if (!UserDataMansger.Instance.userData.skillCollection[i])
             {
-                //if (UserDataMansger.Instance.userData.skillEquip[i])
-                //{
-                    
-                //}
+               
                 LobyDataManager.Instance.reference1[i].Name.text = "???";
                 LobyDataManager.Instance.reference1[i].ability.text = "???";
                 LobyDataManager.Instance.reference1[i].ability2.text = "???";
@@ -206,12 +189,39 @@ public class CsvEquipPanel : MonoBehaviour
             }
         }
         #endregion
-
-        #region 세트효과 적용
-        //
-
-        #endregion
     }
+
+
+    public void Seteffect()
+    {
+        for (int i = 0; i < LobyDataManager.Instance.SetText.Length; i++)
+        {
+            var texts = LobyDataManager.Instance.SetText[i];
+            int SetItem = 0;
+
+
+            for (int j = 0; j < texts.threeRef.Length; j++)
+            {
+                if (texts.threeRef[j].b_Collection) SetItem++;
+            }
+
+            EquipDataSet SetValue = new EquipDataSet();
+            SetValue.name = Read2[i]["세트효율"].ToString();
+            SetValue.Data = int.Parse(Read2[i]["세트효율수치"].ToString());
+
+
+            texts.GetComponent<Text>().text = StringBillder(SetValue.name,
+                                                "+" + SetValue.Data +
+                                                "% 효율      " + SetItem + "/3");
+
+            if (SetItem >= 3)
+            {
+                //31개의 세트효과들 추가
+            }
+        }
+    }
+
+
 
 
 }
