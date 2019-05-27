@@ -7,7 +7,6 @@ public class UserData
 
     public UserAbillity userAbillity;
 
-
     [Header("")]
     public float playTime;
     public int playCount;
@@ -47,12 +46,17 @@ public class UserData
 
     #region 모자관련
 
+    [Header("스킬습득관련")]
+    public int[] skillLVList = new int[23] 
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0};
+
+    [Header("스킬장착정보")]
+    public bool[] skillEquip = new bool[93];
     
 
-    [Header("스킬습득관련")]
-    public int[] skillLVList;
+    [Header("스킬수집정보")]
+    public bool[] skillCollection = new bool[93];
 
-   
 
     #endregion 스킬습득관련
 }
@@ -83,7 +87,6 @@ public class SkillData
     }
 
 }
-
 public class GameSkill
 {
     public int SkillIndex;
@@ -106,45 +109,77 @@ public class GameSkill
 public class UserAbillity
 {
     [Header("최대체력")]
-    public int MaxHp;
+    public float MaxHp;
     [Header("체력감소속도")]
-    public int Hpdeceleration;
+    public float Hpdeceleration;
     [Header("방어력")]
-    public int DEF;
+    public float DEF;
     [Header("획득체력")]
-    public int HpGain;
+    public float HpGain;
     [Header("획득 추가진화포인트")]
-    public int Gainevolution;
+    public float Gainevolution;
     [Header("골드 획득량")]
-    public int MoneyGain;
+    public float MoneyGain;
     [Header("2배 시간")]
-    public int StartRange;
+    public float StartRange;
+    [Header("스킬몸크기")]
+    public float BodySize;
+    [Header("스킬지속시간")]
+    public float duration;
+    [Header("스킬최대치")]
+    public float Maximum;
 
-    public int _MaxHp{ get { return MaxHp; }
+   
+    
+    [Header("1회성 2배 시간")]
+    public float One_Time_StartRange;
+    [Header("1회성 골드 획득량")]
+    public float One_Time_MoneyGain;
+    [Header("1회성 전체 체력 증가")]
+    public float One_Time_MaxHpUp;
+    [Header("1회성 스킬최대치")]
+    public float One_Time_Maximum;
+    [Header("1회성 획득체력")]
+    public float One_Time_HpGain;
+
+
+
+    public float _MaxHp
+    {
+        get { return MaxHp; }
         set
         {
             MaxHp = value;
-            UnityEngine.MonoBehaviour.FindObjectOfType<PlayerData>().maxhp = MaxHp;
+            Object.FindObjectOfType<PlayerData>().maxhp = MaxHp;
         }
     }
 
     public UserAbillity() { }
 
-    public UserAbillity(int Maxhp,
-                     int Hpdeceleration,
-                     int DEF,
-                     int HpGain, 
-                     int Gainevolution,
-                     int MoneyGain,
-                     int StartRange )
+    public UserAbillity(float Maxhp,
+                        float Hpdeceleration,
+                        float DEF,
+                        float HpGain, 
+                        float Gainevolution,
+                        float MoneyGain,
+                        float StartRange ,
+                        float bodysize,
+                        float duration,
+                        float maximum)
+
     {
-        this._MaxHp = Maxhp;
+        this._MaxHp         = Maxhp;
         this.Hpdeceleration = Hpdeceleration;
-        this.DEF = DEF;
-        this.HpGain = HpGain;
-        this.Gainevolution = Gainevolution;
-        this.MoneyGain = MoneyGain;
-        this.StartRange = StartRange;
+        this.DEF            = DEF;
+        this.HpGain         = HpGain;
+        this.Gainevolution  = Gainevolution;
+        this.MoneyGain      = MoneyGain;
+        this.StartRange     = StartRange;
+        this.BodySize       = bodysize;
+        this.duration       = duration;
+        this.Maximum        = maximum;
     }
+
+    
 
 }

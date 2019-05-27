@@ -1,24 +1,25 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
 public class CsvEquipPanel : MonoBehaviour
 {
-    public ChildReference1 list;
-    public GameObject Equiplist = null;
-
-    public Transform TextPanel;
-
     private WaitForSeconds forSecond;
 
     public SkinnedMeshRenderer ChangeModel = null;
     public SkinnedMeshRenderer[] meshRenderer;
 
-
-    public GameObject rootGameOBJ = null;
-
     private int objnum;
+
+    public List<Equipdata> EquipList = new List<Equipdata>();
+
+    private List<Dictionary<string, object>> Read = new List<Dictionary<string, object>>();
+    private List<Dictionary<string, object>> Read2 = new List<Dictionary<string, object>>();
+
 
     private void Start()
     {
@@ -27,70 +28,112 @@ public class CsvEquipPanel : MonoBehaviour
 
     private void Awake()
     {
-       StartCoroutine( Equip_Read());
-        
+       Read = CSVReader.Read("EquipTextData");
+       Read2 = CSVReader.Read("EquipTextData2");
+       StartCoroutine(Equip_Read());
+       
     }
+
+    public void UI_TextSetting()
+    {
+        for (int i = 0; i < LobyDataManager.Instance.reference1.Length; i++)
+        {
+            LobyDataManager.Instance.reference1[i].equipRef.Name =
+            LobyDataManager.Instance.reference1[i].Name.text;
+            LobyDataManager.Instance.reference1[i].equipRef.ability =
+            LobyDataManager.Instance.reference1[i].ability.text;
+            LobyDataManager.Instance.reference1[i].equipRef.ability2 =
+            LobyDataManager.Instance.reference1[i].ability2.text;
+        }
+    }
+
 
     public IEnumerator Equip_Read()
     {
-        var Read = CSVReader.Read("EquipTextData");
-        var Read2 = CSVReader.Read("EquipTextData2");
+        
 
-        for (int i = 0; i < Read.Count / 3; i++)
+        int count = LobyDataManager.Instance.reference1.Length;
+
+        for (int j = 0; j < count; j++)
         {
-            GameObject Equip = Instantiate(Equiplist, transform);
+            LobyDataManager.Instance.reference1[j].Name.text = Read[j]["hatName"].ToString();
 
-            Equip.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 400.0f);
-            for (int j = 0; j < 3; j++)
+            string[] mutationName = {"", "", "" };
+            string[] mutationLV = { "", "", "" };
+            string ValueName = "";
+            string ValueNum = "";
+            int n = int.Parse(Read[j]["mutationsCount"].ToString());
+
+            if (n > 0)
             {
-                ChildReference1 obj = GameObject.Instantiate<ChildReference1>(list, Equip.transform);
-                objnum = (i * 3 + j);
-                obj.name = objnum.ToString();
-                obj.Name.text = Read[i * 3 + j]["이름"].ToString();
-                obj.ability.text = StringBillder(Read[i * 3 + j]["적용능력1"].ToString(),
-                                                "\n" + Read[i * 3 + j]["적용능력2"] +
-                                                "\n" + Read[i * 3 + j]["적용능력3"]);
-
-                obj.ability2.text = StringBillder(Read[i * 3 + j]["적용수치1"].ToString(),
-                                                "\n+ " + Read[i * 3 + j]["적용수치2"] +
-                                                "\n+ " + Read[i * 3 + j]["적용수치3"] );
-
-
-                SkillData skillData = new SkillData
+                for (int v = 0; v < n; v++)
                 {
-                    Index = i * 3 + j,
-                    Name = obj.Name.text,
-                    Ability = obj.ability.text,
-                    Ability2 = obj.ability2.text,
-                    Get = true
-                };
+
+                    int MTLV = int.Parse(Read[j][(v + 1) + "_mutationLV"].ToString());
+
+                    mutationName[v] = Read[j][(v + 1) + "_mutatioName"].ToString() + "\n";
+                    mutationLV[v]   ="+ "+ MTLV.ToString() + "\n";
+
+                    EquipDataSet dataSet = new EquipDataSet();
+                    dataSet.name = j.ToString();
+                    dataSet.Key = int.Parse(Read[j][(v + 1) + "_mutationIndex"].ToString());
+                    dataSet.Data = MTLV;
+
+                    LobyDataManager.Instance.reference1[j].DataListSet.Add(dataSet);
 
 
-
-
-              
-
-
-                SettingSkill(skillData, obj);
-
+                    if (mutationName[v] == "none")
+                    {
+                        continue;
+                    }
+                    ValueName = string.Concat(mutationName);
+                    ValueNum = string.Concat(mutationLV);
+                }
             }
-            var p = Instantiate(TextPanel, Equip.transform);
-            var texts = p.GetComponentsInChildren<Text>();
 
-            texts[0].text = StringBillder(Read2[i]["세트효율"].ToString(),
-                                                "+" + Read2[i]["세트효율수치"].ToString() +
-                                                "% 효율");
-            int SetItem = 0;
-            texts[1].text = SetItem + "/3";
+            LobyDataManager.Instance.reference1[j].AddHp 
+                = float.Parse(Read[j]["statValue"].ToString());
 
-            transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 420.0f * (i));
-            yield return forSecond;
+            LobyDataManager.Instance.reference1[j].b_Panel 
+                = UserDataMansger.Instance.userData.skillEquip[j];
+            LobyDataManager.Instance.reference1[j].b_Collection
+                = UserDataMansger.Instance.userData.skillCollection[j];
+
+
+            LobyDataManager.Instance.reference1[j].ability.text 
+                = Read[j]["stat"].ToString()+"\n"+ ValueName;
+            LobyDataManager.Instance.reference1[j].ability2.text 
+                ="+ "+ Read[j]["statValue"].ToString() + "\n" + ValueNum;
+
         }
-        //rootGameOBJ.SetActive(false);
-       // transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 400.0f * (Read.Count / 3));
+
+        for (int i = 0; i < LobyDataManager.Instance.SetText.Length; i++)
+        {
+
+            var texts = LobyDataManager.Instance.SetText[i].GetComponent<Text>();
+            int SetItem = 0;
+
+            EquipDataSet SetValue = new EquipDataSet();
+            SetValue.name = Read2[i]["세트효율"].ToString();
+            SetValue.Data = int.Parse(Read2[i]["세트효율수치"].ToString());
+
+            texts.text = StringBillder(SetValue.name,
+                                                "+" + SetValue.Data +
+                                                "% 효율 \t" + SetItem + "/3");
+        }
+        UI_TextSetting();
+        CollectionPanelOnoff();
+        yield return forSecond;
     }
 
+        
     
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        CollectionPanelOnoff();
+    }
 
 
     public void SettingSkill(SkillData data , ChildReference1 obj)
@@ -118,5 +161,57 @@ public class CsvEquipPanel : MonoBehaviour
 
         return strB.ToString();
     }
+
+
+
+    public void CollectionPanelOnoff()
+    {
+        #region 수집후 수집한 데이터 저장   
+        for (int i = 0; i < LobyDataManager.Instance.reference1.Length; i++)
+        {
+            if (!LobyDataManager.Instance.reference1[i].b_Collection) { continue; }
+
+            UserDataMansger.Instance.userData.skillCollection[i]
+                = LobyDataManager.Instance.reference1[i].b_Collection;
+        }
+        #endregion
+
+        #region 수집했을때 텍스트변화
+        
+
+        for (int i = 0; i < UserDataMansger.Instance.userData.skillCollection.Length; i++)
+        {
+            if (!UserDataMansger.Instance.userData.skillCollection[i])
+            {
+                //if (UserDataMansger.Instance.userData.skillEquip[i])
+                //{
+                    
+                //}
+                LobyDataManager.Instance.reference1[i].Name.text = "???";
+                LobyDataManager.Instance.reference1[i].ability.text = "???";
+                LobyDataManager.Instance.reference1[i].ability2.text = "???";
+                LobyDataManager.Instance.reference1[i].GoldButton.interactable = false;
+                LobyDataManager.Instance.reference1[i].GoldButtonText.text = "";
+            }
+            else
+            {
+                LobyDataManager.Instance.reference1[i].Name.text =
+                LobyDataManager.Instance.reference1[i].equipRef.Name;
+                LobyDataManager.Instance.reference1[i].ability.text =
+                LobyDataManager.Instance.reference1[i].equipRef.ability;
+                LobyDataManager.Instance.reference1[i].ability2.text =
+                LobyDataManager.Instance.reference1[i].equipRef.ability2;
+                LobyDataManager.Instance.reference1[i].GoldButton.interactable = true;
+                //LobyDataManager.Instance.reference1[i].GoldButtonText.text = "장착";
+            }
+        }
+        #endregion
+
+        #region 세트효과 적용
+        //
+
+        #endregion
+    }
+
 
 }

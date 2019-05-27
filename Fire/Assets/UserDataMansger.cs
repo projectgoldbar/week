@@ -14,12 +14,26 @@ public class UserDataMansger : Singleton<UserDataMansger>
 
     public List<UpdateData> updateData = new List<UpdateData>();
 
-    [SerializeField]
-    public Dictionary<string, UpdateData> udateDataDic = new Dictionary<string, UpdateData>();
+    public List<ChildReference1> equipData = new List<ChildReference1>();
 
 
-    string userdataname = "USERDATA.dat";
-    string LvupgradeDataname = "LVUpData.dat";
+    [System.NonSerialized]
+    public string userdataname = "USERDATA.dat";
+    [System.NonSerialized]
+    public string LvupgradeDataname = "LVUpData.dat";
+    [System.NonSerialized]
+    public string EquipDataName = "EquipData.dat";
+
+    public bool b_file = false;
+
+    public List<Dictionary<string, object>> CsvReadUpgradeData = new List<Dictionary<string, object>>();
+    public List<Dictionary<string, object>> CsvReadUpgradeGoldData = new List<Dictionary<string, object>>();
+
+    public List<Dictionary<string, object>> CsvReadEquipData = new List<Dictionary<string, object>>();
+    public List<Dictionary<string, object>> CsvReadEquipDataSet = new List<Dictionary<string, object>>();
+
+
+   
 
     public TextMeshProUGUI UserMoney = null;
     public int Money
@@ -38,11 +52,27 @@ public class UserDataMansger : Singleton<UserDataMansger>
     // Start is called before the first frame update
     private void Awake()
     {
+
+        System.Array.Clear(userData.skillLVList, 0, 23);
+
+
         DataBinaryLoad(userdataname);
         LVUPGRADEDATALoad(LvupgradeDataname);
+        
 
         Money = userData.Money;
+
         
+
+        CsvReadUpgradeData
+           = CSVReader.Read("UpgradeTextData");
+        CsvReadUpgradeGoldData
+            = CSVReader.Read("UpdateDate");
+        CsvReadEquipData
+            = CSVReader.Read("EquipTextData");
+        CsvReadEquipDataSet
+            = CSVReader.Read("EquipTextData2");
+
         
     }
 
@@ -70,19 +100,14 @@ public class UserDataMansger : Singleton<UserDataMansger>
     }
     #endregion
 
+    
 
-
-    private void Update()
+    private void OnApplicationQuit()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            LVUPGRADEDATASave(LvupgradeDataname);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            UserDataBinarySave(userdataname);
-        }
+        LVUPGRADEDATASave(LvupgradeDataname);
+        UserDataBinarySave(userdataname);
     }
+
 
 
     //바이너리 저장
@@ -130,7 +155,10 @@ public class UserDataMansger : Singleton<UserDataMansger>
         file.Close();
     }
 
+   
+   
 
+   
 
     public void LVUPGRADEDATALoad(string DATANAME)
     {
@@ -145,7 +173,7 @@ public class UserDataMansger : Singleton<UserDataMansger>
         file.Close();
     }
 
-
+   
 
 
     //실제 사용될 데이터들을 셋팅
@@ -157,14 +185,10 @@ public class UserDataMansger : Singleton<UserDataMansger>
 
         user.userAbillity                   = userData.userAbillity;
 
+        user.skillLVList                    = userData.skillLVList;
+        user.skillEquip                     = userData.skillEquip;
+        user.skillCollection                = userData.skillCollection;
 
-
-
-        //user.hpLV                           = 1;
-        //user.clearBonusDNALV                = 1;
-        //user.DNAStorageLV                   = 1;
-        //user.ZDNAStorageLV                  = 1;
-        //user.bootyLV                        = 1;
         user.Money                          = userData.Money;
 
         return user;
@@ -202,5 +226,51 @@ public class UpdateData
 {
     public int Index;
     public string Name;
+    public float Data;
+
+    public ChildReference OBJ;
+}
+
+[System.Serializable]
+public class EquipDataSet
+{
+    public string name;
+    public int Key;
     public int Data;
+    
+
+    public EquipDataSet() { }
+    public EquipDataSet(string name,int data)
+    {
+        this.name = name;
+        this.Data = data;
+    }
+
+
+}
+[System.Serializable]
+public class Equipdata
+{
+    public int Index;
+    public string Name;
+    public bool b_Panel;
+    public bool b_collection;
+    public float Addhp;
+    public EquipRefData equipRef;
+    public List<EquipDataSet> DataList;
+    public ChildReference1 child;
+    public Equipdata() { }
+    public Equipdata(int index,
+                     string name,
+                     bool b_Panel,
+                    float Addhp,
+                     List<EquipDataSet> DataList)
+    {
+        this.Index = index;
+        this.Name = name;
+        this.b_Panel = b_Panel;
+        this.Addhp = Addhp;
+        this.DataList = DataList;
+    }
+
 }

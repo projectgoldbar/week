@@ -5,6 +5,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class EquipRefData
+{
+    public string Name;
+    public string ability;
+    public string ability2;
+    public string Text;
+}
 public class ChildReference1 : MonoBehaviour
 {
     public int ArrNumber;
@@ -15,31 +23,108 @@ public class ChildReference1 : MonoBehaviour
     public Button GoldButton = null;
     public Text GoldButtonText = null;
 
-   
     private panelOnoff panel;
-    private CsvEquipPanel csvEquip;
+    public CsvEquipPanel csvEquip;
 
+    public float AddHp;
+    public bool b_Panel;
+    public bool b_Collection;
 
+    public List<EquipDataSet> DataListSet = new List<EquipDataSet>();
+
+    public EquipRefData equipRef = new EquipRefData();
     private void Awake()
     {
         panel = FindObjectOfType<panelOnoff>();
-        csvEquip = FindObjectOfType<CsvEquipPanel>();
+        
     }
 
     private void Start()
     {
         GoldButton.onClick.AddListener(DataEquip);
+
         ArrNumber = int.Parse(transform.name);
-        if (panel.panelName == PanelName.Equip)
+
+        EquipButtonText();
+    }
+
+    public void CollectionSkin(int v)   //v는 Change되는 스킨모델의 인덱스번호
+    {
+        LobyDataManager.Instance.reference1[v].b_Collection = true;
+    }
+
+    public void DataEquip()
+    {
+        ResetData();
+
+        var DataListValue = LobyDataManager.Instance.reference1[ArrNumber];
+
+        
+
+        for (int i = 0; i < DataListValue.DataListSet.Count; i++)
         {
-            //로드할게 있다면 여기~
+            var data = DataListValue.DataListSet[i].Data;
+            var key = DataListValue.DataListSet[i].Key;
+
+            UserDataMansger.Instance.userData.skillLVList[key] = data;
+        }
+
+        ChildReference.PlayerDataSetup(DataListValue.AddHp);
+        DataListValue.b_Panel = true;
+
+        UserDataMansger.Instance.userData.skillEquip[ArrNumber] =
+            LobyDataManager.Instance.reference1[ArrNumber].b_Panel;
+
+
+
+        EquipButtonText();
+
+        csvEquip.ChangeModel.sharedMesh = csvEquip.meshRenderer[ArrNumber%csvEquip.meshRenderer.Length].sharedMesh;
+        //UserDataMansger.userData.skillLVList[돌연변이 index] = 돌연변이레벨;
+        //스킨장착 후 데이터 변동을 해야하나?....
+    }
+
+
+   
+
+
+
+    private void ResetData()
+    {
+        for (int i = 0; i < LobyDataManager.Instance.reference1.Length; i++)
+        {
+            if (!LobyDataManager.Instance.reference1[i].b_Panel) { continue; }
+
+            LobyDataManager.Instance.reference1[i].b_Panel = false;
+            UserDataMansger.Instance.userData.skillEquip[i]
+                        = LobyDataManager.Instance.reference1[i].b_Panel;
+        }
+
+
+        for (int i = 0; i < UserDataMansger.Instance.userData.skillLVList.Length; i++)
+        {
+            if (UserDataMansger.Instance.userData.skillLVList[i] == 0) { continue; }
+
+                UserDataMansger.Instance.userData.skillLVList[i] = 0;
+            
         }
     }
 
-    
-    public void DataEquip()
+
+    private void EquipButtonText()
     {
-        csvEquip.ChangeModel.sharedMesh = csvEquip.meshRenderer[ArrNumber].sharedMesh;
-        //스킨장착 후 데이터 변동을 해야하나?....
+
+        //수집못한애들은 텍스트 변화를 막아야함.
+        for (int i = 0; i < UserDataMansger.Instance.userData.skillEquip.Length; i++)
+        {
+            if (!UserDataMansger.Instance.userData.skillEquip[i])
+            {
+                LobyDataManager.Instance.reference1[i].GoldButtonText.text = "장착";
+            }
+            else
+            {
+                LobyDataManager.Instance.reference1[i].GoldButtonText.text = "장착중";
+            }
+        }
     }
 }
