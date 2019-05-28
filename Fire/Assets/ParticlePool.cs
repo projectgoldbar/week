@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ParticlePool : MonoBehaviour
@@ -13,6 +12,7 @@ public class ParticlePool : MonoBehaviour
     public List<GameObject> blastParticlePool;
     public List<GameObject> hitParticlePool;
     public List<GameObject> meatParticlePool;
+    public List<GameObject> nukeParticlePool;
 
     #endregion 파티클 생산해서 넣을 풀들
 
@@ -35,6 +35,10 @@ public class ParticlePool : MonoBehaviour
             for (int m = 0; m < 5; m++)
             {
                 meatParticlePool.Add(Instantiate(particles[3], transform.position, Quaternion.identity));
+            }
+            for (int o = 0; o < 3; o++)
+            {
+                nukeParticlePool.Add(Instantiate(particles[4], transform.position, Quaternion.identity));
             }
         }
     }

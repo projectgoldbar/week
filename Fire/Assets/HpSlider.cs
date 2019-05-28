@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class HpSlider : MonoBehaviour
 {
     public Slider slider;
     public PlayerData playerData;
+    public Image bloodImg;
+    public Color c;
 
     private void Awake()
     {
@@ -16,6 +16,7 @@ public class HpSlider : MonoBehaviour
     private void Start()
     {
         FindPlayer();
+        c = bloodImg.color;
     }
 
     private void FindPlayer()
@@ -26,6 +27,9 @@ public class HpSlider : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        slider.value = (playerData.hp / playerData.maxhp);
+        var x = playerData.hp / playerData.maxhp;
+        slider.value = x;
+        c.a = 1 - x;
+        bloodImg.color = c;
     }
 }
