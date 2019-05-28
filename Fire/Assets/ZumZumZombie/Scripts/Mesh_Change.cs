@@ -18,12 +18,15 @@ public class Mesh_Change : MonoBehaviour
 
     private IEnumerator meshChange()
     {
-        for (int i = 0; i < skinnedMeshRenderers.Count; i++)
-        {
-            yield return new WaitForSeconds(0.5f);
-            playerMesh.sharedMesh = skinnedMeshRenderers[i].sharedMesh;
-            playerMesh.material = materials[i];
+        for (int j = 0; j < 10; j++) { 
+            for (int i = 0; i < skinnedMeshRenderers.Count; i++)
+            {
+                yield return new WaitForSeconds(0.5f);
+                playerMesh.sharedMesh = skinnedMeshRenderers[i].sharedMesh;
+                playerMesh.material = materials[i];
 
+               
+            }
             yield return null;
         }
     }
