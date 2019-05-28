@@ -28,7 +28,33 @@ public class EvolveSystem : MonoBehaviour
         evolveFunc.Add(() => GastrointestinalExtension());
         evolveFunc.Add(() => TitaniumTooth());
         evolveFunc.Add(() => MagnetTail());
-        evolveFunc.Add(() => QuadCore());
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
     }
 
     public List<Evolve> Evolve()
