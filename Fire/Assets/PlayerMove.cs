@@ -188,19 +188,4 @@ public class PlayerMove : MonoBehaviour
         //carAudioBoost.Stop();
         //carAudioNormal.Play();
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Coin")
-        {
-            playerData.Gold = 3;
-            other.gameObject.SetActive(false);
-        }
-        else if (other.tag == "Meat")
-        {
-            playerData.Ep = 3f;
-            playerData.hp += 5f;
-            other.gameObject.SetActive(false);
-        }
-    }
 }

@@ -27,12 +27,13 @@ public class Manager : MonoBehaviour
     public Vector3[] line1;
     public Vector3[] line2;
     public Vector3[] line3;
-    private Stopwatch sw = new Stopwatch();
+    public Stopwatch sw = new Stopwatch();
 
     public bool viewAd = false;
 
     private void Awake()
     {
+        Application.targetFrameRate = 45;
         playerData = FindObjectOfType<PlayerData>();
         line = new List<Vector3[]>();
         line.Add(line1);
@@ -52,15 +53,24 @@ public class Manager : MonoBehaviour
     {
         var x = evolSystem.Evolve();
         var a = evolButton1.GetComponentsInChildren<Text>();
+        var aimage = evolButton1.GetComponent<Image>();
         var b = evolButton2.GetComponentsInChildren<Text>();
+        var bimage = evolButton1.GetComponent<Image>();
         var c = evolButton3.GetComponentsInChildren<Text>();
+        var cimage = evolButton1.GetComponent<Image>();
 
+        evolButton1.GetComponent<ChoiceEvolve>().evolve = x[0];
+        evolButton2.GetComponent<ChoiceEvolve>().evolve = x[1];
+        evolButton3.GetComponent<ChoiceEvolve>().evolve = x[2];
         a[0].text = x[0].name;
         b[0].text = x[1].name;
         c[0].text = x[2].name;
         a[1].text = x[0].description;
         b[1].text = x[1].description;
         c[1].text = x[2].description;
+        //aimage.sprite = x[0].sprite;
+        //bimage.sprite = x[1].sprite;
+        //cimage.sprite = x[2].sprite;
 
         evolUi.SetActive(true);
         GamePause();
@@ -96,6 +106,7 @@ public class Manager : MonoBehaviour
 
     private void GameResume()
     {
+        sw.Start();
     }
 
     public void ViewAD()

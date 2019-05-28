@@ -21,16 +21,21 @@ public class csvUpdatePanel : MonoBehaviour
     {
         childReferences = GetComponentsInChildren<ChildReference>();
 
-
-        UpdataPanel_Read();
     }
+
+    public void OnEnable()
+    {
+        UpdataPanel_Read();
+        Update_Load();
+    }
+
 
 
 
     public void UpdataPanel_Read()
     {
-        var Read = CSVReader.Read("UpgradeTextData"); //CsvRead.Instance.CsvReadUpgradeData;
-        var goldData = CSVReader.Read("UpdateDate");
+        Read = CSVReader.Read("UpgradeTextData"); //CsvRead.Instance.CsvReadUpgradeData;
+        goldData = CSVReader.Read("UpdateDate");
         ChildCount = Read.Count;
 
         Debug.Log(ChildCount);
@@ -50,5 +55,35 @@ public class csvUpdatePanel : MonoBehaviour
         }
 
         transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 60.0f * Read.Count);
+    }
+
+    public UpdateData DATA(ChildReference obj)
+    {
+        UpdateData data = new UpdateData();
+        data.Index = obj.ArrNumber;
+        data.Name = obj.Name.text;
+        data.Data = float.Parse(obj.ability2.text);
+
+        data.OBJ = obj;
+
+        return data;
+    }
+    //유니티이벤트로 넣음 
+    public void Update_Load()
+    {
+        for (int i = 0; i < ChildCount; i++)
+        {
+
+             int LvCount = UserDataMansger.Instance.LvDataList[i].LvCount;
+
+            childReferences[i].GoldButtonText.text 
+                = goldData[LvCount][i + "_money"].ToString();
+            childReferences[i].ability2.text 
+                = goldData[LvCount][i + "_value"].ToString();
+
+            UserDataMansger.Instance.updateData.Add(DATA(childReferences[i]));
+
+        }
+            ChildReference.PlayerDataSetup();
     }
 }

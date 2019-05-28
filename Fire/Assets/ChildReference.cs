@@ -36,18 +36,14 @@ public class ChildReference : MonoBehaviour
 
     private void OnEnable()
     {
-    }
-
-    private void Start()
-    {
         if (panel.panelName == PanelName.Upgrade)
         {
             ArrNumber = int.Parse(transform.name);
             Update_Load();
-           
         }
     }
 
+   
     public void DataUpdate()
     {
         var Current_Money = UserDataMansger.Instance.Money;
@@ -83,7 +79,7 @@ public class ChildReference : MonoBehaviour
 
         //최대체력
         //체력수치 * (세트효율+100)*0.01
-        Abillity._MaxHp = UserDataMansger.Instance.updateData[14].Data+ addhp;
+        Abillity.MaxHp = UserDataMansger.Instance.updateData[14].Data+ addhp;
 
         //체력감소속도
         Abillity.Hpdeceleration = UserDataMansger.Instance.updateData[13].Data;
@@ -97,7 +93,7 @@ public class ChildReference : MonoBehaviour
         Abillity.MoneyGain = UserDataMansger.Instance.updateData[9].Data;
         //시작거리
         Abillity.StartRange = UserDataMansger.Instance.updateData[8].Data;
-        
+       
 
         UserDataMansger.Instance.userData.userAbillity = Abillity;
     }
@@ -135,13 +131,13 @@ public class ChildReference : MonoBehaviour
     public void Update_Load()
     {
         LvCount = UserDataMansger.Instance.LvDataList[ArrNumber].LvCount;
-        
+
         GoldButtonText.text = goldRead[LvCount][ArrNumber + "_money"].ToString();
         ability2.text = goldRead[LvCount][ArrNumber + "_value"].ToString();
 
-        UserDataMansger.Instance.updateData.Add(DATA());
+        UserDataMansger.Instance.updateData[ArrNumber] = DATA();
     }
 
-   
+
 
 }

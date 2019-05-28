@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class ParticlePool : MonoBehaviour
 {
+    //파티클종류
     public List<GameObject> particles;
+
+    #region 파티클 생산해서 넣을 풀들
+
     public List<GameObject> coinParticlePool;
+    public List<GameObject> blastParticlePool;
+    public List<GameObject> hitParticlePool;
+    public List<GameObject> meatParticlePool;
+
+    #endregion 파티클 생산해서 넣을 풀들
 
     private void Start()
     {
@@ -14,6 +23,18 @@ public class ParticlePool : MonoBehaviour
             for (int j = 0; j < 20; j++)
             {
                 coinParticlePool.Add(Instantiate(particles[0], transform.position, Quaternion.identity));
+            }
+            for (int k = 0; k < 5; k++)
+            {
+                blastParticlePool.Add(Instantiate(particles[1], transform.position, Quaternion.identity));
+            }
+            for (int l = 0; l < 20; l++)
+            {
+                hitParticlePool.Add(Instantiate(particles[2], transform.position, Quaternion.identity));
+            }
+            for (int m = 0; m < 5; m++)
+            {
+                meatParticlePool.Add(Instantiate(particles[3], transform.position, Quaternion.identity));
             }
         }
     }

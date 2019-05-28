@@ -12,7 +12,7 @@ public class UserData
     public int playCount;
     public int dieCount;
     public int clearCount;
-    public float maxRiskLevel;
+    public float maxLiveTime;
 
     #region MONEY
     public int Money;
@@ -144,15 +144,7 @@ public class UserAbillity
 
 
 
-    public float _MaxHp
-    {
-        get { return MaxHp; }
-        set
-        {
-            MaxHp = value;
-            Object.FindObjectOfType<PlayerData>().maxhp = MaxHp;
-        }
-    }
+
 
     public UserAbillity() { }
 
@@ -168,7 +160,7 @@ public class UserAbillity
                         float maximum)
 
     {
-        this._MaxHp         = Maxhp;
+        this.MaxHp         = Maxhp;
         this.Hpdeceleration = Hpdeceleration;
         this.DEF            = DEF;
         this.HpGain         = HpGain;
