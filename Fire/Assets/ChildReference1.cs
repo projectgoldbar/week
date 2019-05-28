@@ -75,8 +75,8 @@ public class ChildReference1 : MonoBehaviour
             UserDataMansger.Instance.userData.skillLVList[key] = data;
         }
 
-        //ChildReference.UpdateDataNUserData(DataListValue.AddHp);
-        ChildReference.UserDataNUpdateData(DataListValue.AddHp);
+        ChildReference.UpdateDataNUserData(DataListValue.AddHp);
+        //ChildReference.UserDataNUpdateData(DataListValue.AddHp);
         DataListValue.b_Panel = true;
 
 

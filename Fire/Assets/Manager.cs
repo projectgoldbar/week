@@ -138,12 +138,14 @@ public class Manager : MonoBehaviour
 
     public void EndGameSeq()
     {
-        var x = UserDataMansger.Instance.userData;
-        x.Money = playerData.gold;
+        var x = UserDataMansger.Instance;
+        x.userData.Money = playerData.gold;
+        x.UserDataBinarySave(x.userdataname);
+
     }
 
     public void GoIntro()
     {
-        SceneManager.LoadScene("01_Intro 1");
+        SceneManager.LoadScene("01_Intro");
     }
 }

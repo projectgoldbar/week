@@ -45,6 +45,10 @@ public class UserDataMansger : Singleton<UserDataMansger>
         set
         {
             money = value;
+            if(UserMoney == null)
+            {
+                UserMoney = FindObjectOfType<TextMeshMoney>().GetComponent<TextMeshProUGUI>();
+            }
             UserMoney.text = money.ToString(); 
         }
     }
@@ -75,7 +79,6 @@ public class UserDataMansger : Singleton<UserDataMansger>
         CsvReadEquipDataSet
             = CSVReader.Read("EquipTextData2");
 
-        DontDestroyOnLoad(this);
     }
 
 
