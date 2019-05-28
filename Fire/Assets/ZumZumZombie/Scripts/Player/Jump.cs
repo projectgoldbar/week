@@ -18,11 +18,11 @@ public class Jump : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-<<<<<<< HEAD
+//<<<<<<< HEAD
             swipe.GoSwipe = true;
-=======
+//=======
             //swipe.GoSwipe = true;
->>>>>>> merge
+//>>>>>>> merge
             PlayerJump();
             Debug.Log("스와이프 준비됨");
         }
