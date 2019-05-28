@@ -19,7 +19,7 @@ public class Jump : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             swipe.GoSwipe = true;
-            //PlayerJump();
+            PlayerJump();
             Debug.Log("스와이프 준비됨");
         }
         if (swipe.GoSwipe)
