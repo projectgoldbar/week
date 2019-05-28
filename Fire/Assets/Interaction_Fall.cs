@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interaction_Fall : Interaction
 {
-    public override void Somthing()
+    public override void Use()
     {
         StartCoroutine(Fallen());
     }

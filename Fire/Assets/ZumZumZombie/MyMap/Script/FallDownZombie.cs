@@ -161,7 +161,7 @@ public class FallDownZombie : MonoBehaviour
             {
                 //anim.SetBool(jump, false);
                 ParticleManager.Instance.OutputEffect(type, new Vector3(setAmingPoint.x, setAmingPoint.y + 1f, setAmingPoint.z));
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
 
                 yield break;
             }

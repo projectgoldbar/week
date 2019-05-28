@@ -11,10 +11,10 @@ public class GameLevelManager : MonoBehaviour
     public InGameItemContainer itemContainer;
     public NewMonsterGenerator monsterGenerator;
     public GameManager gm;
+    private Stopwatch sw = new Stopwatch();
+    private bool oneMoreChance = false;
 
     public int stage = 0;
-    private bool oneMoreChance = false;
-    private Stopwatch sw = new Stopwatch();
     public Transform player;
     public bool tutorialClear = false;
 
@@ -182,7 +182,7 @@ public class GameLevelManager : MonoBehaviour
     /// 피벗기준으로 rotation방향으로 distance만큼 떨어진 위치를 반환
     /// </summary>
     /// <param name="pivot"></param>
-    /// <param name="rotation">1 = 3시, 2= 6시, 3 = 9시, 4 = 12시</param>
+    /// <param name="rotation"></param>
     private Vector3 PivotPointSet(Vector3 pivot, Vector3 origin, Direction direction, float distance)
     {
         switch (direction)
@@ -274,7 +274,7 @@ public class GameLevelManager : MonoBehaviour
         MarkerSystem.instance.targetChange(a);
         for (int i = 0; i < zombielist.Length; i++)
         {
-            if (zombielist[i].GetComponent<MonsterUnit>().level <= stage)
+            if (zombielist[i].GetComponent<ZombieState.ZombiesComponent>().level <= stage)
             {
                 Instantiate(zombielist[i].gameObject, FindEmptySpace(player.position, 50f, 60f), Quaternion.identity);
                 Instantiate(specialZombies[Random.Range(0, specialZombies.Length)].gameObject, FindEmptySpace(player.position, 50f, 60f), Quaternion.identity);
@@ -309,6 +309,7 @@ public class GameLevelManager : MonoBehaviour
 
     public void OnGameOverPanel()
     {
+        Time.timeScale = 0;
         gameOverUI.SetActive(true);
         OnLifeTimeText();
     }
@@ -318,7 +319,13 @@ public class GameLevelManager : MonoBehaviour
         gm.GameOver();
     }
 
-    private void OnLifeTimeText()
+    public void GameClear()
+    {
+        OnLifeTimeText();
+        gm.GameEnd();
+    }
+
+    public void OnLifeTimeText()
     {
         sw.Stop();
         var a = sw.ElapsedMilliseconds;

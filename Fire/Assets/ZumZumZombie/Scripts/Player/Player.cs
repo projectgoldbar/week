@@ -23,6 +23,10 @@ public class Player : MonoBehaviour
 
     public Evasion evasion;
 
+    private void Start()
+    {
+    }
+
     public float Hp
     {
         get => hp;
@@ -44,9 +48,27 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Utility.Instance.PlayerHpText.text = Mathf.RoundToInt(Hp).ToString();
+                //StartCoroutine(HpGageSmoth());
+                Utility.Instance.PlayerHpText.text = Mathf.RoundToInt(hp).ToString();
                 Utility.Instance.PlayerHpBar.value = (Hp / MaxHp);
             }
+        }
+    }
+
+    private IEnumerator HpGageSmoth()
+    {
+        var HPG = Utility.Instance.PlayerHpBar.value * 10;
+
+        while (true)
+        {
+            var Current = Utility.Instance.PlayerHpBar.value;
+
+            Current = Mathf.Lerp(Current, hp / MaxHp, Time.deltaTime * 5.0f);
+            Utility.Instance.PlayerHpBar.value = Current;
+            Utility.Instance.PlayerHpText.text = Mathf.RoundToInt(hp).ToString();
+            Debug.Log("a");
+
+            yield return null;
         }
     }
 
@@ -105,7 +127,7 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Interaction"))
         {
-            other.GetComponent<Interaction>().Somthing();
+            other.GetComponent<Interaction>().Use();
         }
     }
 

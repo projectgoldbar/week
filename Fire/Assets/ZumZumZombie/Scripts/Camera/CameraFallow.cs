@@ -10,15 +10,16 @@ public class CameraFallow : MonoBehaviour
 
     private void Awake()
     {
+        target = GameObject.FindObjectOfType<PlayerData>().transform;
     }
 
-    private void Update()
-    {
-        if (target == null)
-        {
-            target = GameObject.FindObjectOfType<Player>().transform;
-        }
-    }
+    //private void Update()
+    //{
+    //    //if (target == null)
+    //    //{
+    //    //    target = GameObject.FindObjectOfType<PlayerData>().transform;
+    //    //}
+    //}
 
     public float offset = 80.0f;
     /// <summary>

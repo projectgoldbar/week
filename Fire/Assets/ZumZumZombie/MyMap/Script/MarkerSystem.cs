@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[DefaultExecutionOrder(-100)]
 public class MarkerSystem : MonoBehaviour
 {
     public static MarkerSystem instance;

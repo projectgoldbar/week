@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[DefaultExecutionOrder(-500)]
+//[DefaultExecutionOrder(-500)]
 public class ThrowingChase : ChaseGenerator
 {
     private void OnEnable()

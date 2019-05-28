@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8389659122063113947}
   - component: {fileID: 7794369066487403817}
+  - component: {fileID: 662808633}
   m_Layer: 0
   m_Name: ItemList
   m_TagString: Untagged
@@ -48,11 +49,29 @@ MonoBehaviour:
     description: "\uD14C\uC2A4\uD2B8\uB97C \uC704\uD558\uC5EC \uB9CC\uB4E4\uC5B4\uC9C4
       \uBAA8\uC790"
     type: 0
+    minStat: 0
+    maxStat: 5
   - name: TestBody
     description: "\uD14C\uC2A4\uD2B8\uB97C \uC704\uD558\uC5EC \uB9CC\uB4E4\uC5B4\uC9C4
       \uBAB8"
     type: 1
+    minStat: 0
+    maxStat: 5
   - name: TestFoot
     description: "\uD14C\uC2A4\uD2B8\uB97C \uC704\uD558\uC5EC \uB9CC\uB4E4\uC5B4\uC9C4
       \uBC1C"
     type: 2
+    minStat: 0
+    maxStat: 5
+--- !u!114 &662808633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8412345319666536626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b54ae47cd4a06498fe220a31864a1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

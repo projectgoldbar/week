@@ -11,19 +11,14 @@ GameObject:
   - component: {fileID: 4714680489494612356}
   - component: {fileID: 6333285311859412084}
   - component: {fileID: 5688471789582729827}
-  - component: {fileID: 5688471790167704085}
-  - component: {fileID: 5688471790167704084}
   - component: {fileID: 3448348160652011653}
-  - component: {fileID: 3448348160556387127}
-  - component: {fileID: 3187940576161508130}
-  - component: {fileID: 115567812991410181}
-  - component: {fileID: 5947255569483929927}
-  - component: {fileID: 8011203198065010727}
-  - component: {fileID: 8011203199168433757}
-  - component: {fileID: 8011203198310846399}
+  - component: {fileID: 1369419214}
+  - component: {fileID: 1369419215}
+  - component: {fileID: 1369419218}
+  - component: {fileID: 1369419220}
   m_Layer: 10
   m_Name: PolygonZombie(Gallery)
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -73,8 +68,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.75
-  m_Speed: 16
-  m_Acceleration: 12
+  m_Speed: 18
+  m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 1000
   m_StoppingDistance: 0
@@ -85,49 +80,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
---- !u!114 &5688471790167704085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4714680489494727766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc373f047ce342a41806bb87c51a6289, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Agent: {fileID: 5688471789582729827}
-  mono: {fileID: 5688471790167704085}
-  StateBase: {fileID: 0}
-  Chase: {fileID: 3448348160556387127}
-  Attack: {fileID: 3187940576161508130}
-  Trap: {fileID: 8011203199168433757}
-  Flying: {fileID: 5947255569483929927}
-  Catch: {fileID: 8011203198310846399}
-  Type: 0
---- !u!114 &5688471790167704084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4714680489494727766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9478f86845beaf40a707de65a66566f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 0
-  atkPoint: 1
-  distance: 0
-  Anim: {fileID: 6333285311859412084}
-  monsterstate: {fileID: 5688471790167704085}
-  state: 0
-  ChaseTarget: {fileID: 0}
-  type: 0
-  Hulk: {fileID: 0}
-  Catch: {fileID: 0}
 --- !u!136 &3448348160652011653
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -142,7 +94,7 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.5, z: 0}
---- !u!114 &3448348160556387127
+--- !u!114 &1369419214
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,28 +103,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4714680489494727766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 771a9befea77dc24eaa5f8fd3912e6e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 9681e9275d5e45441bf17da03c7b3030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerMin: 3
-  timerMax: 5
-  range: 3
---- !u!114 &3187940576161508130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4714680489494727766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb5e7605c86151499315e29d74ff349, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackKind: 0
-  trail: {fileID: 0}
+  level: 0
+  damage: 10
+  agent: {fileID: 0}
   player: {fileID: 0}
---- !u!114 &115567812991410181
+  animator: {fileID: 0}
+  stateMachine: {fileID: 0}
+  moving: {fileID: 0}
+  attack: {fileID: 0}
+  stun: {fileID: 0}
+  material: {fileID: 0}
+  eyeTrailRenderer: {fileID: 0}
+--- !u!114 &1369419215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,12 +126,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4714680489494727766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d33f2cbdef3fe184da61f4974f649b25, type: 3}
+  m_Script: {fileID: 11500000, guid: 0968419bbf42ca94bbe7a82af4cc43a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dis: 0
-  check: 0
---- !u!114 &5947255569483929927
+--- !u!114 &1369419218
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,10 +138,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4714680489494727766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe4b868cdec710449a0abc2d1d767d1, type: 3}
+  m_Script: {fileID: 11500000, guid: ea0b9d97c10593d4a9f5073edf084e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8011203198065010727
+  currentState: {fileID: 0}
+--- !u!114 &1369419220
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,34 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4714680489494727766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3b23eaa3b5699543a31f469349b458d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flySpd: 1
---- !u!114 &8011203199168433757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4714680489494727766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d33f2cbdef3fe184da61f4974f649b25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dis: 0
-  check: 0
---- !u!114 &8011203198310846399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4714680489494727766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6898e7daf8e89e8478b987c2fa1da999, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ae512c2471aff74aa92f5c5cb74dd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8011203197923185486
