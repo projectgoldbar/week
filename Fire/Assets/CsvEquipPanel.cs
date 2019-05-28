@@ -118,8 +118,11 @@ public class CsvEquipPanel : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        CollectionPanelOnoff();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Seteffect();
+            CollectionPanelOnoff();
+        }
     }
 
 
@@ -151,7 +154,7 @@ public class CsvEquipPanel : MonoBehaviour
 
 
 
-    public void CollectionPanelOnoff()
+    public static void CollectionPanelOnoff()
     {
         #region 수집후 수집한 데이터 저장   
         for (int i = 0; i < LobyDataManager.Instance.reference1.Length; i++)
@@ -185,9 +188,19 @@ public class CsvEquipPanel : MonoBehaviour
                 LobyDataManager.Instance.reference1[i].ability2.text =
                 LobyDataManager.Instance.reference1[i].equipRef.ability2;
                 LobyDataManager.Instance.reference1[i].GoldButton.interactable = true;
-                //LobyDataManager.Instance.reference1[i].GoldButtonText.text = "장착";
+                LobyDataManager.Instance.reference1[i].Buttonimage.color = Color.green;
+
+                if (!UserDataMansger.Instance.userData.skillEquip[i])
+                    LobyDataManager.Instance.reference1[i].GoldButtonText.text = "장착";
+                else
+                {
+                    LobyDataManager.Instance.reference1[i].GoldButtonText.text = "장착중";
+                    LobyDataManager.Instance.reference1[i].Buttonimage.color = Color.red;
+                }
+
             }
         }
+        
         #endregion
     }
 

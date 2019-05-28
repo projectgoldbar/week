@@ -58,6 +58,19 @@ public class UserData
     public bool[] skillCollection = new bool[93];
 
 
+
+
+    
+    public bool[] SkillCollection 
+    {
+        get { return skillCollection; }
+        set {
+            skillCollection = value;
+            CsvEquipPanel.CollectionPanelOnoff();
+        }
+    }
+
+
     #endregion 스킬습득관련
 }
 

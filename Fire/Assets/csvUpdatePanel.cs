@@ -27,6 +27,8 @@ public class csvUpdatePanel : MonoBehaviour
     {
         UpdataPanel_Read();
         Update_Load();
+
+       
     }
 
 
@@ -47,6 +49,7 @@ public class csvUpdatePanel : MonoBehaviour
             #endregion
             //obj = GameObject.Instantiate<ChildReference>(list, transform);
             childReferences[i].name = i.ToString();
+            childReferences[i].ArrNumber = i;
             childReferences[i].Name.text = Read[i]["statName"].ToString();
             childReferences[i].ability.text = Read[i]["stat"].ToString();
 
@@ -55,6 +58,8 @@ public class csvUpdatePanel : MonoBehaviour
         }
 
         transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 60.0f * Read.Count);
+
+        
     }
 
     public UpdateData DATA(ChildReference obj)
@@ -84,6 +89,7 @@ public class csvUpdatePanel : MonoBehaviour
             UserDataMansger.Instance.updateData.Add(DATA(childReferences[i]));
 
         }
-            ChildReference.PlayerDataSetup();
+        ChildReference.UpdateDataNUserData();
+        //ChildReference.UserDataNUpdateData();
     }
 }

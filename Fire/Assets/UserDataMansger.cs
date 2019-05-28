@@ -75,7 +75,7 @@ public class UserDataMansger : Singleton<UserDataMansger>
         CsvReadEquipDataSet
             = CSVReader.Read("EquipTextData2");
 
-        
+        DontDestroyOnLoad(this);
     }
 
 
@@ -220,7 +220,7 @@ public class UserDataMansger : Singleton<UserDataMansger>
     public void CollectionSkill(int v)   //v는 아이템의 인덱스번호
     {
         LobyDataManager.Instance.reference1[v].b_Collection = true;
-        csvEquip.CollectionPanelOnoff();
+        CsvEquipPanel.CollectionPanelOnoff();
         csvEquip.Seteffect();
     }
 

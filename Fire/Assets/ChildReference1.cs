@@ -75,7 +75,8 @@ public class ChildReference1 : MonoBehaviour
             UserDataMansger.Instance.userData.skillLVList[key] = data;
         }
 
-        ChildReference.PlayerDataSetup(DataListValue.AddHp);
+        //ChildReference.UpdateDataNUserData(DataListValue.AddHp);
+        ChildReference.UserDataNUpdateData(DataListValue.AddHp);
         DataListValue.b_Panel = true;
 
 
@@ -86,10 +87,10 @@ public class ChildReference1 : MonoBehaviour
 
         EquipButtonText(ArrNumber);
 
-        
+       
 
 
-        csvEquip.ChangeModel.sharedMesh = csvEquip.meshRenderer[ArrNumber%csvEquip.meshRenderer.Length].sharedMesh;
+        //csvEquip.ChangeModel.sharedMesh = csvEquip.meshRenderer[ArrNumber%csvEquip.meshRenderer.Length].sharedMesh;
         //UserDataMansger.userData.skillLVList[돌연변이 index] = 돌연변이레벨;
         //스킨장착 후 데이터 변동을 해야하나?....
     }
@@ -102,26 +103,17 @@ public class ChildReference1 : MonoBehaviour
     private void ResetData(int arrnum = -1)
     {
 
-        LobyDataManager.Instance.reference1[arrnum].b_Panel = false;
-        UserDataMansger.Instance.userData.skillEquip[arrnum]
-                    = LobyDataManager.Instance.reference1[arrnum].b_Panel;
-
-        if (EquipIndex != -1)
+        for (int i = 0; i < LobyDataManager.Instance.reference1.Length; i++)
         {
-            //UserDataMansger.Instance.userData.skillEquip[EquipIndex] = false;
+            if (!LobyDataManager.Instance.reference1[i].b_Panel) { continue; }
+
+            LobyDataManager.Instance.reference1[i].b_Panel = false;
+            UserDataMansger.Instance.userData.skillEquip[i]
+                        = LobyDataManager.Instance.reference1[i].b_Panel;
         }
 
-            //for (int i = 0; i < LobyDataManager.Instance.reference1.Length; i++)
-            //{
-            //    if (!LobyDataManager.Instance.reference1[i].b_Panel) { continue; }
 
-            //    LobyDataManager.Instance.reference1[i].b_Panel = false;
-            //    UserDataMansger.Instance.userData.skillEquip[i]
-            //                = LobyDataManager.Instance.reference1[i].b_Panel;
-            //}
-
-
-            for (int i = 0; i < UserDataMansger.Instance.userData.skillLVList.Length; i++)
+        for (int i = 0; i < UserDataMansger.Instance.userData.skillLVList.Length; i++)
         {
             if (UserDataMansger.Instance.userData.skillLVList[i] == 0) { continue; }
 
