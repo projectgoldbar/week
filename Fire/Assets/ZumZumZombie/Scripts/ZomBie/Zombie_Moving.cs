@@ -8,12 +8,14 @@ namespace ZombieState
         protected float resetPathCount = 0.2f;
         protected WaitForSeconds waitSecond;
         private Coroutine test;
+        public Transform player;
 
         public override void Setting()
         {
             waitSecond = new WaitForSeconds(resetPathCount);
             zombieData.agent.acceleration = Random.Range(10, 23);
-            zombieData.moveCoroutine = ZombieMove();
+            //zombieData.moveCoroutine = ZombieMove();
+            player = zombieData.player.gameObject.transform;
         }
 
         public override void Think()
@@ -22,15 +24,16 @@ namespace ZombieState
 
         public override void Execute()
         {
+            test = StartCoroutine(ZombieMove());
             //zombieData.agent.enabled = true;
-            zombieData.animator.Play("Zombie_Walk");
-            StartCoroutine(zombieData.moveCoroutine);
+            //StartCoroutine(zombieData.moveCoroutine);
         }
 
         public IEnumerator ZombieMove()
         {
             while (true)
             {
+                yield return null;
                 //Debug.Log("calculate");
                 //if (Vector3.Distance(zombieData.player.position, transform.position) < 10f)
                 //{
@@ -40,9 +43,9 @@ namespace ZombieState
                 //    yield return null;
                 //}
 
-                //zombieData.agent.CalculatePath(zombieData.player.position, zombieData.path);
-                zombieData.agent.destination = zombieData.player.position;
-                //zombieData.agent.SetPath(zombieData.path);
+                zombieData.agent.CalculatePath(zombieData.player.position, zombieData.path);
+                //zombieData.agent.destination = player.position;
+                zombieData.agent.SetPath(zombieData.path);
 
                 yield return waitSecond;
             }
@@ -61,15 +64,19 @@ namespace ZombieState
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.J))
+            var l = Vector3.Distance(transform.position, player.position);
+
+            zombieData.animator.SetFloat("Distance", l);
+            if (Input.GetKeyDown(KeyCode.H))
             {
-                StartCoroutine(zombieData.moveCoroutine);
+                StopCoroutine(test);
+                zombieData.agent.ResetPath();
             }
         }
 
         public override void Exit()
         {
-            StopCoroutine(zombieData.moveCoroutine);
+            //StopCoroutine(zombieData.moveCoroutine);
             //this.enabled = false;
         }
     }

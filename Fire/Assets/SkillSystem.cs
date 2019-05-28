@@ -1,19 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillSystem : MonoBehaviour
 {
     public PlayerMove playerMove;
     public int skillCount = 1;
     public int maxSkillCount = 1;
+    public float originCoolTime = 20f;
     public float coolTime = 20f;
+    public Image progressBar;
+
+    private void Awake()
+    {
+        progressBar = GetComponent<Image>();
+        coolTime = originCoolTime;
+    }
 
     public void SkillStart()
     {
         if (skillCount > 0)
         {
             Debug.Log("a");
+            coolTime = 0;
             playerMove.Skill();
             skillCount -= 1;
         }
@@ -23,19 +31,19 @@ public class SkillSystem : MonoBehaviour
     {
         if (skillCount < maxSkillCount)
         {
-            if (coolTime > 0)
+            if (coolTime >= originCoolTime)
             {
-                coolTime -= Time.deltaTime;
+                skillCount++;
             }
             else
             {
-                skillCount++;
-                coolTime = 20f;
+                coolTime += Time.deltaTime;
             }
         }
         else
         {
-            coolTime = 20f;
+            coolTime = originCoolTime;
         }
+        progressBar.fillAmount = coolTime * 0.05f;
     }
 }

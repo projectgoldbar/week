@@ -7,7 +7,9 @@ public class MonsterSpwaner : MonoBehaviour
     public GameObject spwanPointss;
     public Transform[] spwanPoints;
     public GameObject zombie;
-    public float second = 10f;
+    public GameObject weekZombie;
+    public GameObject patrolZombie;
+    public float second = 1f;
     private WaitForSeconds seconds;
 
     private void Awake()
@@ -24,11 +26,26 @@ public class MonsterSpwaner : MonoBehaviour
 
     private IEnumerator Spwan()
     {
-        while (true)
+        float count = 0;
+        while (count < 45)
         {
             SpwanZombie();
-
+            count++;
             yield return seconds;
+        }
+        yield break;
+    }
+
+    public List<GameObject> patrolZombieList;
+
+    private IEnumerator SpwanSystem()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            var monster = Instantiate(weekZombie, spwanPoints[Random.Range(1, spwanPoints.Length + 1)].position, Quaternion.identity);
+            var patrolZombie = Instantiate(this.patrolZombie, spwanPoints[Random.Range(1, spwanPoints.Length + 1)].position, Quaternion.identity);
+            patrolZombieList.Add(patrolZombie);
+            yield return new WaitForSeconds(1f);
         }
     }
 }
