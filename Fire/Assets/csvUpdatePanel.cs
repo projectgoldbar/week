@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class csvUpdatePanel : MonoBehaviour
@@ -26,7 +27,15 @@ public class csvUpdatePanel : MonoBehaviour
     public void OnEnable()
     {
         UpdataPanel_Read();
-        Update_Load();
+
+        if (File.Exists(UserDataMansger.Instance.getPath(UserDataMansger.Instance.userdataname)))
+        {
+
+        }
+        else
+        {
+            Update_Load();
+        }
 
        
     }
@@ -48,13 +57,16 @@ public class csvUpdatePanel : MonoBehaviour
             UserDataMansger.Instance.LvDataList.Add(data);
             #endregion
             //obj = GameObject.Instantiate<ChildReference>(list, transform);
+
             childReferences[i].name = i.ToString();
             childReferences[i].ArrNumber = i;
+           
             childReferences[i].Name.text = Read[i]["statName"].ToString();
             childReferences[i].ability.text = Read[i]["stat"].ToString();
+            
 
             //childReferences[i].Key = obj.ability.text;
-
+            
         }
 
         transform.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 60.0f * Read.Count);
@@ -83,8 +95,8 @@ public class csvUpdatePanel : MonoBehaviour
 
             childReferences[i].GoldButtonText.text 
                 = goldData[LvCount][i + "_money"].ToString();
-            childReferences[i].ability2.text 
-                = goldData[LvCount][i + "_value"].ToString();
+                childReferences[i].ability2.text
+                = goldData[LvCount][i + "_value"].ToString()+"";
 
             UserDataMansger.Instance.updateData.Add(DATA(childReferences[i]));
 

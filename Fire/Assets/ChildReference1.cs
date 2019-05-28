@@ -65,7 +65,7 @@ public class ChildReference1 : MonoBehaviour
 
         var DataListValue = LobyDataManager.Instance.reference1[ArrNumber];
 
-        
+        UserDataMansger.Instance.userData.EquipInfo = DataListValue;
 
         for (int i = 0; i < DataListValue.DataListSet.Count; i++)
         {
@@ -87,8 +87,8 @@ public class ChildReference1 : MonoBehaviour
 
         EquipButtonText(ArrNumber);
 
-       
 
+        UserDataMansger.Instance.UserDataBinarySave(UserDataMansger.Instance.userdataname);
 
         //csvEquip.ChangeModel.sharedMesh = csvEquip.meshRenderer[ArrNumber%csvEquip.meshRenderer.Length].sharedMesh;
         //UserDataMansger.userData.skillLVList[돌연변이 index] = 돌연변이레벨;
@@ -141,10 +141,13 @@ public class ChildReference1 : MonoBehaviour
 
         LobyDataManager.Instance.reference1[arrnum].GoldButtonText.text = "장착중";
         LobyDataManager.Instance.reference1[arrnum].Buttonimage.color = Color.red;
+        LobyDataManager.Instance.reference1[arrnum].Buttonimage.raycastTarget = false;
+
 
         if (EquipIndex != -1)
         {
             LobyDataManager.Instance.reference1[EquipIndex].GoldButtonText.text = "장착";
+            LobyDataManager.Instance.reference1[arrnum].Buttonimage.raycastTarget = true;
             LobyDataManager.Instance.reference1[EquipIndex].Buttonimage.color = Color.green;
         }
 

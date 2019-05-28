@@ -36,6 +36,9 @@ public class UserDataMansger : Singleton<UserDataMansger>
     private CsvEquipPanel csvEquip;
 
     public TextMeshProUGUI UserMoney = null;
+
+   
+
     public int Money
     {
         get
@@ -205,7 +208,7 @@ public class UserDataMansger : Singleton<UserDataMansger>
         userData = USER;
     }
 
-    private string getPath(string FileName)
+    public string getPath(string FileName)
     {
 #if UNITY_EDITOR
         return Application.dataPath +"/" + FileName;
