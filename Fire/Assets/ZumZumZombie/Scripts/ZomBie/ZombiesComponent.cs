@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace ZombieState
 {
-    [DefaultExecutionOrder(-100)]
+    [DefaultExecutionOrder(-1000)]
     public class ZombiesComponent : MonoBehaviour
     {
         public int level = 0;

@@ -16,9 +16,11 @@ public class CoinSpwaner : MonoBehaviour
     public List<Field> field;
     public GameObject coin;
     public GameObject meat;
+    private WaitForSeconds twoSecond;
 
     private void Awake()
     {
+        twoSecond = new WaitForSeconds(2f);
         for (int i = 0; i < 50; i++)
         {
             coinPool.Add(Instantiate(coin, this.transform.position, Quaternion.identity));
@@ -28,9 +30,24 @@ public class CoinSpwaner : MonoBehaviour
         {
             Spwan();
         }
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 100; i++)
         {
             MeatSpwan();
+        }
+
+        StartCoroutine(CoinSpwan(10));
+    }
+
+    private IEnumerator CoinSpwan(int x)
+    {
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < 5f; j++)
+            {
+                Spwan();
+                MeatSpwan();
+            }
+            yield return twoSecond;
         }
     }
 

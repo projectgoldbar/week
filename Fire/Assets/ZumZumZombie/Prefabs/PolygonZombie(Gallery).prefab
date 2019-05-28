@@ -15,13 +15,12 @@ GameObject:
   - component: {fileID: 1369419214}
   - component: {fileID: 1369419215}
   - component: {fileID: 1369419218}
-  - component: {fileID: 1369419220}
   m_Layer: 10
   m_Name: PolygonZombie(Gallery)
   m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4714680489494612356
 Transform:
@@ -52,7 +51,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 6867c48408f88ee4f93ab7f9ef03048c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -129,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0968419bbf42ca94bbe7a82af4cc43a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!114 &1369419218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,18 +142,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 0}
---- !u!114 &1369419220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4714680489494727766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ae512c2471aff74aa92f5c5cb74dd6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8011203197923185486
 GameObject:
   m_ObjectHideFlags: 0
