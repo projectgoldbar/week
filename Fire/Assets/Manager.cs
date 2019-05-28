@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Diagnostics;
+using UnityEngine.SceneManagement;
 
-[DefaultExecutionOrder(-400)]
+//[DefaultExecutionOrder(-400)]
 public class Manager : MonoBehaviour
 {
     public GameObject[] Human;
@@ -47,6 +48,16 @@ public class Manager : MonoBehaviour
         playerData.transform.position = new Vector3(x, setLine[0].y, setLine[0].z);
 
         GameStart();
+        //PlayerSetting();
+    }
+
+    private void PlayerSetting()
+    {
+        var userEquipSkillList = UserDataMansger.Instance.userData.skillLVList;
+        for (int i = 0; i < userEquipSkillList.Length; i++)
+        {
+            playerData.evolveLvData[i] = userEquipSkillList[i];
+        }
     }
 
     public void Evolution()
@@ -94,12 +105,14 @@ public class Manager : MonoBehaviour
 
     private void GameStart()
     {
+        Time.timeScale = 1;
         sw.Start();
     }
 
     public void GameOver()
     {
         sw.Stop();
+        EndGameSeq();
         Time.timeScale = 0;
         gameOverUi.SetActive(true);
     }
@@ -121,5 +134,18 @@ public class Manager : MonoBehaviour
     {
         ui.SetActive(false);
         sw.Start();
+    }
+
+    public void EndGameSeq()
+    {
+        var x = UserDataMansger.Instance;
+        x.userData.Money = playerData.gold;
+        x.UserDataBinarySave(x.userdataname);
+
+    }
+
+    public void GoIntro()
+    {
+        SceneManager.LoadScene("01_Intro");
     }
 }

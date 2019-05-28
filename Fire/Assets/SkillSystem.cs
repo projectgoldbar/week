@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class SkillSystem : MonoBehaviour
 {
     public PlayerMove playerMove;
+    public PlayerData playerData;
     public int skillCount = 1;
     public int maxSkillCount = 1;
     public float originCoolTime = 20f;
@@ -14,13 +15,13 @@ public class SkillSystem : MonoBehaviour
     {
         progressBar = GetComponent<Image>();
         coolTime = originCoolTime;
+        playerData = playerMove.GetComponent<PlayerData>();
     }
 
     public void SkillStart()
     {
-        if (skillCount > 0)
+        if (skillCount != 0)
         {
-            Debug.Log("a");
             coolTime = 0;
             playerMove.Skill();
             skillCount -= 1;
@@ -29,7 +30,7 @@ public class SkillSystem : MonoBehaviour
 
     private void Update()
     {
-        if (skillCount < maxSkillCount)
+        if (skillCount < playerData.skillCountLv)
         {
             if (coolTime >= originCoolTime)
             {
@@ -45,5 +46,6 @@ public class SkillSystem : MonoBehaviour
             coolTime = originCoolTime;
         }
         progressBar.fillAmount = coolTime * 0.05f;
+        Debug.Log(skillCount);
     }
 }

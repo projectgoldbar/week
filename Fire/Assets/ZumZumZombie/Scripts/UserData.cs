@@ -12,7 +12,7 @@ public class UserData
     public int playCount;
     public int dieCount;
     public int clearCount;
-    public float maxRiskLevel;
+    public float maxLiveTime;
 
     #region MONEY
     public int Money;
@@ -56,6 +56,20 @@ public class UserData
 
     [Header("스킬수집정보")]
     public bool[] skillCollection = new bool[93];
+
+
+    [System.NonSerialized]
+    public ChildReference1 EquipInfo;
+
+
+    public bool[] SkillCollection 
+    {
+        get { return skillCollection; }
+        set {
+            skillCollection = value;
+            CsvEquipPanel.CollectionPanelOnoff();
+        }
+    }
 
 
     #endregion 스킬습득관련
@@ -144,15 +158,7 @@ public class UserAbillity
 
 
 
-    public float _MaxHp
-    {
-        get { return MaxHp; }
-        set
-        {
-            MaxHp = value;
-            Object.FindObjectOfType<PlayerData>().maxhp = MaxHp;
-        }
-    }
+
 
     public UserAbillity() { }
 
@@ -168,7 +174,7 @@ public class UserAbillity
                         float maximum)
 
     {
-        this._MaxHp         = Maxhp;
+        this.MaxHp         = Maxhp;
         this.Hpdeceleration = Hpdeceleration;
         this.DEF            = DEF;
         this.HpGain         = HpGain;

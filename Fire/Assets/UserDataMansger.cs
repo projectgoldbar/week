@@ -36,6 +36,9 @@ public class UserDataMansger : Singleton<UserDataMansger>
     private CsvEquipPanel csvEquip;
 
     public TextMeshProUGUI UserMoney = null;
+
+   
+
     public int Money
     {
         get
@@ -45,6 +48,10 @@ public class UserDataMansger : Singleton<UserDataMansger>
         set
         {
             money = value;
+            if(UserMoney == null)
+            {
+                UserMoney = FindObjectOfType<TextMeshMoney>().GetComponent<TextMeshProUGUI>();
+            }
             UserMoney.text = money.ToString(); 
         }
     }
@@ -75,7 +82,6 @@ public class UserDataMansger : Singleton<UserDataMansger>
         CsvReadEquipDataSet
             = CSVReader.Read("EquipTextData2");
 
-        
     }
 
 
@@ -202,7 +208,7 @@ public class UserDataMansger : Singleton<UserDataMansger>
         userData = USER;
     }
 
-    private string getPath(string FileName)
+    public string getPath(string FileName)
     {
 #if UNITY_EDITOR
         return Application.dataPath +"/" + FileName;
@@ -220,7 +226,7 @@ public class UserDataMansger : Singleton<UserDataMansger>
     public void CollectionSkill(int v)   //v는 아이템의 인덱스번호
     {
         LobyDataManager.Instance.reference1[v].b_Collection = true;
-        csvEquip.CollectionPanelOnoff();
+        CsvEquipPanel.CollectionPanelOnoff();
         csvEquip.Seteffect();
     }
 

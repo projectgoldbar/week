@@ -38,30 +38,34 @@ public class ChildReference1 : MonoBehaviour
     public List<EquipDataSet> DataListSet = new List<EquipDataSet>();
 
     public EquipRefData equipRef = new EquipRefData();
+
+
+    public static int EquipIndex;
     private void Awake()
     {
         panel = FindObjectOfType<panelOnoff>();
+        GoldButton.onClick.AddListener(DataEquip);
         
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        GoldButton.onClick.AddListener(DataEquip);
-
         ArrNumber = int.Parse(transform.name);
-
-        EquipButtonText();
+        EquipIndex = - 1;
+        defaultButtonColor();
+        EquipLoadButtonColorText();
+        //EquipButtonText();
     }
 
     
 
     public void DataEquip()
     {
-        ResetData();
+        ResetData(ArrNumber);
 
         var DataListValue = LobyDataManager.Instance.reference1[ArrNumber];
 
-        
+        UserDataMansger.Instance.userData.EquipInfo = DataListValue;
 
         for (int i = 0; i < DataListValue.DataListSet.Count; i++)
         {
@@ -71,17 +75,22 @@ public class ChildReference1 : MonoBehaviour
             UserDataMansger.Instance.userData.skillLVList[key] = data;
         }
 
-        ChildReference.PlayerDataSetup(DataListValue.AddHp);
+        ChildReference.UpdateDataNUserData(DataListValue.AddHp);
+        //ChildReference.UserDataNUpdateData(DataListValue.AddHp);
         DataListValue.b_Panel = true;
+
 
         UserDataMansger.Instance.userData.skillEquip[ArrNumber] =
             LobyDataManager.Instance.reference1[ArrNumber].b_Panel;
 
 
 
-        EquipButtonText();
+        EquipButtonText(ArrNumber);
 
-        csvEquip.ChangeModel.sharedMesh = csvEquip.meshRenderer[ArrNumber%csvEquip.meshRenderer.Length].sharedMesh;
+
+        UserDataMansger.Instance.UserDataBinarySave(UserDataMansger.Instance.userdataname);
+
+        //csvEquip.ChangeModel.sharedMesh = csvEquip.meshRenderer[ArrNumber%csvEquip.meshRenderer.Length].sharedMesh;
         //UserDataMansger.userData.skillLVList[돌연변이 index] = 돌연변이레벨;
         //스킨장착 후 데이터 변동을 해야하나?....
     }
@@ -91,8 +100,9 @@ public class ChildReference1 : MonoBehaviour
 
 
 
-    private void ResetData()
+    private void ResetData(int arrnum = -1)
     {
+
         for (int i = 0; i < LobyDataManager.Instance.reference1.Length; i++)
         {
             if (!LobyDataManager.Instance.reference1[i].b_Panel) { continue; }
@@ -113,20 +123,47 @@ public class ChildReference1 : MonoBehaviour
     }
 
 
-    private void EquipButtonText()
+
+    private void defaultButtonColor()
     {
-        
         for (int i = 0; i < UserDataMansger.Instance.userData.skillEquip.Length; i++)
         {
             if (UserDataMansger.Instance.userData.skillCollection[i]) //수집
             {
-                if (!UserDataMansger.Instance.userData.skillEquip[i]) //장착
+                LobyDataManager.Instance.reference1[i].Buttonimage.color = Color.green;
+            }
+        }
+    }
+
+
+    private void EquipButtonText(int arrnum = -1)
+    {
+
+        LobyDataManager.Instance.reference1[arrnum].GoldButtonText.text = "장착중";
+        LobyDataManager.Instance.reference1[arrnum].Buttonimage.color = Color.red;
+        LobyDataManager.Instance.reference1[arrnum].Buttonimage.raycastTarget = false;
+
+
+        if (EquipIndex != -1)
+        {
+            LobyDataManager.Instance.reference1[EquipIndex].GoldButtonText.text = "장착";
+            LobyDataManager.Instance.reference1[arrnum].Buttonimage.raycastTarget = true;
+            LobyDataManager.Instance.reference1[EquipIndex].Buttonimage.color = Color.green;
+        }
+
+        EquipIndex = arrnum;
+    }
+
+
+    private void EquipLoadButtonColorText()
+    {
+        for (int i = 0; i < UserDataMansger.Instance.userData.skillEquip.Length; i++)
+        {
+            if (UserDataMansger.Instance.userData.skillCollection[i]) //수집
+            {
+                if (UserDataMansger.Instance.userData.skillEquip[i]) //장착
                 {
-                    LobyDataManager.Instance.reference1[i].GoldButtonText.text = "장착";
-                    LobyDataManager.Instance.reference1[i].Buttonimage.color = Color.green;
-                }
-                else
-                {
+                    EquipIndex = i;
                     LobyDataManager.Instance.reference1[i].GoldButtonText.text = "장착중";
                     LobyDataManager.Instance.reference1[i].Buttonimage.color = Color.red;
                 }
@@ -137,4 +174,6 @@ public class ChildReference1 : MonoBehaviour
             }
         }
     }
+
+
 }

@@ -29,7 +29,10 @@ public class LobyDataManager : Singleton<LobyDataManager>
         ReferenceLoby();
     }
 
-
+    public void sceneChange()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+    }
 
 
 
