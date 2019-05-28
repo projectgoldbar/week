@@ -2,10 +2,18 @@
 
 public class DontDestroy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
+    private static DontDestroy x = null;
 
+    private void Awake()
+    {
+        if (x != null && x != this)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            x = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
 }

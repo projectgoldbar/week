@@ -112,6 +112,7 @@ public class Manager : MonoBehaviour
     public void GameOver()
     {
         sw.Stop();
+        EndGameSeq();
         Time.timeScale = 0;
         gameOverUi.SetActive(true);
     }
@@ -133,6 +134,12 @@ public class Manager : MonoBehaviour
     {
         ui.SetActive(false);
         sw.Start();
+    }
+
+    public void EndGameSeq()
+    {
+        var x = UserDataMansger.Instance.userData;
+        x.Money = playerData.gold;
     }
 
     public void GoIntro()

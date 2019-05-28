@@ -10,11 +10,23 @@ public class PlayerData : MonoBehaviour
     public float maxhp = 50f;
     public float hp = 50f;
     public float hpDownSpeed = 3.3f;
+
+    /// <summary>
+    /// 스킬지속시간관련
+    /// </summary>
     public float skillLv = 0;
-    public float skillCountLv = 0;
+
+    /// <summary>
+    /// 스킬최대횟수관련
+    /// </summary>
+    public float skillCountLv = 1;
+
     public float maxEp = 10f;
     public float epLv = 0;
     public float ep = 0f;
+    public float hpUpSpeed = 5f;
+    public float epUpSpeed = 3f;
+    public int goldUpSpeed = 3;
     public int gold = 0;
     public int df = 0;
     public int live = 0;
@@ -154,10 +166,26 @@ public class PlayerData : MonoBehaviour
 
     private void PlayerSetting()
     {
-        var userEquipSkillList = UserDataMansger.Instance.userData.skillLVList;
-        for (int i = 0; i < userEquipSkillList.Length; i++)
+        if (UserDataMansger.Instance.userData == null)
         {
-            evolveLvData[i] = userEquipSkillList[i];
+            return;
+        }
+        else
+        {
+            var x = UserDataMansger.Instance.userData;
+            gold = x.Money;
+            maxhp = x.userAbillity.MaxHp;
+            df = (int)x.userAbillity.DEF;
+            hpDownSpeed = hpDownSpeed - (hpDownSpeed * x.userAbillity.Hpdeceleration * 0.01f);
+            epUpSpeed = epUpSpeed + (epUpSpeed * x.userAbillity.Gainevolution * 0.01f);
+            goldUpSpeed = goldUpSpeed + (int)(goldUpSpeed * x.userAbillity.MoneyGain * 0.01f);
+            skillCountLv = skillCountLv - x.userAbillity.Maximum;
+            skillLv = skillLv + x.userAbillity.duration;
+            var userEquipSkillList = x.skillLVList;
+            for (int i = 0; i < userEquipSkillList.Length; i++)
+            {
+                evolveLvData[i] = userEquipSkillList[i];
+            }
         }
     }
 
@@ -256,13 +284,13 @@ public class PlayerData : MonoBehaviour
         }
         else if (other.tag == "Coin")
         {
-            Gold = 3;
+            Gold = goldUpSpeed;
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Meat")
         {
-            var xep = 3f + (evolveLvData[9] * 0.5f);
-            var xhp = 5f + (evolveLvData[7] * 3f);
+            var xep = epUpSpeed + (evolveLvData[9] * 0.5f);
+            var xhp = hpUpSpeed + (evolveLvData[7] * 3f);
             Ep = xep;
             hp += xhp;
             other.gameObject.SetActive(false);
