@@ -46,6 +46,5 @@ public class SkillSystem : MonoBehaviour
             coolTime = originCoolTime;
         }
         progressBar.fillAmount = coolTime * 0.05f;
-        Debug.Log(skillCount);
     }
 }

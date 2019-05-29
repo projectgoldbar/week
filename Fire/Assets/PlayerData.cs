@@ -1,11 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
     public GameObject dummyShied;
     public ParticleSystem boostParticle;
+    public bool isTest;
 
     public float maxhp = 50f;
     public float hp = 50f;
@@ -149,7 +149,6 @@ public class PlayerData : MonoBehaviour
     private void Awake()
     {
         evolveLvData = new int[24] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        hp = maxhp;
         //FindObjectOfType<hpSlider>().playerData = this;
         playerMove = GetComponent<PlayerMove>();
         FindObjectOfType<SkillSystem>().playerMove = GetComponent<PlayerMove>();
@@ -161,31 +160,28 @@ public class PlayerData : MonoBehaviour
         boostParticle = GetComponentInChildren<ParticleSystem>();
         shield.SetActive(false);
         magnet.SetActive(false);
-        PlayerSetting();
+        if (!isTest)
+        {
+            PlayerSetting();
+        }
+        hp = maxhp;
     }
 
     private void PlayerSetting()
     {
-        if (UserDataMansger.Instance.userData == null)
+        var x = UserDataMansger.Instance.userData;
+        gold = x.Money;
+        maxhp = x.userAbillity.MaxHp;
+        df = (int)x.userAbillity.DEF;
+        hpDownSpeed = hpDownSpeed - (hpDownSpeed * x.userAbillity.Hpdeceleration * 0.01f);
+        epUpSpeed = epUpSpeed + (epUpSpeed * x.userAbillity.Gainevolution * 0.01f);
+        goldUpSpeed = goldUpSpeed + (int)(goldUpSpeed * x.userAbillity.MoneyGain * 0.01f);
+        skillCountLv = skillCountLv - x.userAbillity.Maximum;
+        skillLv = skillLv + x.userAbillity.duration;
+        var userEquipSkillList = x.skillLVList;
+        for (int i = 0; i < userEquipSkillList.Length; i++)
         {
-            return;
-        }
-        else
-        {
-            var x = UserDataMansger.Instance.userData;
-            gold = x.Money;
-            maxhp = x.userAbillity.MaxHp;
-            df = (int)x.userAbillity.DEF;
-            hpDownSpeed = hpDownSpeed - (hpDownSpeed * x.userAbillity.Hpdeceleration * 0.01f);
-            epUpSpeed = epUpSpeed + (epUpSpeed * x.userAbillity.Gainevolution * 0.01f);
-            goldUpSpeed = goldUpSpeed + (int)(goldUpSpeed * x.userAbillity.MoneyGain * 0.01f);
-            skillCountLv = skillCountLv - x.userAbillity.Maximum;
-            skillLv = skillLv + x.userAbillity.duration;
-            var userEquipSkillList = x.skillLVList;
-            for (int i = 0; i < userEquipSkillList.Length; i++)
-            {
-                evolveLvData[i] = userEquipSkillList[i];
-            }
+            evolveLvData[i] = userEquipSkillList[i];
         }
     }
 

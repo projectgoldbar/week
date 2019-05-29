@@ -13,6 +13,7 @@ public class CoinSpwaner : MonoBehaviour
 {
     public List<GameObject> coinPool;
     public List<GameObject> meatPool;
+
     public List<Field> field;
     public GameObject coin;
     public GameObject meat;

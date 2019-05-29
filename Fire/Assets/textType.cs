@@ -5,4 +5,6 @@ using UnityEngine;
 public class textType : MonoBehaviour
 {
     public ChildReference1[] threeRef;
+
+    public int SetInt = 0;
 }

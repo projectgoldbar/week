@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ public class ChildReference : MonoBehaviour
     public Button GoldButton = null;
     public Text GoldButtonText = null;
 
-    public string Key = null;
+    
 
     public UnityEvent LoadData;
     private panelOnoff panel;
@@ -41,6 +42,8 @@ public class ChildReference : MonoBehaviour
     private void Start()
     {
         Update_Load();
+
+        
     }
 
     public void DataUpdate()
@@ -54,17 +57,21 @@ public class ChildReference : MonoBehaviour
         LvCount = UserDataMansger.Instance.LvDataList[ArrNumber].LvCount;
 
         GoldButtonText.text = UserMoney();
+        var addhp = LobyDataManager.Instance.EquipInfo.AddHp;
+       
+        //else addhp = 0;
+
+        var vv = float.Parse(goldRead[LvCount][ArrNumber + "_value"].ToString())+addhp;
+        ability2.text = vv.ToString();
+
         
 
-
-        var vv = float.Parse(goldRead[LvCount][ArrNumber + "_value"].ToString());
-        ability2.text = vv.ToString();
         UserDataMansger.Instance.LvDataList[ArrNumber].LvCount = LvCount;
         UserDataMansger.Instance.updateData[ArrNumber] = DATA(ArrNumber);
 
-
         UpdateDataNUserData();
-        //UserDataNUpdateData();
+       // UserDataNUpdateData();
+
     }
 
 
@@ -110,7 +117,7 @@ public class ChildReference : MonoBehaviour
     }
 
     //UserData를 UpdateData로 보내줌
-    public static void UserDataNUpdateData(float addhp = 0, float Def = 0)
+    public static void UserDataNUpdateData(float addhp = 0, float Def = 0, Action action = null)
     {
         UserAbillity Abillity = UserDataMansger.Instance.userData.userAbillity;
 
@@ -147,17 +154,30 @@ public class ChildReference : MonoBehaviour
         //1회성 획득체력
         UserDataMansger.Instance.updateData[14].Data = Abillity.One_Time_HpGain;
 
+        action?.Invoke();
+       
     }
 
+
+    public static void haveFile()
+    {
+        for (int i = 0; i < UserDataMansger.Instance.updateData.Count; i++)
+        {
+            UserDataMansger.Instance.updateData[i].OBJ.ability2.text =
+            UserDataMansger.Instance.updateData[i].Data.ToString();
+        }
+
+    }
 
 
 
     public UpdateData DATA(int arrnum =0)
     {
         UpdateData data = new UpdateData();
-        data.Index = ArrNumber;
+        data.Index = arrnum;
         data.Name = Name.text;
-        data.Data = Convert.ToSingle(goldRead[LvCount][arrnum + "_value"].ToString());
+        data.Data = //UserDataMansger.Instance.updateData[arrnum].Data;
+            float.Parse(goldRead[LvCount][arrnum + "_value"].ToString());
 
         data.OBJ = this;
 
@@ -184,12 +204,27 @@ public class ChildReference : MonoBehaviour
     //유니티이벤트로 넣음 
     public void Update_Load()
     {
+        for (int i = 0; i < UserDataMansger.Instance.userData.skillEquip.Length; i++)
+        {
+            if (UserDataMansger.Instance.userData.skillEquip[i])
+            {
+                LobyDataManager.Instance.EquipInfo = LobyDataManager.Instance.reference1[i];
+            }
+            else continue;
+        }
+
         LvCount = UserDataMansger.Instance.LvDataList[ArrNumber].LvCount;
 
         GoldButtonText.text = goldRead[LvCount][ArrNumber + "_money"].ToString();
-        ability2.text = goldRead[LvCount][ArrNumber + "_value"].ToString();
+        //ability2.text = goldRead[LvCount][ArrNumber + "_value"].ToString();
 
         UserDataMansger.Instance.updateData[ArrNumber] = DATA(ArrNumber);
+
+            ability2.text = UserDataMansger.Instance.updateData[ArrNumber].Data.ToString();
+
+
+       
+
     }
 
 

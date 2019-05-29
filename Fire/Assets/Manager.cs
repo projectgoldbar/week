@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Diagnostics;
@@ -29,6 +28,7 @@ public class Manager : MonoBehaviour
     public Vector3[] line2;
     public Vector3[] line3;
     public Stopwatch sw = new Stopwatch();
+    public float playtime;
 
     public bool viewAd = false;
 
@@ -93,8 +93,8 @@ public class Manager : MonoBehaviour
 
     private void Update()
     {
-        var a = Mathf.Floor(sw.ElapsedMilliseconds * 0.001f);
-        timeUi.text = "생존시간" + a;
+        playtime = Mathf.Floor(sw.ElapsedMilliseconds * 0.001f);
+        timeUi.text = "생존시간 " + playtime;
     }
 
     private void GamePause()
@@ -141,7 +141,6 @@ public class Manager : MonoBehaviour
         var x = UserDataMansger.Instance;
         x.userData.Money = playerData.gold;
         x.UserDataBinarySave(x.userdataname);
-
     }
 
     public void GoIntro()

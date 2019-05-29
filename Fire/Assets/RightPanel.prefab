@@ -1239,8 +1239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: {fileID: 5722665399875149201, guid: 2195e6e0f915f694e8c051bb0903803f, type: 3}
-  CSVFileName: UpgradeTextData
-  CSVFileGoldData: ShopGoldData
+  childReferences: []
 --- !u!1 &6298447876469687192
 GameObject:
   m_ObjectHideFlags: 0
@@ -2221,7 +2220,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6298447877336187588}
-  - component: {fileID: 6298447877336187590}
   - component: {fileID: 6298447877336187591}
   - component: {fileID: 6298447877336187592}
   m_Layer: 5
@@ -2250,29 +2248,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 54}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &6298447877336187590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6298447877336187589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1297475563, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 70
-  m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
 --- !u!114 &6298447877336187591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2285,14 +2260,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ef46381252e2942ad2e1ae260f20f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  list: {fileID: 5722665399875149201, guid: ac514bd7536940e478436752bb45c6f0, type: 3}
-  CSVFileName: EquipTextData
-  CSVFileGoldData: ShopGoldData
-  Equiplist: {fileID: 3682032677441267031, guid: a8cc995d82edfd5479de967cb5aaa8c4,
-    type: 3}
-  TextPanel: {fileID: 8736104942802035786, guid: e1eaeb9e2ec86d24881069fedc98cf3c,
-    type: 3}
-  rootGameOBJ: {fileID: 6298447877542400037}
+  ChangeModel: {fileID: 0}
+  meshRenderer: []
+  EquipList: []
 --- !u!222 &6298447877336187592
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2373,9 +2343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5558eef2e70f9045bcd6f2e9bee352f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  list: {fileID: 5722665399875149201, guid: 9e01360f384c1714a9194ebbc1e3dae5, type: 3}
-  CSVFileName: UpgradeTextData
-  CSVFileGoldData: ShopGoldData
+  ChildBMPanel: {fileID: 0}
 --- !u!1 &6298447877414918757
 GameObject:
   m_ObjectHideFlags: 0

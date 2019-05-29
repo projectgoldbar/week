@@ -34,13 +34,5 @@ namespace ZombieState
             attack = GetComponent<ZomBie_Attack>();
             material = GetComponentInChildren<SkinnedMeshRenderer>().materials[0];
         }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                StopCoroutine(moveCoroutine);
-            }
-        }
     }
 }

@@ -86,7 +86,6 @@ public class EvolveSystem : MonoBehaviour
     {
         var a = FindObjectOfType<PlayerData>();
         a.live++;
-        Debug.Log("2차심장");
     }
 
     public void FullCharge()
@@ -96,34 +95,49 @@ public class EvolveSystem : MonoBehaviour
         {
             a.skillCount++;
         }
-        Debug.Log("풀차지");
     }
 
     public void MeatFall()
     {
         var a = FindObjectOfType<PlayerData>();
+        var m = FindObjectOfType<CoinSpwaner>();
 
-        Debug.Log("하늘에서고기가 구현해줘");
+        for (int i = 0; i < 10; i++)
+        {
+            if (i == 0)
+            {
+                for (int j = 0; j < m.meatPool.Count; j++)
+                {
+                    if (!m.meatPool[j].activeSelf)
+                    {
+                        m.transform.position = a.transform.forward * i;
+                        i++;
+                    }
+                }
+            }
+            m.meatPool.Add(Instantiate(m.meat, a.transform.position + a.transform.forward * i * 5f, Quaternion.identity));
+        }
     }
+
+    private bool setShield = false;
 
     public void DefenceUp()
     {
         var a = FindObjectOfType<PlayerData>();
-        if (a.evolveLvData[4] == 0)
+        if (setShield == false)
         {
             a.animator.Play("Jumping");
             StartCoroutine(SetShield(a));
+            setShield = true;
         }
         a.evolveLvData[4]++;
-
-        Debug.Log("디펜스업");
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            DefenceUp();
+            MeatFall();
         }
     }
 
