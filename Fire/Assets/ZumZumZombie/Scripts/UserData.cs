@@ -58,18 +58,17 @@ public class UserData
     public bool[] skillCollection = new bool[93];
 
 
-    [System.NonSerialized]
-    public ChildReference1 EquipInfo;
+   
 
 
-    public bool[] SkillCollection 
-    {
-        get { return skillCollection; }
-        set {
-            skillCollection = value;
-            CsvEquipPanel.CollectionPanelOnoff();
-        }
-    }
+    //public bool[] SkillCollection 
+    //{
+    //    get { return skillCollection; }
+    //    set {
+    //        skillCollection = value;
+    //        CsvEquipPanel.CollectionPanelOnoff();
+    //    }
+    //}
 
 
     #endregion 스킬습득관련

@@ -9,7 +9,8 @@ public class LobyDataManager : Singleton<LobyDataManager>
     public GameObject EquipParent;
     public ChildReference1[] reference1;
     public textType[] SetText;
-
+    //[System.NonSerialized]
+    public ChildReference1 EquipInfo;
 
     public void ReferenceLoby()
     {
@@ -21,6 +22,8 @@ public class LobyDataManager : Singleton<LobyDataManager>
         }
 
         SetText = EquipParent.GetComponentsInChildren<textType>();
+
+        
     }
 
 
@@ -28,6 +31,9 @@ public class LobyDataManager : Singleton<LobyDataManager>
     {
         ReferenceLoby();
     }
+
+
+    
 
     public void sceneChange()
     {

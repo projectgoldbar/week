@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
+using System.Text;
 
 [System.Serializable]
 public class EquipRefData
@@ -41,6 +40,9 @@ public class ChildReference1 : MonoBehaviour
 
 
     public static int EquipIndex;
+
+
+    
     private void Awake()
     {
         panel = FindObjectOfType<panelOnoff>();
@@ -54,18 +56,26 @@ public class ChildReference1 : MonoBehaviour
         EquipIndex = - 1;
         defaultButtonColor();
         EquipLoadButtonColorText();
+
         //EquipButtonText();
     }
+    private void Start()
+    {
+      
+    }
 
-    
 
     public void DataEquip()
     {
+        if (LobyDataManager.Instance.reference1[ArrNumber].b_Panel) return;
+
         ResetData(ArrNumber);
 
         var DataListValue = LobyDataManager.Instance.reference1[ArrNumber];
 
-        UserDataMansger.Instance.userData.EquipInfo = DataListValue;
+        LobyDataManager.Instance.EquipInfo = DataListValue;
+
+
 
         for (int i = 0; i < DataListValue.DataListSet.Count; i++)
         {
@@ -75,30 +85,28 @@ public class ChildReference1 : MonoBehaviour
             UserDataMansger.Instance.userData.skillLVList[key] = data;
         }
 
-        ChildReference.UpdateDataNUserData(DataListValue.AddHp);
-        //ChildReference.UserDataNUpdateData(DataListValue.AddHp);
         DataListValue.b_Panel = true;
 
 
         UserDataMansger.Instance.userData.skillEquip[ArrNumber] =
             LobyDataManager.Instance.reference1[ArrNumber].b_Panel;
 
-
-
         EquipButtonText(ArrNumber);
 
 
-        UserDataMansger.Instance.UserDataBinarySave(UserDataMansger.Instance.userdataname);
+        ChildReference.UserDataNUpdateData(LobyDataManager.Instance.EquipInfo.AddHp,0,ChildReference.haveFile);
+        ChildReference.UpdateDataNUserData();
+
+
+        //DataListValue.ability2.text 
+        //    = UserDataMansger.Instance.userData.userAbillity.MaxHp.ToString();
 
         //csvEquip.ChangeModel.sharedMesh = csvEquip.meshRenderer[ArrNumber%csvEquip.meshRenderer.Length].sharedMesh;
         //UserDataMansger.userData.skillLVList[돌연변이 index] = 돌연변이레벨;
-        //스킨장착 후 데이터 변동을 해야하나?....
     }
 
-
-   
-
-
+    
+    
 
     private void ResetData(int arrnum = -1)
     {
@@ -138,19 +146,20 @@ public class ChildReference1 : MonoBehaviour
 
     private void EquipButtonText(int arrnum = -1)
     {
+       
+
 
         LobyDataManager.Instance.reference1[arrnum].GoldButtonText.text = "장착중";
         LobyDataManager.Instance.reference1[arrnum].Buttonimage.color = Color.red;
-        LobyDataManager.Instance.reference1[arrnum].Buttonimage.raycastTarget = false;
-
+       
 
         if (EquipIndex != -1)
         {
             LobyDataManager.Instance.reference1[EquipIndex].GoldButtonText.text = "장착";
-            LobyDataManager.Instance.reference1[arrnum].Buttonimage.raycastTarget = true;
             LobyDataManager.Instance.reference1[EquipIndex].Buttonimage.color = Color.green;
-        }
 
+            UserDataMansger.Instance.userData.userAbillity.MaxHp -= LobyDataManager.Instance.reference1[EquipIndex].AddHp;
+        }
         EquipIndex = arrnum;
     }
 

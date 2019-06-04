@@ -13,15 +13,21 @@ public class panelOnoff : MonoBehaviour
         switch (panelName)
         {
             case PanelName.Upgrade:
-                OnTarget(0).SetActive(true);
+                if (OnTarget(0).activeSelf)return;
+
+                    OnTarget(0).SetActive(true);
                 break;
 
             case PanelName.Equip:
+                if (OnTarget(1).activeSelf) return;
+
                 OnTarget(1).SetActive(true);
                 break;
 
             case PanelName.spl:
-                OnTarget(2).SetActive(true);
+                if (OnTarget(2).activeSelf) return;
+
+                    OnTarget(2).SetActive(true);
                 break;
         }
     }

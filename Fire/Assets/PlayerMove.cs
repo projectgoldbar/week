@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -174,7 +173,7 @@ public class PlayerMove : MonoBehaviour
 
         //Manager.boostFlash.SetActive(false);
         //Manager.boostVignette.SetActive(true);
-        transform.localScale = transform.localScale * (1 * playerData.skillLv + 1);
+        transform.localScale = transform.localScale * (1 + playerData.skillLv * 0.1f);
         //boostParticles.Play();
 
         speed *= 2f;
