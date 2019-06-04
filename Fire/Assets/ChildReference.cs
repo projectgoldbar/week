@@ -34,17 +34,12 @@ public class ChildReference : MonoBehaviour
         //GoldButton.onClick.AddListener(Process);
     }
 
-
-    private void OnEnable()
-    {
-        
-    }
     private void Start()
     {
         Update_Load();
-
-        
     }
+
+
 
     public void DataUpdate()
     {
@@ -57,7 +52,9 @@ public class ChildReference : MonoBehaviour
         LvCount = UserDataMansger.Instance.LvDataList[ArrNumber].LvCount;
 
         GoldButtonText.text = UserMoney();
-        var addhp = LobyDataManager.Instance.EquipInfo.AddHp;
+        float addhp = 0;
+        if (LobyDataManager.Instance.EquipInfo != null)
+        addhp = LobyDataManager.Instance.EquipInfo.AddHp;
        
         //else addhp = 0;
 
@@ -155,7 +152,8 @@ public class ChildReference : MonoBehaviour
         UserDataMansger.Instance.updateData[14].Data = Abillity.One_Time_HpGain;
 
         action?.Invoke();
-       
+
+        
     }
 
 
@@ -201,9 +199,9 @@ public class ChildReference : MonoBehaviour
         return goldRead[LvCount][ArrNumber + "_money"].ToString();
     }
 
-    //유니티이벤트로 넣음 
     public void Update_Load()
     {
+        Debug.Log("Load");
         for (int i = 0; i < UserDataMansger.Instance.userData.skillEquip.Length; i++)
         {
             if (UserDataMansger.Instance.userData.skillEquip[i])
@@ -218,15 +216,8 @@ public class ChildReference : MonoBehaviour
         GoldButtonText.text = goldRead[LvCount][ArrNumber + "_money"].ToString();
         //ability2.text = goldRead[LvCount][ArrNumber + "_value"].ToString();
 
-        UserDataMansger.Instance.updateData[ArrNumber] = DATA(ArrNumber);
+        //UserDataMansger.Instance.updateData[ArrNumber] = DATA(ArrNumber);
 
-            ability2.text = UserDataMansger.Instance.updateData[ArrNumber].Data.ToString();
-
-
-       
-
+        //ability2.text = UserDataMansger.Instance.updateData[ArrNumber].Data.ToString();
     }
-
-
-
 }

@@ -155,8 +155,8 @@ public class UserAbillity
     [Header("1회성 획득체력")]
     public float One_Time_HpGain;
 
-
-
+    [Header("장착스킨Index")] 
+    public int EquipIndex; // 스킨 장착 후 게임시작 스킨목록에서 장착시킬 스킨배열번호
 
 
     public UserAbillity() { }

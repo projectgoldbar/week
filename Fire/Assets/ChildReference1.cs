@@ -67,6 +67,8 @@ public class ChildReference1 : MonoBehaviour
 
     public void DataEquip()
     {
+        UserDataMansger.Instance.userData.userAbillity.EquipIndex = ArrNumber;
+
         if (LobyDataManager.Instance.reference1[ArrNumber].b_Panel) return;
 
         ResetData(ArrNumber);
@@ -94,7 +96,8 @@ public class ChildReference1 : MonoBehaviour
         EquipButtonText(ArrNumber);
 
 
-        ChildReference.UserDataNUpdateData(LobyDataManager.Instance.EquipInfo.AddHp,0,ChildReference.haveFile);
+        //ChildReference.UserDataNUpdateData(LobyDataManager.Instance.EquipInfo.AddHp,0,ChildReference.haveFile);
+        ChildReference.UserDataNUpdateData(LobyDataManager.Instance.EquipInfo.AddHp,0, ChildReference.haveFile);
         ChildReference.UpdateDataNUserData();
 
 

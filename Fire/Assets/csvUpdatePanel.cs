@@ -23,53 +23,38 @@ public class csvUpdatePanel : MonoBehaviour
         childReferences = GetComponentsInChildren<ChildReference>();
         UpdataPanel_Read();
         Update_Load();
+        ChildReference.UserDataNUpdateData(0, 0);
         
     }
 
-    public void OnEnable()
-    {
-        // ChildReference.UserDataNUpdateData();
-        //for (int i = 0; i < ChildCount; i++)
-        //{
-        //    childReferences[i].ability2.text =
-        //        UserDataMansger.Instance.updateData[i].Data.ToString();
-        //}
-    }
     private void Start()
     {
-        //Update_Load2();
-        //ChildReference.UserDataNUpdateData();
+    }
+
+
+    public void OnEnable()
+    {
+        var objs = GetComponentsInChildren<ChildReference>();
+        flag = false;
+        for (int i = 0; i < objs.Length; i++)
+        {
+            UserDataMansger.Instance.updateData[i].OBJ = objs[i];
+
+            UserDataMansger.Instance.updateData[i].OBJ.ability2.text =
+            UserDataMansger.Instance.updateData[i].Data.ToString();
+        }
+
     }
     bool flag = false;
     private void Update()
     {
         if (flag) return;
 
-        //if (childReferences != null)
-        {
-            Debug.Log("됫냐?");
-            //if (File.Exists(UserDataMansger.Instance.getPath(UserDataMansger.Instance.userdataname)))
-            //{
-            //    for (int i = 0; i < UserDataMansger.Instance.updateData.Count; i++)
-            //    {
-            //        UserDataMansger.Instance.updateData[i].OBJ.ability2.text =
-            //        UserDataMansger.Instance.updateData[i].Data.ToString();
-            //    }
-            //    ChildReference.UserDataNUpdateData();
-            //}
-            //else
-            //{
-            //    for (int i = 0; i < UserDataMansger.Instance.updateData.Count; i++)
-            //    {
-            //        UserDataMansger.Instance.updateData[i].Data = float.Parse(UserDataMansger.Instance.updateData[i].OBJ.ability2.text);
-            //    }
-            //    ChildReference.UserDataNUpdateData(0, 0, ChildReference.haveFile);
-            //}
+        Debug.Log("됫냐?");
+       
+        ChildReference.UserDataNUpdateData(0, 0);
 
-              ChildReference.UserDataNUpdateData(0, 0, ChildReference.haveFile);
-            
-            flag = true;
-        }
+        flag = true;
     }
 
     public void UpdataPanel_Read()
