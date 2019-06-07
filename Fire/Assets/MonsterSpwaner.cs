@@ -52,7 +52,7 @@ public class MonsterSpwaner : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             var monster = Instantiate(bombZombie, spwanPoints[Random.Range(1, spwanPoints.Length)].position, Quaternion.identity);
-            var patrolZombie = Instantiate(this.patrolZombie, spwanPoints[Random.Range(1, spwanPoints.Length)].position, Quaternion.identity);
+            var patrolZombie = Instantiate(this.bombZombie, spwanPoints[Random.Range(1, spwanPoints.Length)].position, Quaternion.identity);
             patrolZombieList.Add(patrolZombie);
             yield return new WaitForSeconds(20f);
         }

@@ -3,7 +3,7 @@
 public class Coin : MonoBehaviour
 {
     public Vector3 RotationSpeed = new Vector3(0f, 0, 100f);
-
+    public int coinSection;
     private ParticlePool particlePool;
 
     private void Awake()

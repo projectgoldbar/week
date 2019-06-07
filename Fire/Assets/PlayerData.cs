@@ -6,6 +6,7 @@ public class PlayerData : MonoBehaviour
     public GameObject dummyShied;
     public ParticleSystem boostParticle;
     public bool isTest;
+    private bool smite = true;
 
     public float maxhp = 50f;
     public float hp = 50f;
@@ -167,12 +168,27 @@ public class PlayerData : MonoBehaviour
         hp = maxhp;
     }
 
+    public bool isHalfSpeech = false;
+
     private void PlayerSetting()
     {
+        if (smite)
+        {
+            df = -20;
+        }
+        if (isHalfSpeech)
+        {
+            maxhp = 281;
+            df = 4;
+            hpUpSpeed = 20f;
+
+            return;
+        }
         var x = UserDataMansger.Instance.userData;
         gold = x.Money;
         maxhp = x.userAbillity.MaxHp;
-        df = (int)x.userAbillity.DEF;
+        var dft = x.userAbillity.DEF * 0.2f;
+        df = (int)dft;
         hpDownSpeed = hpDownSpeed - (hpDownSpeed * x.userAbillity.Hpdeceleration * 0.01f);
         epUpSpeed = epUpSpeed + (epUpSpeed * x.userAbillity.Gainevolution * 0.01f);
         goldUpSpeed = goldUpSpeed + (int)(goldUpSpeed * x.userAbillity.MoneyGain * 0.01f);
@@ -272,7 +288,7 @@ public class PlayerData : MonoBehaviour
     {
         if (other.tag == "Zombie")
         {
-            Hp = -1 * (other.GetComponent<ZombieState.ZombiesComponent>().damage - evolveLvData[4]);
+            Hp = -1 * (other.GetComponent<ZombieState.ZombiesComponent>().damage - evolveLvData[4] - df);
             var hitEffect = particlePool.GetParticle(particlePool.hitParticlePool);
             hitEffect.transform.position = transform.position;
             hitEffect.transform.localRotation = transform.rotation;
@@ -285,7 +301,7 @@ public class PlayerData : MonoBehaviour
         }
         else if (other.tag == "Meat")
         {
-            var xep = epUpSpeed + (evolveLvData[9] * 0.5f);
+            var xep = epUpSpeed + (evolveLvData[8] * 0.5f);
             var xhp = hpUpSpeed + (evolveLvData[7] * 3f);
             Ep = xep;
             hp += xhp;

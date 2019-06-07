@@ -35,6 +35,7 @@ public class BombZombie : MonoBehaviour
         while (true)
         {
             yield return null;
+            Debug.Log(23);
             if (Vector3.Distance(playerData.position, transform.position) < 15f)
             {
                 StartCoroutine(BombSeq());
@@ -45,7 +46,7 @@ public class BombZombie : MonoBehaviour
             {
                 SuchPlayer();
                 agent.SetDestination(target.position);
-                yield return waitFor02Seconds;
+                yield return waitForOneSeconds;
             }
         }
     }
@@ -58,6 +59,7 @@ public class BombZombie : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(1f);
+        transform.localScale = new Vector3(1, 1, 1);
         var a = particlePool.GetParticle(particlePool.nukeParticlePool);
         a.transform.position = transform.position;
         a.SetActive(true);

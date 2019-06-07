@@ -8,7 +8,7 @@ public class Blast : MonoBehaviour
         var a = Physics.OverlapSphere(transform.position, 20f);
         for (int i = 0; i < a.Length; i++)
         {
-            if (a[i].gameObject.layer == LayerMask.NameToLayer("Magnet"))
+            if (a[i].gameObject.layer == LayerMask.NameToLayer("Magnet") || a[i].gameObject.layer == LayerMask.NameToLayer("Sector"))
             {
                 continue;
             }

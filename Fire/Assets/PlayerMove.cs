@@ -187,4 +187,11 @@ public class PlayerMove : MonoBehaviour
         //carAudioBoost.Stop();
         //carAudioNormal.Play();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Sector"))
+        {
+        }
+    }
 }
