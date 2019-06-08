@@ -166,31 +166,24 @@ public class EvolveSystem : MonoBehaviour
 
     public void RadiationInjection()
     {
-        Debug.Log("1");
         var a = FindObjectOfType<PlayerData>();
         a.evolveLvData[5]++;
     }
 
     public void GastrointestinalExtension()
     {
-        Debug.Log("2");
-
         var a = FindObjectOfType<PlayerData>();
         a.evolveLvData[6]++;
     }
 
     public void TitaniumTooth()
     {
-        Debug.Log("3");
-
         var a = FindObjectOfType<PlayerData>();
         a.evolveLvData[7]++;
     }
 
     public void MagnetTail()
     {
-        Debug.Log("4");
-
         var a = FindObjectOfType<PlayerData>();
         a.magnet.SetActive(true);
         a.MagnetLV = 1;
