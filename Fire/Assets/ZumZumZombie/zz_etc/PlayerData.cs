@@ -64,6 +64,8 @@ public class PlayerData : MonoBehaviour
     public Material material;
 
     public GameObject magnet;
+    public GameObject meat;
+
     public GameObject shield;
     private bool isGameOver = false;
     private bool isRevive = false;
@@ -82,6 +84,20 @@ public class PlayerData : MonoBehaviour
         {
             evolveLvData[7] = value;
             magnet.GetComponent<SphereCollider>().radius *= 2f;
+        }
+    }
+
+    public int MeatTailLV
+    {
+        get
+        {
+            return evolveLvData[11];
+        }
+        set
+        {
+            evolveLvData[11] = value;
+            
+            meat.SetActive(true);
         }
     }
 
@@ -155,6 +171,7 @@ public class PlayerData : MonoBehaviour
         FindObjectOfType<SkillSystem>().playerMove = GetComponent<PlayerMove>();
         manager = FindObjectOfType<Manager>();
         magnet = FindObjectOfType<Magnet>().gameObject;
+        meat = FindObjectOfType<Meat>().gameObject;
         shield = FindObjectOfType<Shield>().gameObject;
         particlePool = FindObjectOfType<ParticlePool>();
         animator = transform.GetChild(0).GetComponent<Animator>();
