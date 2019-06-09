@@ -14,7 +14,6 @@ public class MonsterSpwaner : MonoBehaviour
     private Manager manager;
     public List<GameObject> zombies;
 
-
     private void Awake()
     {
         spwanPoints = spwanPointss.GetComponentsInChildren<Transform>();
@@ -28,9 +27,7 @@ public class MonsterSpwaner : MonoBehaviour
 
     public void SpwanZombie(GameObject zombie)
     {
-        var monster = GameObject.Instantiate(zombie, spwanPoints[Random.Range(1, spwanPoints.Length)].position, Quaternion.identity);
-
-
+        var monster = GameObject.Instantiate(zombie, spwanPoints[Random.Range(1, spwanPoints.Length)].position, Quaternion.identity, transform);
     }
 
     private IEnumerator Spwan()

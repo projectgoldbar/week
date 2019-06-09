@@ -3,38 +3,48 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    public Transform target;
     public GameObject Enemy;
+    private Coroutine coroutine;
+    private WaitForSeconds second;
+    private ParticlePool particlePool;
 
-    public float distance;
-    public int angle;
-    public float checkDuration;
+    public float duration;
+    private bool isUsed = false;
 
-    private void Start()
+    private void Awake()
     {
-        StartCoroutine(Checking(checkDuration));
+        second = new WaitForSeconds(duration);
+        particlePool = FindObjectOfType<ParticlePool>();
     }
 
-    private IEnumerator Checking(float duration)
+    private void OnTriggerEnter(Collider other)
     {
-        while (true)
-        {
-            var f = Vector3.Distance(target.position, transform.position);
-            Debug.Log(f);
-            if (f < distance)
-            {
-                TrapOn();
-                yield break;
-            }
-            yield return new WaitForSeconds(duration);
-        }
+        TrapOn();
     }
 
     private void TrapOn()
     {
+        if (!isUsed)
+        {
+            coroutine = StartCoroutine(InstanceZombie());
+            Camera.main.GetComponent<CameraFallow>().CameraShake(0.2f);
+            var x = particlePool.GetParticle(particlePool.trapParticlePool);
+
+            x.transform.position = transform.position;
+            x.transform.rotation = transform.rotation;
+            x.SetActive(true);
+            isUsed = true;
+        }
+    }
+
+    private IEnumerator InstanceZombie()
+    {
         for (int i = 0; i < 5; i++)
         {
+            yield return second;
             GameObject.Instantiate(Enemy, transform.position, Quaternion.identity);
+            yield return second;
         }
+        yield break;
     }
 }
