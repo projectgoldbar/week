@@ -3,12 +3,17 @@
 public class Sector : MonoBehaviour
 {
     public CoinPool coinPool;
+
     public SectorManager sectorManager;
     public int sectorNumber = 0;
     public int maxCoin = 10;
+    public int maxMeat = 10;
     public int currentCoin = 0;
+    public int currentMeat = 0;
 
     public int[] spwanSectorNumber;
+
+    public GameObject building;
 
     private void Awake()
     {
@@ -18,10 +23,17 @@ public class Sector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        bool trap = false;
+        if (Random.Range(0, 2) == 1)
+        {
+            trap = true;
+        }
         for (int i = 0; i < coinPool.coinPool.Count; i++)
         {
             var coin = coinPool.coinPool[i].GetComponent<Coin>();
+            var meat = coinPool.meatPool[i].GetComponent<Meat>();
             var count = 0;
+            var meatCount = 0;
             for (int j = 0; j < spwanSectorNumber.Length; j++)
             {
                 if (coin.coinSection == spwanSectorNumber[j] || coin.coinSection == sectorNumber)
@@ -30,17 +42,38 @@ public class Sector : MonoBehaviour
                     break;
                 }
             }
+            for (int j = 0; j < spwanSectorNumber.Length; j++)
+            {
+                if (meat.meatSection == spwanSectorNumber[j] || meat.meatSection == sectorNumber)
+                {
+                    meatCount++;
+                    break;
+                }
+            }
             if (count == 0)
             {
                 coinPool.coinPool[i].SetActive(false);
                 count = 0;
             }
+            else if (meatCount == 0)
+            {
+                coinPool.meatPool[i].SetActive(false);
+                meatCount = 0;
+            }
         }
 
         for (int i = 0; i < spwanSectorNumber.Length; i++)
         {
-            sectorManager.sectors[spwanSectorNumber[i]].SpwanCoin();
+            for (int j = 0; j < 5; j++)
+            {
+                sectorManager.sectors[spwanSectorNumber[i]].SpwanCoin();
+                sectorManager.sectors[spwanSectorNumber[i]].SpwanMeat();
+            }
         }
+    }
+
+    public void SpwanTrap()
+    {
     }
 
     public void SpwanCoin()
@@ -59,9 +92,31 @@ public class Sector : MonoBehaviour
 
             var point = FindPoint();
             coin.GetComponent<Coin>().coinSection = sectorNumber;
-            currentCoin++;
+            //currentCoin++;
             coin.transform.position = point;
             coin.SetActive(true);
+        }
+    }
+
+    public void SpwanMeat()
+    {
+        if (currentMeat < maxMeat)
+        {
+            GameObject meat = null;
+            for (int i = 0; i < coinPool.meatPool.Count; i++)
+            {
+                if (!coinPool.meatPool[i].activeSelf)
+                {
+                    meat = coinPool.meatPool[i];
+                    break;
+                }
+            }
+
+            var point = FindPoint();
+            meat.GetComponent<Meat>().meatSection = sectorNumber;
+            currentMeat++;
+            meat.transform.position = point;
+            meat.SetActive(true);
         }
     }
 
@@ -70,12 +125,12 @@ public class Sector : MonoBehaviour
         var bounds = GetComponent<BoxCollider>().bounds;
         var min = bounds.min;
         var max = bounds.max;
-        var x = Random.Range(min.x, max.x);
-        var z = Random.Range(min.z, max.z);
-        Vector3 targetVector = new Vector3(x, 1.7f, z);
 
         for (int i = 0; i < 50; i++)
         {
+            var x = Random.Range(min.x, max.x);
+            var z = Random.Range(min.z, max.z);
+            Vector3 targetVector = new Vector3(x, 1.7f, z);
             if (!SomethingOnPlace(targetVector))
             {
                 return targetVector;

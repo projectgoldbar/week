@@ -13,7 +13,7 @@ namespace ZombieState
         public override void Setting()
         {
             waitSecond = new WaitForSeconds(resetPathCount);
-            zombieData.agent.acceleration = Random.Range(10, 23);
+            zombieData.agent.acceleration = Random.Range(10, 18);
             //zombieData.moveCoroutine = ZombieMove();
             player = zombieData.player.gameObject.transform;
         }

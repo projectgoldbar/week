@@ -13,6 +13,11 @@ public class Coin : MonoBehaviour
         sectorManager = FindObjectOfType<SectorManager>();
     }
 
+    private void OnEnable()
+    {
+        sectorManager.sectors[coinSection].currentCoin++;
+    }
+
     /// <summary>
     /// Makes the object rotate on its center every frame.
     /// </summary>

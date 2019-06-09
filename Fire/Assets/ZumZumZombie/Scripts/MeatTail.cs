@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Meat : MonoBehaviour
+public class MeatTail : MonoBehaviour
 {
     private PlayerData playerData;
 
@@ -27,18 +27,17 @@ public class Meat : MonoBehaviour
         MeatProcess = StartCoroutine(Meatsense());
     }
 
-
     private void OnDisable()
     {
-        if(MeatProcess != null)
-        StopCoroutine(MeatProcess);
+        if (MeatProcess != null)
+            StopCoroutine(MeatProcess);
     }
 
     public IEnumerator Meatsense()
     {
         while (senceDistance != 0 && playerData != null)
         {
-            var meats = Physics.OverlapSphere(playerData.transform.position, senceDistance , LayerMask.GetMask("Meat"));
+            var meats = Physics.OverlapSphere(playerData.transform.position, senceDistance, LayerMask.GetMask("Meat"));
 
             if (meats.Length <= 0) continue;
 
