@@ -19,7 +19,7 @@ public class MeatTail : MonoBehaviour
         Second = new WaitForSeconds(0.01f);
         playerData = FindObjectOfType<PlayerData>();
 
-        senceDistance = playerData.evolveLvData[11] * DefaultDistance;
+        //senceDistance = playerData.evolveLvData[11] * DefaultDistance;
     }
 
     private void OnEnable()

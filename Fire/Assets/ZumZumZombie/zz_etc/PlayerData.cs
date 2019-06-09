@@ -64,7 +64,7 @@ public class PlayerData : MonoBehaviour
     public Material material;
 
     public GameObject magnet;
-    public GameObject meat;
+    public GameObject meatTail;
 
     public GameObject shield;
     private bool isGameOver = false;
@@ -96,8 +96,8 @@ public class PlayerData : MonoBehaviour
         set
         {
             evolveLvData[11] = value;
-            
-            meat.SetActive(true);
+
+            meatTail.SetActive(true);
         }
     }
 
@@ -171,13 +171,14 @@ public class PlayerData : MonoBehaviour
         FindObjectOfType<SkillSystem>().playerMove = GetComponent<PlayerMove>();
         manager = FindObjectOfType<Manager>();
         magnet = FindObjectOfType<Magnet>().gameObject;
-        meat = FindObjectOfType<Meat>().gameObject;
+        meatTail = FindObjectOfType<MeatTail>().gameObject;
         shield = FindObjectOfType<Shield>().gameObject;
         particlePool = FindObjectOfType<ParticlePool>();
         animator = transform.GetChild(0).GetComponent<Animator>();
         boostParticle = GetComponentInChildren<ParticleSystem>();
         shield.SetActive(false);
         magnet.SetActive(false);
+        meatTail.SetActive(false);
         if (!isTest)
         {
             PlayerSetting();
