@@ -13,7 +13,7 @@ namespace ZombieState
         public override void Setting()
         {
             waitSecond = new WaitForSeconds(resetPathCount);
-            zombieData.agent.acceleration = Random.Range(10, 23);
+            zombieData.agent.acceleration = Random.Range(10, 18);
             //zombieData.moveCoroutine = ZombieMove();
             player = zombieData.player.gameObject.transform;
         }
@@ -34,19 +34,8 @@ namespace ZombieState
             while (true)
             {
                 yield return null;
-                //Debug.Log("calculate");
-                //if (Vector3.Distance(zombieData.player.position, transform.position) < 10f)
-                //{
-                //    //CoolTime(3f);
-                //    //zombieData.agent.enabled = false;
-                //    StateChange(zombieData.attack);
-                //    yield return null;
-                //}
-
                 zombieData.agent.CalculatePath(zombieData.player.position, zombieData.path);
-                //zombieData.agent.destination = player.position;
                 zombieData.agent.SetPath(zombieData.path);
-
                 yield return waitSecond;
             }
         }

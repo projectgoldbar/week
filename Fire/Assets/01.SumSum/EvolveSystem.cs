@@ -28,8 +28,8 @@ public class EvolveSystem : MonoBehaviour
         evolveFunc.Add(() => GastrointestinalExtension());
         evolveFunc.Add(() => TitaniumTooth());
         evolveFunc.Add(() => MagnetTail());
-        evolveFunc.Add(() => { });
-        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => QuadCore());
+        evolveFunc.Add(() => MeatTail());
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
@@ -91,9 +91,9 @@ public class EvolveSystem : MonoBehaviour
     public void FullCharge()
     {
         var a = FindObjectOfType<SkillSystem>();
-        if (a.skillCount < 1)
+        if (a.SkillCount < 1)
         {
-            a.skillCount++;
+            a.SkillCount++;
         }
     }
 
@@ -137,7 +137,7 @@ public class EvolveSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            MeatFall();
+            FullCharge();
         }
     }
 
@@ -166,31 +166,24 @@ public class EvolveSystem : MonoBehaviour
 
     public void RadiationInjection()
     {
-        Debug.Log("1");
         var a = FindObjectOfType<PlayerData>();
         a.evolveLvData[5]++;
     }
 
     public void GastrointestinalExtension()
     {
-        Debug.Log("2");
-
         var a = FindObjectOfType<PlayerData>();
         a.evolveLvData[6]++;
     }
 
     public void TitaniumTooth()
     {
-        Debug.Log("3");
-
         var a = FindObjectOfType<PlayerData>();
         a.evolveLvData[7]++;
     }
 
     public void MagnetTail()
     {
-        Debug.Log("4");
-
         var a = FindObjectOfType<PlayerData>();
         a.magnet.SetActive(true);
         a.MagnetLV = 1;
@@ -199,6 +192,32 @@ public class EvolveSystem : MonoBehaviour
     public void QuadCore()
     {
         var a = FindObjectOfType<PlayerData>();
-        a.evolveLvData[9]++;
+        a.evolveLvData[8]++;
     }
+
+    public void GoldStoker()
+    {
+        var a = FindObjectOfType<CoinSpwaner>().coinPool;
+        var b = FindObjectOfType<PlayerData>();
+
+        for (int i = 0; i < a.Count; i++)
+        {
+            a[i].transform.localScale *= 1.5f;
+        }
+
+        b.goldUpSpeed *= 2;
+        b.evolveLvData[10]++;
+    }
+
+    public void MeatTail()
+    {
+        var a = FindObjectOfType<PlayerData>();
+        a.evolveLvData[11]++;
+
+    }
+
+
+
+
+
 }
