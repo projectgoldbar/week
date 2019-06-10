@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-
     private Animator doorAnim;
 
-
-    void Start()
+    private void Start()
     {
         doorAnim = this.GetComponent<Animator>();
     }
-
-
-
-   
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,11 +17,9 @@ public class Door : MonoBehaviour
         {
             CloseDoor();
         }
-}
+    }
 
-
-
-    bool CheckPlayerIn(Collider other)
+    private bool CheckPlayerIn(Collider other)
     {
         if (other.tag == "Player")
         {
@@ -36,7 +28,7 @@ public class Door : MonoBehaviour
         return false;
     }
 
-    void CloseDoor()
+    private void CloseDoor()
     {
         doorAnim.SetTrigger("PlayerIn");
     }
