@@ -22,7 +22,6 @@ public class CSVManager : MonoBehaviour
     private List<Upgrade13instantSkillMaxCountCSV> m_Upgrade13instantSkillMaxCountCSVList = new List<Upgrade13instantSkillMaxCountCSV>();
     private List<Upgrade14instantGainHpCSV> m_Upgrade14instantGainHpCSVList = new List<Upgrade14instantGainHpCSV>();
 
-    private List<SkinsKeyCSV> m_SkinsKeyCSVList = new List<SkinsKeyCSV>();
 
     public static CSVManager Instance
     {
@@ -49,18 +48,9 @@ public class CSVManager : MonoBehaviour
         Upgrade13instantSkillMaxCountCSV.LoadCSV("KM/GameData/Upgrade/Upgrade13instantSkillMaxCountCSV", m_Upgrade13instantSkillMaxCountCSVList);
         Upgrade14instantGainHpCSV.LoadCSV("KM/GameData/Upgrade/Upgrade14instantGainHpCSV", m_Upgrade14instantGainHpCSVList);
 
-        SkinsKeyCSV.LoadCSV("KM/GameData/Skin/SkinsKeyCSV", m_SkinsKeyCSVList);
     }
 
-    public SkinsKeyCSV GetSkinsKeyCSV(int skinID)
-    {
-        if (m_SkinsKeyCSVList.Count <= skinID)
-        {
-            Debug.LogError(string.Format("GetSkinsKeyCSV! skinID={0}", skinID));
-            return null;
-        }
-        return m_SkinsKeyCSVList[skinID - 1];
-    }
+ 
 
     public Upgrade00maxHpCSV GetUpgrade00maxHpCSV(int level)
     {
