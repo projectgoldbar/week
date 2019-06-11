@@ -29,9 +29,15 @@ public class SkillSystem : MonoBehaviour
     {
         progressBar = GetComponent<Image>();
         coolTime = originCoolTime;
-        playerData = playerMove.GetComponent<PlayerData>();
         skillCount = maxSkillCount;
         skillCounttext.text = skillCount.ToString();
+    }
+
+
+    private void Start()
+    {
+        playerData = playerMove.GetComponent<PlayerData>();
+        
     }
 
     public void SkillStart()

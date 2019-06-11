@@ -172,6 +172,7 @@ public class PlayerData : MonoBehaviour
         manager = FindObjectOfType<Manager>();
         magnet = FindObjectOfType<Magnet>().gameObject;
         meatTail = FindObjectOfType<MeatTail>().gameObject;
+        meatTail.GetComponent<MeatTail>().GetMeat(this);
         shield = FindObjectOfType<Shield>().gameObject;
         particlePool = FindObjectOfType<ParticlePool>();
         animator = transform.GetChild(0).GetComponent<Animator>();

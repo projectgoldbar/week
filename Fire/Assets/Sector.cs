@@ -6,14 +6,14 @@ public class Sector : MonoBehaviour
 
     public SectorManager sectorManager;
     public int sectorNumber = 0;
-    public int maxCoin = 10;
-    public int maxMeat = 10;
+    private int maxCoin = 5;
+    private int maxMeat = 5;
     public int currentCoin = 0;
     public int currentMeat = 0;
 
     public int[] spwanSectorNumber;
 
-    public GameObject building;
+    public GameObject[] trap;
 
     private void Awake()
     {
@@ -23,11 +23,6 @@ public class Sector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        bool trap = false;
-        if (Random.Range(0, 2) == 1)
-        {
-            trap = true;
-        }
         for (int i = 0; i < coinPool.coinPool.Count; i++)
         {
             var coin = coinPool.coinPool[i].GetComponent<Coin>();
@@ -53,12 +48,11 @@ public class Sector : MonoBehaviour
             if (count == 0)
             {
                 coinPool.coinPool[i].SetActive(false);
-                count = 0;
             }
-            else if (meatCount == 0)
+
+            if (meatCount == 0)
             {
                 coinPool.meatPool[i].SetActive(false);
-                meatCount = 0;
             }
         }
 
@@ -70,10 +64,6 @@ public class Sector : MonoBehaviour
                 sectorManager.sectors[spwanSectorNumber[i]].SpwanMeat();
             }
         }
-    }
-
-    public void SpwanTrap()
-    {
     }
 
     public void SpwanCoin()
@@ -114,13 +104,16 @@ public class Sector : MonoBehaviour
 
             var point = FindPoint();
             meat.GetComponent<Meat>().meatSection = sectorNumber;
-            currentMeat++;
+            //currentMeat++;
             meat.transform.position = point;
             meat.SetActive(true);
         }
     }
-
-    private Vector3 FindPoint()
+    /// <summary>
+    /// 자기 박스컬라이더 내부에서 갈수 있는 위치벡터를 반환하는 함수
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 FindPoint()
     {
         var bounds = GetComponent<BoxCollider>().bounds;
         var min = bounds.min;

@@ -212,7 +212,8 @@ public class EvolveSystem : MonoBehaviour
     public void MeatTail()
     {
         var a = FindObjectOfType<PlayerData>();
-        a.evolveLvData[11]++;
+        //a.evolveLvData[11]++;
+        a.MeatTailLV++;
 
     }
 
