@@ -59,8 +59,7 @@ namespace ZombieState
                 zombieData.agent.SetPath(zombieData.path);
                 yield return waitSecond;
             }
-            if (zombieData.agent.path == null)
-                zombieData.agent.ResetPath();
+             zombieData.agent.ResetPath();
             yield return null;
         }
 

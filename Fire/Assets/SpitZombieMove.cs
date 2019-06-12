@@ -82,12 +82,13 @@ public class SpitZombieMove : MonoBehaviour
 
             if (distance <= component.agent.stoppingDistance)
             {
-                component.agent.updateRotation = false;
+                //component.agent.updateRotation = false;
                 state = SpitState.Attack;
             }
         }
         else
         {
+            NavPath();
             targetPosition = component.player.transform.position;
             transform.LookAt(targetPosition);
 
@@ -106,7 +107,7 @@ public class SpitZombieMove : MonoBehaviour
 
             if (distance > component.agent.stoppingDistance)
             {
-                component.agent.updateRotation = true;
+                //component.agent.updateRotation = true;
                 state = SpitState.Chase;
             }
         }
