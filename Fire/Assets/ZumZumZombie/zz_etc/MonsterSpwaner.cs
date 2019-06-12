@@ -18,7 +18,7 @@ public class MonsterSpwaner : MonoBehaviour
     {
         spwanPoints = spwanPointss.GetComponentsInChildren<Transform>();
         manager = GetComponent<Manager>();
-        StartCoroutine(Spwan());
+        //StartCoroutine(Spwan());
         seconds = new WaitForSeconds(second);
         zombies.Add(zombie);
         zombies.Add(bombZombie);

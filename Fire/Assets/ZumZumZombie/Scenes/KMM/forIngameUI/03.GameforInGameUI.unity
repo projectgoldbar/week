@@ -15,17 +15,17 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.14150941, g: 0.096787095, b: 0.096787095, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.004
-  m_LinearFogStart: 35.1
-  m_LinearFogEnd: 53.4
-  m_AmbientSkyColor: {r: 0.05286579, g: 0.12261071, b: 0.41509432, a: 1}
-  m_AmbientEquatorColor: {r: 0.025364896, g: 0.21650259, b: 0.3584906, a: 1}
-  m_AmbientGroundColor: {r: 0.20754719, g: 0.061676756, b: 0.10164625, a: 1}
+  m_LinearFogStart: 40
+  m_LinearFogEnd: 50
+  m_AmbientSkyColor: {r: 0.056470275, g: 0.09501819, b: 0.254717, a: 1}
+  m_AmbientEquatorColor: {r: 0.0036044791, g: 0.14639392, b: 0.254717, a: 1}
+  m_AmbientGroundColor: {r: 0.8584906, g: 0, b: 0.23644891, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 3
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 3f0c1231ec9e80f4da4ef7557318e695, type: 2}
   m_HaloStrength: 0.5
@@ -36,7 +36,7 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 256
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 0.419
+  m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 8900000, guid: b995d4bd9d11078d11005b9844295342, type: 3}
   m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
@@ -3976,6 +3976,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PolygonZombie(Gallery)
       objectReference: {fileID: 0}
+    - target: {fileID: 4714680489494727766, guid: abb4e5eb88b36fb44a0f27e068610c02,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4714680489494612356, guid: abb4e5eb88b36fb44a0f27e068610c02,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5183,7 +5188,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993447951}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 50, z: 8.9}
+  m_LocalPosition: {x: 0, y: 45, z: 8.9}
   m_LocalScale: {x: 1, y: 1.0000005, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5202,7 +5207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  offset: 50
+  offset: 45
   up: 0
   isShaked: 0
 --- !u!1 &993957779 stripped
@@ -5255,7 +5260,7 @@ PrefabInstance:
     - target: {fileID: 6942881272474726033, guid: 9e34325ff438a544e88bd9043b845d3f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6942881272474726033, guid: 9e34325ff438a544e88bd9043b845d3f,
         type: 3}
@@ -8698,7 +8703,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462899089}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 575a3498e28f77545995dad9fc2dfe30, type: 3}
   m_Name: 
@@ -41873,16 +41878,16 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 0.7075472, g: 0.4899755, b: 0.11681202, a: 1}
+  m_Color: {r: 0.6603774, g: 0.38210514, b: 0, a: 1}
   m_Intensity: 3
-  m_Range: 61.5
+  m_Range: 60
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
     m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.549
+    m_Strength: 0.5
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
