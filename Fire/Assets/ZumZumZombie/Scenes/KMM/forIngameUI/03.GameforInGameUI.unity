@@ -1156,7 +1156,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 231947260}
-  - component: {fileID: 231947261}
   m_Layer: 0
   m_Name: Traps
   m_TagString: Untagged
@@ -1202,20 +1201,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &231947261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 231947259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16b3a26344c71134f880040d90f6d57b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  traps: []
-  numOfTrap: 3
 --- !u!1 &247529016
 GameObject:
   m_ObjectHideFlags: 0
@@ -41359,6 +41344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e126562077408244da63377d0cfe7b97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
+  senceDistance: 0
 --- !u!135 &1893747413
 SphereCollider:
   m_ObjectHideFlags: 0
