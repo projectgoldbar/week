@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class MeatTail : MonoBehaviour
 {
-    private PlayerData playerData;
+    public void GetMeat(PlayerData a )
+    {
+        playerData = a;
+    }
+
+
+    public PlayerData playerData;
 
     private float DefaultDistance = 7.0f;
 
-    private float senceDistance;
+    public float senceDistance;
 
     private WaitForSeconds Second;
 
@@ -17,13 +23,13 @@ public class MeatTail : MonoBehaviour
     public void Awake()
     {
         Second = new WaitForSeconds(0.01f);
-        playerData = FindObjectOfType<PlayerData>();
-
-        //senceDistance = playerData.evolveLvData[11] * DefaultDistance;
     }
+
+    
 
     private void OnEnable()
     {
+        
         MeatProcess = StartCoroutine(Meatsense());
     }
 
@@ -35,19 +41,17 @@ public class MeatTail : MonoBehaviour
 
     public IEnumerator Meatsense()
     {
-        while (senceDistance != 0 && playerData != null)
+       
+        while (true)
         {
+            yield return null;
+            senceDistance = playerData.evolveLvData[11] * DefaultDistance;
             var meats = Physics.OverlapSphere(playerData.transform.position, senceDistance, LayerMask.GetMask("Meat"));
 
             if (meats.Length <= 0) continue;
 
-            for (int i = 0; i < meats.Length; i++)
-            {
-                meats[i].transform.position = Vector3.Lerp(meats[i].transform.position, playerData.transform.position, Time.deltaTime * 10.0f);
-                //Debug.Log(meats[i].name+i);
-            }
-
-            yield return Second;
+               
+            meats[0].transform.position = Vector3.Lerp(meats[0].transform.position, playerData.transform.position, Time.deltaTime * 10.0f);
         }
     }
 }

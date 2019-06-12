@@ -33,7 +33,7 @@ public class MonsterSpwaner : MonoBehaviour
     private IEnumerator Spwan()
     {
         int count = 0;
-        while (count < 55)
+        while (count < 1)
         {
             SpwanZombie(zombie);
             count++;

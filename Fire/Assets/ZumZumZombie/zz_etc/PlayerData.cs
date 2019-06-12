@@ -91,13 +91,11 @@ public class PlayerData : MonoBehaviour
     {
         get
         {
-            return evolveLvData[11];
+            return evolveLvData[10];
         }
         set
         {
             evolveLvData[11] = value;
-
-            meatTail.SetActive(true);
         }
     }
 
@@ -172,6 +170,7 @@ public class PlayerData : MonoBehaviour
         manager = FindObjectOfType<Manager>();
         magnet = FindObjectOfType<Magnet>().gameObject;
         meatTail = FindObjectOfType<MeatTail>().gameObject;
+        meatTail.GetComponent<MeatTail>().GetMeat(this);
         shield = FindObjectOfType<Shield>().gameObject;
         particlePool = FindObjectOfType<ParticlePool>();
         animator = transform.GetChild(0).GetComponent<Animator>();

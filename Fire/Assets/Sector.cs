@@ -109,8 +109,11 @@ public class Sector : MonoBehaviour
             meat.SetActive(true);
         }
     }
-
-    private Vector3 FindPoint()
+    /// <summary>
+    /// 자기 박스컬라이더 내부에서 갈수 있는 위치벡터를 반환하는 함수
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 FindPoint()
     {
         var bounds = GetComponent<BoxCollider>().bounds;
         var min = bounds.min;

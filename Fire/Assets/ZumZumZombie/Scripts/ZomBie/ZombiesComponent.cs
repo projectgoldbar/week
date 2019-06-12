@@ -33,6 +33,7 @@ namespace ZombieState
             moving = GetComponent<Zombie_Moving>();
             attack = GetComponent<ZomBie_Attack>();
             material = GetComponentInChildren<SkinnedMeshRenderer>().materials[0];
+
         }
     }
 }

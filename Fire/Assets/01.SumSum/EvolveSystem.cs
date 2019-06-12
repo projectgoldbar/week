@@ -29,8 +29,8 @@ public class EvolveSystem : MonoBehaviour
         evolveFunc.Add(() => TitaniumTooth());
         evolveFunc.Add(() => MagnetTail());
         evolveFunc.Add(() => QuadCore());
-        evolveFunc.Add(() => MeatTail());
         evolveFunc.Add(() => { });
+        evolveFunc.Add(() => MeatTail());
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
@@ -206,13 +206,15 @@ public class EvolveSystem : MonoBehaviour
         }
 
         b.goldUpSpeed *= 2;
-        b.evolveLvData[10]++;
+        b.evolveLvData[9]++;
     }
 
     public void MeatTail()
     {
         var a = FindObjectOfType<PlayerData>();
+        a.meatTail.SetActive(true);
         a.evolveLvData[11]++;
+        //a.MeatTailLV++;
 
     }
 
