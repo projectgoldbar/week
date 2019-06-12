@@ -91,13 +91,11 @@ public class PlayerData : MonoBehaviour
     {
         get
         {
-            return evolveLvData[11];
+            return evolveLvData[10];
         }
         set
         {
             evolveLvData[11] = value;
-
-            meatTail.SetActive(true);
         }
     }
 

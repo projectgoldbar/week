@@ -49,7 +49,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
     public bool IsInitialized => storeController != null && storeExtensionProvider != null;
 
 
-    public Text DebugText = null;
+  //  public Text DebugText = null;
 
 
     void Awake()
@@ -151,7 +151,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
     //실행후 OnIntialized 자동으로 실행됨.
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
-        DebugText.text = "Unity IAP 초기화 성공";
+        //DebugText.text = "Unity IAP 초기화 성공";
         Debug.Log("Unity IAP 초기화 성공");
     
         storeController = controller;
@@ -165,13 +165,13 @@ public class IAPManager : MonoBehaviour, IStoreListener
     }
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
-        DebugText.text = $"구매 성공 - ID : {args.purchasedProduct.definition.id}";
+       // DebugText.text = $"구매 성공 - ID : {args.purchasedProduct.definition.id}";
         Debug.Log($"구매 성공 - ID : {args.purchasedProduct.definition.id}");
 
         if (args.purchasedProduct.definition.id == ProductGold[0] ||
             args.purchasedProduct.definition.id == ProductGold[1])
         {
-            DebugText.text = "골드 상승 처리";
+            //DebugText.text = "골드 상승 처리";
             Debug.Log("골드 상승 처리");
         }
 
@@ -202,17 +202,17 @@ public class IAPManager : MonoBehaviour, IStoreListener
 
         if (product != null && product.availableToPurchase) //구매가능
         {
-            var Debug = $"구매시도 - {product.definition.id}";
-            DebugText.text = Debug;
+            //var Debug = $"구매시도 - {product.definition.id}";
+            //DebugText.text = Debug;
 
-           // Debug.Log($"구매시도 - {product.definition.id}");
+            Debug.Log($"구매시도 - {product.definition.id}");
             storeController.InitiatePurchase(product);
         }
         else
         {
-            var Debug = $"구매시도 불가 - {product.definition.id}";
-            DebugText.text = Debug;
-            //Debug.Log($"구매시도 불가 - {product.definition.id}");
+            //var Debug = $"구매시도 불가 - {product.definition.id}";
+            //DebugText.text = Debug;
+            Debug.Log($"구매시도 불가 - {product.definition.id}");
         }
     }
 

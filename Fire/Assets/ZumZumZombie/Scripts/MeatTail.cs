@@ -23,16 +23,13 @@ public class MeatTail : MonoBehaviour
     public void Awake()
     {
         Second = new WaitForSeconds(0.01f);
-        //playerData = FindObjectOfType<PlayerData>();
-
-        //senceDistance = playerData.evolveLvData[11] * DefaultDistance;
     }
 
     
 
     private void OnEnable()
     {
-        //senceDistance = playerData.evolveLvData[11] * DefaultDistance;
+        
         MeatProcess = StartCoroutine(Meatsense());
     }
 
@@ -44,7 +41,8 @@ public class MeatTail : MonoBehaviour
 
     public IEnumerator Meatsense()
     {
-        while (senceDistance != 0.0f)
+       
+        while (true)
         {
             yield return null;
             senceDistance = playerData.evolveLvData[11] * DefaultDistance;

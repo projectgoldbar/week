@@ -22,7 +22,7 @@ public class CreateWayZombie : MonoBehaviour
         for (int i = 0; i < position.ZombieMaxCount; i++)
         {
             var obj = GameObject.Instantiate(WayZombie, position.DefaultDistance[i], transform.rotation ,transform);
-            obj.SetActive(false);
+            //obj.SetActive(false);
             WayZombieList.Add(obj);
         }
     }

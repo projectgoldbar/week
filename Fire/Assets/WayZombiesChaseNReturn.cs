@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using ZombieState;
 
@@ -20,6 +19,15 @@ public class WayZombiesChaseNReturn : MonoBehaviour
 
     public bool b_return;
 
+    private System.Action minEvent;
+    private System.Action middleEvent;
+    private System.Action maxEvent;
+    private System.Action processEvent;
+
+
+
+
+
     public enum WayZombieDistance {MinDistance , MiddleDistanceDown , MiddleDistanceUp, MaxDistance }
     
     private WayZombieDistance zombiedistance;
@@ -29,36 +37,18 @@ public class WayZombiesChaseNReturn : MonoBehaviour
         get { return zombiedistance; }
         set
         {
-            int max = createWayZombie.WayZombieList.Count;
             zombiedistance = value;
             if (zombiedistance == WayZombieDistance.MinDistance)
             {
-                for (int i = 0; i < max; i++)
-                {
-                    controll.b_Moving = false;
-                    createWayZombie.WayZombieList[i].transform.parent = null;
-                    createWayZombie.WayZombieList[i].GetComponent<Zombie_Moving>().target = Player.transform;
-                    createWayZombie.WayZombieList[i].GetComponent<Zombie_Moving>().MoveStart();
-                }
-                b_return = false;
+                minEvent?.Invoke();
             }
             else if (zombiedistance == WayZombieDistance.MiddleDistanceDown)
             {
-                for (int i = 0; i < max; i++)
-                {
-                    if (!createWayZombie.WayZombieList[i].activeSelf)
-                        createWayZombie.WayZombieList[i].gameObject.SetActive(true);
-                }
+                middleEvent?.Invoke();
             }
-           
             else if (zombiedistance == WayZombieDistance.MaxDistance)
             {
-                for (int i = 0; i < max; i++)
-                {
-                    createWayZombie.WayZombieList[i].GetComponent<Zombie_Moving>().target = zombies_position.ZombiesWayPosition[i];
-                   // createWayZombie.WayZombieList[i].GetComponent<Zombie_Moving>().MoveStop();
-                }
-                b_return = true;
+                maxEvent?.Invoke();
             }
         }
     }
@@ -102,11 +92,21 @@ public class WayZombiesChaseNReturn : MonoBehaviour
         }
     }
 
+
+    private void OnEnable()
+    {
+        minEvent += Min;
+        middleEvent += Middle;
+        maxEvent += Max;
+        processEvent += Process;
+    }
+
     private void Start()
     {
         controll.b_Moving = true;
-    }
 
+       // StartCoroutine(enumerator());
+    }
 
     public void CreateZombieSetting(int i, Transform tr = null, bool flag = true)
     {
@@ -115,62 +115,142 @@ public class WayZombiesChaseNReturn : MonoBehaviour
     }
 
     int count = 0;
-    private void Update()
+
+
+    private void FixedUpdate()
     {
         Distance = Vector3.Distance(transform.position, Player.position);
 
-        if      (MinDistance > Distance)                                        ZombieDistance = WayZombieDistance.MinDistance;
-        else if (MiddleDistance > Distance && MinDistance < Distance)           ZombieDistance = WayZombieDistance.MiddleDistanceDown;
-        else if (MaxDistance < Distance)                                        ZombieDistance = WayZombieDistance.MaxDistance;
+        if (MinDistance > Distance)                                     ZombieDistance = WayZombieDistance.MinDistance;
+        else if (MiddleDistance > Distance && MinDistance < Distance)   ZombieDistance = WayZombieDistance.MiddleDistanceDown;
+        else if (MaxDistance < Distance)                                ZombieDistance = WayZombieDistance.MaxDistance;
 
         if (b_return)
         {
-            if (count >= 10)
+            processEvent?.Invoke();
+        }
+       
+    }
+
+    public void Process()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+
+            //var view = Camera.main.WorldToViewportPoint(createWayZombie.WayZombieList[i].transform.position);
+
+            if (Vector3.Distance(createWayZombie.WayZombieList[i].transform.position, zombies_position.DefaultDistance[i]) <= MiddleDistance )
+                
+                // || ((view.x < 0 && view.y < 0) && (view.x < 0 && view.y > 1)) ||
+                //((view.x > 1 && view.y > 1) && (view.x > 1 && view.y < 0)))
             {
-                controll.b_Moving = true;
-                b_return = false;
-                count = 0;
-            }
+                //createWayZombie.WayZombieList[i].GetComponent<Zombie_Moving>().MoveStop();
+                createWayZombie.WayZombieList[i].transform.position = zombies_position.DefaultDistance[i];
+                createWayZombie.WayZombieList[i].transform.rotation = createWayZombie.transform.rotation;
+                createWayZombie.WayZombieList[i].transform.SetParent(createWayZombie.transform);
+                createWayZombie.WayZombieList[i].gameObject.SetActive(false);
 
-            for (int i = 0; i < 10; i++)
+                ++count;
+            }
+            else
             {
-                //createWayZombie.WayZombieList[i].transform.position = Vector3.Lerp(createWayZombie.WayZombieList[i].transform.position,
-                //                                                                   zombies_position.DefaultDistance[i],
-                //                                                                   Time.deltaTime * 0.2f);
+                createWayZombie.WayZombieList[i].transform.position =
+                    Vector3.Lerp(createWayZombie.WayZombieList[i].transform.position,
+                                 zombies_position.DefaultDistance[i],
+                                 Time.fixedDeltaTime * 0.5f);
 
-                //createWayZombie.WayZombieList[i].transform.LookAt(createWayZombie.transform);
-
-                if (Vector3.Distance(createWayZombie.WayZombieList[i].transform.position, zombies_position.DefaultDistance[i]) <= MiddleDistance)
-                {
-                    createWayZombie.WayZombieList[i].transform.position = zombies_position.DefaultDistance[i];
-                    createWayZombie.WayZombieList[i].transform.rotation = createWayZombie.transform.rotation;
-                    createWayZombie.WayZombieList[i].transform.parent = createWayZombie.transform;
-                    ++count;
-
-                    if (createWayZombie.WayZombieList[i].activeSelf)
-                    {
-                        createWayZombie.WayZombieList[i].SetActive(false);
-                    }
-                }
+                createWayZombie.WayZombieList[i].transform.LookAt(createWayZombie.transform.position);
             }
+        }
 
-            
+        if (count >= 10)
+        {
+            count = 0;
+            minEvent += Min;
+            middleEvent += Middle;
+            maxEvent += Max;
+            //processEvent += Process;
+
+            controll.timer = 0;
+            controll.b_Moving = true;
+            b_return = false;
+
         }
 
     }
 
 
-    #region 기즈모
-    public void OnDrawGizmos()
+    public void Min()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, MinDistance);
-        //////////////////////////////////////////////////////////
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, MiddleDistance);
-        //////////////////////////////////////////////////////////
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, MaxDistance);
+        int max = createWayZombie.WayZombieList.Count;
+        for (int i = 0; i < max; i++)
+        {
+            controll.b_Moving = false;
+            createWayZombie.WayZombieList[i].transform.parent = null;
+            createWayZombie.WayZombieList[i].GetComponent<Zombie_Moving>().MoveStart();
+            createWayZombie.WayZombieList[i].GetComponent<Zombie_Moving>().target = Player.transform;
+        }
+        b_return = false;
+        minEvent -= Min;
     }
-    #endregion
+
+    public void Middle()
+    {
+        int max = createWayZombie.WayZombieList.Count;
+        for (int i = 0; i < max; i++)
+        {
+            if (!createWayZombie.WayZombieList[i].activeSelf)
+                createWayZombie.WayZombieList[i].gameObject.SetActive(true);
+        }
+        middleEvent -= Middle;
+    }
+
+    public void Max()
+    {
+        int max = createWayZombie.WayZombieList.Count;
+        for (int i = 0; i < max; i++)
+        {
+            createWayZombie.WayZombieList[i].GetComponent<Zombie_Moving>().target = zombies_position.ZombiesWayPosition[i];
+            //createWayZombie.WayZombieList[i].GetComponent<Zombie_Moving>().MoveStop();
+        }
+        b_return = true;
+        maxEvent -= Max;
+    }
+
+
+    private IEnumerator enumerator()
+    {
+        while (true)
+        {
+            yield return null;
+            Distance = Vector3.Distance(transform.position, Player.position);
+
+            if (MinDistance > Distance) ZombieDistance = WayZombieDistance.MinDistance;
+            else if (MiddleDistance > Distance && MinDistance < Distance) ZombieDistance = WayZombieDistance.MiddleDistanceDown;
+            else if (MaxDistance < Distance) ZombieDistance = WayZombieDistance.MaxDistance;
+
+            if (b_return)
+            {
+                if (count >= 10)
+                {
+                    controll.b_Moving = true;
+                    b_return = false;
+                    count = 0;
+                }
+
+                for (int i = 0; i < 10; i++)
+                {
+                    if (Vector3.Distance(createWayZombie.WayZombieList[i].transform.position, zombies_position.DefaultDistance[i]) <= MiddleDistance + 10.0f)
+                    {
+                        createWayZombie.WayZombieList[i].transform.position = zombies_position.DefaultDistance[i];
+                        //createWayZombie.WayZombieList[i].transform.rotation = createWayZombie.transform.rotation;
+                        //createWayZombie.WayZombieList[i].transform.parent = createWayZombie.transform;
+                        ++count;
+                    }
+                }
+            }
+            yield return new WaitForSeconds(0.02f);
+        }
+    }
+
 }

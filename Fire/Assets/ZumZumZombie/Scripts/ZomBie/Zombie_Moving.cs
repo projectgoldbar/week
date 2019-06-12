@@ -34,8 +34,8 @@ namespace ZombieState
         public void MoveStop()
         {
             x = false;
-            if(zombieData.agent.path == null)
-            zombieData.agent.ResetPath();
+            //if(zombieData.agent.path == null)
+            //zombieData.agent.ResetPath();
             //StopCoroutine(zombieData.moveCoroutine);
             StopCoroutine(test);
 

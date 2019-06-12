@@ -28,20 +28,31 @@ public class Z_WayPointControll : MonoBehaviour
 
     Quaternion rot = new Quaternion();
     Vector3 dir = new Vector3();
+
+    public float timer;
+
     private void Update()
     {
-        if (!b_Moving) return;
+        //if (!b_Moving) return;
 
-        if (Vector3.Distance(transform.position, Z_WayPoint[WayMovePointNumbers[wayIndex % WayPointMaxCount]].position) <= 0.6f)
+        if (b_Moving)
         {
-            ++wayIndex;
-            //transform.LookAt(Z_WayPoint[WayMovePointNumbers[wayIndex % WayPointMaxCount]]);
-        }
-        transform.Translate(Vector3.forward * Time.deltaTime * Damping);
 
-        dir = (Z_WayPoint[WayMovePointNumbers[wayIndex % WayPointMaxCount]].position - transform.position).normalized;
-        rot = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * Damping);
+            {
+                if (Vector3.Distance(transform.position, Z_WayPoint[WayMovePointNumbers[wayIndex % WayPointMaxCount]].position) <= 0.6f)
+                {
+                    ++wayIndex;
+                    //transform.LookAt(Z_WayPoint[WayMovePointNumbers[wayIndex % WayPointMaxCount]]);
+                }
+
+                transform.Translate(Vector3.forward * Time.deltaTime * Damping);
+
+                dir = (Z_WayPoint[WayMovePointNumbers[wayIndex % WayPointMaxCount]].position - transform.position).normalized;
+                rot = Quaternion.LookRotation(dir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * Damping);
+            }
+
+        }
     }
 
 }
