@@ -21,7 +21,8 @@ public class ChoiceEvolve : MonoBehaviour
     public void Evolve()
     {
         FindObjectOfType<EvolveSystem>().evolveFunc[evolve.idx]();
-        transform.parent.gameObject.SetActive(false);
+        //transform.parent.gameObject.SetActive(false);
+        manager.evolUi.SetActive(false);
         Time.timeScale = 1;
         manager.sw.Start();
     }
