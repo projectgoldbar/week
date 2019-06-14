@@ -335,7 +335,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 114.950005, y: -52}
-  m_SizeDelta: {x: 199.90001, y: 60}
+  m_SizeDelta: {x: 199.90001, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8682501402696785111
 CanvasRenderer:
@@ -363,6 +363,9 @@ MonoBehaviour:
   statIndexTxt: {fileID: 212109948695869921}
   statValueTxt: {fileID: 7221534113670219392}
   statPriceTxt: {fileID: 3268617527486254237}
+  statLevel: 1
+  maxHpLevelText: {fileID: 0}
+  upgradeLevelText: {fileID: 0}
 --- !u!1 &1874508725157920728
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,7 +922,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 3
