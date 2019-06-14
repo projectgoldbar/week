@@ -19,8 +19,8 @@ public class Zombies_Position : MonoBehaviour
 
         for (int i = 0; i < ZombieMaxCount; i++)
         {
-            Zpos = Random.Range(0f, 12f);
-            Xpos = Random.Range(0f, 12f);
+            Zpos = Random.Range(-6f, 6f);
+            Xpos = Random.Range(-6f, 6f);
 
             var  pos = new Vector3(Xpos, 0, Zpos);
 

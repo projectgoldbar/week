@@ -7,7 +7,7 @@ public class CarController : Move
 {
     private float eulerDirY = 0;
 
-    private Rigidbody rid;
+    private new Rigidbody rid;
     private float currentY = 0;
 
     public float CarMoveSpeed = 500.0f;

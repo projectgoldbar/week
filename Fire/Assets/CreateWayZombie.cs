@@ -21,21 +21,13 @@ public class CreateWayZombie : MonoBehaviour
     {
         for (int i = 0; i < position.ZombieMaxCount; i++)
         {
-            var obj = GameObject.Instantiate(WayZombie, position.DefaultDistance[i], transform.rotation ,transform);
-            //obj.SetActive(false);
+            var obj = GameObject.Instantiate(WayZombie, position.DefaultDistance[i], transform.rotation);
+            obj.SetActive(false);
             WayZombieList.Add(obj);
         }
     }
 
-    private  void Update()
-    {
-        //for (int i = 0; i < position.ZombieMaxCount; i++)
-        //{
-        //    Vector3 dir = (position.DefaultDistance[i] - WayZombieList[i].transform.position).normalized;
-        //    Quaternion rot = Quaternion.LookRotation(dir);
-        //    WayZombieList[i].transform.rotation = rot;
-        //}
-    }
+   
 
 
 

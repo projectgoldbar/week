@@ -1,119 +1,59 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using ZombieState;
 
 public class SpitZombieMove : MonoBehaviour
 {
+    
+    public ZombiesComponent component;
+    public BoxCollider mapSizeCollider;
+    public GameObject Spit;
     public Vector3 targetPosition;
 
-    public enum SpitState {Patrol , Chase , Attack};
-    public SpitState state = SpitState.Patrol;
+    public enum state {Patrol , Chase }
+    public state s = state.Patrol;
 
-    public ZombiesComponent component;
 
-    public BoxCollider mapSizeCollider;
-
+    
     private float distance = 0;
+    private float FindTimer = 0;
+    private float AttackTimer = 0;
 
-    public GameObject Spit;
+    private int n = 10;
 
 
+    #region 이벤트 (path계속찍음)
+    public Action Path;
+    #endregion
 
-    private void Awake()
+    #region 이벤트 플레이어 감지
+    public Action Sence;
+    #endregion
+
+    #region 이벤트 플레이어 공격
+    public Action Attack;
+    #endregion
+
+
+    //public Action AttackMotionEvent;
+
+
+    private void OnEnable()
     {
+        Path += NavPath;
+        Sence += playerSence;
         targetPositionSetting(FindPoint());
     }
 
-    private void Start()
-    {
-        component.agent.destination = targetPosition;
-        component.agent.stoppingDistance = 15;
-    }
-
-    private void targetPositionSetting(Vector3 pos)
-    {
-        targetPosition = pos;
-    }
-
-
-    private float FindTimer = 0;
-    private Collider[] obj;
-    float AttackTimer = 0;
-
-    private int n = 20;
     private void Update()
     {
+
         distance = Vector3.Distance(component.player.transform.position, transform.position);
 
-        component.animator.SetFloat("Distance", distance);
-
-        if (state == SpitState.Patrol)
-        {
-            FindTimer += Time.deltaTime;
-
-            if (FindTimer >= 1.5)
-            {
-                obj = Physics.OverlapSphere(transform.position, n, LayerMask.GetMask("Player"));
-
-                if (obj.Length > 0)
-                {
-                    Debug.Log("Player감지");
-                    component.agent.ResetPath();
-                    targetPosition = component.player.transform.position;
-
-                    state = SpitState.Chase;
-                }
-                FindTimer = 0;
-            }
-
-            if (10.0f >= component.agent.remainingDistance)
-            {
-                targetPositionSetting(FindPoint());
-                // component.agent.ResetPath();
-                NavPath();
-            }
-        }
-        else if (state == SpitState.Chase)
-        {
-            targetPosition = component.player.transform.position;
-
-            NavPath();
-
-            if (distance <= component.agent.stoppingDistance)
-            {
-                //component.agent.updateRotation = false;
-                state = SpitState.Attack;
-            }
-        }
-        else
-        {
-            NavPath();
-            targetPosition = component.player.transform.position;
-            transform.LookAt(targetPosition);
-
-            AttackTimer += Time.deltaTime;
-            if (AttackTimer >= 1)
-            {
-                Debug.Log("공격");
-              
-                var ob = GameObject.Instantiate(Spit);
-                ob.transform.position = transform.position + Vector3.up * 2 + Vector3.forward * 0.5f;
-                ob.transform.rotation = transform.rotation;
-
-
-                AttackTimer = 0;
-            }
-
-            if (distance > component.agent.stoppingDistance)
-            {
-                //component.agent.updateRotation = true;
-                state = SpitState.Chase;
-            }
-        }
+        Sence?.Invoke();
+        Attack?.Invoke();
     }
-
-
 
     public void NavPath()
     {
@@ -122,37 +62,98 @@ public class SpitZombieMove : MonoBehaviour
         component.agent.SetPath(component.path);
     }
 
-
-    private IEnumerator stateProcessPatrol()
+    public void playerSence()
     {
-        while (state == SpitState.Patrol)
+        s = state.Patrol;
+        FindTimer += Time.deltaTime;
+
+        //value가 5보다 크면 달리는모션
+        //value가 5보다 작으면 공격모션
+        component.animator.SetFloat("Distance", 6);
+
+        Path?.Invoke();
+        if (FindTimer >= 0.5f)
         {
-            yield return null;
-            //Debug.Log("patrol");
-            if (Input.GetKeyDown(KeyCode.A))
+            var obj = Physics.OverlapSphere(transform.position, 10.0f, LayerMask.GetMask("Player"));
+            if (obj.Length > 0)
             {
-                state = SpitState.Chase;
-                StartCoroutine(stateProcessChase());
-                yield break;
+                Debug.Log("Player감지");
+                component.agent.ResetPath();
+                SpitPatrolNChase(false, transform.position);
             }
+        }
+        if (10.0f >= component.agent.remainingDistance)
+        {
+            targetPositionSetting(FindPoint());
         }
     }
 
-    private IEnumerator stateProcessChase()
+    public Vector3 Dir(Vector3 a, Vector3 b)
     {
-        while (state == SpitState.Chase)
+        return (a - b).normalized;
+    }
+
+
+    public void playerAttack()
+    {
+        s = state.Chase;
+
+        var dis = Dir(component.player.position , transform.position);
+        Quaternion rot = Quaternion.LookRotation(dis);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime );
+
+        if (5.0f <= distance)
         {
-            yield return null;
-            //  Debug.Log("chase");
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                state = SpitState.Patrol;
-                StartCoroutine(stateProcessPatrol());
-                yield break;
-            }
+            SpitPatrolNChase(true, component.player.transform.position);
         }
     }
 
+    
+
+
+    public void SpitPatrolNChase(bool flag , Vector3 Targetposition)
+    {
+        ResetTimer();
+        AgentUpdate(flag);
+        targetPositionSetting(component.player.transform.position);
+        if (flag)
+        {
+            Attack -= playerAttack;
+            Sence += playerSence;
+        }
+        else
+        {
+            Attack += playerAttack;
+            Sence -= playerSence;
+        }
+    }
+
+
+
+    public void ResetTimer()
+    {
+        FindTimer = 0;
+        AttackTimer = 0;
+    }
+
+    public void CreateSpit()
+    {
+        var ob = spitPoolManager.Instance.GetSpitObj();
+        ob.SetActive(true);
+        ob.transform.position = transform.position + Vector3.up * 2 + Vector3.forward * 0.5f;
+        ob.transform.rotation = transform.rotation;
+    }
+
+    public void AgentUpdate(bool flag)
+    {
+        //component.agent.updatePosition = flag;
+        component.agent.updateRotation = flag;
+    }
+
+    public void targetPositionSetting(Vector3 pos)
+    {
+        targetPosition = pos;
+    }
 
     public Vector3 FindPoint()
     {
@@ -162,8 +163,8 @@ public class SpitZombieMove : MonoBehaviour
 
         for (int i = 0; i < 50; i++)
         {
-            var x = Random.Range(min.x, max.x);
-            var z = Random.Range(min.z, max.z);
+            var x = UnityEngine.Random.Range(min.x, max.x);
+            var z = UnityEngine.Random.Range(min.z, max.z);
             Vector3 targetVector = new Vector3(x, 1.7f, z);
             if (!SomethingOnPlace(targetVector))
             {
@@ -176,28 +177,28 @@ public class SpitZombieMove : MonoBehaviour
     private bool SomethingOnPlace(Vector3 point)
     {
         Vector3 rayStartPoint = new Vector3(point.x, point.y + 80f, point.z);
-        Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+        //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
         if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 200f, 1 << 11))
         {
             rayStartPoint.y = point.y;
             rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Left, 1f);
-            targetPosition = rayStartPoint;
-            Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+            //targetPosition = rayStartPoint;
+            //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
             if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
             {
                 rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Right, 1f);
-                targetPosition = rayStartPoint;
-                Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+                //targetPosition = rayStartPoint;
+                //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
                 if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
                 {
                     rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Back, 1f);
-                    targetPosition = rayStartPoint;
-                    Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+                    //targetPosition = rayStartPoint;
+                   // Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
                     if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
                     {
                         rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Foward, 1f);
-                        targetPosition = rayStartPoint;
-                        Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
+                        //targetPosition = rayStartPoint;
+                        //Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
                         if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
                         {
                             return false;
@@ -256,6 +257,4 @@ public class SpitZombieMove : MonoBehaviour
         Gizmos.DrawSphere(targetPosition, 5);
 
     }
-
-
 }

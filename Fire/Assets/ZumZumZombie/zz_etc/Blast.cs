@@ -8,9 +8,17 @@ public class Blast : MonoBehaviour
 
     public float Distance = 20f;
 
+    private LayerMask layerMask;
+
+    private void Awake()
+    {
+        layerMask = (LayerMask.GetMask("Player")) | (LayerMask.GetMask("Monster"));
+    }
+
     private void OnEnable()
     {
-        var a = Physics.OverlapSphere(transform.position, 20f);
+
+        var a = Physics.OverlapSphere(transform.position, 20f , layerMask);
         for (int i = 0; i < a.Length; i++)
         {
             if (a[i].gameObject.layer == LayerMask.NameToLayer("Magnet") || a[i].gameObject.layer == LayerMask.NameToLayer("Sector"))
