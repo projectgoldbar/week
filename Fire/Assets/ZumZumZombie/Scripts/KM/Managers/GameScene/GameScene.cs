@@ -21,11 +21,11 @@ public class GameScene : MonoBehaviour
 
     public void Awake()
     {
-        StatButton();
     }
 
     public void Start()
     {
+        StatButton();
     }
 
     public void StatButton()

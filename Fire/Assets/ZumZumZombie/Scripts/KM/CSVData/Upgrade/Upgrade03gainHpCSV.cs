@@ -7,7 +7,7 @@ public class Upgrade03gainHpCSV
     private int m_level;
     private int m_statIndex;
     private int m_price;
-    private int m_value;
+    private float m_value;
 
     public int level
     {
@@ -27,7 +27,7 @@ public class Upgrade03gainHpCSV
         set { m_price = value; }
     }
 
-    public int value
+    public float value
     {
         get { return m_value; }
         set { m_value = value; }
@@ -58,7 +58,7 @@ public class Upgrade03gainHpCSV
         if (null != defaultValue && values[index + arrayIndex].Equals(""))
             m_value = defaultValue.value;
         else
-            m_value = int.Parse(values[index + arrayIndex]);
+            m_value = float.Parse(values[index + arrayIndex]);
         ++arrayIndex;
     }
 

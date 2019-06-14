@@ -12,6 +12,9 @@ public class Manager : MonoBehaviour
     public Text liveTime;
     public GameObject gameOverUi;
     public GameObject gamePauseUi;
+    public GameObject gameResultUi;
+    public GameObject gameClearUi;
+    public GameObject itemResultUi;
     public EvolveSystem evolSystem;
 
     public GameObject evolUi;
@@ -28,7 +31,8 @@ public class Manager : MonoBehaviour
     public Vector3[] line2;
     public Vector3[] line3;
     public Stopwatch sw = new Stopwatch();
-    public float playtime;
+    public float playtime;//스코어
+    public float resultGold;
 
     public bool viewAd = false;
 
@@ -48,8 +52,17 @@ public class Manager : MonoBehaviour
         float x = Random.Range(left, right);
         playerData.transform.position = new Vector3(x, setLine[0].y, setLine[0].z);
 
+        SceneManager.sceneUnloaded += OnSceneEnded;
         GameStart();
         //PlayerSetting();
+    }
+
+    private void OnSceneEnded(Scene scene)
+    {
+        var x = UserDataManager.Instance.userData;
+        x.Money = Mathf.Round(playerData.gold);
+        x.playCount++;
+        x.playTime += playerData.gold;
     }
 
     private void PlayerSetting()
@@ -96,6 +109,10 @@ public class Manager : MonoBehaviour
     {
         playtime = Mathf.Floor(sw.ElapsedMilliseconds * 0.001f);
         timeUi.text = "생존시간 " + playtime;
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            GameOver();
+        }
     }
 
     private void GamePause()
@@ -113,9 +130,37 @@ public class Manager : MonoBehaviour
     public void GameOver()
     {
         sw.Stop();
-        EndGameSeq();
         Time.timeScale = 0;
-        gameOverUi.SetActive(true);
+        GameOverSeq();
+    }
+
+    public void GameOverSeq()
+    {
+        if (playerData.clearCount > 0)
+        {
+            if (!gameClearUi.activeSelf)
+            {
+                gameClearUi.SetActive(true);
+            }
+        }
+        else
+        {
+            gameResultUi.SetActive(true);
+        }
+    }
+
+    public void GameClearUiSeq()
+    {
+        //파티클실행
+        var x = RandomBoxManager.Instance.SkinBoxOpen(UserDataManager.Instance.skinInfos.Length);
+        UserDataManager.Instance.userData.gainSkin[x] = true;
+        gameClearUi.SetActive(false);
+        itemResultUi.SetActive(true);
+    }
+
+    public void itemResultUiseq()
+    {
+        GameOverSeq();
     }
 
     private void GameResume()
@@ -125,10 +170,8 @@ public class Manager : MonoBehaviour
 
     public void ViewAD()
     {
-    }
-
-    public void ToMain()
-    {
+        //광고보기
+        resultGold *= 2;
     }
 
     public void Resume(GameObject ui)
@@ -137,15 +180,8 @@ public class Manager : MonoBehaviour
         sw.Start();
     }
 
-    public void EndGameSeq()
-    {
-        var x = UserDataMansger.Instance;
-        x.userData.Money = playerData.gold;
-        x.UserDataBinarySave(x.userdataname);
-    }
-
     public void GoIntro()
     {
-        SceneManager.LoadScene("01_Intro");
+        SceneManager.LoadScene(0);
     }
 }

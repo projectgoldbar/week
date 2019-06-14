@@ -11,6 +11,7 @@ public class PlayerData : MonoBehaviour
     public float maxhp = 50f;
     public float hp = 50f;
     public float hpDownSpeed = 3.3f;
+    public float score = 0;
 
     /// <summary>
     /// 스킬지속시간관련
@@ -27,10 +28,12 @@ public class PlayerData : MonoBehaviour
     public float ep = 0f;
     public float hpUpSpeed = 5f;
     public float epUpSpeed = 3f;
-    public int goldUpSpeed = 3;
-    public int gold = 0;
+    public float goldUpSpeed = 5;
+    public float gold = 0;
     public int df = 0;
     public int live = 0;
+    public int randomBoxCount = 0;
+    public int clearCount = 0;
 
     /*
     0.2차심장
@@ -148,7 +151,7 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    public int Gold
+    public float Gold
     {
         get
         {
@@ -193,24 +196,14 @@ public class PlayerData : MonoBehaviour
         {
             df = -20;
         }
-        if (isHalfSpeech)
-        {
-            maxhp = 281;
-            df = 4;
-            hpUpSpeed = 20f;
 
-            return;
-        }
-        var x = UserDataMansger.Instance.userData;
+        var x = UserDataManager.Instance.userData;
         gold = x.Money;
-        maxhp = x.userAbillity.MaxHp;
-        var dft = x.userAbillity.DEF * 0.2f;
-        df = (int)dft;
-        hpDownSpeed = hpDownSpeed - (hpDownSpeed * x.userAbillity.Hpdeceleration * 0.01f);
-        epUpSpeed = epUpSpeed + (epUpSpeed * x.userAbillity.Gainevolution * 0.01f);
-        goldUpSpeed = goldUpSpeed + (int)(goldUpSpeed * x.userAbillity.MoneyGain * 0.01f);
-        skillCountLv = skillCountLv - x.userAbillity.Maximum;
-        skillLv = skillLv + x.userAbillity.duration;
+        maxhp = x.hp;
+        df = 0;
+        hpDownSpeed = 0;
+        epUpSpeed = x.gainExp;
+        goldUpSpeed = goldUpSpeed + (goldUpSpeed * x.gainMoney * 0.01f);
         var userEquipSkillList = x.skillLVList;
         for (int i = 0; i < userEquipSkillList.Length; i++)
         {
@@ -323,6 +316,10 @@ public class PlayerData : MonoBehaviour
             Ep = xep;
             hp += xhp;
             other.gameObject.SetActive(false);
+        }
+        else if (other.tag == "RandomBox")
+        {
+            randomBoxCount++;
         }
     }
 }
