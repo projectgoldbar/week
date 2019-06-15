@@ -10,46 +10,36 @@ public class StageOpenPanel : MonoBehaviour
 
     private Vector3 targetScale;
     private Color targetColor;
+    private Color currColor;
 
-    private float scaleInTime = 1f;
-    private float colorTime = 1f;
-    private float scaleOutTime = 0.3f;
+    private float scaleInTime = 1.5f;
+    private float colorTime = 0.3f;
+    private float scaleOutTime = 0.5f;
     private float scaleOutScale = 200.0f;
     private float scaleOutDisappearTime = 0.5f;
-
-    private Color myColor;
 
     private void Start()
     {
         targetScale = targetText.GetComponent<RectTransform>().localScale;
-        targetColor = targetText.GetComponent<Text>().color;
+        currColor = targetText.GetComponent<Text>().color;
         ClosePanel();
     }
 
-    public void OpenPanel()
+    public void OpenPanel(string stageName)
     {
+        if (LeanTween.isTweening(targetforScaleOutText))
+        {
+            Debug.Log("--");
+            return;
+        }
         gameObject.SetActive(true);
+        resetSOPanel(stageName);
         PlayTweenEffect();
     }
 
     public void ClosePanel()
     {
-        resetText1();
         gameObject.SetActive(false);
-    }
-
-    private void resetText1()
-    {
-        targetforScaleOutText.SetActive(false);
-        targetText.GetComponent<RectTransform>().localScale = Vector3.zero;
-        targetText.GetComponent<Text>().color = Color.gray;
-    }
-
-    private void resetText2()
-    {
-        targetforScaleOutText.SetActive(true);
-        targetforScaleOutText.GetComponent<RectTransform>().localScale = Vector3.one;
-        targetforScaleOutText.GetComponent<Text>().color = Color.gray;
     }
 
     private void PlayTweenEffect()
@@ -59,7 +49,6 @@ public class StageOpenPanel : MonoBehaviour
 
     private void TweenScaleIn_Complete()
     {
-        resetText2();
         TweenColor();
     }
 
@@ -73,6 +62,17 @@ public class StageOpenPanel : MonoBehaviour
         ClosePanel();
     }
 
+    private void resetSOPanel(string stageName)
+    {
+        targetforScaleOutText.GetComponent<Text>().text = stageName;
+        targetforScaleOutText.GetComponent<RectTransform>().localScale = Vector3.one * 1.05f;
+        targetforScaleOutText.GetComponent<Text>().color = Color.black;
+
+        targetText.GetComponent<Text>().text = stageName;
+        targetText.GetComponent<RectTransform>().localScale = Vector3.zero;
+        targetText.GetComponent<Text>().color = currColor;
+    }
+
     private void TweenScaleIn()
     {
         LTDescr desc = LeanTween.scale(targetText, targetScale, scaleInTime).setEase(LeanTweenType.easeOutElastic);
@@ -81,8 +81,8 @@ public class StageOpenPanel : MonoBehaviour
 
     private void TweenColor()
     {
-        myColor = Color.gray;
-        LTDescr desc = LeanTween.value(0f, Color.gray.r, colorTime);
+        targetColor = currColor;
+        LTDescr desc = LeanTween.value(0f, currColor.r, colorTime);
         desc.setOnUpdate(ColorValueUpdate);
         desc.setOnUpdate(x => { ColorValueUpdate(x); });
         desc.setOnComplete(TweenColor_Complete);
@@ -90,11 +90,11 @@ public class StageOpenPanel : MonoBehaviour
 
     private void ColorValueUpdate(float value)
     {
-        myColor.g = (Color.gray.g - value);
-        myColor.b = (Color.gray.b - value);
-        myColor.r = (Color.gray.r + value);
+        targetColor.g = (currColor.g - value);
+        targetColor.b = (currColor.b - value);
+        targetColor.r = (currColor.r + value);
 
-        targetText.GetComponent<Text>().color = myColor;
+        targetText.GetComponent<Text>().color = targetColor;
     }
 
     private void TweenScaleOut()
@@ -103,7 +103,7 @@ public class StageOpenPanel : MonoBehaviour
         LeanTween.alphaText(targetforScaleOutText.GetComponent<RectTransform>(), 0f, scaleOutTime * scaleOutDisappearTime).setEase(LeanTweenType.easeInCirc);
 
         LTDescr desc = LeanTween.scale(targetText, targetScale * scaleOutScale, scaleOutTime).setEase(LeanTweenType.easeInCirc);
-        LTDescr desclate = LeanTween.scale(targetforScaleOutText, targetScale * scaleOutScale, scaleOutTime * 2f).setEase(LeanTweenType.easeInCirc);
+        LTDescr desclate = LeanTween.scale(targetforScaleOutText, targetScale * 10f, scaleOutTime).setEase(LeanTweenType.easeInCirc);
 
         desc.setOnComplete(TweenScaleOut_Complete);
     }
