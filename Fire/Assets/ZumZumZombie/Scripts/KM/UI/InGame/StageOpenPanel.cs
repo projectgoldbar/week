@@ -41,7 +41,7 @@ public class StageOpenPanel : MonoBehaviour
         gameObject.SetActive(true);
 
         stageOpenPanelText = string.Format("*STAGE OPEN*\n{0}", stageName);
-        resetSOPanel(stageOpenPanelText);
+        resetPanel(stageOpenPanelText);
         PlayTweenEffect();
     }
 
@@ -70,7 +70,7 @@ public class StageOpenPanel : MonoBehaviour
         ClosePanel();
     }
 
-    private void resetSOPanel(string stageOpenPanelText)
+    private void resetPanel(string stageOpenPanelText)
     {
         targetforScaleOutText.GetComponent<Text>().text = stageOpenPanelText;
         targetforScaleOutText.GetComponent<RectTransform>().localScale = Vector3.one * 1.05f;

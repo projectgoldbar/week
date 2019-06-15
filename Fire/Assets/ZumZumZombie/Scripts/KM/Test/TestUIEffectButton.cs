@@ -10,4 +10,9 @@ public class TestUIEffectButton : MonoBehaviour
         string stageText = "------\n ---------l";
         UITweenEffectManager.Instace.stageOpenPanel.OpenPanel(stageText);
     }
+
+    public void OnSkinBoxOpen()
+    {
+        UITweenEffectManager.Instace.skinBoxOpenPanel.Open();
+    }
 }
