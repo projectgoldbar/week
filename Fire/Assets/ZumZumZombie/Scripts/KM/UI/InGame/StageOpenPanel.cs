@@ -10,7 +10,7 @@ public class StageOpenPanel : MonoBehaviour
 
     private Vector3 targetScale;
     private Color targetColor;
-    private Color currColor;
+    private Color currColor = Color.red;
 
     private float scaleInTime = 1.5f;
     private float colorTime = 0.3f;
@@ -20,22 +20,27 @@ public class StageOpenPanel : MonoBehaviour
 
     private string stageOpenPanelText;
 
-    private void Start()
+    private void Awake()
     {
         targetScale = targetText.GetComponent<RectTransform>().localScale;
-        currColor = targetText.GetComponent<Text>().color;
+        targetText.GetComponent<Text>().color = currColor;
+    }
+
+    private void start()
+    {
         ClosePanel();
     }
 
     public void OpenPanel(string stageName)
     {
-        stageOpenPanelText = string.Format("*STAGE OPEN*\n{0}", stageName);
         if (LeanTween.isTweening(targetforScaleOutText))
         {
             Debug.Log("--");
             return;
         }
         gameObject.SetActive(true);
+
+        stageOpenPanelText = string.Format("*STAGE OPEN*\n{0}", stageName);
         resetSOPanel(stageOpenPanelText);
         PlayTweenEffect();
     }
@@ -85,6 +90,8 @@ public class StageOpenPanel : MonoBehaviour
     private void TweenColor()
     {
         targetColor = currColor;
+        Debug.Log(targetColor);
+
         LTDescr desc = LeanTween.value(0f, currColor.r, colorTime);
         desc.setOnUpdate(ColorValueUpdate);
         desc.setOnUpdate(x => { ColorValueUpdate(x); });

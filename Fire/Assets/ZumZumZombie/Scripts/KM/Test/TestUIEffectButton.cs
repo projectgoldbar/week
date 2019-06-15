@@ -7,7 +7,7 @@ public class TestUIEffectButton : MonoBehaviour
     public void OnTestButton()
     {
         //string stageText = Random.Range(0, 9).ToString();
-        string stageText = "gkgkgkgkgkgkdl\n glglglglgl";
+        string stageText = "------\n ---------l";
         UITweenEffectManager.Instace.stageOpenPanel.OpenPanel(stageText);
     }
 }
