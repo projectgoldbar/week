@@ -18,6 +18,8 @@ public class StageOpenPanel : MonoBehaviour
     private float scaleOutScale = 200.0f;
     private float scaleOutDisappearTime = 0.5f;
 
+    private string stageOpenPanelText;
+
     private void Start()
     {
         targetScale = targetText.GetComponent<RectTransform>().localScale;
@@ -27,13 +29,14 @@ public class StageOpenPanel : MonoBehaviour
 
     public void OpenPanel(string stageName)
     {
+        stageOpenPanelText = string.Format("*STAGE OPEN*\n{0}", stageName);
         if (LeanTween.isTweening(targetforScaleOutText))
         {
             Debug.Log("--");
             return;
         }
         gameObject.SetActive(true);
-        resetSOPanel(stageName);
+        resetSOPanel(stageOpenPanelText);
         PlayTweenEffect();
     }
 
@@ -62,13 +65,13 @@ public class StageOpenPanel : MonoBehaviour
         ClosePanel();
     }
 
-    private void resetSOPanel(string stageName)
+    private void resetSOPanel(string stageOpenPanelText)
     {
-        targetforScaleOutText.GetComponent<Text>().text = stageName;
+        targetforScaleOutText.GetComponent<Text>().text = stageOpenPanelText;
         targetforScaleOutText.GetComponent<RectTransform>().localScale = Vector3.one * 1.05f;
         targetforScaleOutText.GetComponent<Text>().color = Color.black;
 
-        targetText.GetComponent<Text>().text = stageName;
+        targetText.GetComponent<Text>().text = stageOpenPanelText;
         targetText.GetComponent<RectTransform>().localScale = Vector3.zero;
         targetText.GetComponent<Text>().color = currColor;
     }
