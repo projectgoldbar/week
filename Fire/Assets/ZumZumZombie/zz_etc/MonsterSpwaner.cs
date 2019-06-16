@@ -18,7 +18,7 @@ public class MonsterSpwaner : MonoBehaviour
     {
         spwanPoints = spwanPointss.GetComponentsInChildren<Transform>();
         manager = GetComponent<Manager>();
-        //StartCoroutine(Spwan());
+        StartCoroutine(Spwan());
         seconds = new WaitForSeconds(second);
         zombies.Add(zombie);
         zombies.Add(bombZombie);
@@ -27,20 +27,20 @@ public class MonsterSpwaner : MonoBehaviour
 
     public void SpwanZombie(GameObject zombie)
     {
-        var monster = GameObject.Instantiate(zombie, spwanPoints[Random.Range(1, spwanPoints.Length)].position, Quaternion.identity, transform);
+        GameObject.Instantiate(zombie, spwanPoints[Random.Range(1, spwanPoints.Length)].position, Quaternion.identity, transform);
     }
 
     private IEnumerator Spwan()
     {
         int count = 0;
-        while (count < 1)
+        while (count < 4)
         {
             SpwanZombie(zombie);
             count++;
 
             yield return seconds;
         }
-        StartCoroutine(SpwanSystem());
+        //StartCoroutine(SpwanSystem());
         yield break;
     }
 

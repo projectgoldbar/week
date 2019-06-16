@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Diagnostics;
@@ -25,21 +26,26 @@ public class Manager : MonoBehaviour
     public Text timeUi;
     public Text goldUi;
 
+    [Header("게임오버패널")]
+    public Text scoreText;
+
+    public Text survivalTimeTxt;
+    public Text coinText;
+    public Text StageClearText;
+
     private List<Vector3[]> line;
 
     public Vector3[] line1;
     public Vector3[] line2;
     public Vector3[] line3;
     public Stopwatch sw = new Stopwatch();
-    public float playtime;//스코어
+    public float score;//스코어
     public float resultGold;
 
     public bool viewAd = false;
 
     private void Awake()
     {
-        Screen.SetResolution(720, 1280, true);
-        Application.targetFrameRate = 45;
         playerData = FindObjectOfType<PlayerData>();
         line = new List<Vector3[]>();
         line.Add(line1);
@@ -101,17 +107,17 @@ public class Manager : MonoBehaviour
         GamePause();
     }
 
-    private void SetPlayer()
-    {
-    }
-
     private void Update()
     {
-        playtime = Mathf.Floor(sw.ElapsedMilliseconds * 0.001f);
-        timeUi.text = "생존시간 " + playtime;
+        score = Mathf.Floor(sw.ElapsedMilliseconds * 0.001f);
+        timeUi.text = "Score " + score;
         if (Input.GetKeyDown(KeyCode.Q))
         {
             GameOver();
+        }
+        else if (Input.GetKeyDown(KeyCode.J))
+        {
+            StartCoroutine(TimeToGold());
         }
     }
 
@@ -134,6 +140,10 @@ public class Manager : MonoBehaviour
         GameOverSeq();
     }
 
+    private float sec;
+    private float min;
+    private float hour;
+
     public void GameOverSeq()
     {
         if (playerData.clearCount > 0)
@@ -145,8 +155,54 @@ public class Manager : MonoBehaviour
         }
         else
         {
-            gameResultUi.SetActive(true);
+            scoreText.text = score.ToString();
+            var playTime = score;
+            sec = playTime % 60;
+            min = playTime / 60 % 60;
+            hour = playTime / 3600;
+            survivalTimeTxt.text = string.Format("{0:00} : {1:00} : {2:00}", hour, min, sec);
+            gameOverUi.SetActive(true);
+            StartCoroutine(TimeToGold());
         }
+    }
+
+    private IEnumerator TimeToGold()
+    {
+        var gold = playerData.gold;
+        while (sec > 1)
+        {
+            sec -= 1f;
+            gold++;
+            survivalTimeTxt.text = string.Format("{0:00} : {1:00} : {2:00}", hour, min, sec);
+            coinText.text = gold.ToString();
+            yield return null;
+        }
+        sec = 0f;
+        while (min > 1)
+        {
+            min -= 1f;
+            gold += 60f;
+            survivalTimeTxt.text = string.Format("{0:00} : {1:00} : {2:00}", hour, min, sec);
+            coinText.text = gold.ToString();
+
+            yield return null;
+        }
+        min = 0f;
+        while (hour > 1)
+        {
+            hour -= 1f;
+            gold += 3600f;
+
+            survivalTimeTxt.text = string.Format("{0:00} : {1:00} : {2:00}", hour, min, sec);
+
+            coinText.text = gold.ToString();
+
+            yield return null;
+        }
+        hour = 0f;
+        survivalTimeTxt.text = string.Format("{0:00} : {1:00} : {2:00}", hour, min, sec);
+
+        playerData.gold = gold;
     }
 
     public void GameClearUiSeq()
@@ -158,7 +214,7 @@ public class Manager : MonoBehaviour
         itemResultUi.SetActive(true);
     }
 
-    public void itemResultUiseq()
+    public void ItemResultUiseq()
     {
         GameOverSeq();
     }

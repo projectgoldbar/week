@@ -14,6 +14,7 @@ public class ParticlePool : MonoBehaviour
     public List<GameObject> meatParticlePool;
     public List<GameObject> nukeParticlePool;
     public List<GameObject> trapParticlePool;
+    public List<GameObject> gateOpenParticlePool;
 
     #endregion 파티클 생산해서 넣을 풀들
 
@@ -25,6 +26,7 @@ public class ParticlePool : MonoBehaviour
     3. 고기먹었을때
     4. 폭탄좀비폭발
     5. 함정
+    6. 게이트오픈
       */
 
     private void Start()
@@ -52,6 +54,10 @@ public class ParticlePool : MonoBehaviour
         for (int p = 0; p < 4; p++)
         {
             trapParticlePool.Add(Instantiate(particles[5], transform.position, Quaternion.identity, transform));
+        }
+        for (int q = 0; q < 6; q++)
+        {
+            gateOpenParticlePool.Add(Instantiate(particles[6], transform.position, Quaternion.identity, transform));
         }
     }
 

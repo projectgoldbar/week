@@ -17,8 +17,7 @@ public class Blast : MonoBehaviour
 
     private void OnEnable()
     {
-
-        var a = Physics.OverlapSphere(transform.position, 20f , layerMask);
+        var a = Physics.OverlapSphere(transform.position, 20f, layerMask);
         for (int i = 0; i < a.Length; i++)
         {
             if (a[i].gameObject.layer == LayerMask.NameToLayer("Magnet") || a[i].gameObject.layer == LayerMask.NameToLayer("Sector"))
@@ -32,7 +31,6 @@ public class Blast : MonoBehaviour
             StartCoroutine(KuckBack(a[i]));
         }
     }
-
 
     private IEnumerator KuckBack(Collider a)
     {

@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerData : MonoBehaviour
 {
     public GameObject dummyShied;
     public ParticleSystem boostParticle;
     public bool isTest;
+    public Text hpText;
+
     private bool smite = true;
 
     public float maxhp = 50f;
     public float hp = 50f;
-    public float hpDownSpeed = 3.3f;
+    public float hpDownSpeed = 5f;
     public float score = 0;
 
     /// <summary>
@@ -35,20 +38,20 @@ public class PlayerData : MonoBehaviour
     public int randomBoxCount = 0;
     public int clearCount = 0;
 
+    public int key = 0;
+
     /*
     0.2차심장
     1.풀차지
-    2.하늘에서고기가
-    3.어미구더기
-    4.방어력업
-    5.방사능주사
-    6.위장강화
-    7.티타늄이빨
-    8.자석꼬리
-    9.쿼드코어
-    10.금화추적기
-    11.고기자석꼬리
-    12.더미데이터
+    2.방어력업
+    3.방사능주사
+    4.위장강화
+    5.티타늄이빨
+    6.자석꼬리
+    7.쿼드코어
+    8.고기자석꼬리
+    9.전방방패
+    10.더미데이터
     13.더미데이터
     14.더미데이터
     15.더미데이터
@@ -94,11 +97,12 @@ public class PlayerData : MonoBehaviour
     {
         get
         {
-            return evolveLvData[10];
+            return evolveLvData[8];
         }
         set
         {
-            evolveLvData[11] = value;
+            evolveLvData[8] = value;
+            meatTail.GetComponent<SphereCollider>().radius *= 2f;
         }
     }
 
@@ -145,7 +149,7 @@ public class PlayerData : MonoBehaviour
             {
                 epLv++;
                 ep = ep - maxEp;
-                maxEp = maxEp + epLv;
+                maxEp = maxEp + epLv * 2;
                 manager.Evolution();
             }
         }
@@ -173,7 +177,7 @@ public class PlayerData : MonoBehaviour
         manager = FindObjectOfType<Manager>();
         magnet = FindObjectOfType<Magnet>().gameObject;
         meatTail = FindObjectOfType<MeatTail>().gameObject;
-        meatTail.GetComponent<MeatTail>().GetMeat(this);
+        meatTail.GetComponent<MeatTail>().SetPlayer(this);
         shield = FindObjectOfType<Shield>().gameObject;
         particlePool = FindObjectOfType<ParticlePool>();
         animator = transform.GetChild(0).GetComponent<Animator>();
@@ -201,8 +205,10 @@ public class PlayerData : MonoBehaviour
         gold = x.Money;
         maxhp = x.hp;
         df = 0;
-        hpDownSpeed = 0;
-        epUpSpeed = x.gainExp;
+        var fperHp = (maxhp * 0.05f);
+        hpDownSpeed = fperHp - (fperHp * (0.01f * x.decelerationHp));
+        hpUpSpeed = hpUpSpeed + (hpUpSpeed * (0.01f * x.healHp));
+        epUpSpeed = epUpSpeed + (epUpSpeed * x.gainExp * 0.01f);
         goldUpSpeed = goldUpSpeed + (goldUpSpeed * x.gainMoney * 0.01f);
         var userEquipSkillList = x.skillLVList;
         for (int i = 0; i < userEquipSkillList.Length; i++)
@@ -222,7 +228,7 @@ public class PlayerData : MonoBehaviour
         {
             if (hp >= 0)
             {
-                hp = hp - (hpDownSpeed * (1 - evolveLvData[6] * 0.1f)) * Time.deltaTime;
+                hp = hp - hpDownSpeed * Time.deltaTime;
             }
             else if (live > 0)
             {
@@ -284,11 +290,9 @@ public class PlayerData : MonoBehaviour
         if (originSpeed == 0)
             originSpeed = playerMove.speed;
         playerMove.speed *= 1.5f;
-        evolveLvData[4] += evolveLvData[5];
         yield return new WaitForSeconds(3f);
 
         playerMove.speed = 11;
-        evolveLvData[4] -= evolveLvData[5];
         originSpeed = 0f;
         isradiantion = false;
         yield break;
@@ -311,8 +315,8 @@ public class PlayerData : MonoBehaviour
         }
         else if (other.tag == "Meat")
         {
-            var xep = epUpSpeed + (evolveLvData[8] * 0.5f);
-            var xhp = hpUpSpeed + (evolveLvData[7] * 3f);
+            var xep = epUpSpeed + (evolveLvData[7]);
+            var xhp = hpUpSpeed + (maxhp * (0.03f * evolveLvData[5]));
             Ep = xep;
             hp += xhp;
             other.gameObject.SetActive(false);

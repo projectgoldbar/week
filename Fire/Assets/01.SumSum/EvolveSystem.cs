@@ -10,6 +10,7 @@ public class Evolve
     public string description;
     public Sprite sprite;
     public int idx = 0;
+    public int lv = 0;
 }
 
 public class EvolveSystem : MonoBehaviour
@@ -20,17 +21,17 @@ public class EvolveSystem : MonoBehaviour
 
     private void Awake()
     {
-        evolveFunc.Add(() => SecondsHeart());
-        evolveFunc.Add(() => FullCharge());
-        evolveFunc.Add(() => MeatFall());
-        evolveFunc.Add(() => DefenceUp());
-        evolveFunc.Add(() => RadiationInjection());
-        evolveFunc.Add(() => GastrointestinalExtension());
-        evolveFunc.Add(() => TitaniumTooth());
-        evolveFunc.Add(() => MagnetTail());
-        evolveFunc.Add(() => QuadCore());
-        evolveFunc.Add(() => { });
-        evolveFunc.Add(() => MeatTail());
+        evolveFunc.Add(() => SecondsHeart());//0
+        evolveFunc.Add(() => FullCharge());//1
+        evolveFunc.Add(() => DefenceUp());//2
+        evolveFunc.Add(() => RadiationInjection());//3
+        evolveFunc.Add(() => GastrointestinalExtension());//4
+        evolveFunc.Add(() => TitaniumTooth());//5
+        evolveFunc.Add(() => MagnetTail());//6
+        evolveFunc.Add(() => QuadCore());//7
+        evolveFunc.Add(() => MeatTail());//8
+        evolveFunc.Add(() => FowardShield());//9
+        evolveFunc.Add(() => Charge());//10
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
@@ -59,26 +60,24 @@ public class EvolveSystem : MonoBehaviour
 
     public List<Evolve> Evolve()
     {
-        List<bool> boolIdx = new List<bool>();
+        List<Evolve> lv3lowerList = new List<Evolve>();
+
         for (int i = 0; i < evolveIdx.Length; i++)
         {
-            boolIdx.Add(true);
+            if (evolveIdx[i].lv < 3)
+            {
+                lv3lowerList.Add(evolveIdx[i]);
+            }
         }
         List<Evolve> returnValue = new List<Evolve>();
 
-        for (int j = 0; j < 3; j++)
+        for (int i = 0; i < 3; i++)
         {
-            var x = UnityEngine.Random.Range(0, evolveIdx.Length);
-            if (boolIdx[x] == true)
-            {
-                boolIdx[x] = false;
-                returnValue.Add(evolveIdx[x]);
-            }
-            else
-            {
-                j--;
-            }
+            var x = UnityEngine.Random.Range(0, lv3lowerList.Count);
+            returnValue.Add(lv3lowerList[x]);
+            lv3lowerList.RemoveAt(x);
         }
+
         return returnValue;
     }
 
@@ -130,7 +129,8 @@ public class EvolveSystem : MonoBehaviour
             StartCoroutine(SetShield(a));
             setShield = true;
         }
-        a.evolveLvData[4]++;
+
+        a.evolveLvData[2]++;
     }
 
     private void Update()
@@ -167,32 +167,35 @@ public class EvolveSystem : MonoBehaviour
     public void RadiationInjection()
     {
         var a = FindObjectOfType<PlayerData>();
-        a.evolveLvData[5]++;
+        a.evolveLvData[3]++;
     }
 
     public void GastrointestinalExtension()
     {
         var a = FindObjectOfType<PlayerData>();
-        a.evolveLvData[6]++;
+        a.evolveLvData[4]++;
     }
 
     public void TitaniumTooth()
     {
         var a = FindObjectOfType<PlayerData>();
-        a.evolveLvData[7]++;
+        a.evolveLvData[5]++;
     }
 
     public void MagnetTail()
     {
         var a = FindObjectOfType<PlayerData>();
-        a.magnet.SetActive(true);
+        if (!a.magnet.activeSelf)
+        {
+            a.magnet.SetActive(true);
+        }
         a.MagnetLV = 1;
     }
 
     public void QuadCore()
     {
         var a = FindObjectOfType<PlayerData>();
-        a.evolveLvData[8]++;
+        a.evolveLvData[7]++;
     }
 
     public void GoldStoker()
@@ -212,14 +215,19 @@ public class EvolveSystem : MonoBehaviour
     public void MeatTail()
     {
         var a = FindObjectOfType<PlayerData>();
-        a.meatTail.SetActive(true);
-        a.evolveLvData[11]++;
-        //a.MeatTailLV++;
-
+        if (!a.meatTail.activeSelf)
+        {
+            a.meatTail.SetActive(true);
+        }
+        a.evolveLvData[8]++;
+        a.MeatTailLV++;
     }
 
+    public void FowardShield()
+    {
+    }
 
-
-
-
+    public void Charge()
+    {
+    }
 }

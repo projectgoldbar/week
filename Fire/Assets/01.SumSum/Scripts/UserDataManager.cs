@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [DefaultExecutionOrder(-5000)]
 public class UserDataManager : MonoBehaviour
@@ -9,9 +10,13 @@ public class UserDataManager : MonoBehaviour
     public SKinInfo[] skinInfos;
     public int value;
     public static UserDataManager Instance;
+    public Text debugText;
 
     private void Awake()
     {
+        Screen.SetResolution(720, 1280, true);
+        Application.targetFrameRate = 45;
+
         userData = new NewUserData();
 
         if (Instance != null)
@@ -55,6 +60,11 @@ public class UserDataManager : MonoBehaviour
         }
     }
 
+    private void OnApplicationPause(bool pause)
+    {
+        NewSaveSystem.SaveData(userData);
+    }
+
     private void OnApplicationQuit()
     {
         NewSaveSystem.SaveData(userData);
@@ -62,12 +72,20 @@ public class UserDataManager : MonoBehaviour
 
     public void LoadData()
     {
+        debugText.text = "로드들어옴";
         var data = NewSaveSystem.LoadData();
-        userData.Money = data.money;
-        userData.statPointerIdx = data.statPointerIdx;
-        userData.playTime = data.playTime;
-        userData.gainSkin = data.gainSkin;
-        userData.equipedSkinIdx = data.equipedSkinIdx;
+        debugText.text = "데이타로드완료";
+
+        if (data != null)
+        {
+            debugText.text = "데이타가 잘읽혔음";
+
+            userData.Money = data.money;
+            userData.statPointerIdx = data.statPointerIdx;
+            userData.playTime = data.playTime;
+            userData.gainSkin = data.gainSkin;
+            userData.equipedSkinIdx = data.equipedSkinIdx;
+        }
     }
 
     public void Refresh()
@@ -120,6 +138,7 @@ public class UserDataManager : MonoBehaviour
             for (int i = 0; i < upgradeInfoPanels.Length; i++)
             {
                 upgradeInfoPanels[i].Initiate();
+                SceneManager.LoadScene(1);
             }
         }
     }

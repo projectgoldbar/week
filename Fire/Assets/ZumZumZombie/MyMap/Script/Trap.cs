@@ -26,9 +26,12 @@ public class Trap : MonoBehaviour
     {
         if (!isUsed)
         {
+            var soundManager = SoundManager.Instance;
             coroutine = StartCoroutine(InstanceZombie());
             Camera.main.GetComponent<CameraFallow>().CameraShake(0.2f);
             var x = particlePool.GetParticle(particlePool.trapParticlePool);
+
+            soundManager.PlayBGM(soundManager.trapBgm, soundManager.SoundDic["trap"], false, 0);
 
             x.transform.position = transform.position;
             x.transform.rotation = transform.rotation;

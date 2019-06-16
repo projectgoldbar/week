@@ -7,6 +7,7 @@ public class HpSlider : MonoBehaviour
     public PlayerData playerData;
     public Image bloodImg;
     public Color c;
+    public Text hpText;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class HpSlider : MonoBehaviour
     private void Update()
     {
         var x = playerData.hp / playerData.maxhp;
+        hpText.text = Mathf.Round(playerData.hp).ToString() + " / " + playerData.maxhp.ToString();
         slider.value = x;
         c.a = 1 - x;
         bloodImg.color = c;

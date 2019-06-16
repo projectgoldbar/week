@@ -22,7 +22,6 @@ public class CSVManager : MonoBehaviour
     private List<Upgrade13instantSkillMaxCountCSV> m_Upgrade13instantSkillMaxCountCSVList = new List<Upgrade13instantSkillMaxCountCSV>();
     private List<Upgrade14instantGainHpCSV> m_Upgrade14instantGainHpCSVList = new List<Upgrade14instantGainHpCSV>();
 
-
     public static CSVManager Instance
     {
         get { return instance; }
@@ -32,25 +31,22 @@ public class CSVManager : MonoBehaviour
     {
         instance = this;
 
-        Upgrade00maxHpCSV.LoadCSV("KM/GameData/Upgrade/Upgrade00maxHpCSV", m_Upgrade00maxHpCSVList);
-        Upgrade01decelerationHpCSV.LoadCSV("KM/GameData/Upgrade/Upgrade01decelerationHpCSV", m_Upgrade01decelerationHpCSVList);
-        Upgrade02defenseCSV.LoadCSV("KM/GameData/Upgrade/Upgrade02defenseCSV", m_Upgrade02defenseCSVList);
-        Upgrade03gainHpCSV.LoadCSV("KM/GameData/Upgrade/Upgrade03gainHpCSV", m_Upgrade03gainHpCSVList);
-        Upgrade04gainPointCSV.LoadCSV("KM/GameData/Upgrade/Upgrade04gainPointCSV", m_Upgrade04gainPointCSVList);
-        Upgrade05gainMoneyCSV.LoadCSV("KM/GameData/Upgrade/Upgrade05gainMoneyCSV", m_Upgrade05gainMoneyCSVList);
-        Upgrade06startBonusCSV.LoadCSV("KM/GameData/Upgrade/Upgrade06startBonusCSV", m_Upgrade06startBonusCSVList);
-        Upgrade07skillBodyRatioCSV.LoadCSV("KM/GameData/Upgrade/Upgrade07skillBodyRatioCSV", m_Upgrade07skillBodyRatioCSVList);
-        Upgrade08skillDurationCSV.LoadCSV("KM/GameData/Upgrade/Upgrade08skillDurationCSV", m_Upgrade08skillDurationCSVList);
-        Upgrade09skillMaxCountCSV.LoadCSV("KM/GameData/Upgrade/Upgrade09skillMaxCountCSV", m_Upgrade09skillMaxCountCSVList);
-        Upgrade10instantStartBonusCSV.LoadCSV("KM/GameData/Upgrade/Upgrade10instantStartBonusCSV", m_Upgrade10instantStartBonusCSVList);
-        Upgrade11instantGainMoneyCSV.LoadCSV("KM/GameData/Upgrade/Upgrade11instantGainMoneyCSV", m_Upgrade11instantGainMoneyCSVList);
-        Upgrade12instantGainMaxHpCSV.LoadCSV("KM/GameData/Upgrade/Upgrade12instantGainMaxHpCSV", m_Upgrade12instantGainMaxHpCSVList);
-        Upgrade13instantSkillMaxCountCSV.LoadCSV("KM/GameData/Upgrade/Upgrade13instantSkillMaxCountCSV", m_Upgrade13instantSkillMaxCountCSVList);
-        Upgrade14instantGainHpCSV.LoadCSV("KM/GameData/Upgrade/Upgrade14instantGainHpCSV", m_Upgrade14instantGainHpCSVList);
-
+        Upgrade00maxHpCSV.LoadCSV("Upgrade00maxHpCSV", m_Upgrade00maxHpCSVList);
+        Upgrade01decelerationHpCSV.LoadCSV("Upgrade01decelerationHpCSV", m_Upgrade01decelerationHpCSVList);
+        Upgrade02defenseCSV.LoadCSV("Upgrade02defenseCSV", m_Upgrade02defenseCSVList);
+        Upgrade03gainHpCSV.LoadCSV("Upgrade03gainHpCSV", m_Upgrade03gainHpCSVList);
+        Upgrade04gainPointCSV.LoadCSV("Upgrade04gainPointCSV", m_Upgrade04gainPointCSVList);
+        Upgrade05gainMoneyCSV.LoadCSV("Upgrade05gainMoneyCSV", m_Upgrade05gainMoneyCSVList);
+        Upgrade06startBonusCSV.LoadCSV("Upgrade06startBonusCSV", m_Upgrade06startBonusCSVList);
+        Upgrade07skillBodyRatioCSV.LoadCSV("Upgrade07skillBodyRatioCSV", m_Upgrade07skillBodyRatioCSVList);
+        Upgrade08skillDurationCSV.LoadCSV("Upgrade08skillDurationCSV", m_Upgrade08skillDurationCSVList);
+        Upgrade09skillMaxCountCSV.LoadCSV("Upgrade09skillMaxCountCSV", m_Upgrade09skillMaxCountCSVList);
+        Upgrade10instantStartBonusCSV.LoadCSV("Upgrade10instantStartBonusCSV", m_Upgrade10instantStartBonusCSVList);
+        Upgrade11instantGainMoneyCSV.LoadCSV("Upgrade11instantGainMoneyCSV", m_Upgrade11instantGainMoneyCSVList);
+        Upgrade12instantGainMaxHpCSV.LoadCSV("Upgrade12instantGainMaxHpCSV", m_Upgrade12instantGainMaxHpCSVList);
+        Upgrade13instantSkillMaxCountCSV.LoadCSV("Upgrade13instantSkillMaxCountCSV", m_Upgrade13instantSkillMaxCountCSVList);
+        Upgrade14instantGainHpCSV.LoadCSV("Upgrade14instantGainHpCSV", m_Upgrade14instantGainHpCSVList);
     }
-
- 
 
     public Upgrade00maxHpCSV GetUpgrade00maxHpCSV(int level)
     {

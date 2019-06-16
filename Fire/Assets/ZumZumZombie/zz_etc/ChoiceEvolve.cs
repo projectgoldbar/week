@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ChoiceEvolve : MonoBehaviour
@@ -21,6 +19,7 @@ public class ChoiceEvolve : MonoBehaviour
     public void Evolve()
     {
         FindObjectOfType<EvolveSystem>().evolveFunc[evolve.idx]();
+        evolve.lv++;
         //transform.parent.gameObject.SetActive(false);
         manager.evolUi.SetActive(false);
         Time.timeScale = 1;
