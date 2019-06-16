@@ -18,4 +18,5 @@ public class UITweenEffectManager : MonoBehaviour
 
     public StageOpenPanel stageOpenPanel;
     public SkinBoxOpenPanel skinBoxOpenPanel;
+    public GameOverPanel gameOverPanel;
 }
