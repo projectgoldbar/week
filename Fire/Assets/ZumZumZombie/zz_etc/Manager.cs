@@ -45,6 +45,7 @@ public class Manager : MonoBehaviour
     public bool viewAd = false;
 
     public AdmobVideoAd AdsVideo;
+
     private void Awake()
     {
         playerData = FindObjectOfType<PlayerData>();
@@ -59,7 +60,7 @@ public class Manager : MonoBehaviour
         float right = setLine[1].x;
         float x = Random.Range(left, right);
         playerData.transform.position = new Vector3(x, setLine[0].y, setLine[0].z);
-
+        goldUi.text = playerData.gold.ToString();
         SceneManager.sceneUnloaded += OnSceneEnded;
         GameStart();
         //PlayerSetting();
@@ -70,7 +71,6 @@ public class Manager : MonoBehaviour
         var x = UserDataManager.Instance.userData;
         x.Money = Mathf.Round(playerData.gold);
         x.playCount++;
-        x.playTime += playerData.gold;
     }
 
     private void PlayerSetting()
@@ -206,8 +206,6 @@ public class Manager : MonoBehaviour
         survivalTimeTxt.text = string.Format("{0:00} : {1:00} : {2:00}", hour, min, sec);
 
         resultGold = gold;
-
-        
     }
 
     public void GameClearUiSeq()
@@ -233,10 +231,7 @@ public class Manager : MonoBehaviour
     {
         //광고보기
         AdsVideo.ShowRewardedAd();
-       
     }
-
-
 
     public void Resume(GameObject ui)
     {
@@ -246,15 +241,13 @@ public class Manager : MonoBehaviour
 
     public void GoIntro()
     {
-        playerData.gold += resultGold;
         SceneManager.LoadScene(0);
     }
-
 
     public void RewardGold()
     {
         resultGold *= 2;
+        coinText.text = resultGold.ToString();
+        playerData.gold += resultGold;
     }
-
-
 }

@@ -122,7 +122,7 @@ public class PlayerData : MonoBehaviour
             {
                 hp = maxhp;
             }
-            else if (evolveLvData[5] > 0)
+            else if (evolveLvData[3] > 0)
             {
                 if (!isradiantion)
                 {

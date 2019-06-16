@@ -7,7 +7,7 @@ public static class NewSaveSystem
     public static void SaveData(NewUserData userData)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.dataPath + "/testSavDat.dd";
+        string path = Application.persistentDataPath + "/beta.dd";
         FileStream stream = new FileStream(path, FileMode.Create);
         SaveData data = new SaveData();
         data.statPointerIdx = userData.statPointerIdx;
@@ -21,7 +21,7 @@ public static class NewSaveSystem
 
     public static SaveData LoadData()
     {
-        string path = Application.dataPath + "/testSavDat.dd";
+        string path = Application.persistentDataPath + "/beta.dd";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
