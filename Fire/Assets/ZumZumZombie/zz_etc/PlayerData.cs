@@ -198,7 +198,7 @@ public class PlayerData : MonoBehaviour
     {
         if (smite)
         {
-            df = -20;
+            return;
         }
 
         var x = UserDataManager.Instance.userData;

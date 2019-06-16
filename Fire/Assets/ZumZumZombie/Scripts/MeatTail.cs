@@ -23,6 +23,7 @@ public class MeatTail : MonoBehaviour
     public void Awake()
     {
         Second = new WaitForSeconds(2f);
+        var x =
         StartCoroutine(CoolDown());
     }
 

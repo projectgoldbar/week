@@ -69,13 +69,14 @@ public class Manager : MonoBehaviour
     private void OnSceneEnded(Scene scene)
     {
         var x = UserDataManager.Instance.userData;
+        playerData.gold += resultGold;
         x.Money = Mathf.Round(playerData.gold);
         x.playCount++;
     }
 
     private void PlayerSetting()
     {
-        var userEquipSkillList = UserDataMansger.Instance.userData.skillLVList;
+        var userEquipSkillList = UserDataManager.Instance.userData.skillLVList;
         for (int i = 0; i < userEquipSkillList.Length; i++)
         {
             playerData.evolveLvData[i] = userEquipSkillList[i];
@@ -248,6 +249,5 @@ public class Manager : MonoBehaviour
     {
         resultGold *= 2;
         coinText.text = resultGold.ToString();
-        playerData.gold += resultGold;
     }
 }
