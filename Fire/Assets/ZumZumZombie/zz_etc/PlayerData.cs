@@ -5,9 +5,11 @@ using UnityEngine.UI;
 public class PlayerData : MonoBehaviour
 {
     public GameObject dummyShied;
+    public GameObject arrow;
     public ParticleSystem boostParticle;
     public bool isTest;
     public Text hpText;
+    public Gate gate;
 
     private bool smite = false;
 
@@ -35,8 +37,10 @@ public class PlayerData : MonoBehaviour
     public float gold = 0;
     public int df = 0;
     public int live = 0;
-    public int randomBoxCount = 0;
+    public int[] randomBox;
     public int clearCount = 0;
+    public int[] clearBox;
+    public int boxBuffer = 0;
 
     public int key = 0;
 
@@ -102,7 +106,7 @@ public class PlayerData : MonoBehaviour
         set
         {
             evolveLvData[8] = value;
-            meatTail.GetComponent<SphereCollider>().radius *= 2f;
+            meatTail.GetComponent<SphereCollider>().radius += 5f;
         }
     }
 
@@ -171,6 +175,8 @@ public class PlayerData : MonoBehaviour
     private void Awake()
     {
         evolveLvData = new int[24] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        clearBox = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
+        randomBox = new int[7] { 0, 0, 0, 0, 0, 0, 0 };
         //FindObjectOfType<hpSlider>().playerData = this;
         playerMove = GetComponent<PlayerMove>();
         FindObjectOfType<SkillSystem>().playerMove = GetComponent<PlayerMove>();
@@ -214,6 +220,10 @@ public class PlayerData : MonoBehaviour
         for (int i = 0; i < userEquipSkillList.Length; i++)
         {
             evolveLvData[i] = userEquipSkillList[i];
+        }
+        for (int i = 0; i < x.randomBox.Length; i++)
+        {
+            randomBox[i] = x.randomBox[i];
         }
     }
 
@@ -323,7 +333,16 @@ public class PlayerData : MonoBehaviour
         }
         else if (other.tag == "RandomBox")
         {
-            randomBoxCount++;
+            var boxLv = other.GetComponent<RandomBox>().lv;
+            randomBox[boxLv]++;
+            other.gameObject.SetActive(false);
+        }
+        else if (other.tag == "ClearBox")
+        {
+            var boxLv = other.GetComponent<Box>().lv;
+            boxBuffer = boxLv;
+            other.gameObject.SetActive(false);
+            gate.isClear = true;
         }
     }
 }

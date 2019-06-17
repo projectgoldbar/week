@@ -36,6 +36,12 @@ public class NewUserData
 
     #endregion 스킨관련
 
+    #region 박스관련
+
+    public int[] randomBox = new int[7] { 0, 0, 0, 0, 0, 0, 0 };
+
+    #endregion 박스관련
+
     #endregion 세이브할목록들
 
     #region 인게임플레이어스테이터스

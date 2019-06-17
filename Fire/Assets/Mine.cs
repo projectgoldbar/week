@@ -13,10 +13,9 @@ public class Mine : MonoBehaviour
     private void Awake()
     {
         particlePool = FindObjectOfType<ParticlePool>();
-        second = new WaitForSeconds(1f);
+        second = new WaitForSeconds(0.5f);
         tracerDuration = new WaitForSeconds(0.2f);
         material = GetComponent<Renderer>().materials[0];
-        c = StartCoroutine(MineBlastSeq());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,13 +27,13 @@ public class Mine : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         isPlayer = false;
-        StopCoroutine(c);
     }
+
+    private int count = 2;
 
     private IEnumerator MineBlastSeq()
     {
         StartCoroutine(Tracer());
-        int count = 2;
         while (isPlayer)
         {
             yield return second;
@@ -43,8 +42,10 @@ public class Mine : MonoBehaviour
             {
                 isPlayer = false;
                 var x = particlePool.GetParticle(particlePool.mineParticlePool);
+
                 x.transform.position = transform.position;
                 x.SetActive(true);
+
                 gameObject.SetActive(false);
             }
         }

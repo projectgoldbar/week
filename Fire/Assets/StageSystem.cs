@@ -5,8 +5,35 @@ using UnityEngine;
 public class StageSystem : MonoBehaviour
 {
     public List<GameObject> stageGate;
+    public List<Stage> stages;
     public Manager manager;
     public ParticlePool particlePool;
+    public GameObject arrowPivot;
+    private int currentStage = 0;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            StartCoroutine(DestroyGate());
+        }
+    }
+
+    public int CurrentStage
+    {
+        get
+        {
+            return currentStage;
+        }
+        set
+        {
+            arrowPivot.GetComponent<ArrowMove>().target = stageGate[currentStage].transform;
+            if (!arrowPivot.activeSelf)
+            {
+                arrowPivot.SetActive(true);
+            }
+        }
+    }
 
     private void Start()
     {
@@ -16,9 +43,9 @@ public class StageSystem : MonoBehaviour
         }
     }
 
-    public void InstanceStageOpen(int stage)
+    public void InstanceStageOpen()
     {
-        DestroyGate(stage);
+        StartCoroutine(DestroyGate(currentStage));
     }
 
     public void KeyStageOpen(int keyCount)
@@ -36,6 +63,8 @@ public class StageSystem : MonoBehaviour
                 particle.transform.position = stageGate[i].transform.position;
                 particle.SetActive(true);
                 stageGate[i].SetActive(false);
+                stages[i].Setting();
+                CurrentStage++;
                 yield return new WaitForSeconds(2f);
             }
         }

@@ -28339,7 +28339,7 @@ GameObject:
   - component: {fileID: 6610565404595339367}
   - component: {fileID: 6611531319520719797}
   - component: {fileID: 6404388641694794573}
-  - component: {fileID: 6383205185780634077}
+  - component: {fileID: 1668362911}
   m_Layer: 0
   m_Name: MineExplosion
   m_TagString: Untagged
@@ -33052,7 +33052,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3.51
   m_Center: {x: 0, y: 0.78, z: 0}
---- !u!114 &6383205185780634077
+--- !u!114 &1668362911
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -33061,10 +33061,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6413565955613292029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a895231490da6545890b1e1794f8704, type: 3}
+  m_Script: {fileID: 11500000, guid: 21bfb007e21cb1740afc7bcbf9d41bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathtimer: 5
+  damage: 50
+  kuckBackDistance: 30
+  Distance: 9
 --- !u!1 &6413565955998591793
 GameObject:
   m_ObjectHideFlags: 0
