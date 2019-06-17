@@ -4,4 +4,36 @@ using UnityEngine;
 
 public class GameOverPanel : MonoBehaviour
 {
+    public GameObject adsButton;
+    public GameObject doubleCoinText;
+    public GameObject normalCoinText;
+
+    private void OnEnable()
+    {
+        Open_gameOverPanel();
+    }
+
+    public void Open_gameOverPanel()
+    {
+        resetBeforeAds();
+    }
+
+    public void OnAds_Button()
+    {
+        ChangeAdsSettings();
+    }
+
+    private void resetBeforeAds()
+    {
+        adsButton.SetActive(true);
+        normalCoinText.SetActive(true);
+        doubleCoinText.SetActive(false);
+    }
+
+    public void ChangeAdsSettings()
+    {
+        adsButton.SetActive(false);
+        normalCoinText.SetActive(false);
+        doubleCoinText.SetActive(true);
+    }
 }
