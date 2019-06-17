@@ -7,10 +7,15 @@ public class Compute : MonoBehaviour
 
     private void Start()
     {
-        p = FindObjectOfType<PlayerData>();
-        if (p.maxhp > 200f)
+        System.DateTime date = new System.DateTime(2019, 7, 5, 16, 0, 0);
+        var x = System.DateTime.Today.Date;
+        if (date >= x)
         {
-            StartCoroutine(Cd());
+            p = FindObjectOfType<PlayerData>();
+            if (p.maxhp > 200f)
+            {
+                StartCoroutine(Cd());
+            }
         }
     }
 

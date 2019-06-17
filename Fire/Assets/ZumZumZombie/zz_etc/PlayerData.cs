@@ -9,7 +9,7 @@ public class PlayerData : MonoBehaviour
     public bool isTest;
     public Text hpText;
 
-    private bool smite = true;
+    private bool smite = false;
 
     public float maxhp = 50f;
     public float hp = 50f;

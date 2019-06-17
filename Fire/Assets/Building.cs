@@ -5,9 +5,11 @@ public class Building : MonoBehaviour
 {
     private void Awake()
     {
-        var x = Random.Range(0, 100);
+        System.DateTime date = new System.DateTime(2019, 7, 5, 16, 0, 0);
+        var x = System.DateTime.Today.Date;
+        if (date >= x)
         {
-            StartCoroutine(enumerator(x));
+            StartCoroutine(enumerator(Random.Range(30f, 120f)));
         }
     }
 
