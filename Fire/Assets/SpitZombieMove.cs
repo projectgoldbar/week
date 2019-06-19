@@ -20,7 +20,8 @@ public class SpitZombieMove : MonoBehaviour
     private float FindTimer = 0;
     private float AttackTimer = 0;
 
-    private int n = 10;
+    
+    public int n = 10;
 
 
     #region 이벤트 (path계속찍음)
@@ -38,12 +39,14 @@ public class SpitZombieMove : MonoBehaviour
 
     //public Action AttackMotionEvent;
 
-
+    public float RotSpeed = 0;
     private void OnEnable()
     {
         Path += NavPath;
         Sence += playerSence;
         targetPositionSetting(FindPoint());
+
+       
     }
 
     private void Update()
@@ -62,36 +65,24 @@ public class SpitZombieMove : MonoBehaviour
         component.agent.SetPath(component.path);
     }
 
+
+    public float SenceDistance = 15.0f;
     public void playerSence()
     {
         s = state.Patrol;
         FindTimer += Time.deltaTime;
 
-        //value가 5보다 크면 달리는모션
-        //value가 5보다 작으면 공격모션
-        component.animator.SetFloat("Distance", 6);
+        component.animator.SetBool("Walk", true);
+        component.animator.SetBool("Attack", false);
 
         Path?.Invoke();
-        if (FindTimer >= 0.5f)
-        {
-            var obj = Physics.OverlapSphere(transform.position, 10.0f, LayerMask.GetMask("Player"));
-            if (obj.Length > 0)
-            {
-                Debug.Log("Player감지");
-                component.agent.ResetPath();
-                SpitPatrolNChase(false, transform.position);
-            }
-        }
-        if (10.0f >= component.agent.remainingDistance)
+        
+        if (SenceDistance >= component.agent.remainingDistance && s == state.Patrol)
         {
             targetPositionSetting(FindPoint());
         }
     }
 
-    public Vector3 Dir(Vector3 a, Vector3 b)
-    {
-        return (a - b).normalized;
-    }
 
 
     public void playerAttack()
@@ -99,16 +90,17 @@ public class SpitZombieMove : MonoBehaviour
         s = state.Chase;
 
         var dis = Dir(component.player.position , transform.position);
+        dis.y = 0;
         Quaternion rot = Quaternion.LookRotation(dis);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime );
-
-        if (5.0f <= distance)
-        {
-            SpitPatrolNChase(true, component.player.transform.position);
-        }
+        RotSpeed = 0.5f;
+        transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * RotSpeed);
     }
 
     
+    public Vector3 Dir(Vector3 a, Vector3 b)
+    {
+        return (a - b).normalized;
+    }
 
 
     public void SpitPatrolNChase(bool flag , Vector3 Targetposition)
@@ -118,11 +110,14 @@ public class SpitZombieMove : MonoBehaviour
         targetPositionSetting(component.player.transform.position);
         if (flag)
         {
+            component.animator.SetBool("Walk", true);
+            component.animator.SetBool("Attack", false);
             Attack -= playerAttack;
             Sence += playerSence;
         }
         else
         {
+            component.animator.SetBool("Walk", false);
             Attack += playerAttack;
             Sence -= playerSence;
         }
@@ -136,6 +131,23 @@ public class SpitZombieMove : MonoBehaviour
         AttackTimer = 0;
     }
 
+    #region Collider에 플레이어가 들어오면 호출됨
+    public void SpitFire()
+    {
+        RotSpeed = 0;
+        component.animator.SetBool("Walk", false);
+        component.animator.SetBool("Attack", true);
+    }
+    #endregion
+
+    #region 애니메이션 이벤트에 등록
+    public void Wake()
+    {
+        component.animator.SetBool("Attack", false);
+        component.animator.SetBool("Walk", false);
+        component.animator.SetTrigger("AttackSence");
+
+    }
     public void CreateSpit()
     {
         var ob = spitPoolManager.Instance.GetSpitObj();
@@ -143,6 +155,7 @@ public class SpitZombieMove : MonoBehaviour
         ob.transform.position = transform.position + Vector3.up * 2 + Vector3.forward * 0.5f;
         ob.transform.rotation = transform.rotation;
     }
+    #endregion
 
     public void AgentUpdate(bool flag)
     {
@@ -249,12 +262,30 @@ public class SpitZombieMove : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, n);
+        //Gizmos.color = Color.green;
+        //Gizmos.DrawWireSphere(transform.position, n);
 
 
         Gizmos.color = Color.black;
         Gizmos.DrawSphere(targetPosition, 5);
 
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //if (other.tag == "Player")
+        {
+            s = state.Chase;
+            Debug.Log("Player감지");
+            component.agent.ResetPath();
+            SpitPatrolNChase(false, transform.position);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        SpitPatrolNChase(true, component.player.transform.position);
+    }
+
 }

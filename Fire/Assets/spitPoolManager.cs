@@ -9,6 +9,11 @@ public class spitPoolManager : MonoBehaviour
 
     public List<GameObject> SpitList;
 
+
+    public GameObject SpitCollision;
+    public List<GameObject> SpitCollisionList;
+
+
     public int SpitCount = 20;
 
     private static spitPoolManager m_instance;
@@ -30,12 +35,18 @@ public class spitPoolManager : MonoBehaviour
             Destroy(this);
         }
         DontDestroyOnLoad(gameObject);
+        var obParent  = new GameObject("SpitManager");
+        var obParent2 = new GameObject("SpitCollisionManager");
 
         for (int i = 0; i < SpitCount; i++)
         {
-            var ob = GameObject.Instantiate(Spit, transform);
+            var ob = GameObject.Instantiate(Spit, obParent.transform);
             ob.SetActive(false);
             SpitList.Add(ob);
+
+            var ob2 = GameObject.Instantiate(SpitCollision, obParent2.transform);
+            ob2.SetActive(false);
+            SpitCollisionList.Add(ob2);
         }
     }
 
@@ -51,13 +62,40 @@ public class spitPoolManager : MonoBehaviour
         return null;
     }
 
+    public GameObject GetSpitCollisionObj()
+    {
+        for (int i = 0; i < SpitCollisionList.Count; i++)
+        {
+            if (!SpitCollisionList[i].activeSelf)
+            {
+                return SpitCollisionList[i];
+            }
+        }
+        return null;
+    }
 
     public void SetSpitObj(GameObject obj)
     {
         obj.SetActive(false);
     }
 
+    //SpitCollision터0지는이펙트 비활성시키는 로직 (파티클시간? 게임시간? 둘중 하나로 정해서 구현)
+    public void NoActive(Vector3 tr, Quaternion rot)
+    {
+        var particle = GetSpitCollisionObj().GetComponent<ParticleSystem>();
+        particle.gameObject.SetActive(true);
+        particle.transform.position = tr + Vector3.up * 3.0f;
+        particle.transform.rotation = rot;
+        particle.Play();
 
+        StartCoroutine(aa(particle.gameObject));
+    }
 
+    IEnumerator aa(GameObject ob)
+    {
+        yield return new WaitForSeconds(2);
+        ob.SetActive(false);
+        yield return null;
+    }
 
 }

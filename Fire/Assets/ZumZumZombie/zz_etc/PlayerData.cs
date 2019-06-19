@@ -344,5 +344,17 @@ public class PlayerData : MonoBehaviour
             other.gameObject.SetActive(false);
             gate.isClear = true;
         }
+        else if (other.tag == "Spit")
+        {
+            Debug.Log("Spit 맞음");
+            other.gameObject.SetActive(false);
+
+            var dir = (other.transform.position - transform.position).normalized;
+            dir.y = 0;
+            Quaternion rot = Quaternion.LookRotation(dir);
+            Hp = -1;
+
+            spitPoolManager.Instance.NoActive(transform.position , rot);
+        }
     }
 }
