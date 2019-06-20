@@ -10,12 +10,13 @@ public class GameOverPanel : MonoBehaviour
 
     private void start()
     {
-        Open_gameOverPanel();
+        //Open_gameOverPanel();
     }
 
     public void Open_gameOverPanel()
     {
         resetBeforeAds();
+        gameObject.SetActive(false);
     }
 
     public void OnAds_Button()

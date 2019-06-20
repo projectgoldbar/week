@@ -12,7 +12,7 @@ public class spitrange : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        SpitZombie.CreateSpit();
+        SpitZombie.SpitFire();
     }
 
 }

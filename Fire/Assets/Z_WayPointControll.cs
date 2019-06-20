@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Z_WayPointControll : MonoBehaviour
 {
@@ -15,19 +13,19 @@ public class Z_WayPointControll : MonoBehaviour
     public Zombies_Position _Position;
 
     public bool b_Moving = false;
+
     private void Awake()
     {
         WayPointMaxCount = WayMovePointNumbers.Length;
-        
+
         transform.position = Z_WayPoint[WayMovePointNumbers[0]].position;
         transform.LookAt(Z_WayPoint[WayMovePointNumbers[++wayIndex % WayPointMaxCount]]);
 
         _Position.Defaultpos();
-
     }
 
-    Quaternion rot = new Quaternion();
-    Vector3 dir = new Vector3();
+    private Quaternion rot = new Quaternion();
+    private Vector3 dir = new Vector3();
 
     public float timer;
 
@@ -37,7 +35,6 @@ public class Z_WayPointControll : MonoBehaviour
 
         if (b_Moving)
         {
-
             {
                 if (Vector3.Distance(transform.position, Z_WayPoint[WayMovePointNumbers[wayIndex % WayPointMaxCount]].position) <= 0.6f)
                 {
@@ -51,8 +48,6 @@ public class Z_WayPointControll : MonoBehaviour
                 rot = Quaternion.LookRotation(dir);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * Damping);
             }
-
         }
     }
-
 }

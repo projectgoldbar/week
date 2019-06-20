@@ -34,7 +34,11 @@ public class AdmobVideoAd : MonoBehaviour
         //사용자가 비디오시청을 통해 보상을 받을 때 호출됩니다.
         RewardAd.OnAdRewarded += (sender, e) => { Debug.Log("OnAdRewarded"); AdsReward?.Invoke(); };
         //광고가 닫힐때 호출됩니다.
-        RewardAd.OnAdClosed += (sender, e) => { Debug.Log("OnAdClosed"); LoadAd(); };
+        RewardAd.OnAdClosed += (sender, e) => 
+        {
+            Debug.Log("OnAdClosed"); LoadAd();
+            UITweenEffectManager.Instace.gameOverPanel.OnAds_Button();
+        };
         //광고클릭으로 인해 사용자가 애플리케이션을 종료한 경우 호출됩니다.
         RewardAd.OnAdLeavingApplication += (sender, e) => Debug.Log("OnAdLeavingApplication");
 
@@ -53,6 +57,7 @@ public class AdmobVideoAd : MonoBehaviour
         if (this.RewardAd.IsLoaded())
         {
             this.RewardAd.Show();
+            //UITweenEffectManager.Instace.gameOverPanel.OnAds_Button();
         }
         else
         {

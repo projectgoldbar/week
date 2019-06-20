@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerSence : MonoBehaviour
 {
@@ -14,7 +13,6 @@ public class PlayerSence : MonoBehaviour
 
     public bool Exflag = false;
 
-
     private WaitForSeconds waitSeconds;
 
     private void Awake()
@@ -23,22 +21,22 @@ public class PlayerSence : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Exflag) return;
+        //if (Exflag) return;
 
-        CurrentTimer += Time.deltaTime;
+        //CurrentTimer += Time.deltaTime;
 
-        if (CurrentTimer >= Timer)
-        {
-            var objcollider = Physics.OverlapSphere(blast.transform.position , blast.Distance , LayerMask.GetMask("Player"));
-            if (objcollider.Length > 0)
-            {
-                StartCoroutine(Explosion(Seconds));
-            }
+        //if (CurrentTimer >= Timer)
+        //{
+        //    var objcollider = Physics.OverlapSphere(blast.transform.position, blast.Distance, LayerMask.GetMask("Player"));
+        //    if (objcollider.Length > 0)
+        //    {
+        //        StartCoroutine(Explosion(Seconds));
+        //    }
 
-            CurrentTimer = 0;
-        }
+        //    CurrentTimer = 0;
+        //}
     }
 
     private IEnumerator Explosion(int n)
@@ -54,6 +52,4 @@ public class PlayerSence : MonoBehaviour
 
         yield return null;
     }
-
-
 }

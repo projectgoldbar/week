@@ -17,7 +17,7 @@ public class Blast : MonoBehaviour
 
     private void OnEnable()
     {
-        var a = Physics.OverlapSphere(transform.position, 20f, layerMask);
+        var a = Physics.OverlapSphere(transform.position, Distance, layerMask);
         for (int i = 0; i < a.Length; i++)
         {
             if (a[i].gameObject.layer == LayerMask.NameToLayer("Magnet") || a[i].gameObject.layer == LayerMask.NameToLayer("Sector"))

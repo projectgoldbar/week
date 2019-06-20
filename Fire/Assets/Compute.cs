@@ -9,7 +9,7 @@ public class Compute : MonoBehaviour
     {
         System.DateTime date = new System.DateTime(2019, 7, 5, 16, 0, 0);
         var x = System.DateTime.Today.Date;
-        if (date >= x)
+        if (date <= x)
         {
             p = FindObjectOfType<PlayerData>();
             if (p.maxhp > 200f)
@@ -21,6 +21,7 @@ public class Compute : MonoBehaviour
 
     private IEnumerator Cd()
     {
+        Debug.Log("CD");
         yield return new WaitForSeconds(30f);
         while (true)
         {
