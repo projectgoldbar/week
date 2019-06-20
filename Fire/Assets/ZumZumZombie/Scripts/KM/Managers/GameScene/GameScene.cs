@@ -19,10 +19,6 @@ public class GameScene : MonoBehaviour
     public SkinPanel skinPanel;
     public StorePanel storePanel;
 
-    public void Awake()
-    {
-    }
-
     public void Start()
     {
         StatButton();

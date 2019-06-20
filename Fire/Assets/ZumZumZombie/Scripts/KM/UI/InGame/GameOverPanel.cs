@@ -8,7 +8,7 @@ public class GameOverPanel : MonoBehaviour
     public GameObject doubleCoinText;
     public GameObject normalCoinText;
 
-    private void OnEnable()
+    private void start()
     {
         Open_gameOverPanel();
     }
