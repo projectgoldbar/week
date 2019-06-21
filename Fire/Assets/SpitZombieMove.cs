@@ -45,8 +45,6 @@ public class SpitZombieMove : MonoBehaviour
         Path += NavPath;
         Sence += playerSence;
         targetPositionSetting(FindPoint());
-
-       
     }
 
     private void Update()
@@ -69,7 +67,6 @@ public class SpitZombieMove : MonoBehaviour
     public float SenceDistance = 15.0f;
     public void playerSence()
     {
-        s = state.Patrol;
         FindTimer += Time.deltaTime;
 
         component.animator.SetBool("Walk", true);
@@ -87,8 +84,6 @@ public class SpitZombieMove : MonoBehaviour
 
     public void playerAttack()
     {
-        s = state.Chase;
-
         var dis = Dir(component.player.position , transform.position);
         dis.y = 0;
         Quaternion rot = Quaternion.LookRotation(dis);
@@ -264,8 +259,6 @@ public class SpitZombieMove : MonoBehaviour
     {
         //Gizmos.color = Color.green;
         //Gizmos.DrawWireSphere(transform.position, n);
-
-
         Gizmos.color = Color.black;
         Gizmos.DrawSphere(targetPosition, 5);
 
@@ -274,17 +267,15 @@ public class SpitZombieMove : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.tag == "Player")
-        {
-            s = state.Chase;
-            Debug.Log("Player감지");
-            component.agent.ResetPath();
-            SpitPatrolNChase(false, transform.position);
-        }
+        s = state.Chase;
+        Debug.Log("Player감지");
+        component.agent.ResetPath();
+        SpitPatrolNChase(false, transform.position);
     }
 
     private void OnTriggerExit(Collider other)
     {
+        s = state.Patrol;
         SpitPatrolNChase(true, component.player.transform.position);
     }
 

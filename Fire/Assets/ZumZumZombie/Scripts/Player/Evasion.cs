@@ -21,7 +21,7 @@ public class Evasion : MonoBehaviour
 
     private Action method;
 
-    private Swipe swipe;
+    //private Swipe swipe;
 
     public bool b_Evasion
     {
@@ -40,7 +40,7 @@ public class Evasion : MonoBehaviour
 
     private void Awake()
     {
-        swipe = FindObjectOfType<Swipe>();
+        //swipe = FindObjectOfType<Swipe>();
         method += EvasionProcess;
         // evasionTrigger.gameObject.SetActive(false);
     }
@@ -57,7 +57,7 @@ public class Evasion : MonoBehaviour
                 evationTimer = 0;
                 evasionTrigger.gameObject.SetActive(false);
                 b_Evasion = false;
-                swipe.GoSwipe = false;
+                //swipe.GoSwipe = false;
             }
             else
             {
@@ -65,7 +65,7 @@ public class Evasion : MonoBehaviour
                 Time.timeScale = 0.5f;
                 evasionTrigger.gameObject.SetActive(true);
                 //2.스와이프
-                swipe.GoSwipe = true;
+                //swipe.GoSwipe = true;
                 //if (swipe.GoSwipe)
                 //    swipe.SwipeProcess(() => EvasionProcess());
                 //3.화면클릭
