@@ -9,14 +9,14 @@ namespace ZombieState
         protected WaitForSeconds waitSecond;
         private Coroutine test;
         public Transform player;
-
         public Transform target = null;
+        public float speed = 13f;
 
         public override void Setting()
         {
             waitSecond = new WaitForSeconds(resetPathCount);
             zombieData.agent.acceleration = Random.Range(10, 18);
-            //zombieData.moveCoroutine = ZombieMove();
+            zombieData.moveCoroutine = ZombieMove();
             player = zombieData.player.gameObject.transform;
             target = player;
         }
@@ -27,59 +27,65 @@ namespace ZombieState
 
         public override void Execute()
         {
-            test = StartCoroutine(ZombieMove());
+            zombieData.agent.speed = speed;
+
+            //test = StartCoroutine(ZombieMove());
             //zombieData.agent.enabled = true;
-            //StartCoroutine(zombieData.moveCoroutine);
+            StartCoroutine(zombieData.moveCoroutine);
         }
+
         public void MoveStop()
         {
-            x = false;
+            //x = false;
             //if(zombieData.agent.path == null)
             //zombieData.agent.ResetPath();
             //StopCoroutine(zombieData.moveCoroutine);
-            StopCoroutine(test);
-
-
+            //StopCoroutine(test);
         }
+
         public void MoveStart()
         {
-            x = true;
-
             //StartCoroutine(zombieData.moveCoroutine);
-            test = StartCoroutine(ZombieMove());
         }
 
-        bool x = true;
+        private bool x = true;
+
         public IEnumerator ZombieMove()
         {
             while (x)
             {
+                yield return null;
                 //zombieData.agent.CalculatePath(zombieData.player.position, zombieData.path);
                 zombieData.agent.CalculatePath(target.position, zombieData.path);
                 zombieData.agent.SetPath(zombieData.path);
+                Debug.Log("경로탐색중");
                 yield return waitSecond;
             }
-             zombieData.agent.ResetPath();
-            yield return null;
         }
 
+        public float currentTime = 0;
+        public float range = 20f;
 
-        public void CoolTime(float timer)
+        public override void Update()
         {
-            float currentTime = 0;
+            Debug.Log("aaa");
 
-            for (; currentTime <= timer;)
-            {
-                currentTime += 1 * Time.deltaTime;
-                Debug.Log(currentTime);
-            }
-        }
-
-        private void Update()
-        {
             var l = Vector3.Distance(transform.position, player.position);
 
-            zombieData.animator.SetFloat("Distance", l);
+            currentTime += Time.deltaTime;
+
+            if (currentTime < 5f)
+            {
+                return;
+            }
+
+            if (l < range)
+            {
+                currentTime = 0;
+                StateChange(zombieData.attack);
+            }
+
+            //zombieData.animator.SetFloat("Distance", l);
             if (Input.GetKeyDown(KeyCode.H))
             {
                 //StopCoroutine(test);
@@ -88,9 +94,18 @@ namespace ZombieState
             }
         }
 
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, range);
+        }
+
         public override void Exit()
         {
             //StopCoroutine(zombieData.moveCoroutine);
+            //zombieData.agent.ResetPath();
+            zombieData.agent.speed = speed;
+
             //this.enabled = false;
         }
     }
