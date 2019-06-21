@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameScene : MonoBehaviour
+public partial class GameScene : MonoBehaviour
 {
     private static GameScene instance;
 
@@ -22,6 +22,7 @@ public class GameScene : MonoBehaviour
     public void Start()
     {
         StatButton();
+        resetFadeOut();
     }
 
     public void StatButton()

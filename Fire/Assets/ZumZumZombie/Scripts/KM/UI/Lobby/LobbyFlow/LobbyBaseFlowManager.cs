@@ -12,6 +12,7 @@ public class LobbyBaseFlowManager : MonoBehaviour
     }
 
     public LobbyPlayerController lobbyPlayerController;
+    public GameScene gameScene;
 
     public void OnPlay_Button()
     {
@@ -21,6 +22,7 @@ public class LobbyBaseFlowManager : MonoBehaviour
     public void FlowBeforePlay()
     {
         Debug.Log("a");
+        gameScene.FlowBeforePlay();
         lobbyPlayerController.FlowBeforePlay();
     }
 }

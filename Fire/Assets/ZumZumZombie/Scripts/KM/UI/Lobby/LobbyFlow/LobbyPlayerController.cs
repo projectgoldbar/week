@@ -59,6 +59,6 @@ public class LobbyPlayerController : MonoBehaviour
 
     private void RunMoveComplete()
     {
-        Debug.Log("End");
+        Debug.Log("RunEnd");
     }
 }
