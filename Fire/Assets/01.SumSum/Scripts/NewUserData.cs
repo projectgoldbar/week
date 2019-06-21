@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class NewUserData
@@ -39,6 +40,7 @@ public class NewUserData
     #region 박스관련
 
     public int[] randomBox = new int[7] { 0, 0, 0, 0, 0, 0, 0 };
+    public List<GoldBox> goldbox = new List<GoldBox>();
 
     #endregion 박스관련
 
@@ -79,3 +81,6 @@ public class NewUserData
 
     #endregion 업적클리어현황
 }
+
+
+

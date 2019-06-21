@@ -8,11 +8,8 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance;
 
     //오디오클립당 오디오소스 1개
-    public AudioSource mainBgm;
 
-    public AudioSource subBgm;
-
-    public AudioSource trapBgm;
+    public AudioSource[] sources;
 
     public SoundClip[] soundClips;
 
@@ -32,49 +29,25 @@ public class SoundManager : MonoBehaviour
         {
             SoundDic.Add(soundClips[i].name, soundClips[i].clip);
         }
-
-        PlayBGM(mainBgm, SoundDic["mainBGM"], true, 0);
-        PlayBGM(subBgm, SoundDic["subBGM2"], true, 3);
+        PlayBGM( SoundDic["mainBGM"], true, 0);
+        PlayBGM( SoundDic["subBGM2"], true, 3);
     }
 
-    public void PlayBGM(AudioSource audioSource, AudioClip clip, bool loop, float delay)
+    public void PlayBGM( AudioClip clip, bool loop, float delay)
     {
-        Debug.Log("실행");
-        audioSource.clip = clip;
-        audioSource.loop = loop;
-        audioSource.PlayDelayed(delay);
+        for (int i = 0; i < sources.Length; i++)
+        {
+            if (!sources[i].isPlaying)
+            {
+                Debug.Log("실행");
+                sources[i].clip = clip;
+                sources[i].loop = loop;
+                sources[i].PlayDelayed(delay);
+                break;
+            }
+        }
     }
 
-    //public void SoundPlay(int index)
-    //{
-    //    audioSources[index % audioSources.Length].PlayOneShot(clips[index % clips.Length]);
-    //}
-
-    //테스트해봐야됨.
-    //public void SoundPlay2(int index2)
-    //{
-    //    SoundDic[index2 % clips.Length].audioSource.PlayOneShot(SoundDic[index2 % clips.Length].clip);
-    //}
-
-    //public void ExplosionSfx()
-    //{
-    //    audioSources[(int)ClipIndex.Explosion].PlayOneShot(clips[(int)ClipIndex.Explosion]);
-    //}
-
-    //public void 정해야됨2()
-    //{
-    //    audioSources[(int)ClipIndex.정해야됨2].PlayOneShot(clips[(int)ClipIndex.정해야됨2]);
-    //}
-
-    //public void 정해야됨3()
-    //{
-    //    audioSources[(int)ClipIndex.정해야됨3].PlayOneShot(clips[(int)ClipIndex.정해야됨3]);
-    //}
-
-    //public void 정해야됨4()
-    //{
-    //    audioSources[(int)ClipIndex.정해야됨4].PlayOneShot(clips[(int)ClipIndex.정해야됨4]);
-    //}
 }
 
 [System.Serializable]
