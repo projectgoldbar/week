@@ -21,7 +21,7 @@ namespace ZombieState
         public IEnumerator canIAttackCoroutine;
         public IEnumerator zombieAttackCoroutine;
         public Material material;
-        public TrailRenderer eyeTrailRenderer;
+        public TrailRenderer attackTrailRenderer;
 
         private void Awake()
         {
@@ -31,9 +31,10 @@ namespace ZombieState
             animator = GetComponent<Animator>();
             stateMachine = GetComponent<StateMachine>();
             moving = GetComponent<Zombie_Moving>();
+            moving.enabled = false;
             attack = GetComponent<ZomBie_Attack>();
+            attack.enabled = false;
             material = GetComponentInChildren<SkinnedMeshRenderer>().materials[0];
-
         }
     }
 }

@@ -11,6 +11,7 @@ namespace ZombieState
             if (currentState == null)
             {
                 currentState = GetComponent<Zombie_Moving>();
+                currentState.enabled = true;
             }
             AllStateSetup();
             StateStart();
@@ -27,9 +28,15 @@ namespace ZombieState
 
         public void StateChange(ZombieState state)
         {
-            currentState.Exit();
-            currentState = state;
-            StateStart();
+            if (currentState != state)
+            {
+                currentState.Exit();
+                currentState.enabled = false;
+                currentState = state;
+                currentState.enabled = true;
+
+                StateStart();
+            }
         }
 
         public void StateStart()

@@ -14,6 +14,10 @@ namespace ZombieState
             zombieData = GetComponent<ZombiesComponent>();
         }
 
+        public virtual void Update()
+        {
+        }
+
         public virtual void Setting()
         {
         }

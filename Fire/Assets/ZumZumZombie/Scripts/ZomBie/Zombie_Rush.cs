@@ -28,7 +28,7 @@ namespace ZombieState
         {
             //도착지점 설정
             var v = new Vector3(transform.position.x, transform.position.y + 5f, transform.position.z);
-            zombieData.eyeTrailRenderer.time = 0.5f;
+            zombieData.attackTrailRenderer.time = 0.5f;
             //zombieData.agent.speed = 0;
             //RaycastHit hit;
 
@@ -90,7 +90,7 @@ namespace ZombieState
 
         public override void Exit()
         {
-            zombieData.eyeTrailRenderer.time = 0.0f;
+            zombieData.attackTrailRenderer.time = 0.0f;
             //zombieData.agent.speed = 16;
             StopCoroutine(zombieData.zombieAttackCoroutine);
             this.enabled = false;
