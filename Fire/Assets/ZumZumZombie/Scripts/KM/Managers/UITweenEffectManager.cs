@@ -22,17 +22,13 @@ public class UITweenEffectManager : MonoBehaviour
     public GameOverPanel gameOverPanel;
     public GameObject FadeInImageObj;
 
-    private float duration = 3.0f;
+    public bool isCompleteFadeIn = false;
+    public float fadeInDuration = 2.0f;
+
     private float from = 255.0f;
     private float to = 0.0f;
     private Color beforeFAdeInColor;
     private Color nowColor;
-
-    private void Start()
-    {
-        resetPanel();
-        startGame();
-    }
 
     private void resetPanel()
     {
@@ -40,14 +36,16 @@ public class UITweenEffectManager : MonoBehaviour
         FadeInImageObj.GetComponent<Image>().color = beforeFAdeInColor;
     }
 
-    public void startGame()
+    public void StartFadeInEffect()
     {
+        resetPanel();
         FadeInEffect();
     }
 
     private void FadeInEffect()
     {
-        var d = LeanTween.value(from, to, duration);
+        isCompleteFadeIn = false;
+        var d = LeanTween.value(from, to, fadeInDuration);
         d.setOnUpdate(x => { ValueUpdateFadeOut(x); });
         d.setOnComplete(FadeInImageComplete);
     }
@@ -60,7 +58,6 @@ public class UITweenEffectManager : MonoBehaviour
 
     private void FadeInImageComplete()
     {
-        Debug.Log("FadeInEnd");
-        //게임시작 부르기!
+        isCompleteFadeIn = true;
     }
 }

@@ -16,13 +16,17 @@ public class LobbyBaseFlowManager : MonoBehaviour
 
     public void OnPlay_Button()
     {
+        if (LeanTween.isTweening(gameScene.fadeOutImageObj))
+        {
+            Debug.Log("_________________fadeOutImageObj   isTweening");
+            return;
+        }
         FlowBeforePlay();
     }
 
     public void FlowBeforePlay()
     {
-        Debug.Log("a");
-        gameScene.FlowBeforePlay();
         lobbyPlayerController.FlowBeforePlay();
+        gameScene.FlowBeforePlay();
     }
 }

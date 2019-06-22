@@ -5,30 +5,38 @@ using UnityEngine.UI;
 
 public partial class GameScene : MonoBehaviour
 {
-    public float duration = 3.0f;
-    private float from = 0.0f;
-    private float to = 255.0f;
+    public float duration = 4.0f;
+    private float toIn = 0.0f;
+    private float toOut = 255.0f;
 
     public GameObject fadeOutImageObj;
     private Color beforeFAdeOutColor;
     private Color nowColor;
 
+    public bool isCompleteFadeTween = false;
+
     private void resetFadeOut()
     {
         beforeFAdeOutColor = fadeOutImageObj.GetComponent<Image>().color;
         fadeOutImageObj.GetComponent<Image>().color = beforeFAdeOutColor;
+        FadeEffectTween(toOut, toIn, duration);
     }
 
     public void FlowBeforePlay()
     {
-        FadeOutImage();
+        FadeEffectTween(toIn, toOut, duration);
+        Debug.Log(isCompleteFadeTween + "  _FlowBeforePlay");
     }
 
-    private void FadeOutImage()
+    public void FadeEffectTween(float from, float to, float duration)
     {
-        var d = LeanTween.value(from, to, duration).setDelay(duration * 0.3f);
+        Debug.Log("FadeTweenStart");
+        isCompleteFadeTween = false;
+        Debug.Log(isCompleteFadeTween + "  _FadeEffectTween");
+
+        var d = LeanTween.value(from, to, duration);
         d.setOnUpdate(x => { ValueUpdateFadeOut(x); });
-        d.setOnComplete(FadeOutImageComplete);
+        d.setOnComplete(FadeEffectTweenComplete);
     }
 
     private void ValueUpdateFadeOut(float value)
@@ -37,9 +45,10 @@ public partial class GameScene : MonoBehaviour
         fadeOutImageObj.GetComponent<Image>().color = nowColor;
     }
 
-    private void FadeOutImageComplete()
+    private void FadeEffectTweenComplete()
     {
-        Debug.Log("FadeOutEnd");
-        //게임종료 부르기!
+        Debug.Log("FadeTweenEnd");
+        isCompleteFadeTween = true;
+        Debug.Log(isCompleteFadeTween + "  _FadeEffectTweenComplete");
     }
 }

@@ -52,7 +52,6 @@ public class LobbyPlayerController : MonoBehaviour
             Debug.Log("tweening");
             return;
         }
-        Debug.Log("b");
         LTDescr d = LeanTween.moveSpline(gameObject, listPath.ToArray(), 3.0f).setOrientToPath(true).setEase(LeanTweenType.easeInQuad);
         d.setOnComplete(RunMoveComplete);
     }
