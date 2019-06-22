@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public partial class GameScene : MonoBehaviour
 {
-    public float duration = 3.5f;
+    public float duration = 4f;
     private float toIn = 0.0f;
     private float toOut = 255.0f;
 
@@ -46,7 +46,7 @@ public partial class GameScene : MonoBehaviour
     {
         if (LeanTween.isTweening(lobbyBase_Controller.lobbyPlayerController.gameObject))
         {
-            Debug.Log("tweening  fadeOutImageObj//Don't reStart");
+            Debug.Log("tweening fadeOutImageObj // Don't Restart");
             return;
         }
         resetFadeOut();

@@ -31,7 +31,7 @@ public class LobbyPlayerController : MonoBehaviour
     {
         if (LeanTween.isTweening(gameObject))
         {
-            Debug.Log("tweening _____RunningAnim");
+            Debug.Log("tweening _RunningAnim");
             return;
         }
         RunAnim();
