@@ -4,16 +4,6 @@ using UnityEngine;
 
 public partial class GameScene : MonoBehaviour
 {
-    private static GameScene instance;
-
-    public static GameScene Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-
     public MiddleAllPanel middleAllPanel;
     public StatPanel statPanel;
     public SkinPanel skinPanel;
@@ -22,7 +12,6 @@ public partial class GameScene : MonoBehaviour
     public void Start()
     {
         StatButton();
-        resetFadeOut();
     }
 
     public void StatButton()

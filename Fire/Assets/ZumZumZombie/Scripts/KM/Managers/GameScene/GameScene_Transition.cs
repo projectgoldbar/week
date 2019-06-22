@@ -10,36 +10,28 @@ public partial class GameScene : MonoBehaviour
     private float toOut = 255.0f;
 
     public GameObject fadeOutImageObj;
+    public bool isCompletedFadeOut = false;
+
     private Color beforeFAdeOutColor;
     private Color nowColor;
 
-    public bool isCompleteFadeTween = false;
+    public LobbyBaseFlowManager lobbyBaseFlowManager;
 
     private void resetFadeOut()
     {
-        beforeFAdeOutColor = fadeOutImageObj.GetComponent<Image>().color;
+        beforeFAdeOutColor.a = toIn;
         fadeOutImageObj.GetComponent<Image>().color = beforeFAdeOutColor;
-        FadeEffectTween(toOut, toIn, duration);
     }
 
-    public void FlowBeforePlay()
+    private void StartFadeOut()
     {
-        FadeEffectTween(toIn, toOut, duration);
-        Debug.Log(isCompleteFadeTween + "  _FlowBeforePlay");
-    }
-
-    public void FadeEffectTween(float from, float to, float duration)
-    {
-        Debug.Log("FadeTweenStart");
-        isCompleteFadeTween = false;
-        Debug.Log(isCompleteFadeTween + "  _FadeEffectTween");
-
-        var d = LeanTween.value(from, to, duration);
-        d.setOnUpdate(x => { ValueUpdateFadeOut(x); });
+        isCompletedFadeOut = false;
+        var d = LeanTween.value(toIn, toOut, duration);
+        d.setOnUpdate(x => { ValueUpdateFade(x); });
         d.setOnComplete(FadeEffectTweenComplete);
     }
 
-    private void ValueUpdateFadeOut(float value)
+    private void ValueUpdateFade(float value)
     {
         nowColor.a = value / 255f;
         fadeOutImageObj.GetComponent<Image>().color = nowColor;
@@ -47,8 +39,13 @@ public partial class GameScene : MonoBehaviour
 
     private void FadeEffectTweenComplete()
     {
-        Debug.Log("FadeTweenEnd");
-        isCompleteFadeTween = true;
-        Debug.Log(isCompleteFadeTween + "  _FadeEffectTweenComplete");
+        isCompletedFadeOut = true;
+    }
+
+    public void StartGame_Button()
+    {
+        resetFadeOut();
+        StartFadeOut();
+        lobbyBaseFlowManager.lobbyPlayerController.RunningAnim();
     }
 }

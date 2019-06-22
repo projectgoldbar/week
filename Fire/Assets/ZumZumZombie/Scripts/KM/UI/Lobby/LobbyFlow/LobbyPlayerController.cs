@@ -7,7 +7,6 @@ public class LobbyPlayerController : MonoBehaviour
     public Vector3[] path;
 
     private Animator lobbyPlayerAnim;
-
     private List<Vector3> listPath;
 
     private void Start()
@@ -28,7 +27,7 @@ public class LobbyPlayerController : MonoBehaviour
         listPath.Add(path[path.Length - 1]);
     }
 
-    public void FlowBeforePlay()
+    public void RunningAnim()
     {
         ResetAnim();
         RunAnim();

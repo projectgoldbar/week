@@ -5,18 +5,6 @@ using UnityEngine.UI;
 
 public class UITweenEffectManager : MonoBehaviour
 {
-    private static UITweenEffectManager instance;
-
-    public static UITweenEffectManager Instace
-    {
-        get { return instance; }
-    }
-
-    private void Awake()
-    {
-        instance = this;
-    }
-
     public StageOpenPanel stageOpenPanel;
     public SkinBoxOpenPanel skinBoxOpenPanel;
     public GameOverPanel gameOverPanel;
