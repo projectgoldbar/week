@@ -13,8 +13,12 @@ public class AdmobVideoAd : MonoBehaviour
 
     private readonly string AppId       = "ca-app-pub-5205187543072249~8311581277";
     private readonly string TestAppId   = "ca-app-pub-3940256099942544~3347511713";
-  
+
     public UnityEvent AdsReward;
+    public UnityEvent UnityAdsReward;
+    public UnityEvent AdsFail;
+
+    public bool AdsPlaying = false;
          
 
     // Start is called before the first frame update
@@ -24,9 +28,18 @@ public class AdmobVideoAd : MonoBehaviour
         MobileAds.Initialize(TestAppId);
         RewardAd = RewardBasedVideoAd.Instance;
         //광고 요청이 성공적으로 로드되면 호출됩니다.
-        RewardAd.OnAdLoaded += (sender, e) => Debug.Log("OnAdLoaded");
-        //광고요청을 로드하지 못했을때 호출도비니다.
-        RewardAd.OnAdFailedToLoad += (sender, e) => Debug.Log("OnAdFailedToLoad");
+        RewardAd.OnAdLoaded += (sender, e) =>
+        {
+            Debug.Log("OnAdLoaded");
+            
+        };
+        //광고요청을 로드하지 못했을때 호출됩니다.
+        RewardAd.OnAdFailedToLoad += (sender, e) =>
+        {
+            Debug.Log("OnAdFailedToLoad");
+
+        };
+
         //광고가 표시활때 호출됩니다.
         RewardAd.OnAdOpening += (sender, e) => Debug.Log("OnAdOpening");
         //광고가 재생되기 시작하면 호출됩니다.
@@ -36,7 +49,9 @@ public class AdmobVideoAd : MonoBehaviour
         //광고가 닫힐때 호출됩니다.
         RewardAd.OnAdClosed += (sender, e) => 
         {
-            Debug.Log("OnAdClosed"); LoadAd();
+            Debug.Log("OnAdClosed");
+            AdsPlaying = false;
+            LoadAd();
             UITweenEffectManager.Instace.gameOverPanel.OnAds_Button();
         };
         //광고클릭으로 인해 사용자가 애플리케이션을 종료한 경우 호출됩니다.
@@ -56,6 +71,7 @@ public class AdmobVideoAd : MonoBehaviour
     {
         if (this.RewardAd.IsLoaded())
         {
+            AdsPlaying = true;
             this.RewardAd.Show();
             //UITweenEffectManager.Instace.gameOverPanel.OnAds_Button();
         }
@@ -63,8 +79,18 @@ public class AdmobVideoAd : MonoBehaviour
         {
             Debug.Log("NOT Loaded Interstitial");
             LoadAd();
+            //유니티애즈 실행
+            UnityAdsReward?.Invoke();
         }
     }
+
+    void OnApplicationQuit()
+    {
+        if (AdsPlaying)
+            AdsFail?.Invoke();
+    }
+
+
 
 
 
