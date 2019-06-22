@@ -29,14 +29,18 @@ public class LobbyPlayerController : MonoBehaviour
 
     public void RunningAnim()
     {
-        ResetAnim();
+        if (LeanTween.isTweening(gameObject))
+        {
+            Debug.Log("tweening _____RunningAnim");
+            return;
+        }
         RunAnim();
         RunMove();
     }
 
     private void ResetAnim()
     {
-        //lobbyPlayerAnim.
+        lobbyPlayerAnim.SetTrigger("LobbyIdle");
     }
 
     private void RunAnim()
@@ -46,11 +50,11 @@ public class LobbyPlayerController : MonoBehaviour
 
     private void RunMove()
     {
-        if (LeanTween.isTweening(gameObject))
-        {
-            Debug.Log("tweening");
-            return;
-        }
+        //if (LeanTween.isTweening(gameObject))
+        //{
+        //    Debug.Log("tweening");
+        //    return;
+        //}
         LTDescr d = LeanTween.moveSpline(gameObject, listPath.ToArray(), 3.0f).setOrientToPath(true).setEase(LeanTweenType.easeInQuad);
         d.setOnComplete(RunMoveComplete);
     }
@@ -58,5 +62,6 @@ public class LobbyPlayerController : MonoBehaviour
     private void RunMoveComplete()
     {
         Debug.Log("RunEnd");
+        ResetAnim();
     }
 }
