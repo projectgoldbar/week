@@ -47,6 +47,6 @@ public class Stage1 : Stage
             x.SetActive(true);
             mines.Add(x);
         }
-        UITweenEffectManager.Instace.stageOpenPanel.OpenPanel("BFS");
+        //UITweenEffectManager.Instance.stageOpenPanel.OpenPanel("BFS");
     }
 }

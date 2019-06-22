@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TestUIEffectButton : MonoBehaviour
 {
+    /*
     public void OnTestButton()
     {
         //string stageText = Random.Range(0, 9).ToString();
@@ -15,4 +16,5 @@ public class TestUIEffectButton : MonoBehaviour
     {
         UITweenEffectManager.Instace.skinBoxOpenPanel.Open();
     }
+    */
 }
