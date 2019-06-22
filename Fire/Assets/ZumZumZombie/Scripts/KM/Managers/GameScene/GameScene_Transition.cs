@@ -15,7 +15,7 @@ public partial class GameScene : MonoBehaviour
     private Color beforeFAdeOutColor;
     private Color nowColor;
 
-    public LobbyBaseFlowManager lobbyBaseFlowManager;
+    public LobbyBase_Controller lobbyBase_Controller;
 
     private void resetFadeOut()
     {
@@ -46,6 +46,6 @@ public partial class GameScene : MonoBehaviour
     {
         resetFadeOut();
         StartFadeOut();
-        lobbyBaseFlowManager.lobbyPlayerController.RunningAnim();
+        lobbyBase_Controller.lobbyPlayerController.RunningAnim();
     }
 }
