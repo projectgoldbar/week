@@ -35,8 +35,13 @@ public partial class GameScene : MonoBehaviour
         storePanel.OpenPanel();
     }
 
-    public void UpDownButton()
+    public void DownPanel()
     {
-        Debug.Log("OnUpDownButton");
+        middleAllPanel.OpenPanel();
+    }
+
+    public void UpPanel()
+    {
+        middleAllPanel.ClosePanel();
     }
 }

@@ -28,8 +28,11 @@ public partial class GameScene : MonoBehaviour
             return;
         }
         StartFadeImageAlpha(toIn);
-        StartFadeOut();
+
         lobbyBase_Controller.lobbyPlayerController.RunningAnim();
+
+        StartFadeOut();
+        UpPanel();
     }
 
     public void EnterLobby()
@@ -42,7 +45,9 @@ public partial class GameScene : MonoBehaviour
         lobbyBase_Controller.lobbyPlayerController.ResetLobbyPlayer();
         lobbyBase_Controller.doorController.OpenDoorTween(EnterDuration);
         StartFadeImageAlpha(toOut);
+
         StartFadeIn();
+        DownPanel();
     }
 
     private void StartFadeImageAlpha(float startTo)
