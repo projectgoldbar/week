@@ -3,21 +3,38 @@ using UnityEngine.UI;
 
 public class MiddleAllPanel : MonoBehaviour
 {
-    private bool isOpened = false;
+    public bool isOpened = true;
     private float openPos = 0f;
-    private float closePos = 180f;
-    private float duration = 1f;
+    private float closePos = 200f;
+    private float duration = 0.8f;
 
     private Vector2 nowPos = Vector2.zero;
 
+    private void Start()
+    {
+        isOpened = true;
+    }
+
     public void OpenPanel()
     {
+        if (isOpened == true)
+        {
+            Debug.Log("openning : cant reOpen");
+
+            return;
+        }
         isOpened = true;
         MovePanelTween(isOpened);
     }
 
     public void ClosePanel()
     {
+        if (isOpened == false)
+        {
+            Debug.Log("closing : cant reClose");
+
+            return;
+        }
         isOpened = false;
         MovePanelTween(isOpened);
     }
@@ -27,14 +44,14 @@ public class MiddleAllPanel : MonoBehaviour
         if (now == true)
         {
             //열어
-            LTDescr d = LeanTween.value(gameObject, closePos, openPos, duration).setEase(LeanTweenType.easeOutBack);
+            LTDescr d = LeanTween.value(gameObject, closePos, openPos, duration).setEase(LeanTweenType.easeInOutBack);
             d.setOnUpdate(x => { MoveUpdatePanel(x); });
             d.setOnComplete(MovePanelTweenCompleteOpen);
         }
         else
         {
             //닫아
-            LTDescr d = LeanTween.value(gameObject, openPos, closePos, duration).setEase(LeanTweenType.easeOutBack);
+            LTDescr d = LeanTween.value(gameObject, openPos, closePos, duration).setEase(LeanTweenType.easeInOutBack);
             d.setOnUpdate(x => { MoveUpdatePanel(x); });
             d.setOnComplete(MovePanelTweenCompleteClose);
         }
@@ -48,11 +65,11 @@ public class MiddleAllPanel : MonoBehaviour
 
     private void MovePanelTweenCompleteClose()
     {
-        isOpened = true;
+        isOpened = false;
     }
 
     private void MovePanelTweenCompleteOpen()
     {
-        isOpened = false;
+        isOpened = true;
     }
 }
