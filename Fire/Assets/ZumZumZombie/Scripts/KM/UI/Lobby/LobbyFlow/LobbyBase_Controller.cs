@@ -5,4 +5,5 @@ using UnityEngine;
 public class LobbyBase_Controller : MonoBehaviour
 {
     public LobbyPlayerController lobbyPlayerController;
+    public Door door;
 }

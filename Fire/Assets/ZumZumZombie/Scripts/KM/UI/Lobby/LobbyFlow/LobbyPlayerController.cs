@@ -9,10 +9,15 @@ public class LobbyPlayerController : MonoBehaviour
     private Animator lobbyPlayerAnim;
     private List<Vector3> listPath;
 
+    private Vector3 lobbyPlayerPos;
+    private Quaternion lobbyPlayerRotQ;
+
     private void Start()
     {
         lobbyPlayerAnim = GetComponent<Animator>();
         listPath = new List<Vector3>();
+        lobbyPlayerPos = transform.position;
+        lobbyPlayerRotQ = transform.rotation;
         SettingPaths();
     }
 
@@ -27,6 +32,18 @@ public class LobbyPlayerController : MonoBehaviour
         listPath.Add(path[path.Length - 1]);
     }
 
+    public void ResetLobbyPlayer()
+    {
+        IdleAnim();
+        IdleTrans();
+    }
+
+    private void IdleTrans()
+    {
+        gameObject.transform.position = lobbyPlayerPos;
+        gameObject.transform.rotation = lobbyPlayerRotQ;
+    }
+
     public void RunningAnim()
     {
         if (LeanTween.isTweening(gameObject))
@@ -34,27 +51,24 @@ public class LobbyPlayerController : MonoBehaviour
             Debug.Log("tweening _RunningAnim");
             return;
         }
+
+        ResetLobbyPlayer();
         RunAnim();
         RunMove();
     }
 
-    private void ResetAnim()
+    private void IdleAnim()
     {
-        lobbyPlayerAnim.SetTrigger("LobbyIdle");
+        lobbyPlayerAnim.SetBool("LobbyRun", false);
     }
 
     private void RunAnim()
     {
-        lobbyPlayerAnim.SetTrigger("LobbyRun");
+        lobbyPlayerAnim.SetBool("LobbyRun", true);
     }
 
     private void RunMove()
     {
-        //if (LeanTween.isTweening(gameObject))
-        //{
-        //    Debug.Log("tweening");
-        //    return;
-        //}
         LTDescr d = LeanTween.moveSpline(gameObject, listPath.ToArray(), 3.0f).setOrientToPath(true).setEase(LeanTweenType.easeInQuad);
         d.setOnComplete(RunMoveComplete);
     }
@@ -62,6 +76,5 @@ public class LobbyPlayerController : MonoBehaviour
     private void RunMoveComplete()
     {
         Debug.Log("RunEnd");
-        ResetAnim();
     }
 }

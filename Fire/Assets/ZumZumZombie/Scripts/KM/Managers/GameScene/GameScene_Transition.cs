@@ -11,15 +11,41 @@ public partial class GameScene : MonoBehaviour
 
     public GameObject fadeOutImageObj;
     public bool isCompletedFadeOut = false;
+    public bool isCompletedFadeIn = false;
 
     private Color beforeFAdeOutColor;
     private Color nowColor;
 
     public LobbyBase_Controller lobbyBase_Controller;
 
-    private void resetFadeOut()
+    public void LeaveLobby()
     {
-        beforeFAdeOutColor.a = toIn;
+        if (LeanTween.isTweening())
+        {
+            Debug.Log(" LeaveLobby> " + LeanTween.tweensRunning + " // Don't ReLeaveLobby");
+            return;
+        }
+        StartFadeImageAlpha(toIn);
+        StartFadeOut();
+        lobbyBase_Controller.lobbyPlayerController.RunningAnim();
+    }
+
+    public void EnterLobby()
+    {
+        if (LeanTween.isTweening())
+        {
+            Debug.Log("EnterLobby>  " + LeanTween.tweensRunning + "// Don't ReEnterLobby");
+            return;
+        }
+        lobbyBase_Controller.lobbyPlayerController.ResetLobbyPlayer();
+        lobbyBase_Controller.door.OpenDoor();
+        StartFadeImageAlpha(toOut);
+        StartFadeIn();
+    }
+
+    private void StartFadeImageAlpha(float startTo)
+    {
+        beforeFAdeOutColor.a = startTo;
         fadeOutImageObj.GetComponent<Image>().color = beforeFAdeOutColor;
     }
 
@@ -28,7 +54,15 @@ public partial class GameScene : MonoBehaviour
         isCompletedFadeOut = false;
         var d = LeanTween.value(toIn, toOut, duration);
         d.setOnUpdate(x => { ValueUpdateFade(x); });
-        d.setOnComplete(FadeEffectTweenComplete);
+        d.setOnComplete(FadeOutTweenComplete);
+    }
+
+    private void StartFadeIn()
+    {
+        isCompletedFadeIn = false;
+        var d = LeanTween.value(toOut, toIn, duration);
+        d.setOnUpdate(x => { ValueUpdateFade(x); });
+        d.setOnComplete(FadeInTweenComplete);
     }
 
     private void ValueUpdateFade(float value)
@@ -37,20 +71,13 @@ public partial class GameScene : MonoBehaviour
         fadeOutImageObj.GetComponent<Image>().color = nowColor;
     }
 
-    private void FadeEffectTweenComplete()
+    private void FadeOutTweenComplete()
     {
         isCompletedFadeOut = true;
     }
 
-    public void StartGame_Button()
+    private void FadeInTweenComplete()
     {
-        if (LeanTween.isTweening(lobbyBase_Controller.lobbyPlayerController.gameObject))
-        {
-            Debug.Log("tweening fadeOutImageObj // Don't Restart");
-            return;
-        }
-        resetFadeOut();
-        StartFadeOut();
-        lobbyBase_Controller.lobbyPlayerController.RunningAnim();
+        isCompletedFadeIn = true;
     }
 }

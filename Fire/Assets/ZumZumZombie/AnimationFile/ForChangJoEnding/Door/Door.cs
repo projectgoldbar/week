@@ -3,11 +3,26 @@
 public class Door : MonoBehaviour
 {
     private Animator doorAnim;
+    private Quaternion doorRotQ;
 
     private void Start()
     {
         doorAnim = this.GetComponent<Animator>();
-        OpenDoor();
+        doorRotQ = this.transform.rotation;
+        //OpenDoor();
+    }
+
+    public void OpenDoor()
+    {
+        resetDoorRot();
+        doorAnim.SetBool("DoorOpen", true);
+    }
+
+    private void resetDoorRot()
+    {
+        doorAnim.SetBool("DoorOpen", false);
+        this.transform.rotation = doorRotQ;
+        Debug.Log(this.transform.rotation);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,10 +45,5 @@ public class Door : MonoBehaviour
     private void CloseDoor()
     {
         doorAnim.SetTrigger("PlayerIn");
-    }
-
-    private void OpenDoor()
-    {
-        doorAnim.SetTrigger("start");
     }
 }
