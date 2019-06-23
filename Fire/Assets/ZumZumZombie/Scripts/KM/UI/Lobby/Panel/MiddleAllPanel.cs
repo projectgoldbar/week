@@ -6,7 +6,7 @@ public class MiddleAllPanel : MonoBehaviour
     public bool isOpened = true;
     private float openPos = 0f;
     private float closePos = 200f;
-    private float duration = 0.8f;
+    private float duration = 0.5f;
 
     private Vector2 nowPos = Vector2.zero;
 
@@ -19,12 +19,19 @@ public class MiddleAllPanel : MonoBehaviour
     {
         if (isOpened == true)
         {
-            Debug.Log("openning : cant reOpen");
-
+            ScalePanelTween();
             return;
         }
         isOpened = true;
         MovePanelTween(isOpened);
+    }
+
+    private void ScalePanelTween()
+    {
+        Debug.Log("openning : cant reOpen");
+
+        LeanTween.scale(gameObject.GetComponent<RectTransform>(), Vector3.one * 1.2f, 0.1f).setEase(LeanTweenType.easeOutBack);
+        LeanTween.scale(gameObject.GetComponent<RectTransform>(), Vector3.one, 0.4f).setEase(LeanTweenType.easeOutBack);
     }
 
     public void ClosePanel()
@@ -44,14 +51,14 @@ public class MiddleAllPanel : MonoBehaviour
         if (now == true)
         {
             //열어
-            LTDescr d = LeanTween.value(gameObject, closePos, openPos, duration).setEase(LeanTweenType.easeInOutBack);
+            LTDescr d = LeanTween.value(gameObject, closePos, openPos, duration).setEase(LeanTweenType.easeOutBack);
             d.setOnUpdate(x => { MoveUpdatePanel(x); });
             d.setOnComplete(MovePanelTweenCompleteOpen);
         }
         else
         {
             //닫아
-            LTDescr d = LeanTween.value(gameObject, openPos, closePos, duration).setEase(LeanTweenType.easeInOutBack);
+            LTDescr d = LeanTween.value(gameObject, openPos, closePos, duration).setEase(LeanTweenType.easeOutBack);
             d.setOnUpdate(x => { MoveUpdatePanel(x); });
             d.setOnComplete(MovePanelTweenCompleteClose);
         }
