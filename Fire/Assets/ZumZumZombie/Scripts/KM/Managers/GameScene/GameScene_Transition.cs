@@ -53,6 +53,8 @@ public partial class GameScene : MonoBehaviour
 
     private void StartFadeOut()
     {
+        fadeOutImageObj.GetComponent<Image>().raycastTarget = true;
+
         isCompletedFadeOut = false;
         var d = LeanTween.value(toIn, toOut, LeaveDuration);
         d.setOnUpdate(x => { ValueUpdateFade(x); });
@@ -61,6 +63,8 @@ public partial class GameScene : MonoBehaviour
 
     private void StartFadeIn()
     {
+        fadeOutImageObj.GetComponent<Image>().raycastTarget = false;
+
         isCompletedFadeIn = false;
         var d = LeanTween.value(toOut, toIn, EnterDuration);
         d.setOnUpdate(x => { ValueUpdateFade(x); });
