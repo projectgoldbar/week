@@ -8910,10 +8910,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4050514457766190525}
-  - component: {fileID: 919788537851024285}
-  - component: {fileID: 919788537851024284}
-  - component: {fileID: 919788537851024282}
-  - component: {fileID: 919788537851024283}
+  - component: {fileID: 2353370998390322904}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -8936,55 +8933,7 @@ Transform:
   m_Father: {fileID: 2503327800022700269}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &919788537851024285
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4050514457766190526}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &919788537851024284
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4050514457766190526}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6205432, y: 1.1390839, z: 1.1757691}
-  m_Center: {x: -1.3537945, y: 1.0652046, z: -1.0283982}
---- !u!95 &919788537851024282
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4050514457766190526}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 91bbfa44f6e664b4085a6ec815e60e94, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &919788537851024283
+--- !u!114 &2353370998390322904
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8993,9 +8942,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4050514457766190526}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d26286f68bf07a9499619ac26f9bfe43, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ba09cb10dad9d4428ff0e05ab181a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotTime: 1
 --- !u!1 &4050514457795121684
 GameObject:
   m_ObjectHideFlags: 0
@@ -9474,7 +9424,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lobbyPlayerController: {fileID: 1164411057}
-  door: {fileID: 919788537851024283}
+  door: {fileID: 0}
+  doorController: {fileID: 2353370998390322904}
 --- !u!1 &8458636614530712411
 GameObject:
   m_ObjectHideFlags: 0

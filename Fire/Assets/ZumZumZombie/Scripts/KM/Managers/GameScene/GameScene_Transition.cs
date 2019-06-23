@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public partial class GameScene : MonoBehaviour
 {
-    public float duration = 4f;
+    public float LeaveDuration = 4f;
+    public float EnterDuration = 3f;
+
     private float toIn = 0.0f;
     private float toOut = 255.0f;
 
@@ -38,7 +40,7 @@ public partial class GameScene : MonoBehaviour
             return;
         }
         lobbyBase_Controller.lobbyPlayerController.ResetLobbyPlayer();
-        lobbyBase_Controller.door.OpenDoor();
+        lobbyBase_Controller.doorController.OpenDoorTween(EnterDuration);
         StartFadeImageAlpha(toOut);
         StartFadeIn();
     }
@@ -52,7 +54,7 @@ public partial class GameScene : MonoBehaviour
     private void StartFadeOut()
     {
         isCompletedFadeOut = false;
-        var d = LeanTween.value(toIn, toOut, duration);
+        var d = LeanTween.value(toIn, toOut, LeaveDuration);
         d.setOnUpdate(x => { ValueUpdateFade(x); });
         d.setOnComplete(FadeOutTweenComplete);
     }
@@ -60,7 +62,7 @@ public partial class GameScene : MonoBehaviour
     private void StartFadeIn()
     {
         isCompletedFadeIn = false;
-        var d = LeanTween.value(toOut, toIn, duration);
+        var d = LeanTween.value(toOut, toIn, EnterDuration);
         d.setOnUpdate(x => { ValueUpdateFade(x); });
         d.setOnComplete(FadeInTweenComplete);
     }
