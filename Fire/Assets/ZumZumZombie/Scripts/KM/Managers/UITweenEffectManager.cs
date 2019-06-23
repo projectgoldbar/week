@@ -11,34 +11,54 @@ public class UITweenEffectManager : MonoBehaviour
     public GameObject FadeInImageObj;
 
     public bool isCompleteFadeIn = false;
+    public bool isCompleteFadeOut = false;
+
     public float fadeInDuration = 2.0f;
 
-    private float from = 255.0f;
-    private float to = 0.0f;
+    private float toOut = 255.0f;
+    private float toIn = 0.0f;
     private Color beforeFAdeInColor;
     private Color nowColor;
 
-    private void resetPanel()
+    private void resetPanel(float resetAlpha)
     {
-        beforeFAdeInColor.a = from;
+        beforeFAdeInColor.a = resetAlpha;
         FadeInImageObj.GetComponent<Image>().color = beforeFAdeInColor;
     }
 
-    public void StartFadeInEffect()
+    public void EnterInGame()
     {
-        resetPanel();
+        resetPanel(toOut);
         FadeInEffect();
+    }
+
+    public void LeaveInGame()
+    {
+        resetPanel(toIn);
+        FadeOutEffect();
     }
 
     private void FadeInEffect()
     {
+        FadeInImageObj.GetComponent<Image>().raycastTarget = false;
+
         isCompleteFadeIn = false;
-        var d = LeanTween.value(from, to, fadeInDuration);
-        d.setOnUpdate(x => { ValueUpdateFadeOut(x); });
+        var d = LeanTween.value(toOut, toIn, fadeInDuration);
+        d.setOnUpdate(x => { ValueUpdateFade(x); });
         d.setOnComplete(FadeInImageComplete);
     }
 
-    private void ValueUpdateFadeOut(float value)
+    private void FadeOutEffect()
+    {
+        FadeInImageObj.GetComponent<Image>().raycastTarget = true;
+
+        isCompleteFadeOut = false;
+        var d = LeanTween.value(toIn, toOut, fadeInDuration);
+        d.setOnUpdate(x => { ValueUpdateFade(x); });
+        d.setOnComplete(FadeOutImageComplete);
+    }
+
+    private void ValueUpdateFade(float value)
     {
         nowColor.a = value / 255f;
         FadeInImageObj.GetComponent<Image>().color = nowColor;
@@ -47,5 +67,10 @@ public class UITweenEffectManager : MonoBehaviour
     private void FadeInImageComplete()
     {
         isCompleteFadeIn = true;
+    }
+
+    private void FadeOutImageComplete()
+    {
+        isCompleteFadeOut = true;
     }
 }
