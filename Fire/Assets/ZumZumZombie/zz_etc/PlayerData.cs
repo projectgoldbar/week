@@ -354,7 +354,7 @@ public class PlayerData : MonoBehaviour
             Quaternion rot = Quaternion.LookRotation(dir);
             Hp = -1;
 
-            spitPoolManager.Instance.NoActive(transform.position , rot);
+            spitPoolManager.Instance.NoActive(transform.position, rot);
         }
     }
 }

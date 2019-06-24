@@ -22,6 +22,8 @@ public class ChoiceEvolve : MonoBehaviour
         evolve.lv++;
         //transform.parent.gameObject.SetActive(false);
         manager.evolUi.SetActive(false);
+
+        manager.playerController.SetActive(true);
         Time.timeScale = 1;
         manager.sw.Start();
     }

@@ -11,6 +11,7 @@ namespace ZombieState
         public Transform player;
         public Transform target = null;
         public float speed = 13f;
+        public float attackCooltime = 10f;
 
         public override void Setting()
         {
@@ -74,7 +75,7 @@ namespace ZombieState
 
             currentTime += Time.deltaTime;
 
-            if (currentTime < 5f)
+            if (currentTime < attackCooltime)
             {
                 return;
             }

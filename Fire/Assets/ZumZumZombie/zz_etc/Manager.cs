@@ -16,6 +16,7 @@ public class Manager : MonoBehaviour
     public GameObject gameResultUi;
     public GameObject gameClearUi;
     public GameObject itemResultUi;
+    public GameObject playerController;
     public EvolveSystem evolSystem;
     public StageSystem stageSystem;
 
@@ -77,6 +78,7 @@ public class Manager : MonoBehaviour
             x.randomBox[i] = playerData.randomBox[i];
         }
         x.playCount++;
+        SceneManager.sceneUnloaded -= OnSceneEnded;
     }
 
     private void PlayerSetting()
@@ -112,6 +114,7 @@ public class Manager : MonoBehaviour
         //cimage.sprite = x[2].sprite;
 
         evolUi.SetActive(true);
+        playerController.SetActive(false);
         GamePause();
     }
 
@@ -131,6 +134,7 @@ public class Manager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.J))
         {
+            UnityEngine.Debug.Log(CSVManager.Instance);
             StartCoroutine(TimeToGold());
         }
     }

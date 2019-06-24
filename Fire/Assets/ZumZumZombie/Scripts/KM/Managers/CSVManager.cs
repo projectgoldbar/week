@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CSVManager : MonoBehaviour
@@ -24,6 +23,7 @@ public class CSVManager : MonoBehaviour
 
     public static CSVManager Instance
     {
+        set { instance = value; }
         get { return instance; }
     }
 

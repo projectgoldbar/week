@@ -14,6 +14,8 @@ namespace ZombieState
 
         public override void Execute()
         {
+            Debug.Log("공격상태로옴");
+
             attackWait = false;
             targetPoint = zombieData.player.position;
             zombieData.agent.acceleration = 50f;
@@ -28,11 +30,8 @@ namespace ZombieState
         public float attackRange = 30f;
         private Vector3 targetVec;
 
-        public Transform testObject;
-
         public override void Update()
         {
-            testObject.position = targetVec;
             Debug.Log("공격업데이트");
             if (time > attackDelay)
             {
@@ -87,7 +86,7 @@ namespace ZombieState
 
             zombieData.animator.SetBool("Attack", false);
             zombieData.agent.enabled = true;
-            zombieData.agent.acceleration = 16f;
+            zombieData.agent.acceleration = 12f;
             //zombieData.agent.speed = 16f;
             //StopCoroutine(zombieData.zombieAttackCoroutine);
         }
