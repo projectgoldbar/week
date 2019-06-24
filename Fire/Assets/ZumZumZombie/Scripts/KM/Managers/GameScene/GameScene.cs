@@ -44,4 +44,9 @@ public partial class GameScene : MonoBehaviour
     {
         middleAllPanel.ClosePanel();
     }
+
+    public void UpPanelwhenEnter()
+    {
+        middleAllPanel.ClosedPanelwhenEnter();
+    }
 }

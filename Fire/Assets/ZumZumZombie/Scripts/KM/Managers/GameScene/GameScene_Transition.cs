@@ -32,7 +32,6 @@ public partial class GameScene : MonoBehaviour
         lobbyBase_Controller.lobbyPlayerController.RunningAnim();
 
         StartFadeOut();
-        middleAllPanel.isOpened = true;
         UpPanel();
     }
 
@@ -48,8 +47,7 @@ public partial class GameScene : MonoBehaviour
         StartFadeImageAlpha(toOut);
 
         StartFadeIn();
-        middleAllPanel.isOpened = false;
-        DownPanel();
+        UpPanelwhenEnter();
     }
 
     private void StartFadeImageAlpha(float startTo)
