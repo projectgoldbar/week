@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class MiddleAllPanel : MonoBehaviour
 {
-    public bool isOpened = true;
+    public bool isOpened = false;
     private float openPos = 0f;
-    private float closePos = 200f;
+    private float closePos = 1000f;
     private float duration = 0.5f;
 
     private Vector2 nowPos = Vector2.zero;
@@ -44,6 +44,13 @@ public class MiddleAllPanel : MonoBehaviour
         }
         isOpened = false;
         MovePanelTween(isOpened);
+    }
+
+    public void ClosedPanelwhenEnter()
+    {
+        isOpened = false;
+        Vector2 ClosedPos = new Vector2(0f, closePos);
+        gameObject.GetComponent<RectTransform>().anchoredPosition = ClosedPos;
     }
 
     private void MovePanelTween(bool now)
