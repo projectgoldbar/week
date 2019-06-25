@@ -1801,6 +1801,7 @@ GameObject:
   - component: {fileID: 8792354594972897165}
   - component: {fileID: 5237225892874213005}
   - component: {fileID: 936271136224746043}
+  - component: {fileID: 2712267081420754231}
   m_Layer: 10
   m_Name: Zombie2
   m_TagString: Zombie
@@ -1946,6 +1947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackWait: 1
+  iswall: 0
   attackDelay: 1
   time: 0
   attackRange: 30
@@ -1962,3 +1964,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 1524808457723160216}
+--- !u!114 &2712267081420754231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4281057405417156105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09643f39362fc5649a2af227c4a5fe7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stun: 1
+  wallStun: 2
+  time: 0
+  isWall: 0

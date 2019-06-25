@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using System;
 
 public class JoyStick2 : MonoBehaviour
 {
@@ -25,7 +27,7 @@ public class JoyStick2 : MonoBehaviour
     public Vector2 StartPos;
 
     public float MoveSpeed = 11;
-
+    public bool evadeRotate = false;
     private float distance;
 
     public bool JoyStickMoving = true;
@@ -42,6 +44,15 @@ public class JoyStick2 : MonoBehaviour
         StartPos = new Vector2(Screen.width * 0.5f, 200.0f);
         knob.position = StartPos;
         center.position = StartPos;
+    }
+
+    public InputField InputField;
+
+    public void SenceChange()
+    {
+        var x = InputField.text;
+        var s = Convert.ToSingle(x);
+        rollSensitive = s;
     }
 
     private int frame = 0;
@@ -91,7 +102,7 @@ public class JoyStick2 : MonoBehaviour
                 //Debug.Log(direction);
                 //Debug.Log($"마우스 초기위치부터 현재위치까지의 거리{distance}");
 
-                if (speed > rollSensitive && isRoll != true)
+                if (speed > rollSensitive)
                 {
                     Debug.Log("구른다");
                     Vector3 rollDirection = new Vector3(direction.x, 0, direction.y);
@@ -99,18 +110,20 @@ public class JoyStick2 : MonoBehaviour
                     Target.rotation = playerRotation = rollDirection != Vector3.zero ? Quaternion.LookRotation(rollDirection) : transform.rotation;
                     ;
                     playerData.animator.StopPlayback();
-                    playerData.animator.SetBool("Roll", true);
+                    playerData.animator.Play("Roll");
                     MoveSpeed = 15f;
                     isRoll = true;
                 }
 
                 if (distance < 20) return;
-                Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
+                if (!isRoll)
+                {
+                    Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
 
-                Quaternion targetRotation = moveDirection != Vector3.zero ? Quaternion.LookRotation(moveDirection) : transform.rotation;
-                //Target.rotation = targetRotation;
-                Target.rotation = Quaternion.Slerp(Target.rotation, targetRotation, Time.deltaTime * 10.0f);
-
+                    Quaternion targetRotation = moveDirection != Vector3.zero ? Quaternion.LookRotation(moveDirection) : transform.rotation;
+                    //Target.rotation = targetRotation;
+                    Target.rotation = Quaternion.Slerp(Target.rotation, targetRotation, Time.deltaTime * 10.0f);
+                }
                 if (JoyStickMoving)
                     agent.velocity = agent.transform.forward * MoveSpeed;
             }

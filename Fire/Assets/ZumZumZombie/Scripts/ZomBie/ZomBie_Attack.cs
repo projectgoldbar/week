@@ -5,6 +5,7 @@ namespace ZombieState
     public class ZomBie_Attack : ZombieState
     {
         public bool attackWait = true;
+        public bool iswall = false;
 
         public override void Setting()
         {
@@ -22,7 +23,6 @@ namespace ZombieState
 
             zombieData.attackTrailRenderer.enabled = true;
             zombieData.animator.SetBool("Attack", true);
-            zombieData.animator.StopPlayback();
         }
 
         public float attackDelay = 0f;
@@ -43,12 +43,15 @@ namespace ZombieState
                 {
                     Debug.Log("레이맞음");
                     targetVec = hit.point;
+                    iswall = true;
                     Debug.Log("targetPoint = " + targetPoint);
                 }
                 else
                 {
                     targetVec = transform.position + transform.forward.normalized * attackRange;
+                    iswall = false;
                 }
+                //zombieData.animator.Play("mixamo_com(1)");
             }
             if (!attackWait)
             {
@@ -66,6 +69,8 @@ namespace ZombieState
                 //d.Normalize();
                 //Debug.Log(d);
                 //transform.Translate(d + d * Time.deltaTime);
+                time += Time.deltaTime;
+
                 Debug.Log(targetVec);
                 transform.position = Vector3.Lerp(transform.position, targetVec, 2f * Time.deltaTime);
             }
@@ -76,17 +81,28 @@ namespace ZombieState
         public void ChangeState()
         {
             Debug.Log("호출");
-            zombieData.animator.StopPlayback();
-            StateChange(zombieData.moving);
+            //zombieData.animator.StopPlayback();
+            if (iswall)
+            {
+                zombieData.stun.isWall = true;
+                StateChange(zombieData.stun);
+            }
+            else
+            {
+                zombieData.stun.isWall = false;
+                StateChange(zombieData.stun);
+            }
         }
 
         public override void Exit()
         {
-            zombieData.attackTrailRenderer.enabled = false;
-
+            //zombieData.animator.speed = 1;
+            zombieData.agent.acceleration = 0f;
+            zombieData.agent.velocity = new Vector3(0, 0, 0);
+            zombieData.agent.speed = 0f;
             zombieData.animator.SetBool("Attack", false);
-            zombieData.agent.enabled = true;
-            zombieData.agent.acceleration = 12f;
+            zombieData.attackTrailRenderer.enabled = false;
+            time = 0f;
             //zombieData.agent.speed = 16f;
             //StopCoroutine(zombieData.zombieAttackCoroutine);
         }

@@ -16,7 +16,7 @@ namespace ZombieState
         public StateMachine stateMachine;
         public Zombie_Moving moving;
         public ZomBie_Attack attack;
-        public ZombieState stun;
+        public ZomBie_Stun stun;
         public IEnumerator moveCoroutine;
         public IEnumerator canIAttackCoroutine;
         public IEnumerator zombieAttackCoroutine;
@@ -34,6 +34,8 @@ namespace ZombieState
             moving.enabled = false;
             attack = GetComponent<ZomBie_Attack>();
             attack.enabled = false;
+            stun = GetComponent<ZomBie_Stun>();
+            stun.enabled = false;
             material = GetComponentInChildren<SkinnedMeshRenderer>().materials[0];
         }
     }
