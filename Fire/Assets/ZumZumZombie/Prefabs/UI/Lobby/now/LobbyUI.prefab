@@ -8960,6 +8960,7 @@ GameObject:
   - component: {fileID: 7017896705533956669}
   - component: {fileID: 2267382736437911990}
   - component: {fileID: 1424977837359123541}
+  - component: {fileID: 488054416}
   m_Layer: 5
   m_Name: LobbyUI
   m_TagString: Untagged
@@ -9025,6 +9026,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triangleOutline_Image: {fileID: 5290863809186378171}
   doorOutline_SpriteRenderer: {fileID: 0}
+--- !u!114 &488054416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7017896705533956670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4b0df53d3d9f04d98d815f419bd1dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: 0
 --- !u!1 &7032923357301083956
 GameObject:
   m_ObjectHideFlags: 0
@@ -15550,6 +15564,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61848228deda9364ea9bcc6d0a5354de, type: 3}
+--- !u!224 &4427417035867751257 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2773753528645743780, guid: 61848228deda9364ea9bcc6d0a5354de,
+    type: 3}
+  m_PrefabInstance: {fileID: 1949779866383775741}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4427417035867751253 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2773753528645743784, guid: 61848228deda9364ea9bcc6d0a5354de,
@@ -15562,12 +15582,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 698470548092c094498a63ec5a7232c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &4427417035867751257 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2773753528645743780, guid: 61848228deda9364ea9bcc6d0a5354de,
-    type: 3}
-  m_PrefabInstance: {fileID: 1949779866383775741}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7017896705679786065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15684,6 +15698,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3182764529912279982, guid: f369d9f7a0bfbcf4496cfac1262c0b81,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.11764706
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f369d9f7a0bfbcf4496cfac1262c0b81, type: 3}
