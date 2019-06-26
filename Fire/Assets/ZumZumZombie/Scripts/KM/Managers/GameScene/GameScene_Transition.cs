@@ -22,7 +22,7 @@ public partial class GameScene : MonoBehaviour
 
     public void LeaveLobby()
     {
-        if (LeanTween.isTweening())
+        if (fadeOutImageObj.GetComponent<Image>().color.a != toIn / 255f && fadeOutImageObj.GetComponent<Image>().color.a != toOut / 255f)
         {
             Debug.Log(" LeaveLobby> " + LeanTween.tweensRunning + " // Don't ReLeaveLobby");
             return;
@@ -37,7 +37,7 @@ public partial class GameScene : MonoBehaviour
 
     public void EnterLobby()
     {
-        if (LeanTween.isTweening())
+        if (fadeOutImageObj.GetComponent<Image>().color.a != toIn / 255f && fadeOutImageObj.GetComponent<Image>().color.a != toOut / 255f)
         {
             Debug.Log("EnterLobby>  " + LeanTween.tweensRunning + "// Don't ReEnterLobby");
             return;
