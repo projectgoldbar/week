@@ -10,6 +10,7 @@ public class PlayerData : MonoBehaviour
     public bool isTest;
     public Text hpText;
     public Gate gate;
+    public int rollStack = 1;
 
     private bool smite = false;
 
@@ -309,12 +310,27 @@ public class PlayerData : MonoBehaviour
         yield break;
     }
 
+    public GameObject testBlood;
+    public GameObject hitUI;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Zombie")
         {
             Hp = -1 * (other.GetComponent<ZombieState.ZombiesComponent>().damage - evolveLvData[4] - df);
             var hitEffect = particlePool.GetParticle(particlePool.hitParticlePool);
+            if (hitUI.activeSelf)
+            {
+                hitUI.SetActive(false);
+                hitUI.SetActive(true);
+            }
+            else
+            {
+                hitUI.SetActive(true);
+            }
+            testBlood.transform.position = transform.position;
+            testBlood.transform.rotation = other.transform.rotation;
+            testBlood.SetActive(true);
             hitEffect.transform.position = transform.position;
             hitEffect.transform.localRotation = transform.rotation;
             hitEffect.SetActive(true);

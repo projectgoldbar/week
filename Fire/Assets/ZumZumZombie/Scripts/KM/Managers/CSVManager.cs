@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-5800)]
 public class CSVManager : MonoBehaviour
 {
     private static CSVManager instance;

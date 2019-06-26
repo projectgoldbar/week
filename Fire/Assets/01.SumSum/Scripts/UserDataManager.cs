@@ -45,7 +45,7 @@ public class UserDataManager : MonoBehaviour
         if (scene.buildIndex == 0)
         {
             upgradeInfoPanels = GameObject.Find("Content 0-14").GetComponentsInChildren<UpgradeInfoPanels>();
-            skinInfos = GameObject.Find("SkinInfoPivot").GetComponentsInChildren<SKinInfo>();
+            skinInfos = GameObject.Find("SkinInfoPivot_Contents").GetComponentsInChildren<SKinInfo>();
             for (int i = 0; i < upgradeInfoPanels.Length; i++)
             {
                 upgradeInfoPanels[i].statLevel = userData.statPointerIdx[i];

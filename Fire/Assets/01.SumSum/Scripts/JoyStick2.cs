@@ -94,6 +94,7 @@ public class JoyStick2 : MonoBehaviour
                 direction = DisNdir(knob.position, center.position).dir;
                 distance = DisNdir(pos, start).dis;
                 speedDistance = DisNdir(pos, bufferVector2).dis;
+
                 var speed = speedDistance * 0.045;
                 //Debug.Log("방향" + direction);
                 //Debug.Log("거리" + distance);
@@ -102,7 +103,7 @@ public class JoyStick2 : MonoBehaviour
                 //Debug.Log(direction);
                 //Debug.Log($"마우스 초기위치부터 현재위치까지의 거리{distance}");
 
-                if (speed > rollSensitive)
+                if (speed > rollSensitive && playerData.rollStack > 0)
                 {
                     Debug.Log("구른다");
                     Vector3 rollDirection = new Vector3(direction.x, 0, direction.y);
@@ -111,8 +112,6 @@ public class JoyStick2 : MonoBehaviour
                     ;
                     playerData.animator.StopPlayback();
                     playerData.animator.Play("Roll");
-                    MoveSpeed = 15f;
-                    isRoll = true;
                 }
 
                 if (distance < 20) return;

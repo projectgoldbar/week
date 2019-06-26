@@ -35,11 +35,8 @@ public class Manager : MonoBehaviour
     public Text coinText;
     public Text StageClearText;
 
-    private List<Vector3[]> line;
+    public Vector3[] spwanPoints;
 
-    public Vector3[] line1;
-    public Vector3[] line2;
-    public Vector3[] line3;
     public Stopwatch sw = new Stopwatch();
     public float score;//스코어
     public float resultGold;
@@ -50,21 +47,19 @@ public class Manager : MonoBehaviour
 
     private void Awake()
     {
+        Screen.SetResolution(720, 1280, true);
+        Application.targetFrameRate = 45;
         playerData = FindObjectOfType<PlayerData>();
         AdsVideo = FindObjectOfType<AdmobVideoAd>();
-        line = new List<Vector3[]>();
-        line.Add(line1);
-        line.Add(line2);
-        line.Add(line3);
 
-        var setLine = line[Random.Range(0, line.Count)];
-        float left = setLine[0].x;
-        float right = setLine[1].x;
-        float x = Random.Range(left, right);
-        playerData.transform.position = new Vector3(x, setLine[0].y, setLine[0].z);
+        playerData.transform.position = spwanPoints[Random.Range(0, spwanPoints.Length)];
         goldUi.text = playerData.gold.ToString();
         SceneManager.sceneUnloaded += OnSceneEnded;
+        //Time.timeScale = 0;
+        FindObjectOfType<UITweenEffectManager>().EnterInGame();
+
         GameStart();
+
         //PlayerSetting();
     }
 
@@ -145,7 +140,7 @@ public class Manager : MonoBehaviour
         sw.Stop();
     }
 
-    private void GameStart()
+    public void GameStart()
     {
         Time.timeScale = 1;
         sw.Start();

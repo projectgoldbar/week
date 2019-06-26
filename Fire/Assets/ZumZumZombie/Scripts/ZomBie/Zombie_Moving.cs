@@ -28,7 +28,6 @@ namespace ZombieState
 
         public override void Execute()
         {
-            zombieData.animator.SetBool("Stun", false);
             zombieData.animator.SetBool("Attack", false);
             zombieData.agent.speed = speed;
 
