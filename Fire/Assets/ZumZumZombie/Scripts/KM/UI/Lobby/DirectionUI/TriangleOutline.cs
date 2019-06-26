@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScalePingPong : MonoBehaviour
+public class TriangleOutline : MonoBehaviour
 {
+    private float targetScale = 1.1f;
     private float durationT = 2f;
     private float delayT = 10f;
 
@@ -18,12 +19,12 @@ public class ScalePingPong : MonoBehaviour
         onAlpha = nowColor.a * 255f;
 
         Debug.Log(onAlpha + " : " + gameObject.GetComponent<Image>().color.a);
-        LeanTween.scale(gameObject, Vector3.one * 1.1f, durationT).setEase(LeanTweenType.easeOutQuart).setLoopClamp();
+        LeanTween.scale(gameObject, Vector3.one * targetScale, durationT).setEase(LeanTweenType.easeOutQuart).setLoopClamp();
         LTDescr d = LeanTween.value(gameObject, onAlpha, offAlpha, durationT).setLoopClamp();
-        d.setOnUpdate(x => { valueUpdateAlpha(x); });
+        d.setOnUpdate(x => { ValueUpdateAlpha(x); });
     }
 
-    private void valueUpdateAlpha(float value)
+    private void ValueUpdateAlpha(float value)
     {
         nowColor.a = value / 255f;
         gameObject.GetComponent<Image>().color = nowColor;

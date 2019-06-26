@@ -9,6 +9,8 @@ public partial class GameScene : MonoBehaviour
     public SkinPanel skinPanel;
     public StorePanel storePanel;
 
+    public DirectionUIController directionUIController;
+
     public void Start()
     {
         StatButton();

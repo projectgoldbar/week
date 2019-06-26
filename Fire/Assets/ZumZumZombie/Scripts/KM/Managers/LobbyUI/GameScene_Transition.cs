@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public partial class GameScene : MonoBehaviour
 {
-    public float LeaveDuration = 4f;
-    public float EnterDuration = 3f;
+    private float LeaveDuration = 4f;
+    private float EnterDuration = 3f;
 
     private float toIn = 0.0f;
     private float toOut = 255.0f;
 
     public GameObject fadeOutImageObj;
-    public bool isCompletedFadeOut = false;
-    public bool isCompletedFadeIn = false;
+    private bool isCompletedFadeOut = false;
+    private bool isCompletedFadeIn = false;
 
     private Color beforeFAdeOutColor;
     private Color nowColor;
