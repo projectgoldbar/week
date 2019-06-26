@@ -44,5 +44,27 @@ public class MonsterSpwaner : MonoBehaviour
         yield break;
     }
 
-    
+    public List<GameObject> patrolZombieList;
+
+    private IEnumerator SpwanSystem()
+    {
+        WaitForSeconds tenSec = new WaitForSeconds(10f);
+        for (int i = 0; i < 3; i++)
+        {
+            var monster = Instantiate(bombZombie, spwanPoints[Random.Range(1, spwanPoints.Length)].position, Quaternion.identity);
+            var patrolZombie = Instantiate(this.bombZombie, spwanPoints[Random.Range(1, spwanPoints.Length)].position, Quaternion.identity);
+            patrolZombieList.Add(patrolZombie);
+            yield return new WaitForSeconds(20f);
+        }
+
+        for (int i = 0; i < patrolZombieList.Count; i++)
+        {
+            if (patrolZombieList[i].gameObject.activeSelf == false)
+            {
+                patrolZombieList[i].transform.position = spwanPoints[Random.Range(1, spwanPoints.Length)].position;
+                patrolZombieList[i].gameObject.SetActive(true);
+            }
+            yield return tenSec;
+        }
+    }
 }

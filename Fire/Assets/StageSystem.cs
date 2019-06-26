@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class StageSystem : MonoBehaviour
 {
-
     public List<GameObject> stageGate;
     public List<Stage> stages;
     public Manager manager;
     public ParticlePool particlePool;
     public GameObject arrowPivot;
-    public StageManager stageManager;
     private int currentStage = 0;
-    
 
     private void Update()
     {
@@ -66,8 +63,7 @@ public class StageSystem : MonoBehaviour
                 particle.transform.position = stageGate[i].transform.position;
                 particle.SetActive(true);
                 stageGate[i].SetActive(false);
-                stages[i].Setting(i);
-                stageManager.StageSetting(i);
+                stages[i].Setting();
                 CurrentStage++;
                 yield return new WaitForSeconds(2f);
             }

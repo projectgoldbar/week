@@ -11,15 +11,7 @@ public class Stage1 : Stage
     public List<Vector3> randomVector;
     public List<GameObject> mines;
 
-    private UITweenEffectManager uITweenEffectManager;
-
-    public void Awake()
-    {
-        uITweenEffectManager = FindObjectOfType<UITweenEffectManager>();
-    }
-
-
-    public override void Setting(int index)
+    public override void Setting()
     {
         Vector3 pivot = new Vector3(-239f, 1.7f, 236f);
 
@@ -55,7 +47,6 @@ public class Stage1 : Stage
             x.SetActive(true);
             mines.Add(x);
         }
-        //uITweenEffectManager.stageOpenPanel.OpenPanel("BFS");
-        uITweenEffectManager.stageOpenPanel.OpenPanel(index);
+        //UITweenEffectManager.Instance.stageOpenPanel.OpenPanel("BFS");
     }
 }

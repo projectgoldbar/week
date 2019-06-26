@@ -44,24 +44,6 @@ public class StageOpenPanel : MonoBehaviour
         resetPanel(stageOpenPanelText);
         PlayTweenEffect();
     }
-    public void OpenPanel(int stageIndex)
-    {
-        if (LeanTween.isTweening(targetforScaleOutText))
-        {
-            Debug.Log("--");
-            return;
-        }
-        gameObject.SetActive(true);
-
-        StageManager stageManager = FindObjectOfType<StageManager>();
-        var stage = stageManager.SpawnList.Find(x => x.StageLv == stageIndex);
-
-        string stageName = stage.StageName;
-
-        stageOpenPanelText = string.Format("*STAGE OPEN*\n{0}", stageName);
-        resetPanel(stageOpenPanelText);
-        PlayTweenEffect();
-    }
 
     public void ClosePanel()
     {
