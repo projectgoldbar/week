@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Stage : MonoBehaviour
 {
-    public virtual void Setting()
+    public virtual void Setting(int index)
     {
     }
 }

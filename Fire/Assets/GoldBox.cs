@@ -6,19 +6,30 @@ using UnityEngine;
 [System.Serializable]
 public class GoldBox : MonoBehaviour
 {
-    public int RewardLv;                          //박스 보상렙 *3~6~9~
-    public int BoxLv;    
-    public int  Gold;                             //박스 오픈 후 얻어야 할 골드
+    public int RewardLv =1;                         //박스 보상렙 *3~6~9~
+    public int BoxLv =1;    
 
     public bool Opened = false;                    //박스 오픈여부
 
-    public int min;
-    public int max;
+    public int min = 50;
+    public int max = 100;
+    private int gold;                            //박스 오픈 후 얻어야 할 골드
 
-    public GoldBox()
+   
+    public int Gold
     {
-        Gold = Random.Range(min * BoxLv, max * BoxLv);
+        get => gold;
+        set {
+            gold = Random.Range(min * BoxLv, max * BoxLv);
+        }
     }
+
+    private void Awake()
+    {
+        Gold = 1;
+        Debug.Log(Gold);
+    }
+
 
     //public void BoxOpen()
     //{
