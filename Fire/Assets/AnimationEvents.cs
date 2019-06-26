@@ -10,6 +10,9 @@ public class AnimationEvents : MonoBehaviour
 
     public void RollStart()
     {
+        joystick2.isRoll = true;
+        joystick2.MoveSpeed = 15f;
+        joystick2.playerData.rollStack--;
     }
 
     public void RollEnd()
@@ -18,6 +21,7 @@ public class AnimationEvents : MonoBehaviour
         {
             joystick2.isRoll = false;
             joystick2.MoveSpeed = 11f;
+            joystick2.playerData.rollStack++;
         }
         else
         {
