@@ -43,7 +43,9 @@ public class RewardInfo : MonoBehaviour
     public void ComboBoxOpen() 
     {
         Debug.Log("콤보박스 열기");
-        AddBox = UserDataManager.Instance.userData.goldbox[0];
+        //AddBox = UserDataManager.Instance.userData.goldbox[0];
+        AddBox = GoldRewardTest.Instance.Goldboxes[0];
+        AddBox.Gold = 0;
         Debug.Log("보상골드 = 박스골드");
         RewardGold = AddBox.Gold;
 

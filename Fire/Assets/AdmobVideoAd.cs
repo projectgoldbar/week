@@ -20,6 +20,13 @@ public class AdmobVideoAd : MonoBehaviour
 
     public bool AdsPlaying = false;
 
+    private UITweenEffectManager uITweenEffectManager;
+
+    public void Awake()
+    {
+        uITweenEffectManager = FindObjectOfType<UITweenEffectManager>();
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -49,7 +56,7 @@ public class AdmobVideoAd : MonoBehaviour
             Debug.Log("OnAdClosed");
             AdsPlaying = false;
             LoadAd();
-            //UITweenEffectManager.Instance.gameOverPanel.OnAds_Button();
+            uITweenEffectManager.gameOverPanel.OnAds_Button();
         };
         //광고클릭으로 인해 사용자가 애플리케이션을 종료한 경우 호출됩니다.
         RewardAd.OnAdLeavingApplication += (sender, e) => Debug.Log("OnAdLeavingApplication");
@@ -70,7 +77,7 @@ public class AdmobVideoAd : MonoBehaviour
         {
             AdsPlaying = true;
             this.RewardAd.Show();
-            //UITweenEffectManager.Instance.gameOverPanel.OnAds_Button();
+            //uITweenEffectManager.gameOverPanel.OnAds_Button();
         }
         else
         {
