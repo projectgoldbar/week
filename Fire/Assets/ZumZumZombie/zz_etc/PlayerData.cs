@@ -212,7 +212,8 @@ public class PlayerData : MonoBehaviour
         maxhp = x.hp;
         df = 0;
         var fperHp = (maxhp * 0.05f);
-        hpDownSpeed = fperHp - (fperHp * (0.01f * x.decelerationHp));
+        //hpDownSpeed = fperHp - (fperHp * (0.01f * x.decelerationHp));
+        hpDownSpeed = 0f;
         hpUpSpeed = hpUpSpeed + (hpUpSpeed * (0.01f * x.healHp));
         epUpSpeed = epUpSpeed + (epUpSpeed * x.gainExp * 0.01f);
         goldUpSpeed = goldUpSpeed + (goldUpSpeed * x.gainMoney * 0.01f);
@@ -354,7 +355,7 @@ public class PlayerData : MonoBehaviour
             Quaternion rot = Quaternion.LookRotation(dir);
             Hp = -1;
 
-            spitPoolManager.Instance.NoActive(transform.position , rot);
+            spitPoolManager.Instance.NoActive(transform.position, rot);
         }
     }
 }

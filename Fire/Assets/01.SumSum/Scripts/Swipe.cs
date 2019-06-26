@@ -6,15 +6,20 @@ using UnityEngine.Events;
 
 public class Swipe : MonoBehaviour
 {
+    public enum Mode
+    { move, roll }
+
     public Vector2 StartPos;
     public Vector2 CurrentPos;
     public Vector2 pos;
+    public float swipeLength = 120f;
+    public Mode mode = Mode.roll;
 
     [Header("Player")]
     public Transform Target = null;
+
     private NavMeshAgent agent;
     public float MoveSpeed = 11;
-
 
     [Header("구르기 기능(함수) 연결")]
     public UnityEvent roll;
@@ -22,10 +27,9 @@ public class Swipe : MonoBehaviour
     private void Awake()
     {
         agent = Target.GetComponent<NavMeshAgent>();
-
     }
 
-    void Update()
+    private void Update()
     {
         ClickSet();
 
@@ -49,20 +53,41 @@ public class Swipe : MonoBehaviour
     {
         var SwipeDistance = pos.magnitude;
 
-        if (SwipeDistance >= 120.0f)
+        Debug.Log(SwipeDistance);
+        if (SwipeDistance >= swipeLength)
         {
-            var direction = pos.normalized;
-            Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
+            switch (mode)
+            {
+                case Mode.move:
+                    var direction = pos.normalized;
+                    Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
 
-            Quaternion targetRotation = moveDirection != Vector3.zero ? Quaternion.LookRotation(moveDirection) : transform.rotation;
-            Target.rotation = Quaternion.Slerp(Target.rotation, targetRotation, Time.deltaTime * 10.0f);
+                    Quaternion targetRotation = moveDirection != Vector3.zero ? Quaternion.LookRotation(moveDirection) : transform.rotation;
+                    Target.rotation = Quaternion.Slerp(Target.rotation, targetRotation, Time.deltaTime * 10.0f);
+                    break;
+
+                case Mode.roll:
+                    direction = pos.normalized;
+                    moveDirection = new Vector3(direction.x, 0, direction.y);
+                    targetRotation = moveDirection != Vector3.zero ? Quaternion.LookRotation(moveDirection) : transform.rotation;
+                    Target.rotation = Quaternion.Slerp(Target.rotation, targetRotation, Time.deltaTime * 10.0f);
+                    MoveSpeed = 20f;
+
+                    break;
+
+                default:
+                    break;
+            }
 
             roll?.Invoke();
         }
     }
 
+    private void MoveWithSwipe()
+    {
+    }
 
-
-
-
+    private void RollWithSwipe()
+    {
+    }
 }

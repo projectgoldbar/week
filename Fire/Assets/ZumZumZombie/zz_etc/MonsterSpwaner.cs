@@ -13,6 +13,7 @@ public class MonsterSpwaner : MonoBehaviour
     private WaitForSeconds seconds;
     private Manager manager;
     public List<GameObject> zombies;
+    public int spwanCount = 4;
 
     private void Awake()
     {
@@ -33,14 +34,13 @@ public class MonsterSpwaner : MonoBehaviour
     private IEnumerator Spwan()
     {
         int count = 0;
-        while (count < 4)
+        while (count < spwanCount)
         {
             SpwanZombie(zombie);
             count++;
 
             yield return seconds;
         }
-        //StartCoroutine(SpwanSystem());
         yield break;
     }
 

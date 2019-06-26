@@ -11,6 +11,7 @@ namespace ZombieState
         public Transform player;
         public Transform target = null;
         public float speed = 13f;
+        public float attackCooltime = 10f;
 
         public override void Setting()
         {
@@ -27,6 +28,8 @@ namespace ZombieState
 
         public override void Execute()
         {
+            zombieData.animator.SetBool("Stun", false);
+            zombieData.animator.SetBool("Attack", false);
             zombieData.agent.speed = speed;
 
             //test = StartCoroutine(ZombieMove());
@@ -74,7 +77,7 @@ namespace ZombieState
 
             currentTime += Time.deltaTime;
 
-            if (currentTime < 5f)
+            if (currentTime < attackCooltime)
             {
                 return;
             }

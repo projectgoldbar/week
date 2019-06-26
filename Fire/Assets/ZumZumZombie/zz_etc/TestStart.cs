@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class TestStart : MonoBehaviour
 {
-    public void GoGame()
+    public static TestStart instance;
+
+    public float a = 7;
+
+    private void Awake()
     {
-        SceneManager.LoadScene("03.Game 3");
+        instance = this;
     }
 }
