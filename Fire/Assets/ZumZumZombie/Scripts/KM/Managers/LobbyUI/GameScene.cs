@@ -46,7 +46,7 @@ public partial class GameScene : MonoBehaviour
     public void UpPanel()
     {
         middleAllPanel.ClosePanel();
-        directionUIController.OnTriangleOutlineforDownPanel();
+        directionUIController.OnTriangleOutlineforUpPanel();
     }
 
     public void UpPanelwhenEnter()

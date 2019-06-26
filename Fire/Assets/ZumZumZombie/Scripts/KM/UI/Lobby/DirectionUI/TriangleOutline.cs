@@ -29,9 +29,4 @@ public class TriangleOutline : MonoBehaviour
         nowColor.a = value / 255f;
         gameObject.GetComponent<Image>().color = nowColor;
     }
-
-    public void OnClicked()
-    {
-        LeanTween.scale(gameObject, gameObject.GetComponent<Transform>().localScale * 1.1f, durationT / 2).setEase(LeanTweenType.easeInOutElastic);
-    }
 }

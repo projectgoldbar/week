@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public partial class GameScene : MonoBehaviour
 {
-    private float LeaveDuration = 4f;
-    private float EnterDuration = 3f;
+    public float leaveDuration = 4f;
+    private float enterDuration = 3f;
 
     private float toIn = 0.0f;
     private float toOut = 255.0f;
@@ -32,6 +32,7 @@ public partial class GameScene : MonoBehaviour
 
     private void LeaveLobbyProcess()
     {
+        directionUIController.OnClickedforLeaveLobby();
         StartFadeImageAlpha(toIn);
         lobbyBase_Controller.lobbyPlayerController.RunningAnim();
         StartFadeOut();
@@ -52,7 +53,7 @@ public partial class GameScene : MonoBehaviour
     private void EnterLobbyProcess()
     {
         lobbyBase_Controller.lobbyPlayerController.ResetLobbyPlayer();
-        lobbyBase_Controller.doorController.OpenDoorTween(EnterDuration);
+        lobbyBase_Controller.doorController.OpenDoorTween(enterDuration);
         StartFadeImageAlpha(toOut);
         StartFadeIn();
         UpPanelwhenEnter();
@@ -69,7 +70,7 @@ public partial class GameScene : MonoBehaviour
         fadeOutImageObj.GetComponent<Image>().raycastTarget = true;
 
         isCompletedFadeOut = false;
-        var d = LeanTween.value(toIn, toOut, LeaveDuration);
+        var d = LeanTween.value(toIn, toOut, leaveDuration);
         d.setOnUpdate(x => { ValueUpdateFade(x); });
         d.setOnComplete(FadeOutTweenComplete);
     }
@@ -79,7 +80,7 @@ public partial class GameScene : MonoBehaviour
         fadeOutImageObj.GetComponent<Image>().raycastTarget = false;
 
         isCompletedFadeIn = false;
-        var d = LeanTween.value(toOut, toIn, EnterDuration);
+        var d = LeanTween.value(toOut, toIn, enterDuration);
         d.setOnUpdate(x => { ValueUpdateFade(x); });
         d.setOnComplete(FadeInTweenComplete);
     }

@@ -13,8 +13,13 @@ public class DirectionUIController : MonoBehaviour
         triangleOutline_Image.GetComponent<Image>().enabled = false;
     }
 
-    public void OnTriangleOutlineforDownPanel()
+    public void OnTriangleOutlineforUpPanel()
     {
         triangleOutline_Image.GetComponent<Image>().enabled = true;
+    }
+
+    public void OnClickedforLeaveLobby()
+    {
+        doorOutline_SpriteRenderer.GetComponent<DoorOutLine>().ReactforLeaveLobby();
     }
 }
