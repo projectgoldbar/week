@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TriangleOutline : MonoBehaviour
 {
-    private float targetScale = 1.1f;
+    public float targetScale = 1.1f;
     private float durationT = 2f;
     private float delayT = 10f;
 
@@ -19,8 +19,8 @@ public class TriangleOutline : MonoBehaviour
         onAlpha = nowColor.a * 255f;
 
         Debug.Log(onAlpha + " : " + gameObject.GetComponent<Image>().color.a);
-        LeanTween.scale(gameObject, Vector3.one * targetScale, durationT).setEase(LeanTweenType.easeOutQuart).setLoopClamp();
-        LTDescr d = LeanTween.value(gameObject, onAlpha, offAlpha, durationT).setLoopClamp();
+        LeanTween.scale(gameObject, Vector3.one * targetScale, durationT).setDelay(3.0f).setEase(LeanTweenType.easeOutQuart).setLoopClamp();
+        LTDescr d = LeanTween.value(gameObject, onAlpha, offAlpha, durationT).setDelay(3.0f).setLoopClamp();
         d.setOnUpdate(x => { ValueUpdateAlpha(x); });
     }
 
@@ -28,5 +28,10 @@ public class TriangleOutline : MonoBehaviour
     {
         nowColor.a = value / 255f;
         gameObject.GetComponent<Image>().color = nowColor;
+    }
+
+    public void OnClicked()
+    {
+        LeanTween.scale(gameObject, gameObject.GetComponent<Transform>().localScale * 1.1f, durationT / 2).setEase(LeanTweenType.easeInOutElastic);
     }
 }

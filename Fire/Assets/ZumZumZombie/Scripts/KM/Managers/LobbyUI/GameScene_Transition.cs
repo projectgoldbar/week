@@ -27,10 +27,13 @@ public partial class GameScene : MonoBehaviour
             Debug.Log(" LeaveLobby> " + LeanTween.tweensRunning + " // Don't ReLeaveLobby");
             return;
         }
+        LeaveLobbyProcess();
+    }
+
+    private void LeaveLobbyProcess()
+    {
         StartFadeImageAlpha(toIn);
-
         lobbyBase_Controller.lobbyPlayerController.RunningAnim();
-
         StartFadeOut();
         UpPanel();
     }
@@ -42,10 +45,15 @@ public partial class GameScene : MonoBehaviour
             Debug.Log("EnterLobby>  " + LeanTween.tweensRunning + "// Don't ReEnterLobby");
             return;
         }
+
+        EnterLobbyProcess();
+    }
+
+    private void EnterLobbyProcess()
+    {
         lobbyBase_Controller.lobbyPlayerController.ResetLobbyPlayer();
         lobbyBase_Controller.doorController.OpenDoorTween(EnterDuration);
         StartFadeImageAlpha(toOut);
-
         StartFadeIn();
         UpPanelwhenEnter();
     }

@@ -8,13 +8,13 @@ public class DirectionUIController : MonoBehaviour
     public Image triangleOutline_Image;
     public SpriteRenderer doorOutline_SpriteRenderer;
 
-    // Start is called before the first frame update
-    private void Start()
+    public void OffTriangleOutlineforDownPanel()
     {
+        triangleOutline_Image.GetComponent<Image>().enabled = false;
     }
 
-    // Update is called once per frame
-    private void Update()
+    public void OnTriangleOutlineforDownPanel()
     {
+        triangleOutline_Image.GetComponent<Image>().enabled = true;
     }
 }
