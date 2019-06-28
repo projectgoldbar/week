@@ -34,7 +34,7 @@ public class NewUserData
 
     [Header("스킨수집정보")]
     public bool[] gainSkin = new bool[10]
-    {false,false,false,false,false,false,false,false,false,false };
+    {true,false,false,false,false,false,false,false,false,false };
 
     [Header("장착스킨정보")]
     public int equipedSkinIdx = 0;

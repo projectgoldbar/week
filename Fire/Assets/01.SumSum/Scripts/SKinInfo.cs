@@ -10,8 +10,9 @@ public class SKinInfo : MonoBehaviour
     public int skinnedMeshIdx;
 
     [Header("이미지")]
-    public Image skinImage;
+    public Image infoImage;
 
+    public Image selectButtonImage;
     public Image equipButtonImage;
 
     [Header("스프라이트")]
@@ -21,14 +22,15 @@ public class SKinInfo : MonoBehaviour
     public Text nameText;
 
     public Text descriptionText;
-    public Text buttonText;
+    public Text equipButtonText;
 
     [Header(" ")]
     public int skillIdx;
 
     public bool isHave = false;
     public bool isEquiped = false;
-    public Button button;
+    public Button equipButton;
+    public Button selectButton;
 
     private void Awake()
     {
@@ -63,24 +65,29 @@ public class SKinInfo : MonoBehaviour
             //button.GetComponent<Text>().text = "Unknown";
             nameText.text = "???";
             descriptionText.text = "???";
-            buttonText.text = "???";
-            button.GetComponent<Button>().interactable = false;
-            skinImage.sprite = spriteData.unknownIconSprite;
-            equipButtonImage.sprite = spriteData.unequipSprite;
+            equipButtonText.text = "???";
+            selectButton.GetComponent<Button>().interactable = false;
+            equipButton.GetComponent<Button>().interactable = false;
+            infoImage.sprite = spriteData.unknownIconSprite;
+            selectButtonImage.sprite = spriteData.unknownIconSprite;
+            equipButtonImage.sprite = spriteData.unknownIconSprite;
         }
         else
         {
             nameText.text = name;
             descriptionText.text = description;
-            buttonText.text = "Equip";
-            button.GetComponent<Button>().interactable = true;
-            skinImage.sprite = skinSprite;
+            equipButtonText.text = "착용하기";
+            selectButton.GetComponent<Button>().interactable = true;
+            equipButton.GetComponent<Button>().interactable = true;
+            infoImage.sprite = skinSprite;
             equipButtonImage.sprite = spriteData.unequipSprite;
         }
 
         if (isEquiped)
         {
-            button.GetComponent<Button>().interactable = false;
+            equipButtonText.text = "착용중";
+            selectButton.GetComponent<Button>().interactable = false;
+            equipButton.GetComponent<Button>().interactable = false;
             equipButtonImage.sprite = spriteData.equipedSprite;
         }
     }
