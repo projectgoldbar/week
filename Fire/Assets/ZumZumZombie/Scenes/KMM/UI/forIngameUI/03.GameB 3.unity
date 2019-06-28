@@ -6077,6 +6077,81 @@ Transform:
   m_Father: {fileID: 572812836}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &946694147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 946694149}
+  - component: {fileID: 946694148}
+  m_Layer: 0
+  m_Name: GameObject (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &946694148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946694147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe7bf8878e7965c48bf75714780f3951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnList:
+  - StageLv: 0
+    StageName: 0
+    PlayerPointLight: {r: 1, g: 0, b: 0, a: 0}
+    spawnData:
+      data:
+      - SpawnOBJ: {fileID: 1000010880751780, guid: 00ce4f5fce6fa714998855e2b41830ae,
+          type: 3}
+        SpawnCount: 3
+  SpawnPosition:
+  - {fileID: 1152847250}
+  - {fileID: 1601881127}
+  - {fileID: 252362853}
+  - {fileID: 933853103}
+  - {fileID: 602837518}
+  - {fileID: 872916149}
+  - {fileID: 1897584081}
+  - {fileID: 520822483}
+  - {fileID: 276428264}
+  - {fileID: 1861327083}
+  - {fileID: 1164893920}
+  - {fileID: 238413351}
+  - {fileID: 986435996}
+  - {fileID: 769437454}
+  - {fileID: 157659019}
+  - {fileID: 1501641149}
+  - {fileID: 1941742915}
+  - {fileID: 1141740693}
+  overlapIndex: 
+  OBjData: []
+  Monsters: []
+  LightColor: {fileID: 2054887141}
+--- !u!4 &946694149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946694147}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.1799998, z: 4.937}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 44
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &955341121
 GameObject:
   m_ObjectHideFlags: 0
@@ -6565,6 +6640,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 308320190466117708, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4012386571223543148, guid: c5a89b022b1eb97408ecb35d32fee9b8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6911,11 +6991,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 308320188858263350, guid: c5a89b022b1eb97408ecb35d32fee9b8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 308320190466117708, guid: c5a89b022b1eb97408ecb35d32fee9b8,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -44065,6 +44140,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BloodSpla
       objectReference: {fileID: 0}
+    - target: {fileID: 2203081137880025683, guid: 3b4da29efa7f9d741b47caff7730a735,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9217889836116741507, guid: 3b4da29efa7f9d741b47caff7730a735,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -44134,11 +44214,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2203081137880025683, guid: 3b4da29efa7f9d741b47caff7730a735,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2203081137880258039, guid: 3b4da29efa7f9d741b47caff7730a735,
         type: 3}

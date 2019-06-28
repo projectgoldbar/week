@@ -31,10 +31,14 @@ public class BoxManager : MonoBehaviour
     public Sprite skinSprite;
     public Text Description;
 
+
+    public AdmobVideoAd videoAd;
+
     private void Start()
     {
         userData = UserDataManager.Instance.userData;
         Refresh();
+        videoAd.AdsReward.AddListener(TrowDice);
     }
 
     /// <summary>
@@ -116,12 +120,14 @@ public class BoxManager : MonoBehaviour
 
     public void BoxOpen(BoxType boxType)
     {
+        
         switch (boxType)
         {
             case BoxType.Bronze:
                 if (!userData.AdOff)
                 {
                     //광고실행함수연결
+                    videoAd.ShowRewardedAd();
                 }
 
                 break;
@@ -130,6 +136,7 @@ public class BoxManager : MonoBehaviour
                 if (!userData.AdOff)
                 {
                     //광고실행함수연결
+                    videoAd.ShowRewardedAd();
                 }
                 break;
 
@@ -137,6 +144,7 @@ public class BoxManager : MonoBehaviour
                 if (!userData.AdOff)
                 {
                     //광고실행함수연결
+                    videoAd.ShowRewardedAd();
                 }
                 break;
 

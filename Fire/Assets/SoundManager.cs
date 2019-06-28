@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ClipIndex { Explosion, 정해야됨2, 정해야됨3, 정해야됨4 }
 
@@ -15,6 +16,12 @@ public class SoundManager : MonoBehaviour
 
     public Dictionary<string, AudioClip> SoundDic = new Dictionary<string, AudioClip>();
 
+
+    public Toggle AllSoundToggle;
+    public Toggle AllSoundMute;
+    public Slider SoundVolume;
+
+
     private void Awake()
     {
         if (Instance != null)
@@ -29,11 +36,11 @@ public class SoundManager : MonoBehaviour
         {
             SoundDic.Add(soundClips[i].name, soundClips[i].clip);
         }
-        PlayBGM( SoundDic["mainBGM"], true, 0);
-        PlayBGM( SoundDic["subBGM2"], true, 3);
+        PlayBGM(SoundDic["mainBGM"], true, 0);
+        PlayBGM(SoundDic["subBGM2"], true, 3);
     }
 
-    public void PlayBGM( AudioClip clip, bool loop, float delay)
+    public void PlayBGM(AudioClip clip, bool loop, float delay)
     {
         for (int i = 0; i < sources.Length; i++)
         {
@@ -47,6 +54,57 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
+
+    public void AllSoundOnOff()
+    {
+        if (!AllSoundToggle.isOn)
+        {
+            for (int i = 0; i < sources.Length; i++)
+            {
+                sources[i].Stop();
+            }
+        }
+        else
+        {
+            for (int i = 0; i < sources.Length; i++)
+            {
+                sources[i].Play();
+            }
+        }
+    }
+
+   
+
+    public void BGMSoundvolume()
+    {
+        for (int i = 0; i < sources.Length; i++)
+        {
+            sources[i].volume = SoundVolume.value;
+        }
+    }
+
+    //음소거
+    public void SoundMute()
+    {
+        if (!AllSoundMute.isOn)
+        {
+            for (int i = 0; i < sources.Length; i++)
+            {
+                sources[i].mute = true;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < sources.Length; i++)
+            {
+                sources[i].mute = false;
+            }
+        }
+    }
+
+
+
+
 
 }
 
