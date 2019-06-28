@@ -16,7 +16,7 @@ public class Stage1 : Stage
         Vector3 pivot = new Vector3(-239f, 1.7f, 236f);
 
         var t = Instantiate(tresure, pivot, Quaternion.identity, transform);
-        t.GetComponent<Box>().lv = 0;
+        // t.GetComponent<Box>().lv = 0;
         for (int y = 0; y < 14; y++)
         {
             for (int x = 0; x < 10; x++)

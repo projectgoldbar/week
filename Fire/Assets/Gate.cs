@@ -19,7 +19,7 @@ public class Gate : MonoBehaviour
         }
         else if (isClear)
         {
-            other.GetComponent<PlayerData>().clearBox[other.GetComponent<PlayerData>().boxBuffer]++;
+            //other.GetComponent<PlayerData>().clearBox[other.GetComponent<PlayerData>().boxBuffer]++;
         }
     }
 }

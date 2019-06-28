@@ -85,6 +85,9 @@ public class UserDataManager : MonoBehaviour
             userData.playTime = data.playTime;
             userData.gainSkin = data.gainSkin;
             userData.equipedSkinIdx = data.equipedSkinIdx;
+            userData.goldBoxCount = data.goldBox;
+            userData.silverBoxCount = data.silberBox;
+            userData.bronzeBoxCount = data.bronzeBox;
         }
     }
 
@@ -109,7 +112,7 @@ public class UserDataManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            NewSaveSystem.SaveData(userData);
+            SceneManager.LoadScene(1);
         }
         else if (Input.GetKeyDown(KeyCode.L))
         {

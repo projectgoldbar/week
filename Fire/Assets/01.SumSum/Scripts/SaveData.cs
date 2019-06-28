@@ -9,6 +9,9 @@ public class SaveData
     public int equipedSkinIdx;
     public float playTime;
     public float money;
+    public int goldBox;
+    public int silberBox;
+    public int bronzeBox;
 
     public SaveData()
     {
@@ -17,5 +20,8 @@ public class SaveData
         playTime = 0f;
         money = 0;
         equipedSkinIdx = 0;
+        goldBox = 0;
+        silberBox = 0;
+        bronzeBox = 0;
     }
 }

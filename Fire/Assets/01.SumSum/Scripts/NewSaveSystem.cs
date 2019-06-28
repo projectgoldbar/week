@@ -15,6 +15,9 @@ public static class NewSaveSystem
         data.money = userData.Money;
         data.gainSkin = userData.gainSkin;
         data.equipedSkinIdx = userData.equipedSkinIdx;
+        data.bronzeBox = userData.bronzeBoxCount;
+        data.silberBox = userData.silverBoxCount;
+        data.goldBox = userData.goldBoxCount;
         formatter.Serialize(stream, data);
         stream.Close();
     }

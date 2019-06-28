@@ -18,7 +18,6 @@ public class Manager : MonoBehaviour
     public GameObject itemResultUi;
     public GameObject playerController;
     public EvolveSystem evolSystem;
-    public StageSystem stageSystem;
 
     public GameObject evolUi;
     public GameObject evolButton1;
@@ -67,12 +66,12 @@ public class Manager : MonoBehaviour
     {
         var x = UserDataManager.Instance.userData;
         playerData.gold += resultGold;
+        playerData.score = score;
         x.Money = Mathf.Round(playerData.gold);
-        for (int i = 0; i < playerData.randomBox.Length; i++)
-        {
-            x.randomBox[i] = playerData.randomBox[i];
-        }
         x.playCount++;
+        x.goldBoxCount += playerData.goldBoxCount;
+        x.silverBoxCount += playerData.silverBoxCount;
+        x.bronzeBoxCount += playerData.bronzeBoxCount;
         SceneManager.sceneUnloaded -= OnSceneEnded;
     }
 
@@ -121,7 +120,7 @@ public class Manager : MonoBehaviour
         timeUi.text = "Score " + score;
         if (score > openTime)
         {
-            stageSystem.InstanceStageOpen();
+            //스테이지오픈시기결정
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {

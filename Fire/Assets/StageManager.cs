@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq;
-using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
@@ -20,21 +18,19 @@ public class StageManager : MonoBehaviour
 
     public Light LightColor;
 
-
     private void Start()
     {
         overlapIndex = OverlapRandomIndex(SpawnPosition.Length);
         ShowTimer = new WaitForSeconds(0.5f);
     }
+
     public void StageSetting(int StageLv)
     {
-
-        //해당 스테이지에 실행되야할것 
+        //해당 스테이지에 실행되야할것
         StartCoroutine(StageMonster(StageLv));
     }
 
     #region 몬스터
-
 
     public Spawn GetSpawn(int StageLv)
     {
@@ -46,11 +42,10 @@ public class StageManager : MonoBehaviour
     {
         var StageData = GetSpawn(StageLv);
 
-        yield return StartCoroutine(DataReset());
+        //yield return StartCoroutine(DataReset());
         yield return StartCoroutine(StageMonsterCreateNHide(StageData));
         StartCoroutine(ShowStageMonster());
     }
-
 
     public IEnumerator DataReset()
     {
@@ -65,9 +60,7 @@ public class StageManager : MonoBehaviour
         overlapIndex = OverlapRandomIndex(SpawnPosition.Length);
         Monsters.Clear();
         OBjData = new GameObject[0];
-
     }
-
 
     private IEnumerator ShowStageMonster()
     {
@@ -78,8 +71,6 @@ public class StageManager : MonoBehaviour
             yield return ShowTimer;
         }
     }
-
-
 
     private IEnumerator StageMonsterCreateNHide(Spawn StageData)
     {
@@ -98,7 +89,6 @@ public class StageManager : MonoBehaviour
                 Array.Resize(ref OBjData, OBjData.Length + 1);
                 OBjData[OBjData.Length - 1] = SpawnCount.SpawnOBJ;
             }
-
         }
 
         for (int j = 0; j < Count; j++)
@@ -123,11 +113,9 @@ public class StageManager : MonoBehaviour
         return SpawnIndex;
     }
 
-
-
     /// <summary>
-    /// 랜덤인덱스 뽑기 
-    /// https://citynetc.tistory.com/194 
+    /// 랜덤인덱스 뽑기
+    /// https://citynetc.tistory.com/194
     /// 그대로 가져옴
     /// </summary>
     /// <returns></returns>
@@ -156,9 +144,7 @@ public class StageManager : MonoBehaviour
         return randArray;
     }
 
-    #endregion
-
-
+    #endregion 몬스터
 
     #region 테스트
 
@@ -178,8 +164,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    #endregion
-
+    #endregion 테스트
 }
 
 [System.Serializable]
@@ -200,6 +185,7 @@ public class Spawn
 {
     [Header("스테이지 검색용")]
     public int StageLv;
+
     public string StageName;
 
     public Color PlayerPointLight;
@@ -208,6 +194,7 @@ public class Spawn
     public SpawnRange spawnData;
 
     private bool dataShowHide;
+
     public bool DataShowHide
     {
         get { return dataShowHide; }
@@ -236,10 +223,8 @@ public class Spawn
                     {
                         spawnData.data[j].SpawnOBJ.SetActive(false);
                     }
-
                 }
             }
         }
-
     }
 }

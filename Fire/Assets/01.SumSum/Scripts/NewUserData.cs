@@ -9,12 +9,16 @@ public class NewUserData
 
     public int playCount;
     public int dieCount;
-    public float maxLiveTime;
-    public int hasRanDomBox = 0;
 
     #region 세이브할목록들
 
     public int[] statPointerIdx = new int[15] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+
+    #region 스코어
+
+    public float highScore = 0f;
+
+    #endregion 스코어
 
     #region MONEY
 
@@ -37,12 +41,21 @@ public class NewUserData
 
     #endregion 스킨관련
 
-    #region 박스관련
+    #region 랜덤박스관련
 
-    public int[] randomBox = new int[7] { 0, 0, 0, 0, 0, 0, 0 };
-    public List<GoldBox> goldbox = new List<GoldBox>();
+    public int goldBoxCount = 0;
+    public int silverBoxCount = 0;
+    public int bronzeBoxCount = 0;
 
-    #endregion 박스관련
+    #endregion 랜덤박스관련
+
+    #region 인앱결제관련
+
+    public bool AdOff = false;
+    public bool goldBonus = false;
+    public bool pakage = false;
+
+    #endregion 인앱결제관련
 
     #endregion 세이브할목록들
 
@@ -81,6 +94,3 @@ public class NewUserData
 
     #endregion 업적클리어현황
 }
-
-
-

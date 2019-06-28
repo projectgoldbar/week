@@ -41,7 +41,7 @@ public class JoyStick2 : MonoBehaviour
     private void Start()
     {
         ShowHide(true);
-        StartPos = new Vector2(Screen.width * 0.5f, 200.0f);
+        StartPos = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
         knob.position = StartPos;
         center.position = StartPos;
     }
@@ -78,7 +78,7 @@ public class JoyStick2 : MonoBehaviour
                 start = pos;
 
                 knob.position = pos;
-                center.position = pos;
+                //center.position = pos;
             }
             else if (Input.GetMouseButton(0))
             {

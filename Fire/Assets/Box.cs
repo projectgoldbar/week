@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
+public enum BoxType
+{ Bronze, Gold, Silver }
+
 public class Box : MonoBehaviour
 {
-    public int lv = 0;
+    public BoxType type;
 }

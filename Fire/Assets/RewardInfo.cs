@@ -7,6 +7,7 @@ public class RewardInfo : MonoBehaviour
     public static int ComboIndex;
 
     private int rewardgold;
+
     public int RewardGold
     {
         get { return rewardgold; }
@@ -15,7 +16,7 @@ public class RewardInfo : MonoBehaviour
             rewardgold = value;
         }
     }
-     
+
     public GoldBox AddBox = null;
 
     public AdmobVideoAd videoAd = null;
@@ -31,19 +32,17 @@ public class RewardInfo : MonoBehaviour
         videoAd.UnityAdsReward.AddListener(UnityADS.ShowAD);
         videoAd.AdsFail.AddListener(Ads_fail);
 
-
-
         UnityADS.Finished.AddListener(Ads_success);
         UnityADS.Failed.AddListener(Ads_fail);
-
     }
 
     #region 박스 여는방법 선택
+
     //광고클릭 (콤보박스열기)
-    public void ComboBoxOpen() 
+    public void ComboBoxOpen()
     {
         Debug.Log("콤보박스 열기");
-        AddBox = UserDataManager.Instance.userData.goldbox[0];
+        //AddBox = UserDataManager.Instance.userData.goldbox[0];
         Debug.Log("보상골드 = 박스골드");
         RewardGold = AddBox.Gold;
 
@@ -57,7 +56,6 @@ public class RewardInfo : MonoBehaviour
             Debug.Log("광고제거성공");
             Ads_success();
         }
-
     }
 
     //박스열기
@@ -72,10 +70,9 @@ public class RewardInfo : MonoBehaviour
         {
             DeleteBox();
         }
-
     }
 
-    #endregion
+    #endregion 박스 여는방법 선택
 
     //Ads전용
     public void Ads_success()
@@ -89,7 +86,7 @@ public class RewardInfo : MonoBehaviour
         //콤보수에 따른 돈계산
         {
             Debug.Log("보상 계산");
-                     //          //3 * 콤보인덱스  =  3 , 6 , 9 ~
+            //          //3 * 콤보인덱스  =  3 , 6 , 9 ~
             Gold = RewardGold * (AddBox.RewardLv * ComboIndex);
         }
         //플레이어한테 돈 넘겨주기
@@ -108,24 +105,22 @@ public class RewardInfo : MonoBehaviour
     {
         Debug.Log("영상시청 실패");
         Debug.Log("다시 박스리스트에Add 시키고 정렬");
-        UserDataManager.Instance.userData.goldbox.Add(AddBox);
-        UserDataManager.Instance.userData.goldbox.Sort();
+        //UserDataManager.Instance.userData.goldbox.Add(AddBox);
+        //UserDataManager.Instance.userData.goldbox.Sort();
         AddBox = null;
     }
-
 
     public void AddMoney(int money)
     {
         Debug.Log("플레이어에 보상돈 전달");
         //플레이어 돈 += money;
-        UserDataManager.Instance.userData.Money += money;
+        //UserDataManager.Instance.userData.Money += money;
     }
 
     public void DeleteBox()
     {
         Debug.Log("OBJ박스 삭제");
-        UserDataManager.Instance.userData.goldbox.RemoveAt(0);
-       // Destroy(AddBox, 0.1f);
+        //UserDataManager.Instance.userData.goldbox.RemoveAt(0);
+        // Destroy(AddBox, 0.1f);
     }
-
 }

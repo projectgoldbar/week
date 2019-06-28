@@ -38,9 +38,10 @@ public class PlayerData : MonoBehaviour
     public float gold = 0;
     public int df = 0;
     public int live = 0;
-    public int[] randomBox;
+    public int goldBoxCount = 0;
+    public int silverBoxCount = 0;
+    public int bronzeBoxCount = 0;
     public int clearCount = 0;
-    public int[] clearBox;
     public int boxBuffer = 0;
 
     public int key = 0;
@@ -176,8 +177,6 @@ public class PlayerData : MonoBehaviour
     private void Awake()
     {
         evolveLvData = new int[24] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        clearBox = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
-        randomBox = new int[7] { 0, 0, 0, 0, 0, 0, 0 };
         //FindObjectOfType<hpSlider>().playerData = this;
         playerMove = GetComponent<PlayerMove>();
         FindObjectOfType<SkillSystem>().playerMove = GetComponent<PlayerMove>();
@@ -223,10 +222,6 @@ public class PlayerData : MonoBehaviour
         {
             evolveLvData[i] = userEquipSkillList[i];
         }
-        for (int i = 0; i < x.randomBox.Length; i++)
-        {
-            randomBox[i] = x.randomBox[i];
-        }
     }
 
     private void Update()
@@ -244,16 +239,24 @@ public class PlayerData : MonoBehaviour
             }
             else if (live > 0)
             {
+                animator.SetBool("Revive", true);
                 StartCoroutine(Revive());
                 isRevive = true;
             }
             else
             {
-                FindObjectOfType<Manager>().GameOver();
+                Invoke("GameOverInvoke", 2f);
+                FindObjectOfType<UITweenEffectManager>().LeaveInGame();
+                FindObjectOfType<JoyStick2>().MoveSpeed = 0f;
                 isGameOver = true;
                 return;
             }
         }
+    }
+
+    private void GameOverInvoke()
+    {
+        FindObjectOfType<Manager>().GameOver();
     }
 
     private IEnumerator Revive()
@@ -277,6 +280,8 @@ public class PlayerData : MonoBehaviour
         live--;
         Time.timeScale = 1;
         animator.SetBool("Dying", false);
+        animator.SetBool("Revive", false);
+
         playerMove.speed = 11f;
         isRevive = false;
         yield break;
@@ -350,16 +355,28 @@ public class PlayerData : MonoBehaviour
         }
         else if (other.tag == "RandomBox")
         {
-            var boxLv = other.GetComponent<RandomBox>().lv;
-            randomBox[boxLv]++;
-            other.gameObject.SetActive(false);
-        }
-        else if (other.tag == "ClearBox")
-        {
-            var boxLv = other.GetComponent<Box>().lv;
-            boxBuffer = boxLv;
-            other.gameObject.SetActive(false);
-            gate.isClear = true;
+            switch (other.GetComponent<Box>().type)
+            {
+                case BoxType.Bronze:
+                    bronzeBoxCount++;
+                    Destroy(other.gameObject);
+                    break;
+
+                case BoxType.Gold:
+                    goldBoxCount++;
+                    Destroy(other.gameObject);
+
+                    break;
+
+                case BoxType.Silver:
+                    silverBoxCount++;
+                    Destroy(other.gameObject);
+
+                    break;
+
+                default:
+                    break;
+            }
         }
         else if (other.tag == "Spit")
         {
