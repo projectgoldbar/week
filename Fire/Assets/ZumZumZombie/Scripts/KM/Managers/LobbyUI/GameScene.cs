@@ -5,9 +5,11 @@ using UnityEngine;
 public partial class GameScene : MonoBehaviour
 {
     public MiddleAllPanel middleAllPanel;
+
     public StatPanel statPanel;
     public SkinPanel skinPanel;
     public StorePanel storePanel;
+    public BoxPanel boxPanel;
 
     public DirectionUIController directionUIController;
 
@@ -21,6 +23,7 @@ public partial class GameScene : MonoBehaviour
         statPanel.OpenPanel();
         skinPanel.ClosePanel();
         storePanel.ClosePanel();
+        boxPanel.ClosePanel();
     }
 
     public void SkinButton()
@@ -28,6 +31,15 @@ public partial class GameScene : MonoBehaviour
         statPanel.ClosePanel();
         skinPanel.OpenPanel();
         storePanel.ClosePanel();
+        boxPanel.ClosePanel();
+    }
+
+    public void BoxButton()
+    {
+        statPanel.ClosePanel();
+        skinPanel.ClosePanel();
+        storePanel.ClosePanel();
+        boxPanel.OpenPanel();
     }
 
     public void StoreButton()
@@ -35,6 +47,7 @@ public partial class GameScene : MonoBehaviour
         statPanel.ClosePanel();
         skinPanel.ClosePanel();
         storePanel.OpenPanel();
+        boxPanel.ClosePanel();
     }
 
     public void DownPanel()
