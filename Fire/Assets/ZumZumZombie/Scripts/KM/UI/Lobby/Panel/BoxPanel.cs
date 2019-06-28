@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoxPanel : MonoBehaviour
 {
-    private Vector2 closePos = new Vector2(0f, 4000f);
+    private Vector2 closePos = new Vector2(0f, 2000f);
     private Vector2 openePos = new Vector2(0f, 0f);
 
     private void Start()
