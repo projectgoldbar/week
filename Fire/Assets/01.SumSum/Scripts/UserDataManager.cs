@@ -8,6 +8,7 @@ public class UserDataManager : MonoBehaviour
     public NewUserData userData;
     public UpgradeInfoPanels[] upgradeInfoPanels;
     public SKinInfo[] skinInfos;
+    public SkinSystem skinSystem;
     public int value;
     public static UserDataManager Instance;
     public Text debugText;
@@ -46,6 +47,7 @@ public class UserDataManager : MonoBehaviour
         {
             upgradeInfoPanels = GameObject.Find("Content 0-14").GetComponentsInChildren<UpgradeInfoPanels>();
             skinInfos = GameObject.Find("SkinInfoPivot_Contents").GetComponentsInChildren<SKinInfo>();
+            skinSystem = FindObjectOfType<SkinSystem>();
             for (int i = 0; i < upgradeInfoPanels.Length; i++)
             {
                 upgradeInfoPanels[i].statLevel = userData.statPointerIdx[i];
@@ -55,7 +57,7 @@ public class UserDataManager : MonoBehaviour
             {
                 skinInfos[i].isHave = userData.gainSkin[i];
             }
-            skinInfos[userData.equipedSkinIdx].isEquiped = true;
+            skinInfos[userData.equipedSkinIdx].Select();
             RefreshSkin();
         }
     }

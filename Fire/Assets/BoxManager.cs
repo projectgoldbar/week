@@ -156,7 +156,10 @@ public class BoxManager : MonoBehaviour
         }
         else
         {
-            resultInfo.GetComponent<Image>().sprite = skinSprite;
+            var skin = FindObjectOfType<SkinSystem>().ThrowRandomSkin();
+            resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
+            skin.isHave = true;
+            UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
         }
     }
 }
