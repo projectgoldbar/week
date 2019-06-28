@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class BoxOpenPanel : MonoBehaviour
 {
-    public void OnPressGetBox_Button()
+    public void OnPressClosePanel_Button()
     {
         //if ()
         //{

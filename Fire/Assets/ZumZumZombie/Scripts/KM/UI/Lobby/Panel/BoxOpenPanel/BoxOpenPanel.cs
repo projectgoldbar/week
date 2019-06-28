@@ -9,8 +9,8 @@ public partial class BoxOpenPanel : MonoBehaviour
     public GameObject boxObj;
     public GameObject boxOpenObj;
 
-    public GameObject openBoxButton;
-    public GameObject getBoxButton;
+    public GameObject unBoxingButton;
+    public GameObject closePanelButton;
 
     private float IntroTime = 0.5f;
 
@@ -63,15 +63,15 @@ public partial class BoxOpenPanel : MonoBehaviour
 
     private void IntroBox_Complete()
     {
-        openBoxButton.SetActive(true);
+        unBoxingButton.SetActive(true);
     }
 
     private void resetPanel()
     {
         boxObj.GetComponent<Transform>().localScale = Vector3.zero;
         boxObj.GetComponent<Transform>().rotation = boxRotQ;
-        openBoxButton.SetActive(false);
-        getBoxButton.SetActive(false);
+        unBoxingButton.SetActive(false);
+        closePanelButton.SetActive(false);
     }
 
     private void IntroBox()

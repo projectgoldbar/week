@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class BoxOpenPanel : MonoBehaviour
 {
-    public void OnPressOpenBox_Button()
+    public void OnPressUnBoxingBox_Button()
     {
         if (LeanTween.isTweening(boxObj))
         {
@@ -17,7 +17,7 @@ public partial class BoxOpenPanel : MonoBehaviour
 
     private void RotBoxTweenEffectForButton_Complete()
     {
-        OpentSkinBox();
+        OpentSkinBoxProcess();
     }
 
     //-----------
@@ -28,7 +28,7 @@ public partial class BoxOpenPanel : MonoBehaviour
         d.setOnComplete(RotBoxTweenEffectForButton_Complete);
     }
 
-    private void OpentSkinBox()
+    private void OpentSkinBoxProcess()
     {
         BoomEffect();
         ChangeMesh();
@@ -44,8 +44,8 @@ public partial class BoxOpenPanel : MonoBehaviour
         boxObj.SetActive(false);
         boxOpenObj.SetActive(true);
 
-        openBoxButton.SetActive(false);
-        getBoxButton.SetActive(true);
+        unBoxingButton.SetActive(false);
+        closePanelButton.SetActive(true);
     }
 
     private void IntroOpenBoxTween()

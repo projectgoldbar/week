@@ -1424,8 +1424,8 @@ MonoBehaviour:
   boxLayer: {fileID: 7047693914229194190}
   boxObj: {fileID: 3154753936002306443}
   boxOpenObj: {fileID: 6981506734156082488}
-  openBoxButton: {fileID: 1866389625648045236}
-  getBoxButton: {fileID: 2452118618291329980}
+  unBoxingButton: {fileID: 1866389625648045236}
+  closePanelButton: {fileID: 2452118618291329980}
 --- !u!1 &249956193320882886
 GameObject:
   m_ObjectHideFlags: 0
@@ -4613,7 +4613,7 @@ GameObject:
   - component: {fileID: 7410131998860543227}
   - component: {fileID: 4692434219219233864}
   m_Layer: 5
-  m_Name: OpenButton
+  m_Name: UnboxingButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4717,7 +4717,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5064231283391515327}
-        m_MethodName: OnPressOpenBox_Button
+        m_MethodName: OnPressUnBoxingBox_Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5544,7 +5544,7 @@ GameObject:
   - component: {fileID: 8215493090250105331}
   - component: {fileID: 1316358510902575349}
   m_Layer: 5
-  m_Name: GetButton
+  m_Name: ClosePanelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5648,7 +5648,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5064231283391515327}
-        m_MethodName: OnPressGetBox_Button
+        m_MethodName: OnPressClosePanel_Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7044,7 +7044,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GET
+  m_Text: CLOSE
 --- !u!1 &4164041423467143196
 GameObject:
   m_ObjectHideFlags: 0
@@ -7788,7 +7788,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: OPEN
+  m_Text: UNBOXING
 --- !u!1 &5125769141330393145
 GameObject:
   m_ObjectHideFlags: 0

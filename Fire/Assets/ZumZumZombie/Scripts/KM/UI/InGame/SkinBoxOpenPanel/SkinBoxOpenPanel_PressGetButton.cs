@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class SkinBoxOpenPanel : MonoBehaviour
 {
-    public void OnPressGetBox_Button()
+    public void OnPressGet_Button()
     {
         //if ()
         //{
