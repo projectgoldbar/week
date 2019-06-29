@@ -12,6 +12,7 @@ public partial class GameScene : MonoBehaviour
     public BoxPanel boxPanel;
 
     public OptionPanel optionPanel;
+    public ExitGamePanel exitGamePanel;
 
     public DirectionUIController directionUIController;
 
@@ -91,14 +92,17 @@ public partial class GameScene : MonoBehaviour
 
     public void ExitGameOpen()
     {
-        //게임 나가기 창 열기
-        Debug.Log("게임 나가기 창 열기");
+        exitGamePanel.OpenPanel();
     }
 
     public void ExitGameClose()
     {
-        //게임 나가기 창 닫기
-        Debug.Log("게임 나가기 창 닫기");
+        exitGamePanel.ClosePanel();
+    }
+
+    public void ExitGame()
+    {
+        exitGamePanel.ExitGame();
     }
 
     public void StartGame()
