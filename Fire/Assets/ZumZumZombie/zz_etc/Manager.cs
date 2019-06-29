@@ -37,7 +37,29 @@ public class Manager : MonoBehaviour
     public Vector3[] spwanPoints;
 
     public Stopwatch sw = new Stopwatch();
-    public float score;//스코어
+
+    public StageManager stageManager;
+
+    private int StageLv = 0;
+    
+
+    //스코어
+    private float Score;
+    public float score
+    {
+        get => Score;
+        set
+        {
+            Score = value;
+            var StageData = stageManager.GetSpawn(stageManager.currentStageLV);
+             
+            if (Score > StageData.spawnData.ClearScore)
+            {
+                stageManager.StageSetting(++stageManager.currentStageLV);
+            }
+
+        }
+    }
     public float resultGold;
 
     public bool viewAd = false;
@@ -60,6 +82,8 @@ public class Manager : MonoBehaviour
         GameStart();
 
         //PlayerSetting();
+
+        stageManager.StageSetting(0);
     }
 
     private void OnSceneEnded(Scene scene)
@@ -112,16 +136,13 @@ public class Manager : MonoBehaviour
         GamePause();
     }
 
-    public float openTime = 10f;
+
 
     private void Update()
     {
         score = Mathf.Floor(sw.ElapsedMilliseconds * 0.001f);
         timeUi.text = "Score " + score;
-        if (score > openTime)
-        {
-            //스테이지오픈시기결정
-        }
+        
         if (Input.GetKeyDown(KeyCode.Q))
         {
             GameOver();

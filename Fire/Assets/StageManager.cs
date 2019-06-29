@@ -5,18 +5,79 @@ using System;
 
 public class StageManager : MonoBehaviour
 {
-    public List<Spawn> SpawnList = new List<Spawn>();
+    public GameObject[] RefBoxs;
+
+    public List<StageSpawn> SpawnList = new List<StageSpawn>();
 
     public Transform[] SpawnPosition;
 
     public int[] overlapIndex;
-    public GameObject[] OBjData;
 
-    public List<GameObject> Monsters = new List<GameObject>();
+    public GameObject[] OBjData;
 
     private WaitForSeconds ShowTimer;
 
     public Light LightColor;
+
+    //맵안에 생성될 모든 좀비
+    public List<ZombieState.ZombiesComponent> AllZombies = new List<ZombieState.ZombiesComponent>();
+
+    public int currentStageLV = 0;
+
+    private int Rndpercent;
+
+
+    //
+    public int RndPer(int StageLv)
+    {
+        var StageData = GetSpawn(StageLv);
+        Rndpercent = UnityEngine.Random.Range(0, 101);
+
+        if (StageData.spawnData.percent_copper <= Rndpercent)
+            return 0;
+        else if (StageData.spawnData.percent_copper > Rndpercent &&
+                 StageData.spawnData.percent_silver <= Rndpercent)
+            return 1;
+        else
+            return 2;
+    }
+
+    private IEnumerator CrearRewardBox(int StageLv, Vector3 SpwanTransform)
+    {
+        var go = GameObject.Instantiate(RefBoxs[RndPer(StageLv)]);
+
+        go.transform.position = SpwanTransform;
+        yield return null;
+    }
+
+    public void StageSetting(int StageLv)
+    {
+        
+        //현제스테이지
+        var StageData = SpawnList[StageLv];
+        //해당 스테이지에 실행되야할것
+        
+
+        //스테이지 전환효과
+        
+        //몬스터생성-몬스터 속도증가
+        StartCoroutine(StageMonster(StageLv));
+
+        //박스생성
+
+        Vector3 boxPosition = new Vector3(0, 0, 0);
+        StartCoroutine(CrearRewardBox(StageLv, boxPosition));
+
+        //유저 박스화살표 변경
+
+        //지뢰가 생성되는 개수
+        int mineCount = StageData.spawnData.data[2].SpawnCount;
+        //지뢰개수만큼 지속적으로 지뢰 생성되는함수 구현하기
+
+        //코인개수 만큼 뿌리기 구현
+
+        Debug.Log("aaaaaaaaaaa"+StageLv);
+    }
 
     private void Start()
     {
@@ -24,15 +85,10 @@ public class StageManager : MonoBehaviour
         ShowTimer = new WaitForSeconds(0.5f);
     }
 
-    public void StageSetting(int StageLv)
-    {
-        //해당 스테이지에 실행되야할것
-        StartCoroutine(StageMonster(StageLv));
-    }
 
     #region 몬스터
 
-    public Spawn GetSpawn(int StageLv)
+    public StageSpawn GetSpawn(int StageLv)
     {
         var Data = SpawnList.Find(x => x.StageLv == StageLv);
         return Data;
@@ -40,39 +96,33 @@ public class StageManager : MonoBehaviour
 
     public IEnumerator StageMonster(int StageLv)
     {
-        var StageData = GetSpawn(StageLv);
+        var StageData = SpawnList[currentStageLV];
 
-        //yield return StartCoroutine(DataReset());
+
+        //해당 스테이지에서 몬스터의 추가속도를 더해줌
+        //해당 스테이지에서 몬스터의 추가 공격력을 더해줌
+
+        foreach (var item in AllZombies)
+        {
+            item.agent.speed += StageData.spawnData.AddSpeed;
+            item.damage += StageData.spawnData.AddDamage;
+        }
+
+        yield return StartCoroutine(DataReset());
+        
         yield return StartCoroutine(StageMonsterCreateNHide(StageData));
-        StartCoroutine(ShowStageMonster());
     }
 
     public IEnumerator DataReset()
     {
-        if (Monsters.Count > 0)
-        {
-            for (int i = 0; i < Monsters.Count; i++)
-            {
-                Destroy(Monsters[i].gameObject);
-                yield return null;
-            }
-        }
         overlapIndex = OverlapRandomIndex(SpawnPosition.Length);
-        Monsters.Clear();
         OBjData = new GameObject[0];
+        yield return null;
     }
 
-    private IEnumerator ShowStageMonster()
-    {
-        for (int j = 0; j < Monsters.Count; j++)
-        {
-            if (!Monsters[j].activeSelf)
-            { Monsters[j].SetActive(true); }
-            yield return ShowTimer;
-        }
-    }
+   
 
-    private IEnumerator StageMonsterCreateNHide(Spawn StageData)
+    private IEnumerator StageMonsterCreateNHide(StageSpawn StageData)
     {
         SpawnData SpawnCount = new SpawnData();
         int Count = 0;
@@ -96,23 +146,12 @@ public class StageManager : MonoBehaviour
             int randomIndex = overlapIndex[j % overlapIndex.Length];
 
             var CreateStageData = GameObject.Instantiate(OBjData[j], SpawnPosition[randomIndex]);
-            CreateStageData.SetActive(false);
-            Monsters.Add(CreateStageData);
+            AllZombies.Add(CreateStageData.GetComponent<ZombieState.ZombiesComponent>());
             yield return ShowTimer;
         }
     }
 
-    /// <summary>
-    /// 랜덤인덱스 뽑기 (겹침 있슴.)
-    /// </summary>
-    /// <returns></returns>
-    public int RandomIndex()
-    {
-        int SpawnIndex = UnityEngine.Random.Range(0, SpawnPosition.Length);
-
-        return SpawnIndex;
-    }
-
+    
     /// <summary>
     /// 랜덤인덱스 뽑기
     /// https://citynetc.tistory.com/194
@@ -172,16 +211,25 @@ public class SpawnData
 {
     public GameObject SpawnOBJ;         //스폰될 오브젝트
     public int SpawnCount;              //생성될 갯수
+    
 }
 
 [System.Serializable]
 public class SpawnRange
 {
     public SpawnData[] data;
+
+    public int ClearScore;              //스테이지 클리어점수
+    public float AddSpeed;              //좀비들의 추가되는 이동속도
+    public int AddDamage;               //좀비들의 추가되는 공격력
+
+    public int percent_copper;          //동박스 확률   0
+    public int percent_silver;          //은박스 확률   1
+    public int percent_gold;            //금박스 확률   2
 }
 
 [System.Serializable]
-public class Spawn
+public class StageSpawn
 {
     [Header("스테이지 검색용")]
     public int StageLv;
