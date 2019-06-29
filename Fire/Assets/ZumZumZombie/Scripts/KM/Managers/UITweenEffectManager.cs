@@ -8,6 +8,8 @@ public class UITweenEffectManager : MonoBehaviour
     public StageOpenPanel stageOpenPanel;
     public SkinBoxOpenPanel skinBoxOpenPanel;
     public GameOverPanel gameOverPanel;
+    public PausePanel pausePanel;
+
     public GameObject FadeInImageObj;
 
     public bool isCompleteFadeIn = false;
@@ -72,5 +74,21 @@ public class UITweenEffectManager : MonoBehaviour
     private void FadeOutImageComplete()
     {
         isCompleteFadeOut = true;
+    }
+
+    public void PauseGameOpen()
+    {
+        //매니저가 게임 일시정지한 후
+        pausePanel.OpenPanel();//패널띄우기!
+    }
+
+    public void PauseGameClose()
+    {
+        pausePanel.ClosePanel();
+    }
+
+    public void GiveUpGame()
+    {
+        pausePanel.GiveUp();//게임 저장하고 / 게임끄기!
     }
 }
