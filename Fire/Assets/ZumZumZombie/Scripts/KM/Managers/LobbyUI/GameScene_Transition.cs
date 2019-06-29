@@ -20,7 +20,7 @@ public partial class GameScene : MonoBehaviour
 
     public LobbyBase_Controller lobbyBase_Controller;
 
-    public void LeaveLobby()
+    private void LeaveLobby()
     {
         if (fadeOutImageObj.GetComponent<Image>().color.a != toIn / 255f && fadeOutImageObj.GetComponent<Image>().color.a != toOut / 255f)
         {

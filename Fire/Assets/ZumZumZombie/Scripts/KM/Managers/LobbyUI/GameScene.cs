@@ -11,6 +11,8 @@ public partial class GameScene : MonoBehaviour
     public StorePanel storePanel;
     public BoxPanel boxPanel;
 
+    public OptionPanel optionPanel;
+
     public DirectionUIController directionUIController;
 
     public void Start()
@@ -18,6 +20,7 @@ public partial class GameScene : MonoBehaviour
         StatButton();
     }
 
+    //중앙 패널 버튼들 ㄱ
     public void StatButton()
     {
         statPanel.OpenPanel();
@@ -66,4 +69,43 @@ public partial class GameScene : MonoBehaviour
     {
         middleAllPanel.ClosedPanelwhenEnter();
     }
+
+    // ㄴ 중앙 패널 버튼들
+
+    // 다른 버튼들 ㄱ
+    public void OptionPanelOpen()
+    {
+        optionPanel.OpenPanel();
+    }
+
+    public void OptionPanelClose()
+    {
+        optionPanel.ClosePanel();
+    }
+
+    public void LeaderBoardOpen()
+    {
+        //리더보드 창 열기
+        Debug.Log("리더보드 창 열기");
+    }
+
+    public void ExitGameOpen()
+    {
+        //게임 나가기 창 열기
+        Debug.Log("게임 나가기 창 열기");
+    }
+
+    public void ExitGameClose()
+    {
+        //게임 나가기 창 닫기
+        Debug.Log("게임 나가기 창 닫기");
+    }
+
+    public void StartGame()
+    {
+        //게임 시작하기
+        LeaveLobby();
+    }
+
+    // ㄴ 다른 버튼들
 }

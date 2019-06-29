@@ -21,6 +21,5 @@ public class StatPanel : MonoBehaviour
     public void ClosePanel()
     {
         gameObject.GetComponent<RectTransform>().anchoredPosition = closePos;
-        gameObject.SetActive(false);
     }
 }
