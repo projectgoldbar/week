@@ -10,6 +10,7 @@ public partial class BoxOpenPanel : MonoBehaviour
     public GameObject boxOpenObj;
     public GameObject resultPanel;
     public GameObject resultCardBackObj;
+    public GameObject resultCardFrontObj;
 
     public GameObject unBoxingButton;
     public GameObject closePanelButton;
@@ -28,6 +29,7 @@ public partial class BoxOpenPanel : MonoBehaviour
 
     private Vector2 closeResultPostion = new Vector2(2000, 2500);
     private Vector2 closeCardBackPosition = new Vector2(0, -1000);
+    private Vector2 closeCardFrontPosition = new Vector2(0, -1500);
 
     private void Awake()
     {
@@ -46,6 +48,7 @@ public partial class BoxOpenPanel : MonoBehaviour
         gameObject.GetComponent<RectTransform>().anchoredPosition = closePostion;
         resultPanel.GetComponent<RectTransform>().anchoredPosition = closeResultPostion;
         resultCardBackObj.GetComponent<RectTransform>().anchoredPosition = closeCardBackPosition;
+        resultCardFrontObj.GetComponent<RectTransform>().anchoredPosition = closeCardFrontPosition;
     }
 
     public void Open()
@@ -78,6 +81,7 @@ public partial class BoxOpenPanel : MonoBehaviour
         resultPanel.GetComponent<RectTransform>().anchoredPosition = closeResultPostion;
         resultCardBackObj.GetComponent<RectTransform>().anchoredPosition = closeCardBackPosition;
         resultCardBackObj.GetComponent<RectTransform>().localScale = Vector3.zero;
+        resultCardFrontObj.GetComponent<RectTransform>().anchoredPosition = closeCardFrontPosition;
     }
 
     private void IntroBox()

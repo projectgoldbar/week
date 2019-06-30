@@ -2988,7 +2988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba3cbac9494f68b4ca87f85f6846d944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
 --- !u!1001 &482144374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4901,7 +4901,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 438984, guid: e0590c316b816ec44b9339efac2791c2, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 438984, guid: e0590c316b816ec44b9339efac2791c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5988,24 +5988,12 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   Target: {fileID: 338495001}
   playerData: {fileID: 1115003754}
-  StartPos: {x: 0, y: 0}
+  startPos: {x: 0, y: 0}
   MoveSpeed: 11
   evadeRotate: 0
   JoyStickMoving: 0
   InputField: {fileID: 649117044}
   speedDistance: 0
---- !u!114 &855518118 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5075819451783846684, guid: e451e8d18ac26274c9ea6fec417589dd,
-    type: 3}
-  m_PrefabInstance: {fileID: 790172552}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 855518115}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 940b0d3906ec19e4b96bbe0add2a502e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &857776159
 GameObject:
   m_ObjectHideFlags: 0
@@ -6311,7 +6299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b38a03839506b54bbcb075db20e4845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 855518118}
   joystick2: {fileID: 855518117}
   animator: {fileID: 902815875}
 --- !u!1 &911297938
@@ -7091,7 +7078,7 @@ PrefabInstance:
     - target: {fileID: 4012386571223543148, guid: c5a89b022b1eb97408ecb35d32fee9b8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4012386571223543148, guid: c5a89b022b1eb97408ecb35d32fee9b8,
         type: 3}
@@ -7416,7 +7403,367 @@ PrefabInstance:
     - target: {fileID: 2418589420871119586, guid: c5a89b022b1eb97408ecb35d32fee9b8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -24.50003
+      value: -24.500061
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875484925958530935, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875484925958530935, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875484925958530935, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875484925958530935, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875484925958530935, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875484925958530935, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 300004486764810030, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 300004486764810030, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 300004486764810030, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 300004486764810030, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 300004486764810030, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 300004486764810030, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256764916973618021, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256764916973618021, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256764916973618021, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256764916973618021, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256764916973618021, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256764916973618021, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932419341853186413, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932419341853186413, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932419341853186413, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932419341853186413, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932419341853186413, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8932419341853186413, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586813900054198447, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586813900054198447, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586813900054198447, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586813900054198447, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586813900054198447, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586813900054198447, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266915847945332573, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266915847945332573, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266915847945332573, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266915847945332573, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266915847945332573, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266915847945332573, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022421871914678403, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022421871914678403, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022421871914678403, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022421871914678403, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022421871914678403, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022421871914678403, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7820508995795982264, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7820508995795982264, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7820508995795982264, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7820508995795982264, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7820508995795982264, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7820508995795982264, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444386220413249250, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444386220413249250, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444386220413249250, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444386220413249250, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444386220413249250, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444386220413249250, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533741782527017036, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533741782527017036, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533741782527017036, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533741782527017036, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533741782527017036, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533741782527017036, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089381945888748623, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089381945888748623, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089381945888748623, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089381945888748623, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089381945888748623, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089381945888748623, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554702116828436615, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554702116828436615, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554702116828436615, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554702116828436615, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554702116828436615, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554702116828436615, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5a89b022b1eb97408ecb35d32fee9b8, type: 3}
@@ -10623,7 +10970,6 @@ MonoBehaviour:
   playerData: {fileID: 0}
   liveTime: {fileID: 0}
   gameOverUi: {fileID: 1437280485}
-  gamePauseUi: {fileID: 0}
   gameResultUi: {fileID: 0}
   gameClearUi: {fileID: 0}
   itemResultUi: {fileID: 0}
@@ -10635,6 +10981,7 @@ MonoBehaviour:
   evolButton3: {fileID: 272320776}
   timeUi: {fileID: 194884407}
   goldUi: {fileID: 2079790554}
+  uITweenEffectManager: {fileID: 0}
   scoreText: {fileID: 1065206592}
   survivalTimeTxt: {fileID: 1065206591}
   coinText: {fileID: 1065206590}
@@ -10646,7 +10993,7 @@ MonoBehaviour:
   - {x: 160, y: 1.7, z: -33}
   - {x: -1, y: 1.7, z: -37}
   - {x: -56, y: 1.7, z: -37}
-  stageManager: {fileID: 1462899098}
+  score: 0
   resultGold: 0
   viewAd: 0
   AdsVideo: {fileID: 0}
@@ -10827,720 +11174,13 @@ MonoBehaviour:
   - {fileID: 179172, guid: da6027951907f624c8aca1bb3d24eb88, type: 3}
   - {fileID: 179172, guid: fa6f1536104a11d4aa7922eb3ffe1187, type: 3}
   - {fileID: 179172, guid: e10edd50579ede449a4ad7b4cd1d1d54, type: 3}
-  SpawnList:
-  - StageLv: 0
-    StageName: 
-    PlayerPointLight: {r: 1, g: 0, b: 0.27507257, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 5
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 5
-      AddSpeed: 0
-      AddDamage: 0
-      percent_copper: 85
-      percent_silver: 10
-      percent_gold: 5
-  - StageLv: 1
-    StageName: 
-    PlayerPointLight: {r: 1, g: 0.3160377, b: 0.3160377, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 2
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 10
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 80
-      percent_silver: 15
-      percent_gold: 5
-  - StageLv: 2
-    StageName: 
-    PlayerPointLight: {r: 0.432644, g: 1, b: 0, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 2
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 1
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 15
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 75
-      percent_silver: 20
-      percent_gold: 5
-  - StageLv: 3
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 2
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 16000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 70
-      percent_silver: 25
-      percent_gold: 5
-  - StageLv: 4
-    StageName: 
-    PlayerPointLight: {r: 0.8777951, g: 1, b: 0, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 2
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 1
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 20000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 65
-      percent_silver: 30
-      percent_gold: 5
-  - StageLv: 5
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 2
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 24000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 60
-      percent_silver: 35
-      percent_gold: 5
-  - StageLv: 6
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 2
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 1
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 28000
-      AddSpeed: 0.1
-      AddDamage: 5
-      percent_copper: 55
-      percent_silver: 40
-      percent_gold: 5
-  - StageLv: 7
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 2
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 32000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 50
-      percent_silver: 45
-      percent_gold: 5
-  - StageLv: 8
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 2
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 1
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 36000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 45
-      percent_silver: 50
-      percent_gold: 5
-  - StageLv: 9
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 2
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 40000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 40
-      percent_silver: 55
-      percent_gold: 5
-  - StageLv: 10
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 1
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 44000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 35
-      percent_silver: 60
-      percent_gold: 5
-  - StageLv: 11
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 48000
-      AddSpeed: 1
-      AddDamage: 0
-      percent_copper: 30
-      percent_silver: 65
-      percent_gold: 5
-  - StageLv: 12
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 52000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 25
-      percent_silver: 70
-      percent_gold: 5
-  - StageLv: 13
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 3
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 56000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 20
-      percent_silver: 75
-      percent_gold: 5
-  - StageLv: 14
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 60000
-      AddSpeed: 0.1
-      AddDamage: 5
-      percent_copper: 15
-      percent_silver: 85
-      percent_gold: 5
-  - StageLv: 15
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 3
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 64000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 10
-      percent_silver: 85
-      percent_gold: 5
-  - StageLv: 16
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 68000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 5
-      percent_silver: 90
-      percent_gold: 5
-  - StageLv: 17
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 3
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 72000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 0
-      percent_silver: 95
-      percent_gold: 5
-  - StageLv: 18
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 76000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 0
-      percent_silver: 90
-      percent_gold: 10
-  - StageLv: 19
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 80000
-      AddSpeed: 0.1
-      AddDamage: 5
-      percent_copper: 0
-      percent_silver: 85
-      percent_gold: 15
-  - StageLv: 20
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 84000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 0
-      percent_silver: 80
-      percent_gold: 20
-  - StageLv: 21
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 3
-      ClearScore: 88000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 0
-      percent_silver: 75
-      percent_gold: 25
-  - StageLv: 22
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 92000
-      AddSpeed: 1
-      AddDamage: 0
-      percent_copper: 0
-      percent_silver: 70
-      percent_gold: 30
-  - StageLv: 23
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 96000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 0
-      percent_silver: 65
-      percent_gold: 35
-  - StageLv: 24
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 100000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 0
-      percent_silver: 60
-      percent_gold: 40
-  - StageLv: 25
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 104000
-      AddSpeed: 0.1
-      AddDamage: 5
-      percent_copper: 0
-      percent_silver: 55
-      percent_gold: 45
-  - StageLv: 26
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 3
-      ClearScore: 108000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 0
-      percent_silver: 50
-      percent_gold: 50
-  - StageLv: 27
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 112000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 0
-      percent_silver: 45
-      percent_gold: 55
-  - StageLv: 28
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 116000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 0
-      percent_silver: 40
-      percent_gold: 60
-  - StageLv: 29
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 120000
-      AddSpeed: 0.1
-      AddDamage: 0
-      percent_copper: 0
-      percent_silver: 35
-      percent_gold: 65
-  - StageLv: 30
-    StageName: 
-    PlayerPointLight: {r: 0.7363515, g: 0, b: 1, a: 0}
-    spawnData:
-      data:
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 382077247060876463, guid: e8471b2fd46b9da4cb6009cfe3d56b88,
-          type: 3}
-        SpawnCount: 0
-      - SpawnOBJ: {fileID: 6091416563689223435, guid: 5f5018f93eec6484aae1bb3af9247fe9,
-          type: 3}
-        SpawnCount: 0
-      ClearScore: 124000
-      AddSpeed: 0.3
-      AddDamage: 0
-      percent_copper: 0
-      percent_silver: 30
-      percent_gold: 70
+  zombie: {fileID: 0}
+  dashZombie: {fileID: 0}
+  spitZombie: {fileID: 0}
+  boxIndirection: {fileID: 0}
+  manager: {fileID: 0}
+  pivot: {fileID: 0}
+  stageList: []
   SpawnPosition:
   - {fileID: 966629565}
   - {fileID: 1713160871}
@@ -11554,8 +11194,8 @@ MonoBehaviour:
   - {fileID: 1047710655}
   overlapIndex: 
   OBjData: []
-  LightColor: {fileID: 2054887141}
-  AllZombies: []
+  lightColor: {fileID: 0}
+  allZombies: []
   currentStageLV: 0
 --- !u!1 &1469137710
 GameObject:
@@ -43710,7 +43350,7 @@ PrefabInstance:
     - target: {fileID: 9159889995990175845, guid: 308f2d5f65ac2a7499cc61cf4e9d14fe,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9159889995990175845, guid: 308f2d5f65ac2a7499cc61cf4e9d14fe,
         type: 3}
@@ -45515,6 +45155,79 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e80ccc77d3e885f47b4e94cb20f9188f, type: 3}
+--- !u!1001 &3765938615672668112
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5144192384323599694, guid: 7a51d9abb670c97478c9c5e0e9be0225,
+        type: 3}
+      propertyPath: m_Name
+      value: CreationRushroot
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -26.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 639384815, guid: 7a51d9abb670c97478c9c5e0e9be0225, type: 3}
+      propertyPath: commingdir
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7a51d9abb670c97478c9c5e0e9be0225, type: 3}
 --- !u!1001 &4718918824075802607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45629,77 +45342,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b4da29efa7f9d741b47caff7730a735, type: 3}
---- !u!1001 &5144192383899138286
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5144192384323599694, guid: 7a51d9abb670c97478c9c5e0e9be0225,
-        type: 3}
-      propertyPath: m_Name
-      value: Frontal
-      objectReference: {fileID: 0}
-    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -26.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5144192384323599695, guid: 7a51d9abb670c97478c9c5e0e9be0225,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5144192383033676860, guid: 7a51d9abb670c97478c9c5e0e9be0225,
-        type: 3}
-      propertyPath: RushZombie
-      value: 
-      objectReference: {fileID: 713186904}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7a51d9abb670c97478c9c5e0e9be0225, type: 3}
