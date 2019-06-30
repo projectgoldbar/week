@@ -4,10 +4,12 @@ using UnityEngine;
 
 public partial class BoxOpenPanel : MonoBehaviour
 {
-    public GameObject boxLayer;
+    public Vector2 closePostion;
 
     public GameObject boxObj;
     public GameObject boxOpenObj;
+    public GameObject resultPanel;
+    public GameObject resultCardBackObj;
 
     public GameObject unBoxingButton;
     public GameObject closePanelButton;
@@ -16,18 +18,21 @@ public partial class BoxOpenPanel : MonoBehaviour
 
     private float rotTime = 2.0f;
     private float scaleTime = 1.5f;
+    private float showResultTweenTime = 0.5f;
 
     private Quaternion boxRotQ;
     private Vector3 targetBoxScaleforIntro;
+    private Vector3 openBoxScaleforIntro;
 
-    private Vector2 openPostion = new Vector2(0, 0);
-    private Vector2 closePostion = new Vector2(2500, 0);
+    private Vector2 openPosition = new Vector2(0, 0);
+
+    private Vector2 closeResultPostion = new Vector2(2000, 2500);
+    private Vector2 closeCardBackPosition = new Vector2(0, -1000);
 
     private void Awake()
     {
-        boxLayer.SetActive(true);
-
         targetBoxScaleforIntro = boxObj.GetComponent<Transform>().localScale;
+        openBoxScaleforIntro = boxOpenObj.GetComponent<Transform>().localScale;
         boxRotQ = boxObj.GetComponent<Transform>().rotation;
     }
 
@@ -38,16 +43,14 @@ public partial class BoxOpenPanel : MonoBehaviour
 
     public void Close()
     {
-        //gameObject.SetActive(false);
         gameObject.GetComponent<RectTransform>().anchoredPosition = closePostion;
-        boxObj.SetActive(false);
-        boxOpenObj.SetActive(false);
+        resultPanel.GetComponent<RectTransform>().anchoredPosition = closeResultPostion;
+        resultCardBackObj.GetComponent<RectTransform>().anchoredPosition = closeCardBackPosition;
     }
 
     public void Open()
     {
-        //gameObject.SetActive(true);
-        gameObject.GetComponent<RectTransform>().anchoredPosition = openPostion;
+        gameObject.GetComponent<RectTransform>().anchoredPosition = openPosition;
 
         boxObj.SetActive(true);
         boxOpenObj.SetActive(false);
@@ -72,6 +75,9 @@ public partial class BoxOpenPanel : MonoBehaviour
         boxObj.GetComponent<Transform>().rotation = boxRotQ;
         unBoxingButton.SetActive(false);
         closePanelButton.SetActive(false);
+        resultPanel.GetComponent<RectTransform>().anchoredPosition = closeResultPostion;
+        resultCardBackObj.GetComponent<RectTransform>().anchoredPosition = closeCardBackPosition;
+        resultCardBackObj.GetComponent<RectTransform>().localScale = Vector3.zero;
     }
 
     private void IntroBox()
