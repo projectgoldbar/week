@@ -90,6 +90,7 @@ public class UserDataManager : MonoBehaviour
             userData.goldBoxCount = data.goldBox;
             userData.silverBoxCount = data.silberBox;
             userData.bronzeBoxCount = data.bronzeBox;
+            userData.AdOff = data.adoff;
         }
     }
 

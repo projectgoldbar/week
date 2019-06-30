@@ -12,6 +12,7 @@ public class SaveData
     public int goldBox;
     public int silberBox;
     public int bronzeBox;
+    public bool adoff;
 
     public SaveData()
     {
@@ -23,5 +24,6 @@ public class SaveData
         goldBox = 0;
         silberBox = 0;
         bronzeBox = 0;
+        adoff = false;
     }
 }

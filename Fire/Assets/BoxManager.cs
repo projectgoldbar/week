@@ -16,7 +16,10 @@ public class BoxManager : MonoBehaviour
     public Sprite noAdSprite;
 
     [Header("박스오픈버튼")]
-    public Button boxOpenButton;
+    public Button boxOpenButton0;
+
+    public Button boxOpenButton1;
+    public Button boxOpenButton2;
 
     [Header("결과정보창")]
     public GameObject resultInfo;
@@ -64,12 +67,14 @@ public class BoxManager : MonoBehaviour
         }
     }
 
-    private void Refresh()
+    public void Refresh()
     {
         int offcount = 0;
         if (userData.AdOff)
         {
-            boxOpenButton.GetComponent<Image>().sprite = noAdSprite;
+            boxOpenButton0.GetComponent<Image>().sprite = noAdSprite;
+            boxOpenButton1.GetComponent<Image>().sprite = noAdSprite;
+            boxOpenButton2.GetComponent<Image>().sprite = noAdSprite;
         }
         bronzeBoxPanel.GetComponentInChildren<Text>().text = userData.bronzeBoxCount.ToString();
         silverBoxPanel.GetComponentInChildren<Text>().text = userData.silverBoxCount.ToString();
@@ -178,6 +183,8 @@ public class BoxManager : MonoBehaviour
                     skin.isHave = true;
                     UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
                 }
+                userData.bronzeBoxCount--;
+                Refresh();
                 break;
 
             case OpenState.silver:
@@ -194,6 +201,9 @@ public class BoxManager : MonoBehaviour
                     skin.isHave = true;
                     UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
                 }
+                userData.silverBoxCount--;
+                Refresh();
+
                 break;
 
             case OpenState.gold:
@@ -210,6 +220,9 @@ public class BoxManager : MonoBehaviour
                     skin.isHave = true;
                     UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
                 }
+                userData.goldBoxCount--;
+                Refresh();
+
                 break;
 
             default:
