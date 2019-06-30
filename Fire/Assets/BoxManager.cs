@@ -12,12 +12,6 @@ public class BoxManager : MonoBehaviour
     public GameObject goldBoxPanel;
     public GameObject emptyBoxPanel;
 
-    [Header("등장박스오브젝트")]
-    public GameObject bronzeBox;
-
-    public GameObject silverBox;
-    public GameObject goldBox;
-
     [Header("박스오픈버튼스프라이트")]
     public Sprite noAdSprite;
 
