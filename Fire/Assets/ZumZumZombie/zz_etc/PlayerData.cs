@@ -358,17 +358,20 @@ public class PlayerData : MonoBehaviour
             switch (other.GetComponent<Box>().type)
             {
                 case BoxType.Bronze:
+                    manager.score += 4000f;
                     bronzeBoxCount++;
                     Destroy(other.gameObject);
                     break;
 
                 case BoxType.Gold:
+                    manager.score += 4000f;
                     goldBoxCount++;
                     Destroy(other.gameObject);
 
                     break;
 
                 case BoxType.Silver:
+                    manager.score += 4000f;
                     silverBoxCount++;
                     Destroy(other.gameObject);
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AnimationEvents : MonoBehaviour
 {
-    public Joystick joystick;
     public JoyStick2 joystick2;
     public Animator animator;
 
@@ -17,17 +16,9 @@ public class AnimationEvents : MonoBehaviour
 
     public void RollEnd()
     {
-        if (!joystick.enabled)
-        {
-            joystick2.isRoll = false;
-            joystick2.MoveSpeed = 11f;
-            joystick2.playerData.rollStack++;
-        }
-        else
-        {
-            joystick.isRoll = false;
-            joystick.MoveSpeed = 11f;
-        }
+        joystick2.isRoll = false;
+        joystick2.MoveSpeed = 11f;
+        joystick2.playerData.rollStack++;
 
         animator.StopPlayback();
         animator.SetBool("Roll", false);
@@ -37,13 +28,6 @@ public class AnimationEvents : MonoBehaviour
     public void SlowDown()
     {
         animator.speed = 2f;
-        if (!joystick.enabled)
-        {
-            joystick2.MoveSpeed = 6f;
-        }
-        else
-        {
-            joystick.MoveSpeed = 6f;
-        }
+        joystick2.MoveSpeed = 6f;
     }
 }

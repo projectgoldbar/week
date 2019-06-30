@@ -27,7 +27,7 @@ public class StageSystem : MonoBehaviour
         }
         set
         {
-            arrowPivot.GetComponent<ArrowMove>().target = stageGate[currentStage].transform;
+            //arrowPivot.GetComponent<ArrowMove>().target = stageGate[currentStage].transform;
             if (!arrowPivot.activeSelf)
             {
                 arrowPivot.SetActive(true);

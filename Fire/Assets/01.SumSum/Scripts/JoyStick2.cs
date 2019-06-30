@@ -24,7 +24,7 @@ public class JoyStick2 : MonoBehaviour
 
     private NavMeshAgent agent;
 
-    public Vector2 StartPos;
+    public Vector2 startPos;
 
     public float MoveSpeed = 11;
     public bool evadeRotate = false;
@@ -41,9 +41,9 @@ public class JoyStick2 : MonoBehaviour
     private void Start()
     {
         ShowHide(true);
-        StartPos = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
-        knob.position = StartPos;
-        center.position = StartPos;
+        startPos = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
+        knob.position = startPos;
+        center.position = startPos;
     }
 
     public InputField InputField;
@@ -73,12 +73,12 @@ public class JoyStick2 : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                //ShowHide(true);
+                ShowHide(true);
 
-                start = pos;
+                //start = pos;
 
                 knob.position = pos;
-                //center.position = pos;
+                center.position = startPos;
             }
             else if (Input.GetMouseButton(0))
             {
@@ -128,10 +128,10 @@ public class JoyStick2 : MonoBehaviour
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                //ShowHide(false);
+                ShowHide(false);
                 direction = Vector2.zero;
                 knob.position = start;
-                center.position = start;
+                //center.position = start;
 
                 if (JoyStickMoving)
                     agent.velocity = Vector3.zero;

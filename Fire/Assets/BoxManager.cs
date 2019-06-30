@@ -31,8 +31,11 @@ public class BoxManager : MonoBehaviour
     public Sprite skinSprite;
     public Text Description;
 
-
     public AdmobVideoAd videoAd;
+
+    public enum OpenState { bronze, silver, gold }
+
+    public OpenState openState;
 
     private void Start()
     {
@@ -118,56 +121,105 @@ public class BoxManager : MonoBehaviour
         }
     }
 
-    public void BoxOpen(BoxType boxType)
+    public void BoxOpen(int boxType)
+
     {
-        
-        switch (boxType)
+        if (boxType == 0)
         {
-            case BoxType.Bronze:
-                if (!userData.AdOff)
-                {
-                    //광고실행함수연결
-                    videoAd.ShowRewardedAd();
-                }
+            openState = OpenState.bronze;
+            if (!userData.AdOff)
+            {
+                //광고실행함수연결
+                videoAd.ShowRewardedAd();
+            }
+            else
+            {
+                TrowDice();
+            }
+        }
+        else if (boxType == 1)
+        {
+            openState = OpenState.silver;
+            if (!userData.AdOff)
+            {
+                //광고실행함수연결
+                videoAd.ShowRewardedAd();
+            }
+            else
+            {
+                TrowDice();
+            }
+        }
+        else if (boxType == 2)
+        {
+            openState = OpenState.gold;
 
-                break;
-
-            case BoxType.Gold:
-                if (!userData.AdOff)
-                {
-                    //광고실행함수연결
-                    videoAd.ShowRewardedAd();
-                }
-                break;
-
-            case BoxType.Silver:
-                if (!userData.AdOff)
-                {
-                    //광고실행함수연결
-                    videoAd.ShowRewardedAd();
-                }
-                break;
-
-            default:
-
-                break;
+            if (!userData.AdOff)
+            {
+                //광고실행함수연결
+                videoAd.ShowRewardedAd();
+            }
+            else
+            {
+                TrowDice();
+            }
         }
     }
 
     public void TrowDice()
     {
-        var x = Random.Range(0, 101);
-        if (x > 94)
+        switch (openState)
         {
-            resultInfo.GetComponent<Image>().sprite = goldSprite;
-            //resultInfo.
-        }
-        else
-        {
-            var skin = FindObjectOfType<SkinSystem>().ThrowRandomSkin();
-            resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
-            skin.isHave = true;
-            UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
+            case OpenState.bronze:
+                var x = Random.Range(0, 101);
+                if (x < 95)
+                {
+                    resultInfo.GetComponent<Image>().sprite = goldSprite;
+                    //resultInfo.
+                }
+                else
+                {
+                    var skin = FindObjectOfType<SkinSystem>().ThrowRandomSkin();
+                    resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
+                    skin.isHave = true;
+                    UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
+                }
+                break;
+
+            case OpenState.silver:
+                var y = Random.Range(0, 101);
+                if (y < 80)
+                {
+                    resultInfo.GetComponent<Image>().sprite = goldSprite;
+                    //resultInfo.
+                }
+                else
+                {
+                    var skin = FindObjectOfType<SkinSystem>().ThrowRandomSkin();
+                    resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
+                    skin.isHave = true;
+                    UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
+                }
+                break;
+
+            case OpenState.gold:
+                var z = Random.Range(0, 101);
+                if (z < 50)
+                {
+                    resultInfo.GetComponent<Image>().sprite = goldSprite;
+                    //resultInfo.
+                }
+                else
+                {
+                    var skin = FindObjectOfType<SkinSystem>().ThrowRandomSkin();
+                    resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
+                    skin.isHave = true;
+                    UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
+                }
+                break;
+
+            default:
+                break;
         }
     }
 }
