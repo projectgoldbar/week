@@ -30,6 +30,7 @@ public partial class BoxOpenPanel : MonoBehaviour
 
     private void ShowResultTween_Complete()
     {
+        resultCardFrontObj.GetComponent<RectTransform>().anchoredPosition = openPosition;
         resultPanel.GetComponent<RectTransform>().anchoredPosition = openPosition;
         closePanelButton.SetActive(true);
     }
@@ -67,7 +68,7 @@ public partial class BoxOpenPanel : MonoBehaviour
     private void ShowResultTween()
     {
         resultCardBackObj.GetComponent<RectTransform>().anchoredPosition = openPosition;
-        LTDescr d = LeanTween.scale(resultCardBackObj, Vector3.one, showResultTweenTime).setEase(LeanTweenType.easeInOutElastic);
+        LTDescr d = LeanTween.scale(resultCardBackObj, Vector3.one, showResultTweenTime).setEase(LeanTweenType.easeInOutBack);
         d.setOnComplete(ShowResultTween_Complete);
     }
 
