@@ -33,25 +33,23 @@ public class SkillSystem : MonoBehaviour
         skillCounttext.text = skillCount.ToString();
     }
 
-
     private void Start()
     {
         playerData = playerMove.GetComponent<PlayerData>();
-        
     }
 
-    public void SkillStart()
-    {
-        if (SkillCount != 0)
-        {
-            playerMove.Skill();
+    //public void SkillStart()
+    //{
+    //    if (SkillCount != 0)
+    //    {
+    //        playerMove.Skill();
 
-            if (!coolTimeRunning)
-                coolTime = 0;
+    //        if (!coolTimeRunning)
+    //            coolTime = 0;
 
-            SkillCount -= 1;
-        }
-    }
+    //        SkillCount -= 1;
+    //    }
+    //}
 
     private bool coolTimeRunning = false;
 

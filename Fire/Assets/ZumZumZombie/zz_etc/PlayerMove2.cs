@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove2 : MonoBehaviour
 {
     public float speed = 11f;
     public float rotSpeed = 300.0f;
