@@ -5435,7 +5435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b38a03839506b54bbcb075db20e4845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick2: {fileID: 0}
+  playerMove: {fileID: 1422453260}
   animator: {fileID: 902815875}
 --- !u!1 &911297938
 GameObject:
@@ -7257,7 +7257,7 @@ PrefabInstance:
     - target: {fileID: 8135886326569738822, guid: 56fae09712773584fb63896d473a98ee,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000061035156
+      value: 0.00012207031
       objectReference: {fileID: 0}
     - target: {fileID: 8135886326569738822, guid: 56fae09712773584fb63896d473a98ee,
         type: 3}
@@ -7327,12 +7327,17 @@ PrefabInstance:
     - target: {fileID: 8135886326569738823, guid: 56fae09712773584fb63896d473a98ee,
         type: 3}
       propertyPath: moveThreshold
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135886326569738823, guid: 56fae09712773584fb63896d473a98ee,
+        type: 3}
+      propertyPath: handleRange
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8135886327475159578, guid: 56fae09712773584fb63896d473a98ee,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8135886327784587632, guid: 56fae09712773584fb63896d473a98ee,
         type: 3}
@@ -7719,6 +7724,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d2d1ff05c1c724eaddd4505837ee98, type: 3}
+--- !u!114 &1115003754 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2229941073806490425, guid: 3a7ae58a044c98540917b091440a783d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1627031337082478751}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422453259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e6b66093c0a3424ba3f026e9a466eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1120442572
 GameObject:
   m_ObjectHideFlags: 0
@@ -10103,9 +10120,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 11
   dynamicJoystick: {fileID: 1477549677}
+  playerData: {fileID: 1115003754}
+  isRoll: 0
   center: {fileID: 1551313098}
   knob: {fileID: 0}
   range: 1
+  rollSensitive: 5
+  accelspeed: 1
 --- !u!1 &1430838505
 GameObject:
   m_ObjectHideFlags: 0
