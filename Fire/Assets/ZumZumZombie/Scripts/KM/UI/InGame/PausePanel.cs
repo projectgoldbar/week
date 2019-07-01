@@ -14,8 +14,13 @@ public class PausePanel : MonoBehaviour
     public Image checkBoxBGMImage;
     public Image checkBoxSFXImage;
 
+    public SoundManager soundManager;
+
     private void Start()
     {
+
+        soundManager = FindObjectOfType<SoundManager>();
+
         checkBGM = true;    //   ㄴ 매니저에서 가져와야 하는 부분
         checkSFX = true; //   ㄴ 매니저에서 가져와야 하는 부분
         SetCheckBox();
@@ -38,12 +43,16 @@ public class PausePanel : MonoBehaviour
     {
         checkBGM = !checkBGM;
         checkBoxBGMImage.enabled = checkBGM;
+
+        soundManager.BGMSoundOnOff(checkBGM);
     }
 
     public void OnClickSFX_Button()
     {
         checkSFX = !checkSFX;
         checkBoxSFXImage.enabled = checkSFX;
+
+        soundManager.SFMSoundOnOff(checkSFX);
     }
 
     // ㄴ 이부분 매니저에서 불러야 할껄?

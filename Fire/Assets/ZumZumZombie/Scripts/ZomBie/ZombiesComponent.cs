@@ -33,7 +33,9 @@ namespace ZombieState
             moving = GetComponent<Zombie_Moving>();
             moving.enabled = false;
             attack = GetComponent<ZomBie_Attack>();
+            if(attack != null)
             attack.enabled = false;
+
             stun = GetComponent<ZomBie_Stun>();
             stun.enabled = false;
             material = GetComponentInChildren<SkinnedMeshRenderer>().materials[0];

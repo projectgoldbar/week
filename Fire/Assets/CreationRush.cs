@@ -13,10 +13,7 @@ public class CreationRush : MonoBehaviour
 
     public bool commingdir;
 
-    private Vector3[] Destinationpoint;
-
-
-    public GameObject[] RushZombies;
+    private GameObject[] RushZombies;
     private void Awake()
     {
         CreateRushZombie();
