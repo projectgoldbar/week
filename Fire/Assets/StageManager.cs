@@ -40,10 +40,10 @@ public class StageManager : MonoBehaviour
         int silverPerCent = bronzePerCent + stageList[currentStageLV].spawnData.percent_silver;
         int goldPerCent = silverPerCent + stageList[currentStageLV].spawnData.percent_gold;
         //동박스
-        if (bronzePerCent < randomValue)
+        if (bronzePerCent > randomValue)
             return 0;
         //은박스
-        else if (silverPerCent < randomValue)
+        else if (silverPerCent > randomValue)
             return 1;
         //금박스
         else

@@ -106,10 +106,13 @@ public class JoyStick2 : MonoBehaviour
                 if (speed > rollSensitive && playerData.rollStack > 0)
                 {
                     Debug.Log("구른다");
-                    Vector3 rollDirection = new Vector3(direction.x, 0, direction.y);
+
+                    //Vector3 rollDirection = new Vector3(direction.x, 0, direction.y);
+                    Vector3 rollDirection = DisNdir(pos, bufferVector2).dir;
                     Quaternion playerRotation = rollDirection != Vector3.zero ? Quaternion.LookRotation(rollDirection) : transform.rotation;
-                    Target.rotation = playerRotation = rollDirection != Vector3.zero ? Quaternion.LookRotation(rollDirection) : transform.rotation;
-                    ;
+                    //Target.rotation = playerRotation = rollDirection != Vector3.zero ? Quaternion.LookRotation(rollDirection) : transform.rotation;
+                    //;
+                    Target.rotation = playerRotation;
                     playerData.animator.StopPlayback();
                     playerData.animator.Play("Roll");
                 }

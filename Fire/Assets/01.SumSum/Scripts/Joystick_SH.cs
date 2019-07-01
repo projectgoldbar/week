@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class Joystick : MonoBehaviour
+public class Joystick_SH : MonoBehaviour
 {
     public RectTransform center;
     public RectTransform knob;
