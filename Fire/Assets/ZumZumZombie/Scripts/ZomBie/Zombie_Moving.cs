@@ -70,8 +70,21 @@ namespace ZombieState
 
         public override void Update()
         {
-            Debug.Log("aaa");
+            //Debug.Log("aaa");
 
+            AttackChangeTime();
+
+            //zombieData.animator.SetFloat("Distance", l);
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                //StopCoroutine(test);
+                //zombieData.agent.ResetPath();
+                MoveStop();
+            }
+        }
+
+        public virtual void AttackChangeTime()
+        {
             var l = Vector3.Distance(transform.position, player.position);
 
             currentTime += Time.deltaTime;
@@ -86,15 +99,8 @@ namespace ZombieState
                 currentTime = 0;
                 StateChange(zombieData.attack);
             }
-
-            //zombieData.animator.SetFloat("Distance", l);
-            if (Input.GetKeyDown(KeyCode.H))
-            {
-                //StopCoroutine(test);
-                //zombieData.agent.ResetPath();
-                MoveStop();
-            }
         }
+
 
         private void OnDrawGizmos()
         {

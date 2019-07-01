@@ -5,6 +5,8 @@ public class MeshChanger : MonoBehaviour
     MonsterModelChange modelChange;
     public SkinnedMeshRenderer meshRenderer;
 
+    
+
     private void Awake()
     {
         modelChange = FindObjectOfType<MonsterModelChange>();
