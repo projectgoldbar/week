@@ -15,6 +15,10 @@ public partial class BoxOpenPanel : MonoBehaviour
     public GameObject unBoxingButton;
     public GameObject closePanelButton;
 
+    public ParticleSystem absorbVfx;
+    public ParticleSystem explodeVfx;
+    public ParticleSystem openVfx;
+
     private float IntroTime = 0.5f;
 
     private float rotTime = 2.0f;
@@ -41,6 +45,13 @@ public partial class BoxOpenPanel : MonoBehaviour
     private void Start()
     {
         Close();
+        StopAllVfx();
+    }
+
+    private void StopAllVfx()
+    {
+        absorbVfx.Stop();
+        explodeVfx.Stop();
     }
 
     public void Close()
