@@ -60,6 +60,7 @@ namespace ZombieState
                 //zombieData.agent.CalculatePath(zombieData.player.position, zombieData.path);
                 zombieData.agent.CalculatePath(target.position, zombieData.path);
                 zombieData.agent.SetPath(zombieData.path);
+                
                 Debug.Log("경로탐색중");
                 yield return waitSecond;
             }

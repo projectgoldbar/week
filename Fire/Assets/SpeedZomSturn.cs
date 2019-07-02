@@ -12,9 +12,9 @@ namespace ZombieState
         {
             //애니메이션 실행
             //정면에서 부딛힌 상황 뒤로 넘어지는 애니메이션
-            zombieData.animator.StopPlayback();
+            zombieData.animator.SetLayerWeight(1, 0);
+           // zombieData.animator.StopPlayback();
             zombieData.animator.Play("Blow");
-
         }
 
 
@@ -28,7 +28,7 @@ namespace ZombieState
 
         public override void Exit()
         {
-           
+            
         }
 
 
@@ -36,8 +36,9 @@ namespace ZombieState
         {
             Debug.Log("스턴끝");
             zombieData.animator.SetBool("Sturn", false);
-            //zombieData.animator.Play("Stand");
-
+            
+            
+           
             StateChange(zombieData.moving);
         }
 

@@ -33,12 +33,17 @@ namespace ZombieState
 
         public override void Execute()
         {
-            Debug.Log("Move");
+            zombieData.animator.SetLayerWeight(1, 1);
             zombieData.agent.velocity = Vector3.forward;
             CurrentSpeed = DefaultSpeed;
             zombieData.agent.speed = CurrentSpeed;
             SturnColl.enabled = false;
+            
             StartCoroutine(zombieData.moveCoroutine);
+
+            
+
+
         }
 
         public override void Update()
@@ -50,7 +55,7 @@ namespace ZombieState
             //3. 변경 후 건물에 부딛힐경우 넘어지는 애니매이션 실행 (스턴상태)
 
             RunnerTimer += Time.deltaTime;
-
+           
             if (RunnerTimer >= RunnerMaxTimer && MaxSpeed > CurrentSpeed)
             {
                 RunnerTimer = 0;
@@ -67,6 +72,7 @@ namespace ZombieState
                     //2.애니메이션 변경 
                     //2.1 상태 전환?
                     //2.2 그대로 애니매이션만 변경?
+                    
                     zombieData.animator.SetFloat("Speed", CurrentSpeed);
                     SturnColl.enabled = true;
                     Trail.SetActive(true);
@@ -93,15 +99,14 @@ namespace ZombieState
 
         public override void Exit()
         {
+            
             Trail.SetActive(false);
             MoveingAnimChange = false;
             CurrentSpeed = 0;
             zombieData.agent.speed = CurrentSpeed;
             zombieData.agent.velocity = Vector3.zero;
             zombieData.animator.SetFloat("Speed", CurrentSpeed);
+            
         }
-
-
-      
     }
 }
