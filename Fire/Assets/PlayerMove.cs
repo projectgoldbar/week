@@ -47,7 +47,7 @@ public class PlayerMove : MonoBehaviour
             bufferVector2 = Input.mousePosition;
             accel = true;
         }
-        
+
         if (accel)
         {
             if (maxSpeed > speed)
