@@ -5,7 +5,7 @@ public class MiddleAllPanel : MonoBehaviour
 {
     public bool isOpened = false;
     private float openPos = 0f;
-    private float closePos = 1000f;
+    private float closePos = 2000f;
     private float duration = 0.5f;
 
     private Vector2 nowPos = Vector2.zero;
