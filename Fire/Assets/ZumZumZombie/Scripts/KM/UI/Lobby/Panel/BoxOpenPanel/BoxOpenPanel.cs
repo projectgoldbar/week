@@ -45,6 +45,13 @@ public partial class BoxOpenPanel : MonoBehaviour
     private void Start()
     {
         Close();
+        StopAllVfx();
+    }
+
+    private void StopAllVfx()
+    {
+        absorbVfx.Stop();
+        explodeVfx.Stop();
     }
 
     public void Close()

@@ -11,7 +11,7 @@ public partial class BoxOpenPanel : MonoBehaviour
             Debug.Log("박스도는중");
             return;
         }
-
+        PlayAbsorbVfx();
         RotBoxTweenEffect();
     }
 
@@ -37,6 +37,8 @@ public partial class BoxOpenPanel : MonoBehaviour
 
     private void BoomEffect()
     {
+        StopAbsorbVfx();
+        explodeVfx.Play();
         //박스열릴때 나오는 연기 이팩트 같은거! 소리도 그렇고
     }
 
@@ -75,5 +77,15 @@ public partial class BoxOpenPanel : MonoBehaviour
     private void ShowResult()
     {
         resultPanel.GetComponent<RectTransform>().anchoredPosition = openPosition;
+    }
+
+    private void PlayAbsorbVfx()
+    {
+        absorbVfx.Play();
+    }
+
+    private void StopAbsorbVfx()
+    {
+        absorbVfx.Stop();
     }
 }
