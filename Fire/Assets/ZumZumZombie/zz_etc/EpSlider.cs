@@ -24,6 +24,6 @@ public class EpSlider : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        slider.value = (playerData.Ep / playerData.maxEp);
+        slider.value = (playerData.ep / playerData.maxEp);
     }
 }

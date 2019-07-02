@@ -73,7 +73,11 @@ public class StageManager : MonoBehaviour
         //박스생성
         Vector3 boxPosition = FindPoint();
         StartCoroutine(CrearRewardBox(currentStageLV, boxPosition));
-
+        //레벨업
+        if (currentStageLV > 0)
+        {
+            manager.Evolution();
+        }
         //유저 박스화살표 변경
         boxIndirection.target = boxPosition;
         //지뢰가 생성되는 개수

@@ -31,7 +31,7 @@ public class Trap : MonoBehaviour
             Camera.main.GetComponent<CameraFallow>().CameraShake(0.2f);
             var x = particlePool.GetParticle(particlePool.trapParticlePool);
 
-            soundManager.PlayBGM(soundManager.SoundDic["trap"], false, 0);
+            //soundManager.PlayBGM(soundManager.SoundDic["trap"], false, 0);
 
             x.transform.position = transform.position;
             x.transform.rotation = transform.rotation;
@@ -42,7 +42,7 @@ public class Trap : MonoBehaviour
 
     private IEnumerator InstanceZombie()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 2; i++)
         {
             yield return second;
             GameObject.Instantiate(Enemy, transform.position, Quaternion.identity);

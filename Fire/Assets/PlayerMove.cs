@@ -6,10 +6,16 @@ using System.Collections;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float speed = 11f;
+    public float maxSpeed = 11.0f;
+    public float speed = 0.0f;
+    public float accelSpeed = 1f;
+
+    public float downSpeed = 1f;
+
     public DynamicJoystick dynamicJoystick;
     private NavMeshAgent agent;
     public PlayerData playerData;
+    public EvadeSystem evadeSystem;
     public bool isRoll = false;
 
     [Header("플레이어방향UI")]
@@ -19,6 +25,8 @@ public class PlayerMove : MonoBehaviour
     public float range = 1f;
 
     public float rollSensitive;
+
+    public bool accel = false;
 
     private void Awake()
     {
@@ -36,6 +44,31 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             StartCoroutine(FadeIn(0));
+            bufferVector2 = Input.mousePosition;
+            accel = true;
+        }
+
+        if (accel)
+        {
+            if (maxSpeed > speed)
+            {
+                speed += accelSpeed;
+            }
+            else
+            {
+                speed = maxSpeed;
+            }
+        }
+        else
+        {
+            if (0f < speed && !isRoll)
+            {
+                speed -= downSpeed;
+            }
+            else if (speed < 0f)
+            {
+                speed = 0f;
+            }
         }
 
         if (Input.GetMouseButton(0))
@@ -49,6 +82,7 @@ public class PlayerMove : MonoBehaviour
                 Debug.Log(rollDirection);
                 transform.rotation = Quaternion.LookRotation(rollDirection);
                 playerData.animator.Play("Roll");
+                playerData.ep -= 7f;
             }
             else if (!isRoll)
             {
@@ -60,9 +94,17 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             StartCoroutine(FadeIn(1));
+            accel = false;
         }
         bufferVector2 = Input.mousePosition;
         agent.velocity = agent.transform.forward * speed;
+
+        if (playerData.ep < playerData.maxEp)
+        {
+            playerData.ep += 3f * Time.deltaTime;
+        }
+
+        playerData.animator.SetFloat("moveSpeed", speed);
     }
 
     public (float dis, Vector3 dir) DisNdir(Vector3 aa, Vector3 bb)
@@ -92,15 +134,5 @@ public class PlayerMove : MonoBehaviour
             }
         }
         yield break;
-    }
-
-    public float accelspeed = 1f;
-
-    private IEnumerator Accel(bool onoff)
-    {
-        float currentSpeed = 1f;
-        while (true)
-        {
-        }
     }
 }

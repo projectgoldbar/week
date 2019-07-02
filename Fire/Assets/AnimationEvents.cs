@@ -12,6 +12,7 @@ public class AnimationEvents : MonoBehaviour
         playerMove.isRoll = true;
         playerMove.speed = 15f;
         playerMove.playerData.rollStack--;
+        playerMove.evadeSystem.enabled = true;
     }
 
     public void RollEnd()
@@ -19,6 +20,7 @@ public class AnimationEvents : MonoBehaviour
         playerMove.isRoll = false;
         playerMove.speed = 11f;
         playerMove.playerData.rollStack++;
+        playerMove.evadeSystem.enabled = false;
 
         animator.StopPlayback();
         animator.SetBool("Roll", false);
