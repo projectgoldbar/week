@@ -84,6 +84,8 @@ public class PlayerData : MonoBehaviour
     private ParticlePool particlePool;
     public Animator animator;
 
+    public SkinnedMeshRenderer MeshData;
+
     public int MagnetLV
     {
         get
@@ -155,6 +157,7 @@ public class PlayerData : MonoBehaviour
 
     private void Awake()
     {
+        MeshData.sharedMesh = UserDataManager.Instance.EquipSkinReference[UserDataManager.Instance.userData.equipedSkinIdx].sharedMesh;
         evolveLvData = new int[24] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         //FindObjectOfType<hpSlider>().playerData = this;
         playerMove = GetComponent<PlayerMove>();
@@ -165,7 +168,7 @@ public class PlayerData : MonoBehaviour
         meatTail.GetComponent<MeatTail>().SetPlayer(this);
         shield = FindObjectOfType<Shield>().gameObject;
         particlePool = FindObjectOfType<ParticlePool>();
-        animator = transform.GetChild(0).GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         boostParticle = GetComponentInChildren<ParticleSystem>();
         shield.SetActive(false);
         magnet.SetActive(false);
@@ -225,7 +228,6 @@ public class PlayerData : MonoBehaviour
             {
                 Invoke("GameOverInvoke", 2f);
                 FindObjectOfType<UITweenEffectManager>().LeaveInGame();
-                FindObjectOfType<JoyStick2>().MoveSpeed = 0f;
                 isGameOver = true;
                 return;
             }
