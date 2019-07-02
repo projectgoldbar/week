@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Diagnostics;
 using UnityEngine.SceneManagement;
 
 //[DefaultExecutionOrder(-400)]

@@ -13,6 +13,9 @@ public class UserDataManager : MonoBehaviour
     public static UserDataManager Instance;
     public Text debugText;
 
+    public SkinnedMeshRenderer[] EquipSkinReference;
+
+
     private void Awake()
     {
         Screen.SetResolution(720, 1280, true);

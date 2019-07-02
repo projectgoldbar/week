@@ -18,6 +18,8 @@ public class PlayerData : MonoBehaviour
     public float hp = 50f;
     public float hpDownSpeed = 5f;
     public float score = 0;
+    public float ep = 10f;
+    public float maxEp = 10f;
 
     /// <summary>
     /// 스킬지속시간관련
@@ -29,11 +31,7 @@ public class PlayerData : MonoBehaviour
     /// </summary>
     public float skillCountLv = 1;
 
-    public float maxEp = 10f;
-    public float epLv = 0;
-    public float ep = 0f;
     public float hpUpSpeed = 5f;
-    public float epUpSpeed = 3f;
     public float goldUpSpeed = 5;
     public float gold = 0;
     public int df = 0;
@@ -85,6 +83,8 @@ public class PlayerData : MonoBehaviour
     private PlayerMove playerMove;
     private ParticlePool particlePool;
     public Animator animator;
+
+    public SkinnedMeshRenderer MeshData;
 
     public int MagnetLV
     {
@@ -142,25 +142,6 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    public float Ep
-    {
-        get
-        {
-            return ep;
-        }
-        set
-        {
-            ep += value + (evolveLvData[7] * 0.4f);
-            if (ep >= maxEp)
-            {
-                epLv++;
-                ep = ep - maxEp;
-                maxEp = maxEp + epLv * 2;
-                manager.Evolution();
-            }
-        }
-    }
-
     public float Gold
     {
         get
@@ -176,6 +157,7 @@ public class PlayerData : MonoBehaviour
 
     private void Awake()
     {
+        MeshData.sharedMesh = UserDataManager.Instance.EquipSkinReference[UserDataManager.Instance.userData.equipedSkinIdx].sharedMesh;
         evolveLvData = new int[24] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         //FindObjectOfType<hpSlider>().playerData = this;
         playerMove = GetComponent<PlayerMove>();
@@ -186,7 +168,7 @@ public class PlayerData : MonoBehaviour
         meatTail.GetComponent<MeatTail>().SetPlayer(this);
         shield = FindObjectOfType<Shield>().gameObject;
         particlePool = FindObjectOfType<ParticlePool>();
-        animator = transform.GetChild(0).GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         boostParticle = GetComponentInChildren<ParticleSystem>();
         shield.SetActive(false);
         magnet.SetActive(false);
@@ -215,7 +197,6 @@ public class PlayerData : MonoBehaviour
         //hpDownSpeed = fperHp - (fperHp * (0.01f * x.decelerationHp));
         hpDownSpeed = 0f;
         hpUpSpeed = hpUpSpeed + (hpUpSpeed * (0.01f * x.healHp));
-        epUpSpeed = epUpSpeed + (epUpSpeed * x.gainExp * 0.01f);
         goldUpSpeed = goldUpSpeed + (goldUpSpeed * x.gainMoney * 0.01f);
         var userEquipSkillList = x.skillLVList;
         for (int i = 0; i < userEquipSkillList.Length; i++)
@@ -247,7 +228,6 @@ public class PlayerData : MonoBehaviour
             {
                 Invoke("GameOverInvoke", 2f);
                 FindObjectOfType<UITweenEffectManager>().LeaveInGame();
-                FindObjectOfType<JoyStick2>().MoveSpeed = 0f;
                 isGameOver = true;
                 return;
             }
@@ -347,9 +327,7 @@ public class PlayerData : MonoBehaviour
         }
         else if (other.tag == "Meat")
         {
-            var xep = epUpSpeed + (evolveLvData[7]);
             var xhp = hpUpSpeed + (maxhp * (0.03f * evolveLvData[5]));
-            Ep = xep;
             hp += xhp;
             other.gameObject.SetActive(false);
         }
