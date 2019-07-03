@@ -44,6 +44,10 @@ public class PausePanel : MonoBehaviour
         checkBGM = !checkBGM;
         checkBoxBGMImage.enabled = checkBGM;
 
+        if (checkBGM)
+        {
+            soundManager.PlaySoundSFX("SoundCheckBox");
+        }
         soundManager.BGMSoundOnOff(checkBGM);
     }
 
@@ -52,6 +56,10 @@ public class PausePanel : MonoBehaviour
         checkSFX = !checkSFX;
         checkBoxSFXImage.enabled = checkSFX;
 
+        if (checkSFX)
+        {
+            soundManager.PlaySoundSFX("SoundCheckBox");
+        }
         soundManager.SFMSoundOnOff(checkSFX);
     }
 

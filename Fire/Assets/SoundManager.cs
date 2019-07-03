@@ -18,9 +18,10 @@ public class SoundManager : MonoBehaviour
 
     public Dictionary<string, AudioClip> SoundDic = new Dictionary<string, AudioClip>();
 
-    public Toggle AllSoundToggle;
-    public Toggle AllSoundMute;
-    public Slider SoundVolume;
+
+    public Toggle AllSoundToggle = null;
+    public Toggle AllSoundMute = null;
+    public Slider SoundVolume = null;
 
 
     private void Awake()
@@ -37,9 +38,24 @@ public class SoundManager : MonoBehaviour
         {
             SoundDic.Add(soundClips[i].name, soundClips[i].clip);
         }
-        PlayBGM(SoundDic["mainBGM"], true, 0);
-        PlayBGM(SoundDic["subBGM2"], true, 3);
+        //PlayBGM(SoundDic["mainBGM"], true, 0);
+        //PlayBGM(SoundDic["subBGM2"], true, 3);
     }
+
+
+
+    public void PlaySoundSFX(string SoundName)
+    {
+        PlaySFM(SoundDic[SoundName], false, 0);
+    }
+
+    public void PlaySoundBGM(string SoundName)
+    {
+        PlayBGM(SoundDic[SoundName], true, 0);
+    }
+
+
+
 
     public void PlayBGM(AudioClip clip, bool loop, float delay)
     {

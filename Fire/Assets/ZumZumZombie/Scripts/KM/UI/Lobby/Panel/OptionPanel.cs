@@ -17,6 +17,7 @@ public class OptionPanel : MonoBehaviour
     public Image checkBoxBGMImage;
     public Image checkBoxSFXImage;
 
+    public SoundManager soundManager;
     private void Start()
     {
         SetCheckBox();
@@ -39,12 +40,24 @@ public class OptionPanel : MonoBehaviour
     {
         checkBGM = !checkBGM;
         checkBoxBGMImage.enabled = checkBGM;
+
+        if (checkBGM)
+        {
+            soundManager.PlaySoundSFX("SoundCheckBox");
+        }
+        soundManager.BGMSoundOnOff(checkBGM);
     }
 
     public void OnClickSFX_Button()
     {
         checkSFX = !checkSFX;
         checkBoxSFXImage.enabled = checkSFX;
+
+        if (checkSFX)
+        {
+            soundManager.PlaySoundSFX("SoundCheckBox");
+        }
+        soundManager.SFMSoundOnOff(checkSFX);
     }
 
     // ㄴ 이부분 매니저에서 불러야 할껄?
