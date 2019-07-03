@@ -33,9 +33,13 @@ public partial class GameScene : MonoBehaviour
 
     public void Awake()
     {
-        //StatButton();
         //SceneManager.sceneLoaded += OnSceneLoaded;
         fadeOutImageObj = FindObjectOfType<FadeOutUI>().gameObject;
+    }
+
+    private void Start()
+    {
+        StatButton();
     }
 
     //중앙 패널 버튼들 ㄱ
@@ -77,11 +81,12 @@ public partial class GameScene : MonoBehaviour
         directionUIController.OffTriangleOutlineforDownPanel();
         directionUIController.doorOutLine.OpenMiddlePanel();
         lobbyBase_Controller.StartObjController.OpenMiddlePanel();
-        StatButton();
     }
 
     public void UpPanel()
     {
+        StatButton();
+
         middleAllPanel.ClosePanel();
         directionUIController.OnTriangleOutlineforUpPanel();
         directionUIController.doorOutLine.CloseMiddlePanel();
