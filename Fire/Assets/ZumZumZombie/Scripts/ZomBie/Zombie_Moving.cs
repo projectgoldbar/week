@@ -5,6 +5,7 @@ namespace ZombieState
 {
     public class Zombie_Moving : ZombieState
     {
+        public CameraView ZombieCameraView;
         protected float resetPathCount = 0.2f;
         protected WaitForSeconds waitSecond;
         private Coroutine test;
@@ -20,6 +21,7 @@ namespace ZombieState
             zombieData.moveCoroutine = ZombieMove();
             player = zombieData.player.gameObject.transform;
             target = player;
+            speed = zombieData.player.GetComponent<PlayerMove>().speed;
         }
 
         public override void Think()
@@ -69,20 +71,16 @@ namespace ZombieState
         public float currentTime = 0;
         public float range = 20f;
 
-        public override void Update()
-        {
-            //Debug.Log("aaa");
+        //박치기 좀비 돌릴라면 이거 주석해제
 
-            AttackChangeTime();
-
-            //zombieData.animator.SetFloat("Distance", l);
-            if (Input.GetKeyDown(KeyCode.H))
-            {
-                //StopCoroutine(test);
-                //zombieData.agent.ResetPath();
-                MoveStop();
-            }
-        }
+        //public override void Update()
+        //{
+        //    AttackChangeTime();
+        //    if (Input.GetKeyDown(KeyCode.H))
+        //    {
+        //        MoveStop();
+        //    }
+        //}
 
         public virtual void AttackChangeTime()
         {

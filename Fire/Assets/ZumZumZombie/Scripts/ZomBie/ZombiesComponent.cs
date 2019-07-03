@@ -17,6 +17,8 @@ namespace ZombieState
         public Zombie_Moving moving;
         public ZomBie_Attack attack;
         public ZomBie_Stun stun;
+        public Zombie_MovingSlow slowMoving;
+        public SturnCollider sturnCollider;
         public IEnumerator moveCoroutine;
         public IEnumerator canIAttackCoroutine;
         public IEnumerator zombieAttackCoroutine;
@@ -31,10 +33,11 @@ namespace ZombieState
             animator = GetComponent<Animator>();
             stateMachine = GetComponent<StateMachine>();
             moving = GetComponent<Zombie_Moving>();
+            slowMoving = GetComponent<Zombie_MovingSlow>();
             moving.enabled = false;
             attack = GetComponent<ZomBie_Attack>();
-            if(attack != null)
-            attack.enabled = false;
+            if (attack != null)
+                attack.enabled = false;
 
             stun = GetComponent<ZomBie_Stun>();
             stun.enabled = false;

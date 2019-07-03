@@ -5,21 +5,17 @@ using ZombieState;
 
 public class Zombie1Moving : SpeedZomMoving
 {
-
     public CameraView ZombieCameraView;
-
 
     [Header("플레이어 속도")]
     public float PlayerSpeed = 10;
 
     public float ViewOutSpeed = 20;
 
-
     public float RunnerTimer = 0;
     private float RunnerMaxTimer = 5.0f;
 
     public bool Running = false;
-
 
     private void OnEnable()
     {
@@ -34,9 +30,9 @@ public class Zombie1Moving : SpeedZomMoving
         zombieData.agent.acceleration = 13f;
         SturnColl.enabled = false;
 
-        PlayerSpeed = player.GetComponent<UnityEngine.AI.NavMeshAgent>().speed;
+        PlayerSpeed = player.GetComponent<PlayerMove>().speed;
 
-        if(Running)
+        if (Running)
             CurrentSpeed = PlayerSpeed;
         else
             CurrentSpeed = ViewOutSpeed;
@@ -44,7 +40,6 @@ public class Zombie1Moving : SpeedZomMoving
         zombieData.agent.speed = CurrentSpeed;
         StartCoroutine(zombieData.moveCoroutine);
     }
-
 
     public override void Update()
     {
@@ -65,7 +60,6 @@ public class Zombie1Moving : SpeedZomMoving
                 zombieData.animator.SetFloat("Speed", CurrentSpeed);
                 SturnColl.enabled = true;
                 Trail.SetActive(true);
-                
             }
 
             zombieData.agent.speed = CurrentSpeed;
@@ -76,15 +70,13 @@ public class Zombie1Moving : SpeedZomMoving
     {
         if (MoveingAnimChange)
         {
-            
             RunnerTimer = 0;
             StateChange(zombieData.stun);
         }
     }
+
     public override void Exit()
     {
         base.Exit();
     }
-
-
 }

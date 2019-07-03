@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SturnCollider : MonoBehaviour
@@ -8,6 +6,10 @@ public class SturnCollider : MonoBehaviour
     // Start is called before the first frame update
 
     public Action SturnEvent = () => { };
+
+    private void OnEnable()
+    {
+    }
 
     public void OnTriggerEnter(Collider other)
     {

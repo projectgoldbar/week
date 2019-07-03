@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ZombieState
 {
@@ -31,7 +28,6 @@ namespace ZombieState
         private void OnEnable()
         {
             sturnCollider.SturnEvent += SturnChange;
-
             Trail.SetActive(false);
         }
 

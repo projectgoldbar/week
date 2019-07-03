@@ -1188,7 +1188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   traps: []
-  numOfTrap: 4
+  numOfTrap: 0
 --- !u!4 &238413351 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1893209112418188219, guid: 7390a83f8c5175b48950cb64a581a597,
@@ -6029,6 +6029,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1462899091}
+    - target: {fileID: 2418589420871119586, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -24.500122
+      objectReference: {fileID: 0}
     - target: {fileID: 2221695522609749184, guid: c5a89b022b1eb97408ecb35d32fee9b8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -44490,7 +44495,7 @@ PrefabInstance:
         type: 3}
       propertyPath: zombie
       value: 
-      objectReference: {fileID: 1091131463947833992, guid: f2c40601f43c52346a49531f8dbe9500,
+      objectReference: {fileID: 1091131463947833992, guid: 67139ab86ec181e409a1902620b78909,
         type: 3}
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
@@ -44501,6 +44506,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stageList.Array.data[3].spawnData.dashZombieCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
+        type: 3}
+      propertyPath: stageList.Array.data[0].spawnData.zombieCount
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e13ff2d4c8da2e946862268e2c08de65, type: 3}
