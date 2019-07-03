@@ -18,8 +18,12 @@ public class DoorOutLine : MonoBehaviour
     private Vector3 myScale;
     private Color myColor;
 
+    private SpriteRenderer spriteDoorOutLine;
+
     private void Start()
     {
+        spriteDoorOutLine = gameObject.GetComponent<SpriteRenderer>();
+
         myPos = gameObject.GetComponent<Transform>().position;
         myScale = gameObject.GetComponent<Transform>().localScale;
         myColor = gameObject.GetComponent<SpriteRenderer>().color;
@@ -28,6 +32,16 @@ public class DoorOutLine : MonoBehaviour
         nowColor = myColor;
 
         DoorOutLineIdle();
+    }
+
+    public void OpenMiddlePanel()
+    {
+        spriteDoorOutLine.enabled = false;
+    }
+
+    public void CloseMiddlePanel()
+    {
+        spriteDoorOutLine.enabled = true;
     }
 
     private void DoorOutLineIdle()

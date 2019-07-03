@@ -75,6 +75,8 @@ public partial class GameScene : MonoBehaviour
     {
         middleAllPanel.OpenPanel();
         directionUIController.OffTriangleOutlineforDownPanel();
+        directionUIController.doorOutLine.OpenMiddlePanel();
+        lobbyBase_Controller.StartObjController.OpenMiddlePanel();
         StatButton();
     }
 
@@ -82,6 +84,8 @@ public partial class GameScene : MonoBehaviour
     {
         middleAllPanel.ClosePanel();
         directionUIController.OnTriangleOutlineforUpPanel();
+        directionUIController.doorOutLine.CloseMiddlePanel();
+        lobbyBase_Controller.StartObjController.CloseMiddlePanel();
     }
 
     public void UpPanelwhenEnter()
@@ -168,6 +172,7 @@ public partial class GameScene : MonoBehaviour
 
     private void EnterLobbyProcess()
     {
+        Debug.Log("-----------------------------------------------");
         lobbyBase_Controller.lobbyPlayerController.ResetLobbyPlayer();
         lobbyBase_Controller.doorController.OpenDoorTween(enterDuration);
         StartFadeImageAlpha(toOut);

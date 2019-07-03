@@ -32,11 +32,11 @@ public class StartObjController : MonoBehaviour
 
     private void AppearStartObjTween()
     {
-        LeanTween.scaleZ(gameObject, appearScale.z, panelMoveDuration).setEase(LeanTweenType.easeOutExpo);
+        LeanTween.scaleZ(gameObject, appearScale.z, panelMoveDuration).setEase(LeanTweenType.easeInCubic);
     }
 
     private void DisAppearStartObjTween()
     {
-        LeanTween.scaleZ(gameObject, disAppearScale.z, panelMoveDuration).setEase(LeanTweenType.easeInExpo);
+        LeanTween.scaleZ(gameObject, disAppearScale.z, panelMoveDuration).setEase(LeanTweenType.easeInBack);
     }
 }

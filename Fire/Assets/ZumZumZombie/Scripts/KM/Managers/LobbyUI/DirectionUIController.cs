@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DirectionUIController : MonoBehaviour
 {
     public Image triangleOutline_Image;
-    public SpriteRenderer doorOutline_SpriteRenderer;
+    public DoorOutLine doorOutLine;
 
     public void OffTriangleOutlineforDownPanel()
     {
@@ -20,6 +20,6 @@ public class DirectionUIController : MonoBehaviour
 
     public void OnClickedforLeaveLobby()
     {
-        doorOutline_SpriteRenderer.GetComponent<DoorOutLine>().ReactforLeaveLobby();
+        doorOutLine.ReactforLeaveLobby();
     }
 }
