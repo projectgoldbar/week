@@ -213,7 +213,7 @@ public class PlayerData : MonoBehaviour
     {
         if (hp <= 0)
         {
-            manager.GameOver();
+            //manager.GameOver();
             animator.Play("die");
         }
 
