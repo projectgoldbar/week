@@ -15,26 +15,31 @@ public class Zombie1Moving : SpeedZomMoving
     public float ViewOutSpeed = 20;
 
 
-    private float RunnerTimer = 0;
+    public float RunnerTimer = 0;
     private float RunnerMaxTimer = 5.0f;
+
+    public bool Running = false;
 
 
     private void OnEnable()
     {
+        sturnCollider.SturnEvent += SturnChange;
         Trail.SetActive(false);
     }
 
     public override void Execute()
     {
         zombieData.animator.SetLayerWeight(1, 1);
-
+        MoveingAnimChange = false;
         zombieData.agent.acceleration = 13f;
         SturnColl.enabled = false;
 
         PlayerSpeed = player.GetComponent<UnityEngine.AI.NavMeshAgent>().speed;
 
-        if (ZombieCameraView.MoveSpeedChange) CurrentSpeed = PlayerSpeed;
-        else CurrentSpeed = ViewOutSpeed; 
+        if(Running)
+            CurrentSpeed = PlayerSpeed;
+        else
+            CurrentSpeed = ViewOutSpeed;
 
         zombieData.agent.speed = CurrentSpeed;
         StartCoroutine(zombieData.moveCoroutine);
@@ -49,6 +54,7 @@ public class Zombie1Moving : SpeedZomMoving
 
             if (RunnerTimer >= RunnerMaxTimer && MaxSpeed > CurrentSpeed)
             {
+                Running = true;
                 RunnerTimer = 0;
                 CurrentSpeed += AddSpeed;
             }
@@ -56,18 +62,25 @@ public class Zombie1Moving : SpeedZomMoving
             if (MaxSpeed <= CurrentSpeed)
             {
                 MoveingAnimChange = true;
-                
-                zombieData.agent.speed = CurrentSpeed;
                 zombieData.animator.SetFloat("Speed", CurrentSpeed);
                 SturnColl.enabled = true;
                 Trail.SetActive(true);
                 
             }
+
+            zombieData.agent.speed = CurrentSpeed;
         }
-       
     }
 
-
+    public override void SturnChange()
+    {
+        if (MoveingAnimChange)
+        {
+            
+            RunnerTimer = 0;
+            StateChange(zombieData.stun);
+        }
+    }
     public override void Exit()
     {
         base.Exit();
