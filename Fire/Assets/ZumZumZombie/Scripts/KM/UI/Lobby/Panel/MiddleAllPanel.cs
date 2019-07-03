@@ -6,7 +6,7 @@ public class MiddleAllPanel : MonoBehaviour
     public bool isOpened = false;
     private float openPos = 0f;
     private float closePos = 2000f;
-    private float duration = 0.5f;
+    private float panelMoveDuration = 0.5f;
 
     private Vector2 nowPos = Vector2.zero;
 
@@ -58,14 +58,14 @@ public class MiddleAllPanel : MonoBehaviour
         if (now == true)
         {
             //열어
-            LTDescr d = LeanTween.value(gameObject, closePos, openPos, duration).setEase(LeanTweenType.easeOutBack);
+            LTDescr d = LeanTween.value(gameObject, closePos, openPos, panelMoveDuration).setEase(LeanTweenType.easeOutBack);
             d.setOnUpdate(x => { MoveUpdatePanel(x); });
             d.setOnComplete(MovePanelTweenCompleteOpen);
         }
         else
         {
             //닫아
-            LTDescr d = LeanTween.value(gameObject, openPos, closePos, duration).setEase(LeanTweenType.easeOutBack);
+            LTDescr d = LeanTween.value(gameObject, openPos, closePos, panelMoveDuration).setEase(LeanTweenType.easeOutBack);
             d.setOnUpdate(x => { MoveUpdatePanel(x); });
             d.setOnComplete(MovePanelTweenCompleteClose);
         }

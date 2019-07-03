@@ -6,4 +6,5 @@ public class LobbyBase_Controller : MonoBehaviour
 {
     public LobbyPlayerController lobbyPlayerController;
     public DoorController doorController;
+    public StartObjController StartObjController;
 }

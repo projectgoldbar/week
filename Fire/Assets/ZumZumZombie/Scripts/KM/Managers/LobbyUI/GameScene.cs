@@ -16,6 +16,21 @@ public partial class GameScene : MonoBehaviour
 
     public DirectionUIController directionUIController;
 
+    public float leaveDuration = 4f;
+    private float enterDuration = 3f;
+
+    private float toIn = 0.0f;
+    private float toOut = 255.0f;
+
+    public GameObject fadeOutImageObj;
+    private bool isCompletedFadeOut = false;
+    private bool isCompletedFadeIn = false;
+
+    private Color beforeFAdeOutColor;
+    private Color nowColor;
+
+    public LobbyBase_Controller lobbyBase_Controller;
+
     public void Awake()
     {
         //StatButton();
@@ -115,21 +130,6 @@ public partial class GameScene : MonoBehaviour
     }
 
     // ㄴ 다른 버튼들
-    public float leaveDuration = 4f;
-
-    private float enterDuration = 3f;
-
-    private float toIn = 0.0f;
-    private float toOut = 255.0f;
-
-    public GameObject fadeOutImageObj;
-    private bool isCompletedFadeOut = false;
-    private bool isCompletedFadeIn = false;
-
-    private Color beforeFAdeOutColor;
-    private Color nowColor;
-
-    public LobbyBase_Controller lobbyBase_Controller;
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
