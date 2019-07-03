@@ -15,7 +15,6 @@ public class UserDataManager : MonoBehaviour
 
     public SkinnedMeshRenderer[] EquipSkinReference;
 
-
     private void Awake()
     {
         Screen.SetResolution(720, 1280, true);
@@ -48,6 +47,7 @@ public class UserDataManager : MonoBehaviour
     {
         if (scene.buildIndex == 0)
         {
+            FindObjectOfType<GameScene>().EnterLobby();
             upgradeInfoPanels = GameObject.Find("Content 0-14").GetComponentsInChildren<UpgradeInfoPanels>();
             skinInfos = GameObject.Find("SkinInfoPivot_Contents").GetComponentsInChildren<SKinInfo>();
             skinSystem = FindObjectOfType<SkinSystem>();

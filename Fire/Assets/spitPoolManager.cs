@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class spitPoolManager : MonoBehaviour
 {
-
     public GameObject Spit;
 
     public List<GameObject> SpitList;
 
-
     public GameObject SpitCollision;
     public List<GameObject> SpitCollisionList;
-
 
     public int SpitCount = 20;
 
     private static spitPoolManager m_instance;
+
     public static spitPoolManager Instance
     {
         get
@@ -28,6 +26,7 @@ public class spitPoolManager : MonoBehaviour
             return m_instance;
         }
     }
+
     private void Awake()
     {
         if (m_instance != null && m_instance != this)
@@ -35,13 +34,14 @@ public class spitPoolManager : MonoBehaviour
             Destroy(this);
         }
         DontDestroyOnLoad(gameObject);
-        var obParent  = new GameObject("SpitManager");
+        var obParent = new GameObject("SpitManager");
         var obParent2 = new GameObject("SpitCollisionManager");
 
         for (int i = 0; i < SpitCount; i++)
         {
             var ob = GameObject.Instantiate(Spit, obParent.transform);
-            ob.SetActive(false);
+            //ob.
+            //    ;
             SpitList.Add(ob);
 
             var ob2 = GameObject.Instantiate(SpitCollision, obParent2.transform);
@@ -91,11 +91,10 @@ public class spitPoolManager : MonoBehaviour
         StartCoroutine(aa(particle.gameObject));
     }
 
-    IEnumerator aa(GameObject ob)
+    private IEnumerator aa(GameObject ob)
     {
         yield return new WaitForSeconds(2);
         ob.SetActive(false);
         yield return null;
     }
-
 }

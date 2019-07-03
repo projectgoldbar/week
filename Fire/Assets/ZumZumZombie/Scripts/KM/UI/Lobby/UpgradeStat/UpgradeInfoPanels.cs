@@ -39,16 +39,16 @@ public class UpgradeInfoPanels : MonoBehaviour
         upgradeStat[2] = () => Upgrade02();
         upgradeStat[3] = () => Upgrade03();
         upgradeStat[4] = () => Upgrade04();
-        upgradeStat[5] = () => Upgrade05();
-        upgradeStat[6] = () => Upgrade06();
-        upgradeStat[7] = () => Upgrade07();
-        upgradeStat[8] = () => Upgrade08();
-        upgradeStat[9] = () => Upgrade09();
-        upgradeStat[10] = () => Upgrade10();
-        upgradeStat[11] = () => Upgrade11();
-        upgradeStat[12] = () => Upgrade12();
-        upgradeStat[13] = () => Upgrade13();
-        upgradeStat[14] = () => Upgrade14();
+        //upgradeStat[5] = () => Upgrade05();
+        //upgradeStat[6] = () => Upgrade06();
+        //upgradeStat[7] = () => Upgrade07();
+        //upgradeStat[8] = () => Upgrade08();
+        //upgradeStat[9] = () => Upgrade09();
+        //upgradeStat[10] = () => Upgrade10();
+        //upgradeStat[11] = () => Upgrade11();
+        //upgradeStat[12] = () => Upgrade12();
+        //upgradeStat[13] = () => Upgrade13();
+        //upgradeStat[14] = () => Upgrade14();
     }
 
     public void Initiate()
@@ -294,346 +294,346 @@ public class UpgradeInfoPanels : MonoBehaviour
         }
     }
 
-    private void Upgrade05()
-    {
-        Upgrade05gainMoneyCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade05gainMoneyCSV(statLevel);
-        if (!firstInit)
-        {
-            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("골드획득량 + {0}%", upgradeStatInfo.value);
-            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            maxHpLevel = statLevel;
-            userDataManager.userData.gainMoney = upgradeStatInfo.value;
-            userDataManager.userData.statPointerIdx[5] = statLevel;
-        }
-        else
-        {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
-            {
-                Debug.Log("돈부족");
-                return;
-            }
-            else
-            {
-                userDataManager.userData.Money -= upgradeStatInfo.price;
-                ++statLevel;
-                upgradeStatInfo = CSVManager.Instance.GetUpgrade05gainMoneyCSV(statLevel);
-                statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("골드획득량 + {0}%", upgradeStatInfo.value);
-                statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                maxHpLevel = statLevel;
-                userDataManager.userData.gainMoney = upgradeStatInfo.value;
-                userDataManager.userData.statPointerIdx[5] = statLevel;
-            }
-        }
-    }
+    //private void Upgrade05()
+    //{
+    //    Upgrade05gainMoneyCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade05gainMoneyCSV(statLevel);
+    //    if (!firstInit)
+    //    {
+    //        statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //        statValueTxt.text = string.Format("골드획득량 + {0}%", upgradeStatInfo.value);
+    //        statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //        maxHpLevel = statLevel;
+    //        userDataManager.userData.gainMoney = upgradeStatInfo.value;
+    //        userDataManager.userData.statPointerIdx[5] = statLevel;
+    //    }
+    //    else
+    //    {
+    //        if (userDataManager.userData.Money < upgradeStatInfo.price)
+    //        {
+    //            Debug.Log("돈부족");
+    //            return;
+    //        }
+    //        else
+    //        {
+    //            userDataManager.userData.Money -= upgradeStatInfo.price;
+    //            ++statLevel;
+    //            upgradeStatInfo = CSVManager.Instance.GetUpgrade05gainMoneyCSV(statLevel);
+    //            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //            statValueTxt.text = string.Format("골드획득량 + {0}%", upgradeStatInfo.value);
+    //            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //            maxHpLevel = statLevel;
+    //            userDataManager.userData.gainMoney = upgradeStatInfo.value;
+    //            userDataManager.userData.statPointerIdx[5] = statLevel;
+    //        }
+    //    }
+    //}
 
-    private void Upgrade06()
-    {
-        Upgrade06startBonusCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade06startBonusCSV(statLevel);
-        if (!firstInit)
-        {
-            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("StageKey Lv {0}", upgradeStatInfo.value);
-            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            maxHpLevel = statLevel;
-            //userDataManager.userData.hp = upgradeStatInfo.value;
-            userDataManager.userData.statPointerIdx[6] = statLevel;
-        }
-        else
-        {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
-            {
-                Debug.Log("돈부족");
-                return;
-            }
-            else
-            {
-                userDataManager.userData.Money -= upgradeStatInfo.price;
-                ++statLevel;
-                upgradeStatInfo = CSVManager.Instance.GetUpgrade06startBonusCSV(statLevel);
-                statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("StageKey Lv {0}", upgradeStatInfo.value);
-                statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                maxHpLevel = statLevel;
-                //userDataManager.userData.hp = upgradeStatInfo.value;
-                userDataManager.userData.statPointerIdx[6] = statLevel;
-            }
-        }
-    }
+    //private void Upgrade06()
+    //{
+    //    Upgrade06startBonusCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade06startBonusCSV(statLevel);
+    //    if (!firstInit)
+    //    {
+    //        statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //        statValueTxt.text = string.Format("StageKey Lv {0}", upgradeStatInfo.value);
+    //        statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //        maxHpLevel = statLevel;
+    //        //userDataManager.userData.hp = upgradeStatInfo.value;
+    //        userDataManager.userData.statPointerIdx[6] = statLevel;
+    //    }
+    //    else
+    //    {
+    //        if (userDataManager.userData.Money < upgradeStatInfo.price)
+    //        {
+    //            Debug.Log("돈부족");
+    //            return;
+    //        }
+    //        else
+    //        {
+    //            userDataManager.userData.Money -= upgradeStatInfo.price;
+    //            ++statLevel;
+    //            upgradeStatInfo = CSVManager.Instance.GetUpgrade06startBonusCSV(statLevel);
+    //            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //            statValueTxt.text = string.Format("StageKey Lv {0}", upgradeStatInfo.value);
+    //            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //            maxHpLevel = statLevel;
+    //            //userDataManager.userData.hp = upgradeStatInfo.value;
+    //            userDataManager.userData.statPointerIdx[6] = statLevel;
+    //        }
+    //    }
+    //}
 
-    private void Upgrade07()
-    {
-        Upgrade07skillBodyRatioCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade07skillBodyRatioCSV(statLevel);
-        if (!firstInit)
-        {
-            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("스킬사용시몸크기증가 {0}", upgradeStatInfo.value);
-            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            maxHpLevel = statLevel;
-            //userDataManager.userData.hp = upgradeStatInfo.value;
-            userDataManager.userData.statPointerIdx[7] = statLevel;
-        }
-        else
-        {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
-            {
-                Debug.Log("돈부족");
-                return;
-            }
-            else
-            {
-                userDataManager.userData.Money -= upgradeStatInfo.price;
-                ++statLevel;
-                upgradeStatInfo = CSVManager.Instance.GetUpgrade07skillBodyRatioCSV(statLevel);
-                statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("스킬사용시몸크기증가 {0}", upgradeStatInfo.value);
-                statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                maxHpLevel = statLevel;
-                //userDataManager.userData.hp = upgradeStatInfo.value;
-                userDataManager.userData.statPointerIdx[7] = statLevel;
-            }
-        }
-    }
+    //private void Upgrade07()
+    //{
+    //    Upgrade07skillBodyRatioCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade07skillBodyRatioCSV(statLevel);
+    //    if (!firstInit)
+    //    {
+    //        statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //        statValueTxt.text = string.Format("스킬사용시몸크기증가 {0}", upgradeStatInfo.value);
+    //        statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //        maxHpLevel = statLevel;
+    //        //userDataManager.userData.hp = upgradeStatInfo.value;
+    //        userDataManager.userData.statPointerIdx[7] = statLevel;
+    //    }
+    //    else
+    //    {
+    //        if (userDataManager.userData.Money < upgradeStatInfo.price)
+    //        {
+    //            Debug.Log("돈부족");
+    //            return;
+    //        }
+    //        else
+    //        {
+    //            userDataManager.userData.Money -= upgradeStatInfo.price;
+    //            ++statLevel;
+    //            upgradeStatInfo = CSVManager.Instance.GetUpgrade07skillBodyRatioCSV(statLevel);
+    //            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //            statValueTxt.text = string.Format("스킬사용시몸크기증가 {0}", upgradeStatInfo.value);
+    //            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //            maxHpLevel = statLevel;
+    //            //userDataManager.userData.hp = upgradeStatInfo.value;
+    //            userDataManager.userData.statPointerIdx[7] = statLevel;
+    //        }
+    //    }
+    //}
 
-    private void Upgrade08()
-    {
-        Upgrade08skillDurationCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade08skillDurationCSV(statLevel);
-        if (!firstInit)
-        {
-            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("스킬지속시간 {0}", upgradeStatInfo.value);
-            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            maxHpLevel = statLevel;
-            userDataManager.userData.skillCoolDown = upgradeStatInfo.value;
-            userDataManager.userData.statPointerIdx[8] = statLevel;
-        }
-        else
-        {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
-            {
-                Debug.Log("돈부족");
-                return;
-            }
-            else
-            {
-                userDataManager.userData.Money -= upgradeStatInfo.price;
-                ++statLevel;
-                upgradeStatInfo = CSVManager.Instance.GetUpgrade08skillDurationCSV(statLevel);
-                statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("스킬지속시간 {0}", upgradeStatInfo.value);
-                statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                maxHpLevel = statLevel;
-                userDataManager.userData.skillCoolDown = upgradeStatInfo.value;
-                userDataManager.userData.statPointerIdx[8] = statLevel;
-            }
-        }
-    }
+    //private void Upgrade08()
+    //{
+    //    Upgrade08skillDurationCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade08skillDurationCSV(statLevel);
+    //    if (!firstInit)
+    //    {
+    //        statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //        statValueTxt.text = string.Format("스킬지속시간 {0}", upgradeStatInfo.value);
+    //        statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //        maxHpLevel = statLevel;
+    //        userDataManager.userData.skillCoolDown = upgradeStatInfo.value;
+    //        userDataManager.userData.statPointerIdx[8] = statLevel;
+    //    }
+    //    else
+    //    {
+    //        if (userDataManager.userData.Money < upgradeStatInfo.price)
+    //        {
+    //            Debug.Log("돈부족");
+    //            return;
+    //        }
+    //        else
+    //        {
+    //            userDataManager.userData.Money -= upgradeStatInfo.price;
+    //            ++statLevel;
+    //            upgradeStatInfo = CSVManager.Instance.GetUpgrade08skillDurationCSV(statLevel);
+    //            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //            statValueTxt.text = string.Format("스킬지속시간 {0}", upgradeStatInfo.value);
+    //            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //            maxHpLevel = statLevel;
+    //            userDataManager.userData.skillCoolDown = upgradeStatInfo.value;
+    //            userDataManager.userData.statPointerIdx[8] = statLevel;
+    //        }
+    //    }
+    //}
 
-    private void Upgrade09()
-    {
-        Upgrade09skillMaxCountCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade09skillMaxCountCSV(statLevel);
-        if (!firstInit)
-        {
-            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("최대스킬갯수 {0}", upgradeStatInfo.value);
-            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            maxHpLevel = statLevel;
-            userDataManager.userData.maxSkillCount = upgradeStatInfo.value;
-            userDataManager.userData.statPointerIdx[9] = statLevel;
-        }
-        else
-        {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
-            {
-                Debug.Log("돈부족");
-                return;
-            }
-            else
-            {
-                userDataManager.userData.Money -= upgradeStatInfo.price;
-                ++statLevel;
-                upgradeStatInfo = CSVManager.Instance.GetUpgrade09skillMaxCountCSV(statLevel);
+    //private void Upgrade09()
+    //{
+    //    Upgrade09skillMaxCountCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade09skillMaxCountCSV(statLevel);
+    //    if (!firstInit)
+    //    {
+    //        statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //        statValueTxt.text = string.Format("최대스킬갯수 {0}", upgradeStatInfo.value);
+    //        statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //        maxHpLevel = statLevel;
+    //        userDataManager.userData.maxSkillCount = upgradeStatInfo.value;
+    //        userDataManager.userData.statPointerIdx[9] = statLevel;
+    //    }
+    //    else
+    //    {
+    //        if (userDataManager.userData.Money < upgradeStatInfo.price)
+    //        {
+    //            Debug.Log("돈부족");
+    //            return;
+    //        }
+    //        else
+    //        {
+    //            userDataManager.userData.Money -= upgradeStatInfo.price;
+    //            ++statLevel;
+    //            upgradeStatInfo = CSVManager.Instance.GetUpgrade09skillMaxCountCSV(statLevel);
 
-                statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("최대스킬갯수 {0}", upgradeStatInfo.value);
-                statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                maxHpLevel = statLevel;
-                userDataManager.userData.maxSkillCount = upgradeStatInfo.value;
-                userDataManager.userData.statPointerIdx[9] = statLevel;
-            }
-        }
-    }
+    //            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //            statValueTxt.text = string.Format("최대스킬갯수 {0}", upgradeStatInfo.value);
+    //            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //            maxHpLevel = statLevel;
+    //            userDataManager.userData.maxSkillCount = upgradeStatInfo.value;
+    //            userDataManager.userData.statPointerIdx[9] = statLevel;
+    //        }
+    //    }
+    //}
 
-    private void Upgrade10()
-    {
-        Upgrade10instantStartBonusCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade10instantStartBonusCSV(statLevel);
-        if (!firstInit)
-        {
-            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("소모품1 {0}", upgradeStatInfo.value);
-            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            maxHpLevel = statLevel;
-            //userDataManager.userData.hp = upgradeStatInfo.value;
-            userDataManager.userData.statPointerIdx[10] = statLevel;
-        }
-        else
-        {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
-            {
-                Debug.Log("돈부족");
-                return;
-            }
-            else
-            {
-                userDataManager.userData.Money -= upgradeStatInfo.price;
-                ++statLevel;
-                upgradeStatInfo = CSVManager.Instance.GetUpgrade10instantStartBonusCSV(statLevel);
-                statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("소모품1 {0}", upgradeStatInfo.value);
-                statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                maxHpLevel = statLevel;
-                //userDataManager.userData.hp = upgradeStatInfo.value;
-                userDataManager.userData.statPointerIdx[10] = statLevel;
-            }
-        }
-    }
+    //private void Upgrade10()
+    //{
+    //    Upgrade10instantStartBonusCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade10instantStartBonusCSV(statLevel);
+    //    if (!firstInit)
+    //    {
+    //        statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //        statValueTxt.text = string.Format("소모품1 {0}", upgradeStatInfo.value);
+    //        statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //        maxHpLevel = statLevel;
+    //        //userDataManager.userData.hp = upgradeStatInfo.value;
+    //        userDataManager.userData.statPointerIdx[10] = statLevel;
+    //    }
+    //    else
+    //    {
+    //        if (userDataManager.userData.Money < upgradeStatInfo.price)
+    //        {
+    //            Debug.Log("돈부족");
+    //            return;
+    //        }
+    //        else
+    //        {
+    //            userDataManager.userData.Money -= upgradeStatInfo.price;
+    //            ++statLevel;
+    //            upgradeStatInfo = CSVManager.Instance.GetUpgrade10instantStartBonusCSV(statLevel);
+    //            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //            statValueTxt.text = string.Format("소모품1 {0}", upgradeStatInfo.value);
+    //            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //            maxHpLevel = statLevel;
+    //            //userDataManager.userData.hp = upgradeStatInfo.value;
+    //            userDataManager.userData.statPointerIdx[10] = statLevel;
+    //        }
+    //    }
+    //}
 
-    private void Upgrade11()
-    {
-        Upgrade11instantGainMoneyCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade11instantGainMoneyCSV(statLevel);
-        if (!firstInit)
-        {
-            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("소모품2 {0}", upgradeStatInfo.value);
-            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            maxHpLevel = statLevel;
-            //userDataManager.userData.hp = upgradeStatInfo.value;
-            userDataManager.userData.statPointerIdx[11] = statLevel;
-        }
-        else
-        {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
-            {
-                Debug.Log("돈부족");
-                return;
-            }
-            else
-            {
-                userDataManager.userData.Money -= upgradeStatInfo.price;
+    //private void Upgrade11()
+    //{
+    //    Upgrade11instantGainMoneyCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade11instantGainMoneyCSV(statLevel);
+    //    if (!firstInit)
+    //    {
+    //        statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //        statValueTxt.text = string.Format("소모품2 {0}", upgradeStatInfo.value);
+    //        statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //        maxHpLevel = statLevel;
+    //        //userDataManager.userData.hp = upgradeStatInfo.value;
+    //        userDataManager.userData.statPointerIdx[11] = statLevel;
+    //    }
+    //    else
+    //    {
+    //        if (userDataManager.userData.Money < upgradeStatInfo.price)
+    //        {
+    //            Debug.Log("돈부족");
+    //            return;
+    //        }
+    //        else
+    //        {
+    //            userDataManager.userData.Money -= upgradeStatInfo.price;
 
-                ++statLevel;
-                upgradeStatInfo = CSVManager.Instance.GetUpgrade11instantGainMoneyCSV(statLevel);
+    //            ++statLevel;
+    //            upgradeStatInfo = CSVManager.Instance.GetUpgrade11instantGainMoneyCSV(statLevel);
 
-                statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("소모품2 {0}", upgradeStatInfo.value);
-                statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                maxHpLevel = statLevel;
-                //userDataManager.userData.hp = upgradeStatInfo.value;
-                userDataManager.userData.statPointerIdx[11] = statLevel;
-            }
-        }
-    }
+    //            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //            statValueTxt.text = string.Format("소모품2 {0}", upgradeStatInfo.value);
+    //            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //            maxHpLevel = statLevel;
+    //            //userDataManager.userData.hp = upgradeStatInfo.value;
+    //            userDataManager.userData.statPointerIdx[11] = statLevel;
+    //        }
+    //    }
+    //}
 
-    private void Upgrade12()
-    {
-        Upgrade12instantGainMaxHpCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade12instantGainMaxHpCSV(statLevel);
-        if (!firstInit)
-        {
-            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("소모품3 {0}", upgradeStatInfo.value);
-            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            maxHpLevel = statLevel;
-            //userDataManager.userData.hp = upgradeStatInfo.value;
-            userDataManager.userData.statPointerIdx[12] = statLevel;
-        }
-        else
-        {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
-            {
-                Debug.Log("돈부족");
-                return;
-            }
-            else
-            {
-                userDataManager.userData.Money -= upgradeStatInfo.price;
-                ++statLevel;
-                upgradeStatInfo = CSVManager.Instance.GetUpgrade12instantGainMaxHpCSV(statLevel);
-                statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("소모품3 {0}", upgradeStatInfo.value);
-                statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                maxHpLevel = statLevel;
-                //userDataManager.userData.hp = upgradeStatInfo.value;
-                userDataManager.userData.statPointerIdx[12] = statLevel;
-            }
-        }
-    }
+    //private void Upgrade12()
+    //{
+    //    Upgrade12instantGainMaxHpCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade12instantGainMaxHpCSV(statLevel);
+    //    if (!firstInit)
+    //    {
+    //        statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //        statValueTxt.text = string.Format("소모품3 {0}", upgradeStatInfo.value);
+    //        statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //        maxHpLevel = statLevel;
+    //        //userDataManager.userData.hp = upgradeStatInfo.value;
+    //        userDataManager.userData.statPointerIdx[12] = statLevel;
+    //    }
+    //    else
+    //    {
+    //        if (userDataManager.userData.Money < upgradeStatInfo.price)
+    //        {
+    //            Debug.Log("돈부족");
+    //            return;
+    //        }
+    //        else
+    //        {
+    //            userDataManager.userData.Money -= upgradeStatInfo.price;
+    //            ++statLevel;
+    //            upgradeStatInfo = CSVManager.Instance.GetUpgrade12instantGainMaxHpCSV(statLevel);
+    //            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //            statValueTxt.text = string.Format("소모품3 {0}", upgradeStatInfo.value);
+    //            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //            maxHpLevel = statLevel;
+    //            //userDataManager.userData.hp = upgradeStatInfo.value;
+    //            userDataManager.userData.statPointerIdx[12] = statLevel;
+    //        }
+    //    }
+    //}
 
-    private void Upgrade13()
-    {
-        Upgrade13instantSkillMaxCountCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade13instantSkillMaxCountCSV(statLevel);
-        if (!firstInit)
-        {
-            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("소모품4 {0}", upgradeStatInfo.value);
-            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            maxHpLevel = statLevel;
-            //userDataManager.userData.hp = upgradeStatInfo.value;
-            userDataManager.userData.statPointerIdx[13] = statLevel;
-        }
-        else
-        {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
-            {
-                Debug.Log("돈부족");
-                return;
-            }
-            else
-            {
-                userDataManager.userData.Money -= upgradeStatInfo.price;
-                ++statLevel;
-                upgradeStatInfo = CSVManager.Instance.GetUpgrade13instantSkillMaxCountCSV(statLevel);
-                statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("소모품4 {0}", upgradeStatInfo.value);
-                statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                maxHpLevel = statLevel;
-                //userDataManager.userData.hp = upgradeStatInfo.value;
-                userDataManager.userData.statPointerIdx[13] = statLevel;
-            }
-        }
-    }
+    //private void Upgrade13()
+    //{
+    //    Upgrade13instantSkillMaxCountCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade13instantSkillMaxCountCSV(statLevel);
+    //    if (!firstInit)
+    //    {
+    //        statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //        statValueTxt.text = string.Format("소모품4 {0}", upgradeStatInfo.value);
+    //        statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //        maxHpLevel = statLevel;
+    //        //userDataManager.userData.hp = upgradeStatInfo.value;
+    //        userDataManager.userData.statPointerIdx[13] = statLevel;
+    //    }
+    //    else
+    //    {
+    //        if (userDataManager.userData.Money < upgradeStatInfo.price)
+    //        {
+    //            Debug.Log("돈부족");
+    //            return;
+    //        }
+    //        else
+    //        {
+    //            userDataManager.userData.Money -= upgradeStatInfo.price;
+    //            ++statLevel;
+    //            upgradeStatInfo = CSVManager.Instance.GetUpgrade13instantSkillMaxCountCSV(statLevel);
+    //            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //            statValueTxt.text = string.Format("소모품4 {0}", upgradeStatInfo.value);
+    //            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //            maxHpLevel = statLevel;
+    //            //userDataManager.userData.hp = upgradeStatInfo.value;
+    //            userDataManager.userData.statPointerIdx[13] = statLevel;
+    //        }
+    //    }
+    //}
 
-    private void Upgrade14()
-    {
-        Upgrade14instantGainHpCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade14instantGainHpCSV(statLevel);
-        if (!firstInit)
-        {
-            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("소모품5 {0}", upgradeStatInfo.value);
-            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            maxHpLevel = statLevel;
-            //userDataManager.userData.hp = upgradeStatInfo.value;
-            userDataManager.userData.statPointerIdx[14] = statLevel;
-        }
-        else
-        {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
-            {
-                Debug.Log("돈부족");
-                return;
-            }
-            else
-            {
-                userDataManager.userData.Money -= upgradeStatInfo.price;
-                ++statLevel;
-                upgradeStatInfo = CSVManager.Instance.GetUpgrade14instantGainHpCSV(statLevel);
-                statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("소모품5 {0}", upgradeStatInfo.value);
-                statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                maxHpLevel = statLevel;
-                //userDataManager.userData.hp = upgradeStatInfo.value;
-                userDataManager.userData.statPointerIdx[14] = statLevel;
-            }
-        }
-    }
+    //private void Upgrade14()
+    //{
+    //    Upgrade14instantGainHpCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade14instantGainHpCSV(statLevel);
+    //    if (!firstInit)
+    //    {
+    //        statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //        statValueTxt.text = string.Format("소모품5 {0}", upgradeStatInfo.value);
+    //        statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //        maxHpLevel = statLevel;
+    //        //userDataManager.userData.hp = upgradeStatInfo.value;
+    //        userDataManager.userData.statPointerIdx[14] = statLevel;
+    //    }
+    //    else
+    //    {
+    //        if (userDataManager.userData.Money < upgradeStatInfo.price)
+    //        {
+    //            Debug.Log("돈부족");
+    //            return;
+    //        }
+    //        else
+    //        {
+    //            userDataManager.userData.Money -= upgradeStatInfo.price;
+    //            ++statLevel;
+    //            upgradeStatInfo = CSVManager.Instance.GetUpgrade14instantGainHpCSV(statLevel);
+    //            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
+    //            statValueTxt.text = string.Format("소모품5 {0}", upgradeStatInfo.value);
+    //            statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
+    //            maxHpLevel = statLevel;
+    //            //userDataManager.userData.hp = upgradeStatInfo.value;
+    //            userDataManager.userData.statPointerIdx[14] = statLevel;
+    //        }
+    //    }
+    //}
 }

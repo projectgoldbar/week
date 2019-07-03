@@ -12,7 +12,7 @@ public class LobbyPlayerController : MonoBehaviour
     private Vector3 lobbyPlayerPos;
     private Quaternion lobbyPlayerRotQ;
 
-    private void Start()
+    private void Awake()
     {
         lobbyPlayerAnim = GetComponent<Animator>();
         listPath = new List<Vector3>();

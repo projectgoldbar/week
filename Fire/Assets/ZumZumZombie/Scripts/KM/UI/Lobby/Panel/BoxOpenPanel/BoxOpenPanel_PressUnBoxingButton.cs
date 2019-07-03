@@ -44,7 +44,8 @@ public partial class BoxOpenPanel : MonoBehaviour
 
     private void ChangeMesh()
     {
-        boxObj.SetActive(false);
+        boxObj.SetActive(false)
+            ;
         boxOpenObj.SetActive(true);
 
         unBoxingButton.SetActive(false);
