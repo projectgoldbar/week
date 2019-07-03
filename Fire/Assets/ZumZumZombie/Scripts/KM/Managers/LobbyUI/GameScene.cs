@@ -18,7 +18,7 @@ public partial class GameScene : MonoBehaviour
 
     public void Awake()
     {
-        StatButton();
+        //StatButton();
         //SceneManager.sceneLoaded += OnSceneLoaded;
         fadeOutImageObj = FindObjectOfType<FadeOutUI>().gameObject;
     }
@@ -60,6 +60,7 @@ public partial class GameScene : MonoBehaviour
     {
         middleAllPanel.OpenPanel();
         directionUIController.OffTriangleOutlineforDownPanel();
+        StatButton();
     }
 
     public void UpPanel()
@@ -171,6 +172,7 @@ public partial class GameScene : MonoBehaviour
         lobbyBase_Controller.doorController.OpenDoorTween(enterDuration);
         StartFadeImageAlpha(toOut);
         StartFadeIn();
+
         UpPanelwhenEnter();
     }
 

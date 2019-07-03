@@ -12,7 +12,7 @@ public class MiddleAllPanel : MonoBehaviour
 
     private void Start()
     {
-        isOpened = true;
+        //isOpened = true;
     }
 
     public void OpenPanel()

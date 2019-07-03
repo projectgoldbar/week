@@ -31,7 +31,6 @@ public class UserDataManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         LoadData();
-
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
