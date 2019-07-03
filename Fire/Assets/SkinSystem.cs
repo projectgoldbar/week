@@ -15,6 +15,8 @@ public class SkinSystem : MonoBehaviour
     public SpriteData spriteData;
 
     public SKinInfo[] skinInfos;
+    public SkinnedMeshRenderer[] playerSkins;
+    public GameObject playerSkinPivot;
 
     private void Awake()
     {
@@ -25,7 +27,20 @@ public class SkinSystem : MonoBehaviour
     public void EquipSkin()
     {
         UserDataManager.Instance.userData.equipedSkinIdx = selectedSkinIdx;
+        ChangeMesh();
         Refresh();
+    }
+
+    public void ChangeMesh()
+    {
+        for (int i = 0; i < playerSkins.Length; i++)
+        {
+            if (playerSkins[i].gameObject.activeSelf)
+            {
+                playerSkins[i].gameObject.SetActive(false);
+            }
+        }
+        playerSkins[selectedSkinIdx].gameObject.SetActive(true);
     }
 
     public void Refresh()
