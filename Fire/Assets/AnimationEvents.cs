@@ -36,4 +36,9 @@ public class AnimationEvents : MonoBehaviour
         playerMove.maxSpeed = 6f;
         playerMove.speed = 6f;
     }
+
+    public void GameOver()
+    {
+        FindObjectOfType<Manager>().GameOver();
+    }
 }

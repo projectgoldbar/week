@@ -81,7 +81,7 @@ namespace ZombieState
         {
         }
 
-        public void SturnChange()
+        public virtual void SturnChange()
         {
             if (MoveingAnimChange)
                 StateChange(zombieData.stun);
