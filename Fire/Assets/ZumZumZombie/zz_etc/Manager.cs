@@ -65,6 +65,12 @@ public class Manager : MonoBehaviour
         GameStart();
 
         //PlayerSetting();
+        Invoke("PlayerDataOn", 1f);
+    }
+
+    private void PlayerDataOn()
+    {
+        playerData.enabled = true;
     }
 
     private void OnSceneEnded(Scene scene)
@@ -172,7 +178,7 @@ public class Manager : MonoBehaviour
     {
         StopCoroutine(sw);
         //Time.timeScale = 0;
-        FindObjectOfType<JoyStick2>().MoveSpeed = 0f;
+        FindObjectOfType<PlayerMove>().speed = 0f;
         GameOverSeq();
     }
 

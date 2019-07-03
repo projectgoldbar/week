@@ -6,11 +6,13 @@ public class AnimationEvents : MonoBehaviour
 {
     public PlayerMove playerMove;
     public Animator animator;
+    public float evadeSpeed = 20f;
 
     public void RollStart()
     {
         playerMove.isRoll = true;
-        playerMove.speed = 15f;
+        playerMove.maxSpeed = evadeSpeed;
+        playerMove.speed = evadeSpeed;
         playerMove.playerData.rollStack--;
         playerMove.evadeSystem.enabled = true;
     }
@@ -18,6 +20,7 @@ public class AnimationEvents : MonoBehaviour
     public void RollEnd()
     {
         playerMove.isRoll = false;
+        playerMove.maxSpeed = 11f;
         playerMove.speed = 11f;
         playerMove.playerData.rollStack++;
         playerMove.evadeSystem.enabled = false;
@@ -30,6 +33,7 @@ public class AnimationEvents : MonoBehaviour
     public void SlowDown()
     {
         animator.speed = 2f;
+        playerMove.maxSpeed = 6f;
         playerMove.speed = 6f;
     }
 }

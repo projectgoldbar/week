@@ -69,6 +69,7 @@ namespace ZombieState
                 //d.Normalize();
                 //Debug.Log(d);
                 //transform.Translate(d + d * Time.deltaTime);
+                zombieData.agent.acceleration = 0f;
                 time += Time.deltaTime;
 
                 Debug.Log(targetVec);

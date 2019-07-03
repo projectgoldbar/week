@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public partial class GameScene : MonoBehaviour
 {
@@ -19,6 +18,16 @@ public partial class GameScene : MonoBehaviour
     private Color nowColor;
 
     public LobbyBase_Controller lobbyBase_Controller;
+
+    private void Awake()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        fadeOutImageObj = FindObjectOfType<FadeOutUI>().gameObject;
+    }
 
     private void LeaveLobby()
     {

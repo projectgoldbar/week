@@ -47,7 +47,7 @@ public class PlayerMove : MonoBehaviour
             bufferVector2 = Input.mousePosition;
             accel = true;
         }
-        
+
         if (accel)
         {
             if (maxSpeed > speed)
@@ -75,7 +75,7 @@ public class PlayerMove : MonoBehaviour
         {
             speedDistance = DisNdir(mousePosition, bufferVector2).dis;
             var speed = speedDistance * 0.045f;
-            if (speed > rollSensitive && !isRoll)
+            if (speed > rollSensitive && !isRoll && playerData.ep > 6f)
             {
                 var dir = DisNdir(mousePosition, bufferVector2).dir;
                 Vector3 rollDirection = new Vector3(dir.x, 0, dir.y);

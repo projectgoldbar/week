@@ -70,6 +70,8 @@ public class SKinInfo : MonoBehaviour
             //nameText.text = "???";
             //descriptionText.text = "???";
             //equipButtonText.text = "???";
+            selectButtonImage.sprite = skinSprite;
+            selectButtonImage.color = new Color(0, 0, 0, 1);
             selectButton.GetComponent<Button>().interactable = false;
             //equipButton.GetComponent<Button>().interactable = false;
             //infoImage.sprite = spriteData.unknownIconSprite;
@@ -82,6 +84,8 @@ public class SKinInfo : MonoBehaviour
             //descriptionText.text = description;
             //equipButtonText.text = "착용하기";
             selectButtonImage.sprite = skinSprite;
+            selectButtonImage.color = new Color(1, 1, 1, 1);
+
             selectButton.GetComponent<Button>().interactable = true;
             //equipButton.GetComponent<Button>().interactable = true;
             //infoImage.sprite = skinSprite;

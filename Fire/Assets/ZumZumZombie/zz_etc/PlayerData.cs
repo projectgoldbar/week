@@ -6,6 +6,7 @@ public class PlayerData : MonoBehaviour
 {
     public GameObject dummyShied;
     public GameObject arrow;
+    public GameObject evadeParticle;
     public ParticleSystem boostParticle;
     public bool isTest;
     public Text hpText;
@@ -79,7 +80,7 @@ public class PlayerData : MonoBehaviour
     public GameObject shield;
     private bool isGameOver = false;
     private bool isRevive = false;
-    private Manager manager;
+    public Manager manager;
     private PlayerMove playerMove;
     private ParticlePool particlePool;
     public Animator animator;
@@ -157,30 +158,33 @@ public class PlayerData : MonoBehaviour
 
     private void Awake()
     {
-        MeshData.sharedMesh = UserDataManager.Instance.EquipSkinReference[UserDataManager.Instance.userData.equipedSkinIdx].sharedMesh;
         evolveLvData = new int[24] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         //FindObjectOfType<hpSlider>().playerData = this;
         playerMove = GetComponent<PlayerMove>();
-        FindObjectOfType<SkillSystem>().playerMove = GetComponent<PlayerMove>();
+        //FindObjectOfType<SkillSystem>().playerMove = GetComponent<PlayerMove>();
         manager = FindObjectOfType<Manager>();
-        magnet = FindObjectOfType<Magnet>().gameObject;
-        meatTail = FindObjectOfType<MeatTail>().gameObject;
-        meatTail.GetComponent<MeatTail>().SetPlayer(this);
-        shield = FindObjectOfType<Shield>().gameObject;
+        //magnet = FindObjectOfType<Magnet>().gameObject;
+        //meatTail = FindObjectOfType<MeatTail>().gameObject;
+        //meatTail.GetComponent<MeatTail>().SetPlayer(this);
+        //shield = FindObjectOfType<Shield>().gameObject;
         particlePool = FindObjectOfType<ParticlePool>();
         animator = GetComponentInChildren<Animator>();
-        boostParticle = GetComponentInChildren<ParticleSystem>();
-        shield.SetActive(false);
-        magnet.SetActive(false);
-        meatTail.SetActive(false);
+
+        //boostParticle = GetComponentInChildren<ParticleSystem>();
+        //shield.SetActive(false);
+        //magnet.SetActive(false);
+        //meatTail.SetActive(false);
         if (!isTest)
         {
             PlayerSetting();
+            MeshData.sharedMesh = UserDataManager.Instance.EquipSkinReference[UserDataManager.Instance.userData.equipedSkinIdx].sharedMesh;
         }
         hp = maxhp;
+        if (this.enabled == false)
+        {
+            this.enabled = true;
+        }
     }
-
-    public bool isHalfSpeech = false;
 
     private void PlayerSetting()
     {
@@ -209,7 +213,8 @@ public class PlayerData : MonoBehaviour
     {
         if (hp <= 0)
         {
-            animator.SetBool("Dying", true);
+            manager.GameOver();
+            animator.Play("die");
         }
 
         if (!isGameOver && !isRevive)
@@ -236,7 +241,7 @@ public class PlayerData : MonoBehaviour
 
     private void GameOverInvoke()
     {
-        FindObjectOfType<Manager>().GameOver();
+        manager.GameOver();
     }
 
     private IEnumerator Revive()
