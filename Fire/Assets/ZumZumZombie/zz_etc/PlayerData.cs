@@ -36,7 +36,102 @@ public class PlayerData : MonoBehaviour
     public float goldUpSpeed = 5;
     public float gold = 0;
     public int df = 0;
-    public int live = 0;
+
+
+    #region 퍽 0번 회복력 강화
+
+    private float RecoveryData;
+    private int Recovery;
+    public int recovery
+    {
+        get => Recovery;
+        set
+        {
+            Recovery = value;
+            if (Recovery == 0)      RecoveryData = 0;
+            else if (Recovery == 1) RecoveryData = 0.5f;
+            else if (Recovery == 2) RecoveryData = 0.75f;
+            else if (Recovery == 3) RecoveryData = 1.0f;
+        }
+    }
+
+    #endregion
+
+    #region 퍽1번 콩벌레
+    public int WormData;
+    private int worm;
+    public int Worm
+    {
+        get { return worm; }
+        set {
+            worm = value;
+            if (worm == 0) WormData = 0;
+            else if (worm == 1) WormData = 2;
+            else if (worm == 2) WormData = 4;
+            else if (worm == 3) WormData = 7;
+
+        }
+    }
+
+    #endregion
+
+    #region 퍽2번 돈벌레
+    public float GoldWormData;
+    private int goldworm;
+    public int GoldWorm
+    {
+        get { return goldworm; }
+        set
+        {
+            goldworm = value;
+            if (goldworm == 0) GoldWormData = 0;
+            else if (goldworm == 1) GoldWormData = 0.5f;
+            else if (goldworm == 2) GoldWormData = 0.75f;
+            else if (goldworm == 3) GoldWormData = 1f;
+        }
+    }
+
+    #endregion
+
+    #region 퍽3번 지구력
+    public float enduranceData;
+    private int endurance;
+    public int Endurance
+    {
+        get { return endurance; }
+        set
+        {
+            endurance = value;
+            if (endurance == 0) enduranceData = 0;
+            else if (endurance == 1) enduranceData = 0.5f;
+            else if(endurance == 2) enduranceData = 0.75f;
+            else if(endurance == 3) enduranceData = 1f;
+        }
+    }
+
+
+    #endregion
+
+    #region 퍽4번 제5감각
+    public float SenceData;
+    private int sence;
+        
+    public int Sence
+    {
+        get { return sence; }
+        set
+        {
+            sence = value;
+            if (sence == 0) SenceData = 0;
+            else if (sence == 1) SenceData = 0.5f;
+            else if (sence == 2) SenceData = 0.75f;
+            else  if (sence == 3) SenceData = 1f;
+        }
+    }
+
+    #endregion
+
+
     public int goldBoxCount = 0;
     public int silverBoxCount = 0;
     public int bronzeBoxCount = 0;
@@ -186,6 +281,19 @@ public class PlayerData : MonoBehaviour
         }
     }
 
+
+    #region 구르기 애니메이션 이벤트로 넣음.
+    public void RollDfUp()
+    {
+        df += WormData;
+    }
+
+    public void RollDfDown()
+    {
+        df -= WormData;
+    }
+    #endregion
+
     private void PlayerSetting()
     {
         if (smite)
@@ -223,7 +331,7 @@ public class PlayerData : MonoBehaviour
             {
                 hp = hp - hpDownSpeed * Time.deltaTime;
             }
-            else if (live > 0)
+            else if (recovery > 0)
             {
                 animator.SetBool("Revive", true);
                 StartCoroutine(Revive());
@@ -262,7 +370,7 @@ public class PlayerData : MonoBehaviour
         particle.transform.position = transform.position;
         particle.SetActive(true);
         hp = maxhp * 0.3f;
-        live--;
+        recovery--;
         Time.timeScale = 1;
         animator.SetBool("Dying", false);
         animator.SetBool("Revive", false);
@@ -303,6 +411,10 @@ public class PlayerData : MonoBehaviour
     public GameObject testBlood;
     public GameObject hitUI;
 
+
+    
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Zombie")
@@ -328,12 +440,14 @@ public class PlayerData : MonoBehaviour
         else if (other.tag == "Coin")
         {
             Gold = goldUpSpeed;
+            hp += GoldWormData;
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Meat")
         {
             var xhp = hpUpSpeed + (maxhp * (0.03f * evolveLvData[5]));
-            hp += xhp;
+            var addHp = xhp + (xhp * RecoveryData);
+            hp += addHp;
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "RandomBox")

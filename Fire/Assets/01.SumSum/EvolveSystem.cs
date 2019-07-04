@@ -19,12 +19,14 @@ public class EvolveSystem : MonoBehaviour
 
     public List<Action> evolveFunc = new List<Action>();
 
+
+
     private void Awake()
     {
-        evolveFunc.Add(() => SecondsHeart());//0
-        evolveFunc.Add(() => FullCharge());//1
+        evolveFunc.Add(() => Resiliencepeace());//0
+        evolveFunc.Add(() => Beanworm());//1
         evolveFunc.Add(() => DefenceUp());//2
-        evolveFunc.Add(() => RadiationInjection());//3
+        evolveFunc.Add(() => endurance());//3
         evolveFunc.Add(() => GastrointestinalExtension());//4
         evolveFunc.Add(() => TitaniumTooth());//5
         evolveFunc.Add(() => MagnetTail());//6
@@ -81,11 +83,38 @@ public class EvolveSystem : MonoBehaviour
         return returnValue;
     }
 
-    public void SecondsHeart()
+    public void Resiliencepeace()
     {
         var a = FindObjectOfType<PlayerData>();
-        a.live++;
+        a.recovery++; 
     }
+
+    public void Beanworm()
+    {
+        var a = FindObjectOfType<PlayerData>();
+        a.Worm++;
+    }
+
+
+    public void GoldWorm()
+    {
+        var a = FindObjectOfType<PlayerData>();
+        a.GoldWorm++;
+    }
+
+    public void endurance()
+    {
+        var a = FindObjectOfType<PlayerData>();
+        a.Endurance++;
+    }
+
+    public void Sence5()
+    {
+        var a = FindObjectOfType<PlayerData>();
+        a.Sence++;
+    }
+
+
 
     public void FullCharge()
     {
