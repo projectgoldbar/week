@@ -83,7 +83,7 @@ public partial class GameScene : MonoBehaviour
     public void DownPanel()
     {
         middleAllPanel.OpenPanel();
-        directionUIController.OffTriangleOutlineforDownPanel();
+        directionUIController.OffTriangleandOutlineforDownPanel();
         directionUIController.doorOutLine.OpenMiddlePanel();
         lobbyBase_Controller.StartObjController.OpenMiddlePanel();
     }
