@@ -14,8 +14,9 @@ public class ParticlePool : MonoBehaviour
     public List<GameObject> meatParticlePool;
     public List<GameObject> nukeParticlePool;
     public List<GameObject> trapParticlePool;
-    public List<GameObject> gateOpenParticlePool;
+    public List<GameObject> zombieDamageParticlePool;
     public List<GameObject> mineParticlePool;
+    public List<GameObject> zombieDustParticle;
 
     #endregion 파티클 생산해서 넣을 풀들
 
@@ -41,11 +42,11 @@ public class ParticlePool : MonoBehaviour
         {
             blastParticlePool.Add(Instantiate(particles[1], transform.position, Quaternion.identity, transform));
         }
-        for (int l = 0; l < 20; l++)
+        for (int l = 0; l < 5; l++)
         {
             hitParticlePool.Add(Instantiate(particles[2], transform.position, Quaternion.identity, transform));
         }
-        for (int m = 0; m < 5; m++)
+        for (int m = 0; m < 3; m++)
         {
             meatParticlePool.Add(Instantiate(particles[3], transform.position, Quaternion.identity, transform));
         }
@@ -57,13 +58,17 @@ public class ParticlePool : MonoBehaviour
         {
             trapParticlePool.Add(Instantiate(particles[5], transform.position, Quaternion.identity, transform));
         }
-        for (int q = 0; q < 6; q++)
+        for (int q = 0; q < 20; q++)
         {
-            gateOpenParticlePool.Add(Instantiate(particles[6], transform.position, Quaternion.identity, transform));
+            zombieDamageParticlePool.Add(Instantiate(particles[6], transform.position, Quaternion.identity, transform));
         }
         for (int q = 0; q < 5; q++)
         {
             mineParticlePool.Add(Instantiate(particles[7], transform.position, Quaternion.identity, transform));
+        }
+        for (int i = 0; i < 30; i++)
+        {
+            zombieDustParticle.Add(Instantiate(particles[8], transform.position, Quaternion.identity, transform));
         }
     }
 
@@ -78,7 +83,7 @@ public class ParticlePool : MonoBehaviour
         }
         var a = Instantiate(pool[0], transform.position, Quaternion.identity, transform);
         a.SetActive(false);
-        coinParticlePool.Add(a);
+        pool.Add(a);
         return a;
     }
 }

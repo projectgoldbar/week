@@ -14,6 +14,7 @@
 //    limitations under the License.
 // </copyright>
 #if UNITY_ANDROID
+
 //
 // ****   GENERATED FILE  DO NOT EDIT !!!  ****//
 //
@@ -21,15 +22,17 @@ using Google.Developers;
 using System;
 using System.Reflection;
 using UnityEngine;
+
 namespace Com.Google.Android.Gms.Games.Stats
 {
-    public class PlayerStatsObject : JavaObjWrapper , PlayerStats
+    public class PlayerStatsObject : JavaObjWrapper, PlayerStats
     {
-        const string CLASS_NAME = "com/google/android/gms/games/stats/PlayerStats";
+        private const string CLASS_NAME = "com/google/android/gms/games/stats/PlayerStats";
 
-        public PlayerStatsObject (IntPtr ptr) : base(ptr)
+        public PlayerStatsObject(IntPtr ptr) : base(ptr)
         {
         }
+
         public static float UNSET_VALUE
         {
             get
@@ -37,6 +40,7 @@ namespace Com.Google.Android.Gms.Games.Stats
                 return JavaObjWrapper.GetStaticFloatField(CLASS_NAME, "UNSET_VALUE");
             }
         }
+
         public static int CONTENTS_FILE_DESCRIPTOR
         {
             get
@@ -44,6 +48,7 @@ namespace Com.Google.Android.Gms.Games.Stats
                 return JavaObjWrapper.GetStaticIntField(CLASS_NAME, "CONTENTS_FILE_DESCRIPTOR");
             }
         }
+
         public static int PARCELABLE_WRITE_RETURN_VALUE
         {
             get
@@ -51,48 +56,59 @@ namespace Com.Google.Android.Gms.Games.Stats
                 return JavaObjWrapper.GetStaticIntField(CLASS_NAME, "PARCELABLE_WRITE_RETURN_VALUE");
             }
         }
+
         public float getAverageSessionLength()
         {
             return InvokeCall<float>("getAverageSessionLength", "()F");
         }
+
         public float getChurnProbability()
         {
             return InvokeCall<float>("getChurnProbability", "()F");
         }
+
         public int getDaysSinceLastPlayed()
         {
             return InvokeCall<int>("getDaysSinceLastPlayed", "()I");
         }
+
         public int getNumberOfPurchases()
         {
             return InvokeCall<int>("getNumberOfPurchases", "()I");
         }
+
         public int getNumberOfSessions()
         {
             return InvokeCall<int>("getNumberOfSessions", "()I");
         }
+
         public float getSessionPercentile()
         {
             return InvokeCall<float>("getSessionPercentile", "()F");
         }
+
         public float getSpendPercentile()
         {
             return InvokeCall<float>("getSpendPercentile", "()F");
         }
+
         public float getSpendProbability()
         {
             return InvokeCall<float>("getSpendProbability", "()F");
         }
+
         public float getHighSpenderProbability()
         {
             return InvokeCall<float>("getHighSpenderProbability", "()F");
         }
+
         public float getTotalSpendNext28Days()
         {
             return InvokeCall<float>("getTotalSpendNext28Days", "()F");
         }
     }
 }
+
 //
 // ****   GENERATED FILE  DO NOT EDIT !!!  ****//
 //

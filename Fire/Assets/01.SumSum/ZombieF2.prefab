@@ -225,7 +225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1091131463947655002
 Transform:
   m_ObjectHideFlags: 0
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
-  damage: 1
+  damage: 10
   agent: {fileID: 0}
   player: {fileID: 0}
   animator: {fileID: 0}
@@ -337,6 +337,7 @@ MonoBehaviour:
   sturnCollider: {fileID: 394043151}
   material: {fileID: 0}
   attackTrailRenderer: {fileID: 0}
+  particlePool: {fileID: 0}
 --- !u!114 &551534646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +345,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091131463947833992}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2a675ad7ab4e0241872f2f639251fd9, type: 3}
   m_Name: 
@@ -353,6 +354,7 @@ MonoBehaviour:
   wallStun: 2
   time: 0
   isWall: 0
+  recoverTime: 1
 --- !u!114 &1913954975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,7 +375,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091131463947833992}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8c4eb02970297e4ea14d0daaceee38b, type: 3}
   m_Name: 
@@ -395,7 +397,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091131463947833992}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54c2e68c02f949a43995a31a7d94b49b, type: 3}
   m_Name: 
@@ -409,7 +411,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091131463947833992}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0968419bbf42ca94bbe7a82af4cc43a2, type: 3}
   m_Name: 
@@ -1059,6 +1061,7 @@ MonoBehaviour:
   zombiedata: {fileID: 551534644}
   zombie: {fileID: 0}
   MoveSpeedChange: 0
+  isStateChageOk: 1
 --- !u!1 &2406066211195238824
 GameObject:
   m_ObjectHideFlags: 0

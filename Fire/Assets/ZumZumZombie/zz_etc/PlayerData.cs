@@ -9,6 +9,7 @@ public class PlayerData : MonoBehaviour
     public GameObject evadeParticle;
     public ParticleSystem boostParticle;
     public bool isTest;
+    public float epRecoverSpeed = 1f;
     public Text hpText;
     public Gate gate;
     public int rollStack = 1;
@@ -17,7 +18,6 @@ public class PlayerData : MonoBehaviour
 
     public float maxhp = 50f;
     public float hp = 50f;
-    public float hpDownSpeed = 5f;
     public float score = 0;
     public float ep = 10f;
     public float maxEp = 10f;
@@ -37,47 +37,51 @@ public class PlayerData : MonoBehaviour
     public float gold = 0;
     public int df = 0;
 
-
     #region 퍽 0번 회복력 강화
 
     private float RecoveryData;
     private int Recovery;
+
     public int recovery
     {
         get => Recovery;
         set
         {
             Recovery = value;
-            if (Recovery == 0)      RecoveryData = 0;
+            if (Recovery == 0) RecoveryData = 0;
             else if (Recovery == 1) RecoveryData = 0.5f;
             else if (Recovery == 2) RecoveryData = 0.75f;
             else if (Recovery == 3) RecoveryData = 1.0f;
         }
     }
 
-    #endregion
+    #endregion 퍽 0번 회복력 강화
 
     #region 퍽1번 콩벌레
+
     public int WormData;
     private int worm;
+
     public int Worm
     {
         get { return worm; }
-        set {
+        set
+        {
             worm = value;
             if (worm == 0) WormData = 0;
             else if (worm == 1) WormData = 2;
             else if (worm == 2) WormData = 4;
             else if (worm == 3) WormData = 7;
-
         }
     }
 
-    #endregion
+    #endregion 퍽1번 콩벌레
 
     #region 퍽2번 돈벌레
+
     public float GoldWormData;
     private int goldworm;
+
     public int GoldWorm
     {
         get { return goldworm; }
@@ -91,11 +95,13 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    #endregion
+    #endregion 퍽2번 돈벌레
 
     #region 퍽3번 지구력
+
     public float enduranceData;
     private int endurance;
+
     public int Endurance
     {
         get { return endurance; }
@@ -104,18 +110,18 @@ public class PlayerData : MonoBehaviour
             endurance = value;
             if (endurance == 0) enduranceData = 0;
             else if (endurance == 1) enduranceData = 0.5f;
-            else if(endurance == 2) enduranceData = 0.75f;
-            else if(endurance == 3) enduranceData = 1f;
+            else if (endurance == 2) enduranceData = 0.75f;
+            else if (endurance == 3) enduranceData = 1f;
         }
     }
 
-
-    #endregion
+    #endregion 퍽3번 지구력
 
     #region 퍽4번 제5감각
+
     public float SenceData;
     private int sence;
-        
+
     public int Sence
     {
         get { return sence; }
@@ -125,12 +131,11 @@ public class PlayerData : MonoBehaviour
             if (sence == 0) SenceData = 0;
             else if (sence == 1) SenceData = 0.5f;
             else if (sence == 2) SenceData = 0.75f;
-            else  if (sence == 3) SenceData = 1f;
+            else if (sence == 3) SenceData = 1f;
         }
     }
 
-    #endregion
-
+    #endregion 퍽4번 제5감각
 
     public int goldBoxCount = 0;
     public int silverBoxCount = 0;
@@ -281,8 +286,8 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-
     #region 구르기 애니메이션 이벤트로 넣음.
+
     public void RollDfUp()
     {
         df += WormData;
@@ -292,7 +297,8 @@ public class PlayerData : MonoBehaviour
     {
         df -= WormData;
     }
-    #endregion
+
+    #endregion 구르기 애니메이션 이벤트로 넣음.
 
     private void PlayerSetting()
     {
@@ -307,14 +313,9 @@ public class PlayerData : MonoBehaviour
         df = 0;
         var fperHp = (maxhp * 0.05f);
         //hpDownSpeed = fperHp - (fperHp * (0.01f * x.decelerationHp));
-        hpDownSpeed = 0f;
         hpUpSpeed = hpUpSpeed + (hpUpSpeed * (0.01f * x.healHp));
         goldUpSpeed = goldUpSpeed + (goldUpSpeed * x.gainMoney * 0.01f);
-        var userEquipSkillList = x.skillLVList;
-        for (int i = 0; i < userEquipSkillList.Length; i++)
-        {
-            evolveLvData[i] = userEquipSkillList[i];
-        }
+        playerMove.equipIdx = x.equipedSkinIdx;
     }
 
     private void Update()
@@ -324,26 +325,9 @@ public class PlayerData : MonoBehaviour
             //manager.GameOver();
             animator.Play("die");
         }
-
-        if (!isGameOver && !isRevive)
+        if (ep < maxEp)
         {
-            if (hp >= 0)
-            {
-                hp = hp - hpDownSpeed * Time.deltaTime;
-            }
-            else if (recovery > 0)
-            {
-                animator.SetBool("Revive", true);
-                StartCoroutine(Revive());
-                isRevive = true;
-            }
-            else
-            {
-                Invoke("GameOverInvoke", 2f);
-                FindObjectOfType<UITweenEffectManager>().LeaveInGame();
-                isGameOver = true;
-                return;
-            }
+            ep += epRecoverSpeed * Time.deltaTime;
         }
     }
 
@@ -408,12 +392,7 @@ public class PlayerData : MonoBehaviour
         yield break;
     }
 
-    public GameObject testBlood;
     public GameObject hitUI;
-
-
-    
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -430,9 +409,6 @@ public class PlayerData : MonoBehaviour
             {
                 hitUI.SetActive(true);
             }
-            testBlood.transform.position = transform.position;
-            testBlood.transform.rotation = other.transform.rotation;
-            testBlood.SetActive(true);
             hitEffect.transform.position = transform.position;
             hitEffect.transform.localRotation = transform.rotation;
             hitEffect.SetActive(true);
@@ -452,7 +428,8 @@ public class PlayerData : MonoBehaviour
         }
         else if (other.tag == "RandomBox")
         {
-            switch (other.GetComponent<Box>().type)
+            var box = other.GetComponent<Box>();
+            switch (box.type)
             {
                 case BoxType.Bronze:
                     manager.score += 4000f;
@@ -463,6 +440,7 @@ public class PlayerData : MonoBehaviour
                 case BoxType.Gold:
                     manager.score += 4000f;
                     goldBoxCount++;
+
                     Destroy(other.gameObject);
 
                     break;
@@ -470,6 +448,7 @@ public class PlayerData : MonoBehaviour
                 case BoxType.Silver:
                     manager.score += 4000f;
                     silverBoxCount++;
+
                     Destroy(other.gameObject);
 
                     break;

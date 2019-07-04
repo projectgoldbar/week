@@ -3,13 +3,13 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using System;
 
 public class PlayerMove : MonoBehaviour
 {
     public float maxSpeed = 11.0f;
     public float speed = 0.0f;
     public float accelSpeed = 1f;
-
     public float downSpeed = 1f;
 
     public DynamicJoystick dynamicJoystick;
@@ -23,14 +23,24 @@ public class PlayerMove : MonoBehaviour
 
     public RectTransform knob;
     public float range = 1f;
-
     public float rollSensitive;
-
     public bool accel = false;
+    public int equipIdx = 0;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        evadeMove = new Action[10] { () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { } };
+        evadeMove[0] = NomalRoll;
+        evadeMove[1] = NomalRoll;
+        evadeMove[2] = NomalRoll;
+        evadeMove[3] = NomalRoll;
+        evadeMove[4] = NomalRoll;
+        evadeMove[5] = NomalRoll;
+        evadeMove[6] = NomalRoll;
+        evadeMove[7] = NomalRoll;
+        evadeMove[8] = NomalRoll;
+        evadeMove[9] = NomalRoll;
     }
 
     private Vector2 bufferVector2;
@@ -79,10 +89,8 @@ public class PlayerMove : MonoBehaviour
             {
                 var dir = DisNdir(mousePosition, bufferVector2).dir;
                 Vector3 rollDirection = new Vector3(dir.x, 0, dir.y);
-                Debug.Log(rollDirection);
                 transform.rotation = Quaternion.LookRotation(rollDirection);
-                playerData.animator.Play("Roll");
-                playerData.ep -= 7f;
+                evadeMove[equipIdx]();
             }
             else if (!isRoll)
             {
@@ -98,11 +106,6 @@ public class PlayerMove : MonoBehaviour
         }
         bufferVector2 = Input.mousePosition;
         agent.velocity = agent.transform.forward * speed;
-
-        if (playerData.ep < playerData.maxEp)
-        {
-            playerData.ep += 3f * Time.deltaTime;
-        }
 
         playerData.animator.SetFloat("moveSpeed", speed);
     }
@@ -134,5 +137,75 @@ public class PlayerMove : MonoBehaviour
             }
         }
         yield break;
+    }
+
+    //-------------------- 복장입어서 추가되는 동작들------
+
+    public Action[] evadeMove;
+
+    private void NomalRoll()
+    {
+        playerData.animator.Play("Roll");
+        playerData.ep -= 7f;
+    }
+
+    private void b()
+    {
+        playerData.animator.Play("Roll");
+        playerData.ep -= 7f;
+    }
+
+    private void c()
+    {
+        playerData.animator.Play("Roll");
+        playerData.ep -= 7f;
+    }
+
+    private void d()
+    {
+        playerData.animator.Play("Roll");
+        playerData.ep -= 7f;
+    }
+
+    private void e()
+    {
+        playerData.animator.Play("Roll");
+        playerData.ep -= 7f;
+    }
+
+    private void f()
+    {
+        playerData.animator.Play("Roll");
+        playerData.ep -= 7f;
+    }
+
+    private void g()
+    {
+        playerData.animator.Play("Roll");
+        playerData.ep -= 7f;
+    }
+
+    private void h()
+    {
+        playerData.animator.Play("Roll");
+        playerData.ep -= 7f;
+    }
+
+    private void i()
+    {
+        playerData.animator.Play("Roll");
+        playerData.ep -= 7f;
+    }
+
+    private void j()
+    {
+        playerData.animator.Play("Roll");
+        playerData.ep -= 7f;
+    }
+
+    private void k()
+    {
+        playerData.animator.Play("Roll");
+        playerData.ep -= 7f;
     }
 }
