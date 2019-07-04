@@ -11,7 +11,12 @@ public partial class BoxOpenPanel : MonoBehaviour
             Debug.Log("박스도는중");
             return;
         }
-        PlayAbsorbVfx();
+        OnPressUnBoxingProcess();
+    }
+
+    private void OnPressUnBoxingProcess()
+    {
+        absorbVfx.Play();
         RotBoxTweenEffect();
     }
 
@@ -33,19 +38,21 @@ public partial class BoxOpenPanel : MonoBehaviour
         resultCardFrontObj.GetComponent<RectTransform>().anchoredPosition = openPosition;
         resultPanel.GetComponent<RectTransform>().anchoredPosition = openPosition;
         closePanelButton.SetActive(true);
+
+        cardOpenVfx.Play();
     }
 
     private void BoomEffect()
     {
-        StopAbsorbVfx();
+        absorbVfx.Stop();
         explodeVfx.Play();
+
         //박스열릴때 나오는 연기 이팩트 같은거! 소리도 그렇고
     }
 
     private void ChangeMesh()
     {
-        boxObj.SetActive(false)
-            ;
+        boxObj.SetActive(false);
         boxOpenObj.SetActive(true);
 
         unBoxingButton.SetActive(false);
@@ -64,8 +71,8 @@ public partial class BoxOpenPanel : MonoBehaviour
         {
             return;
         }
-        LTDescr decr = LeanTween.scale(boxOpenObj, openBoxScaleforIntro * 0.9f, IntroTime).setEase(LeanTweenType.easeOutElastic)
-            .setLoopPingPong(3); //3번하고 끄긴하는데, 다중에 켯을때 ,남았으면, 그것회수까지만해서, 안움직일 경우도 있지만, 다시 열면 되긴해!
+        //3번하고 끄긴하는데, 다중에 켯을때 ,남았으면, 그것회수까지만해서, 안움직일 경우도 있지만, 다시 열면 되긴해!
+        LTDescr decr = LeanTween.scale(boxOpenObj, openBoxScaleforIntro * 0.9f, IntroTime).setEase(LeanTweenType.easeOutElastic).setLoopPingPong(3);
     }
 
     private void ShowResultTween()
@@ -75,18 +82,13 @@ public partial class BoxOpenPanel : MonoBehaviour
         d.setOnComplete(ShowResultTween_Complete);
     }
 
-    private void ShowResult()
+    private void PlayBoxSkinVfx()
     {
-        resultPanel.GetComponent<RectTransform>().anchoredPosition = openPosition;
-    }
-
-    private void PlayAbsorbVfx()
-    {
-        absorbVfx.Play();
+        boxSkinVfx.Play();
     }
 
     private void StopAbsorbVfx()
     {
-        absorbVfx.Stop();
+        boxSkinVfx.Stop();
     }
 }

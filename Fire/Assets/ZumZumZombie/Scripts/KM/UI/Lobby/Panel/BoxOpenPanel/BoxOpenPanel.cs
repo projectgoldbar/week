@@ -15,9 +15,10 @@ public partial class BoxOpenPanel : MonoBehaviour
     public GameObject unBoxingButton;
     public GameObject closePanelButton;
 
+    public ParticleSystem boxSkinVfx;
     public ParticleSystem absorbVfx;
     public ParticleSystem explodeVfx;
-    public ParticleSystem openVfx;
+    public ParticleSystem cardOpenVfx;
 
     private float IntroTime = 0.5f;
 
@@ -50,8 +51,14 @@ public partial class BoxOpenPanel : MonoBehaviour
 
     private void StopAllVfx()
     {
+        boxSkinVfx.Stop();
         absorbVfx.Stop();
         explodeVfx.Stop();
+        cardOpenVfx.Stop();
+
+        absorbVfx.Clear();
+        explodeVfx.Clear();
+        cardOpenVfx.Clear();
     }
 
     public void Close()
@@ -60,10 +67,15 @@ public partial class BoxOpenPanel : MonoBehaviour
         resultPanel.GetComponent<RectTransform>().anchoredPosition = closeResultPostion;
         resultCardBackObj.GetComponent<RectTransform>().anchoredPosition = closeCardBackPosition;
         resultCardFrontObj.GetComponent<RectTransform>().anchoredPosition = closeCardFrontPosition;
+
+        StopAllVfx();
     }
 
     public void Open()
     {
+        StopAllVfx();
+
+        PlayBoxSkinVfx();
         gameObject.GetComponent<RectTransform>().anchoredPosition = openPosition;
 
         boxObj.SetActive(true);
@@ -75,7 +87,7 @@ public partial class BoxOpenPanel : MonoBehaviour
 
     private void PlayTweenEffectforOpen()
     {
-        IntroBox();
+        AppearBoxTween();
     }
 
     private void IntroBox_Complete()
@@ -95,7 +107,7 @@ public partial class BoxOpenPanel : MonoBehaviour
         resultCardFrontObj.GetComponent<RectTransform>().anchoredPosition = closeCardFrontPosition;
     }
 
-    private void IntroBox()
+    private void AppearBoxTween()
     {
         LTDescr decr = LeanTween.scale(boxObj, targetBoxScaleforIntro, IntroTime).setEase(LeanTweenType.easeOutElastic);
         decr.setOnComplete(IntroBox_Complete);
