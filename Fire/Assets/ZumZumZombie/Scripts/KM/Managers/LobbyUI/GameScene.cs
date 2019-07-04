@@ -42,6 +42,11 @@ public partial class GameScene : MonoBehaviour
         StatButton();
     }
 
+    private void OnEnable()
+    {
+        StatButton();
+    }
+
     //중앙 패널 버튼들 ㄱ
     public void StatButton()
     {
