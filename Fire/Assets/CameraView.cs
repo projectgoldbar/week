@@ -22,7 +22,9 @@ public class CameraView : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        zombiedata.stateMachine.StateChange(zombiedata.moving);
+        zombieData.animator.speed = 1f;
+
+        //zombiedata.stateMachine.StateChange(zombiedata.moving);
         //zombiedata.agent.speed = 20f;
         //MoveSpeedChange = false;
     }

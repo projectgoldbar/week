@@ -38,7 +38,6 @@ namespace ZombieState
             zombieData.agent.speed = CurrentSpeed;
             zombieData.agent.acceleration = 13f;
             SturnColl.enabled = false;
-
             StartCoroutine(zombieData.moveCoroutine);
         }
 

@@ -21,7 +21,7 @@ namespace ZombieState
             zombieData.moveCoroutine = ZombieMove();
             player = zombieData.player.gameObject.transform;
             target = player;
-            speed = zombieData.player.GetComponent<PlayerMove>().speed;
+            speed = zombieData.player.GetComponent<PlayerMove>().maxSpeed;
         }
 
         public override void Think()
@@ -63,7 +63,7 @@ namespace ZombieState
                 zombieData.agent.CalculatePath(target.position, zombieData.path);
                 zombieData.agent.SetPath(zombieData.path);
 
-                Debug.Log("경로탐색중");
+                //Debug.Log("경로탐색중");
                 yield return waitSecond;
             }
         }
