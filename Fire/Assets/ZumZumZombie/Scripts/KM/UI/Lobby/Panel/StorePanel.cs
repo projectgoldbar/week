@@ -14,13 +14,11 @@ public class StorePanel : MonoBehaviour
 
     public void OpenPanel()
     {
-        gameObject.SetActive(true);
         gameObject.GetComponent<RectTransform>().anchoredPosition = openePos;
     }
 
     public void ClosePanel()
     {
         gameObject.GetComponent<RectTransform>().anchoredPosition = closePos;
-        gameObject.SetActive(false);
     }
 }
