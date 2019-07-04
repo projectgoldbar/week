@@ -34,6 +34,7 @@ namespace ZombieState
                 currentState.enabled = false;
                 currentState = state;
                 currentState.enabled = true;
+                Debug.Log("현제상태" + currentState);
 
                 StateStart();
             }

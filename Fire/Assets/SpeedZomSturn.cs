@@ -28,6 +28,13 @@ namespace ZombieState
         {
         }
 
+        public float recoverTime = 1f;
+
+        public void SetRecoverTime()
+        {
+            zombieData.animator.speed = 0f;
+        }
+
         public void EndSturn()
         {
             zombieData.sturnCollider.gameObject.SetActive(false);
