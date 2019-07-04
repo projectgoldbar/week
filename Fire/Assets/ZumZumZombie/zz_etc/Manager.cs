@@ -119,7 +119,7 @@ public class Manager : MonoBehaviour
         //cimage.sprite = x[2].sprite;
 
         evolUi.SetActive(true);
-        playerController.SetActive(false);
+        //playerController.SetActive(false);
         GamePause();
     }
 
@@ -150,7 +150,7 @@ public class Manager : MonoBehaviour
         }
     }
 
-    private void GamePause()
+    public void GamePause()
     {
         Time.timeScale = 0;
         StopCoroutine(sw);
@@ -194,8 +194,9 @@ public class Manager : MonoBehaviour
         min = playTime / 60 % 60;
         hour = playTime / 3600;
         survivalTimeTxt.text = string.Format("{0:00} : {1:00} : {2:00}", hour, min, sec);
+        coinText.text = playerData.gold.ToString();
         gameOverUi.SetActive(true);
-        StartCoroutine(TimeToGold());
+        //StartCoroutine(TimeToGold());
     }
 
     private IEnumerator TimeToGold()

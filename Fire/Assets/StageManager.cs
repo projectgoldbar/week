@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class StageManager : MonoBehaviour
 {
@@ -9,11 +8,18 @@ public class StageManager : MonoBehaviour
     public GameObject zombie;
     public GameObject dashZombie;
     public GameObject spitZombie;
+
+    public List<GameObject> zombiePool;
+    public List<GameObject> dashZombiePool;
+    public List<GameObject> etcPool;
+
     public ArrowMove boxIndirection;
     public Manager manager;
     public GameObject pivot; //박스떨구기위해 있는 피벗
     public List<StageS> stageList = new List<StageS>();
 
+    private PlayerData playerData;
+    private ParticlePool particlePool;
     public Transform[] SpawnPosition;
 
     public int[] overlapIndex;
@@ -32,6 +38,53 @@ public class StageManager : MonoBehaviour
     private int randomValue;
 
     //
+
+    private void Awake()
+    {
+        overlapIndex = OverlapRandomIndex(SpawnPosition.Length);
+        ShowTimer = new WaitForSeconds(0.5f);
+        playerData = FindObjectOfType<PlayerData>();
+        particlePool = FindObjectOfType<ParticlePool>();
+        ZombiePoolSet();
+        StageSetting();
+    }
+
+    #region 좀비풀
+
+    private void ZombiePoolSet()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            var x = Instantiate(zombie, transform.position, Quaternion.identity, transform);
+            var y = Instantiate(dashZombie, transform.position, Quaternion.identity, transform);
+            var z = Instantiate(spitZombie, transform.position, Quaternion.identity, transform);
+
+            x.SetActive(false);
+            y.SetActive(false);
+            z.SetActive(false);
+            zombiePool.Add(x);
+            dashZombiePool.Add(y);
+            etcPool.Add(z);
+        }
+    }
+
+    private GameObject GetZombie(List<GameObject> pool)
+    {
+        for (int i = 0; i < pool.Count; i++)
+        {
+            if (!pool[i].activeSelf)
+            {
+                return pool[i];
+            }
+        }
+        var a = Instantiate(pool[0], transform.position, Quaternion.identity, transform);
+        a.SetActive(false);
+        pool.Add(a);
+        return a;
+    }
+
+    #endregion 좀비풀
+
     public int GetBoxRandom()
     {
         //var StageData = GetSpawn(StageLv);
@@ -76,7 +129,7 @@ public class StageManager : MonoBehaviour
         //레벨업
         if (currentStageLV > 0)
         {
-            manager.Evolution();
+            LvUp();
         }
         //유저 박스화살표 변경
         boxIndirection.target = boxPosition;
@@ -85,16 +138,42 @@ public class StageManager : MonoBehaviour
         //지뢰개수만큼 지속적으로 지뢰 생성되는함수 구현하기
 
         //코인개수 만큼 뿌리기 구현
-
-        Debug.Log("aaaaaaaaaaa" + currentStageLV);
     }
 
-    private void Start()
+    #region 스테이지 레벨법 시퀀스
+
+    public void LvUp()
     {
-        overlapIndex = OverlapRandomIndex(SpawnPosition.Length);
-        ShowTimer = new WaitForSeconds(0.5f);
-        StageSetting();
+        var targets = Physics.OverlapSphere(playerData.transform.position, 20f, LayerMask.GetMask("Monster"));
+        StartCoroutine(ChangeAsh(targets));
     }
+
+    private IEnumerator ChangeAsh(Collider[] targets)
+    {
+        WaitForSeconds seconds = new WaitForSeconds(0.1f);
+        for (int i = 0; i < targets.Length; i++)
+        {
+            targets[i].gameObject.GetComponentInChildren<SkinnedMeshRenderer>().materials[0].color = Color.black;
+            yield return seconds;
+        }
+        for (int i = 0; i < targets.Length; i++)
+        {
+            var dust = particlePool.GetParticle(particlePool.zombieDustParticle);
+            dust.transform.position = targets[i].transform.position;
+            dust.transform.rotation = Quaternion.LookRotation(Vector3.up);
+            dust.SetActive(true);
+            targets[i].gameObject.SetActive(false);
+            yield return seconds;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            yield return seconds;
+        }
+
+        manager.Evolution();
+    }
+
+    #endregion 스테이지 레벨법 시퀀스
 
     #region 몬스터
 
@@ -132,20 +211,23 @@ public class StageManager : MonoBehaviour
 
         for (int i = 0; i < StageData.spawnData.zombieCount; i++)
         {
-            var z = Instantiate(zombie, SpawnPosition[UnityEngine.Random.Range(0, SpawnPosition.Length)], transform);
-            allZombies.Add(z.GetComponent<ZombieState.ZombiesComponent>());
+            var z = GetZombie(zombiePool);
+            z.transform.position = SpawnPosition[UnityEngine.Random.Range(0, SpawnPosition.Length)].position;
+            z.SetActive(true);
             yield return ShowTimer;
         }
         for (int i = 0; i < StageData.spawnData.dashZombieCount; i++)
         {
-            var z = Instantiate(dashZombie, SpawnPosition[UnityEngine.Random.Range(0, SpawnPosition.Length)], transform);
-            allZombies.Add(z.GetComponent<ZombieState.ZombiesComponent>());
+            var z = GetZombie(dashZombiePool);
+            z.transform.position = SpawnPosition[UnityEngine.Random.Range(0, SpawnPosition.Length)].position;
+            z.SetActive(true);
             yield return ShowTimer;
         }
         for (int i = 0; i < StageData.spawnData.spitZombieCount; i++)
         {
-            var z = Instantiate(spitZombie, SpawnPosition[UnityEngine.Random.Range(0, SpawnPosition.Length)], transform);
-            allZombies.Add(z.GetComponent<ZombieState.ZombiesComponent>());
+            var z = GetZombie(etcPool);
+            z.transform.position = SpawnPosition[UnityEngine.Random.Range(0, SpawnPosition.Length)].position;
+            z.SetActive(true);
             yield return ShowTimer;
         }
         //for (int k = 0; k < StageData.spawnData.data.Length; k++)

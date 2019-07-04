@@ -8,11 +8,15 @@ public class CameraView : MonoBehaviour
     public ZombiesComponent zombiedata;
     public Zombie1Moving zombie;
     public bool MoveSpeedChange = false;
+    public bool isStateChageOk = true;
 
     private void OnBecameVisible()
     {
-        zombiedata.stateMachine.StateChange(zombiedata.slowMoving);
-        //if (zombie.Running == false)
+        if (isStateChageOk)
+        {
+            zombiedata.stateMachine.StateChange(zombiedata.slowMoving);
+            isStateChageOk = false;
+        }//if (zombie.Running == false)
         //{
         //    zombie.CurrentSpeed = zombie.PlayerSpeed;
         //    zombiedata.agent.speed = zombie.CurrentSpeed;
@@ -23,7 +27,11 @@ public class CameraView : MonoBehaviour
     private void OnBecameInvisible()
     {
         zombiedata.animator.speed = 1f;
-
+        if (zombiedata.stateMachine.currentState == zombiedata.moving)
+        {
+            isStateChageOk = true;
+            zombiedata.agent.speed = 20f;
+        }
         //zombiedata.stateMachine.StateChange(zombiedata.moving);
         //zombiedata.agent.speed = 20f;
         //MoveSpeedChange = false;

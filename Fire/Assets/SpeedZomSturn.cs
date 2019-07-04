@@ -13,6 +13,11 @@ namespace ZombieState
             zombieData.animator.SetLayerWeight(1, 0);
             zombieData.agent.speed = 0f;
             zombieData.agent.velocity = Vector3.zero;
+            var x = zombieData.particlePool.GetParticle(zombieData.particlePool.hitParticlePool);
+
+            x.transform.position = transform.position;
+            x.transform.localRotation = transform.rotation;
+            x.SetActive(true);
             zombieData.animator.SetFloat("Speed", zombieData.agent.speed);
             zombieData.animator.StopPlayback();
             zombieData.animator.Play("Blow");

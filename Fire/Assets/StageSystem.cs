@@ -59,7 +59,7 @@ public class StageSystem : MonoBehaviour
         {
             if (stageGate[i].activeSelf)
             {
-                var particle = particlePool.GetParticle(particlePool.gateOpenParticlePool);
+                var particle = particlePool.GetParticle(particlePool.zombieDamageParticlePool);
                 particle.transform.position = stageGate[i].transform.position;
                 particle.SetActive(true);
                 stageGate[i].SetActive(false);

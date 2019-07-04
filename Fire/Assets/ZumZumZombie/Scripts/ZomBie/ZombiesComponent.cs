@@ -24,6 +24,7 @@ namespace ZombieState
         public IEnumerator zombieAttackCoroutine;
         public Material material;
         public TrailRenderer attackTrailRenderer;
+        public ParticlePool particlePool;
 
         private void Awake()
         {
@@ -36,12 +37,12 @@ namespace ZombieState
             slowMoving = GetComponent<Zombie_MovingSlow>();
             moving.enabled = false;
             attack = GetComponent<ZomBie_Attack>();
-            if (attack != null)
-                attack.enabled = false;
-
+            particlePool = FindObjectOfType<ParticlePool>();
             stun = GetComponent<ZomBie_Stun>();
             stun.enabled = false;
             material = GetComponentInChildren<SkinnedMeshRenderer>().materials[0];
+            if (attack != null)
+                attack.enabled = false;
         }
     }
 }

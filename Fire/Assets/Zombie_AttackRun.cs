@@ -65,6 +65,8 @@ namespace ZombieState
         public override void Exit()
         {
             count = 0;
+            zombieData.animator.StopPlayback();
+
             zombieData.animator.SetBool("FastRun", false);
         }
     }

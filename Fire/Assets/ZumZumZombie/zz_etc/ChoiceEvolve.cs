@@ -23,7 +23,7 @@ public class ChoiceEvolve : MonoBehaviour
         //transform.parent.gameObject.SetActive(false);
         manager.evolUi.SetActive(false);
 
-        manager.playerController.SetActive(true);
+        //manager.playerController.SetActive(true);
         manager.GameResume();
     }
 }
