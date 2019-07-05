@@ -55,7 +55,7 @@ public class UITweenEffectManager : MonoBehaviour
         FadeInImageObj.GetComponent<Image>().raycastTarget = true;
 
         isCompleteFadeOut = false;
-        var d = LeanTween.value(toIn, toOut, fadeTweenDuration);
+        var d = LeanTween.value(toIn, toOut, fadeTweenDuration * 4f);
         d.setOnUpdate(x => { ValueUpdateFade(x); });
         d.setOnComplete(FadeOutImageComplete);
     }
