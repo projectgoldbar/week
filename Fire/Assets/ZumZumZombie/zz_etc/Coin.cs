@@ -6,6 +6,7 @@ public class Coin : MonoBehaviour
     public int coinSection;
     private ParticlePool particlePool;
     private SectorManager sectorManager;
+    public bool coinRotate = true;
 
     private void Awake()
     {
@@ -16,13 +17,15 @@ public class Coin : MonoBehaviour
     private void OnEnable()
     {
         sectorManager.sectors[coinSection].currentCoin++;
+        coinRotate = true;
     }
 
-    /// <summary>
-    /// Makes the object rotate on its center every frame.
-    /// </summary>
     protected virtual void Update()
     {
+        if (!coinRotate)
+        {
+            return;
+        }
         transform.Rotate(RotationSpeed * Time.deltaTime, Space.Self);
     }
 
