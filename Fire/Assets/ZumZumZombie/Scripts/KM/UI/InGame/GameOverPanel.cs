@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameOverPanel : MonoBehaviour
 {
@@ -8,14 +9,23 @@ public class GameOverPanel : MonoBehaviour
     public GameObject doubleCoinText;
     public GameObject normalCoinText;
 
-    private void start()
+    private Vector2 closePos = new Vector2(2000f, 2000f);
+    private Vector2 openePos = new Vector2(0f, 0f);
+
+    private void Start()
     {
-        //Open_gameOverPanel();
+        Open_gameOverPanel();
+    }
+
+    private void OnEnable()
+    {
+        Open_gameOverPanel();
     }
 
     public void Open_gameOverPanel()
     {
         resetBeforeAds();
+        gameObject.GetComponent<RectTransform>().anchoredPosition = openePos;
         gameObject.SetActive(false);
     }
 

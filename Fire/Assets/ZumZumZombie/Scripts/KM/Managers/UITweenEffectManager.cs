@@ -15,7 +15,7 @@ public class UITweenEffectManager : MonoBehaviour
     public bool isCompleteFadeIn = false;
     public bool isCompleteFadeOut = false;
 
-    public float fadeInDuration = 2.0f;
+    public float fadeTweenDuration = 0.5f;
 
     private float toOut = 255.0f;
     private float toIn = 0.0f;
@@ -45,7 +45,7 @@ public class UITweenEffectManager : MonoBehaviour
         FadeInImageObj.GetComponent<Image>().raycastTarget = false;
 
         isCompleteFadeIn = false;
-        var d = LeanTween.value(toOut, toIn, fadeInDuration);
+        var d = LeanTween.value(toOut, toIn, fadeTweenDuration);
         d.setOnUpdate(x => { ValueUpdateFade(x); });
         d.setOnComplete(FadeInImageComplete);
     }
@@ -55,7 +55,7 @@ public class UITweenEffectManager : MonoBehaviour
         FadeInImageObj.GetComponent<Image>().raycastTarget = true;
 
         isCompleteFadeOut = false;
-        var d = LeanTween.value(toIn, toOut, fadeInDuration);
+        var d = LeanTween.value(toIn, toOut, fadeTweenDuration);
         d.setOnUpdate(x => { ValueUpdateFade(x); });
         d.setOnComplete(FadeOutImageComplete);
     }
