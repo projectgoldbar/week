@@ -19,21 +19,19 @@ public class EvolveSystem : MonoBehaviour
 
     public List<Action> evolveFunc = new List<Action>();
 
-
-
     private void Awake()
     {
         evolveFunc.Add(() => Resiliencepeace());//0
         evolveFunc.Add(() => Beanworm());//1
         evolveFunc.Add(() => DefenceUp());//2
         evolveFunc.Add(() => endurance());//3
-        evolveFunc.Add(() => GastrointestinalExtension());//4
-        evolveFunc.Add(() => TitaniumTooth());//5
-        evolveFunc.Add(() => MagnetTail());//6
-        evolveFunc.Add(() => QuadCore());//7
-        evolveFunc.Add(() => MeatTail());//8
-        evolveFunc.Add(() => FowardShield());//9
-        evolveFunc.Add(() => Charge());//10
+        evolveFunc.Add(() => Sence5());//4
+        evolveFunc.Add(() => Calamity());//5
+        evolveFunc.Add(() => Breathing());//6
+        evolveFunc.Add(() => Entente());//7
+        evolveFunc.Add(() => SpeedRun());//8
+        evolveFunc.Add(() => { });//FowardShield());//9
+        evolveFunc.Add(() => { });//Charge());//10
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
@@ -86,13 +84,15 @@ public class EvolveSystem : MonoBehaviour
     public void Resiliencepeace()
     {
         var a = FindObjectOfType<PlayerData>();
-        a.recovery++; 
+        a.recovery++;
+        Debug.Log("회복력 강화");
     }
 
     public void Beanworm()
     {
         var a = FindObjectOfType<PlayerData>();
         a.Worm++;
+        Debug.Log("콩벌레");
     }
 
 
@@ -100,20 +100,50 @@ public class EvolveSystem : MonoBehaviour
     {
         var a = FindObjectOfType<PlayerData>();
         a.GoldWorm++;
+        Debug.Log("돈벌레");
     }
 
     public void endurance()
     {
         var a = FindObjectOfType<PlayerData>();
         a.Endurance++;
+        Debug.Log("지구력");
     }
 
     public void Sence5()
     {
         var a = FindObjectOfType<PlayerData>();
         a.Sence++;
+        Debug.Log("5감각");
     }
 
+    public void Calamity()
+    {
+        var a = FindObjectOfType<PlayerData>();
+        a.Calamity++;
+        Debug.Log("재난대처능력");
+    }
+
+    public void Breathing()
+    {
+        var a = FindObjectOfType<PlayerData>();
+        a.Breathing++;
+        Debug.Log("숨쉬기운동");
+    }
+
+
+    public void Entente()
+    {
+        var a = FindObjectOfType<PlayerData>();
+        a.AddGold++;
+        Debug.Log("협상");
+    }
+    public void SpeedRun()
+    {
+        var a = FindObjectOfType<PlayerData>();
+        a.SpeedRun++;
+        Debug.Log("질주");
+    }
 
 
     public void FullCharge()

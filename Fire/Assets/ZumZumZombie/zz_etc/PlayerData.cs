@@ -37,11 +37,12 @@ public class PlayerData : MonoBehaviour
     public float gold = 0;
     public int df = 0;
 
+    public SphereCollider EvadeCollider;
+
     #region 퍽 0번 회복력 강화
 
     private float RecoveryData;
     private int Recovery;
-
     public int recovery
     {
         get => Recovery;
@@ -52,16 +53,16 @@ public class PlayerData : MonoBehaviour
             else if (Recovery == 1) RecoveryData = 0.5f;
             else if (Recovery == 2) RecoveryData = 0.75f;
             else if (Recovery == 3) RecoveryData = 1.0f;
+
+            Debug.Log($"회복력강화 -> {Recovery}");
         }
     }
 
-    #endregion 퍽 0번 회복력 강화
+    #endregion
 
     #region 퍽1번 콩벌레
-
     public int WormData;
     private int worm;
-
     public int Worm
     {
         get { return worm; }
@@ -72,16 +73,16 @@ public class PlayerData : MonoBehaviour
             else if (worm == 1) WormData = 2;
             else if (worm == 2) WormData = 4;
             else if (worm == 3) WormData = 7;
+
+            Debug.Log($"콩벌레 -> {WormData}");
         }
     }
 
-    #endregion 퍽1번 콩벌레
+    #endregion
 
     #region 퍽2번 돈벌레
-
     public float GoldWormData;
     private int goldworm;
-
     public int GoldWorm
     {
         get { return goldworm; }
@@ -92,16 +93,16 @@ public class PlayerData : MonoBehaviour
             else if (goldworm == 1) GoldWormData = 0.5f;
             else if (goldworm == 2) GoldWormData = 0.75f;
             else if (goldworm == 3) GoldWormData = 1f;
+
+            Debug.Log($"돈벌레 -> {GoldWormData}");
         }
     }
 
-    #endregion 퍽2번 돈벌레
+    #endregion
 
     #region 퍽3번 지구력
-
     public float enduranceData;
     private int endurance;
-
     public int Endurance
     {
         get { return endurance; }
@@ -112,16 +113,21 @@ public class PlayerData : MonoBehaviour
             else if (endurance == 1) enduranceData = 0.5f;
             else if (endurance == 2) enduranceData = 0.75f;
             else if (endurance == 3) enduranceData = 1f;
+
+            ep += enduranceData;
+
+            Debug.Log($"지구력 -> {enduranceData}");
         }
     }
 
-    #endregion 퍽3번 지구력
+
+    #endregion
 
     #region 퍽4번 제5감각
 
+    public float DefaultEvadeRadius;
     public float SenceData;
     private int sence;
-
     public int Sence
     {
         get { return sence; }
@@ -132,10 +138,109 @@ public class PlayerData : MonoBehaviour
             else if (sence == 1) SenceData = 0.5f;
             else if (sence == 2) SenceData = 0.75f;
             else if (sence == 3) SenceData = 1f;
+
+            //회피범위
+
+            var radius = DefaultEvadeRadius + SenceData;
+            EvadeCollider.radius = radius;
+
+            Debug.Log($"제5감각 -> {SenceData}");
         }
     }
 
-    #endregion 퍽4번 제5감각
+    #endregion
+
+    #region 퍽5번 재난대처능력
+    public float calamityData;
+    private int calamity;
+    public float MainusEP = 2;
+    public int Calamity
+    {
+        get { return calamity; }
+        set
+        {
+            calamity = value;
+            if (calamity == 0) calamityData = 0;
+            else if (calamity == 1) calamityData = 0.3f;
+            else if (calamity == 2) calamityData = 0.4f;
+            else if (calamity == 3) calamityData = 0.5f;
+
+
+            Debug.Log($"재난대처능력 -> {calamityData}");
+        }
+    }
+
+    #endregion
+
+    #region 퍽6번 숨쉬기운동
+    public float breathingData;
+    private int breathing;
+
+    public int Breathing
+    {
+        get { return breathing; }
+        set
+        {
+            breathing = value;
+            if (breathing == 0) breathingData = 0;
+            else if (breathing == 1) breathingData = 0.05f;
+            else if (breathing == 2) breathingData = 0.1f;
+            else if (breathing == 3) breathingData = 0.2f;
+
+            maxhp += (maxhp * breathingData);
+            Debug.Log($"숨쉬기운동 -> {breathingData}");
+        }
+    }
+
+    #endregion
+
+    #region 퍽7번 협상
+    public int AddGoldData;
+    private int addGold;
+    public int AddGold
+    {
+        get { return addGold; }
+        set
+        {
+            addGold = value;
+            if (addGold == 0) AddGoldData = 0;
+            else if (addGold == 1) AddGoldData = 2;
+            else if (addGold == 2) AddGoldData = 3;
+            else if (addGold == 3) AddGoldData = 4;
+
+            Debug.Log($"협상 -> {AddGoldData}");
+        }
+    }
+
+
+
+    #endregion
+
+    #region 퍽8번 질주
+    private float DefaultSpeedData;
+    public float SpeedRunData;
+    private int speedRun;
+
+    public int SpeedRun
+    {
+        get { return speedRun; }
+        set
+        {
+            speedRun = value;
+            if (speedRun == 0) SpeedRunData = 0;
+            else if (speedRun == 1) SpeedRunData = 0.3f;
+            else if (speedRun == 2) SpeedRunData = 0.35f;
+            else if (speedRun == 3) SpeedRunData = 0.4f;
+
+
+            var data = DefaultSpeedData + SpeedRunData;
+            playerMove.maxSpeed = data;
+
+            Debug.Log($"질주 -> {SpeedRunData}");
+        }
+    }
+
+    #endregion
 
     public int goldBoxCount = 0;
     public int silverBoxCount = 0;
@@ -280,25 +385,31 @@ public class PlayerData : MonoBehaviour
             MeshData.sharedMesh = UserDataManager.Instance.EquipSkinReference[UserDataManager.Instance.userData.equipedSkinIdx].sharedMesh;
         }
         hp = maxhp;
-        if (this.enabled == false)
-        {
-            this.enabled = true;
-        }
+        DefaultEvadeRadius = EvadeCollider.radius;
+        DefaultSpeedData = playerMove.maxSpeed;
     }
 
-    #region 구르기 애니메이션 이벤트로 넣음.
 
+    #region 구르기 애니메이션 이벤트로 넣음.
     public void RollDfUp()
     {
         df += WormData;
+        if (playerMove.CalamityRoll)
+        {
+            df += 1;
+        }
     }
 
     public void RollDfDown()
     {
         df -= WormData;
+        if (playerMove.CalamityRoll)
+        {
+            df -= 1;
+            playerMove.CalamityRoll = false;
+        }
     }
-
-    #endregion 구르기 애니메이션 이벤트로 넣음.
+    #endregion
 
     private void PlayerSetting()
     {
@@ -323,7 +434,6 @@ public class PlayerData : MonoBehaviour
         if (hp <= 0)
         {
             //manager.GameOver();
-            //Invoke("GameOverInvoke", 2f);
             animator.Play("die");
         }
         if (ep < maxEp)
