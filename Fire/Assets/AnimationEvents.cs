@@ -37,6 +37,7 @@ public class AnimationEvents : MonoBehaviour
 
     public void DieStart()
     {
+        playerMove.enabled = false;
         FindObjectOfType<UITweenEffectManager>().LeaveInGame();
     }
 
