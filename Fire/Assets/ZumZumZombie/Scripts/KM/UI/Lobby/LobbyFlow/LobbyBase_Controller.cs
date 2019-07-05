@@ -9,58 +9,79 @@ public class LobbyBase_Controller : MonoBehaviour
     public DoorController doorController;
     public StartObjController StartObjController;
 
-    /*
-   public GameObject mainCameraBgforMood;
-   public GameObject dLightforMood;
-   public GameObject rawImageforMood;
+    public GameObject mainCameraBgforMood;
 
-   private Color mainCameraBgforMoodColor;
-   private Color dLightforMoodColor;
-   private Color rawImageforMoodColor;
+    //public GameObject dLightforMood;
+    //public GameObject rawImageforMood;
 
-   private float changeMoodTimeSpan = 2.0f;
-   private float changeMoodTime = 2.0f;
+    private Color mainCameraBgforMoodColor;
+    //private Color dLightforMoodColor;
+    //private Color rawImageforMoodColor;
 
-   private Color currColor = Color.white;
+    //private float changeMoodTimeSpan = 2.0f;
+    //private float changeMoodTime = 2.0f;
 
-   private void Awake()
-   {
-       mainCameraBgforMoodColor = mainCameraBgforMood.GetComponent<Camera>().backgroundColor;
-       dLightforMoodColor = dLightforMood.GetComponent<Light>().color;
-       //rawImageforMoodColor = rawImageforMood.GetComponent<Renderer>().material.
-   }
+    //private Color currColor = Color.white;
 
-   private void Start()
-   {
-       Debug.Log(rawImageforMoodColor);
-       // StartCoroutine("ChangeMoodColor");
-   }
+    private void Awake()
+    {
+        mainCameraBgforMoodColor = mainCameraBgforMood.GetComponent<Camera>().backgroundColor;
+        //dLightforMoodColor = dLightforMood.GetComponent<Light>().color;
+        //rawImageforMoodColor = rawImageforMood.GetComponent<Renderer>().material.
+    }
 
-   private IEnumerator ChangeMoodColor()
-   {
-       float progress = 0;
-       float increment = changeMoodTime / changeMoodTimeSpan;
+    private float duration = 5;
+    private float smoothness = 0.02f;
+    private Color currentColor = Color.white;
 
-       while (progress < 1)
-       {
-           mainCameraBgforMoodColor = Color.Lerp(Color.red, Color.blue, progress);
-           progress += increment;
-           Debug.Log(mainCameraBgforMoodColor);
-           yield return new WaitForSeconds(changeMoodTime);
-       }
-   }
+    private void Start()
+    {
+        StartCoroutine("LerpColor");
+    }
 
-   private void Update()
-   {
-       float progress = 0;
-       float increment = changeMoodTime / changeMoodTimeSpan;
+    private IEnumerator LerpColor()
+    {
+        float progress = 0;
+        float increment = smoothness / duration;
+        while (progress < 1)
+        {
+            mainCameraBgforMood.GetComponent<Camera>().backgroundColor = Color.Lerp(Color.red, Color.blue, progress);
+            progress += increment;
+            yield return new WaitForSeconds(smoothness);
+        }
+        //return true;
+    }
 
-       while (progress < 1)
-       {
-           mainCameraBgforMoodColor = Color.Lerp(Color.red, Color.blue, progress);
-           progress += increment;
-           Debug.Log(mainCameraBgforMoodColor);
-       }
-   }
-   */
+    //private void Start()
+    //{
+    //    //   Debug.Log(rawImageforMoodColor);
+    //     StartCoroutine("ChangeMoodColor");
+    //}
+
+    //private IEnumerator ChangeMoodColor()
+    //{
+    //    float progress = 0;
+    //    float increment = changeMoodTime / changeMoodTimeSpan;
+
+    //    while (progress < 1)
+    //    {
+    //        mainCameraBgforMoodColor = Color.Lerp(Color.red, Color.blue, progress);
+    //        progress += increment;
+    //        Debug.Log(mainCameraBgforMoodColor);
+    //        yield return new WaitForSeconds(changeMoodTime);
+    //    }
+    //}
+
+    //private void Update()
+    //{
+    //    float progress = 0;
+    //    float increment = changeMoodTime / changeMoodTimeSpan;
+
+    //    while (progress < 1)
+    //    {
+    //        mainCameraBgforMoodColor = Color.Lerp(Color.red, Color.blue, progress);
+    //        progress += increment;
+    //        Debug.Log(mainCameraBgforMoodColor);
+    //    }
+    //}
 }
