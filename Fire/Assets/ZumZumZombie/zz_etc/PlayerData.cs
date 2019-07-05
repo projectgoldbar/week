@@ -323,6 +323,7 @@ public class PlayerData : MonoBehaviour
         if (hp <= 0)
         {
             //manager.GameOver();
+            //Invoke("GameOverInvoke", 2f);
             animator.Play("die");
         }
         if (ep < maxEp)

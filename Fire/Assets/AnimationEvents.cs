@@ -35,6 +35,11 @@ public class AnimationEvents : MonoBehaviour
         playerMove.speed = 6f;
     }
 
+    public void DieStart()
+    {
+        FindObjectOfType<UITweenEffectManager>().LeaveInGame();
+    }
+
     public void GameOver()
     {
         FindObjectOfType<Manager>().GameOver();
