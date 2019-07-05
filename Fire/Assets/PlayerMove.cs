@@ -45,6 +45,7 @@ public class PlayerMove : MonoBehaviour
 
     private Vector2 bufferVector2;
     private float speedDistance;
+    public bool CalamityRoll = false;
 
     public void Update()
     {

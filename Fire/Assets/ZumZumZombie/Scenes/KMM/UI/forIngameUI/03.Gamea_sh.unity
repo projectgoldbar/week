@@ -1001,6 +1001,11 @@ PrefabInstance:
       propertyPath: hitUI
       value: 
       objectReference: {fileID: 359243934}
+    - target: {fileID: 2124716967656775917, guid: 08234207d7ccd954abc8e3ca0e427679,
+        type: 3}
+      propertyPath: EvadeCollider
+      value: 
+      objectReference: {fileID: 5591809042311366432}
     - target: {fileID: 4280316814188925351, guid: 08234207d7ccd954abc8e3ca0e427679,
         type: 3}
       propertyPath: dynamicJoystick
@@ -2199,8 +2204,9 @@ MonoBehaviour:
   meatParticlePool: []
   nukeParticlePool: []
   trapParticlePool: []
-  gateOpenParticlePool: []
+  zombieDamageParticlePool: []
   mineParticlePool: []
+  zombieDustParticle: []
 --- !u!4 &433809997
 Transform:
   m_ObjectHideFlags: 0
@@ -42896,6 +42902,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b4da29efa7f9d741b47caff7730a735, type: 3}
+--- !u!135 &5591809042311366432 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 5591809042311366432, guid: 08234207d7ccd954abc8e3ca0e427679,
+    type: 3}
+  m_PrefabInstance: {fileID: 199787080}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &8180496326917526139 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 8180496326917526139, guid: 7a3f0f8a303edfa488b2e7b8faf0c1e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 592567516}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8263189019389105219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43160,7 +43178,7 @@ PrefabInstance:
         type: 3}
       propertyPath: lightColor
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8180496326917526139}
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
       propertyPath: stageList.Array.data[1].StageLv

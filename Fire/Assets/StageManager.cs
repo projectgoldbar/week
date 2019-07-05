@@ -20,6 +20,7 @@ public class StageManager : MonoBehaviour
 
     private PlayerData playerData;
     private ParticlePool particlePool;
+    public CoinPool coinPool;
     public Transform[] SpawnPosition;
 
     public int[] overlapIndex;
@@ -140,7 +141,7 @@ public class StageManager : MonoBehaviour
         //코인개수 만큼 뿌리기 구현
     }
 
-    #region 스테이지 레벨법 시퀀스
+    #region 스테이지 레벨업 시퀀스
 
     public void LvUp()
     {
@@ -169,11 +170,32 @@ public class StageManager : MonoBehaviour
         {
             yield return seconds;
         }
+        var coinPools = coinPool.coinPool;
+
+        Queue<GameObject> activeCoins = new Queue<GameObject>();
+
+        for (int i = 0; i < coinPools.Count; i++)
+        {
+            if (coinPools[i].activeSelf == true)
+            {
+                coinPools[i].GetComponent<Coin>().coinRotate = false;
+                activeCoins.Enqueue(coinPools[i]);
+            }
+        }
+        for (; 0 < activeCoins.Count;)
+        {
+            var x = activeCoins.Dequeue();
+            for (; x.activeSelf == true;)
+            {
+                x.transform.position = Vector3.Lerp(x.transform.position, playerData.transform.position, 20f * Time.deltaTime);
+                yield return null;
+            }
+        }
 
         manager.Evolution();
     }
 
-    #endregion 스테이지 레벨법 시퀀스
+    #endregion 스테이지 레벨업 시퀀스
 
     #region 몬스터
 
