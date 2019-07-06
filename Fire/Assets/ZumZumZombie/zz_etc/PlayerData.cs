@@ -39,6 +39,10 @@ public class PlayerData : MonoBehaviour
 
     public SphereCollider EvadeCollider;
 
+    public float RndTimeMin = 3;
+    public float RndTimeMax = 20;
+
+
     #region 퍽 0번 회복력 강화
 
     private float RecoveryData;
@@ -387,29 +391,13 @@ public class PlayerData : MonoBehaviour
         hp = maxhp;
         DefaultEvadeRadius = EvadeCollider.radius;
         DefaultSpeedData = playerMove.maxSpeed;
+
+        RndTime = Random.Range(RndTimeMin, RndTimeMax);
     }
 
 
-    #region 구르기 애니메이션 이벤트로 넣음.
-    public void RollDfUp()
-    {
-        df += WormData;
-        if (playerMove.CalamityRoll)
-        {
-            df += 1;
-        }
-    }
+   
 
-    public void RollDfDown()
-    {
-        df -= WormData;
-        if (playerMove.CalamityRoll)
-        {
-            df -= 1;
-            playerMove.CalamityRoll = false;
-        }
-    }
-    #endregion
 
     private void PlayerSetting()
     {
@@ -429,6 +417,16 @@ public class PlayerData : MonoBehaviour
         playerMove.equipIdx = x.equipedSkinIdx;
     }
 
+
+    public bool is_Wall = false;
+    private float RndTime;
+    private float CurrentTime = 0;
+
+    private float sheildTime =5f;
+    private float sheildCurrentTime;
+
+
+
     private void Update()
     {
         if (hp <= 0)
@@ -439,6 +437,28 @@ public class PlayerData : MonoBehaviour
         if (ep < maxEp)
         {
             ep += epRecoverSpeed * Time.deltaTime;
+        }
+
+        if (playerMove.equipIdx == 8)
+        {
+            if (CurrentTime >= RndTime)
+            {
+                is_Wall = true;
+                if (sheildCurrentTime >= sheildTime)
+                {
+                    sheildCurrentTime = 0;
+                    CurrentTime = 0;
+                    is_Wall = false;
+                }
+                else
+                {
+                    sheildCurrentTime += Time.deltaTime;
+                }
+            }
+            else
+            {
+                CurrentTime += Time.deltaTime;
+            }
         }
     }
 
@@ -505,11 +525,36 @@ public class PlayerData : MonoBehaviour
 
     public GameObject hitUI;
 
+    float EpHitData = 2;
     private void OnTriggerEnter(Collider other)
     {
+        if (playerMove.equipIdx == 8)
+        {
+            if (other.tag == "Zombie" || other.tag == "Spit")
+            {
+                if (is_Wall) return;
+            }
+        }
+
         if (other.tag == "Zombie")
         {
-            Hp = -1 * (other.GetComponent<ZombieState.ZombiesComponent>().damage - evolveLvData[4] - df);
+            if (playerMove.equipIdx == 7) //에너지쉴드 스킨
+            {
+                if (ep + EpHitData > 0)
+                {
+                    ep -= EpHitData;
+                }
+                else
+                {
+                    Hp = -1 * (other.GetComponent<ZombieState.ZombiesComponent>().damage - evolveLvData[4] - df);
+                }
+            }
+            else
+            {
+                Hp = -1 * (other.GetComponent<ZombieState.ZombiesComponent>().damage - evolveLvData[4] - df);
+            }
+
+
             var hitEffect = particlePool.GetParticle(particlePool.hitParticlePool);
             if (hitUI.activeSelf)
             {

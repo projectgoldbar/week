@@ -27,20 +27,30 @@ public class PlayerMove : MonoBehaviour
     public bool accel = false;
     public int equipIdx = 0;
 
+    public ParticleSystem Portal = null;
+    private AnimationEvents animEvent; 
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         evadeMove = new Action[10] { () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { } };
-        evadeMove[0] = NomalRoll;
-        evadeMove[1] = NomalRoll;
+        evadeMove[0] = NomalRoll;   
+        evadeMove[1] = c;           
         evadeMove[2] = NomalRoll;
-        evadeMove[3] = NomalRoll;
+        evadeMove[3] = e;
         evadeMove[4] = NomalRoll;
         evadeMove[5] = NomalRoll;
-        evadeMove[6] = NomalRoll;
+        evadeMove[6] = h;
         evadeMove[7] = NomalRoll;
         evadeMove[8] = NomalRoll;
         evadeMove[9] = NomalRoll;
+
+        animEvent = playerData.animator.GetComponent<AnimationEvents>();
+
+
+        Portal.Stop();
+
+
     }
 
     private Vector2 bufferVector2;
@@ -111,6 +121,13 @@ public class PlayerMove : MonoBehaviour
         playerData.animator.SetFloat("moveSpeed", speed);
     }
 
+
+
+
+   
+
+   
+   
     public (float dis, Vector3 dir) DisNdir(Vector3 aa, Vector3 bb)
     {
         var Init = (aa - bb);
@@ -159,7 +176,9 @@ public class PlayerMove : MonoBehaviour
     private void c()
     {
         playerData.animator.Play("Roll");
-        playerData.ep -= 7f;
+        var hpData = playerData.hp * 0.1f;
+        playerData.hp -= hpData;
+        //playerData.ep -= 7f;
     }
 
     private void d()
@@ -168,9 +187,27 @@ public class PlayerMove : MonoBehaviour
         playerData.ep -= 7f;
     }
 
+    public bool potalOpen = false;
+         
     private void e()
     {
-        playerData.animator.Play("Roll");
+        Portal.transform.position = transform.position + (transform.forward * 20);
+        Portal.gameObject.SetActive(true);
+        Portal.Stop();
+
+        if (Portal.GetComponent<PortalEffectCollider>().is_Building)
+        {
+            playerData.animator.Play("Roll");
+        }
+        else
+        {
+            //포탈구르기
+            playerData.animator.Play("portalOpen");
+            potalOpen = true;
+            accel = false;
+        }
+
+
         playerData.ep -= 7f;
     }
 
@@ -186,9 +223,13 @@ public class PlayerMove : MonoBehaviour
         playerData.ep -= 7f;
     }
 
+
+    public bool wormSkinEquipRolling;
     private void h()
     {
         playerData.animator.Play("Roll");
+        wormSkinEquipRolling = true;
+
         playerData.ep -= 7f;
     }
 
