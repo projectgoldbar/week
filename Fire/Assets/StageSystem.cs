@@ -35,14 +35,6 @@ public class StageSystem : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if (manager.playerData.key > 0)
-        {
-            KeyStageOpen(manager.playerData.key);
-        }
-    }
-
     public void InstanceStageOpen()
     {
         StartCoroutine(DestroyGate(currentStage));
