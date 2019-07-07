@@ -9,7 +9,7 @@ public class SectorManager : MonoBehaviour
 
     private void Awake()
     {
-        coinSpwaner = FindObjectOfType<CoinSpwaner>();
+        //coinSpwaner = FindObjectOfType<CoinSpwaner>();
 
         var x = SectorGroupParent.GetComponentsInChildren<BoxCollider>();
 

@@ -62,11 +62,16 @@ public class NewUserData
     #region 인게임플레이어스테이터스
 
     public int hp;
-    public int df;
-    public float decelerationHp;
     public float healHp;
-    public float gainExp;
+    public float ep;
+    public float healEp;
     public float gainMoney;
+
+    //------안쓰는 것들임
+    public int df;
+
+    public float decelerationHp;
+    public float gainExp;
     public int maxSkillCount;
     public int skillCoolDown;
 

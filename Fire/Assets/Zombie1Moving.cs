@@ -43,27 +43,27 @@ public class Zombie1Moving : SpeedZomMoving
 
     public override void Update()
     {
-        if (ZombieCameraView.MoveSpeedChange)
-        {
-            RunnerTimer += Time.deltaTime;
+        //if (ZombieCameraView.MoveSpeedChange)
+        //{
+        //    RunnerTimer += Time.deltaTime;
 
-            if (RunnerTimer >= RunnerMaxTimer && MaxSpeed > CurrentSpeed)
-            {
-                Running = true;
-                RunnerTimer = 0;
-                CurrentSpeed += AddSpeed;
-            }
+        //    if (RunnerTimer >= RunnerMaxTimer && MaxSpeed > CurrentSpeed)
+        //    {
+        //        Running = true;
+        //        RunnerTimer = 0;
+        //        CurrentSpeed += AddSpeed;
+        //    }
 
-            if (MaxSpeed <= CurrentSpeed)
-            {
-                MoveingAnimChange = true;
-                zombieData.animator.SetFloat("Speed", CurrentSpeed);
-                SturnColl.enabled = true;
-                Trail.SetActive(true);
-            }
+        //    if (MaxSpeed <= CurrentSpeed)
+        //    {
+        //        MoveingAnimChange = true;
+        //        zombieData.animator.SetFloat("Speed", CurrentSpeed);
+        //        SturnColl.enabled = true;
+        //        Trail.SetActive(true);
+        //    }
 
-            zombieData.agent.speed = CurrentSpeed;
-        }
+        //    zombieData.agent.speed = CurrentSpeed;
+        //}
     }
 
     public override void SturnChange()

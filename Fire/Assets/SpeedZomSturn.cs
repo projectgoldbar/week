@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ZombieState
 {
@@ -23,10 +21,17 @@ namespace ZombieState
             zombieData.animator.Play("Blow");
         }
 
+        private float currentTime = 0f;
+        public float reviveTime = 5f;
+
         public override void Update()
         {
-            //일어나는 애니메이션 스테이트 검사
-            //일어나는 애니메이션 끝낫을때 스테이트 변환 (Move)
+            currentTime += Time.deltaTime;
+            if (currentTime > reviveTime)
+            {
+                currentTime = 0f;
+                zombieData.animator.speed = 1f;
+            }
         }
 
         public override void Exit()
@@ -47,7 +52,7 @@ namespace ZombieState
             Debug.Log("스턴끝");
             zombieData.animator.SetBool("Sturn", false);
 
-            StateChange(zombieData.moving);
+            StateChange(zombieData.slowMoving);
         }
     }
 }

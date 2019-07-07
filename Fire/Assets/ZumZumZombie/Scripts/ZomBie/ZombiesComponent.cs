@@ -18,6 +18,8 @@ namespace ZombieState
         public ZomBie_Attack attack;
         public ZomBie_Stun stun;
         public Zombie_MovingSlow slowMoving;
+        public Zombie_Bite zombieBite;
+        public Zombie_Down zombieDown;
         public SturnCollider sturnCollider;
         public IEnumerator moveCoroutine;
         public IEnumerator canIAttackCoroutine;
@@ -40,6 +42,8 @@ namespace ZombieState
             particlePool = FindObjectOfType<ParticlePool>();
             stun = GetComponent<ZomBie_Stun>();
             stun.enabled = false;
+            zombieBite = GetComponent<Zombie_Bite>();
+            zombieDown = GetComponent<Zombie_Down>();
             material = GetComponentInChildren<SkinnedMeshRenderer>().materials[0];
             if (attack != null)
                 attack.enabled = false;

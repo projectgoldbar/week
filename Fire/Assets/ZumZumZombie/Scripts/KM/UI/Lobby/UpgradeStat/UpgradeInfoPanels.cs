@@ -139,7 +139,7 @@ public class UpgradeInfoPanels : MonoBehaviour
         Upgrade00maxHpCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade00maxHpCSV(statLevel);
         if (!firstInit)
         {
-            statIndexTxt.text = string.Format("Hp증가LV : {0}", upgradeStatInfo.level);
+            statIndexTxt.text = string.Format("최대 체력 LV : {0}", upgradeStatInfo.level);
             statValueTxt.text = string.Format("maxHp : {0}", upgradeStatInfo.value);
             statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
             userDataManager.userData.hp = upgradeStatInfo.value;
@@ -157,7 +157,7 @@ public class UpgradeInfoPanels : MonoBehaviour
                 userDataManager.userData.Money -= upgradeStatInfo.price;
                 ++statLevel;
                 upgradeStatInfo = CSVManager.Instance.GetUpgrade00maxHpCSV(statLevel);
-                statIndexTxt.text = string.Format("Hp증가LV : {0}", upgradeStatInfo.level);
+                statIndexTxt.text = string.Format("최대 체력 LV : {0}", upgradeStatInfo.level);
                 statValueTxt.text = string.Format("maxHp : {0}", upgradeStatInfo.value);
                 statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
                 userDataManager.userData.hp = upgradeStatInfo.value;
@@ -171,10 +171,10 @@ public class UpgradeInfoPanels : MonoBehaviour
         Upgrade01decelerationHpCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade01decelerationHpCSV(statLevel);
         if (!firstInit)
         {
-            statIndexTxt.text = string.Format("버티기LV : {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("Hp감소속도 - {0}%", upgradeStatInfo.value);
+            statIndexTxt.text = string.Format("회복력 LV : {0}", upgradeStatInfo.level);
+            statValueTxt.text = string.Format("회복력 + {0}%", upgradeStatInfo.value);
             statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            userDataManager.userData.decelerationHp = upgradeStatInfo.value;
+            userDataManager.userData.healHp = upgradeStatInfo.value;
             userDataManager.userData.statPointerIdx[1] = statLevel;
         }
         else
@@ -189,10 +189,10 @@ public class UpgradeInfoPanels : MonoBehaviour
                 userDataManager.userData.Money -= upgradeStatInfo.price;
                 ++statLevel;
                 upgradeStatInfo = CSVManager.Instance.GetUpgrade01decelerationHpCSV(statLevel);
-                statIndexTxt.text = string.Format("버티기LV : {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("Hp감소속도 - {0}%", upgradeStatInfo.value);
+                statIndexTxt.text = string.Format("회복력 LV : {0}", upgradeStatInfo.level);
+                statValueTxt.text = string.Format("회복력 + {0}%%", upgradeStatInfo.value);
                 statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                userDataManager.userData.decelerationHp = upgradeStatInfo.value;
+                userDataManager.userData.healHp = upgradeStatInfo.value;
                 userDataManager.userData.statPointerIdx[1] = statLevel;
             }
         }
@@ -203,10 +203,10 @@ public class UpgradeInfoPanels : MonoBehaviour
         Upgrade02defenseCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade02defenseCSV(statLevel);
         if (!firstInit)
         {
-            statIndexTxt.text = string.Format("미적용 : {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("방어력 : {0}", upgradeStatInfo.value);
+            statIndexTxt.text = string.Format("스태미너 : {0}", upgradeStatInfo.level);
+            statValueTxt.text = string.Format("최대스태미너 : {0}", upgradeStatInfo.value);
             statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            userDataManager.userData.df = upgradeStatInfo.value;
+            userDataManager.userData.ep = upgradeStatInfo.value;
             userDataManager.userData.statPointerIdx[2] = statLevel;
         }
         else
@@ -221,10 +221,10 @@ public class UpgradeInfoPanels : MonoBehaviour
                 userDataManager.userData.Money -= upgradeStatInfo.price;
                 ++statLevel;
                 upgradeStatInfo = CSVManager.Instance.GetUpgrade02defenseCSV(statLevel);
-                statIndexTxt.text = string.Format("미적용 : {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("방어력 : {0}", upgradeStatInfo.value);
+                statIndexTxt.text = string.Format("스태미너 : {0}", upgradeStatInfo.level);
+                statValueTxt.text = string.Format("최대스태미너 : {0}", upgradeStatInfo.value);
                 statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                userDataManager.userData.df = upgradeStatInfo.value;
+                userDataManager.userData.ep = upgradeStatInfo.value;
                 userDataManager.userData.statPointerIdx[2] = statLevel;
             }
         }
@@ -235,10 +235,10 @@ public class UpgradeInfoPanels : MonoBehaviour
         Upgrade03gainHpCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade03gainHpCSV(statLevel);
         if (!firstInit)
         {
-            statIndexTxt.text = string.Format("Hp회복력LV {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("Hp회복력 : {0}", upgradeStatInfo.value);
+            statIndexTxt.text = string.Format("스태미너회복속도LV {0}", upgradeStatInfo.level);
+            statValueTxt.text = string.Format("스태미너회복속도 + {0}%", upgradeStatInfo.value);
             statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            userDataManager.userData.healHp = upgradeStatInfo.value;
+            userDataManager.userData.healEp = upgradeStatInfo.value;
             userDataManager.userData.statPointerIdx[3] = statLevel;
         }
         else
@@ -253,10 +253,10 @@ public class UpgradeInfoPanels : MonoBehaviour
                 userDataManager.userData.Money -= upgradeStatInfo.price;
                 ++statLevel;
                 upgradeStatInfo = CSVManager.Instance.GetUpgrade03gainHpCSV(statLevel);
-                statIndexTxt.text = string.Format("Hp회복력LV {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("Hp회복력 : {0}", upgradeStatInfo.value);
+                statIndexTxt.text = string.Format("스태미너회복속도LV {0}", upgradeStatInfo.level);
+                statValueTxt.text = string.Format("스태미너회복속도 + {0}%", upgradeStatInfo.value);
                 statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                userDataManager.userData.healHp = upgradeStatInfo.value;
+                userDataManager.userData.healEp = upgradeStatInfo.value;
                 userDataManager.userData.statPointerIdx[3] = statLevel;
             }
         }
@@ -267,10 +267,10 @@ public class UpgradeInfoPanels : MonoBehaviour
         Upgrade04gainPointCSV upgradeStatInfo = CSVManager.Instance.GetUpgrade04gainPointCSV(statLevel);
         if (!firstInit)
         {
-            statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-            statValueTxt.text = string.Format("경험치획득량 + {0}%", upgradeStatInfo.value);
+            statIndexTxt.text = string.Format("골드획득량 : {0}", upgradeStatInfo.level);
+            statValueTxt.text = string.Format("골드획득량 + {0}", upgradeStatInfo.value);
             statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-            userDataManager.userData.gainExp = upgradeStatInfo.value;
+            userDataManager.userData.gainMoney = upgradeStatInfo.value;
             userDataManager.userData.statPointerIdx[4] = statLevel;
         }
         else
@@ -285,10 +285,10 @@ public class UpgradeInfoPanels : MonoBehaviour
                 userDataManager.userData.Money -= upgradeStatInfo.price;
                 ++statLevel;
                 upgradeStatInfo = CSVManager.Instance.GetUpgrade04gainPointCSV(statLevel);
-                statIndexTxt.text = string.Format("statIndex : {0}", upgradeStatInfo.level);
-                statValueTxt.text = string.Format("경험치획득량 + {0}%", upgradeStatInfo.value);
+                statIndexTxt.text = string.Format("골드획득량 : {0}", upgradeStatInfo.level);
+                statValueTxt.text = string.Format("골드획득량 + {0}", upgradeStatInfo.value);
                 statPriceTxt.text = string.Format("{0}", upgradeStatInfo.price);
-                userDataManager.userData.gainExp = upgradeStatInfo.value;
+                userDataManager.userData.gainMoney = upgradeStatInfo.value;
                 userDataManager.userData.statPointerIdx[4] = statLevel;
             }
         }

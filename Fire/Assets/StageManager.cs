@@ -8,6 +8,7 @@ public class StageManager : MonoBehaviour
     public GameObject zombie;
     public GameObject dashZombie;
     public GameObject spitZombie;
+    public TestCoinSpwan testCoinSpwan;
 
     public List<GameObject> zombiePool;
     public List<GameObject> dashZombiePool;
@@ -137,7 +138,6 @@ public class StageManager : MonoBehaviour
         //지뢰가 생성되는 개수
         //int mineCount = stageData.spawnData.data[2].SpawnCount;
         //지뢰개수만큼 지속적으로 지뢰 생성되는함수 구현하기
-
         //코인개수 만큼 뿌리기 구현
     }
 
@@ -145,7 +145,8 @@ public class StageManager : MonoBehaviour
 
     public void LvUp()
     {
-        var targets = Physics.OverlapSphere(playerData.transform.position, 20f, LayerMask.GetMask("Monster"));
+        var targets = Physics.OverlapSphere(playerData.transform.position, 35f, LayerMask.GetMask("Monster"));
+        testCoinSpwan.StopSpwan();
         StartCoroutine(ChangeAsh(targets));
     }
 
@@ -164,6 +165,7 @@ public class StageManager : MonoBehaviour
             dust.transform.rotation = Quaternion.LookRotation(Vector3.up);
             dust.SetActive(true);
             targets[i].gameObject.SetActive(false);
+            targets[i].gameObject.GetComponentInChildren<SkinnedMeshRenderer>().materials[0].color = Color.white;
             yield return seconds;
         }
         for (int i = 0; i < 10; i++)
@@ -193,6 +195,7 @@ public class StageManager : MonoBehaviour
         }
 
         manager.Evolution();
+        testCoinSpwan.SpwanGold();
     }
 
     #endregion 스테이지 레벨업 시퀀스

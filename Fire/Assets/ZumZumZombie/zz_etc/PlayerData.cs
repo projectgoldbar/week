@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class PlayerData : MonoBehaviour
     public GameObject arrow;
     public GameObject evadeParticle;
     public ParticleSystem boostParticle;
+    public ParticleSystem clearParticle;
     public bool isTest;
     public float epRecoverSpeed = 1f;
     public Text hpText;
@@ -41,12 +43,13 @@ public class PlayerData : MonoBehaviour
 
     public float RndTimeMin = 3;
     public float RndTimeMax = 20;
-
+    public Queue<GameObject> biteZombies;
 
     #region 퍽 0번 회복력 강화
 
     private float RecoveryData;
     private int Recovery;
+
     public int recovery
     {
         get => Recovery;
@@ -62,11 +65,13 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    #endregion
+    #endregion 퍽 0번 회복력 강화
 
     #region 퍽1번 콩벌레
+
     public int WormData;
     private int worm;
+
     public int Worm
     {
         get { return worm; }
@@ -82,11 +87,13 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    #endregion
+    #endregion 퍽1번 콩벌레
 
     #region 퍽2번 돈벌레
+
     public float GoldWormData;
     private int goldworm;
+
     public int GoldWorm
     {
         get { return goldworm; }
@@ -102,11 +109,13 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    #endregion
+    #endregion 퍽2번 돈벌레
 
     #region 퍽3번 지구력
+
     public float enduranceData;
     private int endurance;
+
     public int Endurance
     {
         get { return endurance; }
@@ -124,14 +133,14 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-
-    #endregion
+    #endregion 퍽3번 지구력
 
     #region 퍽4번 제5감각
 
     public float DefaultEvadeRadius;
     public float SenceData;
     private int sence;
+
     public int Sence
     {
         get { return sence; }
@@ -152,12 +161,14 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    #endregion
+    #endregion 퍽4번 제5감각
 
     #region 퍽5번 재난대처능력
+
     public float calamityData;
     private int calamity;
     public float MainusEP = 2;
+
     public int Calamity
     {
         get { return calamity; }
@@ -169,14 +180,14 @@ public class PlayerData : MonoBehaviour
             else if (calamity == 2) calamityData = 0.4f;
             else if (calamity == 3) calamityData = 0.5f;
 
-
             Debug.Log($"재난대처능력 -> {calamityData}");
         }
     }
 
-    #endregion
+    #endregion 퍽5번 재난대처능력
 
     #region 퍽6번 숨쉬기운동
+
     public float breathingData;
     private int breathing;
 
@@ -196,11 +207,13 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    #endregion
+    #endregion 퍽6번 숨쉬기운동
 
     #region 퍽7번 협상
+
     public int AddGoldData;
     private int addGold;
+
     public int AddGold
     {
         get { return addGold; }
@@ -216,11 +229,10 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-
-
-    #endregion
+    #endregion 퍽7번 협상
 
     #region 퍽8번 질주
+
     private float DefaultSpeedData;
     public float SpeedRunData;
     private int speedRun;
@@ -236,7 +248,6 @@ public class PlayerData : MonoBehaviour
             else if (speedRun == 2) SpeedRunData = 0.35f;
             else if (speedRun == 3) SpeedRunData = 0.4f;
 
-
             var data = DefaultSpeedData + SpeedRunData;
             playerMove.maxSpeed = data;
 
@@ -244,7 +255,7 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    #endregion
+    #endregion 퍽8번 질주
 
     public int goldBoxCount = 0;
     public int silverBoxCount = 0;
@@ -378,6 +389,7 @@ public class PlayerData : MonoBehaviour
         //shield = FindObjectOfType<Shield>().gameObject;
         particlePool = FindObjectOfType<ParticlePool>();
         animator = GetComponentInChildren<Animator>();
+        biteZombies = new Queue<GameObject>();
 
         //boostParticle = GetComponentInChildren<ParticleSystem>();
         //shield.SetActive(false);
@@ -395,10 +407,6 @@ public class PlayerData : MonoBehaviour
         RndTime = Random.Range(RndTimeMin, RndTimeMax);
     }
 
-
-   
-
-
     private void PlayerSetting()
     {
         if (smite)
@@ -409,6 +417,7 @@ public class PlayerData : MonoBehaviour
         var x = UserDataManager.Instance.userData;
         gold = x.Money;
         maxhp = x.hp;
+
         df = 0;
         var fperHp = (maxhp * 0.05f);
         //hpDownSpeed = fperHp - (fperHp * (0.01f * x.decelerationHp));
@@ -417,15 +426,12 @@ public class PlayerData : MonoBehaviour
         playerMove.equipIdx = x.equipedSkinIdx;
     }
 
-
     public bool is_Wall = false;
     private float RndTime;
     private float CurrentTime = 0;
 
-    private float sheildTime =5f;
+    private float sheildTime = 5f;
     private float sheildCurrentTime;
-
-
 
     private void Update()
     {
@@ -525,7 +531,8 @@ public class PlayerData : MonoBehaviour
 
     public GameObject hitUI;
 
-    float EpHitData = 2;
+    private float EpHitData = 2;
+
     private void OnTriggerEnter(Collider other)
     {
         if (playerMove.equipIdx == 8)
@@ -538,6 +545,12 @@ public class PlayerData : MonoBehaviour
 
         if (other.tag == "Zombie")
         {
+            var zombieData = other.GetComponent<ZombieState.ZombiesComponent>();
+            if (zombieData.stateMachine.currentState == zombieData.zombieBite)
+            {
+                other.transform.SetParent(this.transform, true);
+            }
+
             if (playerMove.equipIdx == 7) //에너지쉴드 스킨
             {
                 if (ep + EpHitData > 0)
@@ -553,7 +566,6 @@ public class PlayerData : MonoBehaviour
             {
                 Hp = -1 * (other.GetComponent<ZombieState.ZombiesComponent>().damage - evolveLvData[4] - df);
             }
-
 
             var hitEffect = particlePool.GetParticle(particlePool.hitParticlePool);
             if (hitUI.activeSelf)
@@ -590,13 +602,14 @@ public class PlayerData : MonoBehaviour
                 case BoxType.Bronze:
                     manager.score += 4000f;
                     bronzeBoxCount++;
+                    clearParticle.Play();
                     Destroy(other.gameObject);
                     break;
 
                 case BoxType.Gold:
                     manager.score += 4000f;
                     goldBoxCount++;
-
+                    clearParticle.Play();
                     Destroy(other.gameObject);
 
                     break;
@@ -604,13 +617,22 @@ public class PlayerData : MonoBehaviour
                 case BoxType.Silver:
                     manager.score += 4000f;
                     silverBoxCount++;
-
+                    clearParticle.Play();
                     Destroy(other.gameObject);
 
                     break;
 
                 default:
                     break;
+            }
+        }
+        else if (other.tag == "BiteZombie")
+        {
+            if (biteZombies.Count < 4)
+            {
+                other.GetComponent<ZombieState.ZombieRunBite>().ChangeBite();
+                other.transform.SetParent(this.transform, true);
+                biteZombies.Enqueue(other.gameObject);
             }
         }
         else if (other.tag == "Spit")

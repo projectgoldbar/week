@@ -16,7 +16,8 @@ public class Coin : MonoBehaviour
 
     private void OnEnable()
     {
-        sectorManager.sectors[coinSection].currentCoin++;
+        //섹터로 처리하지 않아서 주석처리했음
+        //sectorManager.sectors[coinSection].currentCoin++;
         coinRotate = true;
     }
 
@@ -33,7 +34,9 @@ public class Coin : MonoBehaviour
     {
         var a = particlePool.GetParticle(particlePool.coinParticlePool);
         a.transform.position = transform.position;
-        sectorManager.sectors[coinSection].currentCoin--;
+
+        //섹터로 처리하지 않아서 주석처리했음
+        //sectorManager.sectors[coinSection].currentCoin--;
         a.SetActive(true);
     }
 }

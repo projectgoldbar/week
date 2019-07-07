@@ -47,11 +47,6 @@ namespace ZombieState
             }
         }
 
-        public virtual void SturnChange()
-        {
-            StateChange(zombieData.stun);
-        }
-
         public (float dis, Vector3 dir) DisNdir(Vector3 aa, Vector3 bb)
         {
             var Init = (aa - bb);
@@ -66,7 +61,6 @@ namespace ZombieState
         {
             count = 0;
             zombieData.animator.StopPlayback();
-
             zombieData.animator.SetBool("FastRun", false);
         }
     }

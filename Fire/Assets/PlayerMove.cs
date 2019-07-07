@@ -28,14 +28,14 @@ public class PlayerMove : MonoBehaviour
     public int equipIdx = 0;
 
     public ParticleSystem Portal = null;
-    private AnimationEvents animEvent; 
+    private AnimationEvents animEvent;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         evadeMove = new Action[10] { () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { } };
-        evadeMove[0] = NomalRoll;   
-        evadeMove[1] = c;           
+        evadeMove[0] = NomalRoll;
+        evadeMove[1] = c;
         evadeMove[2] = NomalRoll;
         evadeMove[3] = e;
         evadeMove[4] = NomalRoll;
@@ -45,12 +45,9 @@ public class PlayerMove : MonoBehaviour
         evadeMove[8] = NomalRoll;
         evadeMove[9] = NomalRoll;
 
-        animEvent = playerData.animator.GetComponent<AnimationEvents>();
-
+        //animEvent = playerData.animator.GetComponent<AnimationEvents>();
 
         Portal.Stop();
-
-
     }
 
     private Vector2 bufferVector2;
@@ -64,7 +61,7 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            StartCoroutine(FadeIn(0));
+            //StartCoroutine(FadeIn(0));
             bufferVector2 = Input.mousePosition;
             accel = true;
         }
@@ -98,10 +95,20 @@ public class PlayerMove : MonoBehaviour
             var speed = speedDistance * 0.045f;
             if (speed > rollSensitive && !isRoll && playerData.ep > 6f)
             {
+                Debug.Log("롤입력성공");
                 var dir = DisNdir(mousePosition, bufferVector2).dir;
                 Vector3 rollDirection = new Vector3(dir.x, 0, dir.y);
                 transform.rotation = Quaternion.LookRotation(rollDirection);
                 evadeMove[equipIdx]();
+                if (playerData.biteZombies.Count > 0)
+                {
+                    for (int i = 0; i < playerData.biteZombies.Count;)
+                    {
+                        var x = playerData.biteZombies.Dequeue();
+                        x.transform.parent = null;
+                        x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
+                    }
+                }
             }
             else if (!isRoll)
             {
@@ -112,7 +119,7 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            StartCoroutine(FadeIn(1));
+            //StartCoroutine(FadeIn(1));
             accel = false;
         }
         bufferVector2 = Input.mousePosition;
@@ -121,13 +128,6 @@ public class PlayerMove : MonoBehaviour
         playerData.animator.SetFloat("moveSpeed", speed);
     }
 
-
-
-
-   
-
-   
-   
     public (float dis, Vector3 dir) DisNdir(Vector3 aa, Vector3 bb)
     {
         var Init = (aa - bb);
@@ -188,7 +188,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     public bool potalOpen = false;
-         
+
     private void e()
     {
         Portal.transform.position = transform.position + (transform.forward * 20);
@@ -207,7 +207,6 @@ public class PlayerMove : MonoBehaviour
             accel = false;
         }
 
-
         playerData.ep -= 7f;
     }
 
@@ -223,8 +222,8 @@ public class PlayerMove : MonoBehaviour
         playerData.ep -= 7f;
     }
 
-
     public bool wormSkinEquipRolling;
+
     private void h()
     {
         playerData.animator.Play("Roll");

@@ -12,11 +12,11 @@ public class Meat : MonoBehaviour
 
     private void OnEnable()
     {
-        sectorManager.sectors[meatSection].currentMeat++;
+        //sectorManager.sectors[meatSection].currentMeat++;
     }
 
     private void OnDisable()
     {
-        sectorManager.sectors[meatSection].currentMeat--;
+        //sectorManager.sectors[meatSection].currentMeat--;
     }
 }

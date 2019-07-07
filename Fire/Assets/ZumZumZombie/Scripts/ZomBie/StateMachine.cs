@@ -8,12 +8,16 @@ namespace ZombieState
 
         private void Awake()
         {
+            AllStateSetup();
+        }
+
+        private void OnEnable()
+        {
             if (currentState == null)
             {
                 currentState = GetComponent<Zombie_Moving>();
                 currentState.enabled = true;
             }
-            AllStateSetup();
             StateStart();
         }
 

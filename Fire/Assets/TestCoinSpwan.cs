@@ -1,122 +1,124 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-public class Sector : MonoBehaviour
+public class TestCoinSpwan : MonoBehaviour
 {
+    public Transform player;
     public CoinPool coinPool;
 
-    public SectorManager sectorManager;
-    public int sectorNumber = 0;
-    private int maxCoin = 5;
-    private int maxMeat = 3;
-    public int currentCoin = 0;
-    public int currentMeat = 0;
+    public IEnumerator coroutine;
 
-    public int[] spwanSectorNumber;
-
-    public GameObject[] trap;
-
-    private void Awake()
+    private void Start()
     {
-        coinPool = FindObjectOfType<CoinPool>();
-        sectorManager = FindObjectOfType<SectorManager>();
+        coroutine = SpwanCoroutine();
+        StartCoroutine(coroutine);
+        StartCoroutine(SpwanMeatCoroutine());
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void SpwanGold()
     {
+        StartCoroutine(coroutine);
+    }
+
+    public void StopSpwan()
+    {
+        StopCoroutine(coroutine);
+    }
+
+    private IEnumerator SpwanMeatCoroutine()
+    {
+        WaitForSeconds second = new WaitForSeconds(10f);
+        while (true)
+        {
+            yield return null;
+            for (int j = 0; j < 3; j++)
+            {
+                SpwanMeat();
+            }
+            yield return second;
+        }
+    }
+
+    private IEnumerator SpwanCoroutine()
+    {
+        WaitForSeconds second = new WaitForSeconds(10f);
+        while (true)
+        {
+            yield return null;
+            for (int j = 0; j < 10; j++)
+            {
+                Spwan();
+            }
+            yield return second;
+        }
+    }
+
+    private void SpwanMeat()
+    {
+        GameObject meat = null;
+        for (int i = 0; i < coinPool.meatPool.Count; i++)
+        {
+            if (!coinPool.meatPool[i].activeSelf)
+            {
+                meat = coinPool.meatPool[i];
+                break;
+            }
+        }
+        if (meat == null)
+        {
+            return;
+        }
+
+        var point = FindFarPoint(player.position, 20f, 50f);
+
+        //coin.GetComponent<Coin>().coinSection = sectorNumber;
+        //currentCoin++;
+        meat.transform.position = point;
+        meat.SetActive(true);
+    }
+
+    private void Spwan()
+    {
+        GameObject coin = null;
         for (int i = 0; i < coinPool.coinPool.Count; i++)
         {
-            var coin = coinPool.coinPool[i].GetComponent<Coin>();
-            var meat = coinPool.meatPool[i].GetComponent<Meat>();
-            var count = 0;
-            var meatCount = 0;
-            for (int j = 0; j < spwanSectorNumber.Length; j++)
+            if (!coinPool.coinPool[i].activeSelf)
             {
-                if (coin.coinSection == spwanSectorNumber[j] || coin.coinSection == sectorNumber)
-                {
-                    count++;
-                    break;
-                }
-            }
-            for (int j = 0; j < spwanSectorNumber.Length; j++)
-            {
-                if (meat.meatSection == spwanSectorNumber[j] || meat.meatSection == sectorNumber)
-                {
-                    meatCount++;
-                    break;
-                }
-            }
-            if (count == 0)
-            {
-                coinPool.coinPool[i].SetActive(false);
-            }
-
-            if (meatCount == 0)
-            {
-                coinPool.meatPool[i].SetActive(false);
+                coin = coinPool.coinPool[i];
+                break;
             }
         }
 
-        for (int i = 0; i < spwanSectorNumber.Length; i++)
+        if (coin == null)
         {
-            for (int j = 0; j < 5; j++)
-            {
-                sectorManager.sectors[spwanSectorNumber[i]].SpwanCoin();
-            }
+            return;
         }
-        for (int i = 0; i < spwanSectorNumber.Length; i++)
-        {
-            sectorManager.sectors[spwanSectorNumber[i]].SpwanMeat();
-        }
+
+        var point = FindFarPoint(player.position, 20f, 50f);
+
+        //coin.GetComponent<Coin>().coinSection = sectorNumber;
+        //currentCoin++;
+        coin.transform.position = point;
+        coin.SetActive(true);
     }
 
-    public void SpwanCoin()
+    public Vector3 FindFarPoint(Vector3 pivot, float minDistance = 90f, float maxDistance = 110f)
     {
-        if (currentCoin < maxCoin)
+        for (int i = 0; i < 50; i++)
         {
-            GameObject coin = null;
-            for (int i = 0; i < coinPool.coinPool.Count; i++)
-            {
-                if (!coinPool.coinPool[i].activeSelf)
-                {
-                    coin = coinPool.coinPool[i];
-                    break;
-                }
-            }
+            float distance = Random.Range(minDistance, maxDistance);
+            float angle = Random.Range(0f, 360f);
+            float radian = angle * Mathf.Deg2Rad;
 
-            var point = FindPoint();
-            coin.GetComponent<Coin>().coinSection = sectorNumber;
-            //currentCoin++;
-            coin.transform.position = point;
-            coin.SetActive(true);
+            var point = pivot + (new Vector3(Mathf.Cos(radian), 0f, Mathf.Sin(radian)) * distance);
+            if (!SomethingOnPlace(pivot))
+            {
+                return point;
+            }
         }
+        return new Vector3(1000f, 1.7f, 1000f);
     }
 
-    public void SpwanMeat()
-    {
-        if (currentMeat < maxMeat)
-        {
-            GameObject meat = null;
-            for (int i = 0; i < coinPool.meatPool.Count; i++)
-            {
-                if (!coinPool.meatPool[i].activeSelf)
-                {
-                    meat = coinPool.meatPool[i];
-                    break;
-                }
-            }
-
-            var point = FindPoint();
-            meat.GetComponent<Meat>().meatSection = sectorNumber;
-            //currentMeat++;
-            meat.transform.position = point;
-            meat.SetActive(true);
-        }
-    }
-
-    /// <summary>
-    /// 자기 박스컬라이더 내부에서 갈수 있는 위치벡터를 반환하는 함수
-    /// </summary>
-    /// <returns></returns>
     public Vector3 FindPoint()
     {
         var bounds = GetComponent<BoxCollider>().bounds;

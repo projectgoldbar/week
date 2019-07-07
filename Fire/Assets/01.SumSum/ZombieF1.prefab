@@ -216,11 +216,13 @@ GameObject:
   - component: {fileID: 551534644}
   - component: {fileID: 551534646}
   - component: {fileID: 1913954975}
-  - component: {fileID: 2487314341688380236}
   - component: {fileID: 8025818190614341037}
   - component: {fileID: 7549653509446538336}
+  - component: {fileID: 1386249755203224948}
+  - component: {fileID: 2484182320345453265}
+  - component: {fileID: 7163433854258636950}
   m_Layer: 10
-  m_Name: ZombieF2
+  m_Name: ZombieF1
   m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,6 +336,8 @@ MonoBehaviour:
   attack: {fileID: 0}
   stun: {fileID: 0}
   slowMoving: {fileID: 0}
+  zombieBite: {fileID: 0}
+  zombieDown: {fileID: 0}
   sturnCollider: {fileID: 394043151}
   material: {fileID: 0}
   attackTrailRenderer: {fileID: 0}
@@ -354,6 +358,7 @@ MonoBehaviour:
   wallStun: 2
   time: 0
   isWall: 0
+  reviveTime: 5
   recoverTime: 1
 --- !u!114 &1913954975
 MonoBehaviour:
@@ -368,28 +373,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 2406066211159054873}
---- !u!114 &2487314341688380236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1091131463947833992}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8c4eb02970297e4ea14d0daaceee38b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackWait: 1
-  iswall: 0
-  attackDelay: 0
-  time: 0
-  attackRange: 30
-  accelDelay: 1
-  accelSpeed: 0.5
-  maxSpeed: 30
-  stunSpeed: 20
-  count: 0
 --- !u!114 &8025818190614341037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,6 +406,53 @@ MonoBehaviour:
   attackCooltime: 10
   currentTime: 0
   range: 20
+--- !u!114 &1386249755203224948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091131463947833992}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ae7c54a363af34c8fa09d75f93a255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isbite: 0
+--- !u!114 &2484182320345453265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091131463947833992}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ebcd498e7706843ae593030b3e2cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7163433854258636950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091131463947833992}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b689cd964ed8a2642b3973c26af84a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackWait: 1
+  iswall: 0
+  attackDelay: 0
+  time: 0
+  attackRange: 30
+  accelDelay: 1
+  accelSpeed: 0.5
+  maxSpeed: 30
+  stunSpeed: 20
+  count: 0
 --- !u!1 &2406066210654075084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,8 +1090,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombiedata: {fileID: 551534644}
   zombie: {fileID: 0}
-  MoveSpeedChange: 0
-  isStateChageOk: 1
 --- !u!1 &2406066211195238824
 GameObject:
   m_ObjectHideFlags: 0
