@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace ZombieState
+﻿namespace ZombieState
 {
     public class ZombieRunBite : Zombie_AttackRun
     {
@@ -14,6 +10,11 @@ namespace ZombieState
         public void ChangeBite()
         {
             StateChange(zombieData.zombieBite);
+        }
+
+        public override void Exit()
+        {
+            transform.tag = "Zombie";
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ZombieState
 {
@@ -13,10 +11,36 @@ namespace ZombieState
         public override void Execute()
         {
             transform.tag = "Zombie";
+            //zombieData.animator.speed = 0f;
+            //다운애니메이션출력
+        }
+
+        private float currentTime = 0f;
+        public float reviveTime = 5f;
+
+        public override void Update()
+        {
+            currentTime += Time.deltaTime;
+            if (currentTime > reviveTime)
+            {
+                currentTime = 0f;
+                zombieData.animator.speed = 1f;
+            }
+        }
+
+        public void SetRecoverTime()
+        {
+            zombieData.animator.speed = 0f;
+        }
+
+        public void GoSlowMove()
+        {
+            StateChange(zombieData.slowMoving);
         }
 
         public override void Exit()
         {
+            zombieData.agent.enabled = true;
         }
     }
 }
