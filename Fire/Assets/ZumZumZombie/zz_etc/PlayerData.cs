@@ -10,22 +10,25 @@ public class PlayerData : MonoBehaviour
     public GameObject evadeParticle;
     public ParticleSystem boostParticle;
     public ParticleSystem clearParticle;
-    public bool isTest;
     public float originEpRecoverSpeed = 1f;
     public float epRecoverSpeed = 1f;
     public Text hpText;
     public Gate gate;
     public int rollStack = 1;
+    public int equipSkinIdx = 0;
     public float rollEp = 7f;
+    private float calamityrollEp = 5f;
+    private float originEp = 7f;
     public float breathingHp = 0f;
-
-    private bool smite = false;
 
     public float maxhp = 50f;
     public float hp = 50f;
     public float score = 0;
     public float ep = 10f;
     public float maxEp = 10f;
+
+    public bool isTest;
+    public bool overHp = false;
 
     /// <summary>
     /// 스킬지속시간관련
@@ -253,8 +256,8 @@ public class PlayerData : MonoBehaviour
             else if (speedRun == 2) SpeedRunData = 0.35f;
             else if (speedRun == 3) SpeedRunData = 0.4f;
 
-            var data = DefaultSpeedData + SpeedRunData;
-            playerMove.maxSpeed = data;
+            //var data = DefaultSpeedData + SpeedRunData;
+            playerMove.maxSpeed += SpeedRunData;
 
             Debug.Log($"질주 -> {SpeedRunData}");
         }
@@ -335,6 +338,20 @@ public class PlayerData : MonoBehaviour
             {
                 hp = hp + value;
             }
+
+            if (!overHp && hp > maxhp)
+            {
+                hp = maxhp;
+            }
+
+            if (hp <= calamityHp)
+            {
+                rollEp = calamityrollEp;
+            }
+            else
+            {
+                rollEp = originEp;
+            }
         }
     }
 
@@ -370,15 +387,14 @@ public class PlayerData : MonoBehaviour
         DefaultSpeedData = playerMove.maxSpeed;
         manager.goldUi.text = gold.ToString();
         RndTime = Random.Range(RndTimeMin, RndTimeMax);
+        if (equipSkinIdx == 9)
+        {
+            overHp = true;
+        }
     }
 
     private void PlayerSetting()
     {
-        if (smite)
-        {
-            return;
-        }
-
         var x = UserDataManager.Instance.userData;
         gold = x.Money;
         maxhp = x.hp;
@@ -403,10 +419,6 @@ public class PlayerData : MonoBehaviour
         if (hp <= 0)
         {
             animator.Play("die");
-        }
-        if (hp <= calamityHp)
-        {
-            rollEp -= 2f;
         }
 
         if (ep < maxEp)
@@ -550,7 +562,7 @@ public class PlayerData : MonoBehaviour
         {
             var xhp = hpUpSpeed + (maxhp * (0.03f));
             var addHp = xhp + (xhp * RecoveryData);
-            hp += addHp;
+            Hp = addHp;
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "RandomBox")
