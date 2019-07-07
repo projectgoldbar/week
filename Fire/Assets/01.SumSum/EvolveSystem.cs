@@ -23,7 +23,7 @@ public class EvolveSystem : MonoBehaviour
     {
         evolveFunc.Add(() => Resiliencepeace());//0
         evolveFunc.Add(() => Beanworm());//1
-        evolveFunc.Add(() => DefenceUp());//2
+        evolveFunc.Add(() => GoldWorm());//2
         evolveFunc.Add(() => endurance());//3
         evolveFunc.Add(() => Sence5());//4
         evolveFunc.Add(() => Calamity());//5
@@ -95,7 +95,6 @@ public class EvolveSystem : MonoBehaviour
         Debug.Log("콩벌레");
     }
 
-
     public void GoldWorm()
     {
         var a = FindObjectOfType<PlayerData>();
@@ -131,20 +130,19 @@ public class EvolveSystem : MonoBehaviour
         Debug.Log("숨쉬기운동");
     }
 
-
     public void Entente()
     {
         var a = FindObjectOfType<PlayerData>();
         a.AddGold++;
         Debug.Log("협상");
     }
+
     public void SpeedRun()
     {
         var a = FindObjectOfType<PlayerData>();
         a.SpeedRun++;
         Debug.Log("질주");
     }
-
 
     public void FullCharge()
     {
@@ -241,16 +239,6 @@ public class EvolveSystem : MonoBehaviour
         a.evolveLvData[5]++;
     }
 
-    public void MagnetTail()
-    {
-        var a = FindObjectOfType<PlayerData>();
-        if (!a.magnet.activeSelf)
-        {
-            a.magnet.SetActive(true);
-        }
-        a.MagnetLV = 1;
-    }
-
     public void QuadCore()
     {
         var a = FindObjectOfType<PlayerData>();
@@ -269,17 +257,6 @@ public class EvolveSystem : MonoBehaviour
 
         b.goldUpSpeed *= 2;
         b.evolveLvData[9]++;
-    }
-
-    public void MeatTail()
-    {
-        var a = FindObjectOfType<PlayerData>();
-        if (!a.meatTail.activeSelf)
-        {
-            a.meatTail.SetActive(true);
-        }
-        a.evolveLvData[8]++;
-        a.MeatTailLV++;
     }
 
     public void FowardShield()

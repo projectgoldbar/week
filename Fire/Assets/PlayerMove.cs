@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     public float speed = 0.0f;
     public float accelSpeed = 1f;
     public float downSpeed = 1f;
+    public float slowSpeed = 0f;
 
     public DynamicJoystick dynamicJoystick;
     private NavMeshAgent agent;
@@ -58,6 +59,7 @@ public class PlayerMove : MonoBehaviour
     {
         Vector2 mousePosition = Input.mousePosition;
         Vector3 direction = Vector3.forward * dynamicJoystick.Vertical + Vector3.right * dynamicJoystick.Horizontal;
+        int biteCount = playerData.biteZombies.Count;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -85,6 +87,7 @@ public class PlayerMove : MonoBehaviour
             }
             else if (speed < 0f)
             {
+                playerData.Hp = playerData.breathingHp;
                 speed = 0f;
             }
         }
@@ -100,7 +103,7 @@ public class PlayerMove : MonoBehaviour
                 Vector3 rollDirection = new Vector3(dir.x, 0, dir.y);
                 transform.rotation = Quaternion.LookRotation(rollDirection);
                 evadeMove[equipIdx]();
-                if (playerData.biteZombies.Count > 0)
+                if (biteCount > 0)
                 {
                     for (int i = 0; i < playerData.biteZombies.Count;)
                     {
@@ -123,7 +126,7 @@ public class PlayerMove : MonoBehaviour
             accel = false;
         }
         bufferVector2 = Input.mousePosition;
-        agent.velocity = agent.transform.forward * speed;
+        agent.velocity = agent.transform.forward * (speed - (slowSpeed + biteCount));
 
         playerData.animator.SetFloat("moveSpeed", speed);
     }
@@ -164,13 +167,13 @@ public class PlayerMove : MonoBehaviour
     private void NomalRoll()
     {
         playerData.animator.Play("Roll");
-        playerData.ep -= 7f;
+        playerData.ep -= playerData.rollEp;
     }
 
     private void b()
     {
         playerData.animator.Play("Roll");
-        playerData.ep -= 7f;
+        playerData.ep -= playerData.rollEp;
     }
 
     private void c()
@@ -184,7 +187,7 @@ public class PlayerMove : MonoBehaviour
     private void d()
     {
         playerData.animator.Play("Roll");
-        playerData.ep -= 7f;
+        playerData.ep -= playerData.rollEp;
     }
 
     public bool potalOpen = false;
@@ -207,19 +210,19 @@ public class PlayerMove : MonoBehaviour
             accel = false;
         }
 
-        playerData.ep -= 7f;
+        playerData.ep -= playerData.rollEp;
     }
 
     private void f()
     {
         playerData.animator.Play("Roll");
-        playerData.ep -= 7f;
+        playerData.ep -= playerData.rollEp;
     }
 
     private void g()
     {
         playerData.animator.Play("Roll");
-        playerData.ep -= 7f;
+        playerData.ep -= playerData.rollEp;
     }
 
     public bool wormSkinEquipRolling;
@@ -229,24 +232,24 @@ public class PlayerMove : MonoBehaviour
         playerData.animator.Play("Roll");
         wormSkinEquipRolling = true;
 
-        playerData.ep -= 7f;
+        playerData.ep -= playerData.rollEp;
     }
 
     private void i()
     {
         playerData.animator.Play("Roll");
-        playerData.ep -= 7f;
+        playerData.ep -= playerData.rollEp;
     }
 
     private void j()
     {
         playerData.animator.Play("Roll");
-        playerData.ep -= 7f;
+        playerData.ep -= playerData.rollEp;
     }
 
     private void k()
     {
         playerData.animator.Play("Roll");
-        playerData.ep -= 7f;
+        playerData.ep -= playerData.rollEp;
     }
 }

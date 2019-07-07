@@ -17,6 +17,7 @@ namespace ZombieState
 
         public override void Execute()
         {
+            zombieData.animator.SetBool("FastRun", false);
             zombieData.agent.speed = slowSpeed;
         }
 

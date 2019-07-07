@@ -11,10 +11,13 @@ public class PlayerData : MonoBehaviour
     public ParticleSystem boostParticle;
     public ParticleSystem clearParticle;
     public bool isTest;
+    public float originEpRecoverSpeed = 1f;
     public float epRecoverSpeed = 1f;
     public Text hpText;
     public Gate gate;
     public int rollStack = 1;
+    public float rollEp = 7f;
+    public float breathingHp = 0f;
 
     private bool smite = false;
 
@@ -34,7 +37,7 @@ public class PlayerData : MonoBehaviour
     /// </summary>
     public float skillCountLv = 1;
 
-    public float hpUpSpeed = 5f;
+    public float hpUpSpeed = 30f;
     public float goldUpSpeed = 5;
     public float gold = 0;
     public int df = 0;
@@ -44,6 +47,8 @@ public class PlayerData : MonoBehaviour
     public float RndTimeMin = 3;
     public float RndTimeMax = 20;
     public Queue<GameObject> biteZombies;
+
+    #region 퍽부분
 
     #region 퍽 0번 회복력 강화
 
@@ -126,9 +131,7 @@ public class PlayerData : MonoBehaviour
             else if (endurance == 1) enduranceData = 0.5f;
             else if (endurance == 2) enduranceData = 0.75f;
             else if (endurance == 3) enduranceData = 1f;
-
-            ep += enduranceData;
-
+            epRecoverSpeed += enduranceData;
             Debug.Log($"지구력 -> {enduranceData}");
         }
     }
@@ -168,6 +171,7 @@ public class PlayerData : MonoBehaviour
     public float calamityData;
     private int calamity;
     public float MainusEP = 2;
+    public float calamityHp;
 
     public int Calamity
     {
@@ -180,6 +184,7 @@ public class PlayerData : MonoBehaviour
             else if (calamity == 2) calamityData = 0.4f;
             else if (calamity == 3) calamityData = 0.5f;
 
+            calamityHp = maxhp * calamityData;
             Debug.Log($"재난대처능력 -> {calamityData}");
         }
     }
@@ -202,7 +207,7 @@ public class PlayerData : MonoBehaviour
             else if (breathing == 2) breathingData = 0.1f;
             else if (breathing == 3) breathingData = 0.2f;
 
-            maxhp += (maxhp * breathingData);
+            breathingHp = (maxhp * breathingData);
             Debug.Log($"숨쉬기운동 -> {breathingData}");
         }
     }
@@ -224,7 +229,7 @@ public class PlayerData : MonoBehaviour
             else if (addGold == 1) AddGoldData = 2;
             else if (addGold == 2) AddGoldData = 3;
             else if (addGold == 3) AddGoldData = 4;
-
+            goldUpSpeed += AddGoldData;
             Debug.Log($"협상 -> {AddGoldData}");
         }
     }
@@ -257,6 +262,8 @@ public class PlayerData : MonoBehaviour
 
     #endregion 퍽8번 질주
 
+    #endregion 퍽부분
+
     public int goldBoxCount = 0;
     public int silverBoxCount = 0;
     public int bronzeBoxCount = 0;
@@ -264,31 +271,6 @@ public class PlayerData : MonoBehaviour
     public int boxBuffer = 0;
 
     public int key = 0;
-
-    /*
-    0.2차심장
-    1.풀차지
-    2.방어력업
-    3.방사능주사
-    4.위장강화
-    5.티타늄이빨
-    6.자석꼬리
-    7.쿼드코어
-    8.고기자석꼬리
-    9.전방방패
-    10.더미데이터
-    13.더미데이터
-    14.더미데이터
-    15.더미데이터
-    16.더미데이터
-    17.더미데이터
-    18.더미데이터
-    19.더미데이터
-    20.더미데이터
-    21.더미데이터
-    22.없음
-    23.랜덤
-      */
 
     public int[] evolveLvData;
 
@@ -307,31 +289,31 @@ public class PlayerData : MonoBehaviour
 
     public SkinnedMeshRenderer MeshData;
 
-    public int MagnetLV
-    {
-        get
-        {
-            return evolveLvData[7];
-        }
-        set
-        {
-            evolveLvData[7] = value;
-            magnet.GetComponent<SphereCollider>().radius *= 2f;
-        }
-    }
+    //public int MagnetLV
+    //{
+    //    get
+    //    {
+    //        return evolveLvData[7];
+    //    }
+    //    set
+    //    {
+    //        evolveLvData[7] = value;
+    //        magnet.GetComponent<SphereCollider>().radius *= 2f;
+    //    }
+    //}
 
-    public int MeatTailLV
-    {
-        get
-        {
-            return evolveLvData[8];
-        }
-        set
-        {
-            evolveLvData[8] = value;
-            meatTail.GetComponent<SphereCollider>().radius += 5f;
-        }
-    }
+    //public int MeatTailLV
+    //{
+    //    get
+    //    {
+    //        return evolveLvData[8];
+    //    }
+    //    set
+    //    {
+    //        evolveLvData[8] = value;
+    //        meatTail.GetComponent<SphereCollider>().radius += 5f;
+    //    }
+    //}
 
     private Coroutine radiantion;
     private bool isradiantion = false;
@@ -344,21 +326,14 @@ public class PlayerData : MonoBehaviour
         }
         set
         {
-            hp += value;
-            if (hp >= maxhp)
+            if (value < 0)
             {
-                hp = maxhp;
+                hp = hp + (WormData + value);
+                PlayerHitEffect();
             }
-            else if (evolveLvData[3] > 0)
+            else
             {
-                if (!isradiantion)
-                {
-                    if (radiantion != null)
-                        StopCoroutine(radiantion);
-
-                    boostParticle.Play();
-                    radiantion = StartCoroutine(RadiationInjectionCoroutine());
-                }
+                hp = hp + value;
             }
         }
     }
@@ -379,22 +354,12 @@ public class PlayerData : MonoBehaviour
     private void Awake()
     {
         evolveLvData = new int[24] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        //FindObjectOfType<hpSlider>().playerData = this;
         playerMove = GetComponent<PlayerMove>();
-        //FindObjectOfType<SkillSystem>().playerMove = GetComponent<PlayerMove>();
         manager = FindObjectOfType<Manager>();
-        //magnet = FindObjectOfType<Magnet>().gameObject;
-        //meatTail = FindObjectOfType<MeatTail>().gameObject;
-        //meatTail.GetComponent<MeatTail>().SetPlayer(this);
-        //shield = FindObjectOfType<Shield>().gameObject;
         particlePool = FindObjectOfType<ParticlePool>();
         animator = GetComponentInChildren<Animator>();
         biteZombies = new Queue<GameObject>();
 
-        //boostParticle = GetComponentInChildren<ParticleSystem>();
-        //shield.SetActive(false);
-        //magnet.SetActive(false);
-        //meatTail.SetActive(false);
         if (!isTest)
         {
             PlayerSetting();
@@ -403,7 +368,7 @@ public class PlayerData : MonoBehaviour
         hp = maxhp;
         DefaultEvadeRadius = EvadeCollider.radius;
         DefaultSpeedData = playerMove.maxSpeed;
-
+        manager.goldUi.text = gold.ToString();
         RndTime = Random.Range(RndTimeMin, RndTimeMax);
     }
 
@@ -420,8 +385,8 @@ public class PlayerData : MonoBehaviour
 
         df = 0;
         var fperHp = (maxhp * 0.05f);
-        //hpDownSpeed = fperHp - (fperHp * (0.01f * x.decelerationHp));
         hpUpSpeed = hpUpSpeed + (hpUpSpeed * (0.01f * x.healHp));
+        epRecoverSpeed = originEpRecoverSpeed + (0.01f * x.healEp);
         goldUpSpeed = goldUpSpeed + (goldUpSpeed * x.gainMoney * 0.01f);
         playerMove.equipIdx = x.equipedSkinIdx;
     }
@@ -437,9 +402,13 @@ public class PlayerData : MonoBehaviour
     {
         if (hp <= 0)
         {
-            //manager.GameOver();
             animator.Play("die");
         }
+        if (hp <= calamityHp)
+        {
+            rollEp -= 2f;
+        }
+
         if (ep < maxEp)
         {
             ep += epRecoverSpeed * Time.deltaTime;
@@ -472,6 +441,8 @@ public class PlayerData : MonoBehaviour
     {
         manager.GameOver();
     }
+
+    #region 사용하지않는 기능들
 
     private IEnumerator Revive()
     {
@@ -529,6 +500,8 @@ public class PlayerData : MonoBehaviour
         yield break;
     }
 
+    #endregion 사용하지않는 기능들
+
     public GameObject hitUI;
 
     private float EpHitData = 2;
@@ -559,37 +532,23 @@ public class PlayerData : MonoBehaviour
                 }
                 else
                 {
-                    Hp = -1 * (other.GetComponent<ZombieState.ZombiesComponent>().damage - evolveLvData[4] - df);
+                    Hp = -1 * (other.GetComponent<ZombieState.ZombiesComponent>().damage - df);
                 }
             }
             else
             {
-                Hp = -1 * (other.GetComponent<ZombieState.ZombiesComponent>().damage - evolveLvData[4] - df);
+                Hp = -1 * (other.GetComponent<ZombieState.ZombiesComponent>().damage - df);
             }
-
-            var hitEffect = particlePool.GetParticle(particlePool.hitParticlePool);
-            if (hitUI.activeSelf)
-            {
-                hitUI.SetActive(false);
-                hitUI.SetActive(true);
-            }
-            else
-            {
-                hitUI.SetActive(true);
-            }
-            hitEffect.transform.position = transform.position;
-            hitEffect.transform.localRotation = transform.rotation;
-            hitEffect.SetActive(true);
         }
         else if (other.tag == "Coin")
         {
             Gold = goldUpSpeed;
-            hp += GoldWormData;
+            Hp = (goldUpSpeed * GoldWormData);
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Meat")
         {
-            var xhp = hpUpSpeed + (maxhp * (0.03f * evolveLvData[5]));
+            var xhp = hpUpSpeed + (maxhp * (0.03f));
             var addHp = xhp + (xhp * RecoveryData);
             hp += addHp;
             other.gameObject.SetActive(false);
@@ -647,5 +606,22 @@ public class PlayerData : MonoBehaviour
 
             spitPoolManager.Instance.NoActive(transform.position, rot);
         }
+    }
+
+    public void PlayerHitEffect()
+    {
+        var hitEffect = particlePool.GetParticle(particlePool.hitParticlePool);
+        if (hitUI.activeSelf)
+        {
+            hitUI.SetActive(false);
+            hitUI.SetActive(true);
+        }
+        else
+        {
+            hitUI.SetActive(true);
+        }
+        hitEffect.transform.position = transform.position;
+        hitEffect.transform.localRotation = transform.rotation;
+        hitEffect.SetActive(true);
     }
 }
