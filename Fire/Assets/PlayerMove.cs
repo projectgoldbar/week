@@ -85,10 +85,10 @@ public class PlayerMove : MonoBehaviour
             {
                 speed -= downSpeed;
             }
-            else if (speed < 0f)
+            else if (speed <= 0f)
             {
-                playerData.Hp = playerData.breathingHp;
                 speed = 0f;
+                playerData.Hp = playerData.breathingHp;
             }
         }
 
