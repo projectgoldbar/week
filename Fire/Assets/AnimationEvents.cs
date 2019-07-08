@@ -94,7 +94,7 @@ public class AnimationEvents : MonoBehaviour
             playerMove.speed = 30;
             playerMove.Portal.Stop();
             playerMove.Portal.gameObject.SetActive(false);
-            Invoke("RendederDelay", 0.1f);
+            Invoke("RendederDelay", 0.01f);
         }
 
         #endregion 구를때 소시지 스킨이라면 속도올려?
