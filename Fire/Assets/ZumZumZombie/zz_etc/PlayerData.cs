@@ -446,6 +446,7 @@ public class PlayerData : MonoBehaviour
         hpUpSpeed = hpUpSpeed + (hpUpSpeed * (0.01f * x.healHp));
         epRecoverSpeed = originEpRecoverSpeed + (0.01f * x.healEp);
         goldUpSpeed = goldUpSpeed + (goldUpSpeed * x.gainMoney * 0.01f);
+        equipSkinIdx = x.equipedSkinIdx;
         playerMove.equipIdx = x.equipedSkinIdx;
     }
 
