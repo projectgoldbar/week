@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.Advertisements;
+using UnityEngine.Advertisements; 
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
@@ -11,7 +11,6 @@ public class Ads : MonoBehaviour
     public UnityEvent Finished;
     public UnityEvent Skipped;
     public UnityEvent Failed;
-
 
 
     public void ShowAD()
