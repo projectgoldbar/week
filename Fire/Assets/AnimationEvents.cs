@@ -21,7 +21,7 @@ public class AnimationEvents : MonoBehaviour
     public void RollEnd()
     {
         playerMove.isRoll = false;
-        playerMove.maxSpeed = 11f;
+        playerMove.maxSpeed = playerMove.originMaxSpeed;
         playerMove.speed = 11f;
         playerMove.playerData.rollStack++;
         playerMove.evadeSystem.enabled = false;
@@ -35,7 +35,7 @@ public class AnimationEvents : MonoBehaviour
 
     public void SlowDown()
     {
-        animator.speed = 2f;
+        animator.speed = playerMove.rollDownSpeedTime;
         playerMove.maxSpeed = 6f;
         playerMove.speed = 6f;
     }
@@ -76,11 +76,6 @@ public class AnimationEvents : MonoBehaviour
 
     public void RollDfUp()
     {
-        //playerMove.playerData.df += playerMove.playerData.WormData;
-        if (playerMove.CalamityRoll)
-        {
-            playerMove.playerData.df += 1;
-        }
         if (playerMove.wormSkinEquipRolling)
         {
             playerMove.playerData.df += 3;
@@ -88,7 +83,7 @@ public class AnimationEvents : MonoBehaviour
 
         #region 구를때 소시지 스킨이라면 속도올려?
 
-        if (playerMove.equipIdx == 3)
+        if (playerMove.equipIdx == 4)
         {
             playerMove.maxSpeed = 100000;
             playerMove.speed = 30;
@@ -114,11 +109,6 @@ public class AnimationEvents : MonoBehaviour
     public void RollDfDown()
     {
         playerMove.playerData.df -= playerMove.playerData.WormData;
-        if (playerMove.CalamityRoll)
-        {
-            playerMove.playerData.df -= 1;
-            playerMove.CalamityRoll = false;
-        }
 
         if (playerMove.wormSkinEquipRolling)
         {
@@ -128,7 +118,7 @@ public class AnimationEvents : MonoBehaviour
 
         #region 구르는게 끝날때 소시지 스킨이라면 속도 11?
 
-        if (playerMove.equipIdx == 3)
+        if (playerMove.equipIdx == 4)
         {
             playerMove.accel = true;
             playerMove.maxSpeed = 11;

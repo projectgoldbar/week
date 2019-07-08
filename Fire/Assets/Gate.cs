@@ -7,7 +7,6 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<PlayerData>().arrow.SetActive(false);
     }
 
     private void OnTriggerExit(Collider other)

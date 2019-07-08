@@ -8,10 +8,12 @@ using System;
 public class PlayerMove : MonoBehaviour
 {
     public float maxSpeed = 11.0f;
+    public float originMaxSpeed = 11.0f;
     public float speed = 0.0f;
     public float accelSpeed = 1f;
     public float downSpeed = 1f;
     public float slowSpeed = 0f;
+    public float rollDownSpeedTime = 2f;//구르고 난후 느려지는 시간
 
     public DynamicJoystick dynamicJoystick;
     private NavMeshAgent agent;
@@ -36,14 +38,14 @@ public class PlayerMove : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         evadeMove = new Action[10] { () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { } };
         evadeMove[0] = NomalRoll;
-        evadeMove[1] = Chearleader;
-        evadeMove[2] = NomalRoll;
-        evadeMove[3] = e;
-        evadeMove[4] = NomalRoll;
-        evadeMove[5] = NomalRoll;
-        evadeMove[6] = h;
-        evadeMove[7] = NomalRoll;
-        evadeMove[8] = NomalRoll;
+        evadeMove[1] = Rugby;
+        evadeMove[2] = Chearleader;
+        evadeMove[3] = Nurse;
+        evadeMove[4] = Potal;
+        evadeMove[5] = CeleryMan;
+        evadeMove[6] = MotorCycle;
+        evadeMove[7] = WormSkinEquipRolling;
+        evadeMove[8] = EnergyShield;
         evadeMove[9] = NomalRoll;
 
         //animEvent = playerData.animator.GetComponent<AnimationEvents>();
@@ -108,7 +110,7 @@ public class PlayerMove : MonoBehaviour
 
             if (speed > rollSensitive && !isRoll)
             {
-                if (equipIdx == 1 && playerData.Hp > playerData.rollEp)
+                if (equipIdx == 2 && playerData.Hp > playerData.rollEp)
                 {
                     Debug.Log("치어리더성공");
                     var dir = DisNdir(mousePosition, bufferVector2).dir;
@@ -125,7 +127,7 @@ public class PlayerMove : MonoBehaviour
                         }
                     }
                 }
-                else if (equipIdx != 1 && playerData.ep > playerData.rollEp)
+                else if (equipIdx != 2 && playerData.ep > playerData.rollEp)
                 {
                     Debug.Log("롤입력성공");
                     var dir = DisNdir(mousePosition, bufferVector2).dir;
@@ -203,19 +205,20 @@ public class PlayerMove : MonoBehaviour
         playerData.ep -= playerData.rollEp;
     }
 
+    //럭비
+    private void Rugby()
+    {
+        playerData.animator.Play("Roll");
+        playerData.ep -= playerData.rollEp;
+    }
+
     private void Chearleader()
     {
         playerData.animator.Play("Roll");
         playerData.Hp = -1 * playerData.rollEp;
     }
 
-    private void b()
-    {
-        playerData.animator.Play("Roll");
-        playerData.ep -= playerData.rollEp;
-    }
-
-    private void d()
+    private void Nurse()
     {
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
@@ -223,7 +226,7 @@ public class PlayerMove : MonoBehaviour
 
     public bool potalOpen = false;
 
-    private void e()
+    private void Potal()
     {
         Portal.transform.position = transform.position + (transform.forward * 20);
         Portal.gameObject.SetActive(true);
@@ -244,13 +247,13 @@ public class PlayerMove : MonoBehaviour
         playerData.ep -= playerData.rollEp;
     }
 
-    private void f()
+    private void CeleryMan()
     {
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
     }
 
-    private void g()
+    private void MotorCycle()
     {
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
@@ -258,7 +261,7 @@ public class PlayerMove : MonoBehaviour
 
     public bool wormSkinEquipRolling;
 
-    private void h()
+    private void WormSkinEquipRolling()
     {
         playerData.animator.Play("Roll");
         wormSkinEquipRolling = true;
@@ -266,7 +269,7 @@ public class PlayerMove : MonoBehaviour
         playerData.ep -= playerData.rollEp;
     }
 
-    private void i()
+    private void EnergyShield()
     {
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;

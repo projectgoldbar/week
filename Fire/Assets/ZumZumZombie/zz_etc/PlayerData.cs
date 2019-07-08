@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class PlayerData : MonoBehaviour
 {
     public GameObject dummyShied;
-    public GameObject arrow;
     public GameObject evadeParticle;
+    public GameObject ATFieldUI;
     public ParticleSystem boostParticle;
     public ParticleSystem clearParticle;
     public float originEpRecoverSpeed = 1f;
@@ -331,8 +331,24 @@ public class PlayerData : MonoBehaviour
         {
             if (value < 0)
             {
-                hp = hp + (WormData + value);
-                PlayerHitEffect();
+                if (equipSkinIdx == 9)
+                {
+                    var randomValue = Random.Range(0, 11);
+                    if (randomValue > 8)
+                    {
+                        ATFieldUI.SetActive(true);
+                    }
+                    else
+                    {
+                        hp = hp + (WormData + value);
+                        PlayerHitEffect();
+                    }
+                }
+                else
+                {
+                    hp = hp + (WormData + value);
+                    PlayerHitEffect();
+                }
             }
             else
             {
@@ -364,6 +380,7 @@ public class PlayerData : MonoBehaviour
         set
         {
             gold += value;
+            Hp = (goldUpSpeed * GoldWormData);
             manager.goldUi.text = gold.ToString();
         }
     }
@@ -376,7 +393,6 @@ public class PlayerData : MonoBehaviour
         particlePool = FindObjectOfType<ParticlePool>();
         animator = GetComponentInChildren<Animator>();
         biteZombies = new Queue<GameObject>();
-
         if (!isTest)
         {
             PlayerSetting();
@@ -387,12 +403,36 @@ public class PlayerData : MonoBehaviour
         DefaultSpeedData = playerMove.maxSpeed;
         manager.goldUi.text = gold.ToString();
         RndTime = Random.Range(RndTimeMin, RndTimeMax);
-        if (equipSkinIdx == 9)
+        if (equipSkinIdx == 10)
         {
             overHp = true;
         }
+        else if (equipSkinIdx == 3)
+        {
+            Debug.Log("3번스킨");
+            StartCoroutine(NurseCoroutine());
+        }
+        else if (equipSkinIdx == 6)
+        {
+            playerMove.rollDownSpeedTime = 3f;
+        }
+
         originEp = rollEp;
         calamityrollEp = originEp - 2f;
+    }
+
+    private IEnumerator NurseCoroutine()
+    {
+        while (true)
+        {
+            if (Hp < maxhp && ep > 1f)
+            {
+                Hp = 1f;
+                ep -= 1f;
+                yield return null;
+            }
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     private void PlayerSetting()
@@ -426,28 +466,6 @@ public class PlayerData : MonoBehaviour
         if (ep < maxEp)
         {
             ep += epRecoverSpeed * Time.deltaTime;
-        }
-
-        if (playerMove.equipIdx == 8)
-        {
-            if (CurrentTime >= RndTime)
-            {
-                is_Wall = true;
-                if (sheildCurrentTime >= sheildTime)
-                {
-                    sheildCurrentTime = 0;
-                    CurrentTime = 0;
-                    is_Wall = false;
-                }
-                else
-                {
-                    sheildCurrentTime += Time.deltaTime;
-                }
-            }
-            else
-            {
-                CurrentTime += Time.deltaTime;
-            }
         }
     }
 
@@ -518,7 +536,7 @@ public class PlayerData : MonoBehaviour
 
     public GameObject hitUI;
 
-    private float EpHitData = 2;
+    private float EpHitData = 3;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -538,7 +556,7 @@ public class PlayerData : MonoBehaviour
                 other.transform.SetParent(this.transform, true);
             }
 
-            if (playerMove.equipIdx == 7) //에너지쉴드 스킨
+            if (equipSkinIdx == 8) //에너지쉴드 스킨
             {
                 if (ep + EpHitData > 0)
                 {
@@ -557,7 +575,7 @@ public class PlayerData : MonoBehaviour
         else if (other.tag == "Coin")
         {
             Gold = goldUpSpeed;
-            Hp = (goldUpSpeed * GoldWormData);
+
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Meat")
@@ -597,6 +615,10 @@ public class PlayerData : MonoBehaviour
 
                 default:
                     break;
+            }
+            if (equipSkinIdx == 5)
+            {
+                Gold = 50f + (50f * FindObjectOfType<StageManager>().currentStageLV);
             }
         }
         else if (other.tag == "BiteZombie")
