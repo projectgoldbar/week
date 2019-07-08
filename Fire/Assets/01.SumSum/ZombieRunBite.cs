@@ -15,6 +15,7 @@
         public override void Exit()
         {
             transform.tag = "Zombie";
+            base.Exit();
         }
     }
 }
