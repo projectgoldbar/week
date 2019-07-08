@@ -14,11 +14,15 @@ public class PlayerData : MonoBehaviour
     public float epRecoverSpeed = 1f;
     public Text hpText;
     public Gate gate;
-    public int rollStack = 1;
     public int equipSkinIdx = 0;
+    public int randomGold = 0;
+
+    [Header("구르기필요변수")]
     public float rollEp = 7f;
+
     private float calamityrollEp = 5f;
     private float originEp = 7f; // 원래 돌떄 필요한 포인트
+
     public float breathingHp = 0f;
 
     public float maxhp = 50f;
@@ -371,17 +375,33 @@ public class PlayerData : MonoBehaviour
         }
     }
 
+    private float Shuffle(float x)
+    {
+        x -= randomGold;
+        randomGold = Random.Range(2, 15329);
+        x += randomGold;
+        return x;
+    }
+
+    private float UnShuffle(float x)
+    {
+        x = x - randomGold;
+        return x;
+    }
+
     public float Gold
     {
         get
         {
-            return gold;
+            return UnShuffle(gold);
         }
         set
         {
-            gold += value;
+            //gold = gold + value;
+            var x = gold + value;
+            gold = Shuffle(x);
             Hp = (goldUpSpeed * GoldWormData);
-            manager.goldUi.text = gold.ToString();
+            manager.goldUi.text = Gold.ToString();
         }
     }
 
@@ -392,6 +412,8 @@ public class PlayerData : MonoBehaviour
         manager = FindObjectOfType<Manager>();
         particlePool = FindObjectOfType<ParticlePool>();
         animator = GetComponentInChildren<Animator>();
+        randomGold = Random.Range(4000, 9576);
+        gold += randomGold;
         biteZombies = new Queue<GameObject>();
         if (!isTest)
         {
@@ -401,7 +423,7 @@ public class PlayerData : MonoBehaviour
         hp = maxhp;
         DefaultEvadeRadius = EvadeCollider.radius;
         DefaultSpeedData = playerMove.maxSpeed;
-        manager.goldUi.text = gold.ToString();
+        manager.goldUi.text = Gold.ToString();
         RndTime = Random.Range(RndTimeMin, RndTimeMax);
         if (equipSkinIdx == 10)
         {

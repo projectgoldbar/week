@@ -12,7 +12,6 @@ public class AnimationEvents : MonoBehaviour
         playerMove.isRoll = true;
         playerMove.maxSpeed = evadeSpeed;
         playerMove.speed = evadeSpeed;
-        playerMove.playerData.rollStack--;
         playerMove.evadeSystem.enabled = true;
 
         RollDfUp();
@@ -23,7 +22,6 @@ public class AnimationEvents : MonoBehaviour
         playerMove.isRoll = false;
         playerMove.maxSpeed = playerMove.originMaxSpeed;
         playerMove.speed = 11f;
-        playerMove.playerData.rollStack++;
         playerMove.evadeSystem.enabled = false;
 
         animator.StopPlayback();
