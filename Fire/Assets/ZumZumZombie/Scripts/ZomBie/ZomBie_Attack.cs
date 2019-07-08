@@ -74,12 +74,13 @@ namespace ZombieState
                 zombieData.animator.StopPlayback();
                 zombieData.animator.Play("AttackCrow");
                 zombieData.agent.acceleration = 0f;
+                zombieData.agent.enabled = false;
                 //zombieData.agent.velocity = zombieData.agent.transform.forward * 20f;
 
                 time += Time.deltaTime;
 
                 //transform.position = Vector3.Lerp(transform.position, targetVec, 2f * Time.deltaTime);
-                transform.position = transform.position + transform.forward.normalized * 20f * Time.deltaTime;
+                transform.position = transform.position + transform.forward.normalized * 30f * Time.deltaTime;
             }
         }
 
@@ -99,6 +100,7 @@ namespace ZombieState
         {
             zombieData.sturnCollider.gameObject.SetActive(false);
             zombieData.attackTrailRenderer.enabled = false;
+            zombieData.agent.enabled = true;
             zombieData.agent.acceleration = 11f;
             zombieData.animator.SetBool("Attack", false);
 

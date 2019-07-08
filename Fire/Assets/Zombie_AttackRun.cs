@@ -13,6 +13,10 @@ namespace ZombieState
         public override void Execute()
         {
             //전환효과
+            for (int i = 0; i < zombieData.attackTrail.Length; i++)
+            {
+                zombieData.attackTrail[i].enabled = true;
+            }
             //zombieData.animator.SetLayerWeight(1, 1);
         }
 

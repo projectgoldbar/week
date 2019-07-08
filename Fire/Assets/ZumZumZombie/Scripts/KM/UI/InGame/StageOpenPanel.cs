@@ -26,7 +26,7 @@ public class StageOpenPanel : MonoBehaviour
         targetText.GetComponent<Text>().color = currColor;
     }
 
-    private void start()
+    private void Start()
     {
         ClosePanel();
     }

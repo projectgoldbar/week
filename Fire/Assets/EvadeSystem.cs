@@ -17,6 +17,7 @@ public class EvadeSystem : MonoBehaviour
     private void OnEnable()
     {
         startHp = playerData.Hp;
+        enemys.Clear();
     }
 
     private void OnTriggerEnter(Collider other)

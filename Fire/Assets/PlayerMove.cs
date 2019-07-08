@@ -36,7 +36,7 @@ public class PlayerMove : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         evadeMove = new Action[10] { () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { } };
         evadeMove[0] = NomalRoll;
-        evadeMove[1] = c;
+        evadeMove[1] = Chearleader;
         evadeMove[2] = NomalRoll;
         evadeMove[3] = e;
         evadeMove[4] = NomalRoll;
@@ -52,23 +52,31 @@ public class PlayerMove : MonoBehaviour
     }
 
     private Vector2 bufferVector2;
+    private Vector2 inputVector2;
+    private Vector2 start;
     private float speedDistance;
     public bool CalamityRoll = false;
+    public bool inputStey = false;
+    private float distance;
 
     public void Update()
     {
         Vector2 mousePosition = Input.mousePosition;
+
         Vector3 direction = Vector3.forward * dynamicJoystick.Vertical + Vector3.right * dynamicJoystick.Horizontal;
         int biteCount = playerData.biteZombies.Count;
 
         if (Input.GetMouseButtonDown(0))
         {
             //StartCoroutine(FadeIn(0));
+            inputVector2 = Input.mousePosition;
             bufferVector2 = Input.mousePosition;
+            Quaternion dir = Quaternion.LookRotation(inputVector2);
+            transform.rotation = Quaternion.Slerp(transform.rotation, dir, Time.deltaTime * 10.0f);
             accel = true;
         }
 
-        if (accel)
+        if (accel == true)
         {
             if (maxSpeed > speed)
             {
@@ -88,35 +96,60 @@ public class PlayerMove : MonoBehaviour
             else if (speed <= 0f)
             {
                 speed = 0f;
-                playerData.Hp = playerData.breathingHp;
+                playerData.Hp = playerData.breathingHp * Time.deltaTime;
             }
         }
 
         if (Input.GetMouseButton(0))
         {
+            distance = DisNdir(mousePosition, start).dis;
             speedDistance = DisNdir(mousePosition, bufferVector2).dis;
             var speed = speedDistance * 0.045f;
-            if (speed > rollSensitive && !isRoll && playerData.ep > 6f)
+
+            if (speed > rollSensitive && !isRoll)
             {
-                Debug.Log("롤입력성공");
-                var dir = DisNdir(mousePosition, bufferVector2).dir;
-                Vector3 rollDirection = new Vector3(dir.x, 0, dir.y);
-                transform.rotation = Quaternion.LookRotation(rollDirection);
-                evadeMove[equipIdx]();
-                if (biteCount > 0)
+                if (equipIdx == 1 && playerData.Hp > playerData.rollEp)
                 {
-                    for (int i = 0; i < playerData.biteZombies.Count;)
+                    Debug.Log("치어리더성공");
+                    var dir = DisNdir(mousePosition, bufferVector2).dir;
+                    Vector3 rollDirection = new Vector3(dir.x, 0, dir.y);
+                    transform.rotation = Quaternion.LookRotation(rollDirection);
+                    evadeMove[equipIdx]();
+                    if (biteCount > 0)
                     {
-                        var x = playerData.biteZombies.Dequeue();
-                        x.transform.parent = null;
-                        x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
+                        for (int i = 0; i < playerData.biteZombies.Count;)
+                        {
+                            var x = playerData.biteZombies.Dequeue();
+                            x.transform.parent = null;
+                            x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
+                        }
+                    }
+                }
+                else if (equipIdx != 1 && playerData.ep > playerData.rollEp)
+                {
+                    Debug.Log("롤입력성공");
+                    var dir = DisNdir(mousePosition, bufferVector2).dir;
+                    Vector3 rollDirection = new Vector3(dir.x, 0, dir.y);
+                    transform.rotation = Quaternion.LookRotation(rollDirection);
+                    evadeMove[equipIdx]();
+                    if (biteCount > 0)
+                    {
+                        for (int i = 0; i < playerData.biteZombies.Count;)
+                        {
+                            var x = playerData.biteZombies.Dequeue();
+                            x.transform.parent = null;
+                            x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
+                        }
                     }
                 }
             }
             else if (!isRoll)
             {
-                Quaternion dir = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, dir, Time.deltaTime * 10.0f);
+                var dir = DisNdir(mousePosition, inputVector2).dir;
+
+                Vector3 moveDirection = new Vector3(dir.x, 0, dir.y);
+                Quaternion targetRotation = moveDirection != Vector3.zero ? Quaternion.LookRotation(moveDirection) : transform.rotation;
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10.0f);
             }
         }
 
@@ -170,18 +203,16 @@ public class PlayerMove : MonoBehaviour
         playerData.ep -= playerData.rollEp;
     }
 
+    private void Chearleader()
+    {
+        playerData.animator.Play("Roll");
+        playerData.Hp = -1 * playerData.rollEp;
+    }
+
     private void b()
     {
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
-    }
-
-    private void c()
-    {
-        playerData.animator.Play("Roll");
-        var hpData = playerData.hp * 0.1f;
-        playerData.hp -= hpData;
-        //playerData.ep -= 7f;
     }
 
     private void d()

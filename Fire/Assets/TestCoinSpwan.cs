@@ -7,10 +7,12 @@ public class TestCoinSpwan : MonoBehaviour
     public CoinPool coinPool;
 
     public IEnumerator coroutine;
+    public IEnumerator meatCoroutine;
 
     private void Start()
     {
         coroutine = SpwanCoroutine();
+        meatCoroutine = SpwanMeatCoroutine();
         StartCoroutine(coroutine);
         StartCoroutine(SpwanMeatCoroutine());
     }
@@ -25,17 +27,27 @@ public class TestCoinSpwan : MonoBehaviour
         StopCoroutine(coroutine);
     }
 
+    public void SpwanMeatMethod()
+    {
+        StartCoroutine(meatCoroutine);
+    }
+
+    public void StopMeatMethod()
+    {
+        StopCoroutine(meatCoroutine);
+    }
+
     private IEnumerator SpwanMeatCoroutine()
     {
         WaitForSeconds second = new WaitForSeconds(10f);
         while (true)
         {
-            yield return null;
+            yield return second;
             for (int j = 0; j < 3; j++)
             {
                 SpwanMeat();
             }
-            yield return second;
+            yield return null;
         }
     }
 
@@ -44,12 +56,12 @@ public class TestCoinSpwan : MonoBehaviour
         WaitForSeconds second = new WaitForSeconds(10f);
         while (true)
         {
-            yield return null;
+            yield return second;
             for (int j = 0; j < 10; j++)
             {
                 Spwan();
             }
-            yield return second;
+            yield return null;
         }
     }
 
@@ -69,7 +81,7 @@ public class TestCoinSpwan : MonoBehaviour
             return;
         }
 
-        var point = FindFarPoint(player.position, 20f, 50f);
+        var point = FindFarPoint(player.position, 40f, 80f);
 
         //coin.GetComponent<Coin>().coinSection = sectorNumber;
         //currentCoin++;

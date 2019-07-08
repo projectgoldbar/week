@@ -6,6 +6,10 @@ namespace ZombieState
     {
         public override void Execute()
         {
+            for (int i = 0; i < zombieData.attackTrail.Length; i++)
+            {
+                zombieData.attackTrail[i].enabled = false;
+            }
             //애니메이션 실행
             //정면에서 부딛힌 상황 뒤로 넘어지는 애니메이션
             zombieData.animator.SetLayerWeight(1, 0);

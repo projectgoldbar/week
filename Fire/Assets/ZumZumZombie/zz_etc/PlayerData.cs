@@ -18,7 +18,7 @@ public class PlayerData : MonoBehaviour
     public int equipSkinIdx = 0;
     public float rollEp = 7f;
     private float calamityrollEp = 5f;
-    private float originEp = 7f;
+    private float originEp = 7f; // 원래 돌떄 필요한 포인트
     public float breathingHp = 0f;
 
     public float maxhp = 50f;
@@ -391,6 +391,8 @@ public class PlayerData : MonoBehaviour
         {
             overHp = true;
         }
+        originEp = rollEp;
+        calamityrollEp = originEp - 2f;
     }
 
     private void PlayerSetting()

@@ -19,11 +19,6 @@ public class TargetPointer : MonoBehaviour
 
     private WaitForSeconds second = new WaitForSeconds(0.3f);
 
-    private void Start()
-    {
-        player = GameObject.FindObjectOfType<Player>().transform;
-    }
-
     private void OnEnable()
     {
         StartCoroutine(Blink());

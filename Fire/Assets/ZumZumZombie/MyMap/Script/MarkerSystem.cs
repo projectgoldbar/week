@@ -10,9 +10,7 @@ public class MarkerSystem : MonoBehaviour
 
     [SerializeField] private Camera uiCamera;
     [SerializeField] private Sprite indicationSprite;
-    [SerializeField] private Sprite indicationSprite2;
     [SerializeField] private Sprite goalMarkSprite;
-    [SerializeField] private Sprite homeSprite;
     public int stage = 0;
     public Transform target;
     public List<TargetPointer> pointerList;
@@ -41,7 +39,6 @@ public class MarkerSystem : MonoBehaviour
             {
                 pointerList[i].targetPosition = newTarget;
                 pointerList[i].indicationSprite = indicationSprite;
-                pointerList[i].goalMarkSprite = indicationSprite2;
                 pointerList[i].text.text = stage.ToString();
             }
         }

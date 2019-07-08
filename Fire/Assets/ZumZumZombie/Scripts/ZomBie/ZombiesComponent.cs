@@ -26,6 +26,7 @@ namespace ZombieState
         public IEnumerator zombieAttackCoroutine;
         public Material material;
         public TrailRenderer attackTrailRenderer;
+        public TrailRenderer[] attackTrail;
         public ParticlePool particlePool;
 
         private void Awake()
