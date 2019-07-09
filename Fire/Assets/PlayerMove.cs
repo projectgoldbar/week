@@ -31,7 +31,7 @@ public class PlayerMove : MonoBehaviour
     public int equipIdx = 0;
 
     public ParticleSystem Portal = null;
-    private AnimationEvents animEvent;
+    public AnimationEvents animEvent;
 
     private void Awake()
     {
@@ -213,6 +213,8 @@ public class PlayerMove : MonoBehaviour
     {
         SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
         playerData.animator.Play("Roll");
+        animEvent.evadeSpeed = 25f;
+        playerData.animator.Play("Spin");
         playerData.ep -= playerData.rollEp;
     }
 

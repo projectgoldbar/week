@@ -18,6 +18,7 @@ public class SkinPanel : MonoBehaviour
 
     public void ClosePanel()
     {
+        gameObject.SetActive(false);
         gameObject.GetComponent<RectTransform>().anchoredPosition = closePos;
     }
 }

@@ -42,13 +42,14 @@ public partial class GameScene : MonoBehaviour
 
     private void Start()
     {
-        StatButton();
         SoundManager.Instance.PlaySoundBGM("LOBBYBGM");
+        statPanel.gameObject.SetActive(true);
     }
 
     private void OnEnable()
     {
-        StatButton();
+        //StatButton();
+        statPanel.gameObject.SetActive(true);
     }
 
     //중앙 패널 버튼들 ㄱ

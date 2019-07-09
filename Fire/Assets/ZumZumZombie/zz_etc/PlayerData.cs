@@ -14,7 +14,10 @@ public class PlayerData : MonoBehaviour
     public float epRecoverSpeed = 1f;
     public Text hpText;
     public Gate gate;
+
+    [Header("스킨인덱스")]
     public int equipSkinIdx = 0;
+
     public int randomGold = 0;
 
     [Header("구르기필요변수")]
@@ -431,6 +434,7 @@ public class PlayerData : MonoBehaviour
         else if (equipSkinIdx == 3)
         {
             Debug.Log("3번스킨");
+
             StartCoroutine(NurseCoroutine());
         }
         else if (equipSkinIdx == 6)
@@ -440,6 +444,7 @@ public class PlayerData : MonoBehaviour
 
         originEp = rollEp;
         calamityrollEp = originEp - 2f;
+        ep = maxEp;
     }
 
     private IEnumerator NurseCoroutine()
@@ -544,15 +549,13 @@ public class PlayerData : MonoBehaviour
     private IEnumerator RadiationInjectionCoroutine()
 
     {
-        isradiantion = true;
-        if (originSpeed == 0)
-            originSpeed = playerMove.speed;
-        playerMove.speed *= 1.5f;
-        yield return new WaitForSeconds(3f);
+        originSpeed = playerMove.maxSpeed;
 
-        playerMove.speed = 11;
+        playerMove.maxSpeed *= 1.5f;
+        yield return new WaitForSeconds(1f);
+
+        playerMove.maxSpeed = originSpeed;
         originSpeed = 0f;
-        isradiantion = false;
         yield break;
     }
 
@@ -564,14 +567,6 @@ public class PlayerData : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (playerMove.equipIdx == 8)
-        {
-            if (other.tag == "Zombie" || other.tag == "Spit")
-            {
-                if (is_Wall) return;
-            }
-        }
-
         if (other.tag == "Zombie")
         {
             var zombieData = other.GetComponent<ZombieState.ZombiesComponent>();
@@ -600,7 +595,6 @@ public class PlayerData : MonoBehaviour
         {
             SoundManager.Instance.PlaySoundSFX("GAINCOIN");
             Gold = goldUpSpeed;
-
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Meat")

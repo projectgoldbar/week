@@ -75,7 +75,7 @@ public class SKinInfo : MonoBehaviour
             selectButton.GetComponent<Button>().interactable = false;
             //equipButton.GetComponent<Button>().interactable = false;
             //infoImage.sprite = spriteData.unknownIconSprite;
-            selectButtonImage.sprite = spriteData.unknownIconSprite;
+            //selectButtonImage.sprite = spriteData.unknownIconSprite;
             //equipButtonImage.sprite = spriteData.unknownIconSprite;
         }
         else
