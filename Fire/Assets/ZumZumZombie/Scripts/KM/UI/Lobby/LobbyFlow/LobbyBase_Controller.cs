@@ -30,7 +30,7 @@ public class LobbyBase_Controller : MonoBehaviour
         //rawImageforMoodColor = rawImageforMood.GetComponent<Renderer>().material.
     }
 
-    private float duration = 5;
+    private float duration = 15;
     private float smoothness = 0.02f;
     private Color currentColor = Color.white;
 

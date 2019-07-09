@@ -18,7 +18,7 @@ public partial class GameScene : MonoBehaviour
     public DirectionUIController directionUIController;
 
     public float leaveDuration = 4f;
-    private float enterDuration = 3f;
+    private float enterDuration = 1.5f;
 
     private float toIn = 0.0f;
     private float toOut = 255.0f;

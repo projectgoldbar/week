@@ -7,7 +7,7 @@ public class DoorOutLine : MonoBehaviour
     public float leaveDuration = 4f;
 
     private float targetScale = 1.15f;
-    private float durationT = 2f;
+    private float durationT = 1.8f;
     private float delayT = 10f;
 
     private Color nowColor;
