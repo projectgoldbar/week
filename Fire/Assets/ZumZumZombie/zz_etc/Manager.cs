@@ -77,9 +77,10 @@ public class Manager : MonoBehaviour
     {
         Debug.Log("골드들어갔다." + playerData.Gold);
         var x = UserDataManager.Instance.userData;
+
         playerData.score = score;
 
-        x.Money += playerData.Gold;
+        x.Money += resultGold;
 
         x.playCount++;
         x.goldBoxCount += playerData.goldBoxCount;
@@ -190,6 +191,7 @@ public class Manager : MonoBehaviour
 
     public void GameOverSeq()
     {
+        resultGold = playerData.Gold - UserDataManager.Instance.userData.Money;
         scoreText.text = score.ToString();
         var playTime = score;
         sec = playTime % 60;
