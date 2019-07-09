@@ -9,9 +9,9 @@ public class OptionPanel : MonoBehaviour
     private Vector2 openePos = new Vector2(0f, 0f);
 
     //   r 매니저에서 가져와야 하는 부분
-    private bool checkBGM = true;
+    public bool checkBGM = true;
 
-    private bool checkSFX = true;
+    public bool checkSFX = true;
     //   ㄴ 매니저에서 가져와야 하는 부분
 
     public Image checkBoxBGMImage;

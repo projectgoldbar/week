@@ -24,7 +24,6 @@ public class ExitGamePanel : MonoBehaviour
 
     public void ExitGame()
     {
-        Debug.Log("게임 나가기");
-        //게임 나가기 연결
+        Application.Quit();
     }
 }

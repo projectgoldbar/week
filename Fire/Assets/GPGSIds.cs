@@ -24,8 +24,9 @@
 
 public static class GPGSIds
 {
-        public const string achievement_sumsumzombie_achievements = "CgkIxLi5xPYJEAIQAQ"; // <GPGSID>
         public const string leaderboard_sumsumzombie_leaderboard = "CgkIxLi5xPYJEAIQAA"; // <GPGSID>
+        public const string achievement_starter = "CgkIxLi5xPYJEAIQAQ"; // <GPGSID>
+        public const string achievement_beginner = "CgkIxLi5xPYJEAIQAw"; // <GPGSID>
 
 }
 

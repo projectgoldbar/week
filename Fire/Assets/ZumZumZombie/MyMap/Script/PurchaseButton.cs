@@ -8,8 +8,9 @@ public class PurchaseButton : MonoBehaviour
 
     public void HandleClick()
     {
-        if (targetProductId == IAPManager.ProductCharacterSkin ||
-            targetProductId == IAPManager.ProductSubscription )
+        if (targetProductId == IAPManager.Instance.ProductCharacterSkin[0] ||
+            targetProductId == IAPManager.Instance.ProductCharacterSkin[1] ||
+            targetProductId == IAPManager.Instance.ProductCharacterSkin[2]   )
         {
             if (IAPManager.Instance.HadPurchase(targetProductId))
             {

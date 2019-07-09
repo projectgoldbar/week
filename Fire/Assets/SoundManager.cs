@@ -24,6 +24,8 @@ public class SoundManager : MonoBehaviour
     public Slider SoundVolume = null;
 
 
+    private OptionPanel option;
+
     private void Awake()
     {
         if (Instance != null)
@@ -33,6 +35,9 @@ public class SoundManager : MonoBehaviour
         }
 
         Instance = this;
+
+        option = FindObjectOfType<OptionPanel>();
+
 
         for (int i = 0; i < soundClips.Length; i++)
         {
@@ -46,12 +51,14 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySoundSFX(string SoundName)
     {
+        if(option.checkSFX)
         PlaySFM(SoundDic[SoundName], false, 0);
     }
 
     public void PlaySoundBGM(string SoundName)
     {
-        PlayBGM(SoundDic[SoundName], true, 0);
+        if (option.checkBGM)
+            PlayBGM(SoundDic[SoundName], true, 0);
     }
 
 

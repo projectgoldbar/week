@@ -30,6 +30,7 @@ public class AdmobBanner : MonoBehaviour
         AdRequest request = new AdRequest.Builder().Build();
         banner.LoadAd(request);
 
+        ToogleAd(true);
     }
 
     public void ToogleAd(bool action)

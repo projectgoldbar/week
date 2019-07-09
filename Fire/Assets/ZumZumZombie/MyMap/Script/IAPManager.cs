@@ -7,24 +7,28 @@ using UnityEngine.Purchasing;
 public class IAPManager : MonoBehaviour, IStoreListener
 {
     //계속 구매되는 (소모품)
-    public string[] ProductID              = { "gold1000", "gold2000" };
-
-    //한번 구매하면 (소장품)
-    public const string ProductCharacterSkin = "character_skin";
-    //구독서비스 (매달 무엇을 내는?)
-    public const string ProductSubscription  = "premium_subscription";
+    public string[] ProductID                = { "gold1000", "gold2000" };
 
     //개발자센터의 해당상품에 설정한 식별자ID
     private const string _IOS_GoldId         = "1000coin";
     private string[] _Android_GoldId         = { "gold1000", "gold2000" };
 
+
+    //한번 구매하면 (소장품)
+    public string[] ProductCharacterSkin     = { "01noads", "dia02", "starter03" };
+
     //개발자센터의 해당상품에 설정한 식별자ID
     private const string _IOS_SkinId         = "com.studio.app.skin";
-    private const string _ANDROID_SkinId     = "com.studio.app.skin";
+    public string[] _Android_SkinId          = { "01noads", "dia02", "starter03" };
+    
+
+    //구독서비스 (매달 무엇을 내는?)
+    public const string ProductSubscription  = "premium_subscription";
 
     //개발자센터의 해당상품에 설정한 식별자ID
     private const string _IOS_PremiumSub     = "com.studio.app.sub";
     private const string _ANDROID_PremiumSub = "com.studio.app.sub";
+
 
     private static IAPManager m_instance;
     public static IAPManager Instance
@@ -116,16 +120,22 @@ public class IAPManager : MonoBehaviour, IStoreListener
         #endregion
 
         #region 한번만 구매되는 소장서비스
-        builder.AddProduct
-        (
-            ProductCharacterSkin, ProductType.NonConsumable,
-            new IDs()
-            {
-                //앱스토의 이름
-                {_IOS_SkinId,AppleAppStore.Name },
-                {_ANDROID_SkinId,GooglePlay.Name },
-            }
-        );
+
+
+
+        for (int i = 0; i < ProductCharacterSkin.Length; i++)
+        {
+            builder.AddProduct
+            (
+                ProductCharacterSkin[i], ProductType.NonConsumable,
+                new IDs()
+                {
+                    //앱스토의 이름
+                    {_IOS_SkinId,AppleAppStore.Name },
+                    {_Android_SkinId[i],GooglePlay.Name },
+                }
+            );
+        }
         #endregion
 
         #region 매달 구매해야되는 구독서비스
@@ -163,26 +173,27 @@ public class IAPManager : MonoBehaviour, IStoreListener
     {
         Debug.LogError($"유니티 IAP 초기화 실패{error}");
     }
+
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
        // DebugText.text = $"구매 성공 - ID : {args.purchasedProduct.definition.id}";
         Debug.Log($"구매 성공 - ID : {args.purchasedProduct.definition.id}");
 
-        if (args.purchasedProduct.definition.id == ProductID[0] ||
-            args.purchasedProduct.definition.id == ProductID[1])
+
+        if(args.purchasedProduct.definition.id == ProductCharacterSkin[0])
         {
-            //DebugText.text = "골드 상승 처리";
-            Debug.Log("골드 상승 처리");
+            Debug.Log("광고제거");
+        }
+        if(args.purchasedProduct.definition.id == ProductCharacterSkin[1])
+        {
+            Debug.Log("500프로");
+        }
+        if(args.purchasedProduct.definition.id == ProductCharacterSkin[2])
+        {
+            Debug.Log("스타터패키지 등록");
         }
 
-        else if (args.purchasedProduct.definition.id == ProductCharacterSkin)
-        {
-            Debug.Log("스킨 등록...");
-        }
-        else if (args.purchasedProduct.definition.id == ProductSubscription)
-        {
-            Debug.Log("구독 서비스 시작...");
-        }
+
         return PurchaseProcessingResult.Complete;
     }
 
