@@ -864,7 +864,7 @@ PrefabInstance:
     - target: {fileID: 2124716967656775917, guid: 08234207d7ccd954abc8e3ca0e427679,
         type: 3}
       propertyPath: isTest
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2124716967656775917, guid: 08234207d7ccd954abc8e3ca0e427679,
         type: 3}
@@ -914,7 +914,7 @@ PrefabInstance:
     - target: {fileID: 2124716967656775917, guid: 08234207d7ccd954abc8e3ca0e427679,
         type: 3}
       propertyPath: equipSkinIdx
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2124716967656775917, guid: 08234207d7ccd954abc8e3ca0e427679,
         type: 3}
@@ -954,8 +954,18 @@ PrefabInstance:
     - target: {fileID: 4280316814188925351, guid: 08234207d7ccd954abc8e3ca0e427679,
         type: 3}
       propertyPath: equipIdx
-      value: 9
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4280316814188925351, guid: 08234207d7ccd954abc8e3ca0e427679,
+        type: 3}
+      propertyPath: rollDownSpeedTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280316814188925351, guid: 08234207d7ccd954abc8e3ca0e427679,
+        type: 3}
+      propertyPath: animEvent
+      value: 
+      objectReference: {fileID: 740786047}
     - target: {fileID: 7697883627425561745, guid: 08234207d7ccd954abc8e3ca0e427679,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -4348,6 +4358,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 53
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &740786047 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5892682000088282896, guid: 08234207d7ccd954abc8e3ca0e427679,
+    type: 3}
+  m_PrefabInstance: {fileID: 199787080}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b38a03839506b54bbcb075db20e4845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &747674214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5752,6 +5774,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1282874921662849738, guid: c5a89b022b1eb97408ecb35d32fee9b8,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 199787082}
     - target: {fileID: 357251562202775166, guid: c5a89b022b1eb97408ecb35d32fee9b8,
         type: 3}
       propertyPath: m_IsActive
@@ -6451,11 +6478,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1282874921662849738, guid: c5a89b022b1eb97408ecb35d32fee9b8,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 199787082}
     - target: {fileID: 3176592584874401266, guid: c5a89b022b1eb97408ecb35d32fee9b8,
         type: 3}
       propertyPath: m_IsActive
@@ -13385,7 +13407,7 @@ PrefabInstance:
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
       propertyPath: stageList.Array.data[1].spawnData.zombieCount
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
@@ -13420,7 +13442,7 @@ PrefabInstance:
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
       propertyPath: stageList.Array.data[2].spawnData.zombieCount
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
@@ -14521,7 +14543,7 @@ PrefabInstance:
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
       propertyPath: stageList.Array.data[1].spawnData.dashZombieCount
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
@@ -14531,7 +14553,7 @@ PrefabInstance:
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
       propertyPath: stageList.Array.data[0].spawnData.zombieCount
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
@@ -14552,7 +14574,7 @@ PrefabInstance:
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
       propertyPath: stageList.Array.data[0].spawnData.dashZombieCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
@@ -14568,7 +14590,7 @@ PrefabInstance:
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
       propertyPath: stageList.Array.data[2].spawnData.spitZombieCount
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
@@ -14585,6 +14607,11 @@ PrefabInstance:
       propertyPath: UITweenEffectManager
       value: 
       objectReference: {fileID: 2019559723}
+    - target: {fileID: 8263189020715681241, guid: e13ff2d4c8da2e946862268e2c08de65,
+        type: 3}
+      propertyPath: stageList.Array.data[1].spawnData.spitZombieCount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8263189020715681233, guid: e13ff2d4c8da2e946862268e2c08de65,
         type: 3}
       propertyPath: evolveIdx.Array.size

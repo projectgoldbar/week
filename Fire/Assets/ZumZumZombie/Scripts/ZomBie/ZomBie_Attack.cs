@@ -6,6 +6,7 @@ namespace ZombieState
     {
         public bool attackWait = true;
         public bool iswall = false;
+        public ParticleSystem eyeParticle;
 
         public override void Setting()
         {
@@ -21,7 +22,7 @@ namespace ZombieState
             attackWait = false;
             targetPoint = zombieData.player.position;
             zombieData.agent.acceleration = 50f;
-
+            eyeParticle.Play();
             zombieData.attackTrailRenderer.enabled = true;
             zombieData.animator.SetBool("Attack", true);
         }
@@ -36,7 +37,6 @@ namespace ZombieState
             if (time > attackDelay)
             {
                 Debug.DrawRay(transform.position, transform.forward.normalized * attackRange, Color.red, 5f);
-                RaycastHit hit;
                 attackWait = true;
                 time = 0;
                 //if (Physics.Raycast(transform.position, transform.forward.normalized, out hit, attackRange, 1 << 11))
@@ -98,6 +98,7 @@ namespace ZombieState
 
         public override void Exit()
         {
+            time = 0f;
             zombieData.sturnCollider.gameObject.SetActive(false);
             zombieData.attackTrailRenderer.enabled = false;
             zombieData.agent.enabled = true;

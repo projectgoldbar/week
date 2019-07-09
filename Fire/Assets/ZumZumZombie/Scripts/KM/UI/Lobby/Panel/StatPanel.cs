@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StatPanel : MonoBehaviour
 {
@@ -9,7 +7,7 @@ public class StatPanel : MonoBehaviour
 
     private void Start()
     {
-        gameObject.GetComponent<RectTransform>().anchoredPosition = closePos;
+        //gameObject.GetComponent<RectTransform>().anchoredPosition = closePos;
     }
 
     public void OpenPanel()
