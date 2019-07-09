@@ -397,7 +397,6 @@ public class PlayerData : MonoBehaviour
         }
         set
         {
-            //gold = gold + value;
             var x = gold + value;
             gold = Shuffle(x);
             Hp = (goldUpSpeed * GoldWormData);
@@ -460,7 +459,9 @@ public class PlayerData : MonoBehaviour
     private void PlayerSetting()
     {
         var x = UserDataManager.Instance.userData;
-        gold = x.Money;
+        var u = UserDataManager.Instance.UnShuffle(x.Money);
+        x.Money = u;
+        Gold = u;
         maxhp = x.hp;
 
         df = 0;

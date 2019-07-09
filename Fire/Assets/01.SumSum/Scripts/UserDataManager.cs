@@ -12,7 +12,7 @@ public class UserDataManager : MonoBehaviour
     public int value;
     public static UserDataManager Instance;
     public Text debugText;
-
+    public float randomValue;
     public SkinnedMeshRenderer[] EquipSkinReference;
 
     private void Awake()
@@ -27,7 +27,7 @@ public class UserDataManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+        randomValue = UnityEngine.Random.Range(1, 796854);
         Instance = this;
         DontDestroyOnLoad(gameObject);
         LoadData();
@@ -46,6 +46,12 @@ public class UserDataManager : MonoBehaviour
     {
         if (scene.buildIndex == 0)
         {
+            Debug.Log("최초골드금액  " + userData.Money);
+            userData.Money += randomValue;
+            Debug.Log("셔플전금액  " + userData.Money);
+            userData.Money = Shuffle(userData.Money);
+            Debug.Log("셔플후금액  " + userData.Money);
+
             FindObjectOfType<GameScene>().EnterLobby();
             upgradeInfoPanels = GameObject.Find("Content 0-14").GetComponentsInChildren<UpgradeInfoPanels>();
             skinInfos = GameObject.Find("SkinInfoPivot_Contents").GetComponentsInChildren<SKinInfo>();
@@ -66,12 +72,14 @@ public class UserDataManager : MonoBehaviour
 
     private void OnApplicationPause(bool pause)
     {
-        NewSaveSystem.SaveData(userData);
+        var x = userData.Money - randomValue;
+        NewSaveSystem.SaveData(userData, x);
     }
 
     private void OnApplicationQuit()
     {
-        NewSaveSystem.SaveData(userData);
+        var x = userData.Money - randomValue;
+        NewSaveSystem.SaveData(userData, x);
     }
 
     public void LoadData()
@@ -98,6 +106,7 @@ public class UserDataManager : MonoBehaviour
 
     public void Refresh()
     {
+        userData.Money = Shuffle(userData.Money);
         for (int i = 0; i < upgradeInfoPanels.Length; i++)
         {
             upgradeInfoPanels[i].statLevel = userData.statPointerIdx[i];
@@ -111,6 +120,20 @@ public class UserDataManager : MonoBehaviour
         {
             skinInfos[i].Refresh();
         }
+    }
+
+    private float Shuffle(float x)
+    {
+        x -= randomValue;
+        randomValue = Random.Range(2, 15329);
+        x += randomValue;
+        return x;
+    }
+
+    public float UnShuffle(float x)
+    {
+        x = x - randomValue;
+        return x;
     }
 
     private void Update()
@@ -135,11 +158,6 @@ public class UserDataManager : MonoBehaviour
                 }
             }
             Debug.Log("가진스킨개수" + skinCount);
-        }
-        else if (Input.GetKeyDown(KeyCode.M))
-        {
-            userData.Money = 50;
-            NewSaveSystem.SaveData(userData);
         }
         else if (Input.GetKeyDown(KeyCode.I))
         {

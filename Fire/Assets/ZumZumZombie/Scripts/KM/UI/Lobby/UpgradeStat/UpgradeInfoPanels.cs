@@ -147,7 +147,7 @@ public class UpgradeInfoPanels : MonoBehaviour
         }
         else
         {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
+            if (userDataManager.userData.Money < upgradeStatInfo.price + userDataManager.randomValue)
             {
                 Debug.Log("돈부족");
                 return;
@@ -179,7 +179,7 @@ public class UpgradeInfoPanels : MonoBehaviour
         }
         else
         {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
+            if (userDataManager.userData.Money < upgradeStatInfo.price + userDataManager.randomValue)
             {
                 Debug.Log("돈부족");
                 return;
@@ -211,7 +211,7 @@ public class UpgradeInfoPanels : MonoBehaviour
         }
         else
         {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
+            if (userDataManager.userData.Money < upgradeStatInfo.price + userDataManager.randomValue)
             {
                 Debug.Log("돈부족");
                 return;
@@ -243,7 +243,7 @@ public class UpgradeInfoPanels : MonoBehaviour
         }
         else
         {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
+            if (userDataManager.userData.Money < upgradeStatInfo.price + userDataManager.randomValue)
             {
                 Debug.Log("돈부족");
                 return;
@@ -275,7 +275,7 @@ public class UpgradeInfoPanels : MonoBehaviour
         }
         else
         {
-            if (userDataManager.userData.Money < upgradeStatInfo.price)
+            if (userDataManager.userData.Money < upgradeStatInfo.price + userDataManager.randomValue)
             {
                 Debug.Log("돈부족");
                 return;
