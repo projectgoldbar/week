@@ -60,6 +60,7 @@ public class AnimationEvents : MonoBehaviour
         playerMove.Portal.transform.position = transform.position + transform.up * 1.5f + (transform.forward * 3.0f);
         //포탈 보여주고
         playerMove.Portal.Play();
+        SoundManager.Instance.PlaySoundSFX("OPENPORTAL");
         //n초후 구르기
         Invoke("RollingStart", 1.0f);
     }
@@ -83,6 +84,7 @@ public class AnimationEvents : MonoBehaviour
 
         if (playerMove.equipIdx == 4)
         {
+            
             playerMove.maxSpeed = 100000;
             playerMove.speed = 30;
             playerMove.Portal.Stop();
@@ -96,6 +98,7 @@ public class AnimationEvents : MonoBehaviour
     public void RendederDelay()
     {
         RendererNColliderOnOff(false);
+        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
     }
 
     public void RendererNColliderOnOff(bool b)
@@ -129,6 +132,7 @@ public class AnimationEvents : MonoBehaviour
                 playerMove.Portal.transform.position = transform.position + (transform.forward * 1.5f);
                 playerMove.Portal.gameObject.SetActive(true);
                 playerMove.Portal.Play();
+                SoundManager.Instance.PlaySoundSFX("OPENPORTAL");
                 //포탈을 n초후 꺼줌
                 Invoke("PortalEffectEnd", 1.0f);
             }

@@ -598,12 +598,14 @@ public class PlayerData : MonoBehaviour
         }
         else if (other.tag == "Coin")
         {
+            SoundManager.Instance.PlaySoundSFX("GAINCOIN");
             Gold = goldUpSpeed;
 
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Meat")
         {
+            SoundManager.Instance.PlaySoundSFX("GAINGOGI");
             var xhp = hpUpSpeed + (maxhp * (0.03f));
             var addHp = xhp + (xhp * RecoveryData);
             Hp = addHp;
@@ -611,6 +613,7 @@ public class PlayerData : MonoBehaviour
         }
         else if (other.tag == "RandomBox")
         {
+            SoundManager.Instance.PlaySoundSFX("GAINBOX");
             var box = other.GetComponent<Box>();
             switch (box.type)
             {

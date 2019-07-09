@@ -14,15 +14,17 @@ public class PausePanel : MonoBehaviour
     public Image checkBoxBGMImage;
     public Image checkBoxSFXImage;
 
-    public SoundManager soundManager;
+    
 
     private void Start()
     {
 
-        soundManager = FindObjectOfType<SoundManager>();
+        
 
         checkBGM = true;    //   ㄴ 매니저에서 가져와야 하는 부분
         checkSFX = true; //   ㄴ 매니저에서 가져와야 하는 부분
+        SoundManager.Instance._isSfxSound = checkSFX;
+        SoundManager.Instance._isSfxSound = checkBGM;
         SetCheckBox();
         gameObject.GetComponent<RectTransform>().anchoredPosition = closePos;
     }
@@ -43,24 +45,25 @@ public class PausePanel : MonoBehaviour
     {
         checkBGM = !checkBGM;
         checkBoxBGMImage.enabled = checkBGM;
-
+        SoundManager.Instance._isSfxSound = checkBGM;
         if (checkBGM)
         {
-            soundManager.PlaySoundSFX("SoundCheckBox");
+            SoundManager.Instance.PlaySoundSFX("SoundCheckBox");
         }
-        soundManager.BGMSoundOnOff(checkBGM);
+        SoundManager.Instance.BGMSoundOnOff(checkBGM);
     }
 
     public void OnClickSFX_Button()
     {
         checkSFX = !checkSFX;
         checkBoxSFXImage.enabled = checkSFX;
+        SoundManager.Instance._isSfxSound = checkSFX;
 
         if (checkSFX)
         {
-            soundManager.PlaySoundSFX("SoundCheckBox");
+            SoundManager.Instance.PlaySoundSFX("SoundCheckBox");
         }
-        soundManager.SFMSoundOnOff(checkSFX);
+        SoundManager.Instance.SFMSoundOnOff(checkSFX);
     }
 
     // ㄴ 이부분 매니저에서 불러야 할껄?

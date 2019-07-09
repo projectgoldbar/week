@@ -200,6 +200,7 @@ public class Manager : MonoBehaviour
         survivalTimeTxt.text = string.Format("{0:00} : {1:00} : {2:00}", hour, min, sec);
         coinText.text = playerData.Gold.ToString();
         gameOverUi.SetActive(true);
+        SoundManager.Instance.PlaySoundSFX("GAMEEND");
         //StartCoroutine(TimeToGold());
     }
 

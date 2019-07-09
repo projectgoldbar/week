@@ -133,7 +133,9 @@ public class PlayerMove : MonoBehaviour
                     var dir = DisNdir(mousePosition, bufferVector2).dir;
                     Vector3 rollDirection = new Vector3(dir.x, 0, dir.y);
                     transform.rotation = Quaternion.LookRotation(rollDirection);
+                    
                     evadeMove[equipIdx]();
+
                     if (biteCount > 0)
                     {
                         for (int i = 0; i < playerData.biteZombies.Count;)
@@ -201,6 +203,7 @@ public class PlayerMove : MonoBehaviour
 
     private void NomalRoll()
     {
+        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
     }
@@ -208,18 +211,21 @@ public class PlayerMove : MonoBehaviour
     //럭비
     private void Rugby()
     {
+        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
     }
 
     private void Chearleader()
     {
+        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
         playerData.animator.Play("Roll");
         playerData.Hp = -1 * playerData.rollEp;
     }
 
     private void Nurse()
     {
+        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
     }
@@ -234,10 +240,12 @@ public class PlayerMove : MonoBehaviour
 
         if (Portal.GetComponent<PortalEffectCollider>().is_Building)
         {
+            SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
             playerData.animator.Play("Roll");
         }
         else
         {
+            
             //포탈구르기
             playerData.animator.Play("portalOpen");
             potalOpen = true;
@@ -249,12 +257,14 @@ public class PlayerMove : MonoBehaviour
 
     private void CeleryMan()
     {
+        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
     }
 
     private void MotorCycle()
     {
+        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
     }
@@ -263,6 +273,7 @@ public class PlayerMove : MonoBehaviour
 
     private void WormSkinEquipRolling()
     {
+        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
         playerData.animator.Play("Roll");
         wormSkinEquipRolling = true;
 
@@ -271,18 +282,21 @@ public class PlayerMove : MonoBehaviour
 
     private void EnergyShield()
     {
+        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
     }
 
     private void j()
     {
+        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
     }
 
     private void k()
     {
+        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
     }

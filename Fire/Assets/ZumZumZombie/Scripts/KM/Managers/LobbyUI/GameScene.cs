@@ -36,11 +36,14 @@ public partial class GameScene : MonoBehaviour
     {
         //SceneManager.sceneLoaded += OnSceneLoaded;
         fadeOutImageObj = FindObjectOfType<FadeOutUI>().gameObject;
+
+        
     }
 
     private void Start()
     {
         StatButton();
+        SoundManager.Instance.PlaySoundBGM("LOBBYBGM");
     }
 
     private void OnEnable()
@@ -131,6 +134,7 @@ public partial class GameScene : MonoBehaviour
     {
         //리더보드 창 열기
         Debug.Log("리더보드 창 열기");
+        GooglePlayGPGS.Instance.GoogleLederBoardUI();
     }
 
     public void ExitGameOpen()
@@ -173,6 +177,8 @@ public partial class GameScene : MonoBehaviour
 
     private void LeaveLobbyProcess()
     {
+        
+        SoundManager.Instance.PlaySoundSFX("STARTGAME");
         directionUIController.OnClickedforLeaveLobby();
         StartFadeImageAlpha(toIn);
         lobbyBase_Controller.lobbyPlayerController.RunningAnim();

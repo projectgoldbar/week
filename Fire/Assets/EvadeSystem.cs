@@ -35,6 +35,7 @@ public class EvadeSystem : MonoBehaviour
     {
         if (startHp <= playerData.Hp && enemys.Count > 0)
         {
+            SoundManager.Instance.PlaySoundSFX("BONUSSCORE");
             Debug.Log("회피성공" + enemys.Count);
             playerData.ep += 2f;
             playerData.evadeParticle.SetActive(true);

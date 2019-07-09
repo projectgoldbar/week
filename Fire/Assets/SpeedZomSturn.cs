@@ -6,6 +6,8 @@ namespace ZombieState
     {
         public override void Execute()
         {
+            SoundManager.Instance.PlaySoundSFX($"BUMP{Random.Range(0,3)}");
+
             for (int i = 0; i < zombieData.attackTrail.Length; i++)
             {
                 zombieData.attackTrail[i].enabled = false;

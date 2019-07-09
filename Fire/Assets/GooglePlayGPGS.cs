@@ -18,22 +18,23 @@ public class TestSaveData
 }
 
 
-public class GooglePlayGPGS : MonoBehaviour
+public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
 {
-    private GooglePlayGPGS _instance;
-    public GooglePlayGPGS _Instance
-    {
-        get
-        {
-            if (_instance != null) return _instance;
-            _instance = FindObjectOfType<GooglePlayGPGS>();
-            if (_instance == null)
-            {
-                _instance = new GameObject().AddComponent<GooglePlayGPGS>();
-            }
-            return _instance;
-        }
-    }
+    public Text debugText;
+    //private GooglePlayGPGS _instance;
+    //public GooglePlayGPGS _Instance
+    //{
+    //    get
+    //    {
+    //        if (_instance != null) return _instance;
+    //        _instance = FindObjectOfType<GooglePlayGPGS>();
+    //        if (_instance == null)
+    //        {
+    //            _instance = new GameObject().AddComponent<GooglePlayGPGS>();
+    //        }
+    //        return _instance;
+    //    }
+    //}
 
 
     //public Text LoginText;
@@ -53,29 +54,33 @@ public class GooglePlayGPGS : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this);
-        }
-        DontDestroyOnLoad(gameObject);
+        //if (_instance != null && _instance != this)
+        //{
+        //    Destroy(this);
+        //}
+        //DontDestroyOnLoad(gameObject);
 
         GoogleServicesInit();
     }
 
     public void GoogleServicesInit()
     {
+        debugText.text = "이닛들어옴";
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
 
         //게임 진행 상황을 저장할 수 있습니다.
         .EnableSavedGames()
         .Build();
-        
+        debugText.text = "이닛1";
+
         PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.DebugLogEnabled = true;
         // Google Play 게임 플랫폼 활성화
         PlayGamesPlatform.Activate();
-
+        debugText.text = "이닛2";
         GoogleLogin();
+        //debugText.text = "이닛3";
+
     }
     public void GoogleLogin()
     {
@@ -91,6 +96,8 @@ public class GooglePlayGPGS : MonoBehaviour
             _authenticating = false;
             if (success)
             {
+                debugText.text = "로그인성공";
+
                 //성공
                 //LoginText.text = "Login 되셧습니다.";
                 //UserNicName.text = Social.localUser.userName;
@@ -98,9 +105,11 @@ public class GooglePlayGPGS : MonoBehaviour
             }
             else
             {
+                debugText.text = "로그인실패";
+
                 //실패
                 //LoginText.text = "Login 실패 다시시도.";
-                GoogleLogin();
+                //GoogleLogin();
             }
         });
     }
@@ -178,8 +187,16 @@ public class GooglePlayGPGS : MonoBehaviour
     #region 리더보드 UI
     public void GoogleLederBoardUI()
     {
-        if(Authenticated)
-        Social.ShowLeaderboardUI();
+        debugText.text = "리더보드유아이눌림";
+
+        if (Authenticated)
+        {
+            debugText.text = "리더보드유아이호출";
+            Social.ShowLeaderboardUI();
+        }
+
+
+
     }
 
     public void GoogleLederBoardUITarget(string LeaderBoardID)

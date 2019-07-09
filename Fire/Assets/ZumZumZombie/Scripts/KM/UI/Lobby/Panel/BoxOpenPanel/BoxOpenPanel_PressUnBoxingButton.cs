@@ -6,9 +6,14 @@ public partial class BoxOpenPanel : MonoBehaviour
 {
     public void OnPressUnBoxingBox_Button()
     {
+        var sount = SoundManager.Instance.SoundDic["ROTATINGBOX"];
+        SoundManager.Instance.BGMSoundOnOff(false);
+        SoundManager.Instance.PlaySFM(sount, true, 0);
+
         if (LeanTween.isTweening(boxObj))
         {
             Debug.Log("박스도는중");
+           
             return;
         }
         OnPressUnBoxingProcess();
@@ -16,6 +21,7 @@ public partial class BoxOpenPanel : MonoBehaviour
 
     private void OnPressUnBoxingProcess()
     {
+       
         absorbVfx.Play();
         RotBoxTweenEffect();
     }
@@ -48,6 +54,9 @@ public partial class BoxOpenPanel : MonoBehaviour
         explodeVfx.Play();
 
         //박스열릴때 나오는 연기 이팩트 같은거! 소리도 그렇고
+        SoundManager.Instance.SFMSoundOnOff(false);
+        SoundManager.Instance.PlaySoundSFX("OPENBOX");
+        SoundManager.Instance.BGMSoundOnOff(true);
     }
 
     private void ChangeMesh()

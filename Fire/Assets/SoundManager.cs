@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : Singleton<SoundManager>
 {
     public static SoundManager Instance;
 
@@ -25,7 +25,8 @@ public class SoundManager : MonoBehaviour
 
 
     private OptionPanel option;
-
+    public bool _isSfxSound = true;
+    public bool _isBgmSound = true;
     private void Awake()
     {
         if (Instance != null)
@@ -51,13 +52,13 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySoundSFX(string SoundName)
     {
-        if(option.checkSFX)
+        if(_isSfxSound)
         PlaySFM(SoundDic[SoundName], false, 0);
     }
 
     public void PlaySoundBGM(string SoundName)
     {
-        if (option.checkBGM)
+        if (_isBgmSound)
             PlayBGM(SoundDic[SoundName], true, 0);
     }
 

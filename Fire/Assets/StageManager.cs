@@ -327,6 +327,11 @@ public class StageManager : MonoBehaviour
         if (manager.score > stageList[currentStageLV].spawnData.ClearScore)
         {
             currentStageLV++;
+            if (currentStageLV >= 3)
+            {
+                GooglePlayGPGS.Instance.Starter_AchievementPosting();
+            }
+
             StageSetting();
         }
 
