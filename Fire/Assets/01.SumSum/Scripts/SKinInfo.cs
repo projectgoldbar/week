@@ -8,7 +8,9 @@ public class SKinInfo : MonoBehaviour
     private SpriteData spriteData;
     private UserDataManager userDataManager;
     public string name = "스킨1";
-    public string description = "스킨1설명";
+
+    public string description = "Hello World. \n I am a boy.";
+
     public int skinnedMeshIdx;
 
     [Header("이미지")]

@@ -165,6 +165,10 @@ public class BoxManager : MonoBehaviour
         }
     }
 
+    public float[] bronzeBoxGold;
+    public float[] silverBoxGold;
+    public float[] goldBoxGold;
+
     public void TrowDice()
     {
         switch (openState)
@@ -173,13 +177,18 @@ public class BoxManager : MonoBehaviour
                 var x = Random.Range(0, 101);
                 if (x < 95)
                 {
+                    var gold = Random.Range(bronzeBoxGold[0], bronzeBoxGold[1]);
+                    gold = Mathf.Round(gold);
                     resultInfo.GetComponent<Image>().sprite = goldSprite;
+                    Description.text = gold.ToString();
                     //resultInfo.
                 }
                 else
                 {
                     var skin = FindObjectOfType<SkinSystem>().ThrowRandomSkin();
+
                     resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
+                    Description.text = skin.name;
                     skin.isHave = true;
                     UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
                 }
@@ -191,13 +200,18 @@ public class BoxManager : MonoBehaviour
                 var y = Random.Range(0, 101);
                 if (y < 80)
                 {
+                    var gold = Random.Range(bronzeBoxGold[0], bronzeBoxGold[1]);
+                    gold = Mathf.Round(gold);
+
                     resultInfo.GetComponent<Image>().sprite = goldSprite;
+                    Description.text = gold.ToString();
                     //resultInfo.
                 }
                 else
                 {
                     var skin = FindObjectOfType<SkinSystem>().ThrowRandomSkin();
                     resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
+                    Description.text = skin.name;
                     skin.isHave = true;
                     UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
                 }
@@ -210,13 +224,18 @@ public class BoxManager : MonoBehaviour
                 var z = Random.Range(0, 101);
                 if (z < 50)
                 {
+                    var gold = Random.Range(bronzeBoxGold[0], bronzeBoxGold[1]);
+                    gold = Mathf.Round(gold);
+
                     resultInfo.GetComponent<Image>().sprite = goldSprite;
+                    Description.text = gold.ToString();
                     //resultInfo.
                 }
                 else
                 {
                     var skin = FindObjectOfType<SkinSystem>().ThrowRandomSkin();
                     resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
+                    Description.text = skin.name;
                     skin.isHave = true;
                     UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
                 }

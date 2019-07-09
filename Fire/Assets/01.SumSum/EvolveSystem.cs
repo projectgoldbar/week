@@ -30,8 +30,8 @@ public class EvolveSystem : MonoBehaviour
         evolveFunc.Add(() => Breathing());//6
         evolveFunc.Add(() => Entente());//7
         evolveFunc.Add(() => SpeedRun());//8
-        evolveFunc.Add(() => { });//FowardShield());//9
-        evolveFunc.Add(() => { });//Charge());//10
+        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
