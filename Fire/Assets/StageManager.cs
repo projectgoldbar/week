@@ -9,15 +9,16 @@ public class StageManager : MonoBehaviour
     public GameObject dashZombie;
     public GameObject spitZombie;
     public TestCoinSpwan testCoinSpwan;
+    public TargetPointer tarGetPointer;
 
     public List<GameObject> zombiePool;
     public List<GameObject> dashZombiePool;
     public List<GameObject> etcPool;
 
-    public ArrowMove boxIndirection;
     public Manager manager;
     public GameObject pivot; //박스떨구기위해 있는 피벗
     public List<StageS> stageList = new List<StageS>();
+    public UITweenEffectManager UITweenEffectManager;
 
     private PlayerData playerData;
     private ParticlePool particlePool;
@@ -134,7 +135,10 @@ public class StageManager : MonoBehaviour
             LvUp();
         }
         //유저 박스화살표 변경
-        boxIndirection.target = boxPosition;
+        //boxIndirection.target = boxPosition;
+        tarGetPointer.targetPosition = boxPosition;
+        UITweenEffectManager.stageOpenPanel.gameObject.SetActive(true);
+        UITweenEffectManager.stageOpenPanel.OpenPanel("Stage" + currentStageLV.ToString());
         //지뢰가 생성되는 개수
         //int mineCount = stageData.spawnData.data[2].SpawnCount;
         //지뢰개수만큼 지속적으로 지뢰 생성되는함수 구현하기
@@ -147,6 +151,7 @@ public class StageManager : MonoBehaviour
     {
         var targets = Physics.OverlapSphere(playerData.transform.position, 35f, LayerMask.GetMask("Monster"));
         testCoinSpwan.StopSpwan();
+        testCoinSpwan.StopMeatMethod();
         StartCoroutine(ChangeAsh(targets));
     }
 
@@ -184,18 +189,21 @@ public class StageManager : MonoBehaviour
                 activeCoins.Enqueue(coinPools[i]);
             }
         }
-        for (; 0 < activeCoins.Count;)
+        for (; 1 < activeCoins.Count;)
         {
             var x = activeCoins.Dequeue();
-            for (; x.activeSelf == true;)
+            var y = activeCoins.Dequeue();
+            for (; y.activeSelf == true;)
             {
                 x.transform.position = Vector3.Lerp(x.transform.position, playerData.transform.position, 20f * Time.deltaTime);
+                y.transform.position = Vector3.Lerp(y.transform.position, playerData.transform.position, 20f * Time.deltaTime);
                 yield return null;
             }
         }
 
         manager.Evolution();
         testCoinSpwan.SpwanGold();
+        testCoinSpwan.SpwanMeatMethod();
     }
 
     #endregion 스테이지 레벨업 시퀀스
@@ -321,6 +329,12 @@ public class StageManager : MonoBehaviour
             currentStageLV++;
             StageSetting();
         }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            FindObjectOfType<UITweenEffectManager>().stageOpenPanel.gameObject.SetActive(true);
+            FindObjectOfType<UITweenEffectManager>().stageOpenPanel.OpenPanel("aaa");
+        }
     }
 
     #endregion 테스트
@@ -408,11 +422,6 @@ public class StageManager : MonoBehaviour
         return pivot;
     }
 }
-
-//[System.Serializable]
-//public class SpwanMonsterCount
-//{
-//}
 
 [System.Serializable]
 public class SpawnRange

@@ -15,13 +15,15 @@ public class SkinSystem : MonoBehaviour
     public SpriteData spriteData;
 
     public SKinInfo[] skinInfos;
-    public SkinnedMeshRenderer[] playerSkins;
+    public SkinnedMeshRenderer MeshData;
+    //public SkinnedMeshRenderer[] playerSkins;
     public GameObject playerSkinPivot;
 
     private void Awake()
     {
         spriteData = GetComponent<SpriteData>();
         skinInfos = skinPivot.GetComponentsInChildren<SKinInfo>();
+        ChangeMesh();
     }
 
     public void EquipSkin()
@@ -33,14 +35,18 @@ public class SkinSystem : MonoBehaviour
 
     public void ChangeMesh()
     {
-        for (int i = 0; i < playerSkins.Length; i++)
-        {
-            if (playerSkins[i].gameObject.activeSelf)
-            {
-                playerSkins[i].gameObject.SetActive(false);
-            }
-        }
-        playerSkins[selectedSkinIdx].gameObject.SetActive(true);
+        MeshData.sharedMesh = 
+            UserDataManager.Instance.EquipSkinReference[UserDataManager.Instance.userData.equipedSkinIdx].sharedMesh;
+
+
+        //for (int i = 0; i < playerSkins.Length; i++)
+        //{
+        //    if (playerSkins[i].gameObject.activeSelf)
+        //    {
+        //        playerSkins[i].gameObject.SetActive(false);
+        //    }
+        //}
+        //playerSkins[selectedSkinIdx].gameObject.SetActive(true);
     }
 
     public void Refresh()

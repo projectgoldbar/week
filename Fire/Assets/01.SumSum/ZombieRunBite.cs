@@ -5,6 +5,7 @@
         public override void Execute()
         {
             transform.tag = "BiteZombie";
+            base.Execute();
         }
 
         public void ChangeBite()

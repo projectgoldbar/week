@@ -222,24 +222,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dummyShied: {fileID: 0}
   arrow: {fileID: 0}
+  evadeParticle: {fileID: 0}
   boostParticle: {fileID: 0}
-  isTest: 0
+  clearParticle: {fileID: 0}
+  originEpRecoverSpeed: 1
+  epRecoverSpeed: 1
   hpText: {fileID: 0}
   gate: {fileID: 0}
   rollStack: 1
+  equipSkinIdx: 0
+  rollEp: 7
+  breathingHp: 0
   maxhp: 50
   hp: 50
-  hpDownSpeed: 5
   score: 0
   ep: 0
   maxEp: 10
+  isTest: 0
+  overHp: 0
   skillLv: 0
   skillCountLv: 1
   hpUpSpeed: 5
   goldUpSpeed: 5
   gold: 0
   df: 0
-  live: 0
+  EvadeCollider: {fileID: 0}
+  RndTimeMin: 3
+  RndTimeMax: 20
+  WormData: 0
+  GoldWormData: 0
+  enduranceData: 0
+  DefaultEvadeRadius: 0
+  SenceData: 0
+  calamityData: 0
+  MainusEP: 2
+  calamityHp: 0
+  breathingData: 0
+  AddGoldData: 0
+  SpeedRunData: 0
   goldBoxCount: 0
   silverBoxCount: 0
   bronzeBoxCount: 0
@@ -251,9 +271,10 @@ MonoBehaviour:
   magnet: {fileID: 0}
   meatTail: {fileID: 0}
   shield: {fileID: 0}
+  manager: {fileID: 0}
   animator: {fileID: 0}
-  isHalfSpeech: 0
-  testBlood: {fileID: 0}
+  MeshData: {fileID: 0}
+  is_Wall: 0
   hitUI: {fileID: 0}
 --- !u!65 &185188044
 BoxCollider:
@@ -321,7 +342,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185188042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -18.14}
+  m_LocalPosition: {x: 0, y: 1.48, z: -5.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 313249276}
@@ -344,6 +365,7 @@ MonoBehaviour:
   speed: 11
   accelSpeed: 1
   downSpeed: 1
+  slowSpeed: 0
   dynamicJoystick: {fileID: 833378671}
   playerData: {fileID: 0}
   evadeSystem: {fileID: 0}
@@ -353,6 +375,12 @@ MonoBehaviour:
   range: 1
   rollSensitive: 0
   accel: 0
+  equipIdx: 0
+  Portal: {fileID: 0}
+  CalamityRoll: 0
+  inputStey: 0
+  potalOpen: 0
+  wormSkinEquipRolling: 0
 --- !u!195 &185188049
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -952,6 +980,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie3
       objectReference: {fileID: 0}
+    - target: {fileID: 1091131463947833992, guid: f2c40601f43c52346a49531f8dbe9500,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1091131463947655002, guid: f2c40601f43c52346a49531f8dbe9500,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1185,7 +1218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1567833092
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1274,6 +1307,75 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1001 &1582282519
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1091131463947833992, guid: af28a6bbb2cd80d4588c6e67ccbf7519,
+        type: 3}
+      propertyPath: m_Name
+      value: ZombieF1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091131463947655002, guid: af28a6bbb2cd80d4588c6e67ccbf7519,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091131463947655002, guid: af28a6bbb2cd80d4588c6e67ccbf7519,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091131463947655002, guid: af28a6bbb2cd80d4588c6e67ccbf7519,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091131463947655002, guid: af28a6bbb2cd80d4588c6e67ccbf7519,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091131463947655002, guid: af28a6bbb2cd80d4588c6e67ccbf7519,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091131463947655002, guid: af28a6bbb2cd80d4588c6e67ccbf7519,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091131463947655002, guid: af28a6bbb2cd80d4588c6e67ccbf7519,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091131463947655002, guid: af28a6bbb2cd80d4588c6e67ccbf7519,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091131463947655002, guid: af28a6bbb2cd80d4588c6e67ccbf7519,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091131463947655002, guid: af28a6bbb2cd80d4588c6e67ccbf7519,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091131463947655002, guid: af28a6bbb2cd80d4588c6e67ccbf7519,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: af28a6bbb2cd80d4588c6e67ccbf7519, type: 3}
 --- !u!1 &1658136830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,6 +1609,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Zombie2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4281057405417499611, guid: 3cf1615535cc28c478c828bde613619a,
         type: 3}

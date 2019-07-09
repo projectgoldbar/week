@@ -6,19 +6,23 @@ using UnityEngine.UI;
 public class PlayerData : MonoBehaviour
 {
     public GameObject dummyShied;
-    public GameObject arrow;
     public GameObject evadeParticle;
+    public GameObject ATFieldUI;
     public ParticleSystem boostParticle;
     public ParticleSystem clearParticle;
     public float originEpRecoverSpeed = 1f;
     public float epRecoverSpeed = 1f;
     public Text hpText;
     public Gate gate;
-    public int rollStack = 1;
     public int equipSkinIdx = 0;
+    public int randomGold = 0;
+
+    [Header("구르기필요변수")]
     public float rollEp = 7f;
+
     private float calamityrollEp = 5f;
-    private float originEp = 7f;
+    private float originEp = 7f; // 원래 돌떄 필요한 포인트
+
     public float breathingHp = 0f;
 
     public float maxhp = 50f;
@@ -331,8 +335,24 @@ public class PlayerData : MonoBehaviour
         {
             if (value < 0)
             {
-                hp = hp + (WormData + value);
-                PlayerHitEffect();
+                if (equipSkinIdx == 9)
+                {
+                    var randomValue = Random.Range(0, 11);
+                    if (randomValue > 8)
+                    {
+                        ATFieldUI.SetActive(true);
+                    }
+                    else
+                    {
+                        hp = hp + (WormData + value);
+                        PlayerHitEffect();
+                    }
+                }
+                else
+                {
+                    hp = hp + (WormData + value);
+                    PlayerHitEffect();
+                }
             }
             else
             {
@@ -355,16 +375,33 @@ public class PlayerData : MonoBehaviour
         }
     }
 
+    private float Shuffle(float x)
+    {
+        x -= randomGold;
+        randomGold = Random.Range(2, 15329);
+        x += randomGold;
+        return x;
+    }
+
+    private float UnShuffle(float x)
+    {
+        x = x - randomGold;
+        return x;
+    }
+
     public float Gold
     {
         get
         {
-            return gold;
+            return UnShuffle(gold);
         }
         set
         {
-            gold += value;
-            manager.goldUi.text = gold.ToString();
+            //gold = gold + value;
+            var x = gold + value;
+            gold = Shuffle(x);
+            Hp = (goldUpSpeed * GoldWormData);
+            manager.goldUi.text = Gold.ToString();
         }
     }
 
@@ -375,8 +412,9 @@ public class PlayerData : MonoBehaviour
         manager = FindObjectOfType<Manager>();
         particlePool = FindObjectOfType<ParticlePool>();
         animator = GetComponentInChildren<Animator>();
+        randomGold = Random.Range(4000, 9576);
+        gold += randomGold;
         biteZombies = new Queue<GameObject>();
-
         if (!isTest)
         {
             PlayerSetting();
@@ -385,11 +423,37 @@ public class PlayerData : MonoBehaviour
         hp = maxhp;
         DefaultEvadeRadius = EvadeCollider.radius;
         DefaultSpeedData = playerMove.maxSpeed;
-        manager.goldUi.text = gold.ToString();
+        manager.goldUi.text = Gold.ToString();
         RndTime = Random.Range(RndTimeMin, RndTimeMax);
-        if (equipSkinIdx == 9)
+        if (equipSkinIdx == 10)
         {
             overHp = true;
+        }
+        else if (equipSkinIdx == 3)
+        {
+            Debug.Log("3번스킨");
+            StartCoroutine(NurseCoroutine());
+        }
+        else if (equipSkinIdx == 6)
+        {
+            playerMove.rollDownSpeedTime = 3f;
+        }
+
+        originEp = rollEp;
+        calamityrollEp = originEp - 2f;
+    }
+
+    private IEnumerator NurseCoroutine()
+    {
+        while (true)
+        {
+            if (Hp < maxhp && ep > 1f)
+            {
+                Hp = 1f;
+                ep -= 1f;
+                yield return null;
+            }
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -404,6 +468,7 @@ public class PlayerData : MonoBehaviour
         hpUpSpeed = hpUpSpeed + (hpUpSpeed * (0.01f * x.healHp));
         epRecoverSpeed = originEpRecoverSpeed + (0.01f * x.healEp);
         goldUpSpeed = goldUpSpeed + (goldUpSpeed * x.gainMoney * 0.01f);
+        equipSkinIdx = x.equipedSkinIdx;
         playerMove.equipIdx = x.equipedSkinIdx;
     }
 
@@ -424,28 +489,6 @@ public class PlayerData : MonoBehaviour
         if (ep < maxEp)
         {
             ep += epRecoverSpeed * Time.deltaTime;
-        }
-
-        if (playerMove.equipIdx == 8)
-        {
-            if (CurrentTime >= RndTime)
-            {
-                is_Wall = true;
-                if (sheildCurrentTime >= sheildTime)
-                {
-                    sheildCurrentTime = 0;
-                    CurrentTime = 0;
-                    is_Wall = false;
-                }
-                else
-                {
-                    sheildCurrentTime += Time.deltaTime;
-                }
-            }
-            else
-            {
-                CurrentTime += Time.deltaTime;
-            }
         }
     }
 
@@ -516,7 +559,7 @@ public class PlayerData : MonoBehaviour
 
     public GameObject hitUI;
 
-    private float EpHitData = 2;
+    private float EpHitData = 3;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -536,7 +579,7 @@ public class PlayerData : MonoBehaviour
                 other.transform.SetParent(this.transform, true);
             }
 
-            if (playerMove.equipIdx == 7) //에너지쉴드 스킨
+            if (equipSkinIdx == 8) //에너지쉴드 스킨
             {
                 if (ep + EpHitData > 0)
                 {
@@ -555,7 +598,7 @@ public class PlayerData : MonoBehaviour
         else if (other.tag == "Coin")
         {
             Gold = goldUpSpeed;
-            Hp = (goldUpSpeed * GoldWormData);
+
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Meat")
@@ -595,6 +638,10 @@ public class PlayerData : MonoBehaviour
 
                 default:
                     break;
+            }
+            if (equipSkinIdx == 5)
+            {
+                Gold = 50f + (50f * FindObjectOfType<StageManager>().currentStageLV);
             }
         }
         else if (other.tag == "BiteZombie")

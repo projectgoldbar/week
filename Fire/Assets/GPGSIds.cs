@@ -24,7 +24,8 @@
 
 public static class GPGSIds
 {
-        public const string leaderboard = "CgkI3uaU5OoVEAIQAQ"; // <GPGSID>
+        public const string achievement_sumsumzombie_achievements = "CgkIxLi5xPYJEAIQAQ"; // <GPGSID>
+        public const string leaderboard_sumsumzombie_leaderboard = "CgkIxLi5xPYJEAIQAA"; // <GPGSID>
 
 }
 

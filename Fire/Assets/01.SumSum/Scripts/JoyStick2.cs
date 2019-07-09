@@ -103,7 +103,7 @@ public class JoyStick2 : MonoBehaviour
                 //Debug.Log(direction);
                 //Debug.Log($"마우스 초기위치부터 현재위치까지의 거리{distance}");
 
-                if (speed > rollSensitive && playerData.rollStack > 0)
+                if (speed > rollSensitive)
                 {
                     Debug.Log("구른다");
 
