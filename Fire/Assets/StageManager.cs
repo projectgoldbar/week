@@ -113,6 +113,21 @@ public class StageManager : MonoBehaviour
         yield return null;
     }
 
+
+    IEnumerator StageChangeLighting(Color Current , Color Next)
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            if (i % 2 == 0)
+            { lightColor.color = Current; }
+            else
+            { lightColor.color = Next; }
+
+            yield return null;
+        }
+    }
+
+
     public void StageSetting()
     {
         //현제스테이지
@@ -120,7 +135,13 @@ public class StageManager : MonoBehaviour
         //해당 스테이지에 실행되야할것
 
         //스테이지 전환효과
-        lightColor.color = stageData.PlayerPointLight;
+        //lightColor.color = stageData.PlayerPointLight;
+        Color CurrentColor = lightColor.color;
+        Color NextColor = stageData.PlayerPointLight;
+
+        StartCoroutine(StageChangeLighting(CurrentColor , NextColor));
+
+        ///////////////////////////////////////////////
         //몬스터생성
         StartCoroutine(MonsterCreate(stageList[currentStageLV]));
         //몬스터강화
