@@ -13,6 +13,7 @@ public partial class GameScene : MonoBehaviour
 
     public OptionPanel optionPanel;
     public ExitGamePanel exitGamePanel;
+    public AchivementPanel achivementPanel;
 
     public DirectionUIController directionUIController;
 
@@ -114,6 +115,16 @@ public partial class GameScene : MonoBehaviour
     public void OptionPanelClose()
     {
         optionPanel.ClosePanel();
+    }
+
+    public void AchivementPanelOpen()
+    {
+        achivementPanel.OpenPanel();
+    }
+
+    public void AchivementPanelClose()
+    {
+        achivementPanel.ClosePanel();
     }
 
     public void LeaderBoardOpen()
