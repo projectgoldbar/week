@@ -52,14 +52,8 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
 
     TestSaveData TestData = new TestSaveData();
 
-    private void Awake()
+    private void Start()
     {
-        //if (_instance != null && _instance != this)
-        //{
-        //    Destroy(this);
-        //}
-        //DontDestroyOnLoad(gameObject);
-
         GoogleServicesInit();
     }
 
@@ -68,8 +62,16 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         debugText.text = "이닛들어옴";
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
 
-        //게임 진행 상황을 저장할 수 있습니다.
+        // enables saving game progress.
         .EnableSavedGames()
+        // Will bring up a prompt for consent.
+        .RequestEmail()
+        // requests a server auth code be generated so it can be passed to an
+        //  associated back end server application and exchanged for an OAuth token.
+        .RequestServerAuthCode(false)
+        // requests an ID token be generated.  This OAuth token can be used to
+        //  identify the player to other services such as Firebase.
+        .RequestIdToken()
         .Build();
         debugText.text = "이닛1";
 
@@ -86,6 +88,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
     {
         if (Authenticated || _authenticating)
         {
+            debugText.text = "로그인중";
             return;
         }
 
@@ -140,11 +143,24 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
     
     public void Starter_AchievementPosting()
     {
-        Social.ReportScore(100, GPGSIds.achievement_starter, (bool success) => 
+        {
+            //Social.ReportScore(100, GPGSIds.achievement_starter, (bool success) => 
+            //{
+            //    if (success)
+            //    {
+            //        Debug.Log("스타터 업적 열림");
+            //    }
+            //    else
+            //    {
+
+            //    }
+            //});
+        }
+        PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_starter, 100, (bool success) =>
         {
             if (success)
             {
-                Debug.Log("스타터 업적 열림");
+                debugText.text = "스타터 업적 열림";
             }
             else
             {

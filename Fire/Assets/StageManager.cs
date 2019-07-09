@@ -114,16 +114,17 @@ public class StageManager : MonoBehaviour
     }
 
 
-    IEnumerator StageChangeLighting(Color Current , Color Next)
+    IEnumerator StageChangeLighting(Color Current , Color Next , int n)
     {
-        for (int i = 0; i < 7; i++)
+        float v = 0.1f * (n - 1);
+        for (int i = 0; i < n; i++)
         {
             if (i % 2 == 0)
             { lightColor.color = Current; }
             else
             { lightColor.color = Next; }
 
-            yield return null;
+            yield return new WaitForSeconds(2 - i*0.2f);
         }
     }
 
@@ -139,7 +140,7 @@ public class StageManager : MonoBehaviour
         Color CurrentColor = lightColor.color;
         Color NextColor = stageData.PlayerPointLight;
 
-        StartCoroutine(StageChangeLighting(CurrentColor , NextColor));
+        StartCoroutine(StageChangeLighting(CurrentColor , NextColor,30));
 
         ///////////////////////////////////////////////
         //몬스터생성
