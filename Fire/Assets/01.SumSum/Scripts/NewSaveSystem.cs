@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class NewSaveSystem
 {
-    public static void SaveData(NewUserData userData)
+    public static void SaveData(NewUserData userData, float RGold)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/beta.dd";
@@ -12,7 +12,7 @@ public static class NewSaveSystem
         SaveData data = new SaveData();
         data.statPointerIdx = userData.statPointerIdx;
         data.playTime = userData.playTime;
-        data.money = userData.Money;
+        data.money = RGold;
         data.gainSkin = userData.gainSkin;
         data.equipedSkinIdx = userData.equipedSkinIdx;
         data.bronzeBox = userData.bronzeBoxCount;

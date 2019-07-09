@@ -57,7 +57,7 @@ public class Manager : MonoBehaviour
         uITweenEffectManager = FindObjectOfType<UITweenEffectManager>();
 
         playerData.transform.position = spwanPoints[Random.Range(0, spwanPoints.Length)];
-        goldUi.text = playerData.Gold.ToString();
+        //goldUi.text = playerData.Gold.ToString();
         SceneManager.sceneUnloaded += OnSceneEnded;
         //Time.timeScale = 0;
         FindObjectOfType<UITweenEffectManager>().EnterInGame();
@@ -75,10 +75,13 @@ public class Manager : MonoBehaviour
 
     private void OnSceneEnded(Scene scene)
     {
+        Debug.Log("골드들어갔다." + playerData.Gold);
         var x = UserDataManager.Instance.userData;
-        playerData.Gold += resultGold;
+
         playerData.score = score;
-        x.Money = Mathf.Round(playerData.Gold);
+
+        x.Money += resultGold;
+
         x.playCount++;
         x.goldBoxCount += playerData.goldBoxCount;
         x.silverBoxCount += playerData.silverBoxCount;
@@ -188,6 +191,7 @@ public class Manager : MonoBehaviour
 
     public void GameOverSeq()
     {
+        resultGold = playerData.Gold - UserDataManager.Instance.userData.Money;
         scoreText.text = score.ToString();
         var playTime = score;
         sec = playTime % 60;
