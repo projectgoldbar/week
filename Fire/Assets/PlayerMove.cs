@@ -29,6 +29,7 @@ public class PlayerMove : MonoBehaviour
 
     public ParticleSystem Portal = null;
     public AnimationEvents animEvent;
+    private WaitForSeconds shakeDuration;
 
     private void Awake()
     {
@@ -41,21 +42,27 @@ public class PlayerMove : MonoBehaviour
         evadeMove[4] = Potal;
         evadeMove[5] = CeleryMan;
         evadeMove[6] = MotorCycle;
-        evadeMove[7] = WormSkinEquipRolling;
+        evadeMove[7] = Shaker;
         evadeMove[8] = EnergyShield;
         evadeMove[9] = NomalRoll;
-
+        startPos = new Vector2(-720f, -1280f);
+        //knob.position = startPos;
+        //center.position = startPos;
         //animEvent = playerData.animator.GetComponent<AnimationEvents>();
-
+        shakeDuration = new WaitForSeconds(2f);
         Portal.Stop();
+        StartCoroutine(Shake());
     }
 
     private Vector2 bufferVector2;
     private Vector2 inputVector2;
     private Vector2 start;
     private float speedDistance;
+
     public bool CalamityRoll = false;
     public bool inputStey = false;
+
+    private int biteCount = 0;
 
     #region 상현이 코드 추가
 
@@ -67,31 +74,22 @@ public class PlayerMove : MonoBehaviour
     public float range = 1f;
     private float distance;
 
-    private void Start()
-    {
-        startPos = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
-        knob.position = startPos;
-        center.position = startPos;
-    }
-
     #endregion 상현이 코드 추가
 
     public void Update()
     {
         Vector2 mousePosition = Input.mousePosition;
 
-        //Vector3 direction = Vector3.forward * dynamicJoystick.Vertical + Vector3.right * dynamicJoystick.Horizontal;
-        int biteCount = playerData.biteZombies.Count;
+        Vector3 direction = Vector3.forward * dynamicJoystick.Vertical + Vector3.right * dynamicJoystick.Horizontal;
+        biteCount = playerData.biteZombies.Count;
 
         if (Input.GetMouseButtonDown(0))
         {
             //StartCoroutine(FadeIn(0));
             inputVector2 = Input.mousePosition;
-            //bufferVector2 = Input.mousePosition;
+            bufferVector2 = Input.mousePosition;
             Quaternion dir = Quaternion.LookRotation(inputVector2);
             transform.rotation = Quaternion.Slerp(transform.rotation, dir, Time.deltaTime * 10.0f);
-            knob.position = mousePosition;
-            center.position = mousePosition;
             accel = true;
         }
 
@@ -100,6 +98,11 @@ public class PlayerMove : MonoBehaviour
             if (maxSpeed > speed)
             {
                 speed += accelSpeed;
+            }
+            else if (equipIdx == 6 && playerData.ep > 0 && maxSpeed + 5f > speed)
+            {
+                speed += accelSpeed;
+                playerData.ep -= playerData.MainusEP * Time.deltaTime;
             }
             else
             {
@@ -115,25 +118,22 @@ public class PlayerMove : MonoBehaviour
             else if (speed <= 0f)
             {
                 speed = 0f;
-                playerData.Hp = playerData.breathingHp * Time.deltaTime;
+                evadeMove[equipIdx]();
             }
         }
 
         if (Input.GetMouseButton(0))
         {
-            knob.position = mousePosition;
-            knob.position = center.position + Vector3.ClampMagnitude(knob.position - center.position, center.sizeDelta.x * range);
-
-            if (knob.position != Input.mousePosition)
-            {
-                Vector3 outsideBoundsVector = Input.mousePosition - knob.position;
-                //center.position += outsideBoundsVector;
-            }
-            direction = DisNdir(knob.position, center.position).dir;
             distance = DisNdir(mousePosition, start).dis;
-            //distance = DisNdir(mousePosition, start).dis;
-            //speedDistance = DisNdir(mousePosition, bufferVector2).dis;
-            //var speed = speedDistance * 0.045f;
+            speedDistance = DisNdir(mousePosition, bufferVector2).dis;
+            var speed = speedDistance * 0.045f;
+            var dir = DisNdir(mousePosition, inputVector2).dir;
+
+            Vector3 moveDirection = new Vector3(dir.x, 0, dir.y);
+            Quaternion targetRotation = moveDirection != Vector3.zero ? Quaternion.LookRotation(moveDirection) : transform.rotation;
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10.0f);
+
+            #region 구르기 기능
 
             //if (speed > rollSensitive && !isRoll)
             //{
@@ -173,32 +173,21 @@ public class PlayerMove : MonoBehaviour
             //            }
             //        }
             //    }
-        }
-        if (distance < 20) return;
-        if (!isRoll)
-        {
-            //var dir = DisNdir(mousePosition, inputVector2).dir;
+            //}
 
-            //Vector3 moveDirection = new Vector3(dir.x, 0, dir.y);
-            //Quaternion targetRotation = moveDirection != Vector3.zero ? Quaternion.LookRotation(moveDirection) : transform.rotation;
-            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10.0f);
-            Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
-
-            Quaternion targetRotation = moveDirection != Vector3.zero ? Quaternion.LookRotation(moveDirection) : transform.rotation;
-            //Target.rotation = targetRotation;
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10.0f);
+            #endregion 구르기 기능
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             //StartCoroutine(FadeIn(1));
             accel = false;
-            knob.position = start;
         }
-        agent.velocity = agent.transform.forward * (speed - (slowSpeed + biteCount));
-        playerData.animator.SetFloat("moveSpeed", speed);
+        bufferVector2 = Input.mousePosition;
 
-        //bufferVector2 = Input.mousePosition;
+        agent.velocity = agent.transform.forward * (speed - (slowSpeed + biteCount));
+
+        playerData.animator.SetFloat("moveSpeed", speed);
     }
 
     public (float dis, Vector3 dir) DisNdir(Vector3 aa, Vector3 bb)
@@ -217,26 +206,34 @@ public class PlayerMove : MonoBehaviour
 
     private void NomalRoll()
     {
-        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
-        playerData.animator.Play("Roll");
+        //SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
+        //playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
+        playerData.Hp = playerData.breathingHp * Time.deltaTime;
     }
 
     //럭비
     private void Rugby()
     {
-        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
-        playerData.animator.Play("Roll");
-        animEvent.evadeSpeed = 25f;
-        playerData.animator.Play("Spin");
-        playerData.ep -= playerData.rollEp;
+        playerData.Hp = playerData.breathingHp * Time.deltaTime;
     }
 
     private void Chearleader()
     {
-        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
-        playerData.animator.Play("Roll");
-        playerData.Hp = -1 * playerData.rollEp;
+        playerData.Hp = playerData.breathingHp * Time.deltaTime;
+        if (EpCheck(10))
+        {
+            playerData.ep -= 10f;
+            StartCoroutine(ZeroWorld());
+        }
+    }
+
+    private IEnumerator ZeroWorld()
+    {
+        Time.timeScale = 0.5f;
+        yield return new WaitForSeconds(2f);
+        Time.timeScale = 1f;
+        yield break;
     }
 
     private void Nurse()
@@ -272,27 +269,41 @@ public class PlayerMove : MonoBehaviour
 
     private void CeleryMan()
     {
-        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
-        playerData.animator.Play("Roll");
-        playerData.ep -= playerData.rollEp;
+        playerData.Hp = playerData.breathingHp * Time.deltaTime;
     }
 
     private void MotorCycle()
     {
-        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
-        playerData.animator.Play("Roll");
-        playerData.ep -= playerData.rollEp;
+        //SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
+        //if (playerData.ep >= 0)
+        //{
+        //    playerData.ep -= playerData.rollEp * Time.deltaTime;
+        //}
+        //else
+        //{
+        //    playerData.ep = 0f;
+        //}
+
+        playerData.Hp = playerData.breathingHp * Time.deltaTime;
     }
 
     public bool wormSkinEquipRolling;
 
-    private void WormSkinEquipRolling()
+    private void Shaker()
     {
-        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
-        playerData.animator.Play("Roll");
-        wormSkinEquipRolling = true;
+        //SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
+        //playerData.animator.Play("Roll");
+        //wormSkinEquipRolling = true;
+        //if (playerData.ep >= 0)
+        //{
+        //    playerData.ep -= playerData.rollEp * Time.deltaTime;
+        //}
+        //else
+        //{
+        //    playerData.ep = 0f;
+        //}
 
-        playerData.ep -= playerData.rollEp;
+        playerData.Hp = playerData.breathingHp * Time.deltaTime;
     }
 
     private void EnergyShield()
@@ -314,5 +325,49 @@ public class PlayerMove : MonoBehaviour
         SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
         playerData.animator.Play("Roll");
         playerData.ep -= playerData.rollEp;
+    }
+
+    private bool EpCheck(float x)
+    {
+        if (playerData.ep > x)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private IEnumerator Shake()
+    {
+        Debug.Log("shake");
+        while (true)
+        {
+            if (biteCount > 0)
+            {
+                if (equipIdx == 7)
+                {
+                    for (int i = 0; i < biteCount; i++)
+                    {
+                        var x = playerData.biteZombies.Dequeue();
+                        x.transform.parent = null;
+                        x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
+                        yield return null;
+                    }
+                }
+                else
+                {
+                    var x = playerData.biteZombies.Dequeue();
+                    x.transform.parent = null;
+                    x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
+                    yield return shakeDuration;
+                }
+            }
+            else
+            {
+                yield return shakeDuration;
+            }
+        }
     }
 }

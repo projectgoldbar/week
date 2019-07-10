@@ -21,12 +21,12 @@ public class PlayerData : MonoBehaviour
     public int randomGold = 0;
 
     [Header("구르기필요변수")]
-    public float rollEp = 7f;
+    public float rollEp = 3f;
 
     private float calamityrollEp = 5f;
     private float originEp = 7f; // 원래 돌떄 필요한 포인트
 
-    public float breathingHp = 0f;
+    public float breathingHp = 0.02f;
 
     public float maxhp = 50f;
     public float hp = 50f;
@@ -217,7 +217,7 @@ public class PlayerData : MonoBehaviour
             else if (breathing == 2) breathingData = 0.1f;
             else if (breathing == 3) breathingData = 0.2f;
 
-            breathingHp = (maxhp * breathingData);
+            breathingHp += (maxhp * breathingData);
             Debug.Log($"숨쉬기운동 -> {breathingData}");
         }
     }
@@ -437,9 +437,10 @@ public class PlayerData : MonoBehaviour
 
             StartCoroutine(NurseCoroutine());
         }
-        else if (equipSkinIdx == 6)
+        else if (equipSkinIdx == 1)
         {
-            playerMove.rollDownSpeedTime = 3f;
+            playerMove.accelSpeed = 11f;
+            playerMove.downSpeed = 11f;
         }
 
         originEp = rollEp;

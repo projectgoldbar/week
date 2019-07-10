@@ -75,7 +75,7 @@ public class JoyStick2 : MonoBehaviour
             {
                 ShowHide(true);
 
-                //start = pos;
+                start = pos;
 
                 knob.position = pos;
                 center.position = startPos;
