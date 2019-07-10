@@ -5,7 +5,7 @@ using UnityEngine;
 public class OutlineTween : MonoBehaviour
 {
     public float targetScale = 1.3f;
-    public float durationScale = 1.8f;
+    public float scaleDuration = 1.8f;
 
     private Color nowColor;
     private float onAlpha;
@@ -33,8 +33,8 @@ public class OutlineTween : MonoBehaviour
 
     private void DoorOutLineIdle()
     {
-        LeanTween.scale(gameObject, Vector3.one * myScale.x * targetScale, durationScale).setEase(LeanTweenType.easeOutQuart).setLoopClamp();
-        LTDescr d = LeanTween.value(gameObject, onAlpha, offAlpha, durationScale).setLoopClamp();
+        LeanTween.scale(gameObject, Vector3.one * myScale.x * targetScale, scaleDuration).setEase(LeanTweenType.easeOutQuart).setLoopClamp();
+        LTDescr d = LeanTween.value(gameObject, onAlpha, offAlpha, scaleDuration).setLoopClamp();
         d.setOnUpdate(x => { ValueUpdateAlpha(x); });
     }
 
