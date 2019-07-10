@@ -48,7 +48,10 @@ public class StageManager : MonoBehaviour
         ShowTimer = new WaitForSeconds(0.5f);
         playerData = FindObjectOfType<PlayerData>();
         particlePool = FindObjectOfType<ParticlePool>();
+
+        if(!playerData.isTutirial)
         ZombiePoolSet();
+
         StageSetting();
     }
 
@@ -146,6 +149,7 @@ public class StageManager : MonoBehaviour
 
         ///////////////////////////////////////////////
         //몬스터생성
+        if(!playerData.isTutirial)
         StartCoroutine(MonsterCreate(stageList[currentStageLV]));
         //몬스터강화
         MonsterUpgrade();
