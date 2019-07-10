@@ -52,6 +52,8 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
 
     TestSaveData TestData = new TestSaveData();
 
+    bool tutorial = false;
+    bool Beginner = false;
     private void Start()
     {
         GoogleServicesInit();
@@ -143,28 +145,13 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
     
     public void Starter_AchievementPosting()
     {
-        {
-            //Social.ReportScore(100, GPGSIds.achievement_starter, (bool success) => 
-            //{
-            //    if (success)
-            //    {
-            //        Debug.Log("스타터 업적 열림");
-            //    }
-            //    else
-            //    {
-
-            //    }
-            //});
-        }
-        PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_starter, 100, (bool success) =>
+        
+        Social.ReportProgress(GPGSIds.achievement_tutorial, 100f, (bool success) =>
         {
             if (success)
             {
-                debugText.text = "스타터 업적 열림";
-            }
-            else
-            {
-
+                tutorial = true;
+                Debug.Log("튜토리얼 업적 열림");
             }
         });
     }

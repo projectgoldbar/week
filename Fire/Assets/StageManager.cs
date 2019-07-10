@@ -116,7 +116,6 @@ public class StageManager : MonoBehaviour
 
     IEnumerator StageChangeLighting(Color Current , Color Next , int n)
     {
-        float v = 0.1f * (n - 1);
         for (int i = 0; i < n; i++)
         {
             if (i % 2 == 0)
@@ -124,7 +123,7 @@ public class StageManager : MonoBehaviour
             else
             { lightColor.color = Next; }
 
-            yield return new WaitForSeconds(v - i*0.2f);
+            yield return null;
         }
     }
 
@@ -135,12 +134,17 @@ public class StageManager : MonoBehaviour
         var stageData = stageList[currentStageLV];
         //해당 스테이지에 실행되야할것
 
+        if(currentStageLV >=1) 
+        GooglePlayGPGS.Instance.Starter_AchievementPosting();
+
+
+
         //스테이지 전환효과
         //lightColor.color = stageData.PlayerPointLight;
         Color CurrentColor = lightColor.color;
         Color NextColor = stageData.PlayerPointLight;
 
-        StartCoroutine(StageChangeLighting(CurrentColor , NextColor,30));
+        StartCoroutine(StageChangeLighting(CurrentColor , NextColor,2));
 
         ///////////////////////////////////////////////
         //몬스터생성
@@ -349,10 +353,7 @@ public class StageManager : MonoBehaviour
         if (manager.score > stageList[currentStageLV].spawnData.ClearScore)
         {
             currentStageLV++;
-            if (currentStageLV >= 3)
-            {
-                GooglePlayGPGS.Instance.Starter_AchievementPosting();
-            }
+            
 
             StageSetting();
         }
