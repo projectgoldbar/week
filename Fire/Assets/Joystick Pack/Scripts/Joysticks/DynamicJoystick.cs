@@ -13,6 +13,7 @@ public class DynamicJoystick : Joystick
     {
         MoveThreshold = moveThreshold;
         base.Start();
+        //OnDrag();
         //background.gameObject.SetActive(false);
     }
 
@@ -31,11 +32,11 @@ public class DynamicJoystick : Joystick
 
     protected override void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
     {
-        if (magnitude > moveThreshold)
-        {
-            Vector2 difference = normalised * (magnitude - moveThreshold) * radius;
-            background.anchoredPosition += difference;
-        }
+        //if (magnitude > moveThreshold)
+        //{
+        //    Vector2 difference = normalised * (magnitude - moveThreshold) * radius;
+        //    background.anchoredPosition += difference;
+        //}
         base.HandleInput(magnitude, normalised, radius, cam);
     }
 }

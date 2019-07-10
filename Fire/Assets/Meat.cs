@@ -4,10 +4,16 @@ public class Meat : MonoBehaviour
 {
     public int meatSection;
     private SectorManager sectorManager;
+    private Vector3 RotationSpeed = new Vector3(0, 100f, 0);
 
     private void Awake()
     {
         sectorManager = FindObjectOfType<SectorManager>();
+    }
+
+    private void Update()
+    {
+        transform.Rotate(RotationSpeed * Time.deltaTime, Space.Self);
     }
 
     private void OnEnable()

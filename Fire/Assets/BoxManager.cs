@@ -181,6 +181,7 @@ public class BoxManager : MonoBehaviour
                     gold = Mathf.Round(gold);
                     resultInfo.GetComponent<Image>().sprite = goldSprite;
                     Description.text = gold.ToString();
+                    UserDataManager.Instance.userData.Money += gold;
                     //resultInfo.
                 }
                 else
@@ -200,11 +201,12 @@ public class BoxManager : MonoBehaviour
                 var y = Random.Range(0, 101);
                 if (y < 80)
                 {
-                    var gold = Random.Range(bronzeBoxGold[0], bronzeBoxGold[1]);
+                    var gold = Random.Range(silverBoxGold[0], silverBoxGold[1]);
                     gold = Mathf.Round(gold);
 
                     resultInfo.GetComponent<Image>().sprite = goldSprite;
                     Description.text = gold.ToString();
+                    UserDataManager.Instance.userData.Money += gold;
                     //resultInfo.
                 }
                 else
@@ -224,11 +226,12 @@ public class BoxManager : MonoBehaviour
                 var z = Random.Range(0, 101);
                 if (z < 50)
                 {
-                    var gold = Random.Range(bronzeBoxGold[0], bronzeBoxGold[1]);
+                    var gold = Random.Range(goldBoxGold[0], goldBoxGold[1]);
                     gold = Mathf.Round(gold);
 
                     resultInfo.GetComponent<Image>().sprite = goldSprite;
                     Description.text = gold.ToString();
+                    UserDataManager.Instance.userData.Money += gold;
                     //resultInfo.
                 }
                 else

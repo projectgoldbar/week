@@ -101,7 +101,7 @@ namespace ZombieState
             time = 0f;
             zombieData.sturnCollider.gameObject.SetActive(false);
             zombieData.attackTrailRenderer.enabled = false;
-            zombieData.agent.enabled = true;
+            //zombieData.agent.enabled = true;
             zombieData.agent.acceleration = 11f;
             zombieData.animator.SetBool("Attack", false);
 

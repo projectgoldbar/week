@@ -113,8 +113,7 @@ public class StageManager : MonoBehaviour
         yield return null;
     }
 
-
-    IEnumerator StageChangeLighting(Color Current , Color Next , int n)
+    private IEnumerator StageChangeLighting(Color Current, Color Next, int n)
     {
         float v = 0.1f * (n - 1);
         for (int i = 0; i < n; i++)
@@ -124,10 +123,9 @@ public class StageManager : MonoBehaviour
             else
             { lightColor.color = Next; }
 
-            yield return new WaitForSeconds(2 - i*0.2f);
+            yield return new WaitForSeconds(2 - i * 0.2f);
         }
     }
-
 
     public void StageSetting()
     {
@@ -140,13 +138,13 @@ public class StageManager : MonoBehaviour
         Color CurrentColor = lightColor.color;
         Color NextColor = stageData.PlayerPointLight;
 
-        StartCoroutine(StageChangeLighting(CurrentColor , NextColor,30));
+        //StartCoroutine(StageChangeLighting(CurrentColor, NextColor, 30));
 
         ///////////////////////////////////////////////
         //몬스터생성
         StartCoroutine(MonsterCreate(stageList[currentStageLV]));
         //몬스터강화
-        MonsterUpgrade();
+        //MonsterUpgrade();
 
         //박스생성
         Vector3 boxPosition = FindPoint();
@@ -211,14 +209,18 @@ public class StageManager : MonoBehaviour
                 activeCoins.Enqueue(coinPools[i]);
             }
         }
-        for (; 1 < activeCoins.Count;)
+        for (; 3 < activeCoins.Count;)
         {
             var x = activeCoins.Dequeue();
             var y = activeCoins.Dequeue();
-            for (; y.activeSelf == true;)
+            var z = activeCoins.Dequeue();
+            var o = activeCoins.Dequeue();
+            for (; z.activeSelf == true;)
             {
-                x.transform.position = Vector3.Lerp(x.transform.position, playerData.transform.position, 20f * Time.deltaTime);
-                y.transform.position = Vector3.Lerp(y.transform.position, playerData.transform.position, 20f * Time.deltaTime);
+                o.transform.position = Vector3.Lerp(o.transform.position, playerData.transform.position, 15f * Time.deltaTime);
+                x.transform.position = Vector3.Lerp(x.transform.position, playerData.transform.position, 15f * Time.deltaTime);
+                y.transform.position = Vector3.Lerp(y.transform.position, playerData.transform.position, 15f * Time.deltaTime);
+                z.transform.position = Vector3.Lerp(z.transform.position, playerData.transform.position, 15f * Time.deltaTime);
                 yield return null;
             }
         }
