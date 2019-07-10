@@ -161,14 +161,11 @@ public class PlayerData : MonoBehaviour
         {
             sence = value;
             if (sence == 0) SenceData = 0;
-            else if (sence == 1) SenceData = 0.5f;
-            else if (sence == 2) SenceData = 0.75f;
-            else if (sence == 3) SenceData = 1f;
+            else if (sence == 1) SenceData = 2f;
+            else if (sence == 2) SenceData = 3f;
+            else if (sence == 3) SenceData = 4f;
 
             //회피범위
-
-            var radius = DefaultEvadeRadius + SenceData;
-            EvadeCollider.radius = radius;
 
             Debug.Log($"제5감각 -> {SenceData}");
         }
@@ -259,9 +256,9 @@ public class PlayerData : MonoBehaviour
         {
             speedRun = value;
             if (speedRun == 0) SpeedRunData = 0;
-            else if (speedRun == 1) SpeedRunData = 0.3f;
-            else if (speedRun == 2) SpeedRunData = 0.35f;
-            else if (speedRun == 3) SpeedRunData = 0.4f;
+            else if (speedRun == 1) SpeedRunData = 2f;
+            else if (speedRun == 2) SpeedRunData = 4f;
+            else if (speedRun == 3) SpeedRunData = 6f;
 
             //var data = DefaultSpeedData + SpeedRunData;
             playerMove.maxSpeed += SpeedRunData;
@@ -354,6 +351,7 @@ public class PlayerData : MonoBehaviour
                 else
                 {
                     hp = hp + (WormData + value);
+                    ep += sence;
                     PlayerHitEffect();
                 }
             }
@@ -449,7 +447,6 @@ public class PlayerData : MonoBehaviour
 
         originEp = rollEp;
         calamityrollEp = originEp - 2f;
-        ep = maxEp;
     }
 
     private IEnumerator NurseCoroutine()
@@ -510,6 +507,10 @@ public class PlayerData : MonoBehaviour
         if (ep < maxEp)
         {
             ep += epRecoverSpeed * Time.deltaTime;
+        }
+        else
+        {
+            ep = maxEp;
         }
     }
 
@@ -584,12 +585,6 @@ public class PlayerData : MonoBehaviour
     {
         if (other.tag == "Zombie")
         {
-            var zombieData = other.GetComponent<ZombieState.ZombiesComponent>();
-            if (zombieData.stateMachine.currentState == zombieData.zombieBite)
-            {
-                other.transform.SetParent(this.transform, true);
-            }
-
             if (equipSkinIdx == 8) //에너지쉴드 스킨
             {
                 if (ep + EpHitData > 0)
@@ -659,11 +654,15 @@ public class PlayerData : MonoBehaviour
         }
         else if (other.tag == "BiteZombie")
         {
-            if (biteZombies.Count < 4)
+            if (biteZombies.Count < 10)
             {
                 other.GetComponent<ZombieState.ZombieRunBite>().ChangeBite();
                 other.transform.SetParent(this.transform, true);
                 biteZombies.Enqueue(other.gameObject);
+            }
+            else
+            {
+                Hp = -1 * (other.GetComponent<ZombieState.ZombiesComponent>().damage - df);
             }
         }
         else if (other.tag == "Spit")

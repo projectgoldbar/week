@@ -53,15 +53,14 @@ public class Manager : MonoBehaviour
         Screen.SetResolution(720, 1280, true);
         Application.targetFrameRate = 45;
         playerData = FindObjectOfType<PlayerData>();
-        if(playerData.isTutirial == true)
-        {
-         Invoke("PlayerDataOn", 1f);
-            return;
-        }
+
         AdsVideo = FindObjectOfType<AdmobVideoAd>();
         uITweenEffectManager = FindObjectOfType<UITweenEffectManager>();
 
-        playerData.transform.position = spwanPoints[Random.Range(0, spwanPoints.Length)];
+        if (!playerData.isTutirial)
+        {
+            playerData.transform.position = spwanPoints[Random.Range(0, spwanPoints.Length)];
+        }
         //goldUi.text = playerData.Gold.ToString();
         SceneManager.sceneUnloaded += OnSceneEnded;
         //Time.timeScale = 0;
@@ -69,7 +68,6 @@ public class Manager : MonoBehaviour
 
         GameStart();
         Invoke("PlayerDataOn", 1f);
-
         //PlayerSetting();
     }
 
