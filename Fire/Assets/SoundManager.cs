@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class SoundManager : Singleton<SoundManager>
 {
     public static SoundManager Instance;
@@ -11,6 +10,7 @@ public class SoundManager : Singleton<SoundManager>
 
     //BGM
     public AudioSource[] BGMsources;
+
     //SFM
     public AudioSource[] SFMsources;
 
@@ -18,15 +18,14 @@ public class SoundManager : Singleton<SoundManager>
 
     public Dictionary<string, AudioClip> SoundDic = new Dictionary<string, AudioClip>();
 
-
     public Toggle AllSoundToggle = null;
     public Toggle AllSoundMute = null;
     public Slider SoundVolume = null;
 
-
     private OptionPanel option;
     public bool _isSfxSound = true;
     public bool _isBgmSound = true;
+
     private void Awake()
     {
         if (Instance != null)
@@ -39,7 +38,6 @@ public class SoundManager : Singleton<SoundManager>
 
         option = FindObjectOfType<OptionPanel>();
 
-
         for (int i = 0; i < soundClips.Length; i++)
         {
             SoundDic.Add(soundClips[i].name, soundClips[i].clip);
@@ -48,12 +46,10 @@ public class SoundManager : Singleton<SoundManager>
         //PlayBGM(SoundDic["subBGM2"], true, 3);
     }
 
-
-
     public void PlaySoundSFX(string SoundName)
     {
-        if(_isSfxSound)
-        PlaySFM(SoundDic[SoundName], false, 0);
+        if (_isSfxSound)
+            PlaySFM(SoundDic[SoundName], false, 0);
     }
 
     public void PlaySoundBGM(string SoundName)
@@ -62,16 +58,13 @@ public class SoundManager : Singleton<SoundManager>
             PlayBGM(SoundDic[SoundName], true, 0);
     }
 
-
-
-
     public void PlayBGM(AudioClip clip, bool loop, float delay)
     {
         for (int i = 0; i < BGMsources.Length; i++)
         {
             if (!BGMsources[i].isPlaying)
             {
-                Debug.Log("실행");
+                //Debug.Log("실행");
                 BGMsources[i].clip = clip;
                 BGMsources[i].loop = loop;
                 BGMsources[i].PlayDelayed(delay);
@@ -86,7 +79,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             if (!SFMsources[i].isPlaying)
             {
-                Debug.Log("실행");
+                //.Log("실행");
                 SFMsources[i].clip = clip;
                 SFMsources[i].loop = loop;
                 SFMsources[i].PlayDelayed(delay);
@@ -96,6 +89,7 @@ public class SoundManager : Singleton<SoundManager>
     }
 
     #region BGM 정지
+
     public void BGMSoundOnOffOnclick()
     {
         if (!AllSoundToggle.isOn)
@@ -131,9 +125,11 @@ public class SoundManager : Singleton<SoundManager>
             }
         }
     }
-    #endregion
+
+    #endregion BGM 정지
 
     #region SFM 정지
+
     public void SFMSoundOnOffOnclick()
     {
         if (!AllSoundToggle.isOn)
@@ -169,7 +165,8 @@ public class SoundManager : Singleton<SoundManager>
             }
         }
     }
-    #endregion
+
+    #endregion SFM 정지
 
     #region 볼륨
 
@@ -183,10 +180,9 @@ public class SoundManager : Singleton<SoundManager>
         {
             SFMsources[i].volume = SoundVolume.value;
         }
-
     }
 
-    #endregion
+    #endregion 볼륨
 
     #region 음소거
 
@@ -227,8 +223,7 @@ public class SoundManager : Singleton<SoundManager>
         }
     }
 
-    #endregion
-
+    #endregion 음소거
 }
 
 [System.Serializable]

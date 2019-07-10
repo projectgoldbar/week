@@ -221,7 +221,7 @@ public class PlayerMove : MonoBehaviour
     private void Chearleader()
     {
         playerData.Hp = playerData.breathingHp * Time.deltaTime;
-        if (EpCheck(10))
+        if (EpCheck(playerData.rollEp + 7f))
         {
             playerData.ep -= 10f;
             StartCoroutine(ZeroWorld());
@@ -244,27 +244,68 @@ public class PlayerMove : MonoBehaviour
     }
 
     public bool potalOpen = false;
+    public GameObject potal;
+    public GameObject potalOut;
 
     private void Potal()
     {
-        Portal.transform.position = transform.position + (transform.forward * 20);
-        Portal.gameObject.SetActive(true);
-        Portal.Stop();
+        //Portal.transform.position = transform.position + (transform.forward * 20);
+        //Portal.gameObject.SetActive(true);
+        //Portal.Stop();
 
-        if (Portal.GetComponent<PortalEffectCollider>().is_Building)
+        //if (Portal.GetComponent<PortalEffectCollider>().is_Building)
+        //{
+        //    SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
+        //    playerData.animator.Play("Roll");
+        //}
+        //else
+        //{
+        //    //포탈구르기
+        //    playerData.animator.Play("portalOpen");
+        //    potalOpen = true;
+        //    accel = false;
+        //}
+        if (EpCheck(playerData.rollEp + 7f))
         {
-            SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
-            playerData.animator.Play("Roll");
-        }
-        else
-        {
-            //포탈구르기
-            playerData.animator.Play("portalOpen");
-            potalOpen = true;
-            accel = false;
+            var startPoint = transform.position + transform.forward * 4f;
+
+            if (!SomethingOnPlace(startPoint))
+            {
+                float endDistance = 25f;
+                var endPoint = transform.position + transform.forward * endDistance;
+                if (!SomethingOnPlace(endPoint))
+                {
+                    potal.transform.rotation = transform.rotation;
+                    potal.transform.position = transform.position + transform.forward * 5f;
+                    potalOut.transform.rotation = transform.rotation;
+                    potalOut.transform.position = transform.position + transform.forward * endDistance;
+                    potal.SetActive(true);
+                    playerData.ep -= 10f;
+                    StartCoroutine(PotalEndCoroutine());
+                }
+                else
+                {
+                    endDistance += 4f;
+                    if (!SomethingOnPlace(endPoint))
+                    {
+                        potal.transform.rotation = transform.rotation;
+                        potal.transform.position = transform.position + transform.forward * 5f;
+                        potalOut.transform.rotation = transform.rotation;
+                        potalOut.transform.position = transform.position + transform.forward * endDistance;
+                        potal.SetActive(true);
+                        playerData.ep -= 10f;
+                    }
+                }
+            }
         }
 
-        playerData.ep -= playerData.rollEp;
+        playerData.Hp = playerData.breathingHp * Time.deltaTime;
+    }
+
+    private IEnumerator PotalEndCoroutine()
+    {
+        yield return shakeDuration;
+        potal.SetActive(false);
     }
 
     private void CeleryMan()
@@ -308,9 +349,7 @@ public class PlayerMove : MonoBehaviour
 
     private void EnergyShield()
     {
-        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
-        playerData.animator.Play("Roll");
-        playerData.ep -= playerData.rollEp;
+        playerData.Hp = playerData.breathingHp * Time.deltaTime;
     }
 
     private void j()
@@ -346,7 +385,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (biteCount > 0)
             {
-                if (equipIdx == 7)
+                if (equipIdx == 7 && EpCheck(playerData.rollEp))
                 {
                     for (int i = 0; i < biteCount; i++)
                     {
@@ -369,5 +408,69 @@ public class PlayerMove : MonoBehaviour
                 yield return shakeDuration;
             }
         }
+    }
+
+    private bool SomethingOnPlace(Vector3 point)
+    {
+        Vector3 rayStartPoint = new Vector3(point.x, point.y + 80f, point.z);
+        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 200f, 1 << 11))
+        {
+            rayStartPoint.y = point.y;
+            rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Left, 1f);
+            if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+            {
+                rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Right, 1f);
+                if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+                {
+                    rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Back, 1f);
+                    if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+                    {
+                        rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Foward, 1f);
+                        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// 피벗기준으로 rotation방향으로 distance만큼 떨어진 위치를 반환
+    /// </summary>
+    /// <param name="pivot"></param>
+    /// <param name="rotation"></param>
+    private Vector3 PivotPointSet(Vector3 pivot, Vector3 origin, Direction direction, float distance)
+    {
+        switch (direction)
+        {
+            case Direction.Left:
+                pivot = origin;
+                pivot.x -= distance;
+                break;
+
+            case Direction.Right:
+                pivot = origin;
+                pivot.x += distance;
+                break;
+
+            case Direction.Foward:
+                pivot = origin;
+                pivot.z += distance;
+
+                break;
+
+            case Direction.Back:
+                pivot = origin;
+                pivot.z -= distance;
+
+                break;
+
+            default:
+                break;
+        }
+        return pivot;
     }
 }
