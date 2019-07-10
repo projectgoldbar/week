@@ -132,7 +132,7 @@ public class StageManager : MonoBehaviour
         var stageData = stageList[currentStageLV];
         //해당 스테이지에 실행되야할것
 
-        if (currentStageLV >= 1 && playerData.isTest == false)
+        if (currentStageLV >= 1 && playerData.isTutirial == false)
         {
             GooglePlayGPGS.Instance.Starter_AchievementPosting();
         }
