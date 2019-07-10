@@ -23,7 +23,6 @@ namespace ZombieState
             targetPoint = zombieData.player.position;
             zombieData.agent.acceleration = 50f;
             eyeParticle.Play();
-            zombieData.attackTrailRenderer.enabled = true;
             zombieData.animator.SetBool("Attack", true);
         }
 
@@ -71,6 +70,7 @@ namespace ZombieState
                 //Debug.Log(d);
                 //transform.Translate(d + d * Time.deltaTime);
                 Debug.Log("돌진한다");
+                zombieData.attackTrailRenderer.enabled = true;
                 zombieData.animator.StopPlayback();
                 zombieData.animator.Play("AttackCrow");
                 zombieData.agent.acceleration = 0f;

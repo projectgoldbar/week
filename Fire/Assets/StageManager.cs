@@ -113,8 +113,7 @@ public class StageManager : MonoBehaviour
         yield return null;
     }
 
-
-    IEnumerator StageChangeLighting(Color Current , Color Next , int n)
+    private IEnumerator StageChangeLighting(Color Current, Color Next, int n)
     {
         for (int i = 0; i < n; i++)
         {
@@ -127,24 +126,23 @@ public class StageManager : MonoBehaviour
         }
     }
 
-
     public void StageSetting()
     {
         //현제스테이지
         var stageData = stageList[currentStageLV];
         //해당 스테이지에 실행되야할것
 
-        if(currentStageLV >=1) 
-        GooglePlayGPGS.Instance.Starter_AchievementPosting();
-
-
+        if (currentStageLV >= 1 && playerData.isTest == false)
+        {
+            GooglePlayGPGS.Instance.Starter_AchievementPosting();
+        }
 
         //스테이지 전환효과
         //lightColor.color = stageData.PlayerPointLight;
         Color CurrentColor = lightColor.color;
         Color NextColor = stageData.PlayerPointLight;
 
-        StartCoroutine(StageChangeLighting(CurrentColor , NextColor,2));
+        StartCoroutine(StageChangeLighting(CurrentColor, NextColor, 2));
 
         ///////////////////////////////////////////////
         //몬스터생성
@@ -197,12 +195,13 @@ public class StageManager : MonoBehaviour
             dust.SetActive(true);
             targets[i].gameObject.SetActive(false);
             targets[i].gameObject.GetComponentInChildren<SkinnedMeshRenderer>().materials[0].color = Color.white;
-            yield return seconds;
+            yield return null;
         }
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 15; i++)
         {
             yield return seconds;
         }
+        manager.Evolution();
         var coinPools = coinPool.coinPool;
 
         Queue<GameObject> activeCoins = new Queue<GameObject>();
@@ -227,7 +226,6 @@ public class StageManager : MonoBehaviour
             }
         }
 
-        manager.Evolution();
         testCoinSpwan.SpwanGold();
         testCoinSpwan.SpwanMeatMethod();
     }
@@ -353,7 +351,6 @@ public class StageManager : MonoBehaviour
         if (manager.score > stageList[currentStageLV].spawnData.ClearScore)
         {
             currentStageLV++;
-            
 
             StageSetting();
         }
