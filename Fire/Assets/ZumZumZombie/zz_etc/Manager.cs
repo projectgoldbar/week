@@ -53,6 +53,11 @@ public class Manager : MonoBehaviour
         Screen.SetResolution(720, 1280, true);
         Application.targetFrameRate = 45;
         playerData = FindObjectOfType<PlayerData>();
+        if(playerData.isTutirial == true)
+        {
+         Invoke("PlayerDataOn", 1f);
+            return;
+        }
         AdsVideo = FindObjectOfType<AdmobVideoAd>();
         uITweenEffectManager = FindObjectOfType<UITweenEffectManager>();
 
@@ -63,9 +68,9 @@ public class Manager : MonoBehaviour
         FindObjectOfType<UITweenEffectManager>().EnterInGame();
 
         GameStart();
+        Invoke("PlayerDataOn", 1f);
 
         //PlayerSetting();
-        Invoke("PlayerDataOn", 1f);
     }
 
     private void PlayerDataOn()

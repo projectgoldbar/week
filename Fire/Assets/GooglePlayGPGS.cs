@@ -248,7 +248,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         {
             if (success)
             {
-                Debug.Log($"플레이타임 {000000}초 달성 오픈");
+                Debug.Log($"플레이타임 {3600}초 달성 오픈");
             }
         });
     }
@@ -262,7 +262,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         {
             if (success)
             {
-                Debug.Log($"플레이횟수 {000000}번 달성 오픈");
+                Debug.Log($"플레이횟수 {100}번 달성 오픈");
             }
         });
     }
@@ -290,7 +290,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         {
             if (success)
             {
-                Debug.Log($"누적 회복약 먹은 횟수 {000000}번 달성 오픈");
+                Debug.Log($"누적 회복약 먹은 횟수 {200}번 달성 오픈");
             }
         });
     }
@@ -304,7 +304,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         {
             if (success)
             {
-                Debug.Log($"누적 박스 획득 갯수 {000000}개 달성 오픈");
+                Debug.Log($"누적 박스 획득 갯수 {100}개 달성 오픈");
             }
         });
     }
@@ -318,7 +318,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         {
             if (success)
             {
-                Debug.Log($"누적 박스 깐 횟수 {000000}개 달성 오픈");
+                Debug.Log($"누적 박스 깐 횟수 {100}개 달성 오픈");
             }
         });
     }
@@ -331,7 +331,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         {
             if (success)
             {
-                Debug.Log($"누적 업그레이드 횟수 {000000}번 달성 오픈");
+                Debug.Log($"누적 업그레이드 횟수 {50}번 달성 오픈");
             }
         });
     }

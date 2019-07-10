@@ -34,7 +34,7 @@ public class PlayerData : MonoBehaviour
     public float ep = 10f;
     public float maxEp = 10f;
 
-    public bool isTest;
+    public bool isTutirial;
     public bool overHp = false;
 
     /// <summary>
@@ -417,7 +417,7 @@ public class PlayerData : MonoBehaviour
         randomGold = Random.Range(4000, 9576);
         gold += randomGold;
         biteZombies = new Queue<GameObject>();
-        if (!isTest)
+        if (!isTutirial)
         {
             PlayerSetting();
             MeshData.sharedMesh = UserDataManager.Instance.EquipSkinReference[UserDataManager.Instance.userData.equipedSkinIdx].sharedMesh;

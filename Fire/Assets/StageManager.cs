@@ -48,7 +48,10 @@ public class StageManager : MonoBehaviour
         ShowTimer = new WaitForSeconds(0.5f);
         playerData = FindObjectOfType<PlayerData>();
         particlePool = FindObjectOfType<ParticlePool>();
+
+        if(!playerData.isTutirial)
         ZombiePoolSet();
+
         StageSetting();
     }
 
@@ -132,7 +135,7 @@ public class StageManager : MonoBehaviour
         var stageData = stageList[currentStageLV];
         //해당 스테이지에 실행되야할것
 
-        if (currentStageLV >= 1 && playerData.isTest == false)
+        if (currentStageLV >= 1 && playerData.isTutirial == false)
         {
             GooglePlayGPGS.Instance.Starter_AchievementPosting();
         }
@@ -146,6 +149,7 @@ public class StageManager : MonoBehaviour
 
         ///////////////////////////////////////////////
         //몬스터생성
+        if(!playerData.isTutirial)
         StartCoroutine(MonsterCreate(stageList[currentStageLV]));
         //몬스터강화
         MonsterUpgrade();
