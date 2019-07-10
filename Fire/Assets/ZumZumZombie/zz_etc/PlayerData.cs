@@ -421,8 +421,12 @@ public class PlayerData : MonoBehaviour
         {
             PlayerSetting();
             MeshData.sharedMesh = UserDataManager.Instance.EquipSkinReference[UserDataManager.Instance.userData.equipedSkinIdx].sharedMesh;
+            hp = maxhp;
         }
-        hp = maxhp;
+        else
+        {
+            hp = 10;
+        }
         DefaultEvadeRadius = EvadeCollider.radius;
         DefaultSpeedData = playerMove.maxSpeed;
         manager.goldUi.text = Gold.ToString();
@@ -488,6 +492,16 @@ public class PlayerData : MonoBehaviour
 
     private void Update()
     {
+        if (isTutirial)
+        {
+            if (hp <= 5)
+            {
+                hp = maxhp;
+            }
+            if (!playerMove.accel)
+                Hp = Time.deltaTime;
+        }
+
         if (hp <= 0)
         {
             animator.Play("die");

@@ -8,15 +8,17 @@ public class BoxZone : MonoBehaviour
 
 
 
+    public GameObject[] Doors;
+
     private void OnTriggerEnter(Collider other)
     {
-        DoorAnim.Play("DoorOpen");
+        //DoorAnim.Play("DoorOpen");
+        //LayerNameChange();
     }
-
     public void LayerNameChange()
     {
-        gameObject.layer = 11;
+        Doors[0].layer = 11;
+        Doors[1].layer = 11;
     }
-
 
 }

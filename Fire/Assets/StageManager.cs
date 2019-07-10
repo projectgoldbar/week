@@ -20,8 +20,10 @@ public class StageManager : MonoBehaviour
     public List<StageS> stageList = new List<StageS>();
     public UITweenEffectManager UITweenEffectManager;
 
-    private PlayerData playerData;
-    private ParticlePool particlePool;
+    [HideInInspector]
+    public PlayerData playerData;
+    [HideInInspector]
+    public ParticlePool particlePool;
     public CoinPool coinPool;
     public Transform[] SpawnPosition;
 
@@ -112,6 +114,10 @@ public class StageManager : MonoBehaviour
     private IEnumerator CrearRewardBox(int StageLv, Vector3 SpwanTransform)
     {
         var go = GameObject.Instantiate(RefBoxs[GetBoxRandom()]);
+        if (playerData.isTutirial)
+        {
+            go.AddComponent<TutorialClear>();
+        }
         go.transform.position = SpwanTransform;
         yield return null;
     }
@@ -178,8 +184,11 @@ public class StageManager : MonoBehaviour
     public void LvUp()
     {
         var targets = Physics.OverlapSphere(playerData.transform.position, 35f, LayerMask.GetMask("Monster"));
-        testCoinSpwan.StopSpwan();
-        testCoinSpwan.StopMeatMethod();
+        if (!playerData.isTutirial)
+        {
+            testCoinSpwan.StopSpwan();
+            testCoinSpwan.StopMeatMethod();
+        }
         StartCoroutine(ChangeAsh(targets));
     }
 
@@ -205,33 +214,37 @@ public class StageManager : MonoBehaviour
         {
             yield return seconds;
         }
-        manager.Evolution();
-        var coinPools = coinPool.coinPool;
 
-        Queue<GameObject> activeCoins = new Queue<GameObject>();
-
-        for (int i = 0; i < coinPools.Count; i++)
+        if (!playerData.isTutirial)
         {
-            if (coinPools[i].activeSelf == true)
-            {
-                coinPools[i].GetComponent<Coin>().coinRotate = false;
-                activeCoins.Enqueue(coinPools[i]);
-            }
-        }
-        for (; 1 < activeCoins.Count;)
-        {
-            var x = activeCoins.Dequeue();
-            var y = activeCoins.Dequeue();
-            for (; y.activeSelf == true;)
-            {
-                x.transform.position = Vector3.Lerp(x.transform.position, playerData.transform.position, 20f * Time.deltaTime);
-                y.transform.position = Vector3.Lerp(y.transform.position, playerData.transform.position, 20f * Time.deltaTime);
-                yield return null;
-            }
-        }
+            manager.Evolution();
+            var coinPools = coinPool.coinPool;
 
-        testCoinSpwan.SpwanGold();
-        testCoinSpwan.SpwanMeatMethod();
+            Queue<GameObject> activeCoins = new Queue<GameObject>();
+
+            for (int i = 0; i < coinPools.Count; i++)
+            {
+                if (coinPools[i].activeSelf == true)
+                {
+                    coinPools[i].GetComponent<Coin>().coinRotate = false;
+                    activeCoins.Enqueue(coinPools[i]);
+                }
+            }
+            for (; 1 < activeCoins.Count;)
+            {
+                var x = activeCoins.Dequeue();
+                var y = activeCoins.Dequeue();
+                for (; y.activeSelf == true;)
+                {
+                    x.transform.position = Vector3.Lerp(x.transform.position, playerData.transform.position, 20f * Time.deltaTime);
+                    y.transform.position = Vector3.Lerp(y.transform.position, playerData.transform.position, 20f * Time.deltaTime);
+                    yield return null;
+                }
+            }
+
+            testCoinSpwan.SpwanGold();
+            testCoinSpwan.SpwanMeatMethod();
+        }
     }
 
     #endregion 스테이지 레벨업 시퀀스
