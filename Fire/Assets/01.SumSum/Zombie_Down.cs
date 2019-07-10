@@ -40,6 +40,7 @@ namespace ZombieState
 
         public override void Exit()
         {
+            currentTime = 0f;
             zombieData.agent.enabled = true;
         }
     }
