@@ -53,8 +53,13 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
     TestSaveData TestData = new TestSaveData();
 
     bool tutorial = false;
-    bool Beginner = false;
-    private void Start()
+    bool b_Stage1 = false;
+    bool b_Stage2 = false;
+    bool b_Stage5 = false;
+    bool b_Stage7 = false;
+    bool b_Stage10 = false;
+
+    private void OnEnable()
     {
         GoogleServicesInit();
     }
@@ -82,6 +87,8 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         // Google Play 게임 플랫폼 활성화
         PlayGamesPlatform.Activate();
         debugText.text = "이닛2";
+
+        if(!Authenticated)
         GoogleLogin();
         //debugText.text = "이닛3";
 
@@ -127,6 +134,12 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
             return null;
     }
 
+    private void OnApplicationQuit()
+    {
+        if (Authenticated)
+            GoogleLogOut();
+    }
+
 
     public void GoogleLogOut()
     {
@@ -141,37 +154,187 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         if (Authenticated)
             Social.ShowAchievementsUI();
     }
+    #endregion
 
-    
+    #region 업적열림
+    /// <summary>
+    /// 튜토리얼 업적 열림
+    /// </summary>
     public void Starter_AchievementPosting()
     {
-        
-        Social.ReportProgress(GPGSIds.achievement_tutorial, 100f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_stater, 100f, (bool success) =>
         {
             if (success)
             {
-                tutorial = true;
                 Debug.Log("튜토리얼 업적 열림");
             }
         });
     }
 
-
-    public void beginner_AchievementPosting()
+    /// <summary>
+    /// 스테이지1 업적 열림
+    /// </summary>
+    public void Stage1_Achievement_Open()
     {
-        Social.ReportScore(100, GPGSIds.achievement_beginner, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_stage1_clear, 100f, (bool success) =>
         {
             if (success)
             {
-                Debug.Log("비기너 업적 열림");
+                Debug.Log("스테이지1 오픈");
             }
-            else
+        });
+    }
+    /// <summary>
+    /// 스테이지2 업적 열림
+    /// </summary>
+    public void Stage2_Achievement_Open()
+    {
+        Social.ReportProgress(GPGSIds.achievement_stage2_clear, 100f, (bool success) =>
+        {
+            if (success)
             {
-
+                Debug.Log("스테이지2 오픈");
+            }
+        });
+    }
+    /// <summary>
+    /// 스테이지5 업적 열림
+    /// </summary>
+    public void Stage5_Achievement_Open()
+    {
+        Social.ReportProgress(GPGSIds.achievement_stage5_clear, 100f, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log("스테이지5 오픈");
             }
         });
     }
 
+    /// <summary>
+    /// 스테이지7 업적 열림
+    /// </summary>
+    public void Stage7_Achievement_Open()
+    {
+        Social.ReportProgress(GPGSIds.achievement_stage_7_clear, 100f, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log("스테이지7 오픈");
+            }
+        });
+    }
+
+    /// <summary>
+    /// 스테이지10 업적 열림
+    /// </summary>
+    public void Stage10_Achievement_Open()
+    {
+        Social.ReportProgress(GPGSIds.achievement_stage_10_clear, 100f, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log("스테이지10 오픈");
+            }
+        });
+    }
+
+    /// <summary>
+    /// 누적 플레이 시간 n초 달성
+    /// </summary>
+    public void PlayTime_Achievement_Open()
+    {
+        Social.ReportProgress(GPGSIds.achievement_playtime, 100f, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log($"플레이타임 {000000}초 달성 오픈");
+            }
+        });
+    }
+
+    /// <summary>
+    /// 누적 플레이 횟수 n번 달성
+    /// </summary>
+    public void PlayCount_Achievement_Open()
+    {
+        Social.ReportProgress(GPGSIds.achievement_playcount, 100f, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log($"플레이횟수 {000000}번 달성 오픈");
+            }
+        });
+    }
+
+    /// <summary>
+    /// 누적 획득 금액 n이상 달성
+    /// </summary>
+    public void PlayGold_Achievement_Open()
+    {
+        Social.ReportProgress(GPGSIds.achievement_gold, 100f, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log($"누적 획득 금액 {000000}이상 달성 오픈");
+            }
+        });
+    }
+
+    /// <summary>
+    /// 누적 회복약 먹은 횟수 n번 달성
+    /// </summary>
+    public void Potion_Achievement_Open()
+    {
+        Social.ReportProgress(GPGSIds.achievement_potion, 100f, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log($"누적 회복약 먹은 횟수 {000000}번 달성 오픈");
+            }
+        });
+    }
+
+    /// <summary>
+    /// 누적 박스 획득 갯수 n개 달성 오픈
+    /// </summary>
+    public void Box_Achievement_Open()
+    {
+        Social.ReportProgress(GPGSIds.achievement_box, 100f, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log($"누적 박스 획득 갯수 {000000}개 달성 오픈");
+            }
+        });
+    }
+
+    /// <summary>
+    /// 누적 박스 깐 횟수 n개 달성 오픈
+    /// </summary>
+    public void BoxOpen_Achievement_Open()
+    {
+        Social.ReportProgress(GPGSIds.achievement_boxopen, 100f, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log($"누적 박스 깐 횟수 {000000}개 달성 오픈");
+            }
+        });
+    }
+    /// <summary>
+    /// 누적 업그레이드 횟수 n번 달성 오픈
+    /// </summary>
+    public void Upgrade_Achievement_Open()
+    {
+        Social.ReportProgress(GPGSIds.achievement_upgrade, 100f, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log($"누적 업그레이드 횟수 {000000}번 달성 오픈");
+            }
+        });
+    }
 
     #endregion
 
