@@ -141,7 +141,7 @@ public class BoxManager : MonoBehaviour
             openState = OpenState.silver;
             if (!userData.AdOff)
             {
-                //광고실행함수연결
+                //광고함수연결
                 videoAd.ShowRewardedAd();
             }
             else

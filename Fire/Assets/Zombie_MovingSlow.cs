@@ -12,14 +12,31 @@ namespace ZombieState
 
         public override void Setting()
         {
-            slowSpeed = zombieData.player.GetComponent<PlayerMove>().maxSpeed;
         }
 
         public override void Execute()
         {
+            slowSpeed = zombieData.player.GetComponent<PlayerMove>().maxSpeed;
             zombieData.agent.enabled = true;
             zombieData.animator.SetBool("FastRun", false);
             zombieData.agent.speed = slowSpeed;
+            var x = Random.Range(0, 5);
+            if (x == 0)
+            {
+                SoundManager.Instance.PlaySoundSFX("ZOMBIEMALE0");
+            }
+            else if (x == 1)
+            {
+                SoundManager.Instance.PlaySoundSFX("ZOMBIEMALE1");
+            }
+            else if (x == 2)
+            {
+                SoundManager.Instance.PlaySoundSFX("ZOMBIEFEMALE0");
+            }
+            else if (x == 3)
+            {
+                SoundManager.Instance.PlaySoundSFX("ZOMBIEFEMALE1");
+            }
         }
 
         public override void Update()

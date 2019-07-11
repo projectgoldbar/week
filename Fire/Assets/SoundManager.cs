@@ -46,10 +46,10 @@ public class SoundManager : Singleton<SoundManager>
         //PlayBGM(SoundDic["subBGM2"], true, 3);
     }
 
-    public void PlaySoundSFX(string SoundName)
+    public void PlaySoundSFX(string SoundName, float delay = 0)
     {
         if (_isSfxSound)
-            PlaySFM(SoundDic[SoundName], false, 0);
+            PlaySFM(SoundDic[SoundName], false, delay);
     }
 
     public void PlaySoundBGM(string SoundName)

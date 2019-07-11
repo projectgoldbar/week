@@ -353,6 +353,19 @@ public class PlayerData : MonoBehaviour
                     hp = hp + (WormData + value);
                     ep += sence;
                     PlayerHitEffect();
+                    var x = Random.Range(0, 3);
+                    if (x == 0)
+                    {
+                        SoundManager.Instance.PlaySoundSFX("SCREAM0");
+                    }
+                    else if (x == 1)
+                    {
+                        SoundManager.Instance.PlaySoundSFX("SCREAM1");
+                    }
+                    else
+                    {
+                        SoundManager.Instance.PlaySoundSFX("SCREAM2");
+                    }
                 }
             }
             else
@@ -625,6 +638,7 @@ public class PlayerData : MonoBehaviour
                     manager.score += 4000f;
                     bronzeBoxCount++;
                     clearParticle.Play();
+                    SoundManager.Instance.PlaySoundSFX("STAGEBOMB", 1f);
                     Destroy(other.gameObject);
                     break;
 
@@ -632,6 +646,8 @@ public class PlayerData : MonoBehaviour
                     manager.score += 4000f;
                     goldBoxCount++;
                     clearParticle.Play();
+                    SoundManager.Instance.PlaySoundSFX("STAGEBOMB", 1f);
+
                     Destroy(other.gameObject);
 
                     break;
@@ -640,6 +656,8 @@ public class PlayerData : MonoBehaviour
                     manager.score += 4000f;
                     silverBoxCount++;
                     clearParticle.Play();
+                    SoundManager.Instance.PlaySoundSFX("STAGEBOMB", 1f);
+
                     Destroy(other.gameObject);
 
                     break;

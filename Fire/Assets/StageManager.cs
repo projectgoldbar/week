@@ -22,8 +22,10 @@ public class StageManager : MonoBehaviour
 
     [HideInInspector]
     public PlayerData playerData;
+
     [HideInInspector]
     public ParticlePool particlePool;
+
     public CoinPool coinPool;
     public Transform[] SpawnPosition;
 
@@ -52,7 +54,9 @@ public class StageManager : MonoBehaviour
         particlePool = FindObjectOfType<ParticlePool>();
 
         if (!playerData.isTutirial)
+        {
             ZombiePoolSet();
+        }
 
         StageSetting();
     }
@@ -141,17 +145,24 @@ public class StageManager : MonoBehaviour
         var stageData = stageList[currentStageLV];
         //해당 스테이지에 실행되야할것
 
-        if (currentStageLV >= 1 && playerData.isTutirial == false)
+        if (currentStageLV >= 1 && GooglePlayGPGS.Instance.Authenticated)
         {
-            GooglePlayGPGS.Instance.Starter_AchievementPosting();
+            GooglePlayGPGS.Instance.Stage1_Achievement_Open();
         }
-
+        else if (currentStageLV >= 2 && GooglePlayGPGS.Instance.Authenticated)
+        {
+            GooglePlayGPGS.Instance.Stage2_Achievement_Open();
+        }
+        else if (currentStageLV >= 5 && GooglePlayGPGS.Instance.Authenticated)
+        {
+            GooglePlayGPGS.Instance.Stage5_Achievement_Open();
+        }
         //스테이지 전환효과
-        //lightColor.color = stageData.PlayerPointLight;
-        Color CurrentColor = lightColor.color;
-        Color NextColor = stageData.PlayerPointLight;
+        lightColor.color = stageData.PlayerPointLight;
+        //Color CurrentColor = lightColor.color;
+        //Color NextColor = stageData.PlayerPointLight;
 
-        StartCoroutine(StageChangeLighting(CurrentColor, NextColor, 2));
+        //StartCoroutine(StageChangeLighting(CurrentColor, NextColor, 2));
 
         ///////////////////////////////////////////////
         //몬스터생성
