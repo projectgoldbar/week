@@ -17,15 +17,18 @@ namespace ZombieState
 
         public override void Execute()
         {
+            speed = zombieData.player.GetComponent<PlayerMove>().maxSpeed * 4;
             zombieData.animator.SetLayerWeight(1, 0);
             Debug.Log("공격상태로옴");
             attackWait = false;
             targetPoint = zombieData.player.position;
             zombieData.agent.acceleration = 50f;
+
             eyeParticle.Play();
             zombieData.animator.SetBool("Attack", true);
         }
 
+        public float speed;
         public float attackDelay = 0f;
         public float time = 0;
         public float attackRange = 30f;
@@ -35,7 +38,7 @@ namespace ZombieState
         {
             if (time > attackDelay)
             {
-                Debug.DrawRay(transform.position, transform.forward.normalized * attackRange, Color.red, 5f);
+                //Debug.DrawRay(transform.position, transform.forward.normalized * attackRange, Color.red, 5f);
                 attackWait = true;
                 time = 0;
                 //if (Physics.Raycast(transform.position, transform.forward.normalized, out hit, attackRange, 1 << 11))
@@ -80,7 +83,7 @@ namespace ZombieState
                 time += Time.deltaTime;
 
                 //transform.position = Vector3.Lerp(transform.position, targetVec, 2f * Time.deltaTime);
-                transform.position = transform.position + transform.forward.normalized * 30f * Time.deltaTime;
+                transform.position = transform.position + transform.forward.normalized * speed * Time.deltaTime;
             }
         }
 
