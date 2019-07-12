@@ -40,7 +40,7 @@ public class StageOpenPanel : MonoBehaviour
         }
         gameObject.SetActive(true);
 
-        stageOpenPanelText = string.Format("*STAGE OPEN*\n{0}", stageName);
+        stageOpenPanelText = string.Format("*CLEAR*\n{0}", stageName);
         resetPanel(stageOpenPanelText);
         PlayTweenEffect();
     }
