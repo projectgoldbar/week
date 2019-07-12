@@ -19,6 +19,7 @@ public static class NewSaveSystem
         data.silberBox = userData.silverBoxCount;
         data.goldBox = userData.goldBoxCount;
         data.adoff = userData.AdOff;
+        data.isTutorialClear = userData.isTutorialClear;
         formatter.Serialize(stream, data);
         stream.Close();
     }

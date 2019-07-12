@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class StageManager : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class StageManager : MonoBehaviour
 
     public Manager manager;
     public GameObject pivot; //박스떨구기위해 있는 피벗
+    public Text lvTextUI;
     public List<StageS> stageList = new List<StageS>();
     public UITweenEffectManager UITweenEffectManager;
 
@@ -157,6 +160,10 @@ public class StageManager : MonoBehaviour
         {
             GooglePlayGPGS.Instance.Stage5_Achievement_Open();
         }
+        else if (currentStageLV >= 10 && GooglePlayGPGS.Instance.Authenticated)
+        {
+            GooglePlayGPGS.Instance.Stage10_Achievement_Open();
+        }
         //스테이지 전환효과
         lightColor.color = stageData.PlayerPointLight;
         //Color CurrentColor = lightColor.color;
@@ -173,6 +180,7 @@ public class StageManager : MonoBehaviour
 
         //박스생성
         Vector3 boxPosition = FindPoint();
+        boxPosition.y += 9.5f;
         StartCoroutine(CrearRewardBox(currentStageLV, boxPosition));
         //레벨업
         if (currentStageLV > 0)
@@ -188,6 +196,8 @@ public class StageManager : MonoBehaviour
         //int mineCount = stageData.spawnData.data[2].SpawnCount;
         //지뢰개수만큼 지속적으로 지뢰 생성되는함수 구현하기
         //코인개수 만큼 뿌리기 구현
+        //UI LV올리기
+        lvTextUI.text = "LV" + currentStageLV.ToString();
     }
 
     #region 스테이지 레벨업 시퀀스
@@ -203,7 +213,10 @@ public class StageManager : MonoBehaviour
         StartCoroutine(ChangeAsh(targets));
     }
 
-    private IEnumerator ChangeAsh(Collider[] targets)
+    private I
+        
+        
+        erator ChangeAsh(Collider[] targets)
     {
         WaitForSeconds seconds = new WaitForSeconds(0.1f);
         for (int i = 0; i < targets.Length; i++)

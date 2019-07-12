@@ -12,7 +12,9 @@ public class NewUserData
 
     #region 세이브할목록들
 
-    public int[] statPointerIdx = new int[15] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    public int[] statPointerIdx = new int[5] { 1, 1, 1, 1, 1 };
+    public bool isTutorialClear = false;
+
 
     #region 스코어
 

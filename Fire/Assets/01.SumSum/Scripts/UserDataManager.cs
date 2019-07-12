@@ -11,7 +11,6 @@ public class UserDataManager : MonoBehaviour
     public SkinSystem skinSystem;
     public int value;
     public static UserDataManager Instance;
-    public Text debugText;
     public float randomValue;
     public SkinnedMeshRenderer[] EquipSkinReference;
 
@@ -32,6 +31,7 @@ public class UserDataManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         LoadData();
         SceneManager.sceneLoaded += OnSceneLoaded;
+       
     }
 
     private void Start()
@@ -46,11 +46,8 @@ public class UserDataManager : MonoBehaviour
     {
         if (scene.buildIndex == 0)
         {
-            Debug.Log("최초골드금액  " + userData.Money);
             userData.Money += randomValue;
-            Debug.Log("셔플전금액  " + userData.Money);
             userData.Money = Shuffle(userData.Money);
-            Debug.Log("셔플후금액  " + userData.Money);
 
             FindObjectOfType<GameScene>().EnterLobby();
             upgradeInfoPanels = GameObject.Find("Content 0-14").GetComponentsInChildren<UpgradeInfoPanels>();
@@ -84,13 +81,10 @@ public class UserDataManager : MonoBehaviour
 
     public void LoadData()
     {
-        debugText.text = "로드들어옴";
         var data = NewSaveSystem.LoadData();
-        debugText.text = "데이타로드완료";
 
         if (data != null)
         {
-            debugText.text = "데이타가 잘읽혔음";
 
             userData.Money = data.money;
             userData.statPointerIdx = data.statPointerIdx;
@@ -101,6 +95,7 @@ public class UserDataManager : MonoBehaviour
             userData.silverBoxCount = data.silberBox;
             userData.bronzeBoxCount = data.bronzeBox;
             userData.AdOff = data.adoff;
+            userData.isTutorialClear = data.isTutorialClear;
         }
     }
 

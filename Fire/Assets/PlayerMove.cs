@@ -208,7 +208,7 @@ public class PlayerMove : MonoBehaviour
     {
         //SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
         //playerData.animator.Play("Roll");
-        playerData.ep -= playerData.rollEp;
+        //playerData.ep -= playerData.rollEp;
         playerData.Hp = playerData.breathingHp * Time.deltaTime;
     }
 

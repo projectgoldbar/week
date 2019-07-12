@@ -411,8 +411,18 @@ public class PlayerData : MonoBehaviour
         }
         set
         {
-            var x = gold + value;
-            gold = Shuffle(x);
+            if (UserDataManager.Instance.userData.goldBonus)
+            {
+                var x = gold + (value * 5);
+                gold = Shuffle(x);
+
+            }
+            else
+            {
+                var x = gold + value;
+                gold = Shuffle(x);
+
+            }
             Hp = (goldUpSpeed * GoldWormData);
             manager.goldUi.text = Gold.ToString();
         }

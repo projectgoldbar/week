@@ -13,6 +13,7 @@ public class SaveData
     public int silberBox;
     public int bronzeBox;
     public bool adoff;
+    public bool isTutorialClear;
 
     public SaveData()
     {
@@ -25,5 +26,7 @@ public class SaveData
         silberBox = 0;
         bronzeBox = 0;
         adoff = false;
+        isTutorialClear = false;
+
     }
 }

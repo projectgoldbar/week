@@ -5,6 +5,13 @@ public class SceneMan : MonoBehaviour
 {
     public void OpenGame()
     {
-        SceneManager.LoadScene(1);
+        if (!UserDataManager.Instance.userData.isTutorialClear)
+        {
+            SceneManager.LoadScene(2);
+        }
+        else
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 }

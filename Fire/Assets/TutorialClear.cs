@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class TutorialClear : MonoBehaviour
 {
     public StageManager stageManager;
@@ -14,8 +15,15 @@ public class TutorialClear : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         stageManager.LvUp();
+        UserDataManager.Instance.userData.isTutorialClear = true;
+
+        FindObjectOfType<Manager>().GameOver();
+        
     }
 
+
+
+    
 
     public IEnumerator TutorialZombieClear(Collider[] targets)
     {

@@ -6,14 +6,9 @@ using UnityEngine.SceneManagement;
 //[DefaultExecutionOrder(-400)]
 public class Manager : MonoBehaviour
 {
-    public GameObject[] Human;
     public PlayerData playerData;
     public Text liveTime;
     public GameObject gameOverUi;
-    public GameObject gameResultUi;
-    public GameObject gameClearUi;
-    public GameObject itemResultUi;
-    public GameObject playerController;
     public EvolveSystem evolSystem;
 
     public GameObject evolUi;
@@ -23,6 +18,7 @@ public class Manager : MonoBehaviour
 
     public Text timeUi;
     public Text goldUi;
+    public Text boxCountUI;
 
     public UITweenEffectManager uITweenEffectManager;
 
@@ -31,7 +27,6 @@ public class Manager : MonoBehaviour
 
     public Text survivalTimeTxt;
     public Text coinText;
-    public Text StageClearText;
 
     public Vector3[] spwanPoints;
 
@@ -129,7 +124,10 @@ public class Manager : MonoBehaviour
         GamePause();
     }
 
-    private IEnumerator ScoreUp()
+    private I
+        
+        
+        erator ScoreUp()
     {
         WaitForSeconds oneSeconed = new WaitForSeconds(1f);
         while (true)
@@ -201,7 +199,8 @@ public class Manager : MonoBehaviour
         min = playTime / 60 % 60;
         hour = playTime / 3600;
         survivalTimeTxt.text = string.Format("{0:00} : {1:00} : {2:00}", hour, min, sec);
-        coinText.text = playerData.Gold.ToString();
+        coinText.text = resultGold.ToString();
+        boxCountUI.text = FindObjectOfType<StageManager>().currentStageLV.ToString();
         gameOverUi.SetActive(true);
         SoundManager.Instance.PlaySoundSFX("GAMEEND");
         //StartCoroutine(TimeToGold());
@@ -247,14 +246,14 @@ public class Manager : MonoBehaviour
         resultGold = gold;
     }
 
-    public void GameClearUiSeq()
-    {
-        //파티클실행
-        var x = RandomBoxManager.Instance.SkinBoxOpen(UserDataManager.Instance.skinInfos.Length);
-        UserDataManager.Instance.userData.gainSkin[x] = true;
-        gameClearUi.SetActive(false);
-        itemResultUi.SetActive(true);
-    }
+    //public void GameClearUiSeq()
+    //{
+    //    //파티클실행
+    //    var x = RandomBoxManager.Instance.SkinBoxOpen(UserDataManager.Instance.skinInfos.Length);
+    //    UserDataManager.Instance.userData.gainSkin[x] = true;
+    //    gameClearUi.SetActive(false);
+    //    itemResultUi.SetActive(true);
+    //}
 
     public void ItemResultUiseq()
     {
