@@ -1,36 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using System;
-
 
 public class AchivmentManager : MonoBehaviour
 {
-    public enum Achivemnt { tutorial, stage, playtime, playCount, BoxCount, BoxOpen, Upgrade }
-    public Action[] achivments;
-    public GooglePlayGPGS gpgs;
-    Achivemnt achivemnt = Achivemnt.tutorial;
+    public Action[] gpgsAchivmentCheck;
 
     private void Awake()
     {
-        achivments = new Action[11] {()=> { }, () => { }, () => { }, () => { },
-        ()=> { },()=> { },()=> { },()=> { },()=> { },()=> { },()=> { }};
-        achivments[0] = gpgs.Starter_AchievementPosting;
-        achivments[1] = gpgs.Stage1_Achievement_Open;
-        achivments[2] = gpgs.Stage2_Achievement_Open;
-        achivments[3] = gpgs.Stage5_Achievement_Open;
-        achivments[4] = gpgs.Stage7_Achievement_Open;
-        achivments[5] = gpgs.Stage10_Achievement_Open;
-        achivments[6] = gpgs.PlayTime_Achievement_Open;
-        achivments[7] = gpgs.PlayCount_Achievement_Open;
-        achivments[8] = gpgs.Potion_Achievement_Open;
-        achivments[9] = gpgs.Box_Achievement_Open;
-        achivments[10] = gpgs.BoxOpen_Achievement_Open;
-
+        gpgsAchivmentCheck = new Action[13]
+        {
+            () => { },() => { },
+            () => { },() => { },
+            () => { },() => { },
+            () => { },() => { },
+            () => { },() => { },
+            () => { },() => { },
+            () => { }
+        };
     }
 
     private void Start()
     {
+        gpgsAchivmentCheck[0] = GooglePlayGPGS.Instance.Starter_AchievementPosting;
+        gpgsAchivmentCheck[1] = GooglePlayGPGS.Instance.Stage1_Achievement_Open;
+        gpgsAchivmentCheck[2] = GooglePlayGPGS.Instance.Stage2_Achievement_Open;
+        gpgsAchivmentCheck[3] = GooglePlayGPGS.Instance.Stage5_Achievement_Open;
+        gpgsAchivmentCheck[4] = GooglePlayGPGS.Instance.Stage7_Achievement_Open;
+        gpgsAchivmentCheck[5] = GooglePlayGPGS.Instance.Stage10_Achievement_Open;
+        gpgsAchivmentCheck[6] = GooglePlayGPGS.Instance.PlayTime_Achievement_Open;
+        gpgsAchivmentCheck[7] = GooglePlayGPGS.Instance.PlayCount_Achievement_Open;
+        gpgsAchivmentCheck[8] = GooglePlayGPGS.Instance.Potion_Achievement_Open;
+        gpgsAchivmentCheck[9] = GooglePlayGPGS.Instance.Box_Achievement_Open;
+        gpgsAchivmentCheck[10] = GooglePlayGPGS.Instance.Box50_Achievement_Open;
+        gpgsAchivmentCheck[11] = GooglePlayGPGS.Instance.Box150_Achievement_Open;
+        gpgsAchivmentCheck[12] = GooglePlayGPGS.Instance.Box200_Achievement_Open;
         var userData = UserDataManager.Instance.userData;
         if (UserDataManager.Instance.userData.isTutorialClear)
         {
@@ -38,11 +42,10 @@ public class AchivmentManager : MonoBehaviour
         }
     }
 
-
-
-    //유저데이타에서 업적배열 받아와서 안한것만 일단 등록
-    void CheckCleared()
+    //유저데이타에서 업적배열 받아와서 안한것만 실행
+    private void CheckCleared()
     {
+        List<int> cleardAchivement = new List<int>();
         var userData = UserDataManager.Instance.userData;
         for (int i = 0; i < userData.achievements.Length; i++)
         {
@@ -52,36 +55,87 @@ public class AchivmentManager : MonoBehaviour
             }
             else
             {
-                CheckProcess(i);
+                if (CheckProcess(i))
+                {
+                    cleardAchivement.Add(i);
+                }
             }
         }
-       
+        for (int i = 0; i < cleardAchivement.Count; i++)
+        {
+            gpgsAchivmentCheck[cleardAchivement[i]]();
+        }
     }
 
-
-    void CheckProcess(int idx)
+    private bool CheckProcess(int idx)
     {
+        bool returnValue = false;
         switch (idx)
         {
             case 0:
+                returnValue = TutorialCleared();
+
                 break;
+
             case 1:
+                returnValue = StageCleared(1);
                 break;
+
             case 2:
+                returnValue = StageCleared(2);
+
                 break;
+
             case 3:
+                returnValue = StageCleared(5);
+
                 break;
+
             case 4:
+                returnValue = StageCleared(7);
+
                 break;
+
             case 5:
+                returnValue = StageCleared(10);
+
+                break;
+
+            case 6:
+                returnValue = PlayTimeReached();
+                break;
+
+            case 7:
+                returnValue = PlayCountReached();
+                break;
+
+            case 8:
+                returnValue = HealPackCountReached();
+                break;
+
+            case 9:
+                returnValue = BoxCountReached(100);
+                break;
+
+            case 10:
+                returnValue = BoxCountReached(50);
+                break;
+
+            case 11:
+                returnValue = BoxCountReached(150);
+                break;
+
+            case 12:
+                returnValue = BoxCountReached(200);
                 break;
 
             default:
                 break;
         }
+        return returnValue;
     }
 
-    bool TutorialCleared()
+    private bool TutorialCleared()
     {
         if (UserDataManager.Instance.userData.isTutorialClear)
         {
@@ -93,7 +147,7 @@ public class AchivmentManager : MonoBehaviour
         }
     }
 
-    bool StageCleared(int stage)
+    private bool StageCleared(int stage)
     {
         if (UserDataManager.Instance.userData.highStage >= stage)
         {
@@ -101,7 +155,8 @@ public class AchivmentManager : MonoBehaviour
         }
         else { return false; }
     }
-    bool PlayTimeReached()
+
+    private bool PlayTimeReached()
     {
         if (UserDataManager.Instance.userData.playTime >= 3600f)
         {
@@ -111,7 +166,7 @@ public class AchivmentManager : MonoBehaviour
             return false;
     }
 
-    bool PlayCountReached()
+    private bool PlayCountReached()
     {
         if (UserDataManager.Instance.userData.playCount >= 100)
         {
@@ -120,8 +175,7 @@ public class AchivmentManager : MonoBehaviour
         else return false;
     }
 
-
-    bool HealPackCountReached()
+    private bool HealPackCountReached()
     {
         if (UserDataManager.Instance.userData.accumulateHealPack >= 200)
         {
@@ -129,23 +183,13 @@ public class AchivmentManager : MonoBehaviour
         }
         else return false;
     }
-    bool BoxCountReached()
-    {
-        if (UserDataManager.Instance.userData.accumulateBoxCount >= 100)
-        {
-            return true;
-        }
-        else return false;
-    }
 
-    bool BoxOpenReached()
+    private bool BoxCountReached(int x)
     {
-        if (UserDataManager.Instance.userData.accumulateBoxOpen >= 100)
+        if (UserDataManager.Instance.userData.accumulateBoxCount >= x)
         {
             return true;
         }
         else return false;
     }
 }
-
-

@@ -33,14 +33,6 @@ public class UserDataManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void Start()
-    {
-        //for (int i = 0; i < upgradeInfoPanels.Length; i++)
-        //{
-        //    upgradeInfoPanels[i].Initiate();
-        //}
-    }
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.buildIndex == 0)
@@ -102,6 +94,7 @@ public class UserDataManager : MonoBehaviour
             userData.accumulateHealPack = data.accumulateHealPack;
             userData.highStage = data.highStage;
             userData.playCount = data.playCount;
+            userData.achievements = data.achivements;
         }
     }
 

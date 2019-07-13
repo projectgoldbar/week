@@ -23,13 +23,12 @@ public class SaveData
     public int accumulateBoxOpen = 0;
 
     public bool AsOnOff;
-   
 
     public SaveData()
     {
         statPointerIdx = new int[5] { 1, 1, 1, 1, 1 };
-        gainSkin = new bool[10] { false, false, false, false, false, false, false, false, false, false };
-        achivements = new bool[12] { false, false, false, false, false, false, false, false, false, false,false,false };
+        gainSkin = new bool[11] { true, false, false, false, false, false, false, false, false, false, false };
+        achivements = new bool[12] { false, false, false, false, false, false, false, false, false, false, false, false };
 
         playTime = 0f;
         money = 0;
@@ -46,8 +45,6 @@ public class SaveData
         playCount = 0;
         highStage = 0;
 
-        
         AsOnOff = true;
-
     }
 }

@@ -189,6 +189,7 @@ public class GooglePlayGPGS : MonoBehaviour
             if (success)
             {
                 Debug.Log("튜토리얼 업적 열림");
+                UserDataManager.Instance.userData.achievements[0] = true;
             }
         });
     }
@@ -203,6 +204,7 @@ public class GooglePlayGPGS : MonoBehaviour
             if (success)
             {
                 Debug.Log("스테이지1 오픈");
+                UserDataManager.Instance.userData.achievements[1] = true;
             }
         });
     }
@@ -217,6 +219,7 @@ public class GooglePlayGPGS : MonoBehaviour
             if (success)
             {
                 Debug.Log("스테이지2 오픈");
+                UserDataManager.Instance.userData.achievements[2] = true;
             }
         });
     }
@@ -231,6 +234,7 @@ public class GooglePlayGPGS : MonoBehaviour
             if (success)
             {
                 Debug.Log("스테이지5 오픈");
+                UserDataManager.Instance.userData.achievements[3] = true;
             }
         });
     }
@@ -245,6 +249,7 @@ public class GooglePlayGPGS : MonoBehaviour
             if (success)
             {
                 Debug.Log("스테이지7 오픈");
+                UserDataManager.Instance.userData.achievements[4] = true;
             }
         });
     }
@@ -259,6 +264,7 @@ public class GooglePlayGPGS : MonoBehaviour
             if (success)
             {
                 Debug.Log("스테이지10 오픈");
+                UserDataManager.Instance.userData.achievements[5] = true;
             }
         });
     }
@@ -273,6 +279,7 @@ public class GooglePlayGPGS : MonoBehaviour
             if (success)
             {
                 Debug.Log($"플레이타임 {3600}초 달성 오픈");
+                UserDataManager.Instance.userData.achievements[6] = true;
             }
         });
     }
@@ -287,6 +294,7 @@ public class GooglePlayGPGS : MonoBehaviour
             if (success)
             {
                 Debug.Log($"플레이횟수 {100}번 달성 오픈");
+                UserDataManager.Instance.userData.achievements[7] = true;
             }
         });
     }
@@ -294,13 +302,14 @@ public class GooglePlayGPGS : MonoBehaviour
     /// <summary>
     /// 누적 획득 금액 n이상 달성
     /// </summary>
-    public void PlayGold_Achievement_Open()
+    public void Box150_Achievement_Open()
     {
-        Social.ReportProgress(GPGSIds.achievement_gold, 100f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_box150, 100f, (bool success) =>
         {
             if (success)
             {
-                Debug.Log($"누적 획득 금액 {000000}이상 달성 오픈");
+                Debug.Log($"박스 획득 {150}이상 달성 오픈");
+                UserDataManager.Instance.userData.achievements[11] = true;
             }
         });
     }
@@ -315,6 +324,7 @@ public class GooglePlayGPGS : MonoBehaviour
             if (success)
             {
                 Debug.Log($"누적 회복약 먹은 횟수 {200}번 달성 오픈");
+                UserDataManager.Instance.userData.achievements[8] = true;
             }
         });
     }
@@ -329,6 +339,7 @@ public class GooglePlayGPGS : MonoBehaviour
             if (success)
             {
                 Debug.Log($"누적 박스 획득 갯수 {100}개 달성 오픈");
+                UserDataManager.Instance.userData.achievements[9] = true;
             }
         });
     }
@@ -336,13 +347,14 @@ public class GooglePlayGPGS : MonoBehaviour
     /// <summary>
     /// 누적 박스 깐 횟수 n개 달성 오픈
     /// </summary>
-    public void BoxOpen_Achievement_Open()
+    public void Box50_Achievement_Open()
     {
-        Social.ReportProgress(GPGSIds.achievement_boxopen, 100f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_box50, 100f, (bool success) =>
         {
             if (success)
             {
-                Debug.Log($"누적 박스 깐 횟수 {100}개 달성 오픈");
+                Debug.Log($"누적 박스 획득 횟수 {50}개 달성 오픈");
+                UserDataManager.Instance.userData.achievements[10] = true;
             }
         });
     }
@@ -350,13 +362,14 @@ public class GooglePlayGPGS : MonoBehaviour
     /// <summary>
     /// 누적 업그레이드 횟수 n번 달성 오픈
     /// </summary>
-    public void Upgrade_Achievement_Open()
+    public void Box200_Achievement_Open()
     {
-        Social.ReportProgress(GPGSIds.achievement_upgrade, 100f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_box200, 100f, (bool success) =>
         {
             if (success)
             {
-                Debug.Log($"누적 업그레이드 횟수 {50}번 달성 오픈");
+                Debug.Log($"누적 박스 횟수 {200}번 달성 오픈");
+                UserDataManager.Instance.userData.achievements[12] = true;
             }
         });
     }
