@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class StageManager : MonoBehaviour
 {
     public GameObject[] RefBoxs;
@@ -201,7 +200,7 @@ public class StageManager : MonoBehaviour
         {
             lvTextUI.text = "LV" + currentStageLV.ToString();
         }
-
+        playerData.GetComponent<PlayerMove>().maxSpeed += 0.2f;
     }
 
     #region 스테이지 레벨업 시퀀스
@@ -493,8 +492,6 @@ public class StageManager : MonoBehaviour
         }
         return pivot;
     }
-
-
 }
 
 [System.Serializable]

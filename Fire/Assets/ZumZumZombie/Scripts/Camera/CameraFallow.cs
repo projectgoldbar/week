@@ -22,7 +22,7 @@ public class CameraFallow : MonoBehaviour
     {
         if (!isShaked)
         {
-            transform.position = new Vector3(target.position.x, offset, target.position.z);
+            transform.position = new Vector3(target.position.x, offset, target.position.z + 2f);
         }
         else
         {

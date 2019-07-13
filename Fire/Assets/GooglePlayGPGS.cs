@@ -9,7 +9,6 @@ using UnityEngine.UI;
 using System.Text;
 using System;
 
-
 public class TestSaveData
 {
     public string TestInt;
@@ -17,8 +16,7 @@ public class TestSaveData
     public string TestString;
 }
 
-
-public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
+public class GooglePlayGPGS : MonoBehaviour
 {
     //public Text debugText;
     //private GooglePlayGPGS _instance;
@@ -35,7 +33,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
     //        return _instance;
     //    }
     //}
-
+    public static GooglePlayGPGS Instance;
 
     //public Text LoginText;
     //public Text UserNicName;
@@ -46,45 +44,47 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
 
     //public Text LoadDataText;
 
-
     private bool _authenticating = false;
     public bool Authenticated { get { return Social.Active.localUser.authenticated; } }
 
-    TestSaveData TestData = new TestSaveData();
+    private TestSaveData TestData = new TestSaveData();
 
-    bool tutorial = false;
-    bool b_Stage1 = false;
-    bool b_Stage2 = false;
-    bool b_Stage5 = false;
-    bool b_Stage7 = false;
-    bool b_Stage10 = false;
-      
+    private bool tutorial = false;
+    private bool b_Stage1 = false;
+    private bool b_Stage2 = false;
+    private bool b_Stage5 = false;
+    private bool b_Stage7 = false;
+    private bool b_Stage10 = false;
+    public bool x = false;
+
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        //if (Instance != null && Instance != this)
+        //{
+        //    Destroy(this);
+        //}
+        if (Instance != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
+            return;
         }
+        Instance = this;
+        x = true;
+    }
 
-        DontDestroyOnLoad(gameObject);
-
-        if (!Authenticated||UserDataManager.Instance.userData.isTutorialClear==false)
+    public void InitProcess()
+    {
+        if (UserDataManager.Instance.userData.isTutorialClear == false)
         {
-            if(UserDataManager.Instance.userData.isTutorialClear == false)
-            {
-                Debug.Log("튜토리얼을진행전에는로그인하지 않습니다.");
-            }
-            Debug.Log("로그인되어있기때문에로그인하지 않습니다.");
+            Debug.Log("튜토리얼을진행전에는로그인하지 않습니다.");
         }
-        else if(!Authenticated)
+        else if (!Authenticated)
         {
             Debug.Log("로그인시도한다.");
 
             GoogleServicesInit();
         }
     }
-
-
 
     public void GoogleServicesInit()
     {
@@ -110,11 +110,11 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         PlayGamesPlatform.Activate();
         //debugText.text = "이닛2";
 
-        if(!Authenticated)
-        GoogleLogin();
+        if (!Authenticated)
+            GoogleLogin();
         //debugText.text = "이닛3";
-
     }
+
     public void GoogleLogin()
     {
         if (Authenticated || _authenticating)
@@ -125,8 +125,8 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
 
         _authenticating = true;
 
-        Social.localUser.Authenticate((bool success) => {
-
+        Social.localUser.Authenticate((bool success) =>
+        {
             _authenticating = false;
             if (success)
             {
@@ -162,23 +162,23 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
             GoogleLogOut();
     }
 
-
     public void GoogleLogOut()
     {
         PlayGamesPlatform.Instance.SignOut();
     }
-         
-
 
     #region 업적 UI
+
     public void AchievementsUI()
     {
         if (Authenticated)
             Social.ShowAchievementsUI();
     }
-    #endregion
+
+    #endregion 업적 UI
 
     #region 업적열림
+
     /// <summary>
     /// 튜토리얼 업적 열림
     /// </summary>
@@ -206,6 +206,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
             }
         });
     }
+
     /// <summary>
     /// 스테이지2 업적 열림
     /// </summary>
@@ -219,6 +220,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
             }
         });
     }
+
     /// <summary>
     /// 스테이지5 업적 열림
     /// </summary>
@@ -344,6 +346,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
             }
         });
     }
+
     /// <summary>
     /// 누적 업그레이드 횟수 n번 달성 오픈
     /// </summary>
@@ -358,21 +361,21 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         });
     }
 
-    #endregion
+    #endregion 업적열림
 
-    #region 업적에 점수게시 -> 업적 진행도 표시 (0.0 ~ 100.0f) 
+    #region 업적에 점수게시 -> 업적 진행도 표시 (0.0 ~ 100.0f)
 
-    public void AchievementsReportProgress(string AchievementsID , int progressvalue)
+    public void AchievementsReportProgress(string AchievementsID, int progressvalue)
     {
-        PlayGamesPlatform.Instance.IncrementAchievement(AchievementsID, progressvalue, (bool success) => 
+        PlayGamesPlatform.Instance.IncrementAchievement(AchievementsID, progressvalue, (bool success) =>
         {
-
         });
     }
-    #endregion
 
+    #endregion 업적에 점수게시 -> 업적 진행도 표시 (0.0 ~ 100.0f)
 
     #region 리더보드 UI
+
     public void GoogleLederBoardUI()
     {
         //debugText.text = "리더보드유아이눌림";
@@ -382,30 +385,27 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
             //debugText.text = "리더보드유아이호출";
             Social.ShowLeaderboardUI();
         }
-
-
-
     }
 
     public void GoogleLederBoardUITarget(string LeaderBoardID)
     {
-        if(Authenticated)
-        PlayGamesPlatform.Instance.ShowLeaderboardUI(LeaderBoardID);
+        if (Authenticated)
+            PlayGamesPlatform.Instance.ShowLeaderboardUI(LeaderBoardID);
     }
-    #endregion
+
+    #endregion 리더보드 UI
 
     #region 리더보드에 점수게시
 
     public void LeaderBoardPostring()
     {
         if (Authenticated)
-            GoogleLederBoardPostingScore(GPGSIds.leaderboard_sumsumzombie_leaderboard,100);
+            GoogleLederBoardPostingScore(GPGSIds.leaderboard_sumsumzombie_leaderboard, 100);
     }
 
-
-    public void GoogleLederBoardPostingScore(string LeaderBoardID , long PostingScore)
+    public void GoogleLederBoardPostingScore(string LeaderBoardID, long PostingScore)
     {
-        Social.ReportScore(PostingScore, LeaderBoardID, (bool success) => 
+        Social.ReportScore(PostingScore, LeaderBoardID, (bool success) =>
         {
             if (success)
             {
@@ -414,27 +414,26 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
             else
             {
                 //LoadDataText.text = $"리더보드 게시 Error";
-
             }
         });
     }
-    #endregion
+
+    #endregion 리더보드에 점수게시
 
     #region 리더보드 정보 가져오기
-
 
     public void LeaderBoardScores()
     {
         if (Authenticated)
         {
-            Social.LoadScores(GPGSIds.leaderboard_sumsumzombie_leaderboard, scores => 
+            Social.LoadScores(GPGSIds.leaderboard_sumsumzombie_leaderboard, scores =>
             {
                 if (scores.Length > 0)
                 {
                     foreach (var item in scores)
                     {
                         ////리더보드의 아이디 == 로그인된 자신의 아이디
-                        //if (item.userID == Social.localUser.id)     
+                        //if (item.userID == Social.localUser.id)
                         //{
                         //    var MyScore = item.value;
                         //}
@@ -446,7 +445,6 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
             });
         }
     }
-
 
     public void LeaderBoardRank(string mStatus)
     {
@@ -464,8 +462,8 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
 
         Debug.Log(mStatus);
     }
-    #endregion
 
+    #endregion 리더보드 정보 가져오기
 
     private string SaveFindName = "Game";
 
@@ -474,7 +472,8 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         if (Authenticated)
             ShowSelectUI();
     }
-    void ShowSelectUI()
+
+    private void ShowSelectUI()
     {
         uint maxNumToDisplay = 3;
         bool allowCreateNew = true;
@@ -487,18 +486,17 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
             allowDelete,
             OnSavedGameSelected);
     }
+
     public void OnSavedGameSelected(SelectUIStatus status, ISavedGameMetadata game)
     {
         if (status == SelectUIStatus.SavedGameSelected)
         {
-
             if (Authenticated)
             {
                 OpenLoadGame(SaveFindName);
             }
 
-
-            //SaveGame(game);  
+            //SaveGame(game);
         }
         else
         {
@@ -506,24 +504,25 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         }
     }
 
-
     #region 데이터 클라우드Save(저장할 데이터 지정해야됨)
 
     //데이터 저장
     public void SaveButtonClick()
     {
-        if(Authenticated)
-        OpenSavedGame(SaveFindName);
+        if (Authenticated)
+            OpenSavedGame(SaveFindName);
     }
+
     public void OpenSavedGame(string filename)
     {
         ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 
-        savedGameClient.OpenWithAutomaticConflictResolution(filename, 
+        savedGameClient.OpenWithAutomaticConflictResolution(filename,
                                                             DataSource.ReadCacheOrNetwork,
-                                                            ConflictResolutionStrategy.UseLongestPlaytime, 
+                                                            ConflictResolutionStrategy.UseLongestPlaytime,
                                                             OnSavedGameOpened);
     }
+
     public void OnSavedGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game)
     {
         if (status == SavedGameRequestStatus.Success)
@@ -533,25 +532,29 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         else
         {
             // handle error
-          //  LoadDataText.text = "SaveError";
+            //  LoadDataText.text = "SaveError";
         }
     }
-    void SaveGame(ISavedGameMetadata game)
+
+    private void SaveGame(ISavedGameMetadata game)
     {
         ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
         SavedGameMetadataUpdate update = new SavedGameMetadataUpdate.Builder().Build();
 
-        #region 클라우드에 저장할 데이터 
+        #region 클라우드에 저장할 데이터
+
         TestSaveData TestData = new TestSaveData();
         TestData.TestInt = "111";
         TestData.Testfloat = "10.110f";
         TestData.TestString = "저장합니다";
-        #endregion
+
+        #endregion 클라우드에 저장할 데이터
 
         var stringToSave = JsonUtility.ToJson(TestData);
         byte[] bytes = Encoding.UTF8.GetBytes(stringToSave);
         savedGameClient.CommitUpdate(game, update, bytes, OnSavedGameWritten);
     }
+
     public void OnSavedGameWritten(SavedGameRequestStatus status, ISavedGameMetadata game)
     {
         if (status == SavedGameRequestStatus.Success)
@@ -568,7 +571,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         }
     }
 
-    #endregion
+    #endregion 데이터 클라우드Save(저장할 데이터 지정해야됨)
 
     #region 데이터 클라우드Load
 
@@ -577,15 +580,17 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
     {
         OpenLoadGame(SaveFindName);
     }
+
     public void OpenLoadGame(string filename)
     {
         ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 
-        savedGameClient.OpenWithAutomaticConflictResolution(filename, 
-                                                            DataSource.ReadCacheOrNetwork, 
-                                                            ConflictResolutionStrategy.UseLongestPlaytime, 
+        savedGameClient.OpenWithAutomaticConflictResolution(filename,
+                                                            DataSource.ReadCacheOrNetwork,
+                                                            ConflictResolutionStrategy.UseLongestPlaytime,
                                                             OnLoadGameRead);
     }
+
     public void OnLoadGameRead(SavedGameRequestStatus status, ISavedGameMetadata game)
     {
         if (status == SavedGameRequestStatus.Success)
@@ -596,29 +601,30 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         else
         {
             // handle error
-
         }
     }
-    void LoadGameData(ISavedGameMetadata game)
+
+    private void LoadGameData(ISavedGameMetadata game)
     {
         ((PlayGamesPlatform)Social.Active).SavedGame.ReadBinaryData(game, OnSavedGameDataRead);
     }
+
     public void OnSavedGameDataRead(SavedGameRequestStatus status, byte[] data)
     {
         if (status == SavedGameRequestStatus.Success)
         {
             string dd = Encoding.UTF8.GetString(data);
             var text = JsonUtility.FromJson<TestSaveData>(dd);
-           // LoadDataText.text = text.TestInt + text.Testfloat + text.TestString;
+            // LoadDataText.text = text.TestInt + text.Testfloat + text.TestString;
         }
         else
         {
             // handle error
-           // LoadDataText.text = "LoadError";
+            // LoadDataText.text = "LoadError";
         }
     }
-    #endregion
 
+    #endregion 데이터 클라우드Load
 
     public Texture2D getScreenshot()
     {
@@ -633,5 +639,3 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         return screenShot;
     }
 }
-
-

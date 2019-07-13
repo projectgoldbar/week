@@ -31,7 +31,6 @@ public class UserDataManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         LoadData();
         SceneManager.sceneLoaded += OnSceneLoaded;
-       
     }
 
     private void Start()
@@ -41,7 +40,6 @@ public class UserDataManager : MonoBehaviour
         //    upgradeInfoPanels[i].Initiate();
         //}
     }
-    
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -66,6 +64,7 @@ public class UserDataManager : MonoBehaviour
             }
             skinInfos[userData.equipedSkinIdx].Select();
             RefreshSkin();
+            GooglePlayGPGS.Instance.InitProcess();
         }
     }
 
@@ -87,7 +86,6 @@ public class UserDataManager : MonoBehaviour
 
         if (data != null)
         {
-
             userData.Money = data.money;
             userData.statPointerIdx = data.statPointerIdx;
             userData.playTime = data.playTime;
@@ -104,7 +102,6 @@ public class UserDataManager : MonoBehaviour
             userData.accumulateHealPack = data.accumulateHealPack;
             userData.highStage = data.highStage;
             userData.playCount = data.playCount;
-
         }
     }
 
@@ -163,7 +160,5 @@ public class UserDataManager : MonoBehaviour
             }
             Debug.Log("가진스킨개수" + skinCount);
         }
-
-
     }
 }
