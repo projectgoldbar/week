@@ -223,7 +223,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
         }
         if (args.purchasedProduct.definition.id == ProductID[3])
         {
-              Debug.Log("후원50000원");
+            Debug.Log("후원50000원");
         }
 
 
