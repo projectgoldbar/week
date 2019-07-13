@@ -169,10 +169,14 @@ public class StageManager : MonoBehaviour
 
         ///////////////////////////////////////////////
         //몬스터생성
-        //if(!playerData.isTutirial)
-        StartCoroutine(MonsterCreate(stageList[currentStageLV]));
+        if (!playerData.isTutirial) {
+            StartCoroutine(MonsterCreate(stageList[currentStageLV]));
+        };
         //몬스터강화
-        MonsterUpgrade();
+        if (!playerData.isTutirial)
+        {
+            MonsterUpgrade();
+        }
 
         //박스생성
         Vector3 boxPosition = FindPoint();
@@ -439,20 +443,20 @@ public class StageManager : MonoBehaviour
     private bool SomethingOnPlace(Vector3 point)
     {
         Vector3 rayStartPoint = new Vector3(point.x, point.y + 80f, point.z);
-        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 200f, LayerMask.NameToLayer("Building")))
+        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 200f, 1 << 11))
         {
             rayStartPoint.y = point.y;
             rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Left, 1f);
-            if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, LayerMask.NameToLayer("Building")))
+            if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
             {
                 rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Right, 1f);
-                if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, LayerMask.NameToLayer("Building")))
+                if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
                 {
                     rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Back, 1f);
-                    if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, LayerMask.NameToLayer("Building")))
+                    if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
                     {
                         rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Foward, 1f);
-                        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, LayerMask.NameToLayer("Building")))
+                        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
                         {
                             return false;
                         }

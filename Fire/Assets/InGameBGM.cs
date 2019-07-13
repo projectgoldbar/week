@@ -5,62 +5,39 @@ using UnityEngine;
 public class InGameBGM : MonoBehaviour
 {
     private SoundManager soundManager;
-
-
-    public AudioSource InGameAudioSource;
-
+    public AudioSource[] InGameAudioSource;
     public AudioClip[] BGMRoopingClips;
 
     private int Rnd = 0;
-
     private void Start()
     {
         for (int i = 0; i < 3; i++)
         {
             var Clips = SoundManager.Instance.SoundDic[$"INGAMEBGM{i}"];
             BGMRoopingClips[i] = Clips;
+            InGameAudioSource[i].clip = BGMRoopingClips[i];
         }
 
-
-
-        //var Clip0 = SoundManager.Instance.SoundDic["INGAMEBGM0"];
-        //BGMRoopingClips[0] = Clip0;
-
-        //var Clip1 = SoundManager.Instance.SoundDic["INGAMEBGM1"];
-        //BGMRoopingClips[1] = Clip1;
-
-        //var Clip2 = SoundManager.Instance.SoundDic["INGAMEBGM2"];
-        //BGMRoopingClips[2] = Clip2;
-
-
-
-        //BGMRoopingClips = soundManager.BGMRoopingClips;
         Rnd = Random.Range(0, 3);
 
         var Clip = BGMRoopingClips[Rnd];
 
-        InGameAudioSource.clip = Clip;
-        InGameAudioSource.Play();
+        InGameAudioSource[Rnd].clip = Clip;
+        InGameAudioSource[Rnd].Play();
     }
-
-
 
     public void Update()
     {
         //플레이중이 아닐때 
-        if (!InGameAudioSource.isPlaying)
+        if (!InGameAudioSource[Rnd].isPlaying)
         {
-            var rnd2 = (Rnd++) % 3;
-            SoundPlay(rnd2);
+            SoundPlay((++Rnd) % 3);
         }
     }
 
-
     public void SoundPlay(int rnd)
     {
-        var Clip = BGMRoopingClips[rnd];
-        InGameAudioSource.clip = Clip;
-        InGameAudioSource.Play();
+        InGameAudioSource[rnd].Play();
     }
 
 

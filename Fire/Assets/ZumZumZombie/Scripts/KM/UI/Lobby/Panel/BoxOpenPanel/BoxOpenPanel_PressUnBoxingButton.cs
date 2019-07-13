@@ -7,7 +7,6 @@ public partial class BoxOpenPanel : MonoBehaviour
     public void OnPressUnBoxingBox_Button()
     {
         var sount = SoundManager.Instance.SoundDic["ROTATINGBOX"];
-        SoundManager.Instance.BGMSoundOnOff(false);
         SoundManager.Instance.PlaySFM(sount, true, 0);
 
         if (LeanTween.isTweening(boxObj))
