@@ -39,9 +39,6 @@ public class StageManager : MonoBehaviour
 
     public Light lightColor;
 
-    //맵안에 생성될 모든 좀비
-    public List<ZombieState.ZombiesComponent> allZombies = new List<ZombieState.ZombiesComponent>();
-
     public int currentStageLV = 0;
 
     private int randomValue;
@@ -190,7 +187,7 @@ public class StageManager : MonoBehaviour
         //boxIndirection.target = boxPosition;
         tarGetPointer.targetPosition = boxPosition;
         UITweenEffectManager.stageOpenPanel.gameObject.SetActive(true);
-        UITweenEffectManager.stageOpenPanel.OpenPanel("Stage" + currentStageLV.ToString());
+        UITweenEffectManager.stageOpenPanel.OpenPanel("Lv  " + currentStageLV.ToString());
         //지뢰가 생성되는 개수
         //int mineCount = stageData.spawnData.data[2].SpawnCount;
         //지뢰개수만큼 지속적으로 지뢰 생성되는함수 구현하기
@@ -218,7 +215,7 @@ public class StageManager : MonoBehaviour
 
     public void TutorialLvUP()
     {
-        var targets = Physics.OverlapSphere(playerData.transform.position, 35f, LayerMask.GetMask("Monster"));
+        var targets = Physics.OverlapSphere(playerData.transform.position, 45f, LayerMask.GetMask("Monster"));
     }
 
     private IEnumerator ChangeAsh(Collider[] targets)
@@ -227,7 +224,7 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < targets.Length; i++)
         {
             targets[i].gameObject.GetComponentInChildren<SkinnedMeshRenderer>().materials[0].color = Color.black;
-            yield return seconds;
+            yield return null;
         }
         for (int i = 0; i < targets.Length; i++)
         {
@@ -293,10 +290,20 @@ public class StageManager : MonoBehaviour
         //해당 스테이지에서 몬스터의 추가속도를 더해줌
         //해당 스테이지에서 몬스터의 추가 공격력을 더해줌
 
-        foreach (var item in allZombies)
+        for (int i = 0; i < zombiePool.Count; i++)
         {
-            item.agent.speed += StageData.spawnData.AddSpeed;
-            item.damage += StageData.spawnData.AddDamage;
+            zombiePool[i].GetComponent<ZombieState.ZombiesComponent>().damage += StageData.spawnData.AddDamage;
+            etcPool[i].GetComponent<ZombieState.Zombie_AttackRun>().accelSpeed += StageData.spawnData.mineCount;
+        }
+        for (int i = 0; i < dashZombiePool.Count; i++)
+        {
+            dashZombiePool[i].GetComponent<ZombieState.ZombiesComponent>().damage += StageData.spawnData.AddDamage;
+            dashZombiePool[i].GetComponent<ZombieState.ZomBie_Attack>().originSpeed += StageData.spawnData.AddSpeed;
+        }
+        for (int i = 0; i < etcPool.Count; i++)
+        {
+            etcPool[i].GetComponent<ZombieState.ZombiesComponent>().damage += StageData.spawnData.AddDamage;
+            etcPool[i].GetComponent<ZombieState.Zombie_AttackRun>().accelSpeed += StageData.spawnData.mineCount;
         }
     }
 
@@ -432,20 +439,20 @@ public class StageManager : MonoBehaviour
     private bool SomethingOnPlace(Vector3 point)
     {
         Vector3 rayStartPoint = new Vector3(point.x, point.y + 80f, point.z);
-        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 200f, 1 << 11))
+        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 200f, LayerMask.NameToLayer("Building")))
         {
             rayStartPoint.y = point.y;
             rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Left, 1f);
-            if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+            if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, LayerMask.NameToLayer("Building")))
             {
                 rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Right, 1f);
-                if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+                if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, LayerMask.NameToLayer("Building")))
                 {
                     rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Back, 1f);
-                    if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+                    if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, LayerMask.NameToLayer("Building")))
                     {
                         rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Foward, 1f);
-                        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+                        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, LayerMask.NameToLayer("Building")))
                         {
                             return false;
                         }

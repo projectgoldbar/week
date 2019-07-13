@@ -8,6 +8,7 @@ namespace ZombieState
         {
             stunSpeed = zombieData.player.GetComponent<PlayerMove>().speed + 3f;
             zombieData.sturnCollider.SturnEvent += SturnChange;
+            maxSpeed = zombieData.player.GetComponent<PlayerMove>().maxSpeed + 10f;
         }
 
         public override void Execute()

@@ -17,7 +17,7 @@ namespace ZombieState
 
         public override void Execute()
         {
-            speed = zombieData.player.GetComponent<PlayerMove>().maxSpeed * 4;
+            speed = originSpeed + zombieData.player.GetComponent<PlayerMove>().maxSpeed;
             zombieData.animator.SetLayerWeight(1, 0);
             Debug.Log("공격상태로옴");
             attackWait = false;
@@ -28,6 +28,7 @@ namespace ZombieState
             zombieData.animator.SetBool("Attack", true);
         }
 
+        public float originSpeed;
         public float speed;
         public float attackDelay = 0f;
         public float time = 0;

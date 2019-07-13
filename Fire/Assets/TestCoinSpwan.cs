@@ -39,15 +39,15 @@ public class TestCoinSpwan : MonoBehaviour
 
     private IEnumerator SpwanMeatCoroutine()
     {
-        WaitForSeconds second = new WaitForSeconds(10f);
+        WaitForSeconds second = new WaitForSeconds(30f);
         while (true)
         {
-            yield return second;
+            yield return null;
             for (int j = 0; j < 3; j++)
             {
                 SpwanMeat();
             }
-            yield return null;
+            yield return second;
         }
     }
 
@@ -56,12 +56,12 @@ public class TestCoinSpwan : MonoBehaviour
         WaitForSeconds second = new WaitForSeconds(10f);
         while (true)
         {
-            yield return second;
+            yield return null;
             for (int j = 0; j < 10; j++)
             {
                 Spwan();
             }
-            yield return null;
+            yield return second;
         }
     }
 
@@ -153,20 +153,20 @@ public class TestCoinSpwan : MonoBehaviour
     private bool SomethingOnPlace(Vector3 point)
     {
         Vector3 rayStartPoint = new Vector3(point.x, point.y + 80f, point.z);
-        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 200f, 1 << 11))
+        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 200f, LayerMask.NameToLayer("Building")))
         {
             rayStartPoint.y = point.y;
             rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Left, 1f);
-            if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+            if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, LayerMask.NameToLayer("Building")))
             {
                 rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Right, 1f);
-                if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+                if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, LayerMask.NameToLayer("Building")))
                 {
                     rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Back, 1f);
-                    if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+                    if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, LayerMask.NameToLayer("Building")))
                     {
                         rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Foward, 1f);
-                        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
+                        if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, LayerMask.NameToLayer("Building")))
                         {
                             return false;
                         }
