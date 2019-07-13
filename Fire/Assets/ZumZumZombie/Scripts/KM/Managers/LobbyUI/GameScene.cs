@@ -36,8 +36,6 @@ public partial class GameScene : MonoBehaviour
     {
         //SceneManager.sceneLoaded += OnSceneLoaded;
         fadeOutImageObj = FindObjectOfType<FadeOutUI>().gameObject;
-
-        
     }
 
     private void Start()
@@ -178,7 +176,6 @@ public partial class GameScene : MonoBehaviour
 
     private void LeaveLobbyProcess()
     {
-        
         SoundManager.Instance.PlaySoundSFX("STARTGAME");
         directionUIController.OnClickedforLeaveLobby();
         StartFadeImageAlpha(toIn);

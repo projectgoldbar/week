@@ -412,13 +412,11 @@ public class PlayerData : MonoBehaviour
             {
                 var x = gold + (value * 5);
                 gold = Shuffle(x);
-
             }
             else
             {
                 var x = gold + value;
                 gold = Shuffle(x);
-
             }
             Hp = (goldUpSpeed * GoldWormData);
             manager.goldUi.text = Gold.ToString();
@@ -497,6 +495,10 @@ public class PlayerData : MonoBehaviour
         hpUpSpeed = hpUpSpeed + (hpUpSpeed * (0.01f * x.healHp));
         epRecoverSpeed = originEpRecoverSpeed + (0.01f * x.healEp);
         goldUpSpeed = goldUpSpeed + (goldUpSpeed * x.gainMoney * 0.01f);
+        if (x.goldBonus)
+        {
+            goldUpSpeed *= 5f;
+        }
         equipSkinIdx = x.equipedSkinIdx;
         playerMove.equipIdx = x.equipedSkinIdx;
     }
@@ -626,7 +628,7 @@ public class PlayerData : MonoBehaviour
         {
             SoundManager.Instance.PlaySoundSFX("GAINCOIN");
             Gold = goldUpSpeed;
-            
+
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Meat")

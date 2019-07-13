@@ -8,12 +8,12 @@ using UnityEngine.Purchasing;
 public class IAPManager : MonoBehaviour, IStoreListener
 {
     //계속 구매되는 (소모품)
-    public string[] ProductID = { "gold1000", "gold2000" };
+    public string[] ProductID = { "support1000", "support3000", "support5000", "support50000" };
 
     //개발자센터의 해당상품에 설정한 식별자ID
     private const string _IOS_GoldId = "1000coin";
 
-    private string[] _Android_GoldId = { "gold1000", "gold2000" };
+    public string[] _Android_ProductId = { "support1000", "support3000", "support5000", "support50000" };
 
     //한번 구매하면 (소장품)
     public string[] ProductCharacterSkin = { "01noads", "dia02", "starter03" };
@@ -98,7 +98,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
                {
                     //앱스토의 이름
                     {_IOS_GoldId,AppleAppStore.Name },
-                    {_Android_GoldId[i],GooglePlay.Name },
+                    {_Android_ProductId[i],GooglePlay.Name },
                }
            );
         }
@@ -189,18 +189,44 @@ public class IAPManager : MonoBehaviour, IStoreListener
         // DebugText.text = $"구매 성공 - ID : {args.purchasedProduct.definition.id}";
         Debug.Log($"구매 성공 - ID : {args.purchasedProduct.definition.id}");
 
+        
+
+
+
         if (args.purchasedProduct.definition.id == ProductCharacterSkin[0])
         {
-            Debug.Log("광고제거");
+            UserDataManager.Instance.userData.AdOff = true;
         }
         if (args.purchasedProduct.definition.id == ProductCharacterSkin[1])
         {
+            UserDataManager.Instance.userData.goldBonus = true;
+
             Debug.Log("500프로");
         }
         if (args.purchasedProduct.definition.id == ProductCharacterSkin[2])
         {
+            UserDataManager.Instance.userData.pakage = true;
             Debug.Log("스타터패키지 등록");
         }
+
+        if (args.purchasedProduct.definition.id == ProductID[0])
+        {
+            Debug.Log("후원1000원");
+        }
+        if (args.purchasedProduct.definition.id == ProductID[1])
+        {
+            Debug.Log("후원3000원");
+        }
+        if (args.purchasedProduct.definition.id == ProductID[2])
+        {
+            Debug.Log("후원5000원");
+        }
+        if (args.purchasedProduct.definition.id == ProductID[3])
+        {
+              Debug.Log("후원50000원");
+        }
+
+
 
         return PurchaseProcessingResult.Complete;
     }

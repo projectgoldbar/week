@@ -22,7 +22,8 @@ public class CreationRushroot : MonoBehaviour
             var x = UnityEngine.Random.Range(min.x, max.x);
             var z = UnityEngine.Random.Range(min.z, max.z);
             Vector3 targetVector = new Vector3(x, 1.7f, z);
-            if (!SomethingOnPlace(targetVector))
+            if (!
+                SomethingOnPlace(targetVector))
             {
                 return targetVector;
             }

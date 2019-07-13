@@ -43,7 +43,13 @@ public class SoundManager : Singleton<SoundManager>
 
 
    
-    public void PlaySoundSFX(string SoundName, float delay = 0)
+    public void PlaySoundSFX(string SoundName)
+    {
+        if (_isSfxSound)
+            PlaySFM(SoundDic[SoundName], false, 0);
+    }
+
+    public void PlaySoundSFX(string SoundName,float delay =0f)
     {
         if (_isSfxSound)
             PlaySFM(SoundDic[SoundName], false, delay);

@@ -9,6 +9,15 @@ public class InGameBGM : MonoBehaviour
     public AudioClip[] BGMRoopingClips;
 
     private int Rnd = 0;
+
+    private AdmobBanner banner;
+
+    private void Awake()
+    {
+        banner = FindObjectOfType<AdmobBanner>();
+        banner.ToogleAd(false);
+    }
+
     private void Start()
     {
         for (int i = 0; i < 3; i++)

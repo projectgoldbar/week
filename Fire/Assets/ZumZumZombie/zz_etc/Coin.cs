@@ -4,7 +4,8 @@ public class Coin : MonoBehaviour
 {
     public Vector3 RotationSpeed = new Vector3(0f, 0, 100f);
     public int coinSection;
-    public Material coinMaterial;
+    public GameObject coin;
+    public GameObject goldBar;
     private ParticlePool particlePool;
 
     //private SectorManager sectorManager;
@@ -23,8 +24,10 @@ public class Coin : MonoBehaviour
         coinRotate = true;
     }
 
-    public void ColorChange()
+    public void ModelChange()
     {
+        coin.SetActive(false);
+        goldBar.SetActive(true);
     }
 
     protected virtual void Update()
