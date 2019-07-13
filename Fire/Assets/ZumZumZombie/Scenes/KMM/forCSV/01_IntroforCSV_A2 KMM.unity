@@ -444,7 +444,7 @@ PrefabInstance:
     - target: {fileID: 4427417036273240765, guid: dc595c6a06436014aa1ed574a3ceb3d5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00012207005
+      value: -0.0003934
       objectReference: {fileID: 0}
     - target: {fileID: 4427417036273240765, guid: dc595c6a06436014aa1ed574a3ceb3d5,
         type: 3}
@@ -459,7 +459,7 @@ PrefabInstance:
     - target: {fileID: 7645366895663922578, guid: dc595c6a06436014aa1ed574a3ceb3d5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00012207031
+      value: 0.00005481813
       objectReference: {fileID: 0}
     - target: {fileID: 6668843800386551570, guid: dc595c6a06436014aa1ed574a3ceb3d5,
         type: 3}
@@ -1990,21 +1990,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1821690687}
-    - target: {fileID: 2479416471526072950, guid: dc595c6a06436014aa1ed574a3ceb3d5,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2479416471526072950, guid: dc595c6a06436014aa1ed574a3ceb3d5,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2479416471526072950, guid: dc595c6a06436014aa1ed574a3ceb3d5,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8762917177557387517, guid: dc595c6a06436014aa1ed574a3ceb3d5,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2118,10 +2103,6 @@ PrefabInstance:
     - target: {fileID: 17609122644550306, guid: dc595c6a06436014aa1ed574a3ceb3d5,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1869786971, guid: dc595c6a06436014aa1ed574a3ceb3d5, type: 3}
-      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5599054765395440656, guid: dc595c6a06436014aa1ed574a3ceb3d5,
@@ -2684,6 +2665,25 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2479416471526072950, guid: dc595c6a06436014aa1ed574a3ceb3d5,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479416471526072950, guid: dc595c6a06436014aa1ed574a3ceb3d5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479416471526072950, guid: dc595c6a06436014aa1ed574a3ceb3d5,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869786971, guid: dc595c6a06436014aa1ed574a3ceb3d5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc595c6a06436014aa1ed574a3ceb3d5, type: 3}
 --- !u!137 &58320167 stripped
@@ -2858,18 +2858,6 @@ SkinnedMeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 5408391522227307389}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &178937045 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 570028169285258123, guid: 4956e6977bf54de489b60ec8f3b98900,
-    type: 3}
-  m_PrefabInstance: {fileID: 76274321}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &204377418 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7645366894926481168, guid: dc595c6a06436014aa1ed574a3ceb3d5,
@@ -3293,11 +3281,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userData:
-    playTime: 0
-    playCount: 0
-    dieCount: 0
     statPointerIdx: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+    isTutorialClear: 0
+    playTime: 0
     highScore: 0
+    accumulateBoxCount: 0
+    playCount: 0
+    highStage: 0
+    accumulateHealPack: 0
+    accumulateBoxOpen: 0
     Money: 0
     skillLVList: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
     gainSkin: 00000000000000000000
@@ -3323,7 +3315,6 @@ MonoBehaviour:
   skinInfos: []
   skinSystem: {fileID: 0}
   value: 0
-  debugText: {fileID: 178937045}
   randomValue: 0
   EquipSkinReference:
   - {fileID: 13700004, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
