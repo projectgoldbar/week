@@ -20,6 +20,8 @@ public static class NewSaveSystem
         data.silberBox = userData.silverBoxCount;
         data.goldBox = userData.goldBoxCount;
         data.adoff = userData.AdOff;
+        data.goldBouns = userData.goldBonus;
+        data.pakage = userData.pakage;
         data.isTutorialClear = userData.isTutorialClear;
         data.highScore = userData.highScore;
         data.accumulateBoxCount = userData.accumulateBoxCount;

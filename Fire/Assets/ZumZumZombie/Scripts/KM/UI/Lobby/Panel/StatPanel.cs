@@ -7,7 +7,7 @@ public class StatPanel : MonoBehaviour
 
     private void Start()
     {
-        //gameObject.GetComponent<RectTransform>().anchoredPosition = closePos;
+        gameObject.GetComponent<RectTransform>().anchoredPosition = openePos;
     }
 
     public void OpenPanel()

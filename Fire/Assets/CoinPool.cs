@@ -11,6 +11,10 @@ public class CoinPool : MonoBehaviour
 
     private void Awake()
     {
+        if (UserDataManager.Instance.userData.goldBonus)
+        {
+            coin.GetComponent<Coin>().ModelChange();
+        }
         for (int i = 0; i < 80; i++)
         {
             coinPool.Add(Instantiate(coin, this.transform.position, Quaternion.identity, transform));

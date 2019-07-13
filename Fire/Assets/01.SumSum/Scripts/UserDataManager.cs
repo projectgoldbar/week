@@ -87,6 +87,8 @@ public class UserDataManager : MonoBehaviour
             userData.silverBoxCount = data.silberBox;
             userData.bronzeBoxCount = data.bronzeBox;
             userData.AdOff = data.adoff;
+            userData.goldBonus = data.goldBouns;
+            userData.pakage = data.pakage;
             userData.isTutorialClear = data.isTutorialClear;
             userData.highScore = data.highScore;
             userData.accumulateBoxCount = data.accumulateBoxCount;

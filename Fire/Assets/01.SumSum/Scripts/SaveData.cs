@@ -14,6 +14,8 @@ public class SaveData
     public int silberBox;
     public int bronzeBox;
     public bool adoff;
+    public bool goldBouns;
+    public bool pakage;
     public bool isTutorialClear;
     public float highScore = 0f;
     public int accumulateBoxCount = 0;
@@ -37,6 +39,8 @@ public class SaveData
         silberBox = 0;
         bronzeBox = 0;
         adoff = false;
+        goldBouns = false;
+        pakage = false;
         isTutorialClear = false;
         highScore = 0;
         accumulateBoxCount = 0;
