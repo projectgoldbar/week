@@ -16,7 +16,7 @@ public class TutorialClear : MonoBehaviour
     {
         stageManager.LvUp();
         UserDataManager.Instance.userData.isTutorialClear = true;
-
+        
         FindObjectOfType<Manager>().GameOver();
         
     }

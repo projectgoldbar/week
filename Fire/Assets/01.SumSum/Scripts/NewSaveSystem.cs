@@ -20,6 +20,12 @@ public static class NewSaveSystem
         data.goldBox = userData.goldBoxCount;
         data.adoff = userData.AdOff;
         data.isTutorialClear = userData.isTutorialClear;
+        data.highScore = userData.highScore;
+        data.accumulateBoxCount = userData.accumulateBoxCount;
+        data.accumulateBoxOpen = userData.accumulateBoxOpen;
+        data.accumulateHealPack = userData.accumulateHealPack;
+        data.playCount = userData.playCount;
+        data.highStage = userData.highStage;
         formatter.Serialize(stream, data);
         stream.Close();
     }

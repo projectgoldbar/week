@@ -33,7 +33,7 @@ public class PlayerData : MonoBehaviour
     public float score = 0;
     public float ep = 10f;
     public float maxEp = 10f;
-
+    public int addHealPackCount = 0;
     public bool isTutirial;
     public bool overHp = false;
 
@@ -275,9 +275,6 @@ public class PlayerData : MonoBehaviour
     public int silverBoxCount = 0;
     public int bronzeBoxCount = 0;
     public int clearCount = 0;
-    public int boxBuffer = 0;
-
-    public int key = 0;
 
     public int[] evolveLvData;
 
@@ -490,6 +487,7 @@ public class PlayerData : MonoBehaviour
     {
         var x = UserDataManager.Instance.userData;
         var u = UserDataManager.Instance.UnShuffle(x.Money);
+        UserDataManager.Instance.randomValue = 0f;
         x.Money = u;
         Gold = u;
         maxhp = x.hp;
@@ -628,6 +626,7 @@ public class PlayerData : MonoBehaviour
         {
             SoundManager.Instance.PlaySoundSFX("GAINCOIN");
             Gold = goldUpSpeed;
+            
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Meat")
@@ -636,6 +635,7 @@ public class PlayerData : MonoBehaviour
             var xhp = hpUpSpeed + (maxhp * (0.03f));
             var addHp = xhp + (xhp * RecoveryData);
             Hp = addHp;
+            addHealPackCount++;
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "RandomBox")
@@ -645,7 +645,10 @@ public class PlayerData : MonoBehaviour
             switch (box.type)
             {
                 case BoxType.Bronze:
-                    manager.score += 4000f;
+                    if (!isTutirial)
+                    {
+                        manager.score += 4000f;
+                    }
                     bronzeBoxCount++;
                     clearParticle.Play();
                     SoundManager.Instance.PlaySoundSFX("STAGEBOMB", 1f);
@@ -653,7 +656,10 @@ public class PlayerData : MonoBehaviour
                     break;
 
                 case BoxType.Gold:
-                    manager.score += 4000f;
+                    if (!isTutirial)
+                    {
+                        manager.score += 4000f;
+                    }
                     goldBoxCount++;
                     clearParticle.Play();
                     SoundManager.Instance.PlaySoundSFX("STAGEBOMB", 1f);
@@ -663,7 +669,10 @@ public class PlayerData : MonoBehaviour
                     break;
 
                 case BoxType.Silver:
-                    manager.score += 4000f;
+                    if (!isTutirial)
+                    {
+                        manager.score += 4000f;
+                    }
                     silverBoxCount++;
                     clearParticle.Play();
                     SoundManager.Instance.PlaySoundSFX("STAGEBOMB", 1f);

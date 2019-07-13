@@ -197,7 +197,11 @@ public class StageManager : MonoBehaviour
         //지뢰개수만큼 지속적으로 지뢰 생성되는함수 구현하기
         //코인개수 만큼 뿌리기 구현
         //UI LV올리기
-        lvTextUI.text = "LV" + currentStageLV.ToString();
+        if (!playerData.isTutirial)
+        {
+            lvTextUI.text = "LV" + currentStageLV.ToString();
+        }
+
     }
 
     #region 스테이지 레벨업 시퀀스
@@ -213,10 +217,12 @@ public class StageManager : MonoBehaviour
         StartCoroutine(ChangeAsh(targets));
     }
 
-    private I
-        
-        
-        erator ChangeAsh(Collider[] targets)
+    public void TutorialLvUP()
+    {
+        var targets = Physics.OverlapSphere(playerData.transform.position, 35f, LayerMask.GetMask("Monster"));
+    }
+
+    private IEnumerator ChangeAsh(Collider[] targets)
     {
         WaitForSeconds seconds = new WaitForSeconds(0.1f);
         for (int i = 0; i < targets.Length; i++)
@@ -487,6 +493,8 @@ public class StageManager : MonoBehaviour
         }
         return pivot;
     }
+
+
 }
 
 [System.Serializable]

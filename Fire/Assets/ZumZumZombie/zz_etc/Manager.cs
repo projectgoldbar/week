@@ -10,7 +10,7 @@ public class Manager : MonoBehaviour
     public Text liveTime;
     public GameObject gameOverUi;
     public EvolveSystem evolSystem;
-
+    public StageManager stageManager;
     public GameObject evolUi;
     public GameObject evolButton1;
     public GameObject evolButton2;
@@ -77,13 +77,25 @@ public class Manager : MonoBehaviour
         var x = UserDataManager.Instance.userData;
 
         playerData.score = score;
+        if (score > x.highScore)
+        {
+            x.highScore = score;
+        }
 
+        if (x.highStage < stageManager.currentStageLV)
+        {
+            x.highStage = stageManager.currentStageLV;
+        }
         x.Money += resultGold;
 
         x.playCount++;
         x.goldBoxCount += playerData.goldBoxCount;
         x.silverBoxCount += playerData.silverBoxCount;
         x.bronzeBoxCount += playerData.bronzeBoxCount;
+        x.accumulateBoxCount += playerData.goldBoxCount + playerData.silverBoxCount + playerData.bronzeBoxCount;
+        x.accumulateHealPack += playerData.addHealPackCount;
+        x.playTime += score - (stageManager.currentStageLV * 4000);
+        
         SceneManager.sceneUnloaded -= OnSceneEnded;
     }
 
@@ -124,10 +136,10 @@ public class Manager : MonoBehaviour
         GamePause();
     }
 
-    private I
+    private IEnumerator
         
         
-        erator ScoreUp()
+     ScoreUp()
     {
         WaitForSeconds oneSeconed = new WaitForSeconds(1f);
         while (true)
@@ -203,7 +215,13 @@ public class Manager : MonoBehaviour
         boxCountUI.text = FindObjectOfType<StageManager>().currentStageLV.ToString();
         gameOverUi.SetActive(true);
         SoundManager.Instance.PlaySoundSFX("GAMEEND");
+        Invoke("GameStop", 2f);
         //StartCoroutine(TimeToGold());
+    }
+
+    void GameStop()
+    {
+        Time.timeScale = 0f;
     }
 
     private IEnumerator TimeToGold()

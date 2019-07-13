@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.UI;
 using System;
 
 
 public class AchivmentManager : MonoBehaviour
 {
-    public enum Achivemnt{ tutorial,stage,playtime,playCount,Gold,BoxCount,BoxOpen,Upgrade}
+    public enum Achivemnt { tutorial, stage, playtime, playCount, BoxCount, BoxOpen, Upgrade }
     public Action[] achivments;
     public GooglePlayGPGS gpgs;
+    Achivemnt achivemnt = Achivemnt.tutorial;
 
     private void Awake()
     {
-        achivments = new Action[12] {()=> { }, () => { }, () => { }, () => { },
-        ()=> { },()=> { },()=> { },()=> { },()=> { },()=> { },()=> { },()=> { }};
+        achivments = new Action[11] {()=> { }, () => { }, () => { }, () => { },
+        ()=> { },()=> { },()=> { },()=> { },()=> { },()=> { },()=> { }};
         achivments[0] = gpgs.Starter_AchievementPosting;
         achivments[1] = gpgs.Stage1_Achievement_Open;
         achivments[2] = gpgs.Stage2_Achievement_Open;
@@ -20,29 +23,129 @@ public class AchivmentManager : MonoBehaviour
         achivments[5] = gpgs.Stage10_Achievement_Open;
         achivments[6] = gpgs.PlayTime_Achievement_Open;
         achivments[7] = gpgs.PlayCount_Achievement_Open;
-        achivments[8] = gpgs.PlayGold_Achievement_Open;
-        achivments[9] = gpgs.Potion_Achievement_Open;
-        achivments[10] = gpgs.Box_Achievement_Open;
-        achivments[11] = gpgs.BoxOpen_Achievement_Open;
-        achivments[12] = gpgs.Upgrade_Achievement_Open;
+        achivments[8] = gpgs.Potion_Achievement_Open;
+        achivments[9] = gpgs.Box_Achievement_Open;
+        achivments[10] = gpgs.BoxOpen_Achievement_Open;
+
     }
+
+    private void Start()
+    {
+        var userData = UserDataManager.Instance.userData;
+        if (UserDataManager.Instance.userData.isTutorialClear)
+        {
+            CheckCleared();
+        }
+    }
+
+
 
     //유저데이타에서 업적배열 받아와서 안한것만 일단 등록
-
-
-    void CheckProcess()
+    void CheckCleared()
     {
-        int count = 0;
-        for (int i = 0; i < UserDataManager.Instance.userData.statPointerIdx.Length; i++)
+        var userData = UserDataManager.Instance.userData;
+        for (int i = 0; i < userData.achievements.Length; i++)
         {
-            count += UserDataManager.Instance.userData.statPointerIdx[i];
+            if (userData.achievements[i] == true)
+            {
+                continue;
+            }
+            else
+            {
+                CheckProcess(i);
+            }
         }
-        if (count > 50)
-        {
-            //업적 줄라고 햇는데 실패시 어케 동작하는지 알아봐야함
-            achivments[12]();
-        }
+       
     }
 
 
+    void CheckProcess(int idx)
+    {
+        switch (idx)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    bool TutorialCleared()
+    {
+        if (UserDataManager.Instance.userData.isTutorialClear)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool StageCleared(int stage)
+    {
+        if (UserDataManager.Instance.userData.highStage >= stage)
+        {
+            return true;
+        }
+        else { return false; }
+    }
+    bool PlayTimeReached()
+    {
+        if (UserDataManager.Instance.userData.playTime >= 3600f)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    bool PlayCountReached()
+    {
+        if (UserDataManager.Instance.userData.playCount >= 100)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+
+    bool HealPackCountReached()
+    {
+        if (UserDataManager.Instance.userData.accumulateHealPack >= 200)
+        {
+            return true;
+        }
+        else return false;
+    }
+    bool BoxCountReached()
+    {
+        if (UserDataManager.Instance.userData.accumulateBoxCount >= 100)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    bool BoxOpenReached()
+    {
+        if (UserDataManager.Instance.userData.accumulateBoxOpen >= 100)
+        {
+            return true;
+        }
+        else return false;
+    }
 }
+
+

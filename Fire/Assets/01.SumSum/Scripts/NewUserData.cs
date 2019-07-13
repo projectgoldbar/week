@@ -5,10 +5,10 @@ using UnityEngine;
 public class NewUserData
 {
     [Header("")]
-    public float playTime;
+    
 
-    public int playCount;
-    public int dieCount;
+    
+    
 
     #region 세이브할목록들
 
@@ -16,11 +16,17 @@ public class NewUserData
     public bool isTutorialClear = false;
 
 
-    #region 스코어
-
+    #region 업적관련
+    [Header("업적")]
+    public float playTime = 0f;
     public float highScore = 0f;
+    public int accumulateBoxCount = 0;
+    public int playCount = 0;
+    public int highStage = 0;
+    public int accumulateHealPack = 0;
+    public int accumulateBoxOpen = 0;
 
-    #endregion 스코어
+    #endregion 업적관련
 
     #region MONEY
 
@@ -97,7 +103,7 @@ public class NewUserData
     #region 업적클리어현황
 
     [Header("업적클리어현황")]
-    public bool[] achievements;
+    public bool[] achievements = new bool[12] { false, false, false, false, false, false, false, false, false, false, false,false };
 
     #endregion 업적클리어현황
 }

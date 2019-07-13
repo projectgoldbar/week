@@ -20,7 +20,7 @@ public class TestSaveData
 
 public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
 {
-    public Text debugText;
+    //public Text debugText;
     //private GooglePlayGPGS _instance;
     //public GooglePlayGPGS _Instance
     //{
@@ -58,15 +58,37 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
     bool b_Stage5 = false;
     bool b_Stage7 = false;
     bool b_Stage10 = false;
-
-    private void OnEnable()
+      
+    private void Awake()
     {
-        GoogleServicesInit();
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+
+        DontDestroyOnLoad(gameObject);
+
+        if (!Authenticated||UserDataManager.Instance.userData.isTutorialClear==false)
+        {
+            if(UserDataManager.Instance.userData.isTutorialClear == false)
+            {
+                Debug.Log("튜토리얼을진행전에는로그인하지 않습니다.");
+            }
+            Debug.Log("로그인되어있기때문에로그인하지 않습니다.");
+        }
+        else if(!Authenticated)
+        {
+            Debug.Log("로그인시도한다.");
+
+            GoogleServicesInit();
+        }
     }
+
+
 
     public void GoogleServicesInit()
     {
-        debugText.text = "이닛들어옴";
+        //debugText.text = "이닛들어옴";
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
 
         // enables saving game progress.
@@ -80,13 +102,13 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
         //  identify the player to other services such as Firebase.
         .RequestIdToken()
         .Build();
-        debugText.text = "이닛1";
+        //debugText.text = "이닛1";
 
         PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.DebugLogEnabled = true;
         // Google Play 게임 플랫폼 활성화
         PlayGamesPlatform.Activate();
-        debugText.text = "이닛2";
+        //debugText.text = "이닛2";
 
         if(!Authenticated)
         GoogleLogin();
@@ -97,7 +119,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
     {
         if (Authenticated || _authenticating)
         {
-            debugText.text = "로그인중";
+            //debugText.text = "로그인중";
             return;
         }
 
@@ -108,7 +130,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
             _authenticating = false;
             if (success)
             {
-                debugText.text = "로그인성공";
+                //debugText.text = "로그인성공";
 
                 //성공
                 //LoginText.text = "Login 되셧습니다.";
@@ -117,7 +139,7 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
             }
             else
             {
-                debugText.text = "로그인실패";
+                //debugText.text = "로그인실패";
 
                 //실패
                 //LoginText.text = "Login 실패 다시시도.";
@@ -353,11 +375,11 @@ public class GooglePlayGPGS : Singleton<GooglePlayGPGS>
     #region 리더보드 UI
     public void GoogleLederBoardUI()
     {
-        debugText.text = "리더보드유아이눌림";
+        //debugText.text = "리더보드유아이눌림";
 
         if (Authenticated)
         {
-            debugText.text = "리더보드유아이호출";
+            //debugText.text = "리더보드유아이호출";
             Social.ShowLeaderboardUI();
         }
 

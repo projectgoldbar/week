@@ -41,6 +41,7 @@ public class UserDataManager : MonoBehaviour
         //    upgradeInfoPanels[i].Initiate();
         //}
     }
+    
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -49,6 +50,7 @@ public class UserDataManager : MonoBehaviour
             userData.Money += randomValue;
             userData.Money = Shuffle(userData.Money);
 
+            Time.timeScale = 1f;
             FindObjectOfType<GameScene>().EnterLobby();
             upgradeInfoPanels = GameObject.Find("Content 0-14").GetComponentsInChildren<UpgradeInfoPanels>();
             skinInfos = GameObject.Find("SkinInfoPivot_Contents").GetComponentsInChildren<SKinInfo>();
@@ -96,6 +98,13 @@ public class UserDataManager : MonoBehaviour
             userData.bronzeBoxCount = data.bronzeBox;
             userData.AdOff = data.adoff;
             userData.isTutorialClear = data.isTutorialClear;
+            userData.highScore = data.highScore;
+            userData.accumulateBoxCount = data.accumulateBoxCount;
+            userData.accumulateBoxOpen = data.accumulateBoxOpen;
+            userData.accumulateHealPack = data.accumulateHealPack;
+            userData.highStage = data.highStage;
+            userData.playCount = data.playCount;
+
         }
     }
 
@@ -154,13 +163,7 @@ public class UserDataManager : MonoBehaviour
             }
             Debug.Log("가진스킨개수" + skinCount);
         }
-        else if (Input.GetKeyDown(KeyCode.I))
-        {
-            for (int i = 0; i < upgradeInfoPanels.Length; i++)
-            {
-                upgradeInfoPanels[i].Initiate();
-                SceneManager.LoadScene(1);
-            }
-        }
+
+
     }
 }
