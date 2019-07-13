@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class SoundManager : Singleton<SoundManager>
 {
-    public static SoundManager Instance;
+   // public static SoundManager Instance;
 
     //오디오클립당 오디오소스 1개
 
@@ -13,6 +13,8 @@ public class SoundManager : Singleton<SoundManager>
 
     //SFM
     public AudioSource[] SFMsources;
+
+   
 
     public SoundClip[] soundClips;
 
@@ -26,16 +28,9 @@ public class SoundManager : Singleton<SoundManager>
     public bool _isSfxSound = true;
     public bool _isBgmSound = true;
 
+
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-
         option = FindObjectOfType<OptionPanel>();
 
         for (int i = 0; i < soundClips.Length; i++)
@@ -46,6 +41,8 @@ public class SoundManager : Singleton<SoundManager>
         //PlayBGM(SoundDic["subBGM2"], true, 3);
     }
 
+
+   
     public void PlaySoundSFX(string SoundName, float delay = 0)
     {
         if (_isSfxSound)
@@ -224,6 +221,12 @@ public class SoundManager : Singleton<SoundManager>
     }
 
     #endregion 음소거
+
+
+
+   
+
+
 }
 
 [System.Serializable]

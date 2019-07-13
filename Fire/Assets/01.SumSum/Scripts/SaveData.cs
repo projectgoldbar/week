@@ -22,6 +22,8 @@ public class SaveData
     public int accumulateHealPack = 0;
     public int accumulateBoxOpen = 0;
 
+    public bool AsOnOff;
+   
 
     public SaveData()
     {
@@ -43,6 +45,9 @@ public class SaveData
         accumulateBoxOpen = 0;
         playCount = 0;
         highStage = 0;
+
+        
+        AsOnOff = true;
 
     }
 }
