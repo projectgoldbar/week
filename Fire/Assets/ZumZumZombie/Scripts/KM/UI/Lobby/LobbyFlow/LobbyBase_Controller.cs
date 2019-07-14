@@ -57,9 +57,6 @@ public class LobbyBase_Controller : MonoBehaviour
 
             var vcolor = dLightforMood.color - BackGroundColors[ColorIndex % BackGroundColors.Length];
 
-
-            Debug.Log(Mathf.Abs(vcolor.r)+" "+Mathf.Abs(vcolor.g) + " " + Mathf.Abs(vcolor.b));
-
             if (Mathf.Abs(vcolor.r) <= 0.31f && Mathf.Abs(vcolor.g) <= 0.12f && Mathf.Abs(vcolor.b) <= 0.18)
             {
                 ++ColorIndex;
