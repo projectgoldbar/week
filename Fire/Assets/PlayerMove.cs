@@ -193,7 +193,7 @@ public class PlayerMove : MonoBehaviour
 
         agent.velocity = agent.transform.forward * (speed - (slowSpeed + biteCount));
 
-        if (biteCount > 0 && isShaking == false && playerData.hp>0)
+        if (biteCount > 0 && isShaking == false && playerData.hp > 0)
         {
             StartCoroutine(Shake());
         }
@@ -232,7 +232,7 @@ public class PlayerMove : MonoBehaviour
     private void Chearleader()
     {
         playerData.Hp = playerData.breathingHp * Time.deltaTime;
-        if (EpCheck(playerData.rollEp + 7f))
+        if (EpCheck(playerData.rollEp + 2f))
         {
             playerData.ep -= 10f;
             StartCoroutine(ZeroWorld());
@@ -253,7 +253,6 @@ public class PlayerMove : MonoBehaviour
         //playerData.animator.Play("Roll");
         //playerData.ep -= playerData.rollEp;
         playerData.Hp = playerData.breathingHp * Time.deltaTime;
-
     }
 
     public bool potalOpen = false;
@@ -278,7 +277,7 @@ public class PlayerMove : MonoBehaviour
         //    potalOpen = true;
         //    accel = false;
         //}
-        if (EpCheck(playerData.rollEp + 7f))
+        if (EpCheck(playerData.rollEp + 2f))
         {
             var startPoint = transform.position + transform.forward * 4f;
 
@@ -317,7 +316,7 @@ public class PlayerMove : MonoBehaviour
 
     private IEnumerator PotalEndCoroutine()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         potal.SetActive(false);
     }
 
@@ -396,11 +395,8 @@ public class PlayerMove : MonoBehaviour
         isShaking = true;
         while (biteCount > 0)
         {
-            Debug.Log("shake체크");
-
             if (EpCheck(playerData.rollEp) && biteCount > 0)
             {
-                Debug.Log("shake실행");
                 playerData.animator.Play("HitSide");
             }
             yield return shakeDuration;

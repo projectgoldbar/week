@@ -21,16 +21,16 @@ public class EvolveSystem : MonoBehaviour
 
     private void Awake()
     {
-        evolveFunc.Add(() => Resiliencepeace());//0
-        evolveFunc.Add(() => Beanworm());//1
-        evolveFunc.Add(() => GoldWorm());//2
-        evolveFunc.Add(() => endurance());//3
-        evolveFunc.Add(() => Sence5());//4
-        evolveFunc.Add(() => Calamity());//5
-        evolveFunc.Add(() => Breathing());//6
-        evolveFunc.Add(() => Entente());//7
-        evolveFunc.Add(() => SpeedRun());//8
-        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => Resiliencepeace());    //  _0
+        evolveFunc.Add(() => Beanworm());           //  _1
+        evolveFunc.Add(() => GoldWorm());           //  _2
+        evolveFunc.Add(() => endurance());          //  _3
+        evolveFunc.Add(() => Sence5());             //  _4
+        evolveFunc.Add(() => Calamity());           //  _5
+        evolveFunc.Add(() => Breathing());          //  _6
+        evolveFunc.Add(() => Entente());            //  _7
+        evolveFunc.Add(() => SpeedRun());           //  _8
+        evolveFunc.Add(() => GetScore());           //  _9
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
@@ -263,7 +263,9 @@ public class EvolveSystem : MonoBehaviour
     {
     }
 
-    public void Charge()
+    public void GetScore()
     {
+        var a = FindObjectOfType<PlayerData>().manager.score;
+        a += 3000f;
     }
 }

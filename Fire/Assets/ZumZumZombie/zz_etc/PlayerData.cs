@@ -11,6 +11,7 @@ public class PlayerData : MonoBehaviour
     public ParticleSystem shieldParticle;
     public ParticleSystem healingParticle;
     public ParticleSystem clearParticle;
+    public ParticleSystem smackParticle;
     public float originEpRecoverSpeed = 1f;
     public float epRecoverSpeed = 1f;
     public Text hpText;
@@ -532,7 +533,12 @@ public class PlayerData : MonoBehaviour
 
         if (hp <= 0)
         {
-            animator.Play("die");
+            if (!isGameOver)
+            {
+                isGameOver = true;
+                animator.StopPlayback();
+                animator.Play("die");
+            }
         }
 
         if (ep < maxEp)
@@ -552,59 +558,59 @@ public class PlayerData : MonoBehaviour
 
     #region 사용하지않는 기능들
 
-    private IEnumerator Revive()
-    {
-        Time.timeScale = 0.3f;
-        playerMove.speed = 1f;
-        yield return new WaitForSeconds(1f);
-        var a = Physics.OverlapSphere(transform.position, 13f);
-        for (int i = 0; i < a.Length; i++)
-        {
-            if (a[i].gameObject.layer == LayerMask.NameToLayer("Magnet") || a[i].gameObject.layer == LayerMask.NameToLayer("MeatTail"))
-            {
-                continue;
-            }
-            StartCoroutine(KuckBack(a[i]));
-        }
-        var particle = particlePool.GetParticle(particlePool.blastParticlePool);
-        particle.transform.position = transform.position;
-        particle.SetActive(true);
-        hp = maxhp * 0.3f;
-        recovery--;
-        Time.timeScale = 1;
-        animator.SetBool("Dying", false);
-        animator.SetBool("Revive", false);
+    //private IEnumerator Revive()
+    //{
+    //    Time.timeScale = 0.3f;
+    //    playerMove.speed = 1f;
+    //    yield return new WaitForSeconds(1f);
+    //    var a = Physics.OverlapSphere(transform.position, 13f);
+    //    for (int i = 0; i < a.Length; i++)
+    //    {
+    //        if (a[i].gameObject.layer == LayerMask.NameToLayer("Magnet") || a[i].gameObject.layer == LayerMask.NameToLayer("MeatTail"))
+    //        {
+    //            continue;
+    //        }
+    //        StartCoroutine(KuckBack(a[i]));
+    //    }
+    //    var particle = particlePool.GetParticle(particlePool.blastParticlePool);
+    //    particle.transform.position = transform.position;
+    //    particle.SetActive(true);
+    //    hp = maxhp * 0.3f;
+    //    recovery--;
+    //    Time.timeScale = 1;
+    //    animator.SetBool("Dying", false);
+    //    animator.SetBool("Revive", false);
 
-        playerMove.speed = 11f;
-        isRevive = false;
-        yield break;
-    }
+    //    playerMove.speed = 11f;
+    //    isRevive = false;
+    //    yield break;
+    //}
 
-    private IEnumerator KuckBack(Collider a)
-    {
-        for (int k = 0; k < 45; k++)
-        {
-            a.transform.position = Vector3.MoveTowards(a.transform.position, transform.position, -45f * Time.deltaTime);
-            yield return null;
-        }
+    //private IEnumerator KuckBack(Collider a)
+    //{
+    //    for (int k = 0; k < 45; k++)
+    //    {
+    //        a.transform.position = Vector3.MoveTowards(a.transform.position, transform.position, -45f * Time.deltaTime);
+    //        yield return null;
+    //    }
 
-        yield break;
-    }
+    //    yield break;
+    //}
 
-    private float originSpeed = 0f;
+    //private float originSpeed = 0f;
 
-    private IEnumerator RadiationInjectionCoroutine()
+    //private IEnumerator RadiationInjectionCoroutine()
 
-    {
-        originSpeed = playerMove.maxSpeed;
+    //{
+    //    originSpeed = playerMove.maxSpeed;
 
-        playerMove.maxSpeed *= 1.5f;
-        yield return new WaitForSeconds(1f);
+    //    playerMove.maxSpeed *= 1.5f;
+    //    yield return new WaitForSeconds(1f);
 
-        playerMove.maxSpeed = originSpeed;
-        originSpeed = 0f;
-        yield break;
-    }
+    //    playerMove.maxSpeed = originSpeed;
+    //    originSpeed = 0f;
+    //    yield break;
+    //}
 
     #endregion 사용하지않는 기능들
 

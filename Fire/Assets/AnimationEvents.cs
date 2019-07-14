@@ -41,6 +41,7 @@ public class AnimationEvents : MonoBehaviour
     public void DieStart()
     {
         playerMove.enabled = false;
+
         FindObjectOfType<UITweenEffectManager>().LeaveInGame();
     }
 
@@ -81,6 +82,7 @@ public class AnimationEvents : MonoBehaviour
                 x.transform.parent = null;
                 x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
                 playerMove.playerData.ep -= playerMove.playerData.rollEp;
+                playerMove.playerData.smackParticle.Play();
             }
         }
         else
@@ -89,6 +91,7 @@ public class AnimationEvents : MonoBehaviour
             x.transform.parent = null;
             x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
             playerMove.playerData.ep -= playerMove.playerData.rollEp;
+            playerMove.playerData.smackParticle.Play();
         }
     }
 
