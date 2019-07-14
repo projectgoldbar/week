@@ -104,27 +104,47 @@ public class IAPManager : MonoBehaviour, IStoreListener
         }
 
         {
-            // builder.AddProduct
-            // (
-            //     ProductGold[0], ProductType.Consumable,
-            //     new IDs()
-            //     {
-            //         //앱스토의 이름
-            //         {_IOS_GoldId,AppleAppStore.Name },
-            //         {_Android_GoldId[0],GooglePlay.Name },
-            //     }
-            // );
+           // builder.AddProduct
+           // (
+           //     ProductID[0], ProductType.Consumable,
+           //     new IDs()
+           //     {
+           //          //앱스토의 이름
+           //          {_IOS_GoldId,AppleAppStore.Name },
+           //          {ProductID[0],GooglePlay.Name },
+           //     }
+           // );
 
-            // builder.AddProduct
-            //(
-            //    ProductGold[1], ProductType.Consumable,
-            //    new IDs()
-            //    {
-            //         //앱스토의 이름
-            //         {_IOS_GoldId,AppleAppStore.Name },
-            //         {_Android_GoldId[1],GooglePlay.Name },
-            //    }
-            //);
+           // builder.AddProduct
+           //(
+           //    ProductID[1], ProductType.Consumable,
+           //    new IDs()
+           //    {
+           //          //앱스토의 이름
+           //          {_IOS_GoldId,AppleAppStore.Name },
+           //          {ProductID[1],GooglePlay.Name },
+           //    }
+           //);
+           // builder.AddProduct
+           //(
+           //    ProductID[2], ProductType.Consumable,
+           //    new IDs()
+           //    {
+           //          //앱스토의 이름
+           //          {_IOS_GoldId,AppleAppStore.Name },
+           //          {ProductID[2],GooglePlay.Name },
+           //    }
+           //);
+           // builder.AddProduct
+           //(
+           //    ProductID[3], ProductType.Consumable,
+           //    new IDs()
+           //    {
+           //          //앱스토의 이름
+           //          {_IOS_GoldId,AppleAppStore.Name },
+           //          {ProductID[3],GooglePlay.Name },
+           //    }
+           //);
         }
 
         #endregion 계속 구매되는 소모품

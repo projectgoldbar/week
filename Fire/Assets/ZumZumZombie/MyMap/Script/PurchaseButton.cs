@@ -10,7 +10,7 @@ public class PurchaseButton : MonoBehaviour
     {
         if (targetProductId == IAPManager.Instance.ProductCharacterSkin[0] ||
             targetProductId == IAPManager.Instance.ProductCharacterSkin[1] ||
-            targetProductId == IAPManager.Instance.ProductCharacterSkin[2])
+            targetProductId == IAPManager.Instance.ProductCharacterSkin[2])            
         {
             if (IAPManager.Instance.HadPurchase(targetProductId))
             {
