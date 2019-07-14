@@ -237,7 +237,8 @@ public class StageManager : MonoBehaviour
             dust.transform.position = targets[i].transform.position;
             dust.transform.rotation = Quaternion.LookRotation(Vector3.up);
             dust.SetActive(true);
-            targets[i].gameObject.SetActive(false);
+            //targets[i].gameObject.SetActive(false);
+            targets[i].transform.position = SpawnPosition[UnityEngine.Random.Range(0, SpawnPosition.Length)].position;
             targets[i].gameObject.GetComponentInChildren<SkinnedMeshRenderer>().materials[0].color = Color.white;
             yield return null;
         }
