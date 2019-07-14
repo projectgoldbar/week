@@ -24,7 +24,7 @@ public class AdmobBanner : MonoBehaviour
     {
         string id = Debug.isDebugBuild ? test_unitID : unitID;
 
-        banner = new BannerView(test_unitID, AdSize.SmartBanner,position);
+        banner = new BannerView(test_unitID, AdSize.IABBanner,position);
         //빌드패턴
         //AdRequest request = new AdRequest.Builder().AddTestDevice(test_deviceId).Build();
         AdRequest request = new AdRequest.Builder().Build();

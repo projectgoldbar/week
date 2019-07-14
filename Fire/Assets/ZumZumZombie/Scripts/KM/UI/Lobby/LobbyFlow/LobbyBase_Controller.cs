@@ -11,23 +11,32 @@ public class LobbyBase_Controller : MonoBehaviour
 
     public GameObject mainCameraBgforMood;
 
-    //public GameObject dLightforMood;
-    //public GameObject rawImageforMood;
+    public Light dLightforMood;
 
     private Color mainCameraBgforMoodColor;
-    //private Color dLightforMoodColor;
-    //private Color rawImageforMoodColor;
+    private Color dLightforMoodColor;
 
-    //private float changeMoodTimeSpan = 2.0f;
-    //private float changeMoodTime = 2.0f;
+
+
+    public Color[] BackGroundColors =
+            {
+                Color.white,
+                Color.red,
+                Color.green,
+                Color.blue,
+                Color.cyan,
+                Color.yellow,
+                
+            };
 
     //private Color currColor = Color.white;
 
     private void Awake()
     {
-        mainCameraBgforMoodColor = mainCameraBgforMood.GetComponent<Camera>().backgroundColor;
-        //dLightforMoodColor = dLightforMood.GetComponent<Light>().color;
-        //rawImageforMoodColor = rawImageforMood.GetComponent<Renderer>().material.
+        mainCameraBgforMoodColor = Camera.main.backgroundColor; //mainCameraBgforMood.GetComponent<Camera>().backgroundColor;
+        dLightforMood.type = LightType.Directional;
+        dLightforMoodColor = dLightforMood.color;
+
     }
 
     private float duration = 15;
@@ -36,20 +45,29 @@ public class LobbyBase_Controller : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine("LerpColor");
+        StartCoroutine(LerpColor());
+
     }
 
     private IEnumerator LerpColor()
     {
-        float progress = 0;
-        float increment = smoothness / duration;
-        while (progress < 1)
+        
+        int ColorIndex = 0;
+        while (true)
         {
-            mainCameraBgforMood.GetComponent<Camera>().backgroundColor = Color.Lerp(Color.red, Color.blue, progress);
-            progress += increment;
-            yield return new WaitForSeconds(smoothness);
+            dLightforMood.color = Color.Lerp(dLightforMood.color, BackGroundColors[ColorIndex%BackGroundColors.Length], Time.deltaTime);
+
+            var vcolor = dLightforMood.color - BackGroundColors[ColorIndex % BackGroundColors.Length];
+
+
+            Debug.Log(Mathf.Abs(vcolor.r)+" "+Mathf.Abs(vcolor.g) + " " + Mathf.Abs(vcolor.b));
+
+            if (Mathf.Abs(vcolor.r) <= 0.31f && Mathf.Abs(vcolor.g) <= 0.12f && Mathf.Abs(vcolor.b) <= 0.18)
+            {
+                ++ColorIndex;
+            }
+            yield return new WaitForSeconds(0.2f);
         }
-        //return true;
     }
 
     //private void Start()
