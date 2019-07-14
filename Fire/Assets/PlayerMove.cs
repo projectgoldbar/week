@@ -195,6 +195,7 @@ public class PlayerMove : MonoBehaviour
 
         if (biteCount > 0 && isShaking == false && playerData.hp > 0)
         {
+            
             StartCoroutine(Shake());
         }
 
@@ -393,6 +394,10 @@ public class PlayerMove : MonoBehaviour
     private IEnumerator Shake()
     {
         isShaking = true;
+        if (playerData.isGameOver)
+        {
+            yield break;
+        }
         while (biteCount > 0)
         {
             if (EpCheck(playerData.rollEp) && biteCount > 0)

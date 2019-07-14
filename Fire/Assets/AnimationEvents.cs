@@ -74,6 +74,10 @@ public class AnimationEvents : MonoBehaviour
 
     public void Shake()
     {
+        if (playerMove.playerData.hp <= 0)
+        {
+            return;
+        }
         if (playerMove.equipIdx == 7)
         {
             for (int i = 0; i < playerMove.biteCount; i++)

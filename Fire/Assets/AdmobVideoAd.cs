@@ -5,15 +5,13 @@ using UnityEngine.Events;
 
 public class AdmobVideoAd : MonoBehaviour
 {
-    private readonly string unitID = "ca-app-pub-5205187543072249/3297754282";
+    private readonly string unitID = "ca-app-pub-9641742132924690/3964981427";
     private readonly string test_Ad_unitID = "ca-app-pub-3940256099942544/5224354917";    // 동영상
-    private readonly string test_deviceId = "099176D0E511411B";
 
-    private RewardBasedVideoAd RewardAd;
-
-    private readonly string AppId = "ca-app-pub-5205187543072249~8311581277";
+    private readonly string AppId = "ca-app-pub-9641742132924690~7742988066";
     private readonly string TestAppId = "ca-app-pub-3940256099942544~3347511713";
 
+    private RewardBasedVideoAd RewardAd;
     public UnityEvent AdsReward;
     public UnityEvent UnityAdsReward;
     public UnityEvent AdsFail;
@@ -61,6 +59,7 @@ public class AdmobVideoAd : MonoBehaviour
     {
         AdRequest request = new AdRequest.Builder().Build();
 
+        //RewardAd.LoadAd(request, unitID);
         RewardAd.LoadAd(request, test_Ad_unitID);
     }
 

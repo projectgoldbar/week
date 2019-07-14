@@ -152,7 +152,6 @@ public class PlayerData : MonoBehaviour
 
     #region 퍽4번 제5감각
 
-    public float DefaultEvadeRadius;
     public float SenceData;
     private int sence;
 
@@ -286,7 +285,7 @@ public class PlayerData : MonoBehaviour
     public GameObject meatTail;
 
     public GameObject shield;
-    private bool isGameOver = false;
+    public bool isGameOver = false;
     private bool isRevive = false;
     public Manager manager;
     private PlayerMove playerMove;
@@ -294,32 +293,6 @@ public class PlayerData : MonoBehaviour
     public Animator animator;
 
     public SkinnedMeshRenderer MeshData;
-
-    //public int MagnetLV
-    //{
-    //    get
-    //    {
-    //        return evolveLvData[7];
-    //    }
-    //    set
-    //    {
-    //        evolveLvData[7] = value;
-    //        magnet.GetComponent<SphereCollider>().radius *= 2f;
-    //    }
-    //}
-
-    //public int MeatTailLV
-    //{
-    //    get
-    //    {
-    //        return evolveLvData[8];
-    //    }
-    //    set
-    //    {
-    //        evolveLvData[8] = value;
-    //        meatTail.GetComponent<SphereCollider>().radius += 5f;
-    //    }
-    //}
 
     private Coroutine radiantion;
     private bool isradiantion = false;
@@ -376,6 +349,7 @@ public class PlayerData : MonoBehaviour
             {
                 hp = maxhp;
             }
+            
 
             if (hp <= calamityHp)
             {
@@ -435,20 +409,18 @@ public class PlayerData : MonoBehaviour
         randomGold = Random.Range(4000, 9576);
         gold += randomGold;
         biteZombies = new Queue<GameObject>();
+        PlayerSetting();
+        MeshData.sharedMesh = UserDataManager.Instance.EquipSkinReference[UserDataManager.Instance.userData.equipedSkinIdx].sharedMesh;
         if (!isTutirial)
         {
-            PlayerSetting();
-            MeshData.sharedMesh = UserDataManager.Instance.EquipSkinReference[UserDataManager.Instance.userData.equipedSkinIdx].sharedMesh;
             hp = maxhp;
         }
         else
         {
             hp = 10;
         }
-        DefaultEvadeRadius = EvadeCollider.radius;
         DefaultSpeedData = playerMove.maxSpeed;
         manager.goldUi.text = Gold.ToString();
-        RndTime = Random.Range(RndTimeMin, RndTimeMax);
         if (equipSkinIdx == 10)
         {
             overHp = true;
@@ -471,12 +443,13 @@ public class PlayerData : MonoBehaviour
 
     private IEnumerator NurseCoroutine()
     {
+        WaitForSeconds second = new WaitForSeconds(5f);
         while (true)
         {
             if (Hp < maxhp && ep > 1f)
             {
-                Hp = 1f;
-                ep -= 1f;
+                Hp = 5f;
+                ep -= 3f;
 
                 if (!healingParticle.isPlaying) healingParticle.Play();
                 yield return null;
@@ -486,7 +459,7 @@ public class PlayerData : MonoBehaviour
                 if (healingParticle.isPlaying) healingParticle.Stop();
                 yield return null;
             }
-            yield return new WaitForSeconds(1f);
+            yield return second;
         }
     }
 
@@ -513,7 +486,6 @@ public class PlayerData : MonoBehaviour
     }
 
     public bool is_Wall = false;
-    private float RndTime;
     private float CurrentTime = 0;
 
     private float sheildTime = 5f;

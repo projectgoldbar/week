@@ -33,7 +33,7 @@ public class Manager : MonoBehaviour
 
     public Transform[] spwanPoints;
 
-    public Coroutine sw;
+    public IEnumerator sw;
 
     private int StageLv = 0;
 
@@ -63,7 +63,7 @@ public class Manager : MonoBehaviour
         SceneManager.sceneUnloaded += OnSceneEnded;
         //Time.timeScale = 0;
         FindObjectOfType<UITweenEffectManager>().EnterInGame();
-
+        sw = ScoreUp();
         GameStart();
         Invoke("PlayerDataOn", 1f);
         //PlayerSetting();
@@ -134,9 +134,9 @@ public class Manager : MonoBehaviour
         //bimage.sprite = x[1].sprite;
         //cimage.sprite = x[2].sprite;
 
+        GamePause();
         evolUi.SetActive(true);
         //playerController.SetActive(false);
-        GamePause();
     }
 
     private IEnumerator
@@ -156,22 +156,17 @@ public class Manager : MonoBehaviour
         //score = Mathf.Floor(sw.ElapsedMilliseconds * 0.001f);
 
         timeUi.text = "Score " + score;
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
             GameOver();
         }
-        else if (Input.GetKeyDown(KeyCode.J))
-        {
-            UnityEngine.Debug.Log(CSVManager.Instance);
-            StartCoroutine(TimeToGold());
-        }
+
     }
 
     public void GamePause()
     {
-        Time.timeScale = 0;
         StopCoroutine(sw);
+        Time.timeScale = 0;
     }
 
     public void OnGamePause()
@@ -188,7 +183,8 @@ public class Manager : MonoBehaviour
 
     public void GameStart()
     {
-        sw = StartCoroutine(ScoreUp());
+        StartCoroutine(sw);
+        
         Time.timeScale = 1;
     }
 
@@ -287,7 +283,7 @@ public class Manager : MonoBehaviour
 
     public void GameResume()
     {
-        StartCoroutine(ScoreUp());
+        StartCoroutine(sw);
         Time.timeScale = 1;
     }
 
@@ -300,7 +296,7 @@ public class Manager : MonoBehaviour
     public void Resume(GameObject ui)
     {
         ui.SetActive(false);
-        StartCoroutine(ScoreUp());
+        StartCoroutine(sw);
     }
 
     public void GoIntro()

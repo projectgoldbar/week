@@ -123,6 +123,7 @@ public class StageManager : MonoBehaviour
         }
         go.transform.position = SpwanTransform;
         yield return null;
+        yield break;
     }
 
     private IEnumerator StageChangeLighting(Color Current, Color Next, int n)
@@ -140,26 +141,14 @@ public class StageManager : MonoBehaviour
 
     public void StageSetting()
     {
+        if (currentStageLV > 30)
+        {
+            InfinityMode();
+            return;
+        }
         //현제스테이지
         var stageData = stageList[currentStageLV];
         //해당 스테이지에 실행되야할것
-
-        if (currentStageLV >= 1 && GooglePlayGPGS.Instance.Authenticated)
-        {
-            GooglePlayGPGS.Instance.Stage1_Achievement_Open();
-        }
-        else if (currentStageLV >= 2 && GooglePlayGPGS.Instance.Authenticated)
-        {
-            GooglePlayGPGS.Instance.Stage2_Achievement_Open();
-        }
-        else if (currentStageLV >= 5 && GooglePlayGPGS.Instance.Authenticated)
-        {
-            GooglePlayGPGS.Instance.Stage5_Achievement_Open();
-        }
-        else if (currentStageLV >= 10 && GooglePlayGPGS.Instance.Authenticated)
-        {
-            GooglePlayGPGS.Instance.Stage10_Achievement_Open();
-        }
         //스테이지 전환효과
         lightColor.color = stageData.PlayerPointLight;
         //Color CurrentColor = lightColor.color;
@@ -176,7 +165,7 @@ public class StageManager : MonoBehaviour
         //몬스터강화
         if (!playerData.isTutirial)
         {
-            MonsterUpgrade();
+            MonsterUpgrade(stageData);
         }
 
         //박스생성
@@ -204,6 +193,32 @@ public class StageManager : MonoBehaviour
         }
         playerData.GetComponent<PlayerMove>().maxSpeed += 0.2f;
     }
+
+    #region 30스테이지 이상일 때
+
+    void InfinityMode()
+    {
+        var stageData = stageList[30];
+        
+        lightColor.color = stageList[Random.Range(0, 31)].PlayerPointLight;
+        
+        MonsterUpgrade(stageData);
+        Vector3 boxPosition = FindPoint();
+        boxPosition.y += 9.5f;
+        StartCoroutine(CrearRewardBox(currentStageLV, boxPosition));
+        if (currentStageLV > 0)
+        {
+            LvUp();
+        }
+        tarGetPointer.targetPosition = boxPosition;
+        UITweenEffectManager.stageOpenPanel.gameObject.SetActive(true);
+        UITweenEffectManager.stageOpenPanel.OpenPanel("Lv  " + currentStageLV.ToString());
+        lvTextUI.text = "LV" + currentStageLV.ToString();
+        playerData.GetComponent<PlayerMove>().maxSpeed += 0.2f;
+    }
+    #endregion
+
+
 
     #region 스테이지 레벨업 시퀀스
 
@@ -289,9 +304,9 @@ public class StageManager : MonoBehaviour
     //    return Data;
     //}
 
-    private void MonsterUpgrade()
+    private void MonsterUpgrade(StageS ss)
     {
-        var StageData = stageList[currentStageLV];
+        var StageData = ss;
 
         //해당 스테이지에서 몬스터의 추가속도를 더해줌
         //해당 스테이지에서 몬스터의 추가 공격력을 더해줌

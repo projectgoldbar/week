@@ -5,10 +5,9 @@ using GoogleMobileAds.Api;
 
 public class AdmobBanner : MonoBehaviour
 {
-    private readonly string unitID = "ca-app-pub-5615197344741041/6429978800";
+    private readonly string unitID = "ca-app-pub-9641742132924690/3993468832";
 
     private readonly string test_unitID = "ca-app-pub-3940256099942544/6300978111";
-    private readonly string test_deviceId = "099176D0E511411B";
 
     private BannerView banner;
 
@@ -22,11 +21,10 @@ public class AdmobBanner : MonoBehaviour
 
     private void InitAd()
     {
-        string id = Debug.isDebugBuild ? test_unitID : unitID;
 
+        //banner = new BannerView(unitID, AdSize.MediumRectangle,position);
         banner = new BannerView(test_unitID, AdSize.MediumRectangle,position);
         //빌드패턴
-        //AdRequest request = new AdRequest.Builder().AddTestDevice(test_deviceId).Build();
         AdRequest request = new AdRequest.Builder().Build();
         banner.LoadAd(request);
 
