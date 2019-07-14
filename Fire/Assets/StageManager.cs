@@ -169,7 +169,8 @@ public class StageManager : MonoBehaviour
 
         ///////////////////////////////////////////////
         //몬스터생성
-        if (!playerData.isTutirial) {
+        if (!playerData.isTutirial)
+        {
             StartCoroutine(MonsterCreate(stageList[currentStageLV]));
         };
         //몬스터강화

@@ -8,7 +8,7 @@ public class PlayerData : MonoBehaviour
     public GameObject dummyShied;
     public GameObject evadeParticle;
     public GameObject ATFieldUI;
-    public ParticleSystem boostParticle;
+    public ParticleSystem shieldParticle;
     public ParticleSystem clearParticle;
     public float originEpRecoverSpeed = 1f;
     public float epRecoverSpeed = 1f;
@@ -257,8 +257,8 @@ public class PlayerData : MonoBehaviour
             speedRun = value;
             if (speedRun == 0) SpeedRunData = 0;
             else if (speedRun == 1) SpeedRunData = 2f;
-            else if (speedRun == 2) SpeedRunData = 4f;
-            else if (speedRun == 3) SpeedRunData = 6f;
+            else if (speedRun == 2) SpeedRunData = 1f;
+            else if (speedRun == 3) SpeedRunData = 1f;
 
             //var data = DefaultSpeedData + SpeedRunData;
             playerMove.maxSpeed += SpeedRunData;
@@ -613,6 +613,7 @@ public class PlayerData : MonoBehaviour
                 if (ep + EpHitData > 0)
                 {
                     ep -= EpHitData;
+                    shieldParticle.Play();
                 }
                 else
                 {

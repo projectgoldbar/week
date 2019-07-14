@@ -29,6 +29,7 @@ public class PlayerMove : MonoBehaviour
 
     public ParticleSystem Portal = null;
     public AnimationEvents animEvent;
+    public float shakingDuration = 5f;
     private WaitForSeconds shakeDuration;
 
     private void Awake()
@@ -49,7 +50,7 @@ public class PlayerMove : MonoBehaviour
         //knob.position = startPos;
         //center.position = startPos;
         //animEvent = playerData.animator.GetComponent<AnimationEvents>();
-        shakeDuration = new WaitForSeconds(2f);
+        shakeDuration = new WaitForSeconds(shakingDuration);
         Portal.Stop();
         StartCoroutine(Shake());
     }
@@ -385,22 +386,27 @@ public class PlayerMove : MonoBehaviour
         {
             if (biteCount > 0)
             {
-                if (equipIdx == 7 && EpCheck(playerData.rollEp))
+                if (EpCheck(playerData.rollEp))
                 {
-                    for (int i = 0; i < biteCount; i++)
+                    if (equipIdx == 7)
+                    {
+                        for (int i = 0; i < biteCount; i++)
+                        {
+                            var x = playerData.biteZombies.Dequeue();
+                            x.transform.parent = null;
+                            x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
+                            playerData.ep -= playerData.rollEp;
+                            yield return null;
+                        }
+                    }
+                    else
                     {
                         var x = playerData.biteZombies.Dequeue();
                         x.transform.parent = null;
                         x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
-                        yield return null;
+                        playerData.ep -= playerData.rollEp;
+                        yield return shakeDuration;
                     }
-                }
-                else
-                {
-                    var x = playerData.biteZombies.Dequeue();
-                    x.transform.parent = null;
-                    x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
-                    yield return shakeDuration;
                 }
             }
             else

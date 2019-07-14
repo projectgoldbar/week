@@ -15,6 +15,9 @@ public class Manager : MonoBehaviour
     public GameObject evolButton1;
     public GameObject evolButton2;
     public GameObject evolButton3;
+    public GameObject adsButton;
+    public GameObject nomalCoinText;
+    public GameObject adsCoinText;
 
     public Text timeUi;
     public Text goldUi;
@@ -28,7 +31,7 @@ public class Manager : MonoBehaviour
     public Text survivalTimeTxt;
     public Text coinText;
 
-    public Vector3[] spwanPoints;
+    public Transform[] spwanPoints;
 
     public Coroutine sw;
 
@@ -54,7 +57,7 @@ public class Manager : MonoBehaviour
 
         if (!playerData.isTutirial)
         {
-            playerData.transform.position = spwanPoints[Random.Range(0, spwanPoints.Length)];
+            playerData.transform.position = spwanPoints[Random.Range(0, spwanPoints.Length)].position;
         }
         //goldUi.text = playerData.Gold.ToString();
         SceneManager.sceneUnloaded += OnSceneEnded;
@@ -95,7 +98,7 @@ public class Manager : MonoBehaviour
         x.accumulateBoxCount += playerData.goldBoxCount + playerData.silverBoxCount + playerData.bronzeBoxCount;
         x.accumulateHealPack += playerData.addHealPackCount;
         x.playTime += score - (stageManager.currentStageLV * 4000);
-        
+
         SceneManager.sceneUnloaded -= OnSceneEnded;
     }
 
@@ -137,8 +140,7 @@ public class Manager : MonoBehaviour
     }
 
     private IEnumerator
-        
-        
+
      ScoreUp()
     {
         WaitForSeconds oneSeconed = new WaitForSeconds(1f);
@@ -207,6 +209,11 @@ public class Manager : MonoBehaviour
         resultGold = playerData.Gold - UserDataManager.Instance.userData.Money;
         scoreText.text = score.ToString();
         var playTime = score;
+        if (UserDataManager.Instance.userData.AdOff)
+        {
+            resultGold *= 2;
+            adsButton.SetActive(false);
+        }
         sec = playTime % 60;
         min = playTime / 60 % 60;
         hour = playTime / 3600;
@@ -219,7 +226,7 @@ public class Manager : MonoBehaviour
         //StartCoroutine(TimeToGold());
     }
 
-    void GameStop()
+    private void GameStop()
     {
         Time.timeScale = 0f;
     }
@@ -305,5 +312,8 @@ public class Manager : MonoBehaviour
     {
         resultGold *= 2;
         coinText.text = resultGold.ToString();
+        adsButton.SetActive(false);
+        nomalCoinText.SetActive(false);
+        adsCoinText.SetActive(true);
     }
 }
