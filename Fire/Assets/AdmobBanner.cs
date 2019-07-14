@@ -44,7 +44,10 @@ public class AdmobBanner : MonoBehaviour
         banner.Destroy();
     }
 
-
+    private void OnDisable()
+    {
+        ToogleAd(false);
+    }
 
 
 

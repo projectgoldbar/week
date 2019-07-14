@@ -46,12 +46,10 @@ public class LobbyBase_Controller : MonoBehaviour
     private void Start()
     {
         StartCoroutine(LerpColor());
-
     }
 
     private IEnumerator LerpColor()
     {
-        
         int ColorIndex = 0;
         while (true)
         {

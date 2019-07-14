@@ -10,13 +10,9 @@ public class InGameBGM : MonoBehaviour
 
     private int Rnd = 0;
 
-    private AdmobBanner banner;
+    
 
-    private void Awake()
-    {
-        banner = FindObjectOfType<AdmobBanner>();
-        banner.ToogleAd(false);
-    }
+   
 
     private void Start()
     {
