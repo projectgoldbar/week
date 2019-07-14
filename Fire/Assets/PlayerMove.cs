@@ -28,6 +28,7 @@ public class PlayerMove : MonoBehaviour
     public bool isShaking = false;
     public int equipIdx = 0;
 
+    public ParticleSystem RunnerTail = null;
     public ParticleSystem Portal = null;
     public AnimationEvents animEvent;
     public float shakingDuration = 5f;
@@ -105,10 +106,12 @@ public class PlayerMove : MonoBehaviour
             else if (equipIdx == 6 && playerData.ep > 0 && maxSpeed + 5f > speed)
             {
                 speed += accelSpeed;
+                if (!RunnerTail.isPlaying) RunnerTail.Play();
                 playerData.ep -= playerData.MainusEP * Time.deltaTime;
             }
             else
             {
+                if (RunnerTail.isPlaying) RunnerTail.Stop();
                 speed = maxSpeed;
             }
         }
@@ -246,9 +249,11 @@ public class PlayerMove : MonoBehaviour
 
     private void Nurse()
     {
-        SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
-        playerData.animator.Play("Roll");
-        playerData.ep -= playerData.rollEp;
+        //SoundManager.Instance.PlaySoundSFX("ROLLINGPLAYER");
+        //playerData.animator.Play("Roll");
+        //playerData.ep -= playerData.rollEp;
+        playerData.Hp = playerData.breathingHp * Time.deltaTime;
+
     }
 
     public bool potalOpen = false;

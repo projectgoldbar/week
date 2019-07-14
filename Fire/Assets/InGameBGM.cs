@@ -34,7 +34,7 @@ public class InGameBGM : MonoBehaviour
     public void Update()
     {
         //플레이중이 아닐때 
-        if (!InGameAudioSource[Rnd].isPlaying)
+        if (!InGameAudioSource[Rnd%3].isPlaying)
         {
             SoundPlay((++Rnd) % 3);
         }
