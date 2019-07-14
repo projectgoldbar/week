@@ -41,6 +41,7 @@ public class Coin : MonoBehaviour
 
     private void OnDisable()
     {
+        if (particlePool == null) { return; }
         var a = particlePool.GetParticle(particlePool.coinParticlePool);
         a.transform.position = transform.position;
 

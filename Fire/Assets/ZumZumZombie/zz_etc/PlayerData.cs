@@ -9,6 +9,7 @@ public class PlayerData : MonoBehaviour
     public GameObject evadeParticle;
     public GameObject ATFieldUI;
     public ParticleSystem shieldParticle;
+    public ParticleSystem healingParticle;
     public ParticleSystem clearParticle;
     public float originEpRecoverSpeed = 1f;
     public float epRecoverSpeed = 1f;
@@ -475,6 +476,13 @@ public class PlayerData : MonoBehaviour
             {
                 Hp = 1f;
                 ep -= 1f;
+
+                if (!healingParticle.isPlaying) healingParticle.Play();
+                yield return null;
+            }
+            else
+            {
+                if (healingParticle.isPlaying) healingParticle.Stop();
                 yield return null;
             }
             yield return new WaitForSeconds(1f);

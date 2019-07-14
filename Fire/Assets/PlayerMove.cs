@@ -87,6 +87,7 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            if (accel) return;
             //StartCoroutine(FadeIn(0));
             inputVector2 = Input.mousePosition;
             bufferVector2 = Input.mousePosition;
@@ -189,7 +190,7 @@ public class PlayerMove : MonoBehaviour
 
         agent.velocity = agent.transform.forward * (speed - (slowSpeed + biteCount));
 
-        if (biteCount > 0 && isShaking == false)
+        if (biteCount > 0 && isShaking == false && playerData.hp>0)
         {
             StartCoroutine(Shake());
         }
