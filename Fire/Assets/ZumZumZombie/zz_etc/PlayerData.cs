@@ -471,7 +471,7 @@ public class PlayerData : MonoBehaviour
         x.Money = u;
         Gold = u;
         maxhp = x.hp;
-
+        maxEp = x.ep;
         df = 0;
         var fperHp = (maxhp * 0.05f);
         hpUpSpeed = hpUpSpeed + (hpUpSpeed * (0.01f * x.healHp));
