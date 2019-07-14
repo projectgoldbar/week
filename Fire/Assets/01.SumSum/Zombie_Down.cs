@@ -11,6 +11,7 @@ namespace ZombieState
         public override void Execute()
         {
             transform.tag = "Zombie";
+            zombieData.agent.enabled = false;
             //zombieData.animator.speed = 0f;
             //다운애니메이션출력
         }
@@ -41,7 +42,6 @@ namespace ZombieState
         public override void Exit()
         {
             currentTime = 0f;
-            zombieData.agent.enabled = true;
         }
     }
 }

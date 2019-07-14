@@ -24,6 +24,7 @@ public class CameraView : MonoBehaviour
         {
             zombiedata.stateMachine.StateChange(zombiedata.moving);
         }
+
         //zombiedata.stateMachine.StateChange(zombiedata.moving);
         //zombiedata.agent.speed = 20f;
         //MoveSpeedChange = false;

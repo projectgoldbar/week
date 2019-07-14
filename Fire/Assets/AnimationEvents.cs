@@ -71,6 +71,27 @@ public class AnimationEvents : MonoBehaviour
         playerMove.playerData.animator.Play("Roll");
     }
 
+    public void Shake()
+    {
+        if (playerMove.equipIdx == 7)
+        {
+            for (int i = 0; i < playerMove.biteCount; i++)
+            {
+                var x = playerMove.playerData.biteZombies.Dequeue();
+                x.transform.parent = null;
+                x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
+                playerMove.playerData.ep -= playerMove.playerData.rollEp;
+            }
+        }
+        else
+        {
+            var x = playerMove.playerData.biteZombies.Dequeue();
+            x.transform.parent = null;
+            x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
+            playerMove.playerData.ep -= playerMove.playerData.rollEp;
+        }
+    }
+
     #region 구르기 애니메이션 이벤트로 넣음.
 
     public void RollDfUp()
@@ -84,7 +105,6 @@ public class AnimationEvents : MonoBehaviour
 
         if (playerMove.equipIdx == 4)
         {
-            
             playerMove.maxSpeed = 100000;
             playerMove.speed = 30;
             playerMove.Portal.Stop();

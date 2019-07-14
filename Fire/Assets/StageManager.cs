@@ -64,17 +64,17 @@ public class StageManager : MonoBehaviour
 
     private void ZombiePoolSet()
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 25; i++)
         {
-            var x = Instantiate(zombie, transform.position, Quaternion.identity, transform);
             var y = Instantiate(dashZombie, transform.position, Quaternion.identity, transform);
-            var z = Instantiate(spitZombie, transform.position, Quaternion.identity, transform);
 
-            x.SetActive(false);
             y.SetActive(false);
-            z.SetActive(false);
-            zombiePool.Add(x);
             dashZombiePool.Add(y);
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            var z = Instantiate(spitZombie, transform.position, Quaternion.identity, transform);
+            z.SetActive(false);
             etcPool.Add(z);
         }
     }
@@ -299,17 +299,17 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < zombiePool.Count; i++)
         {
             zombiePool[i].GetComponent<ZombieState.ZombiesComponent>().damage += StageData.spawnData.AddDamage;
-            etcPool[i].GetComponent<ZombieState.Zombie_AttackRun>().accelSpeed += StageData.spawnData.mineCount;
+            etcPool[i].GetComponent<ZombieState.Zombie_AttackRun>().accelSpeed += StageData.spawnData.AddSpeed;
         }
         for (int i = 0; i < dashZombiePool.Count; i++)
         {
             dashZombiePool[i].GetComponent<ZombieState.ZombiesComponent>().damage += StageData.spawnData.AddDamage;
-            dashZombiePool[i].GetComponent<ZombieState.ZomBie_Attack>().originSpeed += StageData.spawnData.AddSpeed;
+            dashZombiePool[i].GetComponent<ZombieState.ZomBie_Attack>().originSpeed += StageData.spawnData.rushSpeed;
         }
         for (int i = 0; i < etcPool.Count; i++)
         {
             etcPool[i].GetComponent<ZombieState.ZombiesComponent>().damage += StageData.spawnData.AddDamage;
-            etcPool[i].GetComponent<ZombieState.Zombie_AttackRun>().accelSpeed += StageData.spawnData.mineCount;
+            etcPool[i].GetComponent<ZombieState.ZombieRunBite>().accelSpeed += StageData.spawnData.AddSpeed;
         }
     }
 
@@ -521,7 +521,7 @@ public class SpawnRange
     public int zombieCount;             //생성될 갯수
     public int dashZombieCount;
     public int spitZombieCount;
-    public int mineCount;
+    public float rushSpeed;
 }
 
 [System.Serializable]

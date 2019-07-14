@@ -654,6 +654,12 @@ public class PlayerData : MonoBehaviour
                     }
                     bronzeBoxCount++;
                     clearParticle.Play();
+                    for (; 0 < biteZombies.Count;)
+                    {
+                        var x = biteZombies.Dequeue();
+                        x.transform.parent = null;
+                        x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
+                    }
                     SoundManager.Instance.PlaySoundSFX("STAGEBOMB", 1f);
                     Destroy(other.gameObject);
                     break;
@@ -665,6 +671,12 @@ public class PlayerData : MonoBehaviour
                     }
                     goldBoxCount++;
                     clearParticle.Play();
+                    for (; 0 < biteZombies.Count;)
+                    {
+                        var x = biteZombies.Dequeue();
+                        x.transform.parent = null;
+                        x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
+                    }
                     SoundManager.Instance.PlaySoundSFX("STAGEBOMB", 1f);
 
                     Destroy(other.gameObject);
@@ -678,6 +690,12 @@ public class PlayerData : MonoBehaviour
                     }
                     silverBoxCount++;
                     clearParticle.Play();
+                    for (; 0 < biteZombies.Count;)
+                    {
+                        var x = biteZombies.Dequeue();
+                        x.transform.parent = null;
+                        x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
+                    }
                     SoundManager.Instance.PlaySoundSFX("STAGEBOMB", 1f);
 
                     Destroy(other.gameObject);

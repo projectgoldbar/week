@@ -21,7 +21,7 @@ namespace ZombieState
             zombieData.animator.SetBool("FastRun", false);
             zombieData.agent.speed = slowSpeed;
             var distance = Vector3.Distance(transform.position, zombieData.player.position);
-            if (distance > 30f)
+            if (distance > 50f)
             {
                 StateChange(zombieData.moving);
             }

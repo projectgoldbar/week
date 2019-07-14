@@ -25,6 +25,7 @@ public class PlayerMove : MonoBehaviour
     public float rollSensitive;
 
     public bool accel = false;
+    public bool isShaking = false;
     public int equipIdx = 0;
 
     public ParticleSystem Portal = null;
@@ -52,7 +53,7 @@ public class PlayerMove : MonoBehaviour
         //animEvent = playerData.animator.GetComponent<AnimationEvents>();
         shakeDuration = new WaitForSeconds(shakingDuration);
         Portal.Stop();
-        StartCoroutine(Shake());
+        //StartCoroutine(Shake());
     }
 
     private Vector2 bufferVector2;
@@ -63,7 +64,7 @@ public class PlayerMove : MonoBehaviour
     public bool CalamityRoll = false;
     public bool inputStey = false;
 
-    private int biteCount = 0;
+    public int biteCount = 0;
 
     #region 상현이 코드 추가
 
@@ -188,6 +189,11 @@ public class PlayerMove : MonoBehaviour
 
         agent.velocity = agent.transform.forward * (speed - (slowSpeed + biteCount));
 
+        if (biteCount > 0 && isShaking == false)
+        {
+            StartCoroutine(Shake());
+        }
+
         playerData.animator.SetFloat("moveSpeed", speed);
     }
 
@@ -305,7 +311,7 @@ public class PlayerMove : MonoBehaviour
 
     private IEnumerator PotalEndCoroutine()
     {
-        yield return shakeDuration;
+        yield return new WaitForSeconds(1f);
         potal.SetActive(false);
     }
 
@@ -381,39 +387,20 @@ public class PlayerMove : MonoBehaviour
 
     private IEnumerator Shake()
     {
-        Debug.Log("shake");
-        while (true)
+        isShaking = true;
+        while (biteCount > 0)
         {
-            if (biteCount > 0)
+            Debug.Log("shake체크");
+
+            if (EpCheck(playerData.rollEp) && biteCount > 0)
             {
-                if (EpCheck(playerData.rollEp))
-                {
-                    if (equipIdx == 7)
-                    {
-                        for (int i = 0; i < biteCount; i++)
-                        {
-                            var x = playerData.biteZombies.Dequeue();
-                            x.transform.parent = null;
-                            x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
-                            playerData.ep -= playerData.rollEp;
-                            yield return null;
-                        }
-                    }
-                    else
-                    {
-                        var x = playerData.biteZombies.Dequeue();
-                        x.transform.parent = null;
-                        x.GetComponent<ZombieState.Zombie_Bite>().ZombieDown();
-                        playerData.ep -= playerData.rollEp;
-                        yield return shakeDuration;
-                    }
-                }
+                Debug.Log("shake실행");
+                playerData.animator.Play("HitSide");
             }
-            else
-            {
-                yield return shakeDuration;
-            }
+            yield return shakeDuration;
         }
+        isShaking = false;
+        yield break;
     }
 
     private bool SomethingOnPlace(Vector3 point)
