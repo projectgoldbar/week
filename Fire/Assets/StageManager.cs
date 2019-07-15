@@ -219,11 +219,13 @@ public class StageManager : MonoBehaviour
 
     #endregion 30스테이지 이상일 때
 
+    public float waveDistance = 35f;
+
     #region 스테이지 레벨업 시퀀스
 
     public void LvUp()
     {
-        var targets = Physics.OverlapSphere(playerData.transform.position, 35f, LayerMask.GetMask("Monster"));
+        var targets = Physics.OverlapSphere(playerData.transform.position, waveDistance, LayerMask.GetMask("Monster"));
         if (!playerData.isTutirial)
         {
             testCoinSpwan.StopSpwan();
