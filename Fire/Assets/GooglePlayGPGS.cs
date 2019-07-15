@@ -556,6 +556,7 @@ public class GooglePlayGPGS : MonoBehaviour
         v.adoff = UserDataManager.Instance.userData.AdOff;
         v.goldBonus = UserDataManager.Instance.userData.goldBonus;
         v.pakage = UserDataManager.Instance.userData.pakage;
+        v.Money = UserDataManager.Instance.userData.Money;
 
         ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
         SavedGameMetadataUpdate update = new SavedGameMetadataUpdate.Builder().Build();
@@ -629,15 +630,16 @@ public class GooglePlayGPGS : MonoBehaviour
         public bool adoff ;
         public bool goldBonus ;
         public bool pakage ;
+        public float Money;
     }
     public void OnSavedGameDataRead(SavedGameRequestStatus status, byte[] data)
     {
-
-        
         if (status == SavedGameRequestStatus.Success)
         {
-                        string dd = Encoding.UTF8.GetString(data);
+
+            string dd = Encoding.UTF8.GetString(data);
             var text = JsonUtility.FromJson<savedata1>(dd);
+            UserDataManager.Instance.userData.Money = text.Money;
             UserDataManager.Instance.userData.AdOff =  text.adoff;
             if (UserDataManager.Instance.userData.AdOff)
             {

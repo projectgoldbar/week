@@ -245,7 +245,7 @@ public class BoxManager : MonoBehaviour
 
             case OpenState.gold:
                 var z = Random.Range(0, 101);
-                if (z < 50)
+                if (z < 70)
                 {
                     var gold = Random.Range(goldBoxGold[0], goldBoxGold[1]);
                     gold = Mathf.Round(gold);
