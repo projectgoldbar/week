@@ -84,6 +84,10 @@ public class GooglePlayGPGS : MonoBehaviour
 
             GoogleServicesInit();
         }
+        else
+        {
+            LeaderBoardPostring((long)UserDataManager.Instance.userData.highScore);
+        }
     }
 
     public void GoogleServicesInit()
@@ -406,10 +410,10 @@ public class GooglePlayGPGS : MonoBehaviour
 
     #region 리더보드에 점수게시
 
-    public void LeaderBoardPostring()
+    public void LeaderBoardPostring(long score)
     {
         if (Authenticated)
-            GoogleLederBoardPostingScore(GPGSIds.leaderboard_sumsumzombie_leaderboard, 100);
+            GoogleLederBoardPostingScore(GPGSIds.leaderboard_sumsumzombie_leaderboard, score);
     }
 
     public void GoogleLederBoardPostingScore(string LeaderBoardID, long PostingScore)

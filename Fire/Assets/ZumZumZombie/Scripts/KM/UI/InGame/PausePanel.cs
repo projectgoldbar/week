@@ -14,6 +14,7 @@ public class PausePanel : MonoBehaviour
     public Image checkBoxBGMImage;
     public Image checkBoxSFXImage;
 
+    public InGameBGM inGameBGM;
     
 
     private void Start()
@@ -46,11 +47,12 @@ public class PausePanel : MonoBehaviour
         checkBGM = !checkBGM;
         checkBoxBGMImage.enabled = checkBGM;
         SoundManager.Instance._isSfxSound = checkBGM;
+        InGameBGM.IngameBgmOnoff = checkSFX;
         if (checkBGM)
         {
             SoundManager.Instance.PlaySoundSFX("SoundCheckBox");
         }
-        SoundManager.Instance.BGMSoundOnOff(checkBGM);
+        inGameBGM.BGMSoundOnOff(checkBGM);
     }
 
     public void OnClickSFX_Button()
@@ -63,6 +65,7 @@ public class PausePanel : MonoBehaviour
         {
             SoundManager.Instance.PlaySoundSFX("SoundCheckBox");
         }
+
         SoundManager.Instance.SFMSoundOnOff(checkSFX);
     }
 
