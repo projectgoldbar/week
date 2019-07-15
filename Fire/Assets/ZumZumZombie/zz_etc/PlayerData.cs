@@ -343,11 +343,16 @@ public class PlayerData : MonoBehaviour
             else
             {
                 hp = hp + value;
+                if (hp > maxhp * 1.4f)
+                {
+                    hp = maxhp * 1.4f;
+                }
             }
 
-            if (!overHp && hp > maxhp)
+            if (!overHp && hp > maxhp )
             {
                 hp = maxhp;
+                
             }
             
 

@@ -37,7 +37,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        evadeMove = new Action[10] { () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { } };
+        evadeMove = new Action[11] { () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { }, () => { } };
         evadeMove[0] = NomalRoll;
         evadeMove[1] = Rugby;
         evadeMove[2] = Chearleader;
@@ -48,6 +48,7 @@ public class PlayerMove : MonoBehaviour
         evadeMove[7] = Shaker;
         evadeMove[8] = EnergyShield;
         evadeMove[9] = NomalRoll;
+        evadeMove[10] = NomalRoll;
         startPos = new Vector2(-720f, -1280f);
         //knob.position = startPos;
         //center.position = startPos;
