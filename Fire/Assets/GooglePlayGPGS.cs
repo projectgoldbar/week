@@ -552,12 +552,17 @@ public class GooglePlayGPGS : MonoBehaviour
 
     private void SaveGame(ISavedGameMetadata game)
     {
+        savedata1 v = new savedata1();
+        v.adoff = UserDataManager.Instance.userData.AdOff;
+        v.goldBonus = UserDataManager.Instance.userData.goldBonus;
+        v.pakage = UserDataManager.Instance.userData.pakage;
+
         ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
         SavedGameMetadataUpdate update = new SavedGameMetadataUpdate.Builder().Build();
 
         #region 클라우드에 저장할 데이터
 
-        var data = UserDataManager.Instance;
+        var data = v;
 
         #endregion 클라우드에 저장할 데이터
 
@@ -619,14 +624,31 @@ public class GooglePlayGPGS : MonoBehaviour
     {
         ((PlayGamesPlatform)Social.Active).SavedGame.ReadBinaryData(game, OnSavedGameDataRead);
     }
-
+    struct savedata1
+    {
+        public bool adoff ;
+        public bool goldBonus ;
+        public bool pakage ;
+    }
     public void OnSavedGameDataRead(SavedGameRequestStatus status, byte[] data)
     {
+
+        
         if (status == SavedGameRequestStatus.Success)
         {
-            string dd = Encoding.UTF8.GetString(data);
-            var text = JsonUtility.FromJson<UserDataManager>(dd);
-            UserDataManager.Instance.userData = text.userData;
+                        string dd = Encoding.UTF8.GetString(data);
+            var text = JsonUtility.FromJson<savedata1>(dd);
+            UserDataManager.Instance.userData.AdOff =  text.adoff;
+            if (UserDataManager.Instance.userData.AdOff)
+            {
+                FindObjectOfType<AdmobBanner>().ToogleAd(false);
+            }
+            UserDataManager.Instance.userData.goldBonus = text.goldBonus ;
+            UserDataManager.Instance.userData.pakage = text.pakage;
+            if (UserDataManager.Instance.userData.pakage)
+            {
+                FindObjectOfType<AdmobBanner>().ToogleAd(false);
+            }
             // LoadDataText.text = text.TestInt + text.Testfloat + text.TestString;
         }
         else
