@@ -117,7 +117,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            if (0f < speed && !isRoll)
+            if (0f < speed)
             {
                 speed -= downSpeed;
             }
@@ -402,6 +402,10 @@ public class PlayerMove : MonoBehaviour
         {
             if (EpCheck(playerData.rollEp) && biteCount > 0)
             {
+                if (playerData.isGameOver)
+                {
+                    yield break;
+                }
                 playerData.animator.Play("HitSide");
             }
             yield return shakeDuration;

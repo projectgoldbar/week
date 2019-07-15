@@ -8,6 +8,7 @@
 
         public override void Execute()
         {
+            zombieData.sturnCollider.gameObject.SetActive(false);
             zombieData.agent.enabled = false;
             //zombieData.animator.StopPlayback();
             zombieData.animator.SetBool("Bite", true);

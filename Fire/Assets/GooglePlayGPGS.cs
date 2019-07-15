@@ -304,7 +304,7 @@ public class GooglePlayGPGS : MonoBehaviour
     /// </summary>
     public void Box150_Achievement_Open()
     {
-        Social.ReportProgress(GPGSIds.achievement_box150, 100f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_gainbox_step3, 100f, (bool success) =>
         {
             if (success)
             {
@@ -334,7 +334,7 @@ public class GooglePlayGPGS : MonoBehaviour
     /// </summary>
     public void Box_Achievement_Open()
     {
-        Social.ReportProgress(GPGSIds.achievement_box, 100f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_gainbox_step2, 100f, (bool success) =>
         {
             if (success)
             {
@@ -349,7 +349,7 @@ public class GooglePlayGPGS : MonoBehaviour
     /// </summary>
     public void Box50_Achievement_Open()
     {
-        Social.ReportProgress(GPGSIds.achievement_box50, 100f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_gainbox_step1, 100f, (bool success) =>
         {
             if (success)
             {
@@ -364,7 +364,7 @@ public class GooglePlayGPGS : MonoBehaviour
     /// </summary>
     public void Box200_Achievement_Open()
     {
-        Social.ReportProgress(GPGSIds.achievement_box200, 100f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_gainbox_step4, 100f, (bool success) =>
         {
             if (success)
             {

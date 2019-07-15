@@ -17,13 +17,13 @@ public class TutorialClear : MonoBehaviour
         stageManager.LvUp();
         UserDataManager.Instance.userData.isTutorialClear = true;
         
-        FindObjectOfType<Manager>().GameOver();
         
+        FindObjectOfType<Manager>().GameOver();
     }
 
-
-
     
+
+
 
     public IEnumerator TutorialZombieClear(Collider[] targets)
     {

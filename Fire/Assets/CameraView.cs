@@ -4,7 +4,6 @@ using ZombieState;
 public class CameraView : MonoBehaviour
 {
     public ZombiesComponent zombiedata;
-    public Zombie1Moving zombie;
 
     private void OnBecameVisible()
     {

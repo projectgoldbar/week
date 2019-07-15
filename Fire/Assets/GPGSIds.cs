@@ -21,20 +21,23 @@
 /// Resources.
 ///
 
+
 public static class GPGSIds
 {
-    public const string achievement_stage5_clear = "CgkIxLi5xPYJEAIQBQ"; // <GPGSID>
-    public const string achievement_box = "CgkIxLi5xPYJEAIQDA"; // <GPGSID>
-    public const string achievement_stater = "CgkIxLi5xPYJEAIQAQ"; // <GPGSID>
-    public const string achievement_stage1_clear = "CgkIxLi5xPYJEAIQAw"; // <GPGSID>
-    public const string achievement_playcount = "CgkIxLi5xPYJEAIQCQ"; // <GPGSID>
-    public const string achievement_box150 = "CgkIxLi5xPYJEAIQCg"; // <GPGSID>
-    public const string achievement_box200 = "CgkIxLi5xPYJEAIQDg"; // <GPGSID>
-    public const string leaderboard_sumsumzombie_leaderboard = "CgkIxLi5xPYJEAIQAA"; // <GPGSID>
-    public const string achievement_stage_7_clear = "CgkIxLi5xPYJEAIQBg"; // <GPGSID>
-    public const string achievement_stage2_clear = "CgkIxLi5xPYJEAIQBA"; // <GPGSID>
-    public const string achievement_stage_10_clear = "CgkIxLi5xPYJEAIQBw"; // <GPGSID>
-    public const string achievement_box50 = "CgkIxLi5xPYJEAIQDQ"; // <GPGSID>
-    public const string achievement_playtime = "CgkIxLi5xPYJEAIQCA"; // <GPGSID>
-    public const string achievement_potion = "CgkIxLi5xPYJEAIQCw"; // <GPGSID>
+        public const string achievement_stage5_clear = "CgkIxLi5xPYJEAIQBQ"; // <GPGSID>
+        public const string achievement_gainbox_step1 = "CgkIxLi5xPYJEAIQDQ"; // <GPGSID>
+        public const string achievement_gainbox_step2 = "CgkIxLi5xPYJEAIQDA"; // <GPGSID>
+        public const string achievement_gainbox_step3 = "CgkIxLi5xPYJEAIQCg"; // <GPGSID>
+        public const string achievement_stage1_clear = "CgkIxLi5xPYJEAIQAw"; // <GPGSID>
+        public const string achievement_playcount = "CgkIxLi5xPYJEAIQCQ"; // <GPGSID>
+        public const string leaderboard_sumsumzombie_leaderboard = "CgkIxLi5xPYJEAIQAA"; // <GPGSID>
+        public const string achievement_stater = "CgkIxLi5xPYJEAIQAQ"; // <GPGSID>
+        public const string achievement_stage_7_clear = "CgkIxLi5xPYJEAIQBg"; // <GPGSID>
+        public const string achievement_gainbox_step4 = "CgkIxLi5xPYJEAIQDg"; // <GPGSID>
+        public const string achievement_stage2_clear = "CgkIxLi5xPYJEAIQBA"; // <GPGSID>
+        public const string achievement_stage_10_clear = "CgkIxLi5xPYJEAIQBw"; // <GPGSID>
+        public const string achievement_playtime = "CgkIxLi5xPYJEAIQCA"; // <GPGSID>
+        public const string achievement_potion = "CgkIxLi5xPYJEAIQCw"; // <GPGSID>
+
 }
+

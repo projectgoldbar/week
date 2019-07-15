@@ -508,6 +508,8 @@ public class PlayerData : MonoBehaviour
             if (!isGameOver)
             {
                 isGameOver = true;
+                ep = 0f;
+                maxEp = 0f;
                 animator.SetBool("Dying", true);
                 animator.StopPlayback();
                 animator.Play("die");
