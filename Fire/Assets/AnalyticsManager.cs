@@ -64,6 +64,17 @@ public class AnalyticsManager : MonoBehaviour
         });
     }
 
+
+    public void AdsClear()
+    {
+        Analytics.CustomEvent("광고보기 성공", new Dictionary<string, object>
+        {
+            { $"광고보기 성공한 닉네임 "  , Social.localUser.userName},
+            { "광고보기 성공한 Id " , Social.localUser.id}
+        });
+    }
+
+
     int TimeCalc()
     {
         

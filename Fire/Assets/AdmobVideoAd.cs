@@ -40,7 +40,12 @@ public class AdmobVideoAd : MonoBehaviour
         //광고가 재생되기 시작하면 호출됩니다.
         RewardAd.OnAdStarted += (sender, e) => Debug.Log("OnAdStarted");
         //사용자가 비디오시청을 통해 보상을 받을 때 호출됩니다.
-        RewardAd.OnAdRewarded += (sender, e) => { Debug.Log("OnAdRewarded"); AdsReward?.Invoke(); };
+        RewardAd.OnAdRewarded += (sender, e) => 
+        {
+            Debug.Log("OnAdRewarded");
+            AdsReward?.Invoke();
+            AnalyticsManager.Instance.AdsClear();
+        };
         //광고가 닫힐때 호출됩니다.
         RewardAd.OnAdClosed += (sender, e) =>
         {
