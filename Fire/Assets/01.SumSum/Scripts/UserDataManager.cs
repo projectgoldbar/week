@@ -56,6 +56,7 @@ public class UserDataManager : MonoBehaviour
             }
             skinInfos[userData.equipedSkinIdx].Select();
             RefreshSkin();
+
             GooglePlayGPGS.Instance.InitProcess();
         }
     }

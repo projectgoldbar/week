@@ -10,9 +10,9 @@ public class InGameBGM : MonoBehaviour
 
     private int Rnd = 0;
 
-    
+    public static bool IngameBgmOnoff = true;
 
-   
+    AudioClip Clip;
 
     private void Start()
     {
@@ -25,19 +25,33 @@ public class InGameBGM : MonoBehaviour
 
         Rnd = Random.Range(0, 3);
 
-        var Clip = BGMRoopingClips[Rnd];
+        Clip = BGMRoopingClips[Rnd];
 
         InGameAudioSource[Rnd].clip = Clip;
         InGameAudioSource[Rnd].Play();
     }
 
+
+    float SoundDelay = 0;
+
     public void Update()
     {
-        //플레이중이 아닐때 
-        if (!InGameAudioSource[Rnd%3].isPlaying)
+        if (!IngameBgmOnoff) return;
+
+        SoundDelay += Time.deltaTime;
+
+        if (InGameAudioSource[Rnd % 3].clip.length <= SoundDelay)
         {
+            SoundDelay = 0;
             SoundPlay((++Rnd) % 3);
         }
+
+
+        //    //플레이중이 아닐때 
+        //if (!InGameAudioSource[Rnd % 3].isPlaying)
+        //{
+        //    SoundPlay((++Rnd) % 3);
+        //}
     }
 
     public void SoundPlay(int rnd)
@@ -45,7 +59,26 @@ public class InGameBGM : MonoBehaviour
         InGameAudioSource[rnd].Play();
     }
 
+    public void BGMSoundOnOff(bool Active)
+    {
+        if (!Active)
+        {
+            //for (int i = 0; i < InGameAudioSource.Length; i++)
+            //{
+            //    InGameAudioSource[i].Stop();
+            //}
 
+            InGameAudioSource[Rnd].Stop();
+        }
+        else
+        {
+            Clip = BGMRoopingClips[Rnd];
+
+            InGameAudioSource[Rnd].clip = Clip;
+            InGameAudioSource[Rnd].Play();
+           
+        }
+    }
 
 
 }

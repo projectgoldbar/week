@@ -136,6 +136,13 @@ public partial class GameScene : MonoBehaviour
         GooglePlayGPGS.Instance.GoogleLederBoardUI();
     }
 
+    public void AchivementBoardOpen()
+    {
+        //리더보드 창 열기
+        Debug.Log("리더보드 창 열기");
+        GooglePlayGPGS.Instance.AchievementsUI();
+    }
+
     public void ExitGameOpen()
     {
         exitGamePanel.OpenPanel();
