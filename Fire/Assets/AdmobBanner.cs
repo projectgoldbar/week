@@ -16,6 +16,10 @@ public class AdmobBanner : MonoBehaviour
     private void Start()
     {
         InitAd();
+        if (UserDataManager.Instance.userData.AdOff)
+        {
+            ToogleAd(false);
+        }
     }
 
 

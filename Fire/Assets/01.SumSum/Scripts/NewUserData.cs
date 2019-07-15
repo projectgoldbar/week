@@ -58,7 +58,6 @@ public class NewUserData
     #endregion 랜덤박스관련
 
     #region 인앱결제관련
-
     public bool AdOff = false;
     public bool goldBonus = false;
     public bool pakage = false;
