@@ -134,6 +134,7 @@ public class GooglePlayGPGS : MonoBehaviour
             _authenticating = false;
             if (success)
             {
+                
                 //debugText.text = "로그인성공";
 
                 //성공
@@ -556,14 +557,11 @@ public class GooglePlayGPGS : MonoBehaviour
 
         #region 클라우드에 저장할 데이터
 
-        TestSaveData TestData = new TestSaveData();
-        TestData.TestInt = "111";
-        TestData.Testfloat = "10.110f";
-        TestData.TestString = "저장합니다";
+        var data = UserDataManager.Instance;
 
         #endregion 클라우드에 저장할 데이터
 
-        var stringToSave = JsonUtility.ToJson(TestData);
+        var stringToSave = JsonUtility.ToJson(data);
         byte[] bytes = Encoding.UTF8.GetBytes(stringToSave);
         savedGameClient.CommitUpdate(game, update, bytes, OnSavedGameWritten);
     }
@@ -627,7 +625,8 @@ public class GooglePlayGPGS : MonoBehaviour
         if (status == SavedGameRequestStatus.Success)
         {
             string dd = Encoding.UTF8.GetString(data);
-            var text = JsonUtility.FromJson<TestSaveData>(dd);
+            var text = JsonUtility.FromJson<UserDataManager>(dd);
+            UserDataManager.Instance.userData = text.userData;
             // LoadDataText.text = text.TestInt + text.Testfloat + text.TestString;
         }
         else

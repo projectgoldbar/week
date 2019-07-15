@@ -64,13 +64,20 @@ public class UserDataManager : MonoBehaviour
     private void OnApplicationPause(bool pause)
     {
         var x = userData.Money - randomValue;
+
         NewSaveSystem.SaveData(userData, x);
+
+        GooglePlayGPGS.Instance.SaveButtonClick();
     }
 
     private void OnApplicationQuit()
     {
         var x = userData.Money - randomValue;
+
         NewSaveSystem.SaveData(userData, x);
+
+        GooglePlayGPGS.Instance.SaveButtonClick();
+
     }
 
     public void LoadData()
