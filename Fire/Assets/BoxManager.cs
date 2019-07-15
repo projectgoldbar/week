@@ -187,11 +187,21 @@ public class BoxManager : MonoBehaviour
                 else
                 {
                     var skin = FindObjectOfType<SkinSystem>().ThrowRandomSkin();
-
-                    resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
-                    Description.text = skin.name;
-                    skin.isHave = true;
-                    UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
+                    if (skin == null)
+                    {
+                        var gold = Random.Range(bronzeBoxGold[0], bronzeBoxGold[1]);
+                        gold = Mathf.Round(gold);
+                        resultInfo.GetComponent<Image>().sprite = goldSprite;
+                        Description.text = gold.ToString();
+                        UserDataManager.Instance.userData.Money += gold;
+                    }
+                    else
+                    {
+                        resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
+                        Description.text = skin.name;
+                        skin.isHave = true;
+                        UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
+                    }
                 }
                 userData.bronzeBoxCount--;
                 Refresh();
@@ -212,10 +222,21 @@ public class BoxManager : MonoBehaviour
                 else
                 {
                     var skin = FindObjectOfType<SkinSystem>().ThrowRandomSkin();
-                    resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
-                    Description.text = skin.name;
-                    skin.isHave = true;
-                    UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
+                    if (skin == null)
+                    {
+                        var gold = Random.Range(silverBoxGold[0], silverBoxGold[1]);
+                        gold = Mathf.Round(gold);
+                        resultInfo.GetComponent<Image>().sprite = goldSprite;
+                        Description.text = gold.ToString();
+                        UserDataManager.Instance.userData.Money += gold;
+                    }
+                    else
+                    {
+                        resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
+                        Description.text = skin.name;
+                        skin.isHave = true;
+                        UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
+                    }
                 }
                 userData.silverBoxCount--;
                 Refresh();
@@ -237,10 +258,21 @@ public class BoxManager : MonoBehaviour
                 else
                 {
                     var skin = FindObjectOfType<SkinSystem>().ThrowRandomSkin();
-                    resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
-                    Description.text = skin.name;
-                    skin.isHave = true;
-                    UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
+                    if (skin == null)
+                    {
+                        var gold = Random.Range(silverBoxGold[0], silverBoxGold[1]);
+                        gold = Mathf.Round(gold);
+                        resultInfo.GetComponent<Image>().sprite = goldSprite;
+                        Description.text = gold.ToString();
+                        UserDataManager.Instance.userData.Money += gold;
+                    }
+                    else
+                    {
+                        resultInfo.GetComponent<Image>().sprite = skin.skinSprite;
+                        Description.text = skin.name;
+                        skin.isHave = true;
+                        UserDataManager.Instance.userData.gainSkin[skin.skinIdx] = true;
+                    }
                 }
                 userData.goldBoxCount--;
                 Refresh();

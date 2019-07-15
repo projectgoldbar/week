@@ -152,7 +152,7 @@ public class UpgradeInfoPanels : MonoBehaviour
                 Debug.Log("돈부족");
                 return;
             }
-            else if (statLevel > 80)
+            else if (statLevel > 197)
             {
                 statIndexTxt.text = string.Format("최대 체력 LV : MAX", upgradeStatInfo.level);
                 statValueTxt.text = string.Format("maxHp : {0}", upgradeStatInfo.value);
