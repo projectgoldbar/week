@@ -8,23 +8,26 @@ using UnityEngine.Purchasing;
 public class IAPManager : MonoBehaviour, IStoreListener
 {
     //계속 구매되는 (소모품)
+    [NonSerialized]
     public string[] ProductID = { "support1000", "support3000", "support5000", "support50000" };
 
     //개발자센터의 해당상품에 설정한 식별자ID
     private const string _IOS_GoldId = "1000coin";
-
+    [NonSerialized]
     public string[] _Android_ProductId = { "support1000", "support3000", "support5000", "support50000" };
 
     //한번 구매하면 (소장품)
+    [NonSerialized]
     public string[] ProductCharacterSkin = { "01noads", "dia02", "starter03" };
 
     //개발자센터의 해당상품에 설정한 식별자ID
     private const string _IOS_SkinId = "com.studio.app.skin";
 
+    [NonSerialized]
     public string[] _Android_SkinId = { "01noads", "dia02", "starter03" };
 
     //구독서비스 (매달 무엇을 내는?)
-    public const string ProductSubscription = "premium_subscription";
+    private const string ProductSubscription = "premium_subscription";
 
     //개발자센터의 해당상품에 설정한 식별자ID
     private const string _IOS_PremiumSub = "com.studio.app.sub";
