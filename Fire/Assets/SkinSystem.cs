@@ -16,6 +16,7 @@ public class SkinSystem : MonoBehaviour
 
     public SKinInfo[] skinInfos;
     public SkinnedMeshRenderer MeshData;
+
     //public SkinnedMeshRenderer[] playerSkins;
     public GameObject playerSkinPivot;
 
@@ -35,9 +36,8 @@ public class SkinSystem : MonoBehaviour
 
     public void ChangeMesh()
     {
-        MeshData.sharedMesh = 
+        MeshData.sharedMesh =
             UserDataManager.Instance.EquipSkinReference[UserDataManager.Instance.userData.equipedSkinIdx].sharedMesh;
-
 
         //for (int i = 0; i < playerSkins.Length; i++)
         //{
@@ -84,6 +84,12 @@ public class SkinSystem : MonoBehaviour
                 notHaveList.Add(skinInfos[i]);
             }
         }
+
+        if (notHaveList.Count == 0)
+        {
+            return null;
+        }
+
         var x = Random.Range(0, notHaveList.Count);
         //notHaveList[x].isHave = true;
         return notHaveList[x];

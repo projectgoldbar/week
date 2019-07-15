@@ -40,7 +40,7 @@ public class StageManager : MonoBehaviour
     public Light lightColor;
 
     public int currentStageLV = 0;
-
+    public int maxStageCount = 0;
     private int randomValue;
 
     //
@@ -51,7 +51,7 @@ public class StageManager : MonoBehaviour
         ShowTimer = new WaitForSeconds(0.5f);
         playerData = FindObjectOfType<PlayerData>();
         particlePool = FindObjectOfType<ParticlePool>();
-
+        maxStageCount = stageList.Count;
         if (!playerData.isTutirial)
         {
             ZombiePoolSet();
@@ -141,7 +141,7 @@ public class StageManager : MonoBehaviour
 
     public void StageSetting()
     {
-        if (currentStageLV > 30)
+        if (currentStageLV > maxStageCount)
         {
             InfinityMode();
             return;
@@ -196,12 +196,12 @@ public class StageManager : MonoBehaviour
 
     #region 30스테이지 이상일 때
 
-    void InfinityMode()
+    private void InfinityMode()
     {
-        var stageData = stageList[30];
-        
+        var stageData = stageList[maxStageCount];
+
         lightColor.color = stageList[Random.Range(0, 31)].PlayerPointLight;
-        
+
         MonsterUpgrade(stageData);
         Vector3 boxPosition = FindPoint();
         boxPosition.y += 9.5f;
@@ -212,13 +212,12 @@ public class StageManager : MonoBehaviour
         }
         tarGetPointer.targetPosition = boxPosition;
         UITweenEffectManager.stageOpenPanel.gameObject.SetActive(true);
-        UITweenEffectManager.stageOpenPanel.OpenPanel("Lv  " + currentStageLV.ToString());
+        UITweenEffectManager.stageOpenPanel.OpenPanel("Infinity  " + currentStageLV.ToString());
         lvTextUI.text = "LV" + currentStageLV.ToString();
         playerData.GetComponent<PlayerMove>().maxSpeed += 0.2f;
     }
-    #endregion
 
-
+    #endregion 30스테이지 이상일 때
 
     #region 스테이지 레벨업 시퀀스
 

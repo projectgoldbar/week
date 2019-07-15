@@ -160,7 +160,6 @@ public class Manager : MonoBehaviour
         {
             GameOver();
         }
-
     }
 
     public void GamePause()
@@ -184,7 +183,7 @@ public class Manager : MonoBehaviour
     public void GameStart()
     {
         StartCoroutine(sw);
-        
+
         Time.timeScale = 1;
     }
 
@@ -204,7 +203,7 @@ public class Manager : MonoBehaviour
     {
         resultGold = playerData.Gold - UserDataManager.Instance.userData.Money;
         scoreText.text = score.ToString();
-        var playTime = score;
+        var playTime = score - (4000f * stageManager.currentStageLV);
         if (UserDataManager.Instance.userData.AdOff)
         {
             resultGold *= 2;
