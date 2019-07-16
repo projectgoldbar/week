@@ -234,7 +234,10 @@ public partial class GameScene : MonoBehaviour
         Debug.Log("리더보드 창 열기");
         GooglePlayGPGS.Instance.AchievementsUI();
     }
-
+    public void Review()
+    {
+        Application.OpenURL("market://details?id=com.sum.zombie");
+    }
     public void ExitGameOpen()
     {
         exitGamePanel.OpenPanel();

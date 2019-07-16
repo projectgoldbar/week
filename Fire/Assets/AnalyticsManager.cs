@@ -41,8 +41,8 @@ public class AnalyticsManager : MonoBehaviour
         var x = DateTime.Now;
         Analytics.CustomEvent("종료", new Dictionary<string, object>
         {
-            { $"종료한 닉네임, 종료시간{x}플레이시간{TimeCalc()}최고스테이지{UserDataManager.Instance.userData.highStage}" , Social.localUser.userName},
-            { "종료한 id"    , Social.localUser.id}
+            { $" 종료한 닉네임, 종료시간 = {x} 플레이시간 = {TimeCalc()} 최고스테이지 {UserDataManager.Instance.userData.highStage}" , Social.localUser.userName},
+            { " 종료한 id "    , Social.localUser.id}
         });
     }
     
@@ -57,20 +57,20 @@ public class AnalyticsManager : MonoBehaviour
     }
     public void Stage5Clear()
     {
-        Analytics.CustomEvent("한번에스테이지5클리어", new Dictionary<string, object>
+        Analytics.CustomEvent(" 한번에 스테이지 5 클리어 ", new Dictionary<string, object>
         {
-            { $"한번에 스테이지5 클리어 시간{TimeCalc() }" , Social.localUser.userName},
-            { "한번에 스테이지5 클리어 Id" , Social.localUser.id}
+            { $" 한번에 스테이지5 클리어 시간 {TimeCalc() } " , Social.localUser.userName},
+            { " 한번에 스테이지5 클리어 Id " , Social.localUser.id}
         });
     }
 
 
     public void AdsClear()
     {
-        Analytics.CustomEvent("광고보기 성공", new Dictionary<string, object>
+        Analytics.CustomEvent(" 광고보기 성공 ", new Dictionary<string, object>
         {
-            { $"광고보기 성공한 닉네임 "  , Social.localUser.userName},
-            { "광고보기 성공한 Id " , Social.localUser.id}
+            { $" 광고보기 성공한 닉네임 "  , Social.localUser.userName},
+            { " 광고보기 성공한 Id " , Social.localUser.id}
         });
     }
 
