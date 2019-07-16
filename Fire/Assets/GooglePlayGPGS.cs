@@ -489,7 +489,7 @@ public class GooglePlayGPGS : MonoBehaviour
 
     private void ShowSelectUI()
     {
-        uint maxNumToDisplay = 3;
+        uint maxNumToDisplay = 5;
         bool allowCreateNew = true;
         bool allowDelete = true;
 
@@ -552,16 +552,16 @@ public class GooglePlayGPGS : MonoBehaviour
 
     private void SaveGame(ISavedGameMetadata game)
     {
+        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+        SavedGameMetadataUpdate update = new SavedGameMetadataUpdate.Builder().Build();
+
+        #region 클라우드에 저장할 데이터
+
         savedata1 v = new savedata1();
         v.adoff = UserDataManager.Instance.userData.AdOff;
         v.goldBonus = UserDataManager.Instance.userData.goldBonus;
         v.pakage = UserDataManager.Instance.userData.pakage;
         v.Money = UserDataManager.Instance.userData.Money;
-
-        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
-        SavedGameMetadataUpdate update = new SavedGameMetadataUpdate.Builder().Build();
-
-        #region 클라우드에 저장할 데이터
 
         var data = v;
 
@@ -625,33 +625,22 @@ public class GooglePlayGPGS : MonoBehaviour
     {
         ((PlayGamesPlatform)Social.Active).SavedGame.ReadBinaryData(game, OnSavedGameDataRead);
     }
-    struct savedata1
+    public struct savedata1
     {
         public bool adoff ;
         public bool goldBonus ;
         public bool pakage ;
         public float Money;
     }
+
+    public savedata1 LoadData;
     public void OnSavedGameDataRead(SavedGameRequestStatus status, byte[] data)
     {
         if (status == SavedGameRequestStatus.Success)
         {
-
             string dd = Encoding.UTF8.GetString(data);
-            var text = JsonUtility.FromJson<savedata1>(dd);
-            UserDataManager.Instance.userData.Money = text.Money - UserDataManager.Instance.randomValue;
-            UserDataManager.Instance.userData.AdOff =  text.adoff;
-            if (UserDataManager.Instance.userData.AdOff)
-            {
-                FindObjectOfType<AdmobBanner>().ToogleAd(false);
-            }
-            UserDataManager.Instance.userData.goldBonus = text.goldBonus ;
-            UserDataManager.Instance.userData.pakage = text.pakage;
-            if (UserDataManager.Instance.userData.pakage)
-            {
-                FindObjectOfType<AdmobBanner>().ToogleAd(false);
-            }
-            // LoadDataText.text = text.TestInt + text.Testfloat + text.TestString;
+            LoadData = JsonUtility.FromJson<savedata1>(dd);
+            
         }
         else
         {
@@ -674,4 +663,34 @@ public class GooglePlayGPGS : MonoBehaviour
             new Rect(0, 0, Screen.width, (Screen.width / 1024) * 700), 0, 0);
         return screenShot;
     }
+
+    public void MoneyRead()
+    {
+        UserDataManager.Instance.userData.Money = LoadData.Money - UserDataManager.Instance.randomValue;
+    }
+
+    public void AdOffRead()
+    {
+        UserDataManager.Instance.userData.AdOff = LoadData.adoff;
+        if (UserDataManager.Instance.userData.AdOff)
+        {
+            FindObjectOfType<AdmobBanner>().ToogleAd(false);
+        }
+    }
+
+    public void GoldBonusRead()
+    {
+        UserDataManager.Instance.userData.goldBonus = LoadData.goldBonus;
+    }
+
+    public void PakageRead()
+    {
+        UserDataManager.Instance.userData.pakage = LoadData.pakage;
+        if (UserDataManager.Instance.userData.pakage)
+        {
+            FindObjectOfType<AdmobBanner>().ToogleAd(false);
+        }
+    }
+
+
 }

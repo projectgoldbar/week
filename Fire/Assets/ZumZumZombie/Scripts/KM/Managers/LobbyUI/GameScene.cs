@@ -164,6 +164,26 @@ public partial class GameScene : MonoBehaviour
         LeaveLobby();
     }
 
+    public void MoneyReadButton()
+    {
+        GooglePlayGPGS.Instance.MoneyRead();
+    }
+    public void AdOffReadButton()
+    {
+        GooglePlayGPGS.Instance.AdOffRead();
+    }
+    public void GoldBonusReadButton()
+    {
+        GooglePlayGPGS.Instance.GoldBonusRead();
+    }
+    public void PakageReadButton()
+    {
+        GooglePlayGPGS.Instance.PakageRead();
+    }
+
+
+
+
     // ㄴ 다른 버튼들
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
