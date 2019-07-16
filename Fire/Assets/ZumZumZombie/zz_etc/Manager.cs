@@ -158,7 +158,7 @@ public class Manager : MonoBehaviour
         timeUi.text = "Score " + score;
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            GameOver();
+            score += 4000f;
         }
     }
 
