@@ -32,6 +32,11 @@ public partial class GameScene : MonoBehaviour
 
     public LobbyBase_Controller lobbyBase_Controller;
 
+    private bool stateStat = false;
+    private bool stateSkin = false;
+    private bool stateBox = false;
+    private bool stateStore = false;
+
     public void Awake()
     {
         //SceneManager.sceneLoaded += OnSceneLoaded;
@@ -41,46 +46,125 @@ public partial class GameScene : MonoBehaviour
     private void Start()
     {
         SoundManager.Instance.PlaySoundBGM("LOBBYBGM");
-        statPanel.gameObject.SetActive(true);
+        // statPanel.gameObject.SetActive(true);
     }
 
     private void OnEnable()
     {
         //StatButton();
-        statPanel.gameObject.SetActive(true);
+        //  statPanel.gameObject.SetActive(true);
     }
 
     //중앙 패널 버튼들 ㄱ
     public void StatButton()
     {
-        statPanel.OpenPanel();
-        skinPanel.ClosePanel();
-        storePanel.ClosePanel();
-        boxPanel.ClosePanel();
+        //stateStat = false;
+        stateSkin = false;
+        stateBox = false;
+        stateStore = false;
+
+        if (stateStat == true)
+        {
+            UpPanelwhenSameButton();
+            stateStat = false;
+
+            return;
+        }
+        if (stateStat == false)
+        {
+            DownPanel();
+
+            statPanel.OpenPanel();
+            skinPanel.ClosePanel();
+            storePanel.ClosePanel();
+            boxPanel.ClosePanel();
+
+            stateStat = true;
+        }
     }
 
     public void SkinButton()
     {
-        statPanel.ClosePanel();
-        skinPanel.OpenPanel();
-        storePanel.ClosePanel();
-        boxPanel.ClosePanel();
+        stateStat = false;
+        //stateSkin = false;
+        stateBox = false;
+        stateStore = false;
+
+        if (stateSkin == true)
+        {
+            UpPanelwhenSameButton();
+            stateSkin = false;
+
+            return;
+        }
+
+        if (stateSkin == false)
+        {
+            DownPanel();
+
+            statPanel.ClosePanel();
+            skinPanel.OpenPanel();
+            storePanel.ClosePanel();
+            boxPanel.ClosePanel();
+
+            stateSkin = true;
+        }
     }
 
     public void BoxButton()
     {
-        statPanel.ClosePanel();
-        skinPanel.ClosePanel();
-        storePanel.ClosePanel();
-        boxPanel.OpenPanel();
+        stateStat = false;
+        stateSkin = false;
+        //stateBox = false;
+        stateStore = false;
+
+        if (stateBox == true)
+        {
+            UpPanelwhenSameButton();
+            stateBox = false;
+
+            return;
+        }
+
+        if (stateBox == false)
+        {
+            DownPanel();
+
+            statPanel.ClosePanel();
+            skinPanel.ClosePanel();
+            storePanel.ClosePanel();
+            boxPanel.OpenPanel();
+
+            stateBox = true;
+        }
     }
 
     public void StoreButton()
     {
-        statPanel.ClosePanel();
-        skinPanel.ClosePanel();
-        storePanel.OpenPanel();
-        boxPanel.ClosePanel();
+        stateStat = false;
+        stateSkin = false;
+        stateBox = false;
+        //stateStore = false;
+
+        if (stateStore == true)
+        {
+            UpPanelwhenSameButton();
+            stateStore = false;
+
+            return;
+        }
+
+        if (stateStore == false)
+        {
+            DownPanel();
+
+            statPanel.ClosePanel();
+            skinPanel.ClosePanel();
+            storePanel.OpenPanel();
+            boxPanel.ClosePanel();
+
+            stateStore = true;
+        }
     }
 
     public void DownPanel()
@@ -95,6 +179,14 @@ public partial class GameScene : MonoBehaviour
     {
         StatButton();
 
+        middleAllPanel.ClosePanel();
+        directionUIController.OnTriangleOutlineforUpPanel();
+        directionUIController.doorOutLine.CloseMiddlePanel();
+        lobbyBase_Controller.StartObjController.CloseMiddlePanel();
+    }
+
+    private void UpPanelwhenSameButton()
+    {
         middleAllPanel.ClosePanel();
         directionUIController.OnTriangleOutlineforUpPanel();
         directionUIController.doorOutLine.CloseMiddlePanel();
@@ -168,21 +260,21 @@ public partial class GameScene : MonoBehaviour
     {
         GooglePlayGPGS.Instance.MoneyRead();
     }
+
     public void AdOffReadButton()
     {
         GooglePlayGPGS.Instance.AdOffRead();
     }
+
     public void GoldBonusReadButton()
     {
         GooglePlayGPGS.Instance.GoldBonusRead();
     }
+
     public void PakageReadButton()
     {
         GooglePlayGPGS.Instance.PakageRead();
     }
-
-
-
 
     // ㄴ 다른 버튼들
 
