@@ -141,7 +141,7 @@ public class StageManager : MonoBehaviour
 
     public void StageSetting()
     {
-        if (currentStageLV > maxStageCount)
+        if (currentStageLV >= maxStageCount)
         {
             InfinityMode();
             return;
@@ -200,7 +200,7 @@ public class StageManager : MonoBehaviour
     {
         var stageData = stageList[maxStageCount];
 
-        lightColor.color = stageList[Random.Range(0, 31)].PlayerPointLight;
+        lightColor.color = stageList[Random.Range(0, maxStageCount)].PlayerPointLight;
 
         MonsterUpgrade(stageData);
         Vector3 boxPosition = FindPoint();
@@ -423,17 +423,11 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
-        if (manager.score > stageList[currentStageLV].spawnData.ClearScore)
+        if (manager.score > 4000f + (currentStageLV * 4000f))
         {
             currentStageLV++;
 
             StageSetting();
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            FindObjectOfType<UITweenEffectManager>().stageOpenPanel.gameObject.SetActive(true);
-            FindObjectOfType<UITweenEffectManager>().stageOpenPanel.OpenPanel("aaa");
         }
     }
 
