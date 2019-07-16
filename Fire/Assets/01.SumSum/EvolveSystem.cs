@@ -31,7 +31,7 @@ public class EvolveSystem : MonoBehaviour
         evolveFunc.Add(() => Entente());            //  _7
         evolveFunc.Add(() => SpeedRun());           //  _8
         evolveFunc.Add(() => Nuke());           //  _9
-        evolveFunc.Add(() => { });
+        evolveFunc.Add(() => ScoreUp());//10
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
@@ -62,7 +62,7 @@ public class EvolveSystem : MonoBehaviour
     {
         List<Evolve> lv3lowerList = new List<Evolve>();
 
-        for (int i = 0; i < evolveIdx.Length; i++)
+        for (int i = 0; i < evolveIdx.Length-1; i++)
         {
             if (evolveIdx[i].lv < 3)
             {
@@ -70,6 +70,14 @@ public class EvolveSystem : MonoBehaviour
             }
         }
         List<Evolve> returnValue = new List<Evolve>();
+        if (lv3lowerList.Count < 3)
+        {
+            var count = 3 - lv3lowerList.Count;
+            for (int i = 0; i < count; i++)
+            {
+                lv3lowerList.Add(evolveIdx[10]);
+            }
+        }
 
         for (int i = 0; i < 3; i++)
         {
@@ -230,16 +238,17 @@ public class EvolveSystem : MonoBehaviour
         a.evolveLvData[4]++;
     }
 
-    public void TitaniumTooth()
+    public void ScoreUp()
     {
-        var a = FindObjectOfType<PlayerData>();
-        a.evolveLvData[5]++;
+        
+        var a = FindObjectOfType<Manager>();
+        a.score += 1000;
     }
 
-    public void QuadCore()
+    public void ScoreUo2()
     {
-        var a = FindObjectOfType<PlayerData>();
-        a.evolveLvData[7]++;
+        var a = FindObjectOfType<Manager>();
+        a.score += 2000f;
     }
 
     public void GoldStoker()

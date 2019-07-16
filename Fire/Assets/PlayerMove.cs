@@ -234,7 +234,7 @@ public class PlayerMove : MonoBehaviour
     private void Chearleader()
     {
         playerData.Hp = playerData.breathingHp * Time.deltaTime;
-        if (EpCheck(playerData.rollEp + 2f))
+        if (EpCheck(playerData.rollEp + 2f)&&playerData.manager.isPause==false)
         {
             playerData.ep -= 10f;
             StartCoroutine(ZeroWorld());

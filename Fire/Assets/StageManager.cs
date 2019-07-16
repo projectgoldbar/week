@@ -113,6 +113,23 @@ public class StageManager : MonoBehaviour
         else
             return 2;
     }
+    public int GetBoxRandom2()
+    {
+        //var StageData = GetSpawn(StageLv);
+        randomValue = UnityEngine.Random.Range(0, 101);
+        int bronzePerCent = stageList[maxStageCount-1].spawnData.percent_copper;
+        int silverPerCent = bronzePerCent + stageList[maxStageCount - 1].spawnData.percent_silver;
+        int goldPerCent = silverPerCent + stageList[maxStageCount - 1].spawnData.percent_gold;
+        //동박스
+        if (bronzePerCent > randomValue)
+            return 0;
+        //은박스
+        else if (silverPerCent > randomValue)
+            return 1;
+        //금박스
+        else
+            return 2;
+    }
 
     private IEnumerator CrearRewardBox(int StageLv, Vector3 SpwanTransform)
     {
@@ -121,6 +138,16 @@ public class StageManager : MonoBehaviour
         {
             go.AddComponent<TutorialClear>();
         }
+        go.transform.position = SpwanTransform;
+        yield return null;
+        yield break;
+    }
+
+    private IEnumerator CrearRewardBox2( Vector3 SpwanTransform)
+    {
+        var go = GameObject.Instantiate(RefBoxs[GetBoxRandom2()]);
+        if (playerData.isTutirial)
+        
         go.transform.position = SpwanTransform;
         yield return null;
         yield break;
@@ -198,18 +225,15 @@ public class StageManager : MonoBehaviour
 
     private void InfinityMode()
     {
-        var stageData = stageList[maxStageCount];
+        var stageData = stageList[maxStageCount-1];
 
         lightColor.color = stageList[Random.Range(0, maxStageCount)].PlayerPointLight;
 
         MonsterUpgrade(stageData);
         Vector3 boxPosition = FindPoint();
         boxPosition.y += 9.5f;
-        StartCoroutine(CrearRewardBox(currentStageLV, boxPosition));
-        if (currentStageLV > 0)
-        {
-            LvUp();
-        }
+        StartCoroutine(CrearRewardBox2( boxPosition));
+        LvUp();
         tarGetPointer.targetPosition = boxPosition;
         UITweenEffectManager.stageOpenPanel.gameObject.SetActive(true);
         UITweenEffectManager.stageOpenPanel.OpenPanel("Infinity  " + currentStageLV.ToString());

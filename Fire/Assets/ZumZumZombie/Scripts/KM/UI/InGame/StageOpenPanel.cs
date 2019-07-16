@@ -91,6 +91,10 @@ public class StageOpenPanel : MonoBehaviour
     {
         targetColor = currColor;
         Debug.Log(targetColor);
+        if(targetColor == null)
+        {
+            return;
+        }
 
         LTDescr desc = LeanTween.value(0f, currColor.r, colorTime);
         desc.setOnUpdate(ColorValueUpdate);
@@ -104,11 +108,19 @@ public class StageOpenPanel : MonoBehaviour
         targetColor.b = (currColor.b - value);
         targetColor.r = (currColor.r + value);
 
+        if(targetText == null)
+        {
+            return;
+        }
         targetText.GetComponent<Text>().color = targetColor;
     }
 
     private void TweenScaleOut()
     {
+        if(targetText == null)
+        {
+            return;
+        }
         LeanTween.alphaText(targetText.GetComponent<RectTransform>(), 0f, scaleOutTime * scaleOutDisappearTime).setEase(LeanTweenType.easeInCirc);
         LeanTween.alphaText(targetforScaleOutText.GetComponent<RectTransform>(), 0f, scaleOutTime * scaleOutDisappearTime).setEase(LeanTweenType.easeInCirc);
 

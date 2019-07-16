@@ -44,6 +44,8 @@ public class Manager : MonoBehaviour
 
     public bool viewAd = false;
 
+    public bool isPause = false;
+
     public AdmobVideoAd AdsVideo;
 
     private void Awake()
@@ -164,6 +166,7 @@ public class Manager : MonoBehaviour
 
     public void GamePause()
     {
+        isPause = false;
         StopCoroutine(sw);
         Time.timeScale = 0;
     }
@@ -284,6 +287,7 @@ public class Manager : MonoBehaviour
     {
         StartCoroutine(sw);
         Time.timeScale = 1;
+        isPause = true;
     }
 
     public void ViewAD()
@@ -300,6 +304,7 @@ public class Manager : MonoBehaviour
 
     public void GoIntro()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 
