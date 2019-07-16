@@ -30,7 +30,7 @@ public class EvolveSystem : MonoBehaviour
         evolveFunc.Add(() => Breathing());          //  _6
         evolveFunc.Add(() => Entente());            //  _7
         evolveFunc.Add(() => SpeedRun());           //  _8
-        evolveFunc.Add(() => GetScore());           //  _9
+        evolveFunc.Add(() => Nuke());           //  _9
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
         evolveFunc.Add(() => { });
@@ -144,13 +144,10 @@ public class EvolveSystem : MonoBehaviour
         Debug.Log("질주");
     }
 
-    public void FullCharge()
+    public void Nuke()
     {
-        var a = FindObjectOfType<SkillSystem>();
-        if (a.SkillCount < 1)
-        {
-            a.SkillCount++;
-        }
+        var a = FindObjectOfType<StageManager>();
+        a.waveDistance += 5f;
     }
 
     public void MeatFall()
@@ -194,7 +191,7 @@ public class EvolveSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            FullCharge();
+            Nuke();
         }
     }
 
