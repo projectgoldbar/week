@@ -134,7 +134,7 @@ public class GooglePlayGPGS : MonoBehaviour
             _authenticating = false;
             if (success)
             {
-                
+                LoadButtonClick();
                 //debugText.text = "로그인성공";
 
                 //성공
