@@ -639,7 +639,7 @@ public class GooglePlayGPGS : MonoBehaviour
 
             string dd = Encoding.UTF8.GetString(data);
             var text = JsonUtility.FromJson<savedata1>(dd);
-            UserDataManager.Instance.userData.Money = text.Money;
+            UserDataManager.Instance.userData.Money = text.Money - UserDataManager.Instance.randomValue;
             UserDataManager.Instance.userData.AdOff =  text.adoff;
             if (UserDataManager.Instance.userData.AdOff)
             {
