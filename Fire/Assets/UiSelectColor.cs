@@ -7,21 +7,11 @@ public class UiSelectColor : MonoBehaviour
 {
     public uiSelect canvasGroup;
 
-    //private bool clicked;
-    //public bool Clicked
-    //{
-    //    get { return clicked; }
-    //    set
-    //    {
-    //        clicked = value;
-    //        if (clicked) canvasGroup.alpha = 1.0f;
-    //        else canvasGroup.alpha = 0.2f;
-    //    }
-    //}
-
-    // Start is called before the first frame update
+    
 
     public int n;
+
+    public bool flag = false;
 
     private void Awake()
     {
@@ -31,7 +21,8 @@ public class UiSelectColor : MonoBehaviour
 
     public void Click()
     {
-        canvasGroup.CanvasGroupAlphaOn(n);
+        flag = !flag;
+        canvasGroup.CanvasGroupAlphaOn(n, flag);
     }
 
 }

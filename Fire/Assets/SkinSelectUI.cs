@@ -19,8 +19,8 @@ public class SkinSelectUI : MonoBehaviour
     public void Click()
     {
         //Debug.Log(index);
-        skinselect.CanvasGroupNImageColor(UserDataManager.Instance.userData.equipedSkinIdx);
-        //skinselect.CanvasGroupNImageColor(index);
+        //skinselect.CanvasGroupNImageColor(UserDataManager.Instance.userData.equipedSkinIdx);
+        skinselect.CanvasGroupNImageColor(index);
 
     }
 }

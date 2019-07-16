@@ -15,7 +15,7 @@ public class SKinSelect : MonoBehaviour
 
     }
 
-
+    int count = 0;
 
     public void CanvasGroupNImageColor(int n)
     {
@@ -33,8 +33,6 @@ public class SKinSelect : MonoBehaviour
                 b.colorMultiplier = 1;
                 skinsImage[i].colors = b;
             }
-
-
         }
     }
 
