@@ -300,7 +300,11 @@ public partial class GameScene : MonoBehaviour
         StartFadeImageAlpha(toIn);
         lobbyBase_Controller.lobbyPlayerController.RunningAnim();
         StartFadeOut();
-        UpPanel();
+
+        if (middleAllPanel.isOpened == true)
+        {
+            UpPanel();
+        }
     }
 
     public void EnterLobby()
