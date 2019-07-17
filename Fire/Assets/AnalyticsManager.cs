@@ -29,11 +29,21 @@ public class AnalyticsManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
-        Analytics.CustomEvent("종료", new Dictionary<string, object>
+        Analytics.CustomEvent("게임시작", new Dictionary<string, object>
         {
-            { "닉네임, 시작시간"+startDate , Social.localUser.userName},
-            { "시작 id"    , Social.localUser.id}
+            {"닉네임", Social.localUser.userName},
+            {"시작시간", startDate}
+
         });
+
+
+        //AnalyticsEvent.TutorialStart("Tuto", new Dictionary<string, object>
+        //{
+        //    {"닉네임", Social.localUser.userName},
+        //    {"시작시간", startDate}
+        //});
+
+
     }
 
     public void OnApplicationQuit()
@@ -41,11 +51,14 @@ public class AnalyticsManager : MonoBehaviour
         var x = DateTime.Now;
         Analytics.CustomEvent("종료", new Dictionary<string, object>
         {
-            { $" 종료한 닉네임, 종료시간 = {x} 플레이시간 = {TimeCalc()} 최고스테이지 {UserDataManager.Instance.userData.highStage}" , Social.localUser.userName},
-            { " 종료한 id "    , Social.localUser.id}
+            { " 종료한 닉네임 = " , Social.localUser.userName},
+            { " 종료시간 = " , x},
+            { " 플레이시간 = " , TimeCalc() },
+            { " 최고스테이지 = ", UserDataManager.Instance.userData.highStage }
+
         });
     }
-    
+
 
     public void TutorialClear()
     {
@@ -55,12 +68,12 @@ public class AnalyticsManager : MonoBehaviour
             { "튜토리얼 클리어 Id" , Social.localUser.id}
         });
     }
+
     public void Stage5Clear()
     {
         Analytics.CustomEvent(" 한번에 스테이지 5 클리어 ", new Dictionary<string, object>
         {
-            { $" 한번에 스테이지5 클리어 시간 {TimeCalc() } " , Social.localUser.userName},
-            { " 한번에 스테이지5 클리어 Id " , Social.localUser.id}
+            { $" 한번에 스테이지5 클리어 시간" ,TimeCalc()}
         });
     }
 
@@ -82,4 +95,9 @@ public class AnalyticsManager : MonoBehaviour
         return (x - startDate).Seconds;
 
     }
+
+
+    
+
+
 }
