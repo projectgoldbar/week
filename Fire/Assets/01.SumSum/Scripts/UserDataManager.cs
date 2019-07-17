@@ -39,8 +39,8 @@ public class UserDataManager : MonoBehaviour
     {
         if (scene.buildIndex == 0)
         {
-            admob = FindObjectOfType<AdmobBanner>();
-            admob.AdbannerInit();
+            //admob = FindObjectOfType<AdmobBanner>();
+            //admob.AdbannerInit();
 
             userData.Money += randomValue;
             userData.Money = Shuffle(userData.Money);
