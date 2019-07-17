@@ -226,7 +226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1091131463947655002
 Transform:
   m_ObjectHideFlags: 0
@@ -332,10 +332,10 @@ MonoBehaviour:
   player: {fileID: 0}
   animator: {fileID: 0}
   stateMachine: {fileID: 0}
-  moving: {fileID: 0}
-  attack: {fileID: 0}
-  stun: {fileID: 0}
-  slowMoving: {fileID: 0}
+  moving: {fileID: 7549653509446538336}
+  attack: {fileID: 4473340415184645112}
+  stun: {fileID: 551534646}
+  slowMoving: {fileID: 8025818190614341037}
   zombieBite: {fileID: 0}
   zombieDown: {fileID: 0}
   sturnCollider: {fileID: 394043151}
@@ -408,6 +408,7 @@ MonoBehaviour:
   attackWait: 0
   iswall: 0
   eyeParticle: {fileID: 4497758740347698166}
+  accelSpeed: 0.5
   originSpeed: 10
   speed: 0
   attackDelay: 0.7

@@ -36,12 +36,12 @@ namespace ZombieState
             agent = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
             stateMachine = GetComponent<StateMachine>();
-            moving = GetComponent<Zombie_Moving>();
-            slowMoving = GetComponent<Zombie_MovingSlow>();
+            //moving = GetComponent<Zombie_Moving>();
+            //slowMoving = GetComponent<Zombie_MovingSlow>();
             moving.enabled = false;
-            attack = GetComponent<ZomBie_Attack>();
+            //attack = GetComponent<ZomBie_Attack>();
             particlePool = FindObjectOfType<ParticlePool>();
-            stun = GetComponent<ZomBie_Stun>();
+            //stun = GetComponent<ZomBie_Stun>();
             stun.enabled = false;
             zombieBite = GetComponent<Zombie_Bite>();
             zombieDown = GetComponent<Zombie_Down>();

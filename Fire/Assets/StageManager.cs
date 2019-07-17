@@ -64,14 +64,14 @@ public class StageManager : MonoBehaviour
 
     private void ZombiePoolSet()
     {
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < 10; i++)
         {
             var y = Instantiate(dashZombie, transform.position, Quaternion.identity, transform);
 
             y.SetActive(false);
             dashZombiePool.Add(y.GetComponent<ZombieState.ZombiesComponent>());
         }
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 24; i++)
         {
             var z = Instantiate(spitZombie, transform.position, Quaternion.identity, transform);
             z.SetActive(false);
@@ -335,7 +335,7 @@ public class StageManager : MonoBehaviour
 
     private void MonsterUpgrade(StageS ss)
     {
-        int idx = maxStageCount - 1;
+        int idx = currentStageLV;
 
         //해당 스테이지에서 몬스터의 추가속도를 더해줌
         //해당 스테이지에서 몬스터의 추가 공격력을 더해줌
@@ -346,12 +346,15 @@ public class StageManager : MonoBehaviour
             dashZombiePool[i].damage += ss.spawnData.AddDamage;
             dashZombiePool[i].attack.originSpeed += ss.spawnData.rushSpeed;
             dashZombiePool[i].moving.speed = zombieMoveSpeed[idx];
+            dashZombiePool[i].agent.acceleration += ss.rotationSpeed;
         }
         for (int i = 0; i < etcPool.Count; i++)
         {
             etcPool[i].damage += ss.spawnData.AddDamage;
             etcPool[i].attack.accelSpeed += ss.spawnData.AddSpeed;
             etcPool[i].moving.speed = zombieMoveSpeed[idx];
+            dashZombiePool[i].agent.acceleration += ss.rotationSpeed;
+
         }
     }
 

@@ -11,7 +11,7 @@ namespace ZombieState
         private Coroutine test;
         public Transform player;
         public Transform target = null;
-        public float speed = 13f;
+        public float speed = 23f;
         public float attackCooltime = 10f;
 
         public override void Setting()
@@ -21,7 +21,7 @@ namespace ZombieState
             zombieData.moveCoroutine = ZombieMove();
             player = zombieData.player.gameObject.transform;
             target = player;
-            speed = zombieData.player.GetComponent<PlayerMove>().maxSpeed + 10f;
+            //speed = zombieData.player.GetComponent<PlayerMove>().maxSpeed + 10f;
         }
 
         public override void Execute()

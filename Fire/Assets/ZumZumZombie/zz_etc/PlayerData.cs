@@ -287,7 +287,6 @@ public class PlayerData : MonoBehaviour
 
     public GameObject shield;
     public bool isGameOver = false;
-    private bool isRevive = false;
     public Manager manager;
     private PlayerMove playerMove;
     private ParticlePool particlePool;
@@ -296,7 +295,6 @@ public class PlayerData : MonoBehaviour
     public SkinnedMeshRenderer MeshData;
 
     private Coroutine radiantion;
-    private bool isradiantion = false;
 
     public float Hp
     {
@@ -488,10 +486,6 @@ public class PlayerData : MonoBehaviour
     }
 
     public bool is_Wall = false;
-    private float CurrentTime = 0;
-
-    private float sheildTime = 5f;
-    private float sheildCurrentTime;
 
     private void Update()
     {
