@@ -14,6 +14,7 @@ public partial class GameScene : MonoBehaviour
     public OptionPanel optionPanel;
     public ExitGamePanel exitGamePanel;
     public AchivementPanel achivementPanel;
+    public GotoReviewPanel gotoReviewPanel;
 
     public DirectionUIController directionUIController;
 
@@ -198,9 +199,6 @@ public partial class GameScene : MonoBehaviour
         middleAllPanel.ClosedPanelwhenEnter();
     }
 
-    // ㄴ 중앙 패널 버튼들
-
-    // 다른 버튼들 ㄱ
     public void OptionPanelOpen()
     {
         optionPanel.OpenPanel();
@@ -223,21 +221,19 @@ public partial class GameScene : MonoBehaviour
 
     public void LeaderBoardOpen()
     {
-        //리더보드 창 열기
-        Debug.Log("리더보드 창 열기");
         GooglePlayGPGS.Instance.GoogleLederBoardUI();
     }
 
     public void AchivementBoardOpen()
     {
-        //리더보드 창 열기
-        Debug.Log("리더보드 창 열기");
         GooglePlayGPGS.Instance.AchievementsUI();
     }
+
     public void Review()
     {
         Application.OpenURL("market://details?id=com.sum.zombie");
     }
+
     public void ExitGameOpen()
     {
         exitGamePanel.OpenPanel();
@@ -251,6 +247,16 @@ public partial class GameScene : MonoBehaviour
     public void ExitGame()
     {
         exitGamePanel.ExitGame();
+    }
+
+    public void GotoReviewPanelOpen()
+    {
+        gotoReviewPanel.OpenPanel();
+    }
+
+    public void GotoReviewPanelClose()
+    {
+        gotoReviewPanel.ClosePanel();
     }
 
     public void StartGame()
