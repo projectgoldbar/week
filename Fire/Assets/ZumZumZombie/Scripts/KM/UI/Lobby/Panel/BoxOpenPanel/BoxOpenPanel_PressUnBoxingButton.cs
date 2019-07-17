@@ -55,7 +55,6 @@ public partial class BoxOpenPanel : MonoBehaviour
         //박스열릴때 나오는 연기 이팩트 같은거! 소리도 그렇고
         SoundManager.Instance.SFMSoundOnOff(false);
         SoundManager.Instance.PlaySoundSFX("OPENBOX");
-        SoundManager.Instance.BGMSoundOnOff(true);
     }
 
     private void ChangeMesh()
