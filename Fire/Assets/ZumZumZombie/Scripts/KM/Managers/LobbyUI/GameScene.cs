@@ -289,7 +289,8 @@ public partial class GameScene : MonoBehaviour
     {
         GooglePlayGPGS.Instance.LoadButtonClick();
     }
-    public static void  GoogleSave()
+
+    public static void GoogleSave()
     {
         GooglePlayGPGS.Instance.SaveButtonClick();
     }
@@ -305,7 +306,6 @@ public partial class GameScene : MonoBehaviour
     {
         if (fadeOutImageObj.GetComponent<Image>().color.a != toIn / 255f && fadeOutImageObj.GetComponent<Image>().color.a != toOut / 255f)
         {
-            Debug.Log(" LeaveLobby> " + LeanTween.tweensRunning + " // Don't ReLeaveLobby");
             return;
         }
         LeaveLobbyProcess();
@@ -329,7 +329,6 @@ public partial class GameScene : MonoBehaviour
     {
         if (fadeOutImageObj.GetComponent<Image>().color.a != toIn / 255f && fadeOutImageObj.GetComponent<Image>().color.a != toOut / 255f)
         {
-            Debug.Log("EnterLobby>  " + LeanTween.tweensRunning + "// Don't ReEnterLobby");
             return;
         }
 
@@ -338,7 +337,6 @@ public partial class GameScene : MonoBehaviour
 
     private void EnterLobbyProcess()
     {
-        Debug.Log("-----------------------------------------------");
         lobbyBase_Controller.lobbyPlayerController.ResetLobbyPlayer();
         lobbyBase_Controller.doorController.OpenDoorTween(enterDuration);
         StartFadeImageAlpha(toOut);
