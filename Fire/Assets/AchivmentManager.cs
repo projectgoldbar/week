@@ -6,6 +6,7 @@ public class AchivmentManager : MonoBehaviour
 {
     public Action[] gpgsAchivmentCheck;
 
+    public GameScene gameScene;
     private void Awake()
     {
         gpgsAchivmentCheck = new Action[13]
@@ -155,6 +156,7 @@ public class AchivmentManager : MonoBehaviour
         {
             if (stage == 5)
             {
+                gameScene.GotoReviewPanelOpen();
                 AnalyticsManager.Instance.Stage5Clear();
             }
             return true;
