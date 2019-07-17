@@ -13,7 +13,7 @@ public class UserDataManager : MonoBehaviour
     public static UserDataManager Instance;
     public float randomValue;
     public SkinnedMeshRenderer[] EquipSkinReference;
-
+    public AdmobBanner admob;
     private void Awake()
     {
         Screen.SetResolution(720, 1280, true);
@@ -30,6 +30,8 @@ public class UserDataManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         LoadData();
+
+        
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -37,6 +39,9 @@ public class UserDataManager : MonoBehaviour
     {
         if (scene.buildIndex == 0)
         {
+            admob = FindObjectOfType<AdmobBanner>();
+            admob.AdbannerInit();
+
             userData.Money += randomValue;
             userData.Money = Shuffle(userData.Money);
 
@@ -56,6 +61,7 @@ public class UserDataManager : MonoBehaviour
             }
             skinInfos[userData.equipedSkinIdx].Select();
             RefreshSkin();
+
 
             GooglePlayGPGS.Instance.InitProcess();
         }

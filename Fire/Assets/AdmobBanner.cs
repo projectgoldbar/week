@@ -13,48 +13,20 @@ public class AdmobBanner : MonoBehaviour
 
     public AdPosition position;
 
-    private void Start()
+    public void AdbannerInit()
     {
-        banner = new BannerView(unitID, AdSize.MediumRectangle, position);
+        banner = new BannerView(unitID, AdSize.SmartBanner, position);
         //banner = new BannerView(test_unitID, AdSize.Banner, position);
         //빌드패턴
         AdRequest request = new AdRequest.Builder().Build();
         banner.LoadAd(request);
 
-        if (UserDataManager.Instance.userData.AdOff)
-        {
-            ToogleAd(false);
-            DestroyAd();
-        }
-        else
-        {
-            InitAd();
-        }
-    }
-
-
-    private void InitAd()
-    {
-        banner.Show();
+        ToogleAd(UserDataManager.Instance.userData.AdOff);
     }
 
     public void ToogleAd(bool action)
     {
-        if (action) banner.Show();
+        if (!action) banner.Show();
         else banner.Hide();
     }
-
-    public void DestroyAd()
-    {
-        banner.Destroy();
-    }
-
-    private void OnDisable()
-    {
-        ToogleAd(false);
-    }
-
-
-
-
 }
