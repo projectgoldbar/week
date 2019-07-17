@@ -30,6 +30,7 @@ public class PlayerMove : MonoBehaviour
 
     public ParticleSystem RunnerTail = null;
     public ParticleSystem Portal = null;
+    public ParticleSystem biteParticle = null;
     public AnimationEvents animEvent;
     public float shakingDuration = 5f;
     private WaitForSeconds shakeDuration;
@@ -196,7 +197,7 @@ public class PlayerMove : MonoBehaviour
 
         if (biteCount > 0 && isShaking == false && playerData.hp > 0)
         {
-            
+            biteParticle.Play();
             StartCoroutine(Shake());
         }
 
