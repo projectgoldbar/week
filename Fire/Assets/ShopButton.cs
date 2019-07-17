@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class ShopButton : MonoBehaviour
 {
-    public Button button;
+    public ShopButtons shopbuttons;
     public int type;
-    public Text text;
+    
 
     private void Start()
     {
@@ -19,22 +19,26 @@ public class ShopButton : MonoBehaviour
             case  0 :
                 if (UserDataManager.Instance.userData.AdOff)
                 {
-                    button.interactable = false;
-                    text.text = "구매완료";
+                    shopbuttons.shopbuttons[0].interactable = false;
+                    shopbuttons.texts[0].text = "구매완료";
                 }
                 break;
             case 1:
                 if (UserDataManager.Instance.userData.goldBonus)
                 {
-                    button.interactable = false;
-                    text.text = "구매완료";
+                    shopbuttons.shopbuttons[1].interactable = false;
+                    shopbuttons.texts[1].text = "구매완료";
                 }
                 break;
             case 2:
                 if (UserDataManager.Instance.userData.pakage)
                 {
-                    button.interactable = false;
-                    text.text = "구매완료";
+                    for (int i = 0; i < 3; i++)
+                    {
+                        shopbuttons.shopbuttons[i].interactable = false;
+                        shopbuttons.texts[i].text = "구매완료";
+                    }
+                    
                 }
                 break;
 

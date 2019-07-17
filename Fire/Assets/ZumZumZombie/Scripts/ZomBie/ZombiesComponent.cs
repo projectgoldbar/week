@@ -33,7 +33,7 @@ namespace ZombieState
         {
             path = new NavMeshPath();
             player = GameObject.FindObjectOfType<PlayerMove>().transform;
-            agent = GetComponent<NavMeshAgent>();
+            //agent = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
             stateMachine = GetComponent<StateMachine>();
             //moving = GetComponent<Zombie_Moving>();

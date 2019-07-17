@@ -243,18 +243,24 @@ public class IAPManager : MonoBehaviour, IStoreListener
 
         if (args.purchasedProduct.definition.id == ProductID[0])
         {
+            UserDataManager.Instance.userData.bronzeBoxCount++;
             Debug.Log("후원1000원");
         }
         if (args.purchasedProduct.definition.id == ProductID[1])
         {
+            UserDataManager.Instance.userData.silverBoxCount++;
+
             Debug.Log("후원3000원");
         }
         if (args.purchasedProduct.definition.id == ProductID[2])
         {
+            UserDataManager.Instance.userData.goldBoxCount++;
+
             Debug.Log("후원5000원");
         }
         if (args.purchasedProduct.definition.id == ProductID[3])
         {
+            
             Debug.Log("후원50000원");
         }
 

@@ -353,7 +353,7 @@ public class StageManager : MonoBehaviour
             etcPool[i].damage += ss.spawnData.AddDamage;
             etcPool[i].attack.accelSpeed += ss.spawnData.AddSpeed;
             etcPool[i].moving.speed = zombieMoveSpeed[idx];
-            dashZombiePool[i].agent.acceleration += ss.rotationSpeed;
+            etcPool[i].agent.acceleration += ss.rotationSpeed;
 
         }
     }

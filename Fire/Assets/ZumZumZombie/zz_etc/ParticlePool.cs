@@ -38,34 +38,28 @@ public class ParticlePool : MonoBehaviour
         {
             coinParticlePool.Add(Instantiate(particles[0], transform.position, Quaternion.identity, transform));
         }
-        for (int k = 0; k < 5; k++)
-        {
-            blastParticlePool.Add(Instantiate(particles[1], transform.position, Quaternion.identity, transform));
-        }
+        //for (int k = 0; k < 5; k++)
+        //{
+        //    blastParticlePool.Add(Instantiate(particles[1], transform.position, Quaternion.identity, transform));
+        //}
         for (int l = 0; l < 5; l++)
         {
             hitParticlePool.Add(Instantiate(particles[2], transform.position, Quaternion.identity, transform));
         }
-        for (int m = 0; m < 3; m++)
-        {
-            meatParticlePool.Add(Instantiate(particles[3], transform.position, Quaternion.identity, transform));
-        }
-        for (int o = 0; o < 3; o++)
-        {
-            nukeParticlePool.Add(Instantiate(particles[4], transform.position, Quaternion.identity, transform));
-        }
-        for (int p = 0; p < 4; p++)
-        {
-            trapParticlePool.Add(Instantiate(particles[5], transform.position, Quaternion.identity, transform));
-        }
+        //for (int m = 0; m < 3; m++)
+        //{
+        //    meatParticlePool.Add(Instantiate(particles[3], transform.position, Quaternion.identity, transform));
+        //}
+        //for (int o = 0; o < 3; o++)
+        //{
+        //    nukeParticlePool.Add(Instantiate(particles[4], transform.position, Quaternion.identity, transform));
+        //}
+
         for (int q = 0; q < 20; q++)
         {
             zombieDamageParticlePool.Add(Instantiate(particles[6], transform.position, Quaternion.identity, transform));
         }
-        for (int q = 0; q < 5; q++)
-        {
-            mineParticlePool.Add(Instantiate(particles[7], transform.position, Quaternion.identity, transform));
-        }
+
         for (int i = 0; i < 30; i++)
         {
             zombieDustParticle.Add(Instantiate(particles[8], transform.position, Quaternion.identity, transform));

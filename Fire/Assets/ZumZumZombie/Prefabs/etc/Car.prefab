@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6483934026240101149}
   - component: {fileID: 167612986}
   - component: {fileID: 167612984}
-  - component: {fileID: 167612981}
   - component: {fileID: 1587407497}
   m_Layer: 0
   m_Name: Car
@@ -49,9 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29febb2dff8147749bbe6d88445d7aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 100
   rotSpeed: 1000
   rotState: 1
+  rid: {fileID: 0}
+  rotationStop: 0
   CarMoveSpeed: 20
 --- !u!65 &6483934026240101149
 BoxCollider:
@@ -98,23 +98,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 2.62, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &167612981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6483934026240101136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e7db4c00c5ab7d4eb72341772173a63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraFallow: {fileID: 0}
-  agent: {fileID: 1587407497}
-  explosion: {fileID: 8777526104162787391}
-  explosion_Timer: 3
-  PlayerIn: 0
 --- !u!195 &1587407497
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -214,12 +197,6 @@ PrefabInstance:
 --- !u!4 &6483934026426069229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5583823272042812701, guid: 9ff72ae1eba263e4aae512c57e1b2289,
-    type: 3}
-  m_PrefabInstance: {fileID: 1478928947211822576}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &8777526104162787391 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7878554375106135503, guid: 9ff72ae1eba263e4aae512c57e1b2289,
     type: 3}
   m_PrefabInstance: {fileID: 1478928947211822576}
   m_PrefabAsset: {fileID: 0}
