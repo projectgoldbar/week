@@ -268,7 +268,6 @@ public class SpitZombieMove : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         s = state.Chase;
-        Debug.Log("Player감지");
         component.agent.ResetPath();
         SpitPatrolNChase(false, transform.position);
     }

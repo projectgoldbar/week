@@ -30,24 +30,11 @@ namespace ZombieState
             zombieData.agent.enabled = true;
             zombieData.agent.speed = speed;
 
-            //test = StartCoroutine(ZombieMove());
-            //zombieData.agent.enabled = true;
             StartCoroutine(zombieData.moveCoroutine);
         }
 
-        public void MoveStop()
-        {
-            //x = false;
-            //if(zombieData.agent.path == null)
-            //zombieData.agent.ResetPath();
-            //StopCoroutine(zombieData.moveCoroutine);
-            //StopCoroutine(test);
-        }
 
-        public void MoveStart()
-        {
-            //StartCoroutine(zombieData.moveCoroutine);
-        }
+        
 
         private bool x = true;
 
@@ -101,11 +88,7 @@ namespace ZombieState
             }
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, range);
-        }
+
 
         public override void Exit()
         {

@@ -13,7 +13,6 @@ public class SturnCollider : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("박음");
 
         SturnEvent?.Invoke();
     }

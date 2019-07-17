@@ -86,11 +86,7 @@ public class WayZombiesChaseNReturn : MonoBehaviour
         for (int j = 0; j < createWayZombie.WayZombieList.Count; j++)
         {
             if (createWayZombie.WayZombieList[j].gameObject.activeSelf)
-            { createWayZombie.WayZombieList[j].GetComponent<Zombie_Moving>().MoveStart(); }
             createWayZombie.WayZombieList[j].GetComponent<ZombieState.Zombie_Moving>().target = zombies_position.ZombiesWayPosition[j];
-
-            //넘어지는 애니메이션 실행
-            //StartCoroutine(FallAnim(createWayZombie.WayZombieList[j].GetComponent<ZombieState.ZombiesComponent>()));
         }
         StartCoroutine(gototheHome());
     }
@@ -108,8 +104,6 @@ public class WayZombiesChaseNReturn : MonoBehaviour
 
     public IEnumerator GoHome(GameObject ob,int index)
     {
-        //yield return new WaitForSeconds(1);
-
         Vector3 targetScreenPos = Camera.main.WorldToScreenPoint(ob.transform.position);
         if (targetScreenPos.x > Screen.width+1.0f || targetScreenPos.x < -1.0f || targetScreenPos.y > Screen.height+1.0f || targetScreenPos.y < -1.0f)
         {
@@ -146,13 +140,11 @@ public class WayZombiesChaseNReturn : MonoBehaviour
 
     public void Min()
     {
-        Debug.Log("좀비들 추적");
         int max = createWayZombie.WayZombieList.Count;
         for (int i = 0; i < max; i++)
         {
             controll.b_Moving = false;
             createWayZombie.WayZombieList[i].transform.parent = null;
-            createWayZombie.WayZombieList[i].GetComponent<Zombie_Moving>().MoveStart();
             createWayZombie.WayZombieList[i].GetComponent<Zombie_Moving>().target = Player.transform;
         }
         b_return = false;
@@ -163,7 +155,6 @@ public class WayZombiesChaseNReturn : MonoBehaviour
 
     public void Middle()
     {
-        Debug.Log("좀비들 활성화");
         int max = createWayZombie.WayZombieList.Count;
         for (int i = 0; i < max; i++)
         {
@@ -172,7 +163,7 @@ public class WayZombiesChaseNReturn : MonoBehaviour
                 createWayZombie.WayZombieList[i].transform.position = zombies_position.DefaultDistance[i];
                 createWayZombie.WayZombieList[i].gameObject.SetActive(true);
 
-                createWayZombie.WayZombieList[i].GetComponent<Zombie_Moving>().MoveStart();
+                //createWayZombie.WayZombieList[i].GetComponent<Zombie_Moving>().MoveStart();
                 createWayZombie.WayZombieList[i].GetComponent<ZombieState.Zombie_Moving>().target = zombies_position.ZombiesWayPosition[i];
             }
         }
@@ -183,7 +174,6 @@ public class WayZombiesChaseNReturn : MonoBehaviour
 
     public void Max()
     {
-        Debug.Log("좀비들 복귀");
         ReturnEvent?.Invoke();
         Noactivation?.Invoke();
         b_return = true;

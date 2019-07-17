@@ -23,7 +23,7 @@ namespace ZombieState
 
         public void AllStateSetup()
         {
-            var a = FindObjectsOfType<ZombieState>();
+            var a = GetComponents<ZombieState>();
             for (int i = 0; i < a.Length; i++)
             {
                 a[i].Setting();
@@ -38,7 +38,6 @@ namespace ZombieState
                 currentState.enabled = false;
                 currentState = state;
                 currentState.enabled = true;
-                Debug.Log("현제상태" + currentState);
 
                 StateStart();
             }
@@ -49,12 +48,6 @@ namespace ZombieState
             currentState.Execute();
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                currentState.Execute();
-            }
-        }
+
     }
 }

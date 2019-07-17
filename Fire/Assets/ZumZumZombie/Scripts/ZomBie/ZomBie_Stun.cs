@@ -31,7 +31,6 @@ namespace ZombieState
 
         public void ChangeStat()
         {
-            Debug.Log("스턴에서 체인지스테이트 호출");
             StateChange(zombieData.moving);
         }
 

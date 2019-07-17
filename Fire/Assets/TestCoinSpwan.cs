@@ -153,24 +153,19 @@ public class TestCoinSpwan : MonoBehaviour
     private bool SomethingOnPlace(Vector3 point)
     {
         Vector3 rayStartPoint = new Vector3(point.x, point.y + 80f, point.z);
-        Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
         if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 200f, 1 << 11))
         {
             rayStartPoint.y = point.y;
             rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Left, 1f);
-            Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
             if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
             {
                 rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Right, 1f);
-                Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
                 if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
                 {
                     rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Back, 1f);
-                    Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
                     if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
                     {
                         rayStartPoint = PivotPointSet(rayStartPoint, point, Direction.Foward, 1f);
-                        Debug.DrawRay(rayStartPoint, point - rayStartPoint, Color.red, 100f);
                         if (!Physics.Raycast(rayStartPoint, point - rayStartPoint, 2f, 1 << 11))
                         {
                             return false;

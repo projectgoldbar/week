@@ -78,7 +78,6 @@ public class Manager : MonoBehaviour
 
     private void OnSceneEnded(Scene scene)
     {
-        Debug.Log("골드들어갔다." + playerData.Gold);
         var x = UserDataManager.Instance.userData;
 
         playerData.score = score;

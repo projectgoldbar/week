@@ -87,6 +87,10 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 direction = Vector3.forward * dynamicJoystick.Vertical + Vector3.right * dynamicJoystick.Horizontal;
         biteCount = playerData.biteZombies.Count;
+        if (biteCount <= 0)
+        {
+            biteParticle.Stop();
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -200,6 +204,7 @@ public class PlayerMove : MonoBehaviour
             biteParticle.Play();
             StartCoroutine(Shake());
         }
+        
 
         playerData.animator.SetFloat("moveSpeed", speed);
     }

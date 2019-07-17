@@ -43,7 +43,6 @@ namespace ZombieState
         {
             zombieData.sturnCollider.gameObject.SetActive(false);
 
-            Debug.Log("스턴끝");
             zombieData.animator.SetBool("Sturn", false);
 
             StateChange(zombieData.zombieDown);

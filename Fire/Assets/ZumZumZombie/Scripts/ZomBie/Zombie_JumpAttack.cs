@@ -57,7 +57,6 @@ namespace ZombieState
         {
             setAmingPoint = FallDownPosition();
 
-            //OnDrawRadius(setamingPoint);
 
             FlyToTarget(transform.position, zombieData.player.position, g, max_height);
         }
@@ -69,7 +68,6 @@ namespace ZombieState
         }
 
         private void FlyToTarget(Vector3 startPos, Vector3 endPos, float g, float max_height)
-        //포물선 비행. 날아가며 타겟마크 알파 높이기. 적중 시 ReachedTarget실행.
         {
             start_pos = startPos;
 
