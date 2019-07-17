@@ -36,4 +36,11 @@ public class AdmobBanner : MonoBehaviour
         if (!action) banner.Show();
         else banner.Hide();
     }
+
+
+    private void OnDisable()
+    {
+        ToogleAd(true);
+    }
+
 }
