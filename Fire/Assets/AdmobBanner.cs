@@ -17,6 +17,8 @@ public class AdmobBanner : MonoBehaviour
     private void OnEnable()
     {
         AdbannerInit();
+        Debug.Log($"admob이름 =  {gameObject.name}");
+        
     }
 
     public void AdbannerInit()
@@ -40,6 +42,8 @@ public class AdmobBanner : MonoBehaviour
 
     private void OnDisable()
     {
+       
+
         ToogleAd(true);
     }
 
