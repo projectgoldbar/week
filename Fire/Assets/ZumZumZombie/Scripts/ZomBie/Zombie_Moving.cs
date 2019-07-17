@@ -21,7 +21,7 @@ namespace ZombieState
             zombieData.moveCoroutine = ZombieMove();
             player = zombieData.player.gameObject.transform;
             target = player;
-            speed = zombieData.player.GetComponent<PlayerMove>().maxSpeed + 5f;
+            speed = zombieData.player.GetComponent<PlayerMove>().maxSpeed + 10f;
         }
 
         public override void Execute()

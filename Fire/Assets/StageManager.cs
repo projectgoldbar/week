@@ -13,8 +13,8 @@ public class StageManager : MonoBehaviour
     public TargetPointer tarGetPointer;
 
     public List<GameObject> zombiePool;
-    public List<GameObject> dashZombiePool;
-    public List<GameObject> etcPool;
+    public List<ZombieState.ZombiesComponent> dashZombiePool;
+    public List<ZombieState.ZombiesComponent> etcPool;
 
     public Manager manager;
     public GameObject pivot; //박스떨구기위해 있는 피벗
@@ -42,7 +42,7 @@ public class StageManager : MonoBehaviour
     public int currentStageLV = 0;
     public int maxStageCount = 0;
     private int randomValue;
-
+    public float[] zombieMoveSpeed;
     //
 
     private void Awake()
@@ -69,28 +69,28 @@ public class StageManager : MonoBehaviour
             var y = Instantiate(dashZombie, transform.position, Quaternion.identity, transform);
 
             y.SetActive(false);
-            dashZombiePool.Add(y);
+            dashZombiePool.Add(y.GetComponent<ZombieState.ZombiesComponent>());
         }
         for (int i = 0; i < 10; i++)
         {
             var z = Instantiate(spitZombie, transform.position, Quaternion.identity, transform);
             z.SetActive(false);
-            etcPool.Add(z);
+            etcPool.Add(z.GetComponent<ZombieState.ZombiesComponent>());
         }
     }
 
-    private GameObject GetZombie(List<GameObject> pool)
+    private GameObject GetZombie(List<ZombieState.ZombiesComponent> pool)
     {
         for (int i = 0; i < pool.Count; i++)
         {
-            if (!pool[i].activeSelf)
+            if (!pool[i].gameObject.activeSelf)
             {
-                return pool[i];
+                return pool[i].gameObject;
             }
         }
-        var a = Instantiate(pool[0], transform.position, Quaternion.identity, transform);
+        var a = Instantiate(pool[0].gameObject, transform.position, Quaternion.identity, transform);
         a.SetActive(false);
-        pool.Add(a);
+        pool.Add(a.GetComponent<ZombieState.ZombiesComponent>());
         return a;
     }
 
@@ -168,6 +168,10 @@ public class StageManager : MonoBehaviour
 
     public void StageSetting()
     {
+        if (playerData.isGameOver)
+        {
+            return;
+        }
         if (currentStageLV >= maxStageCount)
         {
             InfinityMode();
@@ -331,25 +335,23 @@ public class StageManager : MonoBehaviour
 
     private void MonsterUpgrade(StageS ss)
     {
-        var StageData = ss;
+        int idx = maxStageCount - 1;
 
         //해당 스테이지에서 몬스터의 추가속도를 더해줌
         //해당 스테이지에서 몬스터의 추가 공격력을 더해줌
 
-        for (int i = 0; i < zombiePool.Count; i++)
-        {
-            zombiePool[i].GetComponent<ZombieState.ZombiesComponent>().damage += StageData.spawnData.AddDamage;
-            etcPool[i].GetComponent<ZombieState.Zombie_AttackRun>().accelSpeed += StageData.spawnData.AddSpeed;
-        }
+
         for (int i = 0; i < dashZombiePool.Count; i++)
         {
-            dashZombiePool[i].GetComponent<ZombieState.ZombiesComponent>().damage += StageData.spawnData.AddDamage;
-            dashZombiePool[i].GetComponent<ZombieState.ZomBie_Attack>().originSpeed += StageData.spawnData.rushSpeed;
+            dashZombiePool[i].damage += ss.spawnData.AddDamage;
+            dashZombiePool[i].attack.originSpeed += ss.spawnData.rushSpeed;
+            dashZombiePool[i].moving.speed = zombieMoveSpeed[idx];
         }
         for (int i = 0; i < etcPool.Count; i++)
         {
-            etcPool[i].GetComponent<ZombieState.ZombiesComponent>().damage += StageData.spawnData.AddDamage;
-            etcPool[i].GetComponent<ZombieState.ZombieRunBite>().accelSpeed += StageData.spawnData.AddSpeed;
+            etcPool[i].damage += ss.spawnData.AddDamage;
+            etcPool[i].attack.accelSpeed += ss.spawnData.AddSpeed;
+            etcPool[i].moving.speed = zombieMoveSpeed[idx];
         }
     }
 
@@ -365,13 +367,7 @@ public class StageManager : MonoBehaviour
         //SpawnData SpawnCount = new SpawnData();
         //int Count = 0;
 
-        for (int i = 0; i < StageData.spawnData.zombieCount; i++)
-        {
-            var z = GetZombie(zombiePool);
-            z.transform.position = SpawnPosition[UnityEngine.Random.Range(0, SpawnPosition.Length)].position;
-            z.SetActive(true);
-            yield return ShowTimer;
-        }
+
         for (int i = 0; i < StageData.spawnData.dashZombieCount; i++)
         {
             var z = GetZombie(dashZombiePool);
@@ -562,7 +558,7 @@ public class SpawnRange
 public class StageS
 {
     [Header("스테이지 검색용")]
-    public int StageLv;
+    public int rotationSpeed;
 
     public string StageName;
 

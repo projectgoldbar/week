@@ -7,7 +7,7 @@ namespace ZombieState
         public bool attackWait = true;
         public bool iswall = false;
         public ParticleSystem eyeParticle;
-
+        public float accelSpeed = 0.5f;
         public override void Setting()
         {
             zombieData.sturnCollider.SturnEvent += SturnChange;

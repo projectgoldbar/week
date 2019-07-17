@@ -423,6 +423,7 @@ public class PlayerData : MonoBehaviour
         else
         {
             hp = 10;
+            epRecoverSpeed = 1.5f;
         }
         DefaultSpeedData = playerMove.maxSpeed;
         manager.goldUi.text = Gold.ToString();
