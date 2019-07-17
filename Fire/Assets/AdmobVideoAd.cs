@@ -21,8 +21,8 @@ public class AdmobVideoAd : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        //MobileAds.Initialize(AppId);
-        MobileAds.Initialize(TestAppId);
+        MobileAds.Initialize(AppId);
+        //MobileAds.Initialize(TestAppId);
         RewardAd = RewardBasedVideoAd.Instance;
         //광고 요청이 성공적으로 로드되면 호출됩니다.
         RewardAd.OnAdLoaded += (sender, e) =>
@@ -64,8 +64,8 @@ public class AdmobVideoAd : MonoBehaviour
     {
         AdRequest request = new AdRequest.Builder().Build();
 
-        //RewardAd.LoadAd(request, unitID);
-        RewardAd.LoadAd(request, test_Ad_unitID);
+        RewardAd.LoadAd(request, unitID);
+        //RewardAd.LoadAd(request, test_Ad_unitID);
     }
 
     public void ShowRewardedAd()
