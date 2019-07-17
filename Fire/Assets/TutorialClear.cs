@@ -18,7 +18,7 @@ public class TutorialClear : MonoBehaviour
         UserDataManager.Instance.userData.isTutorialClear = true;
         
         
-        FindObjectOfType<Manager>().GameOver();
+        FindObjectOfType<Manager>().LateGameOver();
     }
 
     

@@ -260,7 +260,7 @@ public class StageManager : MonoBehaviour
 
     public void TutorialLvUP()
     {
-        var targets = Physics.OverlapSphere(playerData.transform.position, 45f, LayerMask.GetMask("Monster"));
+        var targets = Physics.OverlapSphere(playerData.transform.position, 100f, LayerMask.GetMask("Monster"));
     }
 
     private IEnumerator ChangeAsh(Collider[] targets)

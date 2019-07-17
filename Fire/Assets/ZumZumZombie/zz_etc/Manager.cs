@@ -190,6 +190,11 @@ public class Manager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void LateGameOver()
+    {
+        Invoke("GameOver", 3f);
+    }
+
     public void GameOver()
     {
         StopCoroutine(sw);

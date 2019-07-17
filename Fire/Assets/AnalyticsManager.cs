@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Analytics;
 public class AnalyticsManager : MonoBehaviour
 {
-
+    
     private static AnalyticsManager instance = null;
     public static AnalyticsManager Instance
     {

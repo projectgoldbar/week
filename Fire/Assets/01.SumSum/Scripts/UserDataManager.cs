@@ -58,7 +58,6 @@ public class UserDataManager : MonoBehaviour
             RefreshSkin();
 
             GooglePlayGPGS.Instance.InitProcess();
-            AnalyticsManager.Instance.TutorialClear();
         }
     }
 

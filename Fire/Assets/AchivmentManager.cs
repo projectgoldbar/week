@@ -139,6 +139,8 @@ public class AchivmentManager : MonoBehaviour
     {
         if (UserDataManager.Instance.userData.isTutorialClear)
         {
+            AnalyticsManager.Instance.TutorialClear();
+
             return true;
         }
         else
