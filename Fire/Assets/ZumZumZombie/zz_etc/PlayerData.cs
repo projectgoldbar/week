@@ -10,7 +10,7 @@ public class PlayerData : MonoBehaviour
     public GameObject ATFieldUI;
     public ParticleSystem shieldParticle;
     public ParticleSystem healingParticle;
-    public ParticleSystem clearParticle;
+    public ParticleSystem clearParticle;//wave
     public ParticleSystem smackParticle;
     public float originEpRecoverSpeed = 1f;
     public float epRecoverSpeed = 1f;

@@ -26,8 +26,8 @@ public class AdmobBanner : MonoBehaviour
     private void InitAd()
     {
 
-        //banner = new BannerView(unitID, AdSize.MediumRectangle,position);
-        banner = new BannerView(test_unitID, AdSize.Banner, position);
+        banner = new BannerView(unitID, AdSize.MediumRectangle,position);
+        //banner = new BannerView(test_unitID, AdSize.Banner, position);
         //빌드패턴
         AdRequest request = new AdRequest.Builder().Build();
         banner.LoadAd(request);

@@ -155,7 +155,7 @@ public class EvolveSystem : MonoBehaviour
     public void Nuke()
     {
         var a = FindObjectOfType<StageManager>();
-        a.waveDistance += 5f;
+        a.waveDistance += 10f;
     }
 
     public void MeatFall()
