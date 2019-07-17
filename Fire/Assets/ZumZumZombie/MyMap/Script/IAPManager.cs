@@ -219,6 +219,8 @@ public class IAPManager : MonoBehaviour, IStoreListener
         if (args.purchasedProduct.definition.id == ProductCharacterSkin[0])
         {
             UserDataManager.Instance.userData.AdOff = true;
+
+            if(UserDataManager.Instance.userData.AdOff)
             FindObjectOfType<AdmobBanner>().ToogleAd(false);
 
         }
@@ -233,7 +235,10 @@ public class IAPManager : MonoBehaviour, IStoreListener
             UserDataManager.Instance.userData.pakage = true;
             UserDataManager.Instance.userData.AdOff = true;
             UserDataManager.Instance.userData.goldBonus = true;
-            UserDataManager.Instance.userData.Money += 10000f;
+
+            if (UserDataManager.Instance.userData.AdOff)
+                FindObjectOfType<AdmobBanner>().ToogleAd(false);
+            //UserDataManager.Instance.userData.Money += 10000f;
             Debug.Log("스타터패키지 등록");
         }
 

@@ -133,7 +133,7 @@ public class GooglePlayGPGS : MonoBehaviour
             _authenticating = false;
             if (success)
             {
-                LoadButtonClick();
+                //LoadButtonClick();
                
             }
             else
