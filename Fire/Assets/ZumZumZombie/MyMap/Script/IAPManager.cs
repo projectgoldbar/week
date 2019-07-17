@@ -254,7 +254,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
             Debug.Log("후원50000원");
         }
 
-
+        GooglePlayGPGS.Instance.SaveButtonClick();
 
         return PurchaseProcessingResult.Complete;
     }

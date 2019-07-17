@@ -285,6 +285,15 @@ public partial class GameScene : MonoBehaviour
         GooglePlayGPGS.Instance.PakageRead();
     }
 
+    public void GoogleRead()
+    {
+        GooglePlayGPGS.Instance.LoadButtonClick();
+    }
+    public static void  GoogleSave()
+    {
+        GooglePlayGPGS.Instance.SaveButtonClick();
+    }
+
     // ㄴ 다른 버튼들
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

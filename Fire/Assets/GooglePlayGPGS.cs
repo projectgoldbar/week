@@ -123,7 +123,6 @@ public class GooglePlayGPGS : MonoBehaviour
     {
         if (Authenticated || _authenticating)
         {
-            //debugText.text = "로그인중";
             return;
         }
 
@@ -135,20 +134,11 @@ public class GooglePlayGPGS : MonoBehaviour
             if (success)
             {
                 LoadButtonClick();
-                //debugText.text = "로그인성공";
-
-                //성공
-                //LoginText.text = "Login 되셧습니다.";
-                //UserNicName.text = Social.localUser.userName;
-                //if(Authenticated) OpenLoadGame(SaveFindName);
+               
             }
             else
             {
-                //debugText.text = "로그인실패";
-
-                //실패
-                //LoginText.text = "Login 실패 다시시도.";
-                //GoogleLogin();
+                
             }
         });
     }
@@ -561,7 +551,7 @@ public class GooglePlayGPGS : MonoBehaviour
         v.adoff = UserDataManager.Instance.userData.AdOff;
         v.goldBonus = UserDataManager.Instance.userData.goldBonus;
         v.pakage = UserDataManager.Instance.userData.pakage;
-        v.Money = UserDataManager.Instance.userData.Money;
+       // v.Money = UserDataManager.Instance.userData.Money;
 
         var data = v;
 
@@ -640,7 +630,19 @@ public class GooglePlayGPGS : MonoBehaviour
         {
             string dd = Encoding.UTF8.GetString(data);
             LoadData = JsonUtility.FromJson<savedata1>(dd);
-            
+
+            //UserDataManager.Instance.userData.Money = LoadData.Money - UserDataManager.Instance.randomValue;
+            UserDataManager.Instance.userData.AdOff = LoadData.adoff;
+            if (UserDataManager.Instance.userData.AdOff)
+            {
+                FindObjectOfType<AdmobBanner>().ToogleAd(false);
+            }
+            UserDataManager.Instance.userData.goldBonus = LoadData.goldBonus;
+            UserDataManager.Instance.userData.pakage = LoadData.pakage;
+            if (UserDataManager.Instance.userData.pakage)
+            {
+                FindObjectOfType<AdmobBanner>().ToogleAd(false);
+            }
         }
         else
         {
