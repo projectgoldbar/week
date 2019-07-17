@@ -58,6 +58,7 @@ public class UserDataManager : MonoBehaviour
             RefreshSkin();
 
             GooglePlayGPGS.Instance.InitProcess();
+            AnalyticsManager.Instance.TutorialClear();
         }
     }
 
@@ -140,28 +141,5 @@ public class UserDataManager : MonoBehaviour
         return x;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SceneManager.LoadScene(1);
-        }
-        else if (Input.GetKeyDown(KeyCode.L))
-        {
-            LoadData();
 
-            Debug.Log("돈" + userData.Money);
-            Debug.Log("플레이타임" + userData.playTime);
-            Debug.Log("장착스킨" + userData.equipedSkinIdx);
-            int skinCount = 0;
-            for (int i = 0; i < userData.gainSkin.Length; i++)
-            {
-                if (userData.gainSkin[i])
-                {
-                    skinCount++;
-                }
-            }
-            Debug.Log("가진스킨개수" + skinCount);
-        }
-    }
 }

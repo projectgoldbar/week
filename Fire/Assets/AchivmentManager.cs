@@ -151,6 +151,10 @@ public class AchivmentManager : MonoBehaviour
     {
         if (UserDataManager.Instance.userData.highStage >= stage)
         {
+            if (stage == 5)
+            {
+                AnalyticsManager.Instance.Stage5Clear();
+            }
             return true;
         }
         else { return false; }
