@@ -8,11 +8,12 @@ namespace ZombieState
         {
             stunSpeed = zombieData.player.GetComponent<PlayerMove>().speed + 3f;
             zombieData.sturnCollider.SturnEvent += SturnChange;
-            maxSpeed = zombieData.player.GetComponent<PlayerMove>().maxSpeed + 10f;
         }
 
         public override void Execute()
         {
+            maxSpeed = zombieData.player.GetComponent<PlayerMove>().maxSpeed + 10f;
+            stunSpeed = maxSpeed - 8;
             //전환효과
             for (int i = 0; i < zombieData.attackTrail.Length; i++)
             {
@@ -22,7 +23,7 @@ namespace ZombieState
         }
 
         public float accelDelay = 1f;
-        public float accelSpeed = 0.5f;
+        
         public float maxSpeed = 30f;
         public float stunSpeed = 20f;
         public int count = 0;
@@ -36,19 +37,18 @@ namespace ZombieState
                 {
                     return;
                 }
-                else if (count == 2)
+                
+                else
+                {
+                    zombieData.agent.speed += accelSpeed;
+                }
+                time = 0f;
+                if (zombieData.agent.speed > stunSpeed)
                 {
                     zombieData.sturnCollider.gameObject.SetActive(true);
                     zombieData.animator.StopPlayback();
                     zombieData.animator.SetBool("FastRun", true);
-                    count++;
                 }
-                else
-                {
-                    zombieData.agent.speed += accelSpeed;
-                    count++;
-                }
-                time = 0f;
             }
         }
 
