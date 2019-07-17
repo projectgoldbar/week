@@ -17,6 +17,7 @@ public class SaveData
     public bool goldBouns;
     public bool pakage;
     public bool isTutorialClear;
+    public bool gotoReview;
     public float highScore = 0f;
     public int accumulateBoxCount = 0;
     public int playCount = 0;
@@ -42,6 +43,7 @@ public class SaveData
         goldBouns = false;
         pakage = false;
         isTutorialClear = false;
+        gotoReview = false;
         highScore = 0;
         accumulateBoxCount = 0;
         accumulateHealPack = 0;

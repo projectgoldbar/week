@@ -23,6 +23,7 @@ public static class NewSaveSystem
         data.goldBouns = userData.goldBonus;
         data.pakage = userData.pakage;
         data.isTutorialClear = userData.isTutorialClear;
+        data.gotoReview = userData.gotoReview;
         data.highScore = userData.highScore;
         data.accumulateBoxCount = userData.accumulateBoxCount;
         data.accumulateBoxOpen = userData.accumulateBoxOpen;

@@ -159,6 +159,14 @@ public class AchivmentManager : MonoBehaviour
                 gameScene.GotoReviewPanelOpen();
                 AnalyticsManager.Instance.Stage5Clear();
             }
+            else if(stage == 7&&UserDataManager.Instance.userData.gotoReview == false)
+            {
+                gameScene.GotoReviewPanelOpen();
+            }
+            else if (stage == 10 && UserDataManager.Instance.userData.gotoReview == false)
+            {
+                gameScene.GotoReviewPanelOpen();
+            }
             return true;
         }
         else { return false; }

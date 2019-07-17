@@ -15,7 +15,7 @@ public class NewUserData
     public int[] statPointerIdx = new int[5] { 1, 1, 1, 1, 1 };
     public bool isTutorialClear = false;
 
-
+    public bool gotoReview = false;
     #region 업적관련
     [Header("업적")]
     public float playTime = 0f;

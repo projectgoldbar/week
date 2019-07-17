@@ -5,6 +5,12 @@ using System.Collections;
 public class ATField : MonoBehaviour
 {
     public Image image;
+        WaitForSeconds seconds ;
+
+    private void Awake()
+    {
+        seconds = new WaitForSeconds(0.1f);
+    }
 
     private void OnEnable()
     {
@@ -23,7 +29,7 @@ public class ATField : MonoBehaviour
             {
                 image.enabled = true;
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return seconds;
         }
         gameObject.SetActive(false);
         yield break;

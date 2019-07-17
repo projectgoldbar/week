@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PurchaseButton : MonoBehaviour
 {
@@ -20,6 +18,7 @@ public class PurchaseButton : MonoBehaviour
         }
 
         IAPManager.Instance.Purchase(targetProductId);
+        GetComponent<ShopButton>().Block();
     }
 }
 

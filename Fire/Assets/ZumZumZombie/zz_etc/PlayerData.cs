@@ -38,6 +38,7 @@ public class PlayerData : MonoBehaviour
     public int addHealPackCount = 0;
     public bool isTutirial;
     public bool overHp = false;
+    public bool firstInit = false;
 
     /// <summary>
     /// 스킬지속시간관련
@@ -389,16 +390,11 @@ public class PlayerData : MonoBehaviour
         }
         set
         {
-            if (UserDataManager.Instance.userData.goldBonus)
-            {
-                var x = gold + (value * 5);
-                gold = Shuffle(x);
-            }
-            else
-            {
+            
+        
                 var x = gold + value;
                 gold = Shuffle(x);
-            }
+            
             Hp = (goldUpSpeed * GoldWormData);
             manager.goldUi.text = Gold.ToString();
         }

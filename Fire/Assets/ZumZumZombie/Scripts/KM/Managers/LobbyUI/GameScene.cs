@@ -140,6 +140,8 @@ public partial class GameScene : MonoBehaviour
         }
     }
 
+    
+
     public void StoreButton()
     {
         stateStat = false;
@@ -232,6 +234,7 @@ public partial class GameScene : MonoBehaviour
     public void Review()
     {
         Application.OpenURL("market://details?id=com.sum.zombie");
+        UserDataManager.Instance.userData.gotoReview = true;
     }
 
     public void ExitGameOpen()
