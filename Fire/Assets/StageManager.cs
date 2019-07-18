@@ -12,9 +12,30 @@ public class StageManager : MonoBehaviour
     public TestCoinSpwan testCoinSpwan;
     public TargetPointer tarGetPointer;
 
-    public List<GameObject> zombiePool;
     public List<ZombieState.ZombiesComponent> dashZombiePool;
     public List<ZombieState.ZombiesComponent> etcPool;
+    public RawImage[] stageClearPanels;
+    //private int chargeStageLevel = 0;
+    //public int ChargeStageLevel
+    //{
+    //    get
+    //    {
+    //        return chargeStageLevel;
+    //    }
+    //    set
+    //    {
+    //        chargeStageLevel = value;
+    //        stageClearPanels[chargeStageLevel].color = Color.red;
+    //        if(chargeStageLevel == 4)
+    //        {
+    //            for (int i = 0; i < stageClearPanels.Length; i++)
+    //            {
+    //                stageClearPanels[i].color = Color.white;
+    //            }
+    //            chargeStageLevel = 0;
+    //        }
+    //    }
+    //}
 
     public Manager manager;
     public GameObject pivot; //박스떨구기위해 있는 피벗
@@ -43,7 +64,6 @@ public class StageManager : MonoBehaviour
     public int maxStageCount = 0;
     private int randomValue;
     public float[] zombieMoveSpeed;
-    //
 
     private void Awake()
     {
@@ -59,7 +79,27 @@ public class StageManager : MonoBehaviour
 
         StageSetting();
     }
-
+    private int chargeStageLevel = 0;
+    public int ChargeStageLevel
+    {
+        get
+        {
+            return chargeStageLevel;
+        }
+        set
+        {
+            chargeStageLevel = value;
+            stageClearPanels[chargeStageLevel].color = Color.red;
+            if (chargeStageLevel == 4)
+            {
+                for (int i = 0; i < stageClearPanels.Length; i++)
+                {
+                    stageClearPanels[i].color = Color.white;
+                }
+                chargeStageLevel = -1;
+            }
+        }
+    }
     #region 좀비풀
 
     private void ZombiePoolSet()
@@ -196,7 +236,7 @@ public class StageManager : MonoBehaviour
         //몬스터강화
         if (!playerData.isTutirial)
         {
-            MonsterUpgrade(stageData);
+            
         }
 
         //박스생성
@@ -206,6 +246,7 @@ public class StageManager : MonoBehaviour
         //레벨업
         if (currentStageLV > 0)
         {
+            MonsterUpgrade(stageData);
             LvUp();
         }
         //유저 박스화살표 변경
@@ -338,7 +379,10 @@ public class StageManager : MonoBehaviour
     private void MonsterUpgrade(StageS ss)
     {
         int idx = currentStageLV;
-
+        if (zombieMoveSpeed.Length - 1 < idx)
+        {
+            idx = zombieMoveSpeed.Length - 1;
+        }
         //해당 스테이지에서 몬스터의 추가속도를 더해줌
         //해당 스테이지에서 몬스터의 추가 공격력을 더해줌
 
@@ -356,8 +400,8 @@ public class StageManager : MonoBehaviour
             etcPool[i].attack.accelSpeed += ss.spawnData.AddSpeed;
             etcPool[i].moving.speed = zombieMoveSpeed[idx];
             etcPool[i].agent.acceleration += ss.rotationSpeed;
-
         }
+        ChargeStageLevel++;
     }
 
     public IEnumerator DataReset()

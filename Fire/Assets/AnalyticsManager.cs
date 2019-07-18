@@ -86,7 +86,7 @@ public class AnalyticsManager : MonoBehaviour
 
     public void Death(int stage)
     {
-        Analytics.CustomEvent("플레이어사망", new Dictionary<string, object>
+        Analytics.CustomEvent("", new Dictionary<string, object>
         {
             { $"스테이지번호" ,stage}
         });

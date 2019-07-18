@@ -6,7 +6,6 @@ public class HpSlider : MonoBehaviour
     public Slider slider;
     public PlayerData playerData;
     public Image bloodImg;
-    public Color c;
     public Text hpText;
 
     private void Awake()
@@ -17,7 +16,6 @@ public class HpSlider : MonoBehaviour
     private void Start()
     {
         FindPlayer();
-        c = bloodImg.color;
     }
 
     private void FindPlayer()
@@ -31,7 +29,6 @@ public class HpSlider : MonoBehaviour
         var x = playerData.hp / playerData.maxhp;
         hpText.text = Mathf.Round(playerData.hp).ToString() + " / " + playerData.maxhp.ToString();
         slider.value = x;
-        c.a = 1 - x;
-        bloodImg.color = c;
+
     }
 }
