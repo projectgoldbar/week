@@ -195,13 +195,7 @@ public class EvolveSystem : MonoBehaviour
         a.evolveLvData[2]++;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Nuke();
-        }
-    }
+
 
     private IEnumerator SetShield(PlayerData a)
     {

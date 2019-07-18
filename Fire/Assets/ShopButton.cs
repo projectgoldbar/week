@@ -33,11 +33,10 @@ public class ShopButton : MonoBehaviour
             case 2:
                 if (UserDataManager.Instance.userData.pakage)
                 {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        shopbuttons.shopbuttons[i].interactable = false;
-                        shopbuttons.texts[i].text = "구매완료";
-                    }
+                    shopbuttons.shopbuttons[2].interactable = false;
+                    shopbuttons.texts[2].text = "구매완료";
+                    shopbuttons.AllBlock();
+                    
                     
                 }
                 break;

@@ -41,13 +41,7 @@ public class SKinInfo : MonoBehaviour
         Refresh();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            Refresh();
-        }
-    }
+
 
     private void OnEnable()
     {

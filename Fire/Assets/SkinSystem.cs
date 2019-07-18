@@ -65,14 +65,7 @@ public class SkinSystem : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            //var x = ThrowRandomSkin();
-            //Debug.Log(x);
-        }
-    }
+ 
 
     public SKinInfo ThrowRandomSkin()
     {
