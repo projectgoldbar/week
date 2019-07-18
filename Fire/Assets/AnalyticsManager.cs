@@ -51,7 +51,6 @@ public class AnalyticsManager : MonoBehaviour
         var x = DateTime.Now;
         Analytics.CustomEvent("종료", new Dictionary<string, object>
         {
-            { " 종료한 닉네임 = " , Social.localUser.userName},
             { " 종료시간 = " , x},
             { " 플레이시간 = " , TimeCalc() },
             { " 최고스테이지 = ", UserDataManager.Instance.userData.highStage }
@@ -64,7 +63,6 @@ public class AnalyticsManager : MonoBehaviour
     {
         Analytics.CustomEvent("튜토리얼", new Dictionary<string, object>
         {
-            { "튜토리얼 클리어 닉네임" , Social.localUser.userName},
             { "튜토리얼 클리어 Id" , Social.localUser.id}
         });
     }
@@ -77,6 +75,22 @@ public class AnalyticsManager : MonoBehaviour
         });
     }
 
+
+    public void StageClear(int stage)
+    {
+        Analytics.CustomEvent("스테이지클리어", new Dictionary<string, object>
+        {
+            { $"스테이지번호" ,stage}
+        });
+    }
+
+    public void Death(int stage)
+    {
+        Analytics.CustomEvent("플레이어사망", new Dictionary<string, object>
+        {
+            { $"스테이지번호" ,stage}
+        });
+    }
 
     public void AdsClear()
     {

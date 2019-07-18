@@ -221,6 +221,7 @@ public class StageManager : MonoBehaviour
         if (!playerData.isTutirial)
         {
             lvTextUI.text = "LV" + currentStageLV.ToString();
+            AnalyticsManager.Instance.StageClear(currentStageLV);
         }
         playerData.GetComponent<PlayerMove>().maxSpeed += 0.2f;
     }
@@ -243,6 +244,7 @@ public class StageManager : MonoBehaviour
         UITweenEffectManager.stageOpenPanel.OpenPanel("Infinity  " + currentStageLV.ToString());
         lvTextUI.text = "LV" + currentStageLV.ToString();
         playerData.GetComponent<PlayerMove>().maxSpeed += 0.2f;
+        AnalyticsManager.Instance.StageClear(currentStageLV);
     }
 
     #endregion 30스테이지 이상일 때
