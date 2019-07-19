@@ -40,7 +40,7 @@ public class AdmobVideoAd : MonoBehaviour
         //광고가 재생되기 시작하면 호출됩니다.
         RewardAd.OnAdStarted += (sender, e) => Debug.Log("OnAdStarted");
         //사용자가 비디오시청을 통해 보상을 받을 때 호출됩니다.
-        RewardAd.OnAdRewarded += (sender, e) => 
+        RewardAd.OnAdRewarded += (sender, e) =>
         {
             Debug.Log("OnAdRewarded");
             AdsReward?.Invoke();
@@ -62,7 +62,10 @@ public class AdmobVideoAd : MonoBehaviour
 
     private void LoadAd()
     {
-        AdRequest request = new AdRequest.Builder().Build();
+        AdRequest request = new AdRequest.Builder()
+        .TagForChildDirectedTreatment(true)
+        .AddExtra("max_ad_content_rating", "G")
+        .Build();
 
         RewardAd.LoadAd(request, unitID);
         //RewardAd.LoadAd(request, test_Ad_unitID);

@@ -13,12 +13,10 @@ public class AdmobBanner : MonoBehaviour
 
     public AdPosition position;
 
-
     private void OnEnable()
     {
         AdbannerInit();
         Debug.Log($"admob이름 =  {gameObject.name}");
-        
     }
 
     public void AdbannerInit()
@@ -26,9 +24,13 @@ public class AdmobBanner : MonoBehaviour
         banner = new BannerView(unitID, AdSize.MediumRectangle, position);
         //banner = new BannerView(test_unitID, AdSize.Banner, position);
         //빌드패턴
-        AdRequest request = new AdRequest.Builder().Build();
-        banner.LoadAd(request);
 
+        AdRequest request = new AdRequest.Builder()
+        .TagForChildDirectedTreatment(true)
+        .AddExtra("max_ad_content_rating", "G")
+        .Build();
+
+        banner.LoadAd(request);
 
         ToogleAd(UserDataManager.Instance.userData.AdOff);
     }
@@ -39,12 +41,8 @@ public class AdmobBanner : MonoBehaviour
         else banner.Hide();
     }
 
-
     private void OnDisable()
     {
-       
-
         ToogleAd(true);
     }
-
 }
