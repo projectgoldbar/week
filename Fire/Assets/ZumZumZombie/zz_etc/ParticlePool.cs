@@ -13,7 +13,7 @@ public class ParticlePool : MonoBehaviour
     public List<GameObject> hitParticlePool;
     public List<GameObject> meatParticlePool;
     public List<GameObject> nukeParticlePool;
-    public List<GameObject> trapParticlePool;
+    public List<GameObject> megidoParticlePool;
     public List<GameObject> zombieDamageParticlePool;
     public List<GameObject> mineParticlePool;
     public List<GameObject> zombieDustParticle;
@@ -27,7 +27,7 @@ public class ParticlePool : MonoBehaviour
     2. 주인공데미지
     3. 고기먹었을때
     4. 폭탄좀비폭발
-    5. 함정
+    5. 클리어 기모으는 효과
     6. 게이트오픈
     7. 지뢰
       */
@@ -54,7 +54,10 @@ public class ParticlePool : MonoBehaviour
         //{
         //    nukeParticlePool.Add(Instantiate(particles[4], transform.position, Quaternion.identity, transform));
         //}
-
+        for (int i = 0; i < 1; i++)
+        {
+            megidoParticlePool.Add(Instantiate(particles[5], transform.position, Quaternion.identity, transform));
+        }
         for (int q = 0; q < 20; q++)
         {
             zombieDamageParticlePool.Add(Instantiate(particles[6], transform.position, Quaternion.identity, transform));

@@ -246,6 +246,7 @@ public class StageManager : MonoBehaviour
         //레벨업
         if (currentStageLV > 0)
         {
+
             MonsterUpgrade(stageData);
             LvUp();
         }
@@ -296,6 +297,7 @@ public class StageManager : MonoBehaviour
 
     public void LvUp()
     {
+        
         var targets = Physics.OverlapSphere(playerData.transform.position, waveDistance, LayerMask.GetMask("Monster"));
         if (!playerData.isTutirial)
         {
@@ -312,12 +314,14 @@ public class StageManager : MonoBehaviour
 
     private IEnumerator ChangeAsh(Collider[] targets)
     {
+        //Time.timeScale = 0.5f;
         WaitForSeconds seconds = new WaitForSeconds(0.1f);
         for (int i = 0; i < targets.Length; i++)
         {
             targets[i].gameObject.GetComponentInChildren<SkinnedMeshRenderer>().materials[0].color = Color.black;
             yield return null;
         }
+
         for (int i = 0; i < targets.Length; i++)
         {
             var dust = particlePool.GetParticle(particlePool.zombieDustParticle);
@@ -333,6 +337,7 @@ public class StageManager : MonoBehaviour
         {
             yield return seconds;
         }
+
 
         if (!playerData.isTutirial)
         {
@@ -401,7 +406,7 @@ public class StageManager : MonoBehaviour
             etcPool[i].moving.speed = zombieMoveSpeed[idx];
             etcPool[i].agent.acceleration += ss.rotationSpeed;
         }
-        ChargeStageLevel++;
+        //ChargeStageLevel++;
     }
 
     public IEnumerator DataReset()

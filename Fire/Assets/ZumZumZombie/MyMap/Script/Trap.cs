@@ -17,28 +17,28 @@ public class Trap : MonoBehaviour
         particlePool = FindObjectOfType<ParticlePool>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        TrapOn();
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    TrapOn();
+    //}
 
-    private void TrapOn()
-    {
-        if (!isUsed)
-        {
-            var soundManager = SoundManager.Instance;
-            coroutine = StartCoroutine(InstanceZombie());
-            Camera.main.GetComponent<CameraFallow>().CameraShake(0.2f);
-            var x = particlePool.GetParticle(particlePool.trapParticlePool);
+    //private void TrapOn()
+    //{
+    //    if (!isUsed)
+    //    {
+    //        var soundManager = SoundManager.Instance;
+    //        coroutine = StartCoroutine(InstanceZombie());
+    //        Camera.main.GetComponent<CameraFallow>().CameraShake(0.2f);
+    //        //var x = particlePool.GetParticle(particlePool.trapParticlePool);
 
-            //soundManager.PlayBGM(soundManager.SoundDic["trap"], false, 0);
+    //        //soundManager.PlayBGM(soundManager.SoundDic["trap"], false, 0);
 
-            x.transform.position = transform.position;
-            x.transform.rotation = transform.rotation;
-            x.SetActive(true);
-            isUsed = true;
-        }
-    }
+    //        x.transform.position = transform.position;
+    //        x.transform.rotation = transform.rotation;
+    //        x.SetActive(true);
+    //        isUsed = true;
+    //    }
+    //}
 
     private IEnumerator InstanceZombie()
     {

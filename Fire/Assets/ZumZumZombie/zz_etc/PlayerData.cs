@@ -12,6 +12,7 @@ public class PlayerData : MonoBehaviour
     public ParticleSystem healingParticle;
     public ParticleSystem clearParticle;//wave
     public ParticleSystem smackParticle;
+    public ParticleSystem powerUpParticle;
     public float originEpRecoverSpeed = 1f;
     public float epRecoverSpeed = 1f;
     public Text hpText;
@@ -388,15 +389,13 @@ public class PlayerData : MonoBehaviour
         }
         set
         {
-            
-        
-                var x = gold + value;
-                gold = Shuffle(x);
-            
+            var x = gold + value;
+            gold = Shuffle(x);
             Hp = (goldUpSpeed * GoldWormData);
             manager.goldUi.text = Gold.ToString();
         }
     }
+
 
     private void Awake()
     {
@@ -510,6 +509,8 @@ public class PlayerData : MonoBehaviour
                 animator.SetBool("Dying", true);
                 animator.StopPlayback();
                 animator.Play("die");
+                
+                AnalyticsManager.Instance.Death(bronzeBoxCount + goldBoxCount + silverBoxCount);
             }
         }
 
@@ -640,6 +641,8 @@ public class PlayerData : MonoBehaviour
                     }
                     bronzeBoxCount++;
                     clearParticle.Play();
+                    //powerUpParticle.Play();
+
                     for (; 0 < biteZombies.Count;)
                     {
                         var x = biteZombies.Dequeue();
@@ -657,6 +660,9 @@ public class PlayerData : MonoBehaviour
                     }
                     goldBoxCount++;
                     clearParticle.Play();
+                    //powerUpParticle.Play();
+
+
                     for (; 0 < biteZombies.Count;)
                     {
                         var x = biteZombies.Dequeue();
@@ -676,6 +682,8 @@ public class PlayerData : MonoBehaviour
                     }
                     silverBoxCount++;
                     clearParticle.Play();
+                    //powerUpParticle.Play();
+
                     for (; 0 < biteZombies.Count;)
                     {
                         var x = biteZombies.Dequeue();

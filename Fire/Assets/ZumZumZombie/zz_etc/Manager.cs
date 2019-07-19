@@ -51,6 +51,7 @@ public class Manager : MonoBehaviour
     private void Awake()
     {
         Screen.SetResolution(720, 1280, true);
+
         Application.targetFrameRate = 45;
         playerData = FindObjectOfType<PlayerData>();
 
