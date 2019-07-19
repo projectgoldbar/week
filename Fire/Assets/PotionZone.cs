@@ -10,7 +10,7 @@ public class PotionZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        DoorAnim.Play("DoorOpen");
+        DoorAnim.Play("DoorClose");
         LayerNameChange();
     }
     public void LayerNameChange()
