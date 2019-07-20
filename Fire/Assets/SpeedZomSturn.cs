@@ -21,12 +21,15 @@ namespace ZombieState
             zombieData.agent.enabled = false;
             var x = zombieData.particlePool.GetParticle(zombieData.particlePool.hitParticlePool);
 
+            
             x.transform.position = transform.position;
             x.transform.localRotation = transform.rotation;
             x.SetActive(true);
             zombieData.animator.SetFloat("Speed", zombieData.agent.speed);
             zombieData.animator.StopPlayback();
             zombieData.animator.Play("Blow");
+            zombieData.zombieCollider.enabled = false;
+
         }
 
         public override void Update()
@@ -42,6 +45,7 @@ namespace ZombieState
         public void EndSturn()
         {
             zombieData.sturnCollider.gameObject.SetActive(false);
+            zombieData.zombieCollider.enabled = true;
 
             zombieData.animator.SetBool("Sturn", false);
 

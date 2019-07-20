@@ -11,10 +11,11 @@ public class StageManager : MonoBehaviour
     public GameObject spitZombie;
     public TestCoinSpwan testCoinSpwan;
     public TargetPointer tarGetPointer;
+    public Slider originSlider;
+    public Slider currentSlider;
 
     public List<ZombieState.ZombiesComponent> dashZombiePool;
     public List<ZombieState.ZombiesComponent> etcPool;
-    public RawImage[] stageClearPanels;
     //private int chargeStageLevel = 0;
     //public int ChargeStageLevel
     //{
@@ -76,6 +77,7 @@ public class StageManager : MonoBehaviour
         {
             ZombiePoolSet();
         }
+        originSlider.value = UserDataManager.Instance.userData.highStage;
 
         StageSetting();
     }
@@ -89,15 +91,6 @@ public class StageManager : MonoBehaviour
         set
         {
             chargeStageLevel = value;
-            stageClearPanels[chargeStageLevel].color = Color.red;
-            if (chargeStageLevel == 4)
-            {
-                for (int i = 0; i < stageClearPanels.Length; i++)
-                {
-                    stageClearPanels[i].color = Color.white;
-                }
-                chargeStageLevel = -1;
-            }
         }
     }
     #region 좀비풀
@@ -218,6 +211,7 @@ public class StageManager : MonoBehaviour
             return;
         }
         //현제스테이지
+        
         var stageData = stageList[currentStageLV];
         //해당 스테이지에 실행되야할것
         //스테이지 전환효과
@@ -234,27 +228,27 @@ public class StageManager : MonoBehaviour
             StartCoroutine(MonsterCreate(stageList[currentStageLV]));
         };
         //몬스터강화
-        if (!playerData.isTutirial)
-        {
-            
-        }
+
 
         //박스생성
         Vector3 boxPosition = FindPoint();
         boxPosition.y += 9.5f;
         StartCoroutine(CrearRewardBox(currentStageLV, boxPosition));
         //레벨업
-        if (currentStageLV > 0)
+        if (currentStageLV > 0&&playerData.isGameOver == false)
         {
-
+            currentSlider.value++;
             MonsterUpgrade(stageData);
             LvUp();
         }
         //유저 박스화살표 변경
         //boxIndirection.target = boxPosition;
         tarGetPointer.targetPosition = boxPosition;
-        UITweenEffectManager.stageOpenPanel.gameObject.SetActive(true);
-        UITweenEffectManager.stageOpenPanel.OpenPanel("Lv  " + currentStageLV.ToString());
+        if (!playerData.isGameOver)
+        {
+            UITweenEffectManager.stageOpenPanel.gameObject.SetActive(true);
+            UITweenEffectManager.stageOpenPanel.OpenPanel("Lv  " + currentStageLV.ToString());
+        }
         //지뢰가 생성되는 개수
         //int mineCount = stageData.spawnData.data[2].SpawnCount;
         //지뢰개수만큼 지속적으로 지뢰 생성되는함수 구현하기
@@ -286,6 +280,8 @@ public class StageManager : MonoBehaviour
         UITweenEffectManager.stageOpenPanel.OpenPanel("Infinity  " + currentStageLV.ToString());
         lvTextUI.text = "LV" + currentStageLV.ToString();
         playerData.GetComponent<PlayerMove>().maxSpeed += 0.2f;
+        currentSlider.value++;
+
         AnalyticsManager.Instance.StageClear(currentStageLV);
     }
 

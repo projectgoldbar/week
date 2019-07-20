@@ -438,6 +438,7 @@ public class PlayerData : MonoBehaviour
 
         originEp = rollEp;
         calamityrollEp = originEp - 2f;
+        
     }
 
     private IEnumerator NurseCoroutine()

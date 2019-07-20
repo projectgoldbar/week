@@ -28,6 +28,7 @@ namespace ZombieState
         public TrailRenderer attackTrailRenderer;
         public TrailRenderer[] attackTrail;
         public ParticlePool particlePool;
+        public CapsuleCollider zombieCollider;
 
         private void Awake()
         {

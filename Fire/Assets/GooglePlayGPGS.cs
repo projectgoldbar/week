@@ -508,7 +508,7 @@ public class GooglePlayGPGS : MonoBehaviour
         }
     }
 
-    #region 데이터 클라우드Save(저장할 데이터 지정해야됨)
+    #region 데이터 클라우드Save(저장할 데이터 지정해야됨) 
 
     //데이터 저장
     public void SaveButtonClick()
@@ -531,7 +531,25 @@ public class GooglePlayGPGS : MonoBehaviour
     {
         if (status == SavedGameRequestStatus.Success)
         {
-            SaveGame(game);
+            //SaveGame(game);
+            ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+            SavedGameMetadataUpdate update = new SavedGameMetadataUpdate.Builder().Build();
+
+            #region 클라우드에 저장할 데이터
+
+            savedata1 v = new savedata1();
+            v.adoff = UserDataManager.Instance.userData.AdOff;
+            v.goldBonus = UserDataManager.Instance.userData.goldBonus;
+            v.pakage = UserDataManager.Instance.userData.pakage;
+            // v.Money = UserDataManager.Instance.userData.Money;
+
+            var data = v;
+
+            #endregion 클라우드에 저장할 데이터
+
+            var stringToSave = JsonUtility.ToJson(data);
+            byte[] bytes = Encoding.UTF8.GetBytes(stringToSave);
+            savedGameClient.CommitUpdate(game, update, bytes, OnSavedGameWritten);
         }
         else
         {

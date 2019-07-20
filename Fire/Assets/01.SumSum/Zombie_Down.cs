@@ -41,6 +41,7 @@ namespace ZombieState
 
         public override void Exit()
         {
+            zombieData.zombieCollider.enabled = true;
             currentTime = 0f;
         }
     }
