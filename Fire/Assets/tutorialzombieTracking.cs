@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class tutorialzombieTracking : MonoBehaviour
 {
-
-    public static int ZombieSturnCounting;
-
+    public static int ZombieSturnCounting = 0;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -15,11 +13,8 @@ public class tutorialzombieTracking : MonoBehaviour
         {
             ZombieSturnCounting++;
             Debug.Log(ZombieSturnCounting);
-
         }
         else
             return;
     }
-
-
 }

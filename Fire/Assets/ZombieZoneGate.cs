@@ -19,22 +19,21 @@ public class ZombieZoneGate : MonoBehaviour
         LayerNameChange();
         StartCoroutine(ZombiesGo());
     }
+
     public void LayerNameChange()
     {
         Doors[0].layer = 11;
         Doors[1].layer = 11;
     }
 
-
     private void Update()
     {
         if (tutorialzombieTracking.ZombieSturnCounting >= 8)
         {
-            DoorAnim.Play("DoorOpen");
+            //DoorAnim.Play("DoorOpen");
             BuildingAnim.Play("DoorOpen");
         }
     }
-
 
     private IEnumerator ZombiesGo()
     {
