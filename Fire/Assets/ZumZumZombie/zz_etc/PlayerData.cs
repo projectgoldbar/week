@@ -510,7 +510,7 @@ public class PlayerData : MonoBehaviour
                 animator.SetBool("Dying", true);
                 animator.StopPlayback();
                 animator.Play("die");
-                
+                manager.stageManager.tarGetPointer.gameObject.SetActive(false);
                 AnalyticsManager.Instance.Death(bronzeBoxCount + goldBoxCount + silverBoxCount);
             }
         }
