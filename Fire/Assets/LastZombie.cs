@@ -13,8 +13,9 @@ public class LastZombie : MonoBehaviour
         {
             foreach (var item in zombies)
             {
-                item.gameObject.SetActive(false);
+                item.gameObject.SetActive(true);
             }
+            GetComponent<Collider>().enabled = false;
         }
     }
 
