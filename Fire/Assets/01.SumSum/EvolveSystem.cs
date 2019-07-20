@@ -11,6 +11,7 @@ public class Evolve
     public Sprite sprite;
     public int idx = 0;
     public int lv = 0;
+    public string[] lvUpdescription;
 }
 
 public class EvolveSystem : MonoBehaviour
