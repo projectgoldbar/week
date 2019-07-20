@@ -10,7 +10,8 @@ public class tutorialzombieTracking : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponentInChildren<BoxCollider>().enabled == true)
+        if (other.GetComponentInChildren<BoxCollider>().enabled == true &&
+            ZombieSturnCounting <= 8)
         {
             ZombieSturnCounting++;
             Debug.Log(ZombieSturnCounting);

@@ -5,8 +5,8 @@ using UnityEngine;
 public class zombie_SturnCountText : MonoBehaviour
 {
 
-    public TextMesh textMesh;
-    public TextMesh MainTextMesh;
+    public TextMesh text;
+    public TextMesh MainText;
 
     bool MoveGo = false;
 
@@ -15,11 +15,11 @@ public class zombie_SturnCountText : MonoBehaviour
     {
         if (tutorialzombieTracking.ZombieSturnCounting <= 8 && !MoveGo)
         {
-            textMesh.text = $"{tutorialzombieTracking.ZombieSturnCounting}/2";
+            text.text = $"{tutorialzombieTracking.ZombieSturnCounting} / 8";
         }
         if (tutorialzombieTracking.ZombieSturnCounting >= 8 && !MoveGo)
         {
-            MainTextMesh.text = "좌측에 문이 오픈되었습니다. 이동하세요~!!!";
+            MainText.text = "출구문이 오픈되었습니다.  올라가서 이동하세요~!!!";
             MoveGo = true;
         }
     }
