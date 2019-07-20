@@ -260,6 +260,9 @@ public class StageManager : MonoBehaviour
             AnalyticsManager.Instance.StageClear(currentStageLV);
         }
         playerData.GetComponent<PlayerMove>().maxSpeed += 0.2f;
+        
+        playerData.GetComponent<PlayerMove>().slowSpeed += 0.1f;
+
     }
 
     #region 30스테이지 이상일 때
@@ -279,7 +282,7 @@ public class StageManager : MonoBehaviour
         UITweenEffectManager.stageOpenPanel.gameObject.SetActive(true);
         UITweenEffectManager.stageOpenPanel.OpenPanel("Infinity  " + currentStageLV.ToString());
         lvTextUI.text = "LV" + currentStageLV.ToString();
-        playerData.GetComponent<PlayerMove>().maxSpeed += 0.2f;
+        //playerData.GetComponent<PlayerMove>().maxSpeed += 0.2f;
         currentSlider.value++;
 
         AnalyticsManager.Instance.StageClear(currentStageLV);

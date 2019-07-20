@@ -45,7 +45,6 @@ namespace ZombieState
         public void EndSturn()
         {
             zombieData.sturnCollider.gameObject.SetActive(false);
-            zombieData.zombieCollider.enabled = true;
 
             zombieData.animator.SetBool("Sturn", false);
 
