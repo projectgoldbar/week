@@ -237,6 +237,7 @@ public class StageManager : MonoBehaviour
         //레벨업
         if (currentStageLV > 0&&playerData.isGameOver == false)
         {
+            tarGetPointer.gameObject.SetActive(false);
             currentSlider.value++;
             MonsterUpgrade(stageData);
             LvUp();
@@ -338,7 +339,7 @@ public class StageManager : MonoBehaviour
         }
 
 
-        if (!playerData.isTutirial)
+        if (!playerData.isTutirial&& playerData.isGameOver == false)
         {
             manager.Evolution();
             var coinPools = coinPool.coinPool;

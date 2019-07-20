@@ -26,21 +26,20 @@ public class TargetPointer : MonoBehaviour
 
     private IEnumerator Blink()
     {
-        var a = GetComponent<Image>().color;
+        var x = GetComponent<Image>();
+        var a = x.color;
         for (int i = 30; i > 0; i--)
         {
-            GetComponent<Image>().color = a;
+            x.color = a;
             yield return second;
-            GetComponent<Image>().color = Color.yellow;
+            x.color = Color.yellow;
             yield return second;
         }
-        GetComponent<Image>().color = a;
+        x.color = a;
+        yield break;
     }
 
-    private void OnDisable()
-    {
-        targetPosition = new Vector3(167f, 1.5f, -2f);
-    }
+
 
     private void Update()
     {
