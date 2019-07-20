@@ -150,6 +150,11 @@ public class UpgradeInfoPanels : MonoBehaviour
             if (userDataManager.userData.Money < upgradeStatInfo.price + userDataManager.randomValue)
             {
                 Debug.Log("돈부족");
+                var rv =UnityEngine.Random.Range(0, 4);
+                if (rv < 2 && UserDataManager.Instance.userData.AdOff == false)
+                {
+                    FindObjectOfType<AdmobInterstitialAds>().AdShow();
+                }
                 return;
             }
             else if (statLevel > 197)
@@ -188,6 +193,11 @@ public class UpgradeInfoPanels : MonoBehaviour
             if (userDataManager.userData.Money < upgradeStatInfo.price + userDataManager.randomValue)
             {
                 Debug.Log("돈부족");
+                var rv = UnityEngine.Random.Range(0, 4);
+                if (rv < 2 && UserDataManager.Instance.userData.AdOff == false)
+                {
+                    FindObjectOfType<AdmobInterstitialAds>().AdShow();
+                }
                 return;
             }
             else if (statLevel > 9)
@@ -226,6 +236,11 @@ public class UpgradeInfoPanels : MonoBehaviour
             if (userDataManager.userData.Money < upgradeStatInfo.price + userDataManager.randomValue)
             {
                 Debug.Log("돈부족");
+                var rv = UnityEngine.Random.Range(0, 4);
+                if (rv < 2 && UserDataManager.Instance.userData.AdOff == false)
+                {
+                    FindObjectOfType<AdmobInterstitialAds>().AdShow();
+                }
                 return;
             }
             else if (statLevel > 25)
@@ -264,6 +279,11 @@ public class UpgradeInfoPanels : MonoBehaviour
             if (userDataManager.userData.Money < upgradeStatInfo.price + userDataManager.randomValue)
             {
                 Debug.Log("돈부족");
+                var rv = UnityEngine.Random.Range(0, 4);
+                if (rv < 2 && UserDataManager.Instance.userData.AdOff == false)
+                {
+                    FindObjectOfType<AdmobInterstitialAds>().AdShow();
+                }
                 return;
             }
             else if (statLevel > 10)
@@ -302,6 +322,11 @@ public class UpgradeInfoPanels : MonoBehaviour
             if (userDataManager.userData.Money < upgradeStatInfo.price + userDataManager.randomValue)
             {
                 Debug.Log("돈부족");
+                var rv = UnityEngine.Random.Range(0, 4);
+                if (rv < 2 && UserDataManager.Instance.userData.AdOff == false)
+                {
+                    FindObjectOfType<AdmobInterstitialAds>().AdShow();
+                }
                 return;
             }
             else if (statLevel > 4)
