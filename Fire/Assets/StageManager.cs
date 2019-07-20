@@ -77,14 +77,11 @@ public class StageManager : MonoBehaviour
         {
             ZombiePoolSet();
         }
-        if (originSlider != null)
-            originSlider.value = UserDataManager.Instance.userData.highStage;
+        originSlider.value = UserDataManager.Instance.userData.highStage;
 
         StageSetting();
     }
-
     private int chargeStageLevel = 0;
-
     public int ChargeStageLevel
     {
         get
@@ -96,7 +93,6 @@ public class StageManager : MonoBehaviour
             chargeStageLevel = value;
         }
     }
-
     #region 좀비풀
 
     private void ZombiePoolSet()
@@ -150,12 +146,11 @@ public class StageManager : MonoBehaviour
         else
             return 2;
     }
-
     public int GetBoxRandom2()
     {
         //var StageData = GetSpawn(StageLv);
         randomValue = UnityEngine.Random.Range(0, 101);
-        int bronzePerCent = stageList[maxStageCount - 1].spawnData.percent_copper;
+        int bronzePerCent = stageList[maxStageCount-1].spawnData.percent_copper;
         int silverPerCent = bronzePerCent + stageList[maxStageCount - 1].spawnData.percent_silver;
         int goldPerCent = silverPerCent + stageList[maxStageCount - 1].spawnData.percent_gold;
         //동박스
@@ -181,12 +176,12 @@ public class StageManager : MonoBehaviour
         yield break;
     }
 
-    private IEnumerator CrearRewardBox2(Vector3 SpwanTransform)
+    private IEnumerator CrearRewardBox2( Vector3 SpwanTransform)
     {
         var go = GameObject.Instantiate(RefBoxs[GetBoxRandom2()]);
         if (playerData.isTutirial)
-
-            go.transform.position = SpwanTransform;
+        
+        go.transform.position = SpwanTransform;
         yield return null;
         yield break;
     }
@@ -216,7 +211,7 @@ public class StageManager : MonoBehaviour
             return;
         }
         //현제스테이지
-
+        
         var stageData = stageList[currentStageLV];
         //해당 스테이지에 실행되야할것
         //스테이지 전환효과
@@ -234,12 +229,13 @@ public class StageManager : MonoBehaviour
         };
         //몬스터강화
 
+
         //박스생성
         Vector3 boxPosition = FindPoint();
         boxPosition.y += 9.5f;
         StartCoroutine(CrearRewardBox(currentStageLV, boxPosition));
         //레벨업
-        if (currentStageLV > 0 && playerData.isGameOver == false)
+        if (currentStageLV > 0&&playerData.isGameOver == false)
         {
             currentSlider.value++;
             MonsterUpgrade(stageData);
@@ -264,22 +260,23 @@ public class StageManager : MonoBehaviour
             AnalyticsManager.Instance.StageClear(currentStageLV);
         }
         playerData.GetComponent<PlayerMove>().maxSpeed += 0.2f;
-
+        
         playerData.GetComponent<PlayerMove>().slowSpeed += 0.1f;
+
     }
 
     #region 30스테이지 이상일 때
 
     private void InfinityMode()
     {
-        var stageData = stageList[maxStageCount - 1];
+        var stageData = stageList[maxStageCount-1];
 
         lightColor.color = stageList[Random.Range(0, maxStageCount)].PlayerPointLight;
 
         MonsterUpgrade(stageData);
         Vector3 boxPosition = FindPoint();
         boxPosition.y += 9.5f;
-        StartCoroutine(CrearRewardBox2(boxPosition));
+        StartCoroutine(CrearRewardBox2( boxPosition));
         LvUp();
         tarGetPointer.targetPosition = boxPosition;
         UITweenEffectManager.stageOpenPanel.gameObject.SetActive(true);
@@ -299,6 +296,7 @@ public class StageManager : MonoBehaviour
 
     public void LvUp()
     {
+        
         var targets = Physics.OverlapSphere(playerData.transform.position, waveDistance, LayerMask.GetMask("Monster"));
         if (!playerData.isTutirial)
         {
@@ -338,6 +336,7 @@ public class StageManager : MonoBehaviour
         {
             yield return seconds;
         }
+
 
         if (!playerData.isTutirial)
         {
@@ -391,6 +390,7 @@ public class StageManager : MonoBehaviour
         //해당 스테이지에서 몬스터의 추가속도를 더해줌
         //해당 스테이지에서 몬스터의 추가 공격력을 더해줌
 
+
         for (int i = 0; i < dashZombiePool.Count; i++)
         {
             dashZombiePool[i].damage += ss.spawnData.AddDamage;
@@ -419,6 +419,7 @@ public class StageManager : MonoBehaviour
     {
         //SpawnData SpawnCount = new SpawnData();
         //int Count = 0;
+
 
         for (int i = 0; i < StageData.spawnData.dashZombieCount; i++)
         {
