@@ -11,6 +11,9 @@ public class SoundManager : Singleton<SoundManager>
     //BGM
     public AudioSource[] BGMsources;
 
+    public AudioSource[] GameSceneBGMsources;
+
+
     //SFM
     public AudioSource[] SFMsources;
 
@@ -31,6 +34,7 @@ public class SoundManager : Singleton<SoundManager>
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         option = FindObjectOfType<OptionPanel>();
 
         for (int i = 0; i < soundClips.Length; i++)
@@ -117,7 +121,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             for (int i = 0; i < BGMsources.Length; i++)
             {
-                BGMsources[i].Stop();
+                BGMsources[i].Pause();
             }
         }
         else

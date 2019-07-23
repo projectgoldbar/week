@@ -20,8 +20,8 @@ public class OptionPanel : MonoBehaviour
     public SoundManager soundManager;
     private void Start()
     {
+        SoundManager.Instance._isBgmSound = checkBGM;
         SoundManager.Instance._isSfxSound = checkSFX;
-        SoundManager.Instance._isSfxSound = checkBGM;
         SetCheckBox();
         gameObject.GetComponent<RectTransform>().anchoredPosition = closePos;
     }
@@ -42,7 +42,7 @@ public class OptionPanel : MonoBehaviour
     {
         checkBGM = !checkBGM;
         checkBoxBGMImage.enabled = checkBGM;
-        SoundManager.Instance._isSfxSound = checkBGM;
+        SoundManager.Instance._isBgmSound = checkBGM;
         if (checkBGM)
         {
             soundManager.PlaySoundSFX("SoundCheckBox");

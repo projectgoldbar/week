@@ -242,6 +242,15 @@ public partial class GameScene : MonoBehaviour
         exitGamePanel.OpenPanel();
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            ExitGameOpen();
+        }
+    }
+
+
     public void ExitGameClose()
     {
         exitGamePanel.ClosePanel();
