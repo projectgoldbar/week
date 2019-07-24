@@ -11,16 +11,16 @@ public class uiSelect : MonoBehaviour
     {
        
         if(flag)
-        groups[n].alpha = 1;
-        else
         groups[n].alpha = 0.2f;
+        else
+        groups[n].alpha = 1;
 
 
         for (int i = 0; i < groups.Length; i++)
         {
             if (n != i)
             {
-                groups[i].alpha = 0.2f;
+                groups[i].alpha = 1;
                 groups[i].GetComponent<UiSelectColor>().flag = false;
             }
         }

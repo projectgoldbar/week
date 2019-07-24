@@ -17,11 +17,28 @@ public class OptionPanel : MonoBehaviour
     public Image checkBoxBGMImage;
     public Image checkBoxSFXImage;
 
-    public SoundManager soundManager;
+    
     private void Start()
     {
-        SoundManager.Instance._isBgmSound = checkBGM;
-        SoundManager.Instance._isSfxSound = checkSFX;
+        checkBGM = SoundManager.Instance._isBgmSound;    //   ㄴ 매니저에서 가져와야 하는 부분
+        checkSFX = SoundManager.Instance._isSfxSound; //   ㄴ 매니저에서 가져와야 하는 부분
+
+
+        if (checkBGM)
+        {
+            for (int i = 0; i < SoundManager.Instance.BGMsources.Length; i++)
+            {
+                SoundManager.Instance.BGMsources[i].clip = null;
+                SoundManager.Instance.BGMsources[i].Stop();
+            }
+
+            SoundManager.Instance.BGMsources[0].clip =
+                SoundManager.Instance.SoundDic["LOBBYBGM"];
+
+            SoundManager.Instance.BGMsources[0].Play();
+        }
+
+
         SetCheckBox();
         gameObject.GetComponent<RectTransform>().anchoredPosition = closePos;
     }
@@ -41,26 +58,27 @@ public class OptionPanel : MonoBehaviour
     public void OnClickBGM_Button()
     {
         checkBGM = !checkBGM;
-        checkBoxBGMImage.enabled = checkBGM;
+        SetCheckBox();
         SoundManager.Instance._isBgmSound = checkBGM;
+
         if (checkBGM)
         {
-            soundManager.PlaySoundSFX("SoundCheckBox");
+            SoundManager.Instance.PlaySoundSFX("SoundCheckBox");
         }
-        soundManager.BGMSoundOnOff(checkBGM);
+        SoundManager.Instance.BGMSoundOnOff(checkBGM);
     }
 
     public void OnClickSFX_Button()
     {
         checkSFX = !checkSFX;
-        checkBoxSFXImage.enabled = checkSFX;
+        SetCheckBox();
         SoundManager.Instance._isSfxSound = checkSFX;
 
         if (checkSFX)
         {
-            soundManager.PlaySoundSFX("SoundCheckBox");
+            SoundManager.Instance.PlaySoundSFX("SoundCheckBox");
         }
-        soundManager.SFMSoundOnOff(checkSFX);
+        SoundManager.Instance.SFMSoundOnOff(checkSFX);
     }
 
     // ㄴ 이부분 매니저에서 불러야 할껄?

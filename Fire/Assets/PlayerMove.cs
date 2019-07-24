@@ -138,12 +138,11 @@ public class PlayerMove : MonoBehaviour
         {
             distance = DisNdir(mousePosition, start).dis;
             speedDistance = DisNdir(mousePosition, bufferVector2).dis;
-            var speed = speedDistance * 0.045f;
             var dir = DisNdir(mousePosition, inputVector2).dir;
 
             Vector3 moveDirection = new Vector3(dir.x, 0, dir.y);
             Quaternion targetRotation = moveDirection != Vector3.zero ? Quaternion.LookRotation(moveDirection) : transform.rotation;
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10.0f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20.0f);
 
             #region 구르기 기능
 
@@ -196,9 +195,14 @@ public class PlayerMove : MonoBehaviour
             accel = false;
         }
         bufferVector2 = Input.mousePosition;
-
-        agent.velocity = agent.transform.forward * (speed - (slowSpeed + biteCount));
-
+        if (biteCount > 0)
+        {
+            agent.velocity = agent.transform.forward * (speed - (slowSpeed + biteCount));
+        }
+        else
+        {
+            agent.velocity = agent.transform.forward * speed;
+        }
         if (biteCount > 0 && isShaking == false && playerData.hp > 0)
         {
             biteParticle.Play();
