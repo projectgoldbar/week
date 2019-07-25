@@ -2,18 +2,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SoundManager : Singleton<SoundManager>
+
+public class SoundManager : MonoBehaviour
 {
-   // public static SoundManager Instance;
+    // public static SoundManager Instance;
 
     //오디오클립당 오디오소스 1개
-
     //BGM
     public AudioSource[] BGMsources;
 
     public AudioSource[] GameSceneBGMsources;
 
-
+    public static SoundManager Instance;
     //SFM
     public AudioSource[] SFMsources;
 
@@ -34,13 +34,20 @@ public class SoundManager : Singleton<SoundManager>
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
         option = FindObjectOfType<OptionPanel>();
 
         for (int i = 0; i < soundClips.Length; i++)
         {
             SoundDic.Add(soundClips[i].name, soundClips[i].clip);
         }
+        DontDestroyOnLoad(gameObject);
         //PlayBGM(SoundDic["mainBGM"], true, 0);
         //PlayBGM(SoundDic["subBGM2"], true, 3);
     }
@@ -161,14 +168,17 @@ public class SoundManager : Singleton<SoundManager>
         {
             for (int i = 0; i < SFMsources.Length; i++)
             {
-                SFMsources[i].Stop();
+              //  SFMsources[i].Stop();
+                SFMsources[i].mute = true;
             }
         }
         else
         {
             for (int i = 0; i < SFMsources.Length; i++)
             {
-                SFMsources[i].Play();
+            //    SFMsources[i].Play();
+                SFMsources[i].mute = false;
+
             }
         }
     }
