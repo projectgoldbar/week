@@ -19,13 +19,13 @@ public class PausePanel : MonoBehaviour
 
     private void Start()
     {
+        checkBGM = SoundManager.Instance._isBgmSound;    //   ㄴ 매니저에서 가져와야 하는 부분
+        checkSFX = SoundManager.Instance._isSfxSound; //   ㄴ 매니저에서 가져와야 하는 부분
 
-        
+        Debug.Log($"checkBGM{checkBGM}");
+        Debug.Log($"checkSFX{checkSFX}");
+       
 
-        checkBGM = true;    //   ㄴ 매니저에서 가져와야 하는 부분
-        checkSFX = true; //   ㄴ 매니저에서 가져와야 하는 부분
-        SoundManager.Instance._isSfxSound = checkSFX;
-        SoundManager.Instance._isSfxSound = checkBGM;
         SetCheckBox();
         gameObject.GetComponent<RectTransform>().anchoredPosition = closePos;
     }
@@ -46,9 +46,9 @@ public class PausePanel : MonoBehaviour
     {
         checkBGM = !checkBGM;
         checkBoxBGMImage.enabled = checkBGM;
-        SoundManager.Instance._isSfxSound = checkBGM;
-        InGameBGM.IngameBgmOnoff = checkSFX;
-        if (checkBGM)
+        SoundManager.Instance._isBgmSound = checkBGM;
+        InGameBGM.IngameBgmOnoff = checkBGM;
+        if (SoundManager.Instance._isBgmSound)
         {
             SoundManager.Instance.PlaySoundSFX("SoundCheckBox");
         }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class InGameBGM : MonoBehaviour
 {
     private SoundManager soundManager;
-    public AudioSource[] InGameAudioSource;
     public AudioClip[] BGMRoopingClips;
 
     private int Rnd = 0;
@@ -16,19 +15,22 @@ public class InGameBGM : MonoBehaviour
 
     private void Start()
     {
+
         for (int i = 0; i < 3; i++)
         {
             var Clips = SoundManager.Instance.SoundDic[$"INGAMEBGM{i}"];
             BGMRoopingClips[i] = Clips;
-            InGameAudioSource[i].clip = BGMRoopingClips[i];
+            SoundManager.Instance.BGMsources[i].clip = BGMRoopingClips[i];
         }
 
         Rnd = Random.Range(0, 3);
 
         Clip = BGMRoopingClips[Rnd];
 
-        InGameAudioSource[Rnd].clip = Clip;
-        InGameAudioSource[Rnd].Play();
+        SoundManager.Instance.BGMsources[Rnd].clip = Clip;
+
+        if(SoundManager.Instance._isBgmSound)
+        SoundManager.Instance.BGMsources[Rnd].Play();
     }
 
 
@@ -40,7 +42,7 @@ public class InGameBGM : MonoBehaviour
 
         SoundDelay += Time.deltaTime;
 
-        if (InGameAudioSource[Rnd % 3].clip.length <= SoundDelay)
+        if (SoundManager.Instance.BGMsources[Rnd % 3].clip.length <= SoundDelay)
         {
             SoundDelay = 0;
             SoundPlay((++Rnd) % 3);
@@ -56,7 +58,7 @@ public class InGameBGM : MonoBehaviour
 
     public void SoundPlay(int rnd)
     {
-        InGameAudioSource[rnd].Play();
+        SoundManager.Instance.BGMsources[rnd].Play();
     }
 
     public void BGMSoundOnOff(bool Active)
@@ -68,14 +70,14 @@ public class InGameBGM : MonoBehaviour
             //    InGameAudioSource[i].Stop();
             //}
 
-            InGameAudioSource[Rnd].Stop();
+            SoundManager.Instance.BGMsources[Rnd].Stop();
         }
         else
         {
             Clip = BGMRoopingClips[Rnd];
 
-            InGameAudioSource[Rnd].clip = Clip;
-            InGameAudioSource[Rnd].Play();
+            SoundManager.Instance.BGMsources[Rnd].clip = Clip;
+            SoundManager.Instance.BGMsources[Rnd].Play();
            
         }
     }
