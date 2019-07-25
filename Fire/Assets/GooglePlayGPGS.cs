@@ -134,11 +134,9 @@ public class GooglePlayGPGS : MonoBehaviour
             if (success)
             {
                 //LoadButtonClick();
-               
             }
             else
             {
-                
             }
         });
     }
@@ -150,8 +148,6 @@ public class GooglePlayGPGS : MonoBehaviour
         else
             return null;
     }
-
-    
 
     public void GoogleLogOut()
     {
@@ -190,7 +186,7 @@ public class GooglePlayGPGS : MonoBehaviour
     /// </summary>
     public void Stage1_Achievement_Open()
     {
-        Social.ReportProgress(GPGSIds.achievement_stage1_clear, 100f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_level1_clear, 100f, (bool success) =>
         {
             if (success)
             {
@@ -205,7 +201,7 @@ public class GooglePlayGPGS : MonoBehaviour
     /// </summary>
     public void Stage2_Achievement_Open()
     {
-        Social.ReportProgress(GPGSIds.achievement_stage2_clear, 100f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_level2_clear, 100f, (bool success) =>
         {
             if (success)
             {
@@ -220,7 +216,7 @@ public class GooglePlayGPGS : MonoBehaviour
     /// </summary>
     public void Stage5_Achievement_Open()
     {
-        Social.ReportProgress(GPGSIds.achievement_stage5_clear, 100f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_level5_clear, 100f, (bool success) =>
         {
             if (success)
             {
@@ -235,7 +231,7 @@ public class GooglePlayGPGS : MonoBehaviour
     /// </summary>
     public void Stage7_Achievement_Open()
     {
-        Social.ReportProgress(GPGSIds.achievement_stage_7_clear, 100f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_level_7_clear, 100f, (bool success) =>
         {
             if (success)
             {
@@ -250,7 +246,7 @@ public class GooglePlayGPGS : MonoBehaviour
     /// </summary>
     public void Stage10_Achievement_Open()
     {
-        Social.ReportProgress(GPGSIds.achievement_stage_10_clear, 100f, (bool success) =>
+        Social.ReportProgress(GPGSIds.achievement_level_10_clear, 100f, (bool success) =>
         {
             if (success)
             {
@@ -404,7 +400,7 @@ public class GooglePlayGPGS : MonoBehaviour
     public void LeaderBoardPostring(long score)
     {
         if (Authenticated)
-            GoogleLederBoardPostingScore(GPGSIds.leaderboard_sumsumzombie_leaderboard, score);
+            GoogleLederBoardPostingScore(GPGSIds.leaderboard_season_1, score);
     }
 
     public void GoogleLederBoardPostingScore(string LeaderBoardID, long PostingScore)
@@ -508,7 +504,7 @@ public class GooglePlayGPGS : MonoBehaviour
         }
     }
 
-    #region 데이터 클라우드Save(저장할 데이터 지정해야됨) 
+    #region 데이터 클라우드Save(저장할 데이터 지정해야됨)
 
     //데이터 저장
     public void SaveButtonClick()
@@ -569,7 +565,7 @@ public class GooglePlayGPGS : MonoBehaviour
         v.adoff = UserDataManager.Instance.userData.AdOff;
         v.goldBonus = UserDataManager.Instance.userData.goldBonus;
         v.pakage = UserDataManager.Instance.userData.pakage;
-       // v.Money = UserDataManager.Instance.userData.Money;
+        // v.Money = UserDataManager.Instance.userData.Money;
 
         var data = v;
 
@@ -633,15 +629,17 @@ public class GooglePlayGPGS : MonoBehaviour
     {
         ((PlayGamesPlatform)Social.Active).SavedGame.ReadBinaryData(game, OnSavedGameDataRead);
     }
+
     public struct savedata1
     {
-        public bool adoff ;
-        public bool goldBonus ;
-        public bool pakage ;
+        public bool adoff;
+        public bool goldBonus;
+        public bool pakage;
         public float Money;
     }
 
     public savedata1 LoadData;
+
     public void OnSavedGameDataRead(SavedGameRequestStatus status, byte[] data)
     {
         if (status == SavedGameRequestStatus.Success)
@@ -711,6 +709,4 @@ public class GooglePlayGPGS : MonoBehaviour
             FindObjectOfType<AdmobBanner>().ToogleAd(false);
         }
     }
-
-
 }
