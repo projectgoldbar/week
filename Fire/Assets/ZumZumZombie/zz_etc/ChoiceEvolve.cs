@@ -22,6 +22,9 @@ public class ChoiceEvolve : MonoBehaviour
     public void Evolve()
     {
         FindObjectOfType<EvolveSystem>().evolveFunc[evolve.idx]();
+
+        
+
         var x = evolve.lvUpdescription[evolve.lv];
         evolve.lv++;
         //transform.parent.gameObject.SetActive(false);
@@ -44,5 +47,10 @@ public class ChoiceEvolve : MonoBehaviour
         //EvolveAnimObject.text.text = "요기요";
         EvolveAnimObject.Anim.Play("TextMove");
         FindObjectOfType<StageManager>().tarGetPointer.gameObject.SetActive(true);
+
+        if (evolve.idx == 10)
+        {
+            evolve.lv--;
+        }
     }
 }

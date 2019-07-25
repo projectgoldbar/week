@@ -70,7 +70,7 @@ public class InGameBGM : MonoBehaviour
             //    InGameAudioSource[i].Stop();
             //}
 
-            SoundManager.Instance.BGMsources[Rnd].Stop();
+            SoundManager.Instance.BGMsources[Rnd].Pause();
         }
         else
         {
