@@ -78,7 +78,7 @@ public class OptionPanel : MonoBehaviour
         {
             SoundManager.Instance.PlaySoundSFX("SoundCheckBox");
         }
-        SoundManager.Instance.SFMSoundOnOff(checkSFX);
+        //SoundManager.Instance.SFMSoundOnOff(checkSFX);  
     }
 
     // ㄴ 이부분 매니저에서 불러야 할껄?

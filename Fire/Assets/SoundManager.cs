@@ -168,17 +168,14 @@ public class SoundManager : MonoBehaviour
         {
             for (int i = 0; i < SFMsources.Length; i++)
             {
-              //  SFMsources[i].Stop();
-                SFMsources[i].mute = true;
+                SFMsources[i].Stop();
             }
         }
         else
         {
             for (int i = 0; i < SFMsources.Length; i++)
             {
-            //    SFMsources[i].Play();
-                SFMsources[i].mute = false;
-
+                SFMsources[i].Play();
             }
         }
     }
