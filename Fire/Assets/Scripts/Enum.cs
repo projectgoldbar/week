@@ -1,1 +1,0 @@
-﻿public enum StateIndex { IDLE, PATROL, CHASE, ATTACK, JUMP, STURN };

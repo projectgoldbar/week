@@ -1,0 +1,20 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class tutorialzombieTracking : MonoBehaviour
+{
+    public static int ZombieSturnCounting = 0;
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponentInChildren<BoxCollider>().enabled == true &&
+            ZombieSturnCounting <= 8)
+        {
+            ZombieSturnCounting++;
+            Debug.Log(ZombieSturnCounting);
+        }
+        else
+            return;
+    }
+}

@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1082706606697283434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1082706606697283433}
+  - component: {fileID: 1082706606697283432}
+  - component: {fileID: 1082706606697282710}
+  - component: {fileID: 1082706606697282709}
+  - component: {fileID: 1082706606697282711}
+  - component: {fileID: 1082706606697282708}
+  - component: {fileID: 732731559}
+  m_Layer: 0
+  m_Name: managers 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1082706606697283433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082706606697283434}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1082706606697283432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082706606697283434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2efffe0a64a6b04f97193a8aa35eadb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1082706606697282710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082706606697283434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c60a680a902c074b8f671ba4bf65b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1082706606697282709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082706606697283434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f440cddc0d85f654db1ec230acbceea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unknownIconSprite: {fileID: 21300000, guid: 2a7a3069f2fe0d64d9281e449a74b36a, type: 3}
+  unequipSprite: {fileID: 21300000, guid: ffa4c536861302e46a81d91e57436b98, type: 3}
+  equipedSprite: {fileID: 21300000, guid: 7fcea788438f50e4b8571edc7de212ca, type: 3}
+--- !u!114 &1082706606697282711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082706606697283434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db4248a9fbae41f40b6d295397760fe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bronzeBoxPanel: {fileID: 0}
+  silverBoxPanel: {fileID: 0}
+  goldBoxPanel: {fileID: 0}
+  emptyBoxPanel: {fileID: 0}
+  noAdSprite: {fileID: 21300000, guid: c8df1803949c189488a486ddfe47621b, type: 3}
+  boxOpenButton0: {fileID: 0}
+  boxOpenButton1: {fileID: 0}
+  boxOpenButton2: {fileID: 0}
+  resultInfo: {fileID: 0}
+  goldSprite: {fileID: 21300000, guid: 6fcdc87ebe63a7b448453b4cb5f5edde, type: 3}
+  skinSprite: {fileID: 0}
+  Description: {fileID: 0}
+  videoAd: {fileID: 0}
+  openState: 0
+  bronzeBoxGold:
+  - 200
+  - 401
+  silverBoxGold:
+  - 400
+  - 801
+  goldBoxGold:
+  - 800
+  - 2001
+--- !u!114 &1082706606697282708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082706606697283434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f29fa107eb987449bb4f288cb03ffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedSkinIdx: 0
+  skinPivot: {fileID: 0}
+  skinEquipButton: {fileID: 0}
+  equipButtonImage: {fileID: 0}
+  equipText: {fileID: 0}
+  spriteData: {fileID: 0}
+  skinInfos: []
+  MeshData: {fileID: 0}
+  playerSkinPivot: {fileID: 0}
+--- !u!114 &732731559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082706606697283434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 915b7563ff649fb4aa17323d59714f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameScene: {fileID: 0}

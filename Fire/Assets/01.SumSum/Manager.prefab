@@ -1,0 +1,734 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8263189020715681234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8263189020715681242}
+  - component: {fileID: 8263189020715681232}
+  - component: {fileID: 8263189020715681233}
+  - component: {fileID: 8263189020715681243}
+  - component: {fileID: 8263189020715681236}
+  - component: {fileID: 8263189020715681239}
+  - component: {fileID: 8263189020715681238}
+  - component: {fileID: 8263189020715681241}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8263189020715681242
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263189020715681234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -23.463013}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -309.6, y: 473.3}
+  m_SizeDelta: {x: 189.7, y: 92.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8263189020715681232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263189020715681234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d24a487f9764fe4e9407bd1edc09cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Human: []
+  playerData: {fileID: 0}
+  liveTime: {fileID: 0}
+  gameOverUi: {fileID: 0}
+  gameResultUi: {fileID: 0}
+  gameClearUi: {fileID: 0}
+  itemResultUi: {fileID: 0}
+  playerController: {fileID: 0}
+  evolSystem: {fileID: 8263189020715681233}
+  evolUi: {fileID: 0}
+  evolButton1: {fileID: 0}
+  evolButton2: {fileID: 0}
+  evolButton3: {fileID: 0}
+  timeUi: {fileID: 0}
+  goldUi: {fileID: 0}
+  uITweenEffectManager: {fileID: 0}
+  scoreText: {fileID: 0}
+  survivalTimeTxt: {fileID: 0}
+  coinText: {fileID: 0}
+  StageClearText: {fileID: 0}
+  spwanPoints:
+  - {x: -56, y: 1.7, z: -86}
+  - {x: -0.6, y: 1.7, z: -88.6}
+  - {x: 114, y: 1.7, z: -88.6}
+  - {x: 160, y: 1.7, z: -33}
+  - {x: -1, y: 1.7, z: -37}
+  - {x: -56, y: 1.7, z: -37}
+  score: 0
+  resultGold: 0
+  viewAd: 0
+  AdsVideo: {fileID: 0}
+--- !u!114 &8263189020715681233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263189020715681234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd57f2048f30c7148b56da7a94122e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evolveIdx:
+  - name: "\uBC29\uD328"
+    description: "\uBC29\uC5B4\uB825\uC774\uC99D\uAC00\uD55C\uB2E4"
+    sprite: {fileID: 21300000, guid: 889982178ee83f04187544efa089e925, type: 3}
+    idx: 2
+    lv: 0
+  - name: "\uBC18\uC751\uC7A5\uAC11"
+    description: "\uD53C\uD574\uB97C\uC785\uC73C\uBA74\uC7A0\uC2DC\uAC00\uC18D\uD55C\uB2E4."
+    sprite: {fileID: 21300000, guid: cc8dbd391d48d5e46a5b4650470cb557, type: 3}
+    idx: 3
+    lv: 0
+  - name: "\uC778\uB0B4\uC2EC\uC54C\uC57D"
+    description: "\uCCB4\uB825\uAC10\uC18C\uC18D\uB3C4\uAC00 \uB290\uB824\uC9C4\uB2E4."
+    sprite: {fileID: 21300000, guid: b0226253a70a9c34d97c9d67daa764a4, type: 3}
+    idx: 4
+    lv: 0
+  - name: "\uC790\uC591\uAC15\uC7A5\uC81C"
+    description: "\uACE0\uAE30\uB85C\uBD80\uD130 \uC5BB\uB294 \uCCB4\uB825\uC774 \uC99D\uAC00\uD55C\uB2E4."
+    sprite: {fileID: 21300000, guid: 16371f8429b3f8348a22b238a774e186, type: 3}
+    idx: 5
+    lv: 0
+  - name: "\uC790\uC11D"
+    description: "\uACE8\uB4DC\uC744 \uB04C\uC5B4\uB2F9\uAE34\uB2E4."
+    sprite: {fileID: 21300000, guid: 6df1d54a4d445fd47a05e85e4460921a, type: 3}
+    idx: 6
+    lv: 0
+  - name: "\uC7AC\uD65C\uC6A9"
+    description: "\uC8FD\uC74C\uC744 1\uD68C \uBC29\uC9C0\uD55C\uB2E4."
+    sprite: {fileID: 21300000, guid: 25c820e4f6c4ebf4aa42c46f64f80b99, type: 3}
+    idx: 0
+    lv: 0
+  - name: "\uD480\uCC28\uC9C0"
+    description: "\uC2A4\uD0AC\uC744 \uCD5C\uB300\uB85C \uD68C\uBCF5\uD55C\uB2E4."
+    sprite: {fileID: 21300000, guid: fb6e93163cc427545910fcf3f3482e8d, type: 3}
+    idx: 1
+    lv: 0
+  - name: "\uC804\uBC29\uBC29\uD328"
+    description: "\uC804\uBC29\uC5D0\uC11C\uC624\uB294\uACF5\uACA9\uC744\uCC28\uB2E8\uD55C\uB2E4"
+    sprite: {fileID: 21300000, guid: 26a9aa1a7f7e64142a42963880df8ae0, type: 3}
+    idx: 9
+    lv: 0
+  - name: "\uC9C0\uB2A5\uAC15\uD654"
+    description: "\uC2B5\uB4DD \uACBD\uD5D8\uCE58\uAC00 \uC99D\uAC00\uD55C\uB2E4."
+    sprite: {fileID: 21300000, guid: 7af1d1a68e3f21f41abe4764d4259208, type: 3}
+    idx: 7
+    lv: 0
+  - name: "\uBBF8\uC815\uC2A4\uD0AC"
+    description: "\uBBF8\uC815\uC2A4\uD0AC"
+    sprite: {fileID: 21300000, guid: acee28cf6c62a1a4d85d4db2dfa0b76b, type: 3}
+    idx: 9
+    lv: 0
+  - name: "\uACE0\uAE30\uAF2C\uB9AC"
+    description: "\uACE0\uAE30\uB97C \uB04C\uC5B4\uB2F9\uAE34\uB2E4"
+    sprite: {fileID: 21300000, guid: 1d89d4e1489773446b15bba66ef97f75, type: 3}
+    idx: 8
+    lv: 0
+--- !u!222 &8263189020715681243
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263189020715681234}
+  m_CullTransparentMesh: 0
+--- !u!114 &8263189020715681236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263189020715681234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.21888566, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 200
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 200
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!114 &8263189020715681239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263189020715681234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 575a3498e28f77545995dad9fc2dfe30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpdateInterval: 0.3
+  _text: {fileID: 0}
+--- !u!114 &8263189020715681238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263189020715681234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4fbd1e37a71d34798a44e70939638f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChangeModels:
+  - {fileID: 13700000, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700002, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700004, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700006, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700008, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700010, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700012, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700014, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700016, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700018, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700020, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700022, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700024, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700026, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700028, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700030, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700032, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700034, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700036, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700038, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700040, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700042, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700044, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700046, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700048, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700050, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700052, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700054, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700056, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700058, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700060, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700062, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700064, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700066, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700068, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700070, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700072, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700074, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700076, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700078, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700080, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700082, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700084, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700086, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700088, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700090, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700092, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700094, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700096, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+  - {fileID: 13700098, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
+--- !u!114 &8263189020715681241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263189020715681234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe7bf8878e7965c48bf75714780f3951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RefBoxs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  zombie: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a, type: 3}
+  dashZombie: {fileID: 4281057405417156105, guid: 3cf1615535cc28c478c828bde613619a,
+    type: 3}
+  spitZombie: {fileID: 6389755854735096580, guid: e099f981845e03740a13bec589f7388e,
+    type: 3}
+  boxIndirection: {fileID: 0}
+  manager: {fileID: 8263189020715681232}
+  stageList:
+  - StageLv: 0
+    StageName: Stage 1
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 4000
+      AddSpeed: 0.1
+      AddDamage: 0
+      percent_copper: 85
+      percent_silver: 10
+      percent_gold: 5
+      zombieCount: 5
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  - StageLv: 0
+    StageName: 
+    PlayerPointLight: {r: 0, g: 0, b: 0, a: 0}
+    spawnData:
+      ClearScore: 0
+      AddSpeed: 0
+      AddDamage: 0
+      percent_copper: 0
+      percent_silver: 0
+      percent_gold: 0
+      zombieCount: 0
+      dashZombieCount: 0
+      spitZombieCount: 0
+      mineCount: 0
+  SpawnPosition:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  overlapIndex: 
+  OBjData: []
+  lightColor: {fileID: 0}
+  allZombies: []
+  currentStageLV: 0
